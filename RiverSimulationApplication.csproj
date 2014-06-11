@@ -47,14 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RiverSimulation.cs">
+    <Compile Include="WaterModelingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RiverSimulation.Designer.cs">
-      <DependentUpon>RiverSimulation.cs</DependentUpon>
+    <Compile Include="WaterModelingForm.Designer.cs">
+      <DependentUpon>WaterModelingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RiverSimulationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RiverSimulationForm.Designer.cs">
+      <DependentUpon>RiverSimulationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimulationModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimulationModuleForm.Designer.cs">
+      <DependentUpon>SimulationModuleForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -65,8 +77,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RiverSimulation.resx">
-      <DependentUpon>RiverSimulation.cs</DependentUpon>
+    <EmbeddedResource Include="RiverSimulationForm.resx">
+      <DependentUpon>RiverSimulationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimulationModuleForm.resx">
+      <DependentUpon>SimulationModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaterModelingForm.resx">
+      <DependentUpon>WaterModelingForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

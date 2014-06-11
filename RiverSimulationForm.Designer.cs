@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace RiverSimulationApplication
 {
     partial class RiverSimulation
     {
@@ -42,14 +42,14 @@
             this.繁體中文TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.說明HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.關於AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.import = new System.Windows.Forms.Button();
+            this.simulationModule = new System.Windows.Forms.Button();
+            this.waterModeling = new System.Windows.Forms.Button();
+            this.movableBed = new System.Windows.Forms.Button();
+            this.initialConditions = new System.Windows.Forms.Button();
+            this.boundaryConditions = new System.Windows.Forms.Button();
+            this.runSimulation = new System.Windows.Forms.Button();
+            this.simulationResult = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,79 +149,80 @@
             this.關於AToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.關於AToolStripMenuItem.Text = "關於(A)";
             // 
-            // button1
+            // import
             // 
-            this.button1.BackColor = System.Drawing.Color.Red;
-            this.button1.Location = new System.Drawing.Point(354, 90);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 64);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "匯入";
-            this.button1.UseVisualStyleBackColor = false;
+            this.import.BackColor = System.Drawing.Color.Red;
+            this.import.Location = new System.Drawing.Point(354, 90);
+            this.import.Name = "import";
+            this.import.Size = new System.Drawing.Size(102, 64);
+            this.import.TabIndex = 1;
+            this.import.Text = "匯入";
+            this.import.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // simulationModule
             // 
-            this.button2.Location = new System.Drawing.Point(354, 192);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(102, 64);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "模擬模組";
-            this.button2.UseVisualStyleBackColor = true;
+            this.simulationModule.Location = new System.Drawing.Point(354, 192);
+            this.simulationModule.Name = "simulationModule";
+            this.simulationModule.Size = new System.Drawing.Size(102, 64);
+            this.simulationModule.TabIndex = 1;
+            this.simulationModule.Text = "模擬模組";
+            this.simulationModule.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // waterModeling
             // 
-            this.button3.Location = new System.Drawing.Point(229, 294);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(102, 64);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "水理";
-            this.button3.UseVisualStyleBackColor = true;
+            this.waterModeling.Location = new System.Drawing.Point(229, 294);
+            this.waterModeling.Name = "waterModeling";
+            this.waterModeling.Size = new System.Drawing.Size(102, 64);
+            this.waterModeling.TabIndex = 1;
+            this.waterModeling.Text = "水理";
+            this.waterModeling.UseVisualStyleBackColor = true;
+            this.waterModeling.Click += new System.EventHandler(this.waterModeling_Click);
             // 
-            // button4
+            // movableBed
             // 
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.Location = new System.Drawing.Point(479, 294);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(102, 64);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "動床";
-            this.button4.UseVisualStyleBackColor = true;
+            this.movableBed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.movableBed.Location = new System.Drawing.Point(479, 294);
+            this.movableBed.Name = "movableBed";
+            this.movableBed.Size = new System.Drawing.Size(102, 64);
+            this.movableBed.TabIndex = 1;
+            this.movableBed.Text = "動床";
+            this.movableBed.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // initialConditions
             // 
-            this.button5.Location = new System.Drawing.Point(229, 396);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 64);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "初始條件";
-            this.button5.UseVisualStyleBackColor = true;
+            this.initialConditions.Location = new System.Drawing.Point(229, 396);
+            this.initialConditions.Name = "initialConditions";
+            this.initialConditions.Size = new System.Drawing.Size(102, 64);
+            this.initialConditions.TabIndex = 1;
+            this.initialConditions.Text = "初始條件";
+            this.initialConditions.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // boundaryConditions
             // 
-            this.button6.Location = new System.Drawing.Point(479, 396);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(102, 64);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "邊界條件";
-            this.button6.UseVisualStyleBackColor = true;
+            this.boundaryConditions.Location = new System.Drawing.Point(479, 396);
+            this.boundaryConditions.Name = "boundaryConditions";
+            this.boundaryConditions.Size = new System.Drawing.Size(102, 64);
+            this.boundaryConditions.TabIndex = 1;
+            this.boundaryConditions.Text = "邊界條件";
+            this.boundaryConditions.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // runSimulation
             // 
-            this.button7.Location = new System.Drawing.Point(354, 498);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(102, 64);
-            this.button7.TabIndex = 1;
-            this.button7.Text = "開始模擬";
-            this.button7.UseVisualStyleBackColor = true;
+            this.runSimulation.Location = new System.Drawing.Point(354, 498);
+            this.runSimulation.Name = "runSimulation";
+            this.runSimulation.Size = new System.Drawing.Size(102, 64);
+            this.runSimulation.TabIndex = 1;
+            this.runSimulation.Text = "開始模擬";
+            this.runSimulation.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // simulationResult
             // 
-            this.button8.Location = new System.Drawing.Point(354, 600);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(102, 64);
-            this.button8.TabIndex = 1;
-            this.button8.Text = "模擬結果展示";
-            this.button8.UseVisualStyleBackColor = true;
+            this.simulationResult.Location = new System.Drawing.Point(354, 600);
+            this.simulationResult.Name = "simulationResult";
+            this.simulationResult.Size = new System.Drawing.Size(102, 64);
+            this.simulationResult.TabIndex = 1;
+            this.simulationResult.Text = "模擬結果展示";
+            this.simulationResult.UseVisualStyleBackColor = true;
             // 
             // RiverSimulation
             // 
@@ -230,18 +231,19 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(808, 682);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.movableBed);
+            this.Controls.Add(this.boundaryConditions);
+            this.Controls.Add(this.initialConditions);
+            this.Controls.Add(this.waterModeling);
+            this.Controls.Add(this.simulationResult);
+            this.Controls.Add(this.runSimulation);
+            this.Controls.Add(this.simulationModule);
+            this.Controls.Add(this.import);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RiverSimulation";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "水理動床模式使用者介面";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -265,14 +267,14 @@
         private System.Windows.Forms.ToolStripMenuItem 說明HToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 關於AToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 繁體中文TToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button import;
+        private System.Windows.Forms.Button simulationModule;
+        private System.Windows.Forms.Button waterModeling;
+        private System.Windows.Forms.Button movableBed;
+        private System.Windows.Forms.Button initialConditions;
+        private System.Windows.Forms.Button boundaryConditions;
+        private System.Windows.Forms.Button runSimulation;
+        private System.Windows.Forms.Button simulationResult;
     }
 }
 

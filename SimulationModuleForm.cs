@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace RiverSimulationApplication
 {
-    public partial class RiverSimulation : Form
+    public partial class SimulationModuleForm : Form
     {
-        public RiverSimulation()
+        public SimulationModuleForm()
         {
             InitializeComponent();
         }
 
-        private void eToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
 
         }

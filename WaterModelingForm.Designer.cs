@@ -40,10 +40,19 @@
             this.cancel = new System.Windows.Forms.Button();
             this.ok = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Location = new System.Drawing.Point(14, 13);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(366, 71);
@@ -54,6 +63,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Location = new System.Drawing.Point(14, 90);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(366, 71);
@@ -64,6 +74,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Location = new System.Drawing.Point(13, 167);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(367, 71);
@@ -127,14 +138,14 @@
             this.setting.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.setting.Location = new System.Drawing.Point(396, 260);
             this.setting.Name = "setting";
-            this.setting.Size = new System.Drawing.Size(400, 363);
+            this.setting.Size = new System.Drawing.Size(488, 363);
             this.setting.TabIndex = 1;
             this.setting.Text = "設定內容";
             // 
             // cancel
             // 
             this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel.Location = new System.Drawing.Point(701, 638);
+            this.cancel.Location = new System.Drawing.Point(788, 638);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(96, 32);
             this.cancel.TabIndex = 3;
@@ -143,7 +154,7 @@
             // 
             // ok
             // 
-            this.ok.Location = new System.Drawing.Point(587, 638);
+            this.ok.Location = new System.Drawing.Point(674, 638);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 4;
@@ -156,8 +167,48 @@
             this.comment.MinimumSize = new System.Drawing.Size(20, 20);
             this.comment.Name = "comment";
             this.comment.ScrollBarsEnabled = false;
-            this.comment.Size = new System.Drawing.Size(400, 225);
+            this.comment.Size = new System.Drawing.Size(488, 225);
             this.comment.TabIndex = 5;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(17, 30);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(59, 16);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "定量流";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(179, 30);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(59, 16);
+            this.radioButton2.TabIndex = 0;
+            this.radioButton2.Text = "變量流";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(233, 23);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(116, 32);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "數值參數設定";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(234, 21);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(116, 32);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "二次流效應設定";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // WaterModelingForm
             // 
@@ -165,7 +216,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancel;
-            this.ClientSize = new System.Drawing.Size(808, 682);
+            this.ClientSize = new System.Drawing.Size(896, 682);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.ok);
@@ -183,6 +234,10 @@
             this.Text = "水理";
             this.Load += new System.EventHandler(this.WaterModelingForm_Load);
             this.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -201,5 +256,9 @@
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.WebBrowser comment;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

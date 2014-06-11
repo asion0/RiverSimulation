@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RiverSimulation));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.檔案FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新增專案NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,11 +37,11 @@
             this.另存專案為AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.結束XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.說明HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.關於AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.語系切換LToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.繁體中文TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.說明HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.關於AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -112,20 +113,6 @@
             this.結束XToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.結束XToolStripMenuItem.Text = "結束(X)";
             // 
-            // 說明HToolStripMenuItem
-            // 
-            this.說明HToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.關於AToolStripMenuItem});
-            this.說明HToolStripMenuItem.Name = "說明HToolStripMenuItem";
-            this.說明HToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.說明HToolStripMenuItem.Text = "說明(H)";
-            // 
-            // 關於AToolStripMenuItem
-            // 
-            this.關於AToolStripMenuItem.Name = "關於AToolStripMenuItem";
-            this.關於AToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.關於AToolStripMenuItem.Text = "關於(A)";
-            // 
             // 語系切換LToolStripMenuItem
             // 
             this.語系切換LToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -138,24 +125,39 @@
             // eToolStripMenuItem
             // 
             this.eToolStripMenuItem.Name = "eToolStripMenuItem";
-            this.eToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.eToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.eToolStripMenuItem.Text = "English(E)";
             this.eToolStripMenuItem.Click += new System.EventHandler(this.eToolStripMenuItem_Click);
             // 
             // 繁體中文TToolStripMenuItem
             // 
             this.繁體中文TToolStripMenuItem.Name = "繁體中文TToolStripMenuItem";
-            this.繁體中文TToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.繁體中文TToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.繁體中文TToolStripMenuItem.Text = "繁體中文(T)";
+            // 
+            // 說明HToolStripMenuItem
+            // 
+            this.說明HToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.關於AToolStripMenuItem});
+            this.說明HToolStripMenuItem.Name = "說明HToolStripMenuItem";
+            this.說明HToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.說明HToolStripMenuItem.Text = "說明(H)";
+            // 
+            // 關於AToolStripMenuItem
+            // 
+            this.關於AToolStripMenuItem.Name = "關於AToolStripMenuItem";
+            this.關於AToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.關於AToolStripMenuItem.Text = "關於(A)";
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Red;
             this.button1.Location = new System.Drawing.Point(354, 90);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(102, 64);
             this.button1.TabIndex = 1;
             this.button1.Text = "匯入";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // button2
             // 
@@ -177,6 +179,7 @@
             // 
             // button4
             // 
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button4.Location = new System.Drawing.Point(479, 294);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(102, 64);
@@ -224,6 +227,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(808, 682);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button6);
@@ -234,6 +239,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RiverSimulation";
             this.Text = "水理動床模式使用者介面";

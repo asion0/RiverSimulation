@@ -25,7 +25,7 @@ namespace RiverSimulationApplication
             string url = "file:///./" + Environment.CurrentDirectory;
             
 
-            if(c==groupBox1)
+            if(c==flowTypeGroup)
             {
                 url += "\\D1-1-0.html";
             }
@@ -65,63 +65,74 @@ namespace RiverSimulationApplication
  
         }
 
-
-
         private void WaterModelingForm_Load(object sender, EventArgs e)
         {
             string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             comment.Navigate(new Uri(url));
 
-
-
-
+            this.Width = 912;
+            this.Height = 720;
+            valueParamPanel.Visible = false;
+            setting3dPanel.Visible = false;
+            roughnessPanel.Visible = false;
+            turbulencePanel.Visible = false;
+            dryBedPanel.Visible = false;
+            immersionPanel.Visible = false;
         }
 
 
+        private void Back_Click(object sender, EventArgs e)
+        {
+            sp.SlidePanel(null, SliderPanel.Direction.ToLeft);
+        }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
+        private void SettingButton_Click(object sender, EventArgs e)
+        {
+            Button orgBtn = sender as Button;
+            if (orgBtn == valueParamBtn)
+            {
+                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight);
+            }
+            //else if (orgBtn == setting3dBtn)
+            //{
+            //    sp.SlidePanel(setting3dPanel, SliderPanel.Direction.ToRight);
+            //}
+            else if (orgBtn == roughnessBtn)
+            {
+                sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToRight);
+            }
+            else if (orgBtn == turbulenceBtn)
+            {
+                sp.SlidePanel(turbulencePanel, SliderPanel.Direction.ToRight);
+            }
+            //else if (orgBtn == dryBedBtn)
+            //{
+            //    sp.SlidePanel(dryBedPanel, SliderPanel.Direction.ToRight);
+            //}
+            //else if (orgBtn == immersionBtn)
+            //{
+            //    sp.SlidePanel(immersionPanel, SliderPanel.Direction.ToRight);
+            //}
+        }
+
+        private void label12_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void groupBox4_Enter(object sender, EventArgs e)
+        private void label11_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void groupBox5_Enter(object sender, EventArgs e)
+        private void label10_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void groupBox6_Enter(object sender, EventArgs e)
+        private void label9_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void groupBox7_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox8_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void back_Click(object sender, EventArgs e)
-        {
-            sp.SlidePanel(waterValueSubPanel, SliderPanel.Direction.ToLeft);
-        }
-
-        private void valueButton_Click(object sender, EventArgs e)
-        {
-            sp.SlidePanel(waterValueSubPanel, SliderPanel.Direction.ToRight);
         }
     }
 }

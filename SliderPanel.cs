@@ -9,19 +9,19 @@ namespace RiverSimulationApplication
 {
     class SliderPanel
     {
-        private static Timer slidePanelTimer;
-        private const int slidePanelInterval = 30;  //ms
+        private static Timer slideTimer;
+        private const int slideInterval = 30;  //ms
         private const int slideDuration = 480;      //ms
-        private static Panel slideWorkingPanel;
+        private static Panel workPanel;
         private static Direction showDirection = Direction.ToRight;
 
         public SliderPanel()
         {
             // Create a timer with a ten second interval.
-            slidePanelTimer = new System.Windows.Forms.Timer();
+            slideTimer = new System.Windows.Forms.Timer();
             // Hook up the Elapsed event for the timer.
-            slidePanelTimer.Tick  += new EventHandler(OnTimedEvent);
-            slidePanelTimer.Interval = slidePanelInterval;
+            slideTimer.Tick += new EventHandler(OnTimedEvent);
+            slideTimer.Interval = slideInterval;
         }
 
         public enum Direction
@@ -34,19 +34,24 @@ namespace RiverSimulationApplication
 
         public void SlidePanel(Panel p, Direction d)
         {
-            slideWorkingPanel = p;
-            sliderPanelWidth = p.Width;
-            sliderPanelHeight = p.Height;
+            if(p != null)
+            {
+                workPanel = p;
+            }
+
+
+            sliderPanelWidth = workPanel.Width;
+            sliderPanelHeight = workPanel.Height;
             showDirection = d;
             if (sliderPanelWidth > 0)
             {
                 switch(showDirection)
                 {
                     case Direction.ToRight:
-                        p.Top = 0;
-                        p.Left = 0 - p.Width;
-                        p.Visible = true;
-                        p.BringToFront();
+                        workPanel.Top = 0;
+                        workPanel.Left = 0 - p.Width;
+                        workPanel.Visible = true;
+                        workPanel.BringToFront();
                         break;
                     case Direction.ToLeft:
                         break;
@@ -57,7 +62,7 @@ namespace RiverSimulationApplication
                 }
 
             }
-            slidePanelTimer.Enabled = true;
+            slideTimer.Enabled = true;
         }
 
         private static int sliderPanelWidth = 0;
@@ -70,18 +75,18 @@ namespace RiverSimulationApplication
             switch (showDirection)
             {
                 case Direction.ToRight:
-                    slideWorkingPanel.Left += sliderPanelWidth / (slideDuration / slidePanelInterval);
-                    if (slideWorkingPanel.Left >= 0)
+                    workPanel.Left += sliderPanelWidth / (slideDuration / slideInterval);
+                    if (workPanel.Left >= 0)
                     {
-                        slideWorkingPanel.Left = 0;
+                        workPanel.Left = 0;
                         finished = true;
                     }
                     break;
                 case Direction.ToLeft:
-                    slideWorkingPanel.Left -= sliderPanelWidth / (slideDuration / slidePanelInterval);
-                    if (slideWorkingPanel.Left <= 0 - sliderPanelWidth)
+                    workPanel.Left -= sliderPanelWidth / (slideDuration / slideInterval);
+                    if (workPanel.Left <= 0 - sliderPanelWidth)
                     {
-                        slideWorkingPanel.Left = 0 - sliderPanelWidth;
+                        workPanel.Left = 0 - sliderPanelWidth;
                         finished = true;
                     }
                     break;
@@ -91,10 +96,10 @@ namespace RiverSimulationApplication
             }
             if(finished)
             {
-                slidePanelTimer.Enabled = false;
+                slideTimer.Enabled = false;
                 if (showDirection == Direction.ToLeft)
                 {
-                    slideWorkingPanel.Visible = false;
+                    workPanel.Visible = false;
                 }
             }
             //Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);

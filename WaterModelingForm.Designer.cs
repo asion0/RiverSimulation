@@ -32,7 +32,7 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.valueButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -49,15 +49,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.setting = new System.Windows.Forms.Label();
-            this.cancel = new System.Windows.Forms.Button();
             this.ok = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.waterValueSubPanel = new System.Windows.Forms.Panel();
+            this.back = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.waterMainPanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -66,13 +69,15 @@
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.waterValueSubPanel.SuspendLayout();
+            this.waterMainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(14, 13);
+            this.groupBox1.Location = new System.Drawing.Point(12, 11);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(366, 71);
             this.groupBox1.TabIndex = 0;
@@ -104,8 +109,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Location = new System.Drawing.Point(14, 90);
+            this.groupBox2.Controls.Add(this.valueButton);
+            this.groupBox2.Location = new System.Drawing.Point(12, 88);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(366, 71);
             this.groupBox2.TabIndex = 0;
@@ -113,21 +118,22 @@
             this.groupBox2.Text = "數值參數";
             this.groupBox2.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
-            // button1
+            // valueButton
             // 
-            this.button1.Location = new System.Drawing.Point(17, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 32);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "數值參數設定";
-            this.button1.UseVisualStyleBackColor = true;
+            this.valueButton.Location = new System.Drawing.Point(17, 21);
+            this.valueButton.Name = "valueButton";
+            this.valueButton.Size = new System.Drawing.Size(116, 32);
+            this.valueButton.TabIndex = 2;
+            this.valueButton.Text = "數值參數設定";
+            this.valueButton.UseVisualStyleBackColor = true;
+            this.valueButton.Click += new System.EventHandler(this.valueButton_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.radioButton4);
             this.groupBox3.Controls.Add(this.radioButton3);
             this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Location = new System.Drawing.Point(13, 167);
+            this.groupBox3.Location = new System.Drawing.Point(11, 165);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(367, 71);
             this.groupBox3.TabIndex = 0;
@@ -168,7 +174,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Location = new System.Drawing.Point(14, 244);
+            this.groupBox4.Location = new System.Drawing.Point(12, 242);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(366, 71);
             this.groupBox4.TabIndex = 0;
@@ -195,7 +201,7 @@
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.label2);
             this.groupBox5.Controls.Add(this.label1);
-            this.groupBox5.Location = new System.Drawing.Point(14, 321);
+            this.groupBox5.Location = new System.Drawing.Point(12, 319);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(366, 71);
             this.groupBox5.TabIndex = 0;
@@ -276,72 +282,13 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.button4);
-            this.groupBox6.Location = new System.Drawing.Point(14, 398);
+            this.groupBox6.Location = new System.Drawing.Point(12, 396);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(366, 71);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "紊流模式";
             this.groupBox6.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.button5);
-            this.groupBox7.Location = new System.Drawing.Point(13, 475);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(367, 71);
-            this.groupBox7.TabIndex = 0;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "乾床處理";
-            this.groupBox7.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.button6);
-            this.groupBox8.Location = new System.Drawing.Point(14, 552);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(366, 71);
-            this.groupBox8.TabIndex = 0;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "浸沒邊界";
-            this.groupBox8.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
-            // 
-            // setting
-            // 
-            this.setting.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.setting.Location = new System.Drawing.Point(397, 263);
-            this.setting.Name = "setting";
-            this.setting.Size = new System.Drawing.Size(488, 363);
-            this.setting.TabIndex = 1;
-            this.setting.Text = "設定內容";
-            // 
-            // cancel
-            // 
-            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel.Location = new System.Drawing.Point(788, 638);
-            this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(96, 32);
-            this.cancel.TabIndex = 3;
-            this.cancel.Text = "取消";
-            this.cancel.UseVisualStyleBackColor = true;
-            // 
-            // ok
-            // 
-            this.ok.Location = new System.Drawing.Point(674, 638);
-            this.ok.Name = "ok";
-            this.ok.Size = new System.Drawing.Size(96, 32);
-            this.ok.TabIndex = 4;
-            this.ok.Text = "確定";
-            this.ok.UseVisualStyleBackColor = true;
-            // 
-            // comment
-            // 
-            this.comment.Location = new System.Drawing.Point(396, 13);
-            this.comment.MinimumSize = new System.Drawing.Size(20, 20);
-            this.comment.Name = "comment";
-            this.comment.ScrollBarsEnabled = false;
-            this.comment.Size = new System.Drawing.Size(488, 225);
-            this.comment.TabIndex = 5;
             // 
             // button4
             // 
@@ -352,14 +299,36 @@
             this.button4.Text = "紊流模式設定";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.button5);
+            this.groupBox7.Location = new System.Drawing.Point(11, 473);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(367, 71);
+            this.groupBox7.TabIndex = 0;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "乾床處理";
+            this.groupBox7.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(18, 21);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(116, 32);
             this.button5.TabIndex = 2;
-            this.button5.Text = "紊流模式設定";
+            this.button5.Text = "乾床模式設定";
             this.button5.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.button6);
+            this.groupBox8.Location = new System.Drawing.Point(12, 550);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(366, 71);
+            this.groupBox8.TabIndex = 0;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "浸沒邊界";
+            this.groupBox8.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
             // button6
             // 
@@ -367,28 +336,97 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(116, 32);
             this.button6.TabIndex = 2;
-            this.button6.Text = "紊流模式設定";
+            this.button6.Text = "浸沒模式設定";
             this.button6.UseVisualStyleBackColor = true;
+            // 
+            // setting
+            // 
+            this.setting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.setting.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.setting.Location = new System.Drawing.Point(397, 263);
+            this.setting.Name = "setting";
+            this.setting.Size = new System.Drawing.Size(487, 360);
+            this.setting.TabIndex = 1;
+            this.setting.Text = "設定內容";
+            // 
+            // ok
+            // 
+            this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ok.Location = new System.Drawing.Point(788, 638);
+            this.ok.Name = "ok";
+            this.ok.Size = new System.Drawing.Size(96, 32);
+            this.ok.TabIndex = 4;
+            this.ok.Text = "完成";
+            this.ok.UseVisualStyleBackColor = true;
+            // 
+            // comment
+            // 
+            this.comment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comment.Location = new System.Drawing.Point(396, 13);
+            this.comment.MinimumSize = new System.Drawing.Size(20, 20);
+            this.comment.Name = "comment";
+            this.comment.ScrollBarsEnabled = false;
+            this.comment.Size = new System.Drawing.Size(488, 225);
+            this.comment.TabIndex = 5;
+            // 
+            // waterValueSubPanel
+            // 
+            this.waterValueSubPanel.Controls.Add(this.back);
+            this.waterValueSubPanel.Controls.Add(this.groupBox9);
+            this.waterValueSubPanel.Location = new System.Drawing.Point(411, 638);
+            this.waterValueSubPanel.Name = "waterValueSubPanel";
+            this.waterValueSubPanel.Size = new System.Drawing.Size(391, 670);
+            this.waterValueSubPanel.TabIndex = 6;
+            // 
+            // back
+            // 
+            this.back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.back.Location = new System.Drawing.Point(14, 629);
+            this.back.Name = "back";
+            this.back.Size = new System.Drawing.Size(366, 32);
+            this.back.TabIndex = 4;
+            this.back.Text = "退回";
+            this.back.UseVisualStyleBackColor = true;
+            this.back.Click += new System.EventHandler(this.back_Click);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Location = new System.Drawing.Point(12, 12);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(367, 610);
+            this.groupBox9.TabIndex = 5;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "數值參數設定";
+            // 
+            // waterMainPanel
+            // 
+            this.waterMainPanel.Controls.Add(this.groupBox8);
+            this.waterMainPanel.Controls.Add(this.groupBox7);
+            this.waterMainPanel.Controls.Add(this.groupBox6);
+            this.waterMainPanel.Controls.Add(this.groupBox5);
+            this.waterMainPanel.Controls.Add(this.groupBox4);
+            this.waterMainPanel.Controls.Add(this.groupBox3);
+            this.waterMainPanel.Controls.Add(this.groupBox2);
+            this.waterMainPanel.Controls.Add(this.groupBox1);
+            this.waterMainPanel.Location = new System.Drawing.Point(0, 0);
+            this.waterMainPanel.Name = "waterMainPanel";
+            this.waterMainPanel.Size = new System.Drawing.Size(391, 670);
+            this.waterMainPanel.TabIndex = 7;
             // 
             // WaterModelingForm
             // 
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.cancel;
             this.ClientSize = new System.Drawing.Size(896, 682);
+            this.Controls.Add(this.waterMainPanel);
             this.Controls.Add(this.comment);
-            this.Controls.Add(this.cancel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.setting);
-            this.Controls.Add(this.groupBox8);
-            this.Controls.Add(this.groupBox7);
-            this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.waterValueSubPanel);
             this.Name = "WaterModelingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "水理";
@@ -405,6 +443,8 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
+            this.waterValueSubPanel.ResumeLayout(false);
+            this.waterMainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -420,12 +460,11 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Label setting;
-        private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.WebBrowser comment;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button valueButton;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
@@ -441,5 +480,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Panel waterValueSubPanel;
+        private System.Windows.Forms.Button back;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Panel waterMainPanel;
     }
 }

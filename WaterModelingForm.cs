@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace RiverSimulationApplication
 {
     public partial class WaterModelingForm : Form
@@ -16,7 +17,7 @@ namespace RiverSimulationApplication
         {
             InitializeComponent();
         }
-
+        private SliderPanel sp = new SliderPanel();
 
         private void groupBox_MouseHover(object sender, EventArgs e)
         {
@@ -64,12 +65,19 @@ namespace RiverSimulationApplication
  
         }
 
+
+
         private void WaterModelingForm_Load(object sender, EventArgs e)
         {
             string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             comment.Navigate(new Uri(url));
 
+
+
+
         }
+
+
 
         private void groupBox3_Enter(object sender, EventArgs e)
         {
@@ -104,6 +112,16 @@ namespace RiverSimulationApplication
         private void groupBox8_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            sp.SlidePanel(waterValueSubPanel, SliderPanel.Direction.ToLeft);
+        }
+
+        private void valueButton_Click(object sender, EventArgs e)
+        {
+            sp.SlidePanel(waterValueSubPanel, SliderPanel.Direction.ToRight);
         }
     }
 }

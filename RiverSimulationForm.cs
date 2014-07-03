@@ -26,6 +26,37 @@ namespace RiverSimulationApplication
         {
             WaterModelingForm form = new WaterModelingForm();
             
+            
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void simulationModule_Click(object sender, EventArgs e)
+        {
+            SimulationModuleForm form = new SimulationModuleForm();
+
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void importBtn_Click(object sender, EventArgs e)
+        {
+            ImportForm form = new ImportForm();
+
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void movableBedBtn_Click(object sender, EventArgs e)
+        {
+            MovableBedForm form = new MovableBedForm();
+
             if (DialogResult.OK == form.ShowDialog())
             {
 

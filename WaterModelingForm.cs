@@ -78,6 +78,7 @@ namespace RiverSimulationApplication
             turbulencePanel.Visible = false;
             dryBedPanel.Visible = false;
             immersionPanel.Visible = false;
+            this.CenterToParent();
         }
 
 

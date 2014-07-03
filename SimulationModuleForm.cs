@@ -19,7 +19,7 @@ namespace RiverSimulationApplication
 
         private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
-
+            this.CenterToParent();
         }
     }
 }

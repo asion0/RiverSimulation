@@ -51,6 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoundaryConditionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BoundaryConditionsForm.Designer.cs">
+      <DependentUpon>BoundaryConditionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InitialConditionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InitialConditionsForm.Designer.cs">
+      <DependentUpon>InitialConditionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MovableBedForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,9 +76,18 @@
     <Compile Include="ImportForm.Designer.cs">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BoundaryConditionsForm.resx">
+      <DependentUpon>BoundaryConditionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="TableInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableInputForm.Designer.cs">
+      <DependentUpon>TableInputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WaterModelingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +108,9 @@
     <Compile Include="SimulationModuleForm.Designer.cs">
       <DependentUpon>SimulationModuleForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="InitialConditionsForm.resx">
+      <DependentUpon>InitialConditionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MovableBedForm.resx">
       <DependentUpon>MovableBedForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SimulationModuleForm.resx">
       <DependentUpon>SimulationModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableInputForm.resx">
+      <DependentUpon>TableInputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WaterModelingForm.resx">
       <DependentUpon>WaterModelingForm.cs</DependentUpon>

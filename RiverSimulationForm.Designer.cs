@@ -221,6 +221,7 @@
             this.initialConditionsBtn.TabIndex = 1;
             this.initialConditionsBtn.Text = "初始條件";
             this.initialConditionsBtn.UseVisualStyleBackColor = false;
+            this.initialConditionsBtn.Click += new System.EventHandler(this.initialConditionsBtn_Click);
             // 
             // boundaryConditionsBtn
             // 

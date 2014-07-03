@@ -22,47 +22,50 @@ namespace RiverSimulationApplication
         private void groupBox_MouseHover(object sender, EventArgs e)
         {
             GroupBox c = sender as GroupBox;
-            string url = "file:///./" + Environment.CurrentDirectory;
+            string url = "file:///./" + Environment.CurrentDirectory.Replace('\\', '/');
             
 
             if(c==flowTypeGroup)
             {
-                url += "\\D1-1-0.html";
+                url += "/D1-1-0.html";
             }
             else if(c==groupBox2)
             {
-                url += "\\D1-1-1.html";
+                url += "/D1-1-1.html";
             }
             else if(c==groupBox3)
             {
-                url += "\\D1-1-2.html";
+                url += "/D1-1-2.html";
             }
             else if(c==groupBox4)
             {
-                url += "\\D1-1-3.html";
+                url += "/D1-1-3.html";
             }
             else if(c==groupBox5)
             {
-                url += "\\D1-1-4.html";
+                url += "/D1-1-4.html";
             }
             else if(c==groupBox6)
             {
-                url += "\\D1-1-5.html";
+                url += "/D1-1-5.html";
             }
             else if(c==groupBox7)
             {
-                url += "\\D1-1-6.html";
+                url += "/D1-1-6.html";
             }
             else if(c==groupBox8)
             {
-                url += "\\D1-1-7.html";
+                url += "/D1-1-7.html";
             }
             else
             {
-                url += "\\D1-1.html";
+                url += "/D1-1.html";
             }
-            comment.Navigate(new Uri(url));
- 
+
+            if (comment.Url.ToString() != url)
+            {
+                comment.Navigate(new Uri(url));
+            }
         }
 
         private void WaterModelingForm_Load(object sender, EventArgs e)
@@ -98,10 +101,10 @@ namespace RiverSimulationApplication
             //{
             //    sp.SlidePanel(setting3dPanel, SliderPanel.Direction.ToRight);
             //}
-            else if (orgBtn == roughnessBtn)
-            {
-                sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToRight);
-            }
+            //else if (orgBtn == roughnessBtn)
+            //{
+            //    sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToRight);
+            //}
             else if (orgBtn == turbulenceBtn)
             {
                 sp.SlidePanel(turbulencePanel, SliderPanel.Direction.ToRight);
@@ -116,24 +119,77 @@ namespace RiverSimulationApplication
             //}
         }
 
-        private void label12_Click(object sender, EventArgs e)
+        private void inputManningBtn_Click(object sender, EventArgs e)
         {
+            TableInputForm form = new TableInputForm();
 
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
         }
 
-        private void label11_Click(object sender, EventArgs e)
+        private void manningRdo_CheckedChanged(object sender, EventArgs e)
         {
-
+            bool chk = (sender as RadioButton).Checked;
+            manningBtn.Enabled = chk;
         }
 
-        private void label10_Click(object sender, EventArgs e)
+        private void chezyRdo_CheckedChanged(object sender, EventArgs e)
         {
-
+            bool chk = (sender as RadioButton).Checked;
+            chezyBtn.Enabled = chk;
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void curvatureRadiusRdo_CheckedChanged(object sender, EventArgs e)
         {
+            bool chk = (sender as RadioButton).Checked;
+            curvatureRadiusBtn.Enabled = chk; 
+        }
 
+        private void autoCurvatureRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            //curvatureRadiusBtn.Enabled = false;
+        }
+
+        private void curvatureRadiusBtn_Click(object sender, EventArgs e)
+        {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(curvatureRadiusBtn.Text, true, 26, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void manningBtn_Click(object sender, EventArgs e)
+        {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(manningBtn.Text, true, 26, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void chezyBtn_Click(object sender, EventArgs e)
+        {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(chezyBtn.Text, true, 26, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void PropStratBtn_Click(object sender, EventArgs e)
+        {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(propStratBtn.Text, true, 26, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
         }
     }
 }

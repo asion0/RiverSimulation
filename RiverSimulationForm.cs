@@ -62,5 +62,15 @@ namespace RiverSimulationApplication
 
             }
         }
+
+        private void initialConditionsBtn_Click(object sender, EventArgs e)
+        {
+            InitialConditionsForm form = new InitialConditionsForm();
+
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
     }
 }

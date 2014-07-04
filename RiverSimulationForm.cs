@@ -72,5 +72,15 @@ namespace RiverSimulationApplication
 
             }
         }
+
+        private void boundaryConditionsBtn_Click(object sender, EventArgs e)
+        {
+            BoundaryConditionsForm form = new BoundaryConditionsForm();
+
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
     }
 }

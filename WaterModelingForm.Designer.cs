@@ -110,9 +110,7 @@
             this.radioButton13 = new System.Windows.Forms.RadioButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
             this.turbulenceBackBtn = new System.Windows.Forms.Button();
             this.dryBedPanel = new System.Windows.Forms.Panel();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
@@ -138,6 +136,8 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.roughnessBackBtn = new System.Windows.Forms.Button();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -737,20 +737,10 @@
             resources.ApplyResources(this.label18, "label18");
             this.label18.Name = "label18";
             // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
             // textBox16
             // 
             resources.ApplyResources(this.textBox16, "textBox16");
             this.textBox16.Name = "textBox16";
-            // 
-            // textBox15
-            // 
-            resources.ApplyResources(this.textBox15, "textBox15");
-            this.textBox15.Name = "textBox15";
             // 
             // turbulenceBackBtn
             // 
@@ -931,6 +921,16 @@
             this.roughnessBackBtn.UseVisualStyleBackColor = true;
             this.roughnessBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
+            // textBox15
+            // 
+            resources.ApplyResources(this.textBox15, "textBox15");
+            this.textBox15.Name = "textBox15";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
             // WaterModelingForm
             // 
             this.AcceptButton = this.ok;
@@ -1083,9 +1083,7 @@
         private System.Windows.Forms.RadioButton radioButton13;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBox17;
@@ -1099,5 +1097,7 @@
         private System.Windows.Forms.Button manningBtn;
         private System.Windows.Forms.RadioButton chezyRdo;
         private System.Windows.Forms.RadioButton manningRdo;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBox15;
     }
 }

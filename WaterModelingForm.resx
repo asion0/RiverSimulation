@@ -871,7 +871,7 @@
     <value>397, 265</value>
   </data>
   <data name="setting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>487, 360</value>
+    <value>487, 524</value>
   </data>
   <data name="setting.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -895,7 +895,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>788, 638</value>
+    <value>788, 802</value>
   </data>
   <data name="ok.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 32</value>
@@ -2136,6 +2136,9 @@
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 16</value>
   </data>
@@ -2887,10 +2890,7 @@
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>896, 682</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>896, 846</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

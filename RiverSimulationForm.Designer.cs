@@ -232,6 +232,7 @@
             this.boundaryConditionsBtn.TabIndex = 1;
             this.boundaryConditionsBtn.Text = "邊界條件";
             this.boundaryConditionsBtn.UseVisualStyleBackColor = false;
+            this.boundaryConditionsBtn.Click += new System.EventHandler(this.boundaryConditionsBtn_Click);
             // 
             // runSimulationBtn
             // 

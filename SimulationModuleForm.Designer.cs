@@ -33,15 +33,15 @@
             this.setting = new System.Windows.Forms.Label();
             this.ok = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.flowTypeGroup = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.typeMovableBedRdo = new System.Windows.Forms.RadioButton();
+            this.typeWaterModelingRdo = new System.Windows.Forms.RadioButton();
+            this.flowTypeGroup = new System.Windows.Forms.GroupBox();
+            this.type3dRdo = new System.Windows.Forms.RadioButton();
+            this.type2dRdo = new System.Windows.Forms.RadioButton();
             this.mainPanel.SuspendLayout();
-            this.flowTypeGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.flowTypeGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // comment
@@ -76,6 +76,7 @@
             this.ok.TabIndex = 8;
             this.ok.Text = "完成";
             this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // mainPanel
             // 
@@ -86,43 +87,10 @@
             this.mainPanel.Size = new System.Drawing.Size(391, 670);
             this.mainPanel.TabIndex = 9;
             // 
-            // flowTypeGroup
-            // 
-            this.flowTypeGroup.Controls.Add(this.radioButton2);
-            this.flowTypeGroup.Controls.Add(this.radioButton1);
-            this.flowTypeGroup.Location = new System.Drawing.Point(12, 11);
-            this.flowTypeGroup.Name = "flowTypeGroup";
-            this.flowTypeGroup.Size = new System.Drawing.Size(366, 71);
-            this.flowTypeGroup.TabIndex = 1;
-            this.flowTypeGroup.TabStop = false;
-            this.flowTypeGroup.Text = "模組選擇";
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(179, 30);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(37, 16);
-            this.radioButton2.TabIndex = 0;
-            this.radioButton2.Text = "3D";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(17, 30);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(37, 16);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "2D";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton4);
+            this.groupBox1.Controls.Add(this.typeMovableBedRdo);
+            this.groupBox1.Controls.Add(this.typeWaterModelingRdo);
             this.groupBox1.Location = new System.Drawing.Point(12, 88);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(366, 71);
@@ -130,27 +98,60 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模組選擇";
             // 
-            // radioButton3
+            // typeMovableBedRdo
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(179, 30);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(77, 16);
-            this.radioButton3.TabIndex = 0;
-            this.radioButton3.Text = "水理+動床";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.typeMovableBedRdo.AutoSize = true;
+            this.typeMovableBedRdo.Location = new System.Drawing.Point(179, 30);
+            this.typeMovableBedRdo.Name = "typeMovableBedRdo";
+            this.typeMovableBedRdo.Size = new System.Drawing.Size(77, 16);
+            this.typeMovableBedRdo.TabIndex = 0;
+            this.typeMovableBedRdo.Text = "水理+動床";
+            this.typeMovableBedRdo.UseVisualStyleBackColor = true;
+            this.typeMovableBedRdo.CheckedChanged += new System.EventHandler(this.typeMovableBedRdo_CheckedChanged);
             // 
-            // radioButton4
+            // typeWaterModelingRdo
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Checked = true;
-            this.radioButton4.Location = new System.Drawing.Point(17, 30);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(47, 16);
-            this.radioButton4.TabIndex = 0;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "水理";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.typeWaterModelingRdo.AutoSize = true;
+            this.typeWaterModelingRdo.Location = new System.Drawing.Point(17, 30);
+            this.typeWaterModelingRdo.Name = "typeWaterModelingRdo";
+            this.typeWaterModelingRdo.Size = new System.Drawing.Size(47, 16);
+            this.typeWaterModelingRdo.TabIndex = 0;
+            this.typeWaterModelingRdo.Text = "水理";
+            this.typeWaterModelingRdo.UseVisualStyleBackColor = true;
+            this.typeWaterModelingRdo.CheckedChanged += new System.EventHandler(this.typeWaterModelingRdo_CheckedChanged);
+            // 
+            // flowTypeGroup
+            // 
+            this.flowTypeGroup.Controls.Add(this.type3dRdo);
+            this.flowTypeGroup.Controls.Add(this.type2dRdo);
+            this.flowTypeGroup.Location = new System.Drawing.Point(12, 11);
+            this.flowTypeGroup.Name = "flowTypeGroup";
+            this.flowTypeGroup.Size = new System.Drawing.Size(366, 71);
+            this.flowTypeGroup.TabIndex = 1;
+            this.flowTypeGroup.TabStop = false;
+            this.flowTypeGroup.Text = "模組選擇";
+            // 
+            // type3dRdo
+            // 
+            this.type3dRdo.AutoSize = true;
+            this.type3dRdo.Location = new System.Drawing.Point(179, 30);
+            this.type3dRdo.Name = "type3dRdo";
+            this.type3dRdo.Size = new System.Drawing.Size(37, 16);
+            this.type3dRdo.TabIndex = 0;
+            this.type3dRdo.Text = "3D";
+            this.type3dRdo.UseVisualStyleBackColor = true;
+            this.type3dRdo.CheckedChanged += new System.EventHandler(this.type3dRdo_CheckedChanged);
+            // 
+            // type2dRdo
+            // 
+            this.type2dRdo.AutoSize = true;
+            this.type2dRdo.Location = new System.Drawing.Point(17, 30);
+            this.type2dRdo.Name = "type2dRdo";
+            this.type2dRdo.Size = new System.Drawing.Size(37, 16);
+            this.type2dRdo.TabIndex = 0;
+            this.type2dRdo.Text = "2D";
+            this.type2dRdo.UseVisualStyleBackColor = true;
+            this.type2dRdo.CheckedChanged += new System.EventHandler(this.type2dRdo_CheckedChanged);
             // 
             // SimulationModuleForm
             // 
@@ -168,10 +169,10 @@
             this.Text = "模擬模組";
             this.Load += new System.EventHandler(this.SimulationModuleForm_Load);
             this.mainPanel.ResumeLayout(false);
-            this.flowTypeGroup.ResumeLayout(false);
-            this.flowTypeGroup.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.flowTypeGroup.ResumeLayout(false);
+            this.flowTypeGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -183,10 +184,10 @@
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.GroupBox flowTypeGroup;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton type3dRdo;
+        private System.Windows.Forms.RadioButton type2dRdo;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton typeMovableBedRdo;
+        private System.Windows.Forms.RadioButton typeWaterModelingRdo;
     }
 }

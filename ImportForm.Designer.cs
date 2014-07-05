@@ -73,6 +73,7 @@
             this.ok.TabIndex = 8;
             this.ok.Text = "完成";
             this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // setting
             // 

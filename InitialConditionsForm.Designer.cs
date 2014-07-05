@@ -33,12 +33,12 @@
             this.setting = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.valueParamBtn = new System.Windows.Forms.Button();
-            this.flowTypeGroup = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.flowTypeGroup = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.valueParamBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
@@ -67,6 +67,7 @@
             this.ok.TabIndex = 7;
             this.ok.Text = "完成";
             this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // setting
             // 
@@ -100,15 +101,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "動床模組";
             // 
-            // valueParamBtn
+            // button3
             // 
-            this.valueParamBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.valueParamBtn.Location = new System.Drawing.Point(19, 21);
-            this.valueParamBtn.Name = "valueParamBtn";
-            this.valueParamBtn.Size = new System.Drawing.Size(161, 26);
-            this.valueParamBtn.TabIndex = 2;
-            this.valueParamBtn.Text = "U - 流速";
-            this.valueParamBtn.UseVisualStyleBackColor = true;
+            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button3.Location = new System.Drawing.Point(19, 22);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(161, 26);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "初始濃度";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // flowTypeGroup
             // 
@@ -123,15 +124,15 @@
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "水理模組";
             // 
-            // button1
+            // checkBox1
             // 
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(19, 53);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 26);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "V- 流速";
-            this.button1.UseVisualStyleBackColor = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(20, 118);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(89, 16);
+            this.checkBox1.TabIndex = 3;
+            this.checkBox1.Text = "3D 假設剖面";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -143,25 +144,25 @@
             this.button2.Text = "初始水位";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // button1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(20, 118);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 16);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "3D 假設剖面";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button1.Location = new System.Drawing.Point(19, 53);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(161, 26);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "V- 流速";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // valueParamBtn
             // 
-            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button3.Location = new System.Drawing.Point(19, 22);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(161, 26);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "初始濃度";
-            this.button3.UseVisualStyleBackColor = true;
+            this.valueParamBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.valueParamBtn.Location = new System.Drawing.Point(19, 21);
+            this.valueParamBtn.Name = "valueParamBtn";
+            this.valueParamBtn.Size = new System.Drawing.Size(161, 26);
+            this.valueParamBtn.TabIndex = 2;
+            this.valueParamBtn.Text = "U - 流速";
+            this.valueParamBtn.UseVisualStyleBackColor = true;
             // 
             // InitialConditionsForm
             // 

@@ -67,5 +67,56 @@ namespace RiverSimulationApplication
         {
             sp.SlidePanel(null, SliderPanel.Direction.ToLeft);
         }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void normalSandyFlowPanel_EnabledChanged(object sender, EventArgs e)
+        {
+            bool ebd = (sender as Panel).Enabled;
+            selTranSandEquChk.Enabled = ebd;
+            if (ebd)
+                tranSandEquCombo.Enabled = selTranSandEquChk.Checked;
+            else
+                tranSandEquCombo.Enabled = ebd; 
+
+        }
+
+        private void highSandyFlowPanel_EnabledChanged(object sender, EventArgs e)
+        {
+            bool ebd = (sender as Panel).Enabled;
+            selExpandEquChk.Enabled = ebd;
+            if (ebd)
+                expandEquCombo.Enabled = selExpandEquChk.Checked;
+            else
+                expandEquCombo.Enabled = ebd;
+        }
+
+        private void normalSandyFlowRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            normalSandyFlowPanel.Enabled = chk;
+        }
+
+        private void highSandyFlowRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            highSandyFlowPanel.Enabled = chk;
+        }
+
+        private void selTranSandEquChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            tranSandEquCombo.Enabled = chk;
+        }
+
+        private void selExpandEquChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            expandEquCombo.Enabled = chk;
+        }
     }
 }

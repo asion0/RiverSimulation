@@ -80,5 +80,11 @@ namespace RiverSimulationApplication
                 selectBgFilePath.Text = selectBgDlg.FileName;
             }
         }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
     }
 }

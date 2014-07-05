@@ -191,5 +191,36 @@ namespace RiverSimulationApplication
 
             }
         }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void UserInputPanel_EnabledChanged(object sender, EventArgs e)
+        {
+            bool enabled = (sender as Panel).Enabled;
+            xParam.Enabled = enabled;
+            yParam.Enabled = enabled;
+        }
+
+        private void userInputRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            userInputPanel.Enabled = chk;
+        }
+
+        private void zeroEquationRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            zeroEquationCombo.Enabled = chk;
+        }
+
+        private void twinEquationRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            twinEquationCombo.Enabled = chk;
+        }
     }
 }

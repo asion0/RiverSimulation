@@ -8,15 +8,51 @@ namespace RiverSimulationApplication
 {
     class RiverSimulationProfile
     {
-        public static RiverSimulationProfile profile;
+        public static RiverSimulationProfile profile = new RiverSimulationProfile();
 
+        public bool IsImportFinished() { return importFinished; }
+        public bool IsImportReady() { return true; }
 
+        public bool IsSimulationModuleFinished() { return moduleType1 != ModuleType1.NoSelect && moduleType2 != ModuleType2.NoSelect; }
+        public bool IsSimulationModuleReady() { return importFinished; }
+
+        public bool IsWaterModelingFinished() { return waterModelingFinished; }
+        public bool IsWaterModelingReady() { return IsSimulationModuleFinished(); }
+
+        public bool IsMovableBedFinished() { return movableBedFinished; }
+        public bool IsMovableBedReady() { return IsSimulationModuleFinished() && moduleType2 == ModuleType2.MovableBed; }
+
+        public bool IsInitialConditionsFinished() { return initialConditionsFinished; }
+        public bool IsInitialConditionsReady() 
+        {
+            if (moduleType2 == ModuleType2.MovableBed)
+                return IsWaterModelingFinished() && IsMovableBedFinished();
+            else
+                return IsWaterModelingFinished();
+        }
+
+        public bool IsBoundaryConditionsFinished() { return boundaryConditionsFinished; }
+        public bool IsBoundaryConditionsReady() 
+        {
+            if (moduleType2 == ModuleType2.MovableBed)
+                return IsWaterModelingFinished() && IsMovableBedFinished(); 
+            else
+                return IsWaterModelingFinished();
+        }
+
+        public bool IsRunSimulationFinished() { return runSimulationFinished; }
+        public bool IsRunSimulationReady() { return IsBoundaryConditionsFinished() && IsInitialConditionsFinished(); }
+
+        public bool IsSimulationResultFinished() { return true; }
+        public bool IsSimulationResultReady() { return IsRunSimulationFinished(); }
+        
         public bool importFinished = false;
         public bool simulationModuleFinished = false;
         public bool waterModelingFinished = false;
         public bool movableBedFinished = false;
-        public bool InitialConditionsFinished = false;
-        public bool BoundaryConditionsFinished = false;
+        public bool initialConditionsFinished = false;
+        public bool boundaryConditionsFinished = false;
+        public bool runSimulationFinished = false;
 
         public bool ModuleSelectUsability() { return importFinished; }
 

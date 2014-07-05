@@ -32,6 +32,7 @@ namespace RiverSimulationApplication
 
             }
             RiverSimulationProfile.profile.waterModelingFinished = true;
+            UpdateStatus();
         }
 
         private void simulationModule_Click(object sender, EventArgs e)
@@ -43,6 +44,7 @@ namespace RiverSimulationApplication
 
             }
             RiverSimulationProfile.profile.simulationModuleFinished = true;
+            UpdateStatus();
         }
 
         private void importBtn_Click(object sender, EventArgs e)
@@ -54,6 +56,7 @@ namespace RiverSimulationApplication
 
             }
             RiverSimulationProfile.profile.importFinished = true;
+            UpdateStatus();
         }
 
         private void movableBedBtn_Click(object sender, EventArgs e)
@@ -65,6 +68,7 @@ namespace RiverSimulationApplication
 
             }
             RiverSimulationProfile.profile.movableBedFinished = true;
+            UpdateStatus();
         }
 
         private void initialConditionsBtn_Click(object sender, EventArgs e)
@@ -75,7 +79,8 @@ namespace RiverSimulationApplication
             {
 
             }
-            RiverSimulationProfile.profile.InitialConditionsFinished = true;
+            RiverSimulationProfile.profile.initialConditionsFinished = true;
+            UpdateStatus();
         }
 
         private void boundaryConditionsBtn_Click(object sender, EventArgs e)
@@ -86,7 +91,8 @@ namespace RiverSimulationApplication
             {
 
             }
-            RiverSimulationProfile.profile.BoundaryConditionsFinished = true;
+            RiverSimulationProfile.profile.boundaryConditionsFinished = true;
+            UpdateStatus();
         }
 
         private void RiverSimulation_Load(object sender, EventArgs e)
@@ -96,12 +102,49 @@ namespace RiverSimulationApplication
 
         private void UpdateStatus()
         {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
             Color FinishedButton = Color.LimeGreen;
-            Color ReadyButton = Color.LimeGreen;
-            Color DisableButton = SystemColors.ActiveCaption;
+            Color ReadyButton = Color.Goldenrod;
+            Color DisableButton = SystemColors.Control;
 
-            importBtn.BackColor = DisableButton;
+            importBtn.BackColor = (p.IsImportFinished()) ? FinishedButton : (p.IsImportReady()) ? ReadyButton : DisableButton;
+            importBtn.Enabled = p.IsImportReady();
 
+            simulationModuleBtn.BackColor = (p.IsSimulationModuleFinished()) ? FinishedButton : (p.IsSimulationModuleReady()) ? ReadyButton : DisableButton;
+            simulationModuleBtn.Enabled = p.IsSimulationModuleReady();
+
+            waterModelingBtn.BackColor = (p.IsWaterModelingFinished()) ? FinishedButton : (p.IsWaterModelingReady()) ? ReadyButton : DisableButton;
+            waterModelingBtn.Enabled = p.IsWaterModelingReady();
+
+            movableBedBtn.BackColor = (p.IsMovableBedFinished()) ? FinishedButton : (p.IsMovableBedReady()) ? ReadyButton : DisableButton;
+            movableBedBtn.Enabled = p.IsMovableBedReady();
+
+            initialConditionsBtn.BackColor = (p.IsInitialConditionsFinished()) ? FinishedButton : (p.IsInitialConditionsReady()) ? ReadyButton : DisableButton;
+            initialConditionsBtn.Enabled = p.IsInitialConditionsReady();
+
+            boundaryConditionsBtn.BackColor = (p.IsBoundaryConditionsFinished()) ? FinishedButton : (p.IsBoundaryConditionsReady()) ? ReadyButton : DisableButton;
+            boundaryConditionsBtn.Enabled = p.IsBoundaryConditionsReady();
+
+            runSimulationBtn.BackColor = (p.IsRunSimulationFinished()) ? FinishedButton : (p.IsRunSimulationReady()) ? ReadyButton : DisableButton;
+            runSimulationBtn.Enabled = p.IsRunSimulationReady();
+
+            simulationResultBtn.BackColor = (p.IsSimulationResultFinished()) ? FinishedButton : (p.IsSimulationResultReady()) ? ReadyButton : DisableButton;
+            simulationResultBtn.Enabled = p.IsSimulationResultReady();
+        }
+
+        private void runSimulationBtn_Click(object sender, EventArgs e)
+        {
+            RunSimulationForm form = new RunSimulationForm();
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+            RiverSimulationProfile.profile.runSimulationFinished = true;
+            UpdateStatus();
+        }
+
+        private void aboutMnuItem_Click(object sender, EventArgs e)
+        {
 
         }
     }

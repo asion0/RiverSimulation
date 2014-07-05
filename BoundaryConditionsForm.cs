@@ -58,5 +58,11 @@ namespace RiverSimulationApplication
         {
 
         }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
     }
 }

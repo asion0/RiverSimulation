@@ -102,15 +102,17 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.turbulencePanel = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.radioButton16 = new System.Windows.Forms.RadioButton();
-            this.radioButton15 = new System.Windows.Forms.RadioButton();
-            this.radioButton14 = new System.Windows.Forms.RadioButton();
-            this.radioButton13 = new System.Windows.Forms.RadioButton();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.twinEquationCombo = new System.Windows.Forms.ComboBox();
+            this.zeroEquationCombo = new System.Windows.Forms.ComboBox();
+            this.twinEquationRdo = new System.Windows.Forms.RadioButton();
+            this.SingleEquationRdo = new System.Windows.Forms.RadioButton();
+            this.zeroEquationRdo = new System.Windows.Forms.RadioButton();
+            this.userInputRdo = new System.Windows.Forms.RadioButton();
+            this.userInputPanel = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.yParam = new System.Windows.Forms.TextBox();
+            this.xParam = new System.Windows.Forms.TextBox();
             this.turbulenceBackBtn = new System.Windows.Forms.Button();
             this.dryBedPanel = new System.Windows.Forms.Panel();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
@@ -136,8 +138,6 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.roughnessBackBtn = new System.Windows.Forms.Button();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -153,7 +153,7 @@
             this.immersionPanel.SuspendLayout();
             this.turbulencePanel.SuspendLayout();
             this.groupBox10.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.userInputPanel.SuspendLayout();
             this.dryBedPanel.SuspendLayout();
             this.roughnessPanel.SuspendLayout();
             this.groupBox13.SuspendLayout();
@@ -389,6 +389,7 @@
             resources.ApplyResources(this.ok, "ok");
             this.ok.Name = "ok";
             this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // comment
             // 
@@ -661,86 +662,100 @@
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.comboBox5);
-            this.groupBox10.Controls.Add(this.comboBox1);
-            this.groupBox10.Controls.Add(this.radioButton16);
-            this.groupBox10.Controls.Add(this.radioButton15);
-            this.groupBox10.Controls.Add(this.radioButton14);
-            this.groupBox10.Controls.Add(this.radioButton13);
-            this.groupBox10.Controls.Add(this.panel4);
+            this.groupBox10.Controls.Add(this.twinEquationCombo);
+            this.groupBox10.Controls.Add(this.zeroEquationCombo);
+            this.groupBox10.Controls.Add(this.twinEquationRdo);
+            this.groupBox10.Controls.Add(this.SingleEquationRdo);
+            this.groupBox10.Controls.Add(this.zeroEquationRdo);
+            this.groupBox10.Controls.Add(this.userInputRdo);
+            this.groupBox10.Controls.Add(this.userInputPanel);
             resources.ApplyResources(this.groupBox10, "groupBox10");
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.TabStop = false;
             // 
-            // comboBox5
+            // twinEquationCombo
             // 
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
-            resources.GetString("comboBox5.Items")});
-            resources.ApplyResources(this.comboBox5, "comboBox5");
-            this.comboBox5.Name = "comboBox5";
+            this.twinEquationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.twinEquationCombo, "twinEquationCombo");
+            this.twinEquationCombo.FormattingEnabled = true;
+            this.twinEquationCombo.Items.AddRange(new object[] {
+            resources.GetString("twinEquationCombo.Items")});
+            this.twinEquationCombo.Name = "twinEquationCombo";
             // 
-            // comboBox1
+            // zeroEquationCombo
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2"),
-            resources.GetString("comboBox1.Items3"),
-            resources.GetString("comboBox1.Items4")});
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
+            this.zeroEquationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.zeroEquationCombo, "zeroEquationCombo");
+            this.zeroEquationCombo.FormattingEnabled = true;
+            this.zeroEquationCombo.Items.AddRange(new object[] {
+            resources.GetString("zeroEquationCombo.Items"),
+            resources.GetString("zeroEquationCombo.Items1"),
+            resources.GetString("zeroEquationCombo.Items2"),
+            resources.GetString("zeroEquationCombo.Items3"),
+            resources.GetString("zeroEquationCombo.Items4")});
+            this.zeroEquationCombo.Name = "zeroEquationCombo";
             // 
-            // radioButton16
+            // twinEquationRdo
             // 
-            resources.ApplyResources(this.radioButton16, "radioButton16");
-            this.radioButton16.Name = "radioButton16";
-            this.radioButton16.TabStop = true;
-            this.radioButton16.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.twinEquationRdo, "twinEquationRdo");
+            this.twinEquationRdo.Name = "twinEquationRdo";
+            this.twinEquationRdo.TabStop = true;
+            this.twinEquationRdo.UseVisualStyleBackColor = true;
+            this.twinEquationRdo.CheckedChanged += new System.EventHandler(this.twinEquationRdo_CheckedChanged);
             // 
-            // radioButton15
+            // SingleEquationRdo
             // 
-            resources.ApplyResources(this.radioButton15, "radioButton15");
-            this.radioButton15.Name = "radioButton15";
-            this.radioButton15.TabStop = true;
-            this.radioButton15.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.SingleEquationRdo, "SingleEquationRdo");
+            this.SingleEquationRdo.Name = "SingleEquationRdo";
+            this.SingleEquationRdo.TabStop = true;
+            this.SingleEquationRdo.UseVisualStyleBackColor = true;
             // 
-            // radioButton14
+            // zeroEquationRdo
             // 
-            resources.ApplyResources(this.radioButton14, "radioButton14");
-            this.radioButton14.Name = "radioButton14";
-            this.radioButton14.TabStop = true;
-            this.radioButton14.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.zeroEquationRdo, "zeroEquationRdo");
+            this.zeroEquationRdo.Name = "zeroEquationRdo";
+            this.zeroEquationRdo.TabStop = true;
+            this.zeroEquationRdo.UseVisualStyleBackColor = true;
+            this.zeroEquationRdo.CheckedChanged += new System.EventHandler(this.zeroEquationRdo_CheckedChanged);
             // 
-            // radioButton13
+            // userInputRdo
             // 
-            resources.ApplyResources(this.radioButton13, "radioButton13");
-            this.radioButton13.Name = "radioButton13";
-            this.radioButton13.TabStop = true;
-            this.radioButton13.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.userInputRdo, "userInputRdo");
+            this.userInputRdo.Name = "userInputRdo";
+            this.userInputRdo.TabStop = true;
+            this.userInputRdo.UseVisualStyleBackColor = true;
+            this.userInputRdo.CheckedChanged += new System.EventHandler(this.userInputRdo_CheckedChanged);
             // 
-            // panel4
+            // userInputPanel
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel4.Controls.Add(this.label18);
-            this.panel4.Controls.Add(this.label17);
-            this.panel4.Controls.Add(this.textBox16);
-            this.panel4.Controls.Add(this.textBox15);
-            resources.ApplyResources(this.panel4, "panel4");
-            this.panel4.Name = "panel4";
+            this.userInputPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.userInputPanel.Controls.Add(this.label18);
+            this.userInputPanel.Controls.Add(this.label17);
+            this.userInputPanel.Controls.Add(this.yParam);
+            this.userInputPanel.Controls.Add(this.xParam);
+            resources.ApplyResources(this.userInputPanel, "userInputPanel");
+            this.userInputPanel.Name = "userInputPanel";
+            this.userInputPanel.EnabledChanged += new System.EventHandler(this.UserInputPanel_EnabledChanged);
             // 
             // label18
             // 
             resources.ApplyResources(this.label18, "label18");
             this.label18.Name = "label18";
             // 
-            // textBox16
+            // label17
             // 
-            resources.ApplyResources(this.textBox16, "textBox16");
-            this.textBox16.Name = "textBox16";
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
+            // yParam
+            // 
+            resources.ApplyResources(this.yParam, "yParam");
+            this.yParam.Name = "yParam";
+            // 
+            // xParam
+            // 
+            resources.ApplyResources(this.xParam, "xParam");
+            this.xParam.Name = "xParam";
             // 
             // turbulenceBackBtn
             // 
@@ -921,16 +936,6 @@
             this.roughnessBackBtn.UseVisualStyleBackColor = true;
             this.roughnessBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
-            // textBox15
-            // 
-            resources.ApplyResources(this.textBox15, "textBox15");
-            this.textBox15.Name = "textBox15";
-            // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
             // WaterModelingForm
             // 
             this.AcceptButton = this.ok;
@@ -972,8 +977,8 @@
             this.turbulencePanel.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.userInputPanel.ResumeLayout(false);
+            this.userInputPanel.PerformLayout();
             this.dryBedPanel.ResumeLayout(false);
             this.roughnessPanel.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
@@ -1075,15 +1080,15 @@
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.RadioButton radioButton8;
         private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.RadioButton radioButton16;
-        private System.Windows.Forms.RadioButton radioButton15;
-        private System.Windows.Forms.RadioButton radioButton14;
-        private System.Windows.Forms.RadioButton radioButton13;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ComboBox twinEquationCombo;
+        private System.Windows.Forms.ComboBox zeroEquationCombo;
+        private System.Windows.Forms.RadioButton twinEquationRdo;
+        private System.Windows.Forms.RadioButton SingleEquationRdo;
+        private System.Windows.Forms.RadioButton zeroEquationRdo;
+        private System.Windows.Forms.RadioButton userInputRdo;
+        private System.Windows.Forms.Panel userInputPanel;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox yParam;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBox17;
@@ -1098,6 +1103,6 @@
         private System.Windows.Forms.RadioButton chezyRdo;
         private System.Windows.Forms.RadioButton manningRdo;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox xParam;
     }
 }

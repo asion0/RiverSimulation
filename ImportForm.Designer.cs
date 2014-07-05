@@ -33,21 +33,21 @@
             this.setting = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.selectBgFilePath = new System.Windows.Forms.Label();
+            this.selectBgBtn = new System.Windows.Forms.Button();
+            this.noBgRdo = new System.Windows.Forms.RadioButton();
+            this.selectBgRdo = new System.Windows.Forms.RadioButton();
+            this.useGoogleBgRdo = new System.Windows.Forms.RadioButton();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.inputFilePath = new System.Windows.Forms.Label();
+            this.inputFileBtn = new System.Windows.Forms.Button();
+            this.inputGridBtn = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.inputGridRdo = new System.Windows.Forms.RadioButton();
+            this.inputFileRdo = new System.Windows.Forms.RadioButton();
+            this.inputFileDlg = new System.Windows.Forms.OpenFileDialog();
+            this.selectBgDlg = new System.Windows.Forms.OpenFileDialog();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
@@ -97,134 +97,122 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.radioButton5);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Location = new System.Drawing.Point(12, 217);
+            this.groupBox1.Controls.Add(this.selectBgFilePath);
+            this.groupBox1.Controls.Add(this.selectBgBtn);
+            this.groupBox1.Controls.Add(this.noBgRdo);
+            this.groupBox1.Controls.Add(this.selectBgRdo);
+            this.groupBox1.Controls.Add(this.useGoogleBgRdo);
+            this.groupBox1.Location = new System.Drawing.Point(12, 254);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(366, 200);
+            this.groupBox1.Size = new System.Drawing.Size(366, 186);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "匯入航拍圖檔";
             // 
-            // label4
+            // selectBgFilePath
             // 
-            this.label4.Location = new System.Drawing.Point(57, 111);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(303, 12);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "label2";
+            this.selectBgFilePath.Location = new System.Drawing.Point(31, 114);
+            this.selectBgFilePath.Name = "selectBgFilePath";
+            this.selectBgFilePath.Size = new System.Drawing.Size(303, 51);
+            this.selectBgFilePath.TabIndex = 3;
             // 
-            // button6
+            // selectBgBtn
             // 
-            this.button6.Location = new System.Drawing.Point(106, 87);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "選取";
-            this.button6.UseVisualStyleBackColor = true;
+            this.selectBgBtn.Enabled = false;
+            this.selectBgBtn.Location = new System.Drawing.Point(106, 85);
+            this.selectBgBtn.Name = "selectBgBtn";
+            this.selectBgBtn.Size = new System.Drawing.Size(75, 26);
+            this.selectBgBtn.TabIndex = 1;
+            this.selectBgBtn.Text = "選取";
+            this.selectBgBtn.UseVisualStyleBackColor = true;
+            this.selectBgBtn.Click += new System.EventHandler(this.selectBgBtn_Click);
             // 
-            // label3
+            // noBgRdo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 112);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "檔案 :";
+            this.noBgRdo.AutoSize = true;
+            this.noBgRdo.Checked = true;
+            this.noBgRdo.Location = new System.Drawing.Point(17, 30);
+            this.noBgRdo.Name = "noBgRdo";
+            this.noBgRdo.Size = new System.Drawing.Size(83, 16);
+            this.noBgRdo.TabIndex = 0;
+            this.noBgRdo.TabStop = true;
+            this.noBgRdo.Text = "不使用底圖";
+            this.noBgRdo.UseVisualStyleBackColor = true;
+            this.noBgRdo.CheckedChanged += new System.EventHandler(this.noBgRdo_CheckedChanged);
             // 
-            // radioButton5
+            // selectBgRdo
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(17, 30);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(83, 16);
-            this.radioButton5.TabIndex = 0;
-            this.radioButton5.Text = "不使用底圖";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.selectBgRdo.AutoSize = true;
+            this.selectBgRdo.Location = new System.Drawing.Point(17, 90);
+            this.selectBgRdo.Name = "selectBgRdo";
+            this.selectBgRdo.Size = new System.Drawing.Size(71, 16);
+            this.selectBgRdo.TabIndex = 0;
+            this.selectBgRdo.Text = "選取圖檔";
+            this.selectBgRdo.UseVisualStyleBackColor = true;
+            this.selectBgRdo.CheckedChanged += new System.EventHandler(this.selectBgRdo_CheckedChanged);
             // 
-            // radioButton3
+            // useGoogleBgRdo
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(17, 90);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(71, 16);
-            this.radioButton3.TabIndex = 0;
-            this.radioButton3.Text = "選取圖檔";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Checked = true;
-            this.radioButton4.Location = new System.Drawing.Point(17, 60);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(117, 16);
-            this.radioButton4.TabIndex = 0;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "由Google地圖取得";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.useGoogleBgRdo.AutoSize = true;
+            this.useGoogleBgRdo.Location = new System.Drawing.Point(17, 60);
+            this.useGoogleBgRdo.Name = "useGoogleBgRdo";
+            this.useGoogleBgRdo.Size = new System.Drawing.Size(117, 16);
+            this.useGoogleBgRdo.TabIndex = 0;
+            this.useGoogleBgRdo.Text = "由Google地圖取得";
+            this.useGoogleBgRdo.UseVisualStyleBackColor = true;
+            this.useGoogleBgRdo.CheckedChanged += new System.EventHandler(this.useGoogleBgRdo_CheckedChanged);
             // 
             // flowTypeGroup
             // 
-            this.flowTypeGroup.Controls.Add(this.label2);
-            this.flowTypeGroup.Controls.Add(this.label1);
-            this.flowTypeGroup.Controls.Add(this.button4);
-            this.flowTypeGroup.Controls.Add(this.button2);
+            this.flowTypeGroup.Controls.Add(this.inputFilePath);
+            this.flowTypeGroup.Controls.Add(this.inputFileBtn);
+            this.flowTypeGroup.Controls.Add(this.inputGridBtn);
             this.flowTypeGroup.Controls.Add(this.button3);
             this.flowTypeGroup.Controls.Add(this.button1);
-            this.flowTypeGroup.Controls.Add(this.radioButton2);
-            this.flowTypeGroup.Controls.Add(this.radioButton1);
+            this.flowTypeGroup.Controls.Add(this.inputGridRdo);
+            this.flowTypeGroup.Controls.Add(this.inputFileRdo);
             this.flowTypeGroup.Location = new System.Drawing.Point(12, 11);
             this.flowTypeGroup.Name = "flowTypeGroup";
-            this.flowTypeGroup.Size = new System.Drawing.Size(366, 200);
+            this.flowTypeGroup.Size = new System.Drawing.Size(366, 227);
             this.flowTypeGroup.TabIndex = 0;
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "計算網格來源";
             // 
-            // label2
+            // inputFilePath
             // 
-            this.label2.Location = new System.Drawing.Point(57, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(303, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
+            this.inputFilePath.Enabled = false;
+            this.inputFilePath.Location = new System.Drawing.Point(31, 54);
+            this.inputFilePath.Name = "inputFilePath";
+            this.inputFilePath.Size = new System.Drawing.Size(303, 56);
+            this.inputFilePath.TabIndex = 3;
             // 
-            // label1
+            // inputFileBtn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "檔案 :";
+            this.inputFileBtn.Enabled = false;
+            this.inputFileBtn.Location = new System.Drawing.Point(106, 25);
+            this.inputFileBtn.Name = "inputFileBtn";
+            this.inputFileBtn.Size = new System.Drawing.Size(75, 26);
+            this.inputFileBtn.TabIndex = 1;
+            this.inputFileBtn.Text = "選取檔案";
+            this.inputFileBtn.UseVisualStyleBackColor = true;
+            this.inputFileBtn.Click += new System.EventHandler(this.inputFileBtn_Click);
             // 
-            // button4
+            // inputGridBtn
             // 
-            this.button4.Location = new System.Drawing.Point(106, 27);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "選取檔案";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(106, 87);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "輸入格網";
-            this.button2.UseVisualStyleBackColor = true;
+            this.inputGridBtn.Enabled = false;
+            this.inputGridBtn.Location = new System.Drawing.Point(106, 113);
+            this.inputGridBtn.Name = "inputGridBtn";
+            this.inputGridBtn.Size = new System.Drawing.Size(75, 26);
+            this.inputGridBtn.TabIndex = 1;
+            this.inputGridBtn.Text = "輸入格網";
+            this.inputGridBtn.UseVisualStyleBackColor = true;
+            this.inputGridBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(119, 150);
+            this.button3.Location = new System.Drawing.Point(17, 187);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 36);
+            this.button3.Size = new System.Drawing.Size(130, 26);
             this.button3.TabIndex = 1;
             this.button3.Text = "執行Excel";
             this.button3.UseVisualStyleBackColor = true;
@@ -233,32 +221,40 @@
             // 
             this.button1.Location = new System.Drawing.Point(17, 150);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 36);
+            this.button1.Size = new System.Drawing.Size(130, 26);
             this.button1.TabIndex = 1;
             this.button1.Text = "執行CCHE-Mesh";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // inputGridRdo
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(17, 90);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(71, 16);
-            this.radioButton2.TabIndex = 0;
-            this.radioButton2.Text = "自行輸入";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.inputGridRdo.AutoSize = true;
+            this.inputGridRdo.Location = new System.Drawing.Point(17, 118);
+            this.inputGridRdo.Name = "inputGridRdo";
+            this.inputGridRdo.Size = new System.Drawing.Size(71, 16);
+            this.inputGridRdo.TabIndex = 0;
+            this.inputGridRdo.Text = "自行輸入";
+            this.inputGridRdo.UseVisualStyleBackColor = true;
+            this.inputGridRdo.CheckedChanged += new System.EventHandler(this.inputGridRdo_CheckedChanged);
             // 
-            // radioButton1
+            // inputFileRdo
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(17, 30);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(83, 16);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "由檔案匯入";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.inputFileRdo.AutoSize = true;
+            this.inputFileRdo.Location = new System.Drawing.Point(17, 30);
+            this.inputFileRdo.Name = "inputFileRdo";
+            this.inputFileRdo.Size = new System.Drawing.Size(83, 16);
+            this.inputFileRdo.TabIndex = 0;
+            this.inputFileRdo.Text = "由檔案匯入";
+            this.inputFileRdo.UseVisualStyleBackColor = true;
+            this.inputFileRdo.CheckedChanged += new System.EventHandler(this.inputFileRdo_CheckedChanged);
+            // 
+            // inputFileDlg
+            // 
+            this.inputFileDlg.Filter = "Excel檔案|*.xls|CCHE_MESH檔案|*.g|所有檔案|*.*";
+            // 
+            // selectBgDlg
+            // 
+            this.selectBgDlg.Filter = "所有檔案|*.*|Bmp檔案|*.bmp|PNG檔案|*.png|JPG檔案|*jpg";
             // 
             // ImportForm
             // 
@@ -291,21 +287,21 @@
         private System.Windows.Forms.Label setting;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.Label selectBgFilePath;
+        private System.Windows.Forms.Button selectBgBtn;
+        private System.Windows.Forms.RadioButton noBgRdo;
+        private System.Windows.Forms.RadioButton selectBgRdo;
+        private System.Windows.Forms.RadioButton useGoogleBgRdo;
         private System.Windows.Forms.GroupBox flowTypeGroup;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label inputFilePath;
+        private System.Windows.Forms.Button inputFileBtn;
+        private System.Windows.Forms.Button inputGridBtn;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton inputGridRdo;
+        private System.Windows.Forms.RadioButton inputFileRdo;
+        private System.Windows.Forms.OpenFileDialog inputFileDlg;
+        private System.Windows.Forms.OpenFileDialog selectBgDlg;
 
     }
 }

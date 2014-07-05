@@ -31,6 +31,7 @@ namespace RiverSimulationApplication
             {
 
             }
+            RiverSimulationProfile.profile.waterModelingFinished = true;
         }
 
         private void simulationModule_Click(object sender, EventArgs e)
@@ -41,6 +42,7 @@ namespace RiverSimulationApplication
             {
 
             }
+            RiverSimulationProfile.profile.simulationModuleFinished = true;
         }
 
         private void importBtn_Click(object sender, EventArgs e)
@@ -51,6 +53,7 @@ namespace RiverSimulationApplication
             {
 
             }
+            RiverSimulationProfile.profile.importFinished = true;
         }
 
         private void movableBedBtn_Click(object sender, EventArgs e)
@@ -61,6 +64,7 @@ namespace RiverSimulationApplication
             {
 
             }
+            RiverSimulationProfile.profile.movableBedFinished = true;
         }
 
         private void initialConditionsBtn_Click(object sender, EventArgs e)
@@ -71,6 +75,7 @@ namespace RiverSimulationApplication
             {
 
             }
+            RiverSimulationProfile.profile.InitialConditionsFinished = true;
         }
 
         private void boundaryConditionsBtn_Click(object sender, EventArgs e)
@@ -81,6 +86,23 @@ namespace RiverSimulationApplication
             {
 
             }
+            RiverSimulationProfile.profile.BoundaryConditionsFinished = true;
+        }
+
+        private void RiverSimulation_Load(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
+        private void UpdateStatus()
+        {
+            Color FinishedButton = Color.LimeGreen;
+            Color ReadyButton = Color.LimeGreen;
+            Color DisableButton = SystemColors.ActiveCaption;
+
+            importBtn.BackColor = DisableButton;
+
+
         }
     }
 }

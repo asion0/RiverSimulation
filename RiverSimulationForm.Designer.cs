@@ -473,6 +473,7 @@
             this.Name = "RiverSimulation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "水理動床模式使用者介面";
+            this.Load += new System.EventHandler(this.RiverSimulation_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

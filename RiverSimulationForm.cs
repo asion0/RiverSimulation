@@ -145,7 +145,11 @@ namespace RiverSimulationApplication
 
         private void aboutMnuItem_Click(object sender, EventArgs e)
         {
+            AboutForm form = new AboutForm();
+            if (DialogResult.OK == form.ShowDialog())
+            {
 
+            }
         }
     }
 }

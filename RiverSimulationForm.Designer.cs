@@ -166,6 +166,7 @@
             this.aboutMnuItem.Name = "aboutMnuItem";
             this.aboutMnuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutMnuItem.Text = "關於(A)";
+            this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
             // 
             // importBtn
             // 

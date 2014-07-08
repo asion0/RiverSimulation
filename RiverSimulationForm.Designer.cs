@@ -1,16 +1,16 @@
 ﻿namespace RiverSimulationApplication
 {
-    partial class RiverSimulation
+    partial class RiverSimulationForm
     {
         /// <summary>
-        /// 設計工具所需的變數。
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清除任何使用中的資源。
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">如果應該處置 Managed 資源則為 true，否則為 false。</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,15 +20,21 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form 設計工具產生的程式碼
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器
-        /// 修改這個方法的內容。
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RiverSimulation));
+            this.movableBedBtn = new System.Windows.Forms.Button();
+            this.boundaryConditionsBtn = new System.Windows.Forms.Button();
+            this.initialConditionsBtn = new System.Windows.Forms.Button();
+            this.waterModelingBtn = new System.Windows.Forms.Button();
+            this.runSimulationBtn = new System.Windows.Forms.Button();
+            this.simulationModuleBtn = new System.Windows.Forms.Button();
+            this.importBtn = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileMnu = new System.Windows.Forms.ToolStripMenuItem();
             this.newMnuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,34 +48,94 @@
             this.langTwMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMnu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMnuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importBtn = new System.Windows.Forms.Button();
-            this.simulationModuleBtn = new System.Windows.Forms.Button();
-            this.waterModelingBtn = new System.Windows.Forms.Button();
-            this.movableBedBtn = new System.Windows.Forms.Button();
-            this.initialConditionsBtn = new System.Windows.Forms.Button();
-            this.boundaryConditionsBtn = new System.Windows.Forms.Button();
-            this.runSimulationBtn = new System.Windows.Forms.Button();
             this.simulationResultBtn = new System.Windows.Forms.Button();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape17 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape16 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape15 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape14 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape13 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape12 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape11 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape10 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape9 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape8 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape7 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape6 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape5 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape4 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape3 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // movableBedBtn
+            // 
+            this.movableBedBtn.BackColor = System.Drawing.Color.LimeGreen;
+            this.movableBedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.movableBedBtn.Enabled = false;
+            this.movableBedBtn.Location = new System.Drawing.Point(497, 263);
+            this.movableBedBtn.Name = "movableBedBtn";
+            this.movableBedBtn.Size = new System.Drawing.Size(102, 64);
+            this.movableBedBtn.TabIndex = 2;
+            this.movableBedBtn.Text = "動床";
+            this.movableBedBtn.UseVisualStyleBackColor = true;
+            this.movableBedBtn.Click += new System.EventHandler(this.movableBedBtn_Click);
+            // 
+            // boundaryConditionsBtn
+            // 
+            this.boundaryConditionsBtn.BackColor = System.Drawing.Color.Goldenrod;
+            this.boundaryConditionsBtn.Enabled = false;
+            this.boundaryConditionsBtn.Location = new System.Drawing.Point(497, 369);
+            this.boundaryConditionsBtn.Name = "boundaryConditionsBtn";
+            this.boundaryConditionsBtn.Size = new System.Drawing.Size(102, 64);
+            this.boundaryConditionsBtn.TabIndex = 3;
+            this.boundaryConditionsBtn.Text = "邊界條件";
+            this.boundaryConditionsBtn.UseVisualStyleBackColor = true;
+            this.boundaryConditionsBtn.Click += new System.EventHandler(this.boundaryConditionsBtn_Click);
+            // 
+            // initialConditionsBtn
+            // 
+            this.initialConditionsBtn.BackColor = System.Drawing.Color.Goldenrod;
+            this.initialConditionsBtn.Enabled = false;
+            this.initialConditionsBtn.Location = new System.Drawing.Point(247, 369);
+            this.initialConditionsBtn.Name = "initialConditionsBtn";
+            this.initialConditionsBtn.Size = new System.Drawing.Size(102, 64);
+            this.initialConditionsBtn.TabIndex = 4;
+            this.initialConditionsBtn.Text = "初始條件";
+            this.initialConditionsBtn.UseVisualStyleBackColor = true;
+            this.initialConditionsBtn.Click += new System.EventHandler(this.initialConditionsBtn_Click);
+            // 
+            // waterModelingBtn
+            // 
+            this.waterModelingBtn.BackColor = System.Drawing.Color.LimeGreen;
+            this.waterModelingBtn.Enabled = false;
+            this.waterModelingBtn.Location = new System.Drawing.Point(247, 263);
+            this.waterModelingBtn.Name = "waterModelingBtn";
+            this.waterModelingBtn.Size = new System.Drawing.Size(102, 64);
+            this.waterModelingBtn.TabIndex = 5;
+            this.waterModelingBtn.Text = "水理";
+            this.waterModelingBtn.UseVisualStyleBackColor = true;
+            this.waterModelingBtn.Click += new System.EventHandler(this.waterModelingBtn_Click);
+            // 
+            // runSimulationBtn
+            // 
+            this.runSimulationBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.runSimulationBtn.Enabled = false;
+            this.runSimulationBtn.Location = new System.Drawing.Point(372, 475);
+            this.runSimulationBtn.Name = "runSimulationBtn";
+            this.runSimulationBtn.Size = new System.Drawing.Size(102, 64);
+            this.runSimulationBtn.TabIndex = 6;
+            this.runSimulationBtn.Text = "開始模擬";
+            this.runSimulationBtn.UseVisualStyleBackColor = true;
+            this.runSimulationBtn.Click += new System.EventHandler(this.runSimulationBtn_Click);
+            // 
+            // simulationModuleBtn
+            // 
+            this.simulationModuleBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.simulationModuleBtn.Enabled = false;
+            this.simulationModuleBtn.Location = new System.Drawing.Point(372, 157);
+            this.simulationModuleBtn.Name = "simulationModuleBtn";
+            this.simulationModuleBtn.Size = new System.Drawing.Size(102, 64);
+            this.simulationModuleBtn.TabIndex = 7;
+            this.simulationModuleBtn.Text = "模擬模組";
+            this.simulationModuleBtn.UseVisualStyleBackColor = true;
+            this.simulationModuleBtn.Click += new System.EventHandler(this.simulationModuleBtn_Click);
+            // 
+            // importBtn
+            // 
+            this.importBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.importBtn.Enabled = false;
+            this.importBtn.Location = new System.Drawing.Point(372, 51);
+            this.importBtn.Name = "importBtn";
+            this.importBtn.Size = new System.Drawing.Size(102, 64);
+            this.importBtn.TabIndex = 8;
+            this.importBtn.Text = "匯入";
+            this.importBtn.UseVisualStyleBackColor = true;
+            this.importBtn.Click += new System.EventHandler(this.importBtn_Click);
             // 
             // menuStrip1
             // 
@@ -79,8 +145,8 @@
             this.helpMnu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(808, 24);
-            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Size = new System.Drawing.Size(847, 24);
+            this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileMnu
@@ -143,14 +209,13 @@
             // langEngMnuItem
             // 
             this.langEngMnuItem.Name = "langEngMnuItem";
-            this.langEngMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.langEngMnuItem.Size = new System.Drawing.Size(139, 22);
             this.langEngMnuItem.Text = "English(E)";
-            this.langEngMnuItem.Click += new System.EventHandler(this.eToolStripMenuItem_Click);
             // 
             // langTwMnuItem
             // 
             this.langTwMnuItem.Name = "langTwMnuItem";
-            this.langTwMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.langTwMnuItem.Size = new System.Drawing.Size(139, 22);
             this.langTwMnuItem.Text = "繁體中文(T)";
             // 
             // helpMnu
@@ -164,308 +229,26 @@
             // aboutMnuItem
             // 
             this.aboutMnuItem.Name = "aboutMnuItem";
-            this.aboutMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutMnuItem.Size = new System.Drawing.Size(116, 22);
             this.aboutMnuItem.Text = "關於(A)";
-            this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
-            // 
-            // importBtn
-            // 
-            this.importBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.importBtn.Enabled = false;
-            this.importBtn.Location = new System.Drawing.Point(354, 70);
-            this.importBtn.Name = "importBtn";
-            this.importBtn.Size = new System.Drawing.Size(102, 64);
-            this.importBtn.TabIndex = 1;
-            this.importBtn.Text = "匯入";
-            this.importBtn.UseVisualStyleBackColor = true;
-            this.importBtn.Click += new System.EventHandler(this.importBtn_Click);
-            // 
-            // simulationModuleBtn
-            // 
-            this.simulationModuleBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.simulationModuleBtn.Enabled = false;
-            this.simulationModuleBtn.Location = new System.Drawing.Point(354, 176);
-            this.simulationModuleBtn.Name = "simulationModuleBtn";
-            this.simulationModuleBtn.Size = new System.Drawing.Size(102, 64);
-            this.simulationModuleBtn.TabIndex = 1;
-            this.simulationModuleBtn.Text = "模擬模組";
-            this.simulationModuleBtn.UseVisualStyleBackColor = true;
-            this.simulationModuleBtn.Click += new System.EventHandler(this.simulationModule_Click);
-            // 
-            // waterModelingBtn
-            // 
-            this.waterModelingBtn.BackColor = System.Drawing.Color.LimeGreen;
-            this.waterModelingBtn.Enabled = false;
-            this.waterModelingBtn.Location = new System.Drawing.Point(229, 282);
-            this.waterModelingBtn.Name = "waterModelingBtn";
-            this.waterModelingBtn.Size = new System.Drawing.Size(102, 64);
-            this.waterModelingBtn.TabIndex = 1;
-            this.waterModelingBtn.Text = "水理";
-            this.waterModelingBtn.UseVisualStyleBackColor = true;
-            this.waterModelingBtn.Click += new System.EventHandler(this.waterModeling_Click);
-            // 
-            // movableBedBtn
-            // 
-            this.movableBedBtn.BackColor = System.Drawing.Color.LimeGreen;
-            this.movableBedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.movableBedBtn.Enabled = false;
-            this.movableBedBtn.Location = new System.Drawing.Point(479, 282);
-            this.movableBedBtn.Name = "movableBedBtn";
-            this.movableBedBtn.Size = new System.Drawing.Size(102, 64);
-            this.movableBedBtn.TabIndex = 1;
-            this.movableBedBtn.Text = "動床";
-            this.movableBedBtn.UseVisualStyleBackColor = true;
-            this.movableBedBtn.Click += new System.EventHandler(this.movableBedBtn_Click);
-            // 
-            // initialConditionsBtn
-            // 
-            this.initialConditionsBtn.BackColor = System.Drawing.Color.Goldenrod;
-            this.initialConditionsBtn.Enabled = false;
-            this.initialConditionsBtn.Location = new System.Drawing.Point(229, 388);
-            this.initialConditionsBtn.Name = "initialConditionsBtn";
-            this.initialConditionsBtn.Size = new System.Drawing.Size(102, 64);
-            this.initialConditionsBtn.TabIndex = 1;
-            this.initialConditionsBtn.Text = "初始條件";
-            this.initialConditionsBtn.UseVisualStyleBackColor = true;
-            this.initialConditionsBtn.Click += new System.EventHandler(this.initialConditionsBtn_Click);
-            // 
-            // boundaryConditionsBtn
-            // 
-            this.boundaryConditionsBtn.BackColor = System.Drawing.Color.Goldenrod;
-            this.boundaryConditionsBtn.Enabled = false;
-            this.boundaryConditionsBtn.Location = new System.Drawing.Point(479, 388);
-            this.boundaryConditionsBtn.Name = "boundaryConditionsBtn";
-            this.boundaryConditionsBtn.Size = new System.Drawing.Size(102, 64);
-            this.boundaryConditionsBtn.TabIndex = 1;
-            this.boundaryConditionsBtn.Text = "邊界條件";
-            this.boundaryConditionsBtn.UseVisualStyleBackColor = true;
-            this.boundaryConditionsBtn.Click += new System.EventHandler(this.boundaryConditionsBtn_Click);
-            // 
-            // runSimulationBtn
-            // 
-            this.runSimulationBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.runSimulationBtn.Enabled = false;
-            this.runSimulationBtn.Location = new System.Drawing.Point(354, 494);
-            this.runSimulationBtn.Name = "runSimulationBtn";
-            this.runSimulationBtn.Size = new System.Drawing.Size(102, 64);
-            this.runSimulationBtn.TabIndex = 1;
-            this.runSimulationBtn.Text = "開始模擬";
-            this.runSimulationBtn.UseVisualStyleBackColor = true;
-            this.runSimulationBtn.Click += new System.EventHandler(this.runSimulationBtn_Click);
             // 
             // simulationResultBtn
             // 
+            this.simulationResultBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.simulationResultBtn.Enabled = false;
-            this.simulationResultBtn.Location = new System.Drawing.Point(354, 600);
+            this.simulationResultBtn.Location = new System.Drawing.Point(372, 581);
             this.simulationResultBtn.Name = "simulationResultBtn";
             this.simulationResultBtn.Size = new System.Drawing.Size(102, 64);
-            this.simulationResultBtn.TabIndex = 1;
-            this.simulationResultBtn.Text = "模擬結果展示";
+            this.simulationResultBtn.TabIndex = 6;
+            this.simulationResultBtn.Text = "模擬結果";
             this.simulationResultBtn.UseVisualStyleBackColor = true;
+            this.simulationResultBtn.Click += new System.EventHandler(this.runSimulationBtn_Click);
             // 
-            // shapeContainer1
-            // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape17,
-            this.lineShape16,
-            this.lineShape15,
-            this.lineShape14,
-            this.lineShape13,
-            this.lineShape12,
-            this.lineShape11,
-            this.lineShape10,
-            this.lineShape9,
-            this.lineShape8,
-            this.lineShape7,
-            this.lineShape6,
-            this.lineShape5,
-            this.lineShape4,
-            this.lineShape3,
-            this.lineShape2,
-            this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(808, 682);
-            this.shapeContainer1.TabIndex = 2;
-            this.shapeContainer1.TabStop = false;
-            // 
-            // lineShape17
-            // 
-            this.lineShape17.BorderWidth = 3;
-            this.lineShape17.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape17.Name = "lineShape1";
-            this.lineShape17.X1 = 402;
-            this.lineShape17.X2 = 402;
-            this.lineShape17.Y1 = 557;
-            this.lineShape17.Y2 = 600;
-            // 
-            // lineShape16
-            // 
-            this.lineShape16.BorderWidth = 3;
-            this.lineShape16.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape16.Name = "lineShape1";
-            this.lineShape16.X1 = 398;
-            this.lineShape16.X2 = 398;
-            this.lineShape16.Y1 = 468;
-            this.lineShape16.Y2 = 495;
-            // 
-            // lineShape15
-            // 
-            this.lineShape15.BorderWidth = 3;
-            this.lineShape15.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape15.Name = "lineShape1";
-            this.lineShape15.X1 = 531;
-            this.lineShape15.X2 = 531;
-            this.lineShape15.Y1 = 450;
-            this.lineShape15.Y2 = 468;
-            // 
-            // lineShape14
-            // 
-            this.lineShape14.BorderWidth = 3;
-            this.lineShape14.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape14.Name = "lineShape1";
-            this.lineShape14.X1 = 278;
-            this.lineShape14.X2 = 278;
-            this.lineShape14.Y1 = 450;
-            this.lineShape14.Y2 = 468;
-            // 
-            // lineShape13
-            // 
-            this.lineShape13.BorderWidth = 3;
-            this.lineShape13.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape13.Name = "lineShape1";
-            this.lineShape13.X1 = 277;
-            this.lineShape13.X2 = 532;
-            this.lineShape13.Y1 = 467;
-            this.lineShape13.Y2 = 467;
-            // 
-            // lineShape12
-            // 
-            this.lineShape12.BorderWidth = 3;
-            this.lineShape12.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape12.Name = "lineShape1";
-            this.lineShape12.X1 = 531;
-            this.lineShape12.X2 = 531;
-            this.lineShape12.Y1 = 343;
-            this.lineShape12.Y2 = 361;
-            // 
-            // lineShape11
-            // 
-            this.lineShape11.BorderWidth = 3;
-            this.lineShape11.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape11.Name = "lineShape1";
-            this.lineShape11.X1 = 278;
-            this.lineShape11.X2 = 278;
-            this.lineShape11.Y1 = 343;
-            this.lineShape11.Y2 = 361;
-            // 
-            // lineShape10
-            // 
-            this.lineShape10.BorderWidth = 3;
-            this.lineShape10.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape10.Name = "lineShape1";
-            this.lineShape10.X1 = 402;
-            this.lineShape10.X2 = 402;
-            this.lineShape10.Y1 = 359;
-            this.lineShape10.Y2 = 376;
-            // 
-            // lineShape9
-            // 
-            this.lineShape9.BorderWidth = 3;
-            this.lineShape9.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape9.Name = "lineShape1";
-            this.lineShape9.X1 = 277;
-            this.lineShape9.X2 = 532;
-            this.lineShape9.Y1 = 375;
-            this.lineShape9.Y2 = 375;
-            // 
-            // lineShape8
-            // 
-            this.lineShape8.BorderWidth = 3;
-            this.lineShape8.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape8.Name = "lineShape1";
-            this.lineShape8.X1 = 278;
-            this.lineShape8.X2 = 278;
-            this.lineShape8.Y1 = 374;
-            this.lineShape8.Y2 = 392;
-            // 
-            // lineShape7
-            // 
-            this.lineShape7.BorderWidth = 3;
-            this.lineShape7.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape7.Name = "lineShape1";
-            this.lineShape7.X1 = 531;
-            this.lineShape7.X2 = 531;
-            this.lineShape7.Y1 = 374;
-            this.lineShape7.Y2 = 392;
-            // 
-            // lineShape6
-            // 
-            this.lineShape6.BorderWidth = 3;
-            this.lineShape6.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape6.Name = "lineShape1";
-            this.lineShape6.X1 = 277;
-            this.lineShape6.X2 = 532;
-            this.lineShape6.Y1 = 360;
-            this.lineShape6.Y2 = 360;
-            // 
-            // lineShape5
-            // 
-            this.lineShape5.BorderWidth = 3;
-            this.lineShape5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape5.Name = "lineShape1";
-            this.lineShape5.X1 = 277;
-            this.lineShape5.X2 = 532;
-            this.lineShape5.Y1 = 264;
-            this.lineShape5.Y2 = 264;
-            // 
-            // lineShape4
-            // 
-            this.lineShape4.BorderWidth = 3;
-            this.lineShape4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape4.Name = "lineShape1";
-            this.lineShape4.X1 = 278;
-            this.lineShape4.X2 = 278;
-            this.lineShape4.Y1 = 265;
-            this.lineShape4.Y2 = 283;
-            // 
-            // lineShape3
-            // 
-            this.lineShape3.BorderWidth = 3;
-            this.lineShape3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape3.Name = "lineShape1";
-            this.lineShape3.X1 = 531;
-            this.lineShape3.X2 = 531;
-            this.lineShape3.Y1 = 265;
-            this.lineShape3.Y2 = 283;
-            // 
-            // lineShape2
-            // 
-            this.lineShape2.BorderWidth = 3;
-            this.lineShape2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lineShape2.Name = "lineShape1";
-            this.lineShape2.X1 = 402;
-            this.lineShape2.X2 = 402;
-            this.lineShape2.Y1 = 238;
-            this.lineShape2.Y2 = 262;
-            // 
-            // lineShape1
-            // 
-            this.lineShape1.BorderWidth = 3;
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 402;
-            this.lineShape1.X2 = 402;
-            this.lineShape1.Y1 = 132;
-            this.lineShape1.Y2 = 176;
-            // 
-            // RiverSimulation
+            // RiverSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(808, 682);
+            this.ClientSize = new System.Drawing.Size(847, 656);
             this.Controls.Add(this.movableBedBtn);
             this.Controls.Add(this.boundaryConditionsBtn);
             this.Controls.Add(this.initialConditionsBtn);
@@ -475,13 +258,10 @@
             this.Controls.Add(this.simulationModuleBtn);
             this.Controls.Add(this.importBtn);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.shapeContainer1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "RiverSimulation";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "水理動床模式使用者介面";
-            this.Load += new System.EventHandler(this.RiverSimulation_Load);
+            this.Name = "RiverSimulationForm";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -491,6 +271,13 @@
 
         #endregion
 
+        private System.Windows.Forms.Button movableBedBtn;
+        private System.Windows.Forms.Button boundaryConditionsBtn;
+        private System.Windows.Forms.Button initialConditionsBtn;
+        private System.Windows.Forms.Button waterModelingBtn;
+        private System.Windows.Forms.Button runSimulationBtn;
+        private System.Windows.Forms.Button simulationModuleBtn;
+        private System.Windows.Forms.Button importBtn;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileMnu;
         private System.Windows.Forms.ToolStripMenuItem newMnuItem;
@@ -501,35 +288,9 @@
         private System.Windows.Forms.ToolStripMenuItem exitMnuItem;
         private System.Windows.Forms.ToolStripMenuItem languageMnu;
         private System.Windows.Forms.ToolStripMenuItem langEngMnuItem;
+        private System.Windows.Forms.ToolStripMenuItem langTwMnuItem;
         private System.Windows.Forms.ToolStripMenuItem helpMnu;
         private System.Windows.Forms.ToolStripMenuItem aboutMnuItem;
-        private System.Windows.Forms.ToolStripMenuItem langTwMnuItem;
-        private System.Windows.Forms.Button importBtn;
-        private System.Windows.Forms.Button simulationModuleBtn;
-        private System.Windows.Forms.Button waterModelingBtn;
-        private System.Windows.Forms.Button movableBedBtn;
-        private System.Windows.Forms.Button initialConditionsBtn;
-        private System.Windows.Forms.Button boundaryConditionsBtn;
-        private System.Windows.Forms.Button runSimulationBtn;
         private System.Windows.Forms.Button simulationResultBtn;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape17;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape16;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape15;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape14;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape13;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape12;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape11;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape10;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape9;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape8;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape7;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape6;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape5;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape4;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape3;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
     }
 }
-

@@ -96,6 +96,12 @@
     <Compile Include="BoundaryConditionsForm.Designer.cs">
       <DependentUpon>BoundaryConditionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RiverSimulationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RiverSimulationForm.Designer.cs">
+      <DependentUpon>RiverSimulationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <EmbeddedResource Include="BoundaryConditionsForm.resx">
       <DependentUpon>BoundaryConditionsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RiverSimulationForm.resx">
+      <DependentUpon>RiverSimulationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,12 +157,6 @@
     </Compile>
     <Compile Include="WaterModelingForm.Designer.cs">
       <DependentUpon>WaterModelingForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RiverSimulationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RiverSimulationForm.Designer.cs">
-      <DependentUpon>RiverSimulationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,9 +185,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RiverSimulationForm.resx">
-      <DependentUpon>RiverSimulationForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RunSimulationForm.resx">
       <DependentUpon>RunSimulationForm.cs</DependentUpon>
     </EmbeddedResource>

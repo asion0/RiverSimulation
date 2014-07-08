@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace RiverSimulationApplication
 {
-    public partial class RiverSimulation : Form
+    public partial class RiverSimulationForm : Form
     {
-        public RiverSimulation()
+        public RiverSimulationForm()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            UpdateStatus();
         }
 
         private void eToolStripMenuItem_Click(object sender, EventArgs e)
@@ -22,20 +27,30 @@ namespace RiverSimulationApplication
 
         }
 
-        private void waterModeling_Click(object sender, EventArgs e)
+        private void aboutMnuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm form = new AboutForm();
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void waterModelingBtn_Click(object sender, EventArgs e)
         {
             WaterModelingForm form = new WaterModelingForm();
-            
-            
+
+
             if (DialogResult.OK == form.ShowDialog())
             {
 
             }
             RiverSimulationProfile.profile.waterModelingFinished = true;
             UpdateStatus();
+
         }
 
-        private void simulationModule_Click(object sender, EventArgs e)
+        private void simulationModuleBtn_Click(object sender, EventArgs e)
         {
             SimulationModuleForm form = new SimulationModuleForm();
 
@@ -94,25 +109,19 @@ namespace RiverSimulationApplication
             RiverSimulationProfile.profile.boundaryConditionsFinished = true;
             UpdateStatus();
         }
-
-        private void RiverSimulation_Load(object sender, EventArgs e)
-        {
-            UpdateStatus();
-        }
-
         private void UpdateStatus()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             Color FinishedButton = Color.LimeGreen;
             Color ReadyButton = Color.Goldenrod;
             Color DisableButton = SystemColors.Control;
+            simulationModuleBtn.Enabled = p.IsSimulationModuleReady();
+
 
             importBtn.BackColor = (p.IsImportFinished()) ? FinishedButton : (p.IsImportReady()) ? ReadyButton : DisableButton;
             importBtn.Enabled = p.IsImportReady();
 
             simulationModuleBtn.BackColor = (p.IsSimulationModuleFinished()) ? FinishedButton : (p.IsSimulationModuleReady()) ? ReadyButton : DisableButton;
-            simulationModuleBtn.Enabled = p.IsSimulationModuleReady();
-
             waterModelingBtn.BackColor = (p.IsWaterModelingFinished()) ? FinishedButton : (p.IsWaterModelingReady()) ? ReadyButton : DisableButton;
             waterModelingBtn.Enabled = p.IsWaterModelingReady();
 
@@ -143,13 +152,5 @@ namespace RiverSimulationApplication
             UpdateStatus();
         }
 
-        private void aboutMnuItem_Click(object sender, EventArgs e)
-        {
-            AboutForm form = new AboutForm();
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-        }
     }
 }

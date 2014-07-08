@@ -16,7 +16,7 @@ namespace RiverSimulationApplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RiverSimulation());
+            Application.Run(new RiverSimulationForm());
         }
     }
 }

@@ -49,6 +49,12 @@
             this.helpMnu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simulationResultBtn = new System.Windows.Forms.Button();
+            this.sampleDisableBtn = new System.Windows.Forms.Button();
+            this.sampleReadyBtn = new System.Windows.Forms.Button();
+            this.sampleFinishedBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +62,6 @@
             // 
             this.movableBedBtn.BackColor = System.Drawing.Color.LimeGreen;
             this.movableBedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.movableBedBtn.Enabled = false;
             this.movableBedBtn.Location = new System.Drawing.Point(497, 263);
             this.movableBedBtn.Name = "movableBedBtn";
             this.movableBedBtn.Size = new System.Drawing.Size(102, 64);
@@ -68,7 +73,6 @@
             // boundaryConditionsBtn
             // 
             this.boundaryConditionsBtn.BackColor = System.Drawing.Color.Goldenrod;
-            this.boundaryConditionsBtn.Enabled = false;
             this.boundaryConditionsBtn.Location = new System.Drawing.Point(497, 369);
             this.boundaryConditionsBtn.Name = "boundaryConditionsBtn";
             this.boundaryConditionsBtn.Size = new System.Drawing.Size(102, 64);
@@ -80,7 +84,6 @@
             // initialConditionsBtn
             // 
             this.initialConditionsBtn.BackColor = System.Drawing.Color.Goldenrod;
-            this.initialConditionsBtn.Enabled = false;
             this.initialConditionsBtn.Location = new System.Drawing.Point(247, 369);
             this.initialConditionsBtn.Name = "initialConditionsBtn";
             this.initialConditionsBtn.Size = new System.Drawing.Size(102, 64);
@@ -92,7 +95,6 @@
             // waterModelingBtn
             // 
             this.waterModelingBtn.BackColor = System.Drawing.Color.LimeGreen;
-            this.waterModelingBtn.Enabled = false;
             this.waterModelingBtn.Location = new System.Drawing.Point(247, 263);
             this.waterModelingBtn.Name = "waterModelingBtn";
             this.waterModelingBtn.Size = new System.Drawing.Size(102, 64);
@@ -104,7 +106,6 @@
             // runSimulationBtn
             // 
             this.runSimulationBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.runSimulationBtn.Enabled = false;
             this.runSimulationBtn.Location = new System.Drawing.Point(372, 475);
             this.runSimulationBtn.Name = "runSimulationBtn";
             this.runSimulationBtn.Size = new System.Drawing.Size(102, 64);
@@ -116,7 +117,6 @@
             // simulationModuleBtn
             // 
             this.simulationModuleBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.simulationModuleBtn.Enabled = false;
             this.simulationModuleBtn.Location = new System.Drawing.Point(372, 157);
             this.simulationModuleBtn.Name = "simulationModuleBtn";
             this.simulationModuleBtn.Size = new System.Drawing.Size(102, 64);
@@ -128,7 +128,6 @@
             // importBtn
             // 
             this.importBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.importBtn.Enabled = false;
             this.importBtn.Location = new System.Drawing.Point(372, 51);
             this.importBtn.Name = "importBtn";
             this.importBtn.Size = new System.Drawing.Size(102, 64);
@@ -229,26 +228,83 @@
             // aboutMnuItem
             // 
             this.aboutMnuItem.Name = "aboutMnuItem";
-            this.aboutMnuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutMnuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutMnuItem.Text = "關於(A)";
+            this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
             // 
             // simulationResultBtn
             // 
             this.simulationResultBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.simulationResultBtn.Enabled = false;
             this.simulationResultBtn.Location = new System.Drawing.Point(372, 581);
             this.simulationResultBtn.Name = "simulationResultBtn";
             this.simulationResultBtn.Size = new System.Drawing.Size(102, 64);
             this.simulationResultBtn.TabIndex = 6;
             this.simulationResultBtn.Text = "模擬結果";
             this.simulationResultBtn.UseVisualStyleBackColor = true;
-            this.simulationResultBtn.Click += new System.EventHandler(this.runSimulationBtn_Click);
+            this.simulationResultBtn.Click += new System.EventHandler(this.runSimulationResultBtn_Click);
+            // 
+            // sampleDisableBtn
+            // 
+            this.sampleDisableBtn.Location = new System.Drawing.Point(13, 51);
+            this.sampleDisableBtn.Name = "sampleDisableBtn";
+            this.sampleDisableBtn.Size = new System.Drawing.Size(36, 23);
+            this.sampleDisableBtn.TabIndex = 10;
+            this.sampleDisableBtn.UseVisualStyleBackColor = true;
+            // 
+            // sampleReadyBtn
+            // 
+            this.sampleReadyBtn.Location = new System.Drawing.Point(13, 80);
+            this.sampleReadyBtn.Name = "sampleReadyBtn";
+            this.sampleReadyBtn.Size = new System.Drawing.Size(36, 23);
+            this.sampleReadyBtn.TabIndex = 10;
+            this.sampleReadyBtn.UseVisualStyleBackColor = true;
+            // 
+            // sampleFinishedBtn
+            // 
+            this.sampleFinishedBtn.Location = new System.Drawing.Point(13, 109);
+            this.sampleFinishedBtn.Name = "sampleFinishedBtn";
+            this.sampleFinishedBtn.Size = new System.Drawing.Size(36, 23);
+            this.sampleFinishedBtn.TabIndex = 10;
+            this.sampleFinishedBtn.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(55, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(173, 12);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "無法使用，尚有其他參數未完成";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(55, 85);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(161, 12);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "未設定完成參數，請進入設定";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(55, 114);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(161, 12);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "已設定完成參數，可進入修改";
             // 
             // RiverSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 656);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.sampleFinishedBtn);
+            this.Controls.Add(this.sampleReadyBtn);
+            this.Controls.Add(this.sampleDisableBtn);
             this.Controls.Add(this.movableBedBtn);
             this.Controls.Add(this.boundaryConditionsBtn);
             this.Controls.Add(this.initialConditionsBtn);
@@ -260,8 +316,9 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RiverSimulationForm";
-            this.Text = "Form1";
+            this.Text = "水理動床模式使用者介面";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.RiverSimulationForm_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -292,5 +349,11 @@
         private System.Windows.Forms.ToolStripMenuItem helpMnu;
         private System.Windows.Forms.ToolStripMenuItem aboutMnuItem;
         private System.Windows.Forms.Button simulationResultBtn;
+        private System.Windows.Forms.Button sampleDisableBtn;
+        private System.Windows.Forms.Button sampleReadyBtn;
+        private System.Windows.Forms.Button sampleFinishedBtn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

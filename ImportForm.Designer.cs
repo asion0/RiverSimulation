@@ -42,8 +42,8 @@
             this.inputFilePath = new System.Windows.Forms.Label();
             this.inputFileBtn = new System.Windows.Forms.Button();
             this.inputGridBtn = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.runExcelBtn = new System.Windows.Forms.Button();
+            this.runCcheMeshBtn = new System.Windows.Forms.Button();
             this.inputGridRdo = new System.Windows.Forms.RadioButton();
             this.inputFileRdo = new System.Windows.Forms.RadioButton();
             this.inputFileDlg = new System.Windows.Forms.OpenFileDialog();
@@ -168,8 +168,8 @@
             this.flowTypeGroup.Controls.Add(this.inputFilePath);
             this.flowTypeGroup.Controls.Add(this.inputFileBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridBtn);
-            this.flowTypeGroup.Controls.Add(this.button3);
-            this.flowTypeGroup.Controls.Add(this.button1);
+            this.flowTypeGroup.Controls.Add(this.runExcelBtn);
+            this.flowTypeGroup.Controls.Add(this.runCcheMeshBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridRdo);
             this.flowTypeGroup.Controls.Add(this.inputFileRdo);
             this.flowTypeGroup.Location = new System.Drawing.Point(12, 11);
@@ -209,23 +209,25 @@
             this.inputGridBtn.UseVisualStyleBackColor = true;
             this.inputGridBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
             // 
-            // button3
+            // runExcelBtn
             // 
-            this.button3.Location = new System.Drawing.Point(17, 187);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(130, 26);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "執行Excel";
-            this.button3.UseVisualStyleBackColor = true;
+            this.runExcelBtn.Location = new System.Drawing.Point(17, 187);
+            this.runExcelBtn.Name = "runExcelBtn";
+            this.runExcelBtn.Size = new System.Drawing.Size(130, 26);
+            this.runExcelBtn.TabIndex = 1;
+            this.runExcelBtn.Text = "執行Excel";
+            this.runExcelBtn.UseVisualStyleBackColor = true;
+            this.runExcelBtn.Click += new System.EventHandler(this.runExcel_Click);
             // 
-            // button1
+            // runCcheMeshBtn
             // 
-            this.button1.Location = new System.Drawing.Point(17, 150);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 26);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "執行CCHE-Mesh";
-            this.button1.UseVisualStyleBackColor = true;
+            this.runCcheMeshBtn.Location = new System.Drawing.Point(17, 150);
+            this.runCcheMeshBtn.Name = "runCcheMeshBtn";
+            this.runCcheMeshBtn.Size = new System.Drawing.Size(130, 26);
+            this.runCcheMeshBtn.TabIndex = 1;
+            this.runCcheMeshBtn.Text = "執行CCHE-Mesh";
+            this.runCcheMeshBtn.UseVisualStyleBackColor = true;
+            this.runCcheMeshBtn.Click += new System.EventHandler(this.runCcheMeshBtn_Click);
             // 
             // inputGridRdo
             // 
@@ -297,8 +299,8 @@
         private System.Windows.Forms.Label inputFilePath;
         private System.Windows.Forms.Button inputFileBtn;
         private System.Windows.Forms.Button inputGridBtn;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button runExcelBtn;
+        private System.Windows.Forms.Button runCcheMeshBtn;
         private System.Windows.Forms.RadioButton inputGridRdo;
         private System.Windows.Forms.RadioButton inputFileRdo;
         private System.Windows.Forms.OpenFileDialog inputFileDlg;

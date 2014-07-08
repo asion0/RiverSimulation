@@ -43,7 +43,7 @@ namespace RiverSimulationApplication
         public bool IsRunSimulationFinished() { return runSimulationFinished; }
         public bool IsRunSimulationReady() { return IsBoundaryConditionsFinished() && IsInitialConditionsFinished(); }
 
-        public bool IsSimulationResultFinished() { return true; }
+        public bool IsSimulationResultFinished() { return IsRunSimulationFinished(); }
         public bool IsSimulationResultReady() { return IsRunSimulationFinished(); }
         
         public bool importFinished = false;

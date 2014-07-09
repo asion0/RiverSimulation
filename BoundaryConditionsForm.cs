@@ -82,6 +82,8 @@ namespace RiverSimulationApplication
         private void upFlowConditionsChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
+            condNoTxt.Enabled = chk;
+
             if(chk)
             {
                 upSupercriticalFlowRdo.Enabled = true;
@@ -101,11 +103,9 @@ namespace RiverSimulationApplication
             {
                 upSupercriticalFlowRdo.Enabled = false;
                 upSubcriticalFlowRdo.Enabled = false;
-                superCondNoTxt.Enabled = false;
-                superFlowBtn.Enabled = false;
+                upSuperFlowBtn.Enabled = false;
                 upSuperWaterLevelBtn.Enabled = false;
-                subCondNoTxt.Enabled = false;
-                subFlowBtn.Enabled = false;
+                upSubFlowBtn.Enabled = false;
             }
             
         }
@@ -113,16 +113,14 @@ namespace RiverSimulationApplication
         private void upSupercriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            superCondNoTxt.Enabled = chk;
-            superFlowBtn.Enabled = chk;
+            upSuperFlowBtn.Enabled = chk;
             upSuperWaterLevelBtn.Enabled = chk;
         }
 
         private void upSubcriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            subCondNoTxt.Enabled = chk;
-            subFlowBtn.Enabled = chk;
+            upSubFlowBtn.Enabled = chk;
      }
 
         private void downSupercriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
@@ -142,6 +140,7 @@ namespace RiverSimulationApplication
             bool chk = (sender as CheckBox).Checked;
             inPositionBtn.Enabled = chk;
             inFlowBtn.Enabled = chk;
+            sideInFlowNumTxt.Enabled = chk;
         }
 
         private void sideOutFlowChk_CheckedChanged(object sender, EventArgs e)
@@ -149,6 +148,7 @@ namespace RiverSimulationApplication
             bool chk = (sender as CheckBox).Checked;
             outPositionBtn.Enabled = chk;
             outFlowBtn.Enabled = chk;
+            sideOutFlowNumTxt.Enabled = chk;
         }
 
         private void upVerticalDistributionBtn_Click(object sender, EventArgs e)
@@ -175,6 +175,172 @@ namespace RiverSimulationApplication
 
             }
         
+        }
+
+        private void superFlowBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void upSuperWaterLevelBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(condNoTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if (n < 2)
+            {
+                MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSuperWaterLevelBtn.Text, false, n, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void upSuperFlowBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(condNoTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if (n < 2)
+            {
+                MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSuperFlowBtn.Text, false, n, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void upSubFlowBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(condNoTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if (n < 2)
+            {
+                MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSubFlowBtn.Text, false, n, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void downSuperWaterLevelBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(condNoTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if (n < 2)
+            {
+                MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(downSubcriticalFlowRdo.Text + " " + downSuperWaterLevelBtn.Text, false, n, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+
+        }
+
+        private void inFlowBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(sideInFlowNumTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if (n < 2)
+            {
+                MessageBox.Show("請輸入正確的側入流數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(sideInFlowChk.Text + " " + inFlowBtn.Text, false, n, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void outFlowBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(sideOutFlowNumTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if (n < 2)
+            {
+                MessageBox.Show("請輸入正確的側出流數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(sideOutFlowChk.Text + " " + outFlowBtn.Text, false, n, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
         }
 
         

@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaterModelingForm));
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.variableFlowRdo = new System.Windows.Forms.RadioButton();
+            this.constFlowRdo = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.valueParamBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -164,31 +164,33 @@
             // 
             // flowTypeGroup
             // 
-            this.flowTypeGroup.Controls.Add(this.radioButton2);
-            this.flowTypeGroup.Controls.Add(this.radioButton1);
+            this.flowTypeGroup.Controls.Add(this.variableFlowRdo);
+            this.flowTypeGroup.Controls.Add(this.constFlowRdo);
             resources.ApplyResources(this.flowTypeGroup, "flowTypeGroup");
             this.flowTypeGroup.Name = "flowTypeGroup";
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
-            // radioButton2
+            // variableFlowRdo
             // 
-            resources.ApplyResources(this.radioButton2, "radioButton2");
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.variableFlowRdo, "variableFlowRdo");
+            this.variableFlowRdo.Name = "variableFlowRdo";
+            this.variableFlowRdo.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // constFlowRdo
             // 
-            resources.ApplyResources(this.radioButton1, "radioButton1");
-            this.radioButton1.Checked = true;
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.constFlowRdo, "constFlowRdo");
+            this.constFlowRdo.Checked = true;
+            this.constFlowRdo.Name = "constFlowRdo";
+            this.constFlowRdo.TabStop = true;
+            this.constFlowRdo.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.valueParamBtn);
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox2.Controls.Add(this.valueParamBtn);
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             this.groupBox2.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
@@ -954,6 +956,7 @@
             this.Name = "WaterModelingForm";
             this.Load += new System.EventHandler(this.WaterModelingForm_Load);
             this.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WaterModelingForm_MouseMove);
             this.flowTypeGroup.ResumeLayout(false);
             this.flowTypeGroup.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -996,7 +999,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox flowTypeGroup;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -1006,8 +1008,8 @@
         private System.Windows.Forms.Label setting;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.WebBrowser comment;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton variableFlowRdo;
+        private System.Windows.Forms.RadioButton constFlowRdo;
         private System.Windows.Forms.Button valueParamBtn;
         private System.Windows.Forms.Button curvatureRadiusBtn;
         private System.Windows.Forms.RadioButton autoCurvatureRdo;
@@ -1104,5 +1106,6 @@
         private System.Windows.Forms.RadioButton manningRdo;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox xParam;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

@@ -50,6 +50,10 @@ namespace RiverSimulationApplication
                 c++;
             }
             g.RowHeadersWidth = 64;
+            int n1 = g.Rows.Count;
+            g.Rows.Clear();
+            n1 = g.Rows.Count;
+
             for (int i = 0; i < rowCount; i++)
             {
                 g.Rows.Add(row);

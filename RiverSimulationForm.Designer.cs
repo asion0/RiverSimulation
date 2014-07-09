@@ -195,6 +195,7 @@
             this.exitMnuItem.Name = "exitMnuItem";
             this.exitMnuItem.Size = new System.Drawing.Size(161, 22);
             this.exitMnuItem.Text = "結束(X)";
+            this.exitMnuItem.Click += new System.EventHandler(this.exitMnuItem_Click);
             // 
             // languageMnu
             // 
@@ -228,7 +229,7 @@
             // aboutMnuItem
             // 
             this.aboutMnuItem.Name = "aboutMnuItem";
-            this.aboutMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutMnuItem.Size = new System.Drawing.Size(116, 22);
             this.aboutMnuItem.Text = "關於(A)";
             this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
             // 
@@ -316,6 +317,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RiverSimulationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "水理動床模式使用者介面";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.RiverSimulationForm_Paint);

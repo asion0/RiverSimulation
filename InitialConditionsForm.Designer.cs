@@ -33,12 +33,12 @@
             this.setting = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.initialConcentrationBtn = new System.Windows.Forms.Button();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.valueParamBtn = new System.Windows.Forms.Button();
+            this.assumingSectionChk = new System.Windows.Forms.CheckBox();
+            this.initialWaterLevelBtn = new System.Windows.Forms.Button();
+            this.vFlowSpeedBtn = new System.Windows.Forms.Button();
+            this.uFlowSpeedBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
@@ -93,7 +93,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.initialConcentrationBtn);
             this.groupBox2.Location = new System.Drawing.Point(12, 190);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(366, 71);
@@ -101,22 +101,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "動床模組";
             // 
-            // button3
+            // initialConcentrationBtn
             // 
-            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button3.Location = new System.Drawing.Point(19, 22);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(161, 26);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "初始濃度";
-            this.button3.UseVisualStyleBackColor = true;
+            this.initialConcentrationBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.initialConcentrationBtn.Location = new System.Drawing.Point(19, 22);
+            this.initialConcentrationBtn.Name = "initialConcentrationBtn";
+            this.initialConcentrationBtn.Size = new System.Drawing.Size(161, 26);
+            this.initialConcentrationBtn.TabIndex = 2;
+            this.initialConcentrationBtn.Text = "初始濃度";
+            this.initialConcentrationBtn.UseVisualStyleBackColor = true;
+            this.initialConcentrationBtn.Click += new System.EventHandler(this.initialConcentrationBtn_Click);
             // 
             // flowTypeGroup
             // 
-            this.flowTypeGroup.Controls.Add(this.checkBox1);
-            this.flowTypeGroup.Controls.Add(this.button2);
-            this.flowTypeGroup.Controls.Add(this.button1);
-            this.flowTypeGroup.Controls.Add(this.valueParamBtn);
+            this.flowTypeGroup.Controls.Add(this.assumingSectionChk);
+            this.flowTypeGroup.Controls.Add(this.initialWaterLevelBtn);
+            this.flowTypeGroup.Controls.Add(this.vFlowSpeedBtn);
+            this.flowTypeGroup.Controls.Add(this.uFlowSpeedBtn);
             this.flowTypeGroup.Location = new System.Drawing.Point(12, 11);
             this.flowTypeGroup.Name = "flowTypeGroup";
             this.flowTypeGroup.Size = new System.Drawing.Size(366, 156);
@@ -124,45 +125,49 @@
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "水理模組";
             // 
-            // checkBox1
+            // assumingSectionChk
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(20, 118);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 16);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "3D 假設剖面";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.assumingSectionChk.AutoSize = true;
+            this.assumingSectionChk.Location = new System.Drawing.Point(19, 127);
+            this.assumingSectionChk.Name = "assumingSectionChk";
+            this.assumingSectionChk.Size = new System.Drawing.Size(89, 16);
+            this.assumingSectionChk.TabIndex = 3;
+            this.assumingSectionChk.Text = "3D 假設剖面";
+            this.assumingSectionChk.UseVisualStyleBackColor = true;
+            this.assumingSectionChk.CheckedChanged += new System.EventHandler(this.assumingSectionChk_CheckedChanged);
             // 
-            // button2
+            // initialWaterLevelBtn
             // 
-            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button2.Location = new System.Drawing.Point(19, 85);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(161, 26);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "初始水位";
-            this.button2.UseVisualStyleBackColor = true;
+            this.initialWaterLevelBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.initialWaterLevelBtn.Location = new System.Drawing.Point(19, 91);
+            this.initialWaterLevelBtn.Name = "initialWaterLevelBtn";
+            this.initialWaterLevelBtn.Size = new System.Drawing.Size(161, 26);
+            this.initialWaterLevelBtn.TabIndex = 2;
+            this.initialWaterLevelBtn.Text = "初始水位";
+            this.initialWaterLevelBtn.UseVisualStyleBackColor = true;
+            this.initialWaterLevelBtn.Click += new System.EventHandler(this.initialWaterLevelBtn_Click);
             // 
-            // button1
+            // vFlowSpeedBtn
             // 
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(19, 53);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 26);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "V- 流速";
-            this.button1.UseVisualStyleBackColor = true;
+            this.vFlowSpeedBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.vFlowSpeedBtn.Location = new System.Drawing.Point(19, 56);
+            this.vFlowSpeedBtn.Name = "vFlowSpeedBtn";
+            this.vFlowSpeedBtn.Size = new System.Drawing.Size(161, 26);
+            this.vFlowSpeedBtn.TabIndex = 2;
+            this.vFlowSpeedBtn.Text = "V- 流速";
+            this.vFlowSpeedBtn.UseVisualStyleBackColor = true;
+            this.vFlowSpeedBtn.Click += new System.EventHandler(this.vFlowSpeedBtn_Click);
             // 
-            // valueParamBtn
+            // uFlowSpeedBtn
             // 
-            this.valueParamBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.valueParamBtn.Location = new System.Drawing.Point(19, 21);
-            this.valueParamBtn.Name = "valueParamBtn";
-            this.valueParamBtn.Size = new System.Drawing.Size(161, 26);
-            this.valueParamBtn.TabIndex = 2;
-            this.valueParamBtn.Text = "U - 流速";
-            this.valueParamBtn.UseVisualStyleBackColor = true;
+            this.uFlowSpeedBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.uFlowSpeedBtn.Location = new System.Drawing.Point(19, 21);
+            this.uFlowSpeedBtn.Name = "uFlowSpeedBtn";
+            this.uFlowSpeedBtn.Size = new System.Drawing.Size(161, 26);
+            this.uFlowSpeedBtn.TabIndex = 2;
+            this.uFlowSpeedBtn.Text = "U - 流速";
+            this.uFlowSpeedBtn.UseVisualStyleBackColor = true;
+            this.uFlowSpeedBtn.Click += new System.EventHandler(this.uFlowSpeedBtn_Click);
             // 
             // InitialConditionsForm
             // 
@@ -175,7 +180,9 @@
             this.Controls.Add(this.ok);
             this.Controls.Add(this.setting);
             this.Name = "InitialConditionsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "初始條件";
+            this.Load += new System.EventHandler(this.InitialConditionsForm_Load);
             this.mainPanel.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.flowTypeGroup.ResumeLayout(false);
@@ -191,12 +198,12 @@
         private System.Windows.Forms.Label setting;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button initialConcentrationBtn;
         private System.Windows.Forms.GroupBox flowTypeGroup;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button valueParamBtn;
+        private System.Windows.Forms.CheckBox assumingSectionChk;
+        private System.Windows.Forms.Button initialWaterLevelBtn;
+        private System.Windows.Forms.Button vFlowSpeedBtn;
+        private System.Windows.Forms.Button uFlowSpeedBtn;
 
     }
 }

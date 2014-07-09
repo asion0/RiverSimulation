@@ -222,5 +222,10 @@ namespace RiverSimulationApplication
             bool chk = (sender as RadioButton).Checked;
             twinEquationCombo.Enabled = chk;
         }
+
+        private void WaterModelingForm_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

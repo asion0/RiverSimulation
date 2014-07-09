@@ -28,38 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ok = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.version = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.logoPicBox = new System.Windows.Forms.PictureBox();
+            this.build = new System.Windows.Forms.Label();
+            this.copyright2 = new System.Windows.Forms.Label();
+            this.copyright1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ok
-            // 
-            this.ok.Location = new System.Drawing.Point(206, 158);
-            this.ok.Name = "ok";
-            this.ok.Size = new System.Drawing.Size(75, 26);
-            this.ok.TabIndex = 0;
-            this.ok.Text = "OK";
-            this.ok.UseVisualStyleBackColor = true;
-            this.ok.Click += new System.EventHandler(this.ok_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::RiverSimulationApplication.Properties.Resources.RiverSimulation;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(133, 138);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(173, 12);
+            this.label1.Location = new System.Drawing.Point(72, 289);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(278, 31);
             this.label1.TabIndex = 2;
@@ -67,29 +49,76 @@
             // 
             // version
             // 
-            this.version.AutoSize = true;
-            this.version.Font = new System.Drawing.Font("Georgia", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.version.Location = new System.Drawing.Point(179, 47);
+            this.version.Font = new System.Drawing.Font("Segoe UI Symbol", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.version.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.version.Location = new System.Drawing.Point(13, 324);
             this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(69, 25);
+            this.version.Size = new System.Drawing.Size(397, 25);
             this.version.TabIndex = 3;
-            this.version.Text = "label2";
+            this.version.Text = "Version 1.0.0.1";
+            this.version.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // logoPicBox
+            // 
+            this.logoPicBox.Image = global::RiverSimulationApplication.Properties.Resources.RiverSimulation;
+            this.logoPicBox.Location = new System.Drawing.Point(82, 12);
+            this.logoPicBox.Name = "logoPicBox";
+            this.logoPicBox.Size = new System.Drawing.Size(256, 256);
+            this.logoPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.logoPicBox.TabIndex = 1;
+            this.logoPicBox.TabStop = false;
+            // 
+            // build
+            // 
+            this.build.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.build.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.build.Location = new System.Drawing.Point(13, 349);
+            this.build.Name = "build";
+            this.build.Size = new System.Drawing.Size(397, 25);
+            this.build.TabIndex = 3;
+            this.build.Text = "Build: 07092014";
+            this.build.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // copyright2
+            // 
+            this.copyright2.Font = new System.Drawing.Font("Segoe UI Symbol", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.copyright2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.copyright2.Location = new System.Drawing.Point(11, 549);
+            this.copyright2.Name = "copyright2";
+            this.copyright2.Size = new System.Drawing.Size(397, 25);
+            this.copyright2.TabIndex = 3;
+            this.copyright2.Text = "All rights reserved";
+            this.copyright2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // copyright1
+            // 
+            this.copyright1.Font = new System.Drawing.Font("Segoe UI Symbol", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.copyright1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.copyright1.Location = new System.Drawing.Point(12, 524);
+            this.copyright1.Name = "copyright1";
+            this.copyright1.Size = new System.Drawing.Size(397, 25);
+            this.copyright1.TabIndex = 3;
+            this.copyright1.Text = "© 2014 National Chiao Tung University.";
+            this.copyright1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 196);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(421, 583);
+            this.Controls.Add(this.build);
+            this.Controls.Add(this.copyright1);
+            this.Controls.Add(this.copyright2);
             this.Controls.Add(this.version);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.ok);
+            this.Controls.Add(this.logoPicBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "關於";
             this.Load += new System.EventHandler(this.AboutForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,9 +126,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button ok;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox logoPicBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label version;
+        private System.Windows.Forms.Label build;
+        private System.Windows.Forms.Label copyright2;
+        private System.Windows.Forms.Label copyright1;
     }
 }

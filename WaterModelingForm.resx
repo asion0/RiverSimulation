@@ -117,28 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;radioButton2.Name" xml:space="preserve">
-    <value>radioButton2</value>
+  <data name="&gt;&gt;variableFlowRdo.Name" xml:space="preserve">
+    <value>variableFlowRdo</value>
   </data>
-  <data name="&gt;&gt;radioButton2.Type" xml:space="preserve">
+  <data name="&gt;&gt;variableFlowRdo.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButton2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;variableFlowRdo.Parent" xml:space="preserve">
     <value>flowTypeGroup</value>
   </data>
-  <data name="&gt;&gt;radioButton2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;variableFlowRdo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;radioButton1.Name" xml:space="preserve">
-    <value>radioButton1</value>
+  <data name="&gt;&gt;constFlowRdo.Name" xml:space="preserve">
+    <value>constFlowRdo</value>
   </data>
-  <data name="&gt;&gt;radioButton1.Type" xml:space="preserve">
+  <data name="&gt;&gt;constFlowRdo.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButton1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;constFlowRdo.Parent" xml:space="preserve">
     <value>flowTypeGroup</value>
   </data>
-  <data name="&gt;&gt;radioButton1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;constFlowRdo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -167,95 +167,63 @@
   <data name="&gt;&gt;flowTypeGroup.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="radioButton2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="variableFlowRdo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="radioButton2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="variableFlowRdo.Location" type="System.Drawing.Point, System.Drawing">
     <value>179, 30</value>
   </data>
-  <data name="radioButton2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="variableFlowRdo.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 16</value>
   </data>
-  <data name="radioButton2.TabIndex" type="System.Int32, mscorlib">
+  <data name="variableFlowRdo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="radioButton2.Text" xml:space="preserve">
+  <data name="variableFlowRdo.Text" xml:space="preserve">
     <value>變量流</value>
   </data>
-  <data name="&gt;&gt;radioButton2.Name" xml:space="preserve">
-    <value>radioButton2</value>
+  <data name="&gt;&gt;variableFlowRdo.Name" xml:space="preserve">
+    <value>variableFlowRdo</value>
   </data>
-  <data name="&gt;&gt;radioButton2.Type" xml:space="preserve">
+  <data name="&gt;&gt;variableFlowRdo.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButton2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;variableFlowRdo.Parent" xml:space="preserve">
     <value>flowTypeGroup</value>
   </data>
-  <data name="&gt;&gt;radioButton2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;variableFlowRdo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="radioButton1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="constFlowRdo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="radioButton1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="constFlowRdo.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 30</value>
   </data>
-  <data name="radioButton1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="constFlowRdo.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 16</value>
   </data>
-  <data name="radioButton1.TabIndex" type="System.Int32, mscorlib">
+  <data name="constFlowRdo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="radioButton1.Text" xml:space="preserve">
+  <data name="constFlowRdo.Text" xml:space="preserve">
     <value>定量流</value>
   </data>
-  <data name="&gt;&gt;radioButton1.Name" xml:space="preserve">
-    <value>radioButton1</value>
+  <data name="&gt;&gt;constFlowRdo.Name" xml:space="preserve">
+    <value>constFlowRdo</value>
   </data>
-  <data name="&gt;&gt;radioButton1.Type" xml:space="preserve">
+  <data name="&gt;&gt;constFlowRdo.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButton1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;constFlowRdo.Parent" xml:space="preserve">
     <value>flowTypeGroup</value>
   </data>
-  <data name="&gt;&gt;radioButton1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;constFlowRdo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;valueParamBtn.Name" xml:space="preserve">
-    <value>valueParamBtn</value>
-  </data>
-  <data name="&gt;&gt;valueParamBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;valueParamBtn.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;valueParamBtn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 88</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 71</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>數值參數</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>mainPanel</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="valueParamBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 21</value>
@@ -280,6 +248,33 @@
   </data>
   <data name="&gt;&gt;valueParamBtn.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 88</value>
+  </data>
+  <data name="groupBox2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>366, 71</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>數值參數</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;autoCurvatureRdo.Name" xml:space="preserve">
     <value>autoCurvatureRdo</value>
@@ -677,7 +672,6 @@
   <data name="ks.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ks.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2598,6 +2592,159 @@
   <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
+    <value>turbulencePanel</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;turbulenceBackBtn.Name" xml:space="preserve">
+    <value>turbulenceBackBtn</value>
+  </data>
+  <data name="&gt;&gt;turbulenceBackBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;turbulenceBackBtn.Parent" xml:space="preserve">
+    <value>turbulencePanel</value>
+  </data>
+  <data name="&gt;&gt;turbulenceBackBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="turbulencePanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 691</value>
+  </data>
+  <data name="turbulencePanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 669</value>
+  </data>
+  <data name="turbulencePanel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;turbulencePanel.Name" xml:space="preserve">
+    <value>turbulencePanel</value>
+  </data>
+  <data name="&gt;&gt;turbulencePanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;turbulencePanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;turbulencePanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;twinEquationCombo.Name" xml:space="preserve">
+    <value>twinEquationCombo</value>
+  </data>
+  <data name="&gt;&gt;twinEquationCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;twinEquationCombo.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;twinEquationCombo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;zeroEquationCombo.Name" xml:space="preserve">
+    <value>zeroEquationCombo</value>
+  </data>
+  <data name="&gt;&gt;zeroEquationCombo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;zeroEquationCombo.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;zeroEquationCombo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;twinEquationRdo.Name" xml:space="preserve">
+    <value>twinEquationRdo</value>
+  </data>
+  <data name="&gt;&gt;twinEquationRdo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;twinEquationRdo.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;twinEquationRdo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;SingleEquationRdo.Name" xml:space="preserve">
+    <value>SingleEquationRdo</value>
+  </data>
+  <data name="&gt;&gt;SingleEquationRdo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SingleEquationRdo.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;SingleEquationRdo.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;zeroEquationRdo.Name" xml:space="preserve">
+    <value>zeroEquationRdo</value>
+  </data>
+  <data name="&gt;&gt;zeroEquationRdo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;zeroEquationRdo.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;zeroEquationRdo.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;userInputRdo.Name" xml:space="preserve">
+    <value>userInputRdo</value>
+  </data>
+  <data name="&gt;&gt;userInputRdo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userInputRdo.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;userInputRdo.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;userInputPanel.Name" xml:space="preserve">
+    <value>userInputPanel</value>
+  </data>
+  <data name="&gt;&gt;userInputPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userInputPanel.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;userInputPanel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>365, 607</value>
+  </data>
+  <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="groupBox10.Text" xml:space="preserve">
+    <value>紊流模式</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
+    <value>turbulencePanel</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="twinEquationCombo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -2844,78 +2991,6 @@
   <data name="&gt;&gt;userInputPanel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 13</value>
-  </data>
-  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 607</value>
-  </data>
-  <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="groupBox10.Text" xml:space="preserve">
-    <value>紊流模式</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
-    <value>turbulencePanel</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="turbulenceBackBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="turbulenceBackBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 628</value>
-  </data>
-  <data name="turbulenceBackBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 32</value>
-  </data>
-  <data name="turbulenceBackBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="turbulenceBackBtn.Text" xml:space="preserve">
-    <value>前一頁</value>
-  </data>
-  <data name="&gt;&gt;turbulenceBackBtn.Name" xml:space="preserve">
-    <value>turbulenceBackBtn</value>
-  </data>
-  <data name="&gt;&gt;turbulenceBackBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;turbulenceBackBtn.Parent" xml:space="preserve">
-    <value>turbulencePanel</value>
-  </data>
-  <data name="&gt;&gt;turbulenceBackBtn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="turbulencePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 143</value>
-  </data>
-  <data name="turbulencePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 669</value>
-  </data>
-  <data name="turbulencePanel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;turbulencePanel.Name" xml:space="preserve">
-    <value>turbulencePanel</value>
-  </data>
-  <data name="&gt;&gt;turbulencePanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;turbulencePanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;turbulencePanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="label18.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3014,6 +3089,33 @@
   </data>
   <data name="&gt;&gt;xParam.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="turbulenceBackBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="turbulenceBackBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 628</value>
+  </data>
+  <data name="turbulenceBackBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>366, 32</value>
+  </data>
+  <data name="turbulenceBackBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="turbulenceBackBtn.Text" xml:space="preserve">
+    <value>前一頁</value>
+  </data>
+  <data name="&gt;&gt;turbulenceBackBtn.Name" xml:space="preserve">
+    <value>turbulenceBackBtn</value>
+  </data>
+  <data name="&gt;&gt;turbulenceBackBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;turbulenceBackBtn.Parent" xml:space="preserve">
+    <value>turbulencePanel</value>
+  </data>
+  <data name="&gt;&gt;turbulenceBackBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;groupBox11.Name" xml:space="preserve">
     <value>groupBox11</value>

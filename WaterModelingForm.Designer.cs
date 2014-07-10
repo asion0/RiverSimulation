@@ -52,13 +52,13 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.turbulenceBtn = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.dryBedBtn = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
-            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.dryBedNumTxt = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.button7 = new System.Windows.Forms.Button();
+            this.immersedBoundaryBtn = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
-            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.immersedBoundaryNumTxt = new System.Windows.Forms.TextBox();
             this.setting = new System.Windows.Forms.Label();
             this.ok = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
@@ -330,55 +330,57 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.button6);
+            this.groupBox7.Controls.Add(this.dryBedBtn);
             this.groupBox7.Controls.Add(this.label20);
-            this.groupBox7.Controls.Add(this.textBox17);
+            this.groupBox7.Controls.Add(this.dryBedNumTxt);
             resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
             this.groupBox7.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
-            // button6
+            // dryBedBtn
             // 
-            resources.ApplyResources(this.button6, "button6");
-            this.button6.Name = "button6";
-            this.button6.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.dryBedBtn, "dryBedBtn");
+            this.dryBedBtn.Name = "dryBedBtn";
+            this.dryBedBtn.UseVisualStyleBackColor = true;
+            this.dryBedBtn.Click += new System.EventHandler(this.dryBedBtn_Click);
             // 
             // label20
             // 
             resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
             // 
-            // textBox17
+            // dryBedNumTxt
             // 
-            resources.ApplyResources(this.textBox17, "textBox17");
-            this.textBox17.Name = "textBox17";
+            resources.ApplyResources(this.dryBedNumTxt, "dryBedNumTxt");
+            this.dryBedNumTxt.Name = "dryBedNumTxt";
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.button7);
+            this.groupBox8.Controls.Add(this.immersedBoundaryBtn);
             this.groupBox8.Controls.Add(this.label21);
-            this.groupBox8.Controls.Add(this.textBox18);
+            this.groupBox8.Controls.Add(this.immersedBoundaryNumTxt);
             resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.TabStop = false;
             this.groupBox8.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
-            // button7
+            // immersedBoundaryBtn
             // 
-            resources.ApplyResources(this.button7, "button7");
-            this.button7.Name = "button7";
-            this.button7.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.immersedBoundaryBtn, "immersedBoundaryBtn");
+            this.immersedBoundaryBtn.Name = "immersedBoundaryBtn";
+            this.immersedBoundaryBtn.UseVisualStyleBackColor = true;
+            this.immersedBoundaryBtn.Click += new System.EventHandler(this.immersedBoundaryBtn_Click);
             // 
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
             this.label21.Name = "label21";
             // 
-            // textBox18
+            // immersedBoundaryNumTxt
             // 
-            resources.ApplyResources(this.textBox18, "textBox18");
-            this.textBox18.Name = "textBox18";
+            resources.ApplyResources(this.immersedBoundaryNumTxt, "immersedBoundaryNumTxt");
+            this.immersedBoundaryNumTxt.Name = "immersedBoundaryNumTxt";
             // 
             // setting
             // 
@@ -1091,12 +1093,12 @@
         private System.Windows.Forms.Panel userInputPanel;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox yParam;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button dryBedBtn;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox dryBedNumTxt;
+        private System.Windows.Forms.Button immersedBoundaryBtn;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox18;
+        private System.Windows.Forms.TextBox immersedBoundaryNumTxt;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button chezyBtn;
         private System.Windows.Forms.Label ks;

@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.2")]
 [assembly: AssemblyFileVersion("1.0.0.2")]
 
-//1.0.0.2 - 
+//1.0.0.2 - Modify more UI screens for 20140710 demo version
 //1.0.0.1 - First release for demo UI.

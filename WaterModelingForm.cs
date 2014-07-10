@@ -227,5 +227,57 @@ namespace RiverSimulationApplication
         {
 
         }
+
+        private void dryBedBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(dryBedNumTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if(n < 2)
+            {
+                MessageBox.Show("請輸入正確的乾床數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            GridSelectForm form = new GridSelectForm();
+            form.SetFormMode("乾床圈選", n, "乾床");
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void immersedBoundaryBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(immersedBoundaryNumTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if(n < 2)
+            {
+                MessageBox.Show("請輸入正確的數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            GridSelectForm form = new GridSelectForm();
+            form.SetFormMode("浸沒邊界選取", n, "邊界");
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
     }
 }

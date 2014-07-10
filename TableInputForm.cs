@@ -53,12 +53,12 @@ namespace RiverSimulationApplication
                 c++;
             }
             dataGridView.RowHeadersWidth = 64;
-            for (int i = 0; i < rowCount - 1; i++)
+            for (int i = 0; i < rowCount; i++)
             {
                 dataGridView.Rows.Add(row);
                 dataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
-            dataGridView.Rows[rowCount - 1].HeaderCell.Value = rowCount.ToString();
+          //  dataGridView.Rows[rowCount - 1].HeaderCell.Value = rowCount.ToString();
         }
 
         private void TableInputForm_Load(object sender, EventArgs e)

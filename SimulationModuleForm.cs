@@ -25,26 +25,42 @@ namespace RiverSimulationApplication
 
         private void type2dRdo_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as RadioButton).Checked;
+            bool chk = (sender as CheckBox).Checked;
             RiverSimulationProfile.profile.SetModuleType1((chk) ? RiverSimulationProfile.ModuleType1.Type2D : RiverSimulationProfile.ModuleType1.Type3D);
+            if(type3dRdo.Checked == chk)
+            {
+                type3dRdo.Checked = !chk;
+            }
         }
 
         private void type3dRdo_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as RadioButton).Checked;
+            bool chk = (sender as CheckBox).Checked;
             RiverSimulationProfile.profile.SetModuleType1((chk) ? RiverSimulationProfile.ModuleType1.Type3D : RiverSimulationProfile.ModuleType1.Type2D);
+            if (type2dRdo.Checked == chk)
+            {
+                type2dRdo.Checked = !chk;
+            }
         }
 
         private void typeWaterModelingRdo_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as RadioButton).Checked;
+            bool chk = (sender as CheckBox).Checked;
             RiverSimulationProfile.profile.SetModuleType2( (chk) ? RiverSimulationProfile.ModuleType2.WaterModeling : RiverSimulationProfile.ModuleType2.MovableBed);
+            if (typeMovableBedRdo.Checked == chk)
+            {
+                typeMovableBedRdo.Checked = !chk;
+            }
         }
 
         private void typeMovableBedRdo_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as RadioButton).Checked;
+            bool chk = (sender as CheckBox).Checked;
             RiverSimulationProfile.profile.SetModuleType2((chk) ? RiverSimulationProfile.ModuleType2.MovableBed : RiverSimulationProfile.ModuleType2.WaterModeling);
+            if (typeWaterModelingRdo.Checked == chk)
+            {
+                typeWaterModelingRdo.Checked = !chk;
+            }
         }
 
         private void ok_Click(object sender, EventArgs e)

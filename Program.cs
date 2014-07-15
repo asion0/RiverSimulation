@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace RiverSimulationApplication
 {
@@ -16,7 +17,21 @@ namespace RiverSimulationApplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            InitialPath();
             Application.Run(new RiverSimulationForm());
+        }
+
+        public static string currentPath;
+        private static void InitialPath()
+        {
+            if (Environment.GetEnvironmentVariable("sfxname") == null)
+            {
+                currentPath = Environment.CurrentDirectory;
+            }
+            else
+            {   //For WinRar sfx package.
+                currentPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("sfxname"));
+            }
         }
     }
 }

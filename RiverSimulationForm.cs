@@ -201,7 +201,6 @@ namespace RiverSimulationApplication
             g.FillRectangle(lineBrush, 297, 452, 252, 2);
 
             g.FillRectangle(lineBrush, 422, 538, 2, 44);
-
         }
 
         private void runSimulationResultBtn_Click(object sender, EventArgs e)

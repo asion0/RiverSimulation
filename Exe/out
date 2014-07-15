@@ -1,0 +1,27 @@
+     0.000     0.020     0.050     0.100     0.150     0.200     0.250     0.300     0.400     0.500     0.600     0.700     0.750     0.800     0.850     0.900     0.950     0.990     1.000
+  TIME STEP OF VERTICLE DIR.=   0.050000
+    WIND SHEAR FORCE IN LONG=   0.000000
+    WIND SHEAR FORCE IN LATE=   0.000000
+        EARTH CORIOLIS FORCE=   0.000000
+   KINEMATIC VISCO FOR VERTI=   1.000000
+   KINEMATIC VISCO FOR HORIZ=   1.000000
+                          ks=   0.000156
+           CERROR:ERR OF UPED   0.001000
+           CERROR:ERR OF CONC   0.001000
+      B_LAYER THICKNESS TYPE=   3
+             BED B.C. SWITCH=   1
+      FALCON SWITCH(Ver/Hor)=          1         1
+BDC@BED:Cb/type/DIF_sw/WF_sw/Vanc/zm/zsE   4.000       1       0       1   2.000   5.000   0.001
+   ELDER SWITCH(Ver/Hor/0.5)=          1         1   1.00000
+               X DIFFUSIVITY=   0.500000
+               Y DIFFUSIVITY=   0.100000
+     z DIFFUSIVITY(zz/bed/zs)=  0.100000  1.000000  1.000000
+                   view plane         30         0
+      NUMBER OF conc BOUNDARY          0
+          conc INFLO BOUNDARY 
+       NUMBER OF vel BOUNDARY          0
+           vel INFLO BOUNDARY 
+      hfmc                 =    0.000000  0.000000
+      TIME of baro/mb       =         0.000000        0.000000
+               SWITCH OF BAROC         0
+    CUT LOACA.(LATERAL/PLANE):   30    2    4    6    8   10   12   14   16   18   20   22   24   26   28   30   32   34   36   38   40   42   44   46   48   50   52   54   56   58   60    0

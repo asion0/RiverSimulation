@@ -177,30 +177,71 @@ namespace RiverSimulationApplication
             RiverSimulationProfile.profile.runSimulationFinished = true;
             UpdateStatus();
         }
+
         SolidBrush lineBrush = new SolidBrush(Color.Blue);
+        Pen p = new Pen(Color.Blue, 3);
         private void RiverSimulationForm_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = this.CreateGraphics();
-            g.FillRectangle(lineBrush, 423, 114, 2, 44);
-            g.FillRectangle(lineBrush, 423, 220, 2, 22);
-            g.FillRectangle(lineBrush, 297, 242, 2, 22);
-            g.FillRectangle(lineBrush, 547, 242, 2, 22);
-            g.FillRectangle(lineBrush, 297, 242, 252, 2);
+            //int lineWidth = 3;
 
-            g.FillRectangle(lineBrush, 297, 326, 2, 14);
-            g.FillRectangle(lineBrush, 297, 356, 2, 14);
-            g.FillRectangle(lineBrush, 547, 326, 2, 14);
-            g.FillRectangle(lineBrush, 547, 356, 2, 14);
-            g.FillRectangle(lineBrush, 297, 338, 253, 2);
-            g.FillRectangle(lineBrush, 297, 356, 253, 2);
-            g.FillRectangle(lineBrush, 422, 340, 2, 16);
+            //line from importBtn to simulationModuleBtn
+            g.DrawLine(p, importBtn.Left + importBtn.Width / 2, importBtn.Bottom,
+                          importBtn.Left + importBtn.Width / 2, simulationModuleBtn.Top);
 
-            g.FillRectangle(lineBrush, 297, 432, 2, 22);
-            g.FillRectangle(lineBrush, 547, 432, 2, 22);
-            g.FillRectangle(lineBrush, 422, 454, 2, 22);
-            g.FillRectangle(lineBrush, 297, 452, 252, 2);
+            //line under simulationModuleBtn
+            g.DrawLine(p, simulationModuleBtn.Left + simulationModuleBtn.Width / 2, simulationModuleBtn.Bottom,
+                          simulationModuleBtn.Left + simulationModuleBtn.Width / 2, (waterModelingBtn.Top + simulationModuleBtn.Bottom) / 2);
 
-            g.FillRectangle(lineBrush, 422, 538, 2, 44);
+            //lines between waterModelingBtn and movableBedBtn
+            Point[] pts =
+            {
+                 new Point(waterModelingBtn.Left + waterModelingBtn.Width / 2, waterModelingBtn.Top),
+                 new Point(waterModelingBtn.Left + waterModelingBtn.Width / 2, (waterModelingBtn.Top + simulationModuleBtn.Bottom) / 2),
+                 new Point(movableBedBtn.Left + movableBedBtn.Width / 2, (waterModelingBtn.Top + simulationModuleBtn.Bottom) / 2),
+                 new Point(movableBedBtn.Left + movableBedBtn.Width / 2, movableBedBtn.Top),
+            };
+            g.DrawLines(p, pts);
+
+            //lines between waterModelingBtn and movableBedBtn
+            Point[] pts2 =
+            {
+                 new Point(waterModelingBtn.Left + waterModelingBtn.Width / 2, waterModelingBtn.Bottom),
+                 new Point(waterModelingBtn.Left + waterModelingBtn.Width / 2, (initialConditionsBtn.Top + 2 * waterModelingBtn.Bottom) / 3),
+                 new Point(movableBedBtn.Left + movableBedBtn.Width / 2, (initialConditionsBtn.Top + 2 * waterModelingBtn.Bottom) / 3),
+                 new Point(movableBedBtn.Left + movableBedBtn.Width / 2, movableBedBtn.Bottom),
+            };
+            g.DrawLines(p, pts2);
+
+            //lines between initialConditionsBtn and boundaryConditionsBtn
+            Point[] pts3 =
+            {
+                 new Point(initialConditionsBtn.Left + initialConditionsBtn.Width / 2, initialConditionsBtn.Top),
+                 new Point(initialConditionsBtn.Left + initialConditionsBtn.Width / 2, (waterModelingBtn.Bottom + 2 * initialConditionsBtn.Top) / 3),
+                 new Point(boundaryConditionsBtn.Left + boundaryConditionsBtn.Width / 2, (waterModelingBtn.Bottom + 2 * initialConditionsBtn.Top) / 3),
+                 new Point(boundaryConditionsBtn.Left + boundaryConditionsBtn.Width / 2, boundaryConditionsBtn.Top),
+            };
+            g.DrawLines(p, pts3);
+
+            g.DrawLine(p, simulationModuleBtn.Left + simulationModuleBtn.Width / 2, (initialConditionsBtn.Top + 2 * waterModelingBtn.Bottom) / 3,
+                          simulationModuleBtn.Left + simulationModuleBtn.Width / 2, (waterModelingBtn.Bottom + 2 * initialConditionsBtn.Top) / 3);
+
+            //line under initialConditionsBtn
+            Point[] pts4 =
+            {
+                 new Point(initialConditionsBtn.Left + initialConditionsBtn.Width / 2, initialConditionsBtn.Bottom),
+                 new Point(initialConditionsBtn.Left + initialConditionsBtn.Width / 2, (initialConditionsBtn.Bottom + runSimulationBtn.Top) / 2),
+                 new Point(boundaryConditionsBtn.Left + boundaryConditionsBtn.Width / 2, (initialConditionsBtn.Bottom + runSimulationBtn.Top) / 2),
+                 new Point(boundaryConditionsBtn.Left + boundaryConditionsBtn.Width / 2, boundaryConditionsBtn.Bottom),
+            };
+            g.DrawLines(p, pts4);
+
+            g.DrawLine(p, runSimulationBtn.Left + runSimulationBtn.Width / 2, (initialConditionsBtn.Bottom + runSimulationBtn.Top) / 2,
+                          runSimulationBtn.Left + runSimulationBtn.Width / 2, runSimulationBtn.Top);
+
+            //lines between runSimulationBtn and simulationResultBtn
+            g.DrawLine(p, runSimulationBtn.Left + runSimulationBtn.Width / 2, runSimulationBtn.Bottom,
+                          simulationResultBtn.Left + simulationResultBtn.Width / 2, simulationResultBtn.Top);
         }
 
         private void runSimulationResultBtn_Click(object sender, EventArgs e)

@@ -134,7 +134,7 @@ namespace RiverSimulationApplication
 
             if(n < 1)
             {
-                MessageBox.Show("請輸入正確的泥沙顆粒數目", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("請輸入正確的泥砂顆粒數目", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             TableInputForm form = new TableInputForm();
@@ -348,7 +348,7 @@ namespace RiverSimulationApplication
 
             if (n2 < 1)
             {
-                MessageBox.Show("請輸入正確的泥沙顆粒數目", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("請輸入正確的泥砂顆粒數目", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (n1 < 1)

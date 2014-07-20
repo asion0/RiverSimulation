@@ -61,6 +61,7 @@ namespace RiverSimulationApplication
             {
                 typeWaterModelingRdo.Checked = !chk;
             }
+            movableBedPanel.Enabled = chk;
         }
 
         private void ok_Click(object sender, EventArgs e)

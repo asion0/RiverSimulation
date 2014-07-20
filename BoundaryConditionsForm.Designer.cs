@@ -56,8 +56,12 @@
             this.upFlowConditionsChk = new System.Windows.Forms.CheckBox();
             this.upVerticalDistributionChk = new System.Windows.Forms.CheckBox();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.sideOutFlowChk = new System.Windows.Forms.CheckBox();
             this.sideInFlowChk = new System.Windows.Forms.CheckBox();
+            this.sideOutFlowNumTxt = new System.Windows.Forms.TextBox();
+            this.sideInFlowNumTxt = new System.Windows.Forms.TextBox();
             this.outFlowBtn = new System.Windows.Forms.Button();
             this.inFlowBtn = new System.Windows.Forms.Button();
             this.outPositionBtn = new System.Windows.Forms.Button();
@@ -101,10 +105,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
-            this.sideInFlowNumTxt = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.sideOutFlowNumTxt = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -439,6 +439,24 @@
             this.panel8.Size = new System.Drawing.Size(327, 114);
             this.panel8.TabIndex = 5;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(104, 63);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "側出流數目";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(104, 11);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 12);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "側入流數目";
+            // 
             // sideOutFlowChk
             // 
             this.sideOutFlowChk.AutoSize = true;
@@ -460,6 +478,22 @@
             this.sideInFlowChk.Text = "側入流";
             this.sideInFlowChk.UseVisualStyleBackColor = true;
             this.sideInFlowChk.CheckedChanged += new System.EventHandler(this.sideInFlowChk_CheckedChanged);
+            // 
+            // sideOutFlowNumTxt
+            // 
+            this.sideOutFlowNumTxt.Enabled = false;
+            this.sideOutFlowNumTxt.Location = new System.Drawing.Point(170, 57);
+            this.sideOutFlowNumTxt.Name = "sideOutFlowNumTxt";
+            this.sideOutFlowNumTxt.Size = new System.Drawing.Size(66, 22);
+            this.sideOutFlowNumTxt.TabIndex = 8;
+            // 
+            // sideInFlowNumTxt
+            // 
+            this.sideInFlowNumTxt.Enabled = false;
+            this.sideInFlowNumTxt.Location = new System.Drawing.Point(170, 5);
+            this.sideInFlowNumTxt.Name = "sideInFlowNumTxt";
+            this.sideInFlowNumTxt.Size = new System.Drawing.Size(66, 22);
+            this.sideInFlowNumTxt.TabIndex = 8;
             // 
             // outFlowBtn
             // 
@@ -857,7 +891,7 @@
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(96, 16);
             this.checkBox2.TabIndex = 2;
-            this.checkBox2.Text = "入流泥沙設定";
+            this.checkBox2.Text = "入流泥砂設定";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -866,7 +900,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(131, 26);
             this.button3.TabIndex = 1;
-            this.button3.Text = "泥沙比例";
+            this.button3.Text = "泥砂比例";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button2
@@ -907,40 +941,6 @@
             this.moveableBedBackBtn.Text = "前一頁";
             this.moveableBedBackBtn.UseVisualStyleBackColor = true;
             this.moveableBedBackBtn.Click += new System.EventHandler(this.Back_Click);
-            // 
-            // sideInFlowNumTxt
-            // 
-            this.sideInFlowNumTxt.Enabled = false;
-            this.sideInFlowNumTxt.Location = new System.Drawing.Point(170, 5);
-            this.sideInFlowNumTxt.Name = "sideInFlowNumTxt";
-            this.sideInFlowNumTxt.Size = new System.Drawing.Size(66, 22);
-            this.sideInFlowNumTxt.TabIndex = 8;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(104, 11);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 12);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "側入流數目";
-            // 
-            // sideOutFlowNumTxt
-            // 
-            this.sideOutFlowNumTxt.Enabled = false;
-            this.sideOutFlowNumTxt.Location = new System.Drawing.Point(170, 57);
-            this.sideOutFlowNumTxt.Name = "sideOutFlowNumTxt";
-            this.sideOutFlowNumTxt.Size = new System.Drawing.Size(66, 22);
-            this.sideOutFlowNumTxt.TabIndex = 8;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(104, 63);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 12);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "側出流數目";
             // 
             // BoundaryConditionsForm
             // 

@@ -55,6 +55,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.feedMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -221,6 +222,7 @@
             // helpMnu
             // 
             this.helpMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.feedMnuItem,
             this.aboutMnuItem});
             this.helpMnu.Name = "helpMnu";
             this.helpMnu.Size = new System.Drawing.Size(61, 20);
@@ -229,7 +231,7 @@
             // aboutMnuItem
             // 
             this.aboutMnuItem.Name = "aboutMnuItem";
-            this.aboutMnuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutMnuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutMnuItem.Text = "關於(A)";
             this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
             // 
@@ -251,6 +253,7 @@
             this.sampleDisableBtn.Size = new System.Drawing.Size(36, 23);
             this.sampleDisableBtn.TabIndex = 10;
             this.sampleDisableBtn.UseVisualStyleBackColor = true;
+            this.sampleDisableBtn.Visible = false;
             // 
             // sampleReadyBtn
             // 
@@ -259,6 +262,7 @@
             this.sampleReadyBtn.Size = new System.Drawing.Size(36, 23);
             this.sampleReadyBtn.TabIndex = 10;
             this.sampleReadyBtn.UseVisualStyleBackColor = true;
+            this.sampleReadyBtn.Visible = false;
             // 
             // sampleFinishedBtn
             // 
@@ -267,6 +271,7 @@
             this.sampleFinishedBtn.Size = new System.Drawing.Size(36, 23);
             this.sampleFinishedBtn.TabIndex = 10;
             this.sampleFinishedBtn.UseVisualStyleBackColor = true;
+            this.sampleFinishedBtn.Visible = false;
             // 
             // label1
             // 
@@ -276,6 +281,7 @@
             this.label1.Size = new System.Drawing.Size(173, 12);
             this.label1.TabIndex = 11;
             this.label1.Text = "無法使用，尚有其他參數未完成";
+            this.label1.Visible = false;
             // 
             // label2
             // 
@@ -285,6 +291,7 @@
             this.label2.Size = new System.Drawing.Size(161, 12);
             this.label2.TabIndex = 11;
             this.label2.Text = "未設定完成參數，請進入設定";
+            this.label2.Visible = false;
             // 
             // label3
             // 
@@ -294,6 +301,14 @@
             this.label3.Size = new System.Drawing.Size(161, 12);
             this.label3.TabIndex = 11;
             this.label3.Text = "已設定完成參數，可進入修改";
+            this.label3.Visible = false;
+            // 
+            // feedMnuItem
+            // 
+            this.feedMnuItem.Name = "feedMnuItem";
+            this.feedMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.feedMnuItem.Text = "問題回饋(F)";
+            this.feedMnuItem.Click += new System.EventHandler(this.feedMnuItem_Click);
             // 
             // RiverSimulationForm
             // 
@@ -357,5 +372,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem feedMnuItem;
     }
 }

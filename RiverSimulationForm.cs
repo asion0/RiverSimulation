@@ -275,6 +275,15 @@ namespace RiverSimulationApplication
             this.Close();
         }
 
+        private void feedMnuItem_Click(object sender, EventArgs e)
+        {
+            FeedbackForm form = new FeedbackForm();
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
 
 
     }

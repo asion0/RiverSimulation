@@ -96,6 +96,12 @@
     <Compile Include="BoundaryConditionsForm.Designer.cs">
       <DependentUpon>BoundaryConditionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FeedbackForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FeedbackForm.Designer.cs">
+      <DependentUpon>FeedbackForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GridSelectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BoundaryConditionsForm.resx">
       <DependentUpon>BoundaryConditionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FeedbackForm.resx">
+      <DependentUpon>FeedbackForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GridSelectForm.resx">
       <DependentUpon>GridSelectForm.cs</DependentUpon>

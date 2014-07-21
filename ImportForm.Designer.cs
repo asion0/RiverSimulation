@@ -253,7 +253,8 @@
             // 
             // inputFileDlg
             // 
-            this.inputFileDlg.Filter = "Excel檔案|*.xls|CCHE_MESH檔案|*.g|所有檔案|*.*";
+            this.inputFileDlg.Filter = "文字檔案(*.txt)|*.txt|Excel檔案(*.xls)|*.xls|SMS檔案(*.sms)|*.sms|CCHE_MESH檔案(*.geo)|*.g";
+            this.inputFileDlg.Title = "選取匯入格網檔案";
             // 
             // selectBgDlg
             // 

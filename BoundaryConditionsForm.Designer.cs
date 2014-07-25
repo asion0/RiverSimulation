@@ -96,7 +96,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -105,6 +104,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -215,9 +219,9 @@
             // 
             this.waterModelingPanel.Controls.Add(this.groupBox10);
             this.waterModelingPanel.Controls.Add(this.waterModelingBackBtn);
-            this.waterModelingPanel.Location = new System.Drawing.Point(409, 377);
+            this.waterModelingPanel.Location = new System.Drawing.Point(48, 392);
             this.waterModelingPanel.Name = "waterModelingPanel";
-            this.waterModelingPanel.Size = new System.Drawing.Size(391, 670);
+            this.waterModelingPanel.Size = new System.Drawing.Size(500, 670);
             this.waterModelingPanel.TabIndex = 14;
             // 
             // groupBox10
@@ -234,7 +238,7 @@
             this.groupBox10.Controls.Add(this.panel5);
             this.groupBox10.Location = new System.Drawing.Point(14, 13);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(365, 607);
+            this.groupBox10.Size = new System.Drawing.Size(475, 607);
             this.groupBox10.TabIndex = 5;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "水理模式";
@@ -242,7 +246,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 170);
+            this.label4.Location = new System.Drawing.Point(16, 203);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 7;
@@ -251,7 +255,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 467);
+            this.label16.Location = new System.Drawing.Point(16, 490);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(56, 12);
             this.label16.TabIndex = 7;
@@ -260,7 +264,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 383);
+            this.label12.Location = new System.Drawing.Point(16, 378);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 7;
@@ -290,15 +294,15 @@
             this.panel6.Controls.Add(this.upSupercriticalFlowRdo);
             this.panel6.Controls.Add(this.upFlowConditionsChk);
             this.panel6.Controls.Add(this.upVerticalDistributionChk);
-            this.panel6.Location = new System.Drawing.Point(18, 185);
+            this.panel6.Location = new System.Drawing.Point(18, 218);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(327, 190);
+            this.panel6.Size = new System.Drawing.Size(437, 146);
             this.panel6.TabIndex = 5;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(39, 61);
+            this.label10.Location = new System.Drawing.Point(113, 49);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(77, 12);
             this.label10.TabIndex = 9;
@@ -307,7 +311,7 @@
             // condNoTxt
             // 
             this.condNoTxt.Enabled = false;
-            this.condNoTxt.Location = new System.Drawing.Point(131, 54);
+            this.condNoTxt.Location = new System.Drawing.Point(198, 42);
             this.condNoTxt.Name = "condNoTxt";
             this.condNoTxt.Size = new System.Drawing.Size(70, 22);
             this.condNoTxt.TabIndex = 8;
@@ -315,15 +319,15 @@
             // upVerticalDistributionNoTxt
             // 
             this.upVerticalDistributionNoTxt.Enabled = false;
-            this.upVerticalDistributionNoTxt.Location = new System.Drawing.Point(186, 8);
+            this.upVerticalDistributionNoTxt.Location = new System.Drawing.Point(198, 12);
             this.upVerticalDistributionNoTxt.Name = "upVerticalDistributionNoTxt";
-            this.upVerticalDistributionNoTxt.Size = new System.Drawing.Size(50, 22);
+            this.upVerticalDistributionNoTxt.Size = new System.Drawing.Size(70, 22);
             this.upVerticalDistributionNoTxt.TabIndex = 7;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(142, 13);
+            this.label8.Location = new System.Drawing.Point(151, 17);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 12);
             this.label8.TabIndex = 6;
@@ -332,7 +336,7 @@
             // upSuperWaterLevelBtn
             // 
             this.upSuperWaterLevelBtn.Enabled = false;
-            this.upSuperWaterLevelBtn.Location = new System.Drawing.Point(144, 102);
+            this.upSuperWaterLevelBtn.Location = new System.Drawing.Point(212, 74);
             this.upSuperWaterLevelBtn.Name = "upSuperWaterLevelBtn";
             this.upSuperWaterLevelBtn.Size = new System.Drawing.Size(96, 26);
             this.upSuperWaterLevelBtn.TabIndex = 5;
@@ -343,7 +347,7 @@
             // upSuperFlowBtn
             // 
             this.upSuperFlowBtn.Enabled = false;
-            this.upSuperFlowBtn.Location = new System.Drawing.Point(42, 102);
+            this.upSuperFlowBtn.Location = new System.Drawing.Point(110, 74);
             this.upSuperFlowBtn.Name = "upSuperFlowBtn";
             this.upSuperFlowBtn.Size = new System.Drawing.Size(96, 26);
             this.upSuperFlowBtn.TabIndex = 5;
@@ -354,7 +358,7 @@
             // upSubFlowBtn
             // 
             this.upSubFlowBtn.Enabled = false;
-            this.upSubFlowBtn.Location = new System.Drawing.Point(42, 155);
+            this.upSubFlowBtn.Location = new System.Drawing.Point(110, 110);
             this.upSubFlowBtn.Name = "upSubFlowBtn";
             this.upSubFlowBtn.Size = new System.Drawing.Size(96, 26);
             this.upSubFlowBtn.TabIndex = 5;
@@ -365,7 +369,7 @@
             // upVerticalDistributionBtn
             // 
             this.upVerticalDistributionBtn.Enabled = false;
-            this.upVerticalDistributionBtn.Location = new System.Drawing.Point(242, 6);
+            this.upVerticalDistributionBtn.Location = new System.Drawing.Point(274, 9);
             this.upVerticalDistributionBtn.Name = "upVerticalDistributionBtn";
             this.upVerticalDistributionBtn.Size = new System.Drawing.Size(68, 26);
             this.upVerticalDistributionBtn.TabIndex = 5;
@@ -377,7 +381,7 @@
             // 
             this.upSubcriticalFlowRdo.AutoSize = true;
             this.upSubcriticalFlowRdo.Enabled = false;
-            this.upSubcriticalFlowRdo.Location = new System.Drawing.Point(33, 134);
+            this.upSubcriticalFlowRdo.Location = new System.Drawing.Point(33, 110);
             this.upSubcriticalFlowRdo.Name = "upSubcriticalFlowRdo";
             this.upSubcriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.upSubcriticalFlowRdo.TabIndex = 3;
@@ -390,7 +394,7 @@
             // 
             this.upSupercriticalFlowRdo.AutoSize = true;
             this.upSupercriticalFlowRdo.Enabled = false;
-            this.upSupercriticalFlowRdo.Location = new System.Drawing.Point(33, 81);
+            this.upSupercriticalFlowRdo.Location = new System.Drawing.Point(33, 79);
             this.upSupercriticalFlowRdo.Name = "upSupercriticalFlowRdo";
             this.upSupercriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.upSupercriticalFlowRdo.TabIndex = 3;
@@ -402,7 +406,7 @@
             // upFlowConditionsChk
             // 
             this.upFlowConditionsChk.AutoSize = true;
-            this.upFlowConditionsChk.Location = new System.Drawing.Point(16, 39);
+            this.upFlowConditionsChk.Location = new System.Drawing.Point(16, 48);
             this.upFlowConditionsChk.Name = "upFlowConditionsChk";
             this.upFlowConditionsChk.Size = new System.Drawing.Size(72, 16);
             this.upFlowConditionsChk.TabIndex = 2;
@@ -413,7 +417,7 @@
             // upVerticalDistributionChk
             // 
             this.upVerticalDistributionChk.AutoSize = true;
-            this.upVerticalDistributionChk.Location = new System.Drawing.Point(16, 12);
+            this.upVerticalDistributionChk.Location = new System.Drawing.Point(16, 17);
             this.upVerticalDistributionChk.Name = "upVerticalDistributionChk";
             this.upVerticalDistributionChk.Size = new System.Drawing.Size(118, 16);
             this.upVerticalDistributionChk.TabIndex = 0;
@@ -434,15 +438,15 @@
             this.panel8.Controls.Add(this.inFlowBtn);
             this.panel8.Controls.Add(this.outPositionBtn);
             this.panel8.Controls.Add(this.inPositionBtn);
-            this.panel8.Location = new System.Drawing.Point(18, 482);
+            this.panel8.Location = new System.Drawing.Point(18, 505);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(327, 114);
+            this.panel8.Size = new System.Drawing.Size(437, 80);
             this.panel8.TabIndex = 5;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(104, 63);
+            this.label13.Location = new System.Drawing.Point(104, 49);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 12);
             this.label13.TabIndex = 9;
@@ -451,7 +455,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(104, 11);
+            this.label11.Location = new System.Drawing.Point(104, 18);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(65, 12);
             this.label11.TabIndex = 9;
@@ -460,7 +464,7 @@
             // sideOutFlowChk
             // 
             this.sideOutFlowChk.AutoSize = true;
-            this.sideOutFlowChk.Location = new System.Drawing.Point(16, 62);
+            this.sideOutFlowChk.Location = new System.Drawing.Point(16, 48);
             this.sideOutFlowChk.Name = "sideOutFlowChk";
             this.sideOutFlowChk.Size = new System.Drawing.Size(60, 16);
             this.sideOutFlowChk.TabIndex = 2;
@@ -471,7 +475,7 @@
             // sideInFlowChk
             // 
             this.sideInFlowChk.AutoSize = true;
-            this.sideInFlowChk.Location = new System.Drawing.Point(16, 10);
+            this.sideInFlowChk.Location = new System.Drawing.Point(16, 17);
             this.sideInFlowChk.Name = "sideInFlowChk";
             this.sideInFlowChk.Size = new System.Drawing.Size(60, 16);
             this.sideInFlowChk.TabIndex = 2;
@@ -482,7 +486,7 @@
             // sideOutFlowNumTxt
             // 
             this.sideOutFlowNumTxt.Enabled = false;
-            this.sideOutFlowNumTxt.Location = new System.Drawing.Point(170, 57);
+            this.sideOutFlowNumTxt.Location = new System.Drawing.Point(170, 43);
             this.sideOutFlowNumTxt.Name = "sideOutFlowNumTxt";
             this.sideOutFlowNumTxt.Size = new System.Drawing.Size(66, 22);
             this.sideOutFlowNumTxt.TabIndex = 8;
@@ -490,7 +494,7 @@
             // sideInFlowNumTxt
             // 
             this.sideInFlowNumTxt.Enabled = false;
-            this.sideInFlowNumTxt.Location = new System.Drawing.Point(170, 5);
+            this.sideInFlowNumTxt.Location = new System.Drawing.Point(170, 12);
             this.sideInFlowNumTxt.Name = "sideInFlowNumTxt";
             this.sideInFlowNumTxt.Size = new System.Drawing.Size(66, 22);
             this.sideInFlowNumTxt.TabIndex = 8;
@@ -498,9 +502,9 @@
             // outFlowBtn
             // 
             this.outFlowBtn.Enabled = false;
-            this.outFlowBtn.Location = new System.Drawing.Point(135, 82);
+            this.outFlowBtn.Location = new System.Drawing.Point(343, 42);
             this.outFlowBtn.Name = "outFlowBtn";
-            this.outFlowBtn.Size = new System.Drawing.Size(96, 26);
+            this.outFlowBtn.Size = new System.Drawing.Size(86, 26);
             this.outFlowBtn.TabIndex = 5;
             this.outFlowBtn.Text = "流量";
             this.outFlowBtn.UseVisualStyleBackColor = true;
@@ -509,9 +513,9 @@
             // inFlowBtn
             // 
             this.inFlowBtn.Enabled = false;
-            this.inFlowBtn.Location = new System.Drawing.Point(135, 30);
+            this.inFlowBtn.Location = new System.Drawing.Point(343, 10);
             this.inFlowBtn.Name = "inFlowBtn";
-            this.inFlowBtn.Size = new System.Drawing.Size(96, 26);
+            this.inFlowBtn.Size = new System.Drawing.Size(86, 26);
             this.inFlowBtn.TabIndex = 5;
             this.inFlowBtn.Text = "流量";
             this.inFlowBtn.UseVisualStyleBackColor = true;
@@ -520,9 +524,9 @@
             // outPositionBtn
             // 
             this.outPositionBtn.Enabled = false;
-            this.outPositionBtn.Location = new System.Drawing.Point(33, 82);
+            this.outPositionBtn.Location = new System.Drawing.Point(251, 42);
             this.outPositionBtn.Name = "outPositionBtn";
-            this.outPositionBtn.Size = new System.Drawing.Size(96, 26);
+            this.outPositionBtn.Size = new System.Drawing.Size(86, 26);
             this.outPositionBtn.TabIndex = 5;
             this.outPositionBtn.Text = "位置";
             this.outPositionBtn.UseVisualStyleBackColor = true;
@@ -530,9 +534,9 @@
             // inPositionBtn
             // 
             this.inPositionBtn.Enabled = false;
-            this.inPositionBtn.Location = new System.Drawing.Point(33, 30);
+            this.inPositionBtn.Location = new System.Drawing.Point(251, 10);
             this.inPositionBtn.Name = "inPositionBtn";
-            this.inPositionBtn.Size = new System.Drawing.Size(96, 26);
+            this.inPositionBtn.Size = new System.Drawing.Size(86, 26);
             this.inPositionBtn.TabIndex = 5;
             this.inPositionBtn.Text = "位置";
             this.inPositionBtn.UseVisualStyleBackColor = true;
@@ -543,15 +547,15 @@
             this.panel7.Controls.Add(this.downSupercriticalFlowRdo);
             this.panel7.Controls.Add(this.downSubcriticalFlowRdo);
             this.panel7.Controls.Add(this.downSuperWaterLevelBtn);
-            this.panel7.Location = new System.Drawing.Point(18, 398);
+            this.panel7.Location = new System.Drawing.Point(18, 393);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(327, 59);
+            this.panel7.Size = new System.Drawing.Size(437, 80);
             this.panel7.TabIndex = 5;
             // 
             // downSupercriticalFlowRdo
             // 
             this.downSupercriticalFlowRdo.AutoSize = true;
-            this.downSupercriticalFlowRdo.Location = new System.Drawing.Point(16, 7);
+            this.downSupercriticalFlowRdo.Location = new System.Drawing.Point(16, 17);
             this.downSupercriticalFlowRdo.Name = "downSupercriticalFlowRdo";
             this.downSupercriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.downSupercriticalFlowRdo.TabIndex = 3;
@@ -563,7 +567,7 @@
             // downSubcriticalFlowRdo
             // 
             this.downSubcriticalFlowRdo.AutoSize = true;
-            this.downSubcriticalFlowRdo.Location = new System.Drawing.Point(17, 30);
+            this.downSubcriticalFlowRdo.Location = new System.Drawing.Point(17, 48);
             this.downSubcriticalFlowRdo.Name = "downSubcriticalFlowRdo";
             this.downSubcriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.downSubcriticalFlowRdo.TabIndex = 3;
@@ -575,7 +579,7 @@
             // downSuperWaterLevelBtn
             // 
             this.downSuperWaterLevelBtn.Enabled = false;
-            this.downSuperWaterLevelBtn.Location = new System.Drawing.Point(93, 26);
+            this.downSuperWaterLevelBtn.Location = new System.Drawing.Point(94, 40);
             this.downSuperWaterLevelBtn.Name = "downSuperWaterLevelBtn";
             this.downSuperWaterLevelBtn.Size = new System.Drawing.Size(96, 26);
             this.downSuperWaterLevelBtn.TabIndex = 5;
@@ -594,7 +598,7 @@
             this.panel4.Controls.Add(this.textBox15);
             this.panel4.Location = new System.Drawing.Point(18, 35);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(327, 66);
+            this.panel4.Size = new System.Drawing.Size(437, 79);
             this.panel4.TabIndex = 5;
             // 
             // label7
@@ -611,7 +615,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(165, 14);
+            this.label5.Location = new System.Drawing.Point(196, 11);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 12);
             this.label5.TabIndex = 5;
@@ -636,7 +640,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(233, 11);
+            this.textBox3.Location = new System.Drawing.Point(264, 8);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(80, 22);
             this.textBox3.TabIndex = 4;
@@ -651,7 +655,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 109);
+            this.label2.Location = new System.Drawing.Point(16, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 7;
@@ -663,9 +667,9 @@
             this.panel5.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel5.Controls.Add(this.boundaryThicknessCombo);
             this.panel5.Controls.Add(this.boundaryThicknessChk);
-            this.panel5.Location = new System.Drawing.Point(18, 124);
+            this.panel5.Location = new System.Drawing.Point(18, 142);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(327, 37);
+            this.panel5.Size = new System.Drawing.Size(437, 50);
             this.panel5.TabIndex = 5;
             this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
@@ -678,7 +682,7 @@
             "1",
             "2",
             "3"});
-            this.boundaryThicknessCombo.Location = new System.Drawing.Point(106, 9);
+            this.boundaryThicknessCombo.Location = new System.Drawing.Point(106, 14);
             this.boundaryThicknessCombo.Name = "boundaryThicknessCombo";
             this.boundaryThicknessCombo.Size = new System.Drawing.Size(121, 20);
             this.boundaryThicknessCombo.TabIndex = 1;
@@ -686,7 +690,7 @@
             // boundaryThicknessChk
             // 
             this.boundaryThicknessChk.AutoSize = true;
-            this.boundaryThicknessChk.Location = new System.Drawing.Point(16, 12);
+            this.boundaryThicknessChk.Location = new System.Drawing.Point(16, 17);
             this.boundaryThicknessChk.Name = "boundaryThicknessChk";
             this.boundaryThicknessChk.Size = new System.Drawing.Size(84, 16);
             this.boundaryThicknessChk.TabIndex = 0;
@@ -700,7 +704,7 @@
             this.waterModelingBackBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.waterModelingBackBtn.Location = new System.Drawing.Point(14, 629);
             this.waterModelingBackBtn.Name = "waterModelingBackBtn";
-            this.waterModelingBackBtn.Size = new System.Drawing.Size(366, 32);
+            this.waterModelingBackBtn.Size = new System.Drawing.Size(475, 32);
             this.waterModelingBackBtn.TabIndex = 4;
             this.waterModelingBackBtn.Text = "前一頁";
             this.waterModelingBackBtn.UseVisualStyleBackColor = true;
@@ -710,9 +714,9 @@
             // 
             this.moveableBedPanel.Controls.Add(this.groupBox3);
             this.moveableBedPanel.Controls.Add(this.moveableBedBackBtn);
-            this.moveableBedPanel.Location = new System.Drawing.Point(12, 739);
+            this.moveableBedPanel.Location = new System.Drawing.Point(395, 13);
             this.moveableBedPanel.Name = "moveableBedPanel";
-            this.moveableBedPanel.Size = new System.Drawing.Size(391, 670);
+            this.moveableBedPanel.Size = new System.Drawing.Size(500, 670);
             this.moveableBedPanel.TabIndex = 15;
             // 
             // groupBox3
@@ -725,7 +729,7 @@
             this.groupBox3.Controls.Add(this.panel2);
             this.groupBox3.Location = new System.Drawing.Point(14, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(365, 607);
+            this.groupBox3.Size = new System.Drawing.Size(475, 607);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "動床模式";
@@ -733,7 +737,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 289);
+            this.label9.Location = new System.Drawing.Point(16, 307);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 12);
             this.label9.TabIndex = 7;
@@ -749,9 +753,9 @@
             this.panel3.Controls.Add(this.checkBox5);
             this.panel3.Controls.Add(this.comboBox2);
             this.panel3.Controls.Add(this.checkBox4);
-            this.panel3.Location = new System.Drawing.Point(18, 304);
+            this.panel3.Location = new System.Drawing.Point(18, 322);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(327, 157);
+            this.panel3.Size = new System.Drawing.Size(440, 157);
             this.panel3.TabIndex = 5;
             // 
             // button5
@@ -837,30 +841,23 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.radioButton3);
+            this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.checkBox3);
+            this.panel1.Controls.Add(this.radioButton4);
             this.panel1.Location = new System.Drawing.Point(18, 210);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(327, 63);
+            this.panel1.Size = new System.Drawing.Size(440, 80);
             this.panel1.TabIndex = 5;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(37, 17);
+            this.button4.Location = new System.Drawing.Point(41, 10);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(131, 26);
             this.button4.TabIndex = 1;
             this.button4.Text = "濃度";
             this.button4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(16, 24);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(15, 14);
-            this.checkBox3.TabIndex = 0;
-            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -874,14 +871,16 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel2.Controls.Add(this.label14);
             this.panel2.Controls.Add(this.checkBox2);
             this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.button6);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Location = new System.Drawing.Point(18, 35);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(327, 144);
+            this.panel2.Size = new System.Drawing.Size(440, 144);
             this.panel2.TabIndex = 5;
             // 
             // checkBox2
@@ -896,7 +895,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(37, 108);
+            this.button3.Location = new System.Drawing.Point(37, 101);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(131, 26);
             this.button3.TabIndex = 1;
@@ -905,11 +904,11 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(37, 69);
+            this.button2.Location = new System.Drawing.Point(94, 67);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(131, 26);
             this.button2.TabIndex = 1;
-            this.button2.Text = "入流濃度";
+            this.button2.Text = "底床載";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -936,11 +935,57 @@
             this.moveableBedBackBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.moveableBedBackBtn.Location = new System.Drawing.Point(14, 629);
             this.moveableBedBackBtn.Name = "moveableBedBackBtn";
-            this.moveableBedBackBtn.Size = new System.Drawing.Size(366, 32);
+            this.moveableBedBackBtn.Size = new System.Drawing.Size(475, 32);
             this.moveableBedBackBtn.TabIndex = 4;
             this.moveableBedBackBtn.Text = "前一頁";
             this.moveableBedBackBtn.UseVisualStyleBackColor = true;
             this.moveableBedBackBtn.Click += new System.EventHandler(this.Back_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(35, 74);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "入流濃度";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(231, 67);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(131, 26);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "懸浮載";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(16, 17);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(14, 13);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(16, 47);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(47, 16);
+            this.radioButton4.TabIndex = 3;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "通量";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(70, 45);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(81, 22);
+            this.textBox2.TabIndex = 4;
             // 
             // BoundaryConditionsForm
             // 
@@ -948,8 +993,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 1059);
-            this.Controls.Add(this.waterModelingPanel);
             this.Controls.Add(this.moveableBedPanel);
+            this.Controls.Add(this.waterModelingPanel);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.ok);
@@ -1015,7 +1060,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button button3;
@@ -1065,5 +1109,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox sideOutFlowNumTxt;
         private System.Windows.Forms.TextBox sideInFlowNumTxt;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button6;
     }
 }

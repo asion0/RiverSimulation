@@ -78,6 +78,8 @@ namespace RiverSimulationApplication
             {
                 singleValueRdo.Checked = true;
             }
+            RealtimeExampleForm forma = new RealtimeExampleForm();
+            forma.Show();
         }
 
         private void singleValue_CheckedChanged(object sender, EventArgs e)
@@ -90,6 +92,12 @@ namespace RiverSimulationApplication
         {
             singleValueText.Enabled = false;
             dataGridView.Enabled = true;
+        }
+
+        private void TableInputForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show("超過合理範圍：0.009~0.125", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
         }
     }
 }

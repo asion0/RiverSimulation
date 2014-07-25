@@ -29,14 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RunSimulationForm));
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tbResult = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 618);
+            this.progressBar.Location = new System.Drawing.Point(12, 340);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(872, 23);
             this.progressBar.TabIndex = 0;
@@ -46,19 +49,31 @@
             this.tbResult.Location = new System.Drawing.Point(12, 12);
             this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(872, 434);
+            this.tbResult.Size = new System.Drawing.Size(872, 104);
             this.tbResult.TabIndex = 1;
+            this.tbResult.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(158, 54);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(558, 241);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // RunSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 682);
+            this.ClientSize = new System.Drawing.Size(896, 423);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tbResult);
             this.Controls.Add(this.progressBar);
             this.Name = "RunSimulationForm";
             this.Text = "RunSimulationForm";
             this.Load += new System.EventHandler(this.RunSimulationForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -69,5 +84,6 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox tbResult;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

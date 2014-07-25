@@ -23,18 +23,17 @@ namespace RiverSimulationApplication
             Button orgBtn = sender as Button;
             if (orgBtn == waterModelingBtn)
             {
-                sp.SlidePanel(waterModelingPanel, SliderPanel.Direction.ToRight, this.Size);
+                sp.SlidePanel(waterModelingPanel, SliderPanel.Direction.ToLeft, this.ClientSize);
             }
             else if (orgBtn == moveableBedBtn)
             {
-                sp.SlidePanel(moveableBedPanel, SliderPanel.Direction.ToRight, this.Size);
+                sp.SlidePanel(moveableBedPanel, SliderPanel.Direction.ToLeft, this.ClientSize);
             }
-
         }
 
         private void Back_Click(object sender, EventArgs e)
         {
-            sp.SlidePanel(null, SliderPanel.Direction.Back, this.Size);
+            sp.SlidePanel(null, SliderPanel.Direction.Back, this.ClientSize);
         }
 
         private void BoundaryConditionsForm_Load(object sender, EventArgs e)
@@ -253,6 +252,7 @@ namespace RiverSimulationApplication
                 MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+
 
 
             TableInputForm form = new TableInputForm();

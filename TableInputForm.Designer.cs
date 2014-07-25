@@ -91,6 +91,7 @@
             this.Name = "TableInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TableInputForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TableInputForm_FormClosed);
             this.Load += new System.EventHandler(this.TableInputForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

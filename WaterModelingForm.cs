@@ -45,10 +45,10 @@ namespace RiverSimulationApplication
             {
                 url += "/D1-1-4.html";
             }
-            else if(c==groupBox6)
-            {
-                url += "/D1-1-5.html";
-            }
+            //else if(c==groupBox6)
+            //{
+            //    url += "/D1-1-5.html";
+            //}
             else if(c==groupBox7)
             {
                 url += "/D1-1-6.html";
@@ -78,7 +78,7 @@ namespace RiverSimulationApplication
             valueParamPanel.Visible = false;
             setting3dPanel.Visible = false;
             roughnessPanel.Visible = false;
-            turbulencePanel.Visible = false;
+            physicalParamPanel.Visible = false;
             dryBedPanel.Visible = false;
             immersionPanel.Visible = false;
             this.CenterToParent();
@@ -87,7 +87,7 @@ namespace RiverSimulationApplication
 
         private void Back_Click(object sender, EventArgs e)
         {
-            sp.SlidePanel(null, SliderPanel.Direction.Back, this.Size);
+            sp.SlidePanel(null, SliderPanel.Direction.Back, this.ClientSize);
         }
 
         private void SettingButton_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace RiverSimulationApplication
             Button orgBtn = sender as Button;
             if (orgBtn == valueParamBtn)
             {
-                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToLeft, this.Size);
+                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToLeft, this.ClientSize);
             }
             //else if (orgBtn == setting3dBtn)
             //{
@@ -105,9 +105,9 @@ namespace RiverSimulationApplication
             //{
             //    sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToLeft);
             //}
-            else if (orgBtn == turbulenceBtn)
+            else if (orgBtn == physicalParamBtn)
             {
-                sp.SlidePanel(turbulencePanel, SliderPanel.Direction.ToLeft, this.Size);
+                sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToLeft, this.ClientSize);
             }
             //else if (orgBtn == dryBedBtn)
             //{
@@ -146,6 +146,12 @@ namespace RiverSimulationApplication
             bool chk = (sender as RadioButton).Checked;
             curvatureRadiusBtn.Enabled = chk; 
         }
+        private void ksRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            ksTxt.Enabled = chk;
+            ksHelpBtn.Enabled = chk;
+        }
 
         private void autoCurvatureRdo_CheckedChanged(object sender, EventArgs e)
         {
@@ -165,7 +171,7 @@ namespace RiverSimulationApplication
         private void manningBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(manningBtn.Text, true, 26, 50);
+            form.SetFormMode(manningBtn.Text, false, 26, 50);
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -198,18 +204,18 @@ namespace RiverSimulationApplication
             this.Close();
         }
 
-        private void UserInputPanel_EnabledChanged(object sender, EventArgs e)
-        {
-            bool enabled = (sender as Panel).Enabled;
-            xParam.Enabled = enabled;
-            yParam.Enabled = enabled;
-        }
+        //private void UserInputPanel_EnabledChanged(object sender, EventArgs e)
+        //{
+        //    bool enabled = (sender as Panel).Enabled;
+        //    xParam.Enabled = enabled;
+        //    yParam.Enabled = enabled;
+        //}
 
-        private void userInputRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as RadioButton).Checked;
-            userInputPanel.Enabled = chk;
-        }
+        //private void userInputRdo_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    bool chk = (sender as RadioButton).Checked;
+        //    userInputPanel.Enabled = chk;
+        //}
 
         private void zeroEquationRdo_CheckedChanged(object sender, EventArgs e)
         {
@@ -279,5 +285,16 @@ namespace RiverSimulationApplication
 
             }
         }
+
+        private void ksHelpBtn_Click(object sender, EventArgs e)
+        {
+            KsHelpForm form = new KsHelpForm();
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+
     }
 }

@@ -23,18 +23,18 @@ namespace RiverSimulationApplication
             Button orgBtn = sender as Button;
             if (orgBtn == waterModelingBtn)
             {
-                sp.SlidePanel(waterModelingPanel, SliderPanel.Direction.ToRight);
+                sp.SlidePanel(waterModelingPanel, SliderPanel.Direction.ToRight, this.Size);
             }
             else if (orgBtn == moveableBedBtn)
             {
-                sp.SlidePanel(moveableBedPanel, SliderPanel.Direction.ToRight);
+                sp.SlidePanel(moveableBedPanel, SliderPanel.Direction.ToRight, this.Size);
             }
 
         }
 
         private void Back_Click(object sender, EventArgs e)
         {
-            sp.SlidePanel(null, SliderPanel.Direction.ToLeft);
+            sp.SlidePanel(null, SliderPanel.Direction.Back, this.Size);
         }
 
         private void BoundaryConditionsForm_Load(object sender, EventArgs e)

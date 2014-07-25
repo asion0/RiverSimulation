@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace RiverSimulationApplication
 {
@@ -14,6 +15,8 @@ namespace RiverSimulationApplication
         private const int slideDuration = 480;      //ms
         private static Panel workPanel;
         private static Direction showDirection = Direction.ToRight;
+        private static bool backMode = false;
+        private static Size parentSize = new Size();
 
         public SliderPanel()
         {
@@ -29,36 +32,44 @@ namespace RiverSimulationApplication
             ToRight,
             ToLeft,
             ToTop,
-            ToBottom
+            ToBottom,
+            Back
         }
 
-        public void SlidePanel(Panel p, Direction d)
+        public void SlidePanel(Panel p, Direction d, Size ps)
         {
             if(p != null)
             {
                 workPanel = p;
             }
 
-
+            parentSize = ps;
             sliderPanelWidth = workPanel.Width;
             sliderPanelHeight = workPanel.Height;
-            showDirection = d;
             if (sliderPanelWidth > 0)
             {
-                switch(showDirection)
+                switch(d)
                 {
                     case Direction.ToRight:
                         workPanel.Top = 0;
                         workPanel.Left = 0 - p.Width;
                         workPanel.Visible = true;
                         workPanel.BringToFront();
+                        showDirection = d;
                         break;
                     case Direction.ToLeft:
+                        workPanel.Top = 0;
+                        workPanel.Left = parentSize.Width;
+                        workPanel.Visible = true;
+                        workPanel.BringToFront();
+                        showDirection = d;
+                        break;
+                    case Direction.Back:
+                        backMode = true;
                         break;
                     default:
                         //To do ...
                         break;
-
                 }
 
             }
@@ -72,34 +83,64 @@ namespace RiverSimulationApplication
         private void OnTimedEvent(object sender, EventArgs e)
         {
             bool finished = false;
-            switch (showDirection)
+            if (backMode)
             {
-                case Direction.ToRight:
-                    workPanel.Left += sliderPanelWidth / (slideDuration / slideInterval);
-                    if (workPanel.Left >= 0)
-                    {
-                        workPanel.Left = 0;
-                        finished = true;
-                    }
-                    break;
-                case Direction.ToLeft:
-                    workPanel.Left -= sliderPanelWidth / (slideDuration / slideInterval);
-                    if (workPanel.Left <= 0 - sliderPanelWidth)
-                    {
-                        workPanel.Left = 0 - sliderPanelWidth;
-                        finished = true;
-                    }
-                    break;
-                default:
-                    //To do ...
-                    break;
+                switch (showDirection)
+                {
+                    case Direction.ToRight:
+                        workPanel.Left -= sliderPanelWidth / (slideDuration / slideInterval);
+                        if (workPanel.Left <= 0 - sliderPanelWidth)
+                        {
+                            workPanel.Left = 0 - sliderPanelWidth;
+                            finished = true;
+                        }
+                        break;
+                    case Direction.ToLeft:
+                        workPanel.Left += sliderPanelWidth / (slideDuration / slideInterval);
+                        if (workPanel.Left >= parentSize.Width)
+                        {
+                            workPanel.Left = parentSize.Width;
+                            finished = true;
+                        }
+                        break;
+                    default:
+                        //To do ...
+                        break;
+                }
+
+            }
+            else
+            {
+                switch (showDirection)
+                {
+                    case Direction.ToRight:
+                        workPanel.Left += sliderPanelWidth / (slideDuration / slideInterval);
+                        if (workPanel.Left >= 0)
+                        {
+                            workPanel.Left = 0;
+                            finished = true;
+                        }
+                        break;
+                    case Direction.ToLeft:
+                        workPanel.Left -= sliderPanelWidth / (slideDuration / slideInterval);
+                        if (workPanel.Left + workPanel.Width <= parentSize.Width)
+                        {
+                            workPanel.Left = parentSize.Width - workPanel.Width;
+                            finished = true;
+                        }
+                        break;
+                    default:
+                        //To do ...
+                        break;
+                }
             }
             if(finished)
             {
                 slideTimer.Enabled = false;
-                if (showDirection == Direction.ToLeft)
+                if (backMode)
                 {
                     workPanel.Visible = false;
+                    backMode = false;
                 }
             }
             //Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);

@@ -87,7 +87,7 @@ namespace RiverSimulationApplication
 
         private void Back_Click(object sender, EventArgs e)
         {
-            sp.SlidePanel(null, SliderPanel.Direction.ToLeft);
+            sp.SlidePanel(null, SliderPanel.Direction.Back, this.Size);
         }
 
         private void SettingButton_Click(object sender, EventArgs e)
@@ -95,27 +95,27 @@ namespace RiverSimulationApplication
             Button orgBtn = sender as Button;
             if (orgBtn == valueParamBtn)
             {
-                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight);
+                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToLeft, this.Size);
             }
             //else if (orgBtn == setting3dBtn)
             //{
-            //    sp.SlidePanel(setting3dPanel, SliderPanel.Direction.ToRight);
+            //    sp.SlidePanel(setting3dPanel, SliderPanel.Direction.ToLeft);
             //}
             //else if (orgBtn == roughnessBtn)
             //{
-            //    sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToRight);
+            //    sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToLeft);
             //}
             else if (orgBtn == turbulenceBtn)
             {
-                sp.SlidePanel(turbulencePanel, SliderPanel.Direction.ToRight);
+                sp.SlidePanel(turbulencePanel, SliderPanel.Direction.ToLeft, this.Size);
             }
             //else if (orgBtn == dryBedBtn)
             //{
-            //    sp.SlidePanel(dryBedPanel, SliderPanel.Direction.ToRight);
+            //    sp.SlidePanel(dryBedPanel, SliderPanel.Direction.ToLeft);
             //}
             //else if (orgBtn == immersionBtn)
             //{
-            //    sp.SlidePanel(immersionPanel, SliderPanel.Direction.ToRight);
+            //    sp.SlidePanel(immersionPanel, SliderPanel.Direction.ToLeft);
             //}
         }
 

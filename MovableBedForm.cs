@@ -24,7 +24,7 @@ namespace RiverSimulationApplication
             Button orgBtn = sender as Button;
             if (orgBtn == valueParamBtn)
             {
-                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight);
+                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight, this.Size);
             }
             //else if (orgBtn == setting3dBtn)
             //{
@@ -32,15 +32,15 @@ namespace RiverSimulationApplication
             //}
             else if (orgBtn == fluidTypeBtn)
             {
-                sp.SlidePanel(fluidTypePanel, SliderPanel.Direction.ToRight);
+                sp.SlidePanel(fluidTypePanel, SliderPanel.Direction.ToRight, this.Size);
             }
             else if (orgBtn == seabedCompositionBtn)
             {
-                sp.SlidePanel(seabedCompositionPanel, SliderPanel.Direction.ToRight);
+                sp.SlidePanel(seabedCompositionPanel, SliderPanel.Direction.ToRight, this.Size);
             }
             else if (orgBtn == rockStableBtn)
             {
-                sp.SlidePanel(rockStablePanel, SliderPanel.Direction.ToRight);
+                sp.SlidePanel(rockStablePanel, SliderPanel.Direction.ToRight, this.Size);
             }
             //else if (orgBtn == immersionBtn)
             //{
@@ -65,7 +65,7 @@ namespace RiverSimulationApplication
 
         private void Back_Click(object sender, EventArgs e)
         {
-            sp.SlidePanel(null, SliderPanel.Direction.ToLeft);
+            sp.SlidePanel(null, SliderPanel.Direction.Back, this.Size);
         }
 
         private void ok_Click(object sender, EventArgs e)

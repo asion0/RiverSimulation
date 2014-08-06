@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1245696">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1249280">
       <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.2" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>CH7Z4P+lzK6oIiyEfYcamPVoWaXkwjO/dn1Kzz1uozo=</dsig:DigestValue>
+        <dsig:DigestValue>5W+CfE4S68PTmTpCe1ENuyg3dayeDhE+lzO64kbejgc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

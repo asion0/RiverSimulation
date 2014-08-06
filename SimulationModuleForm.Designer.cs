@@ -38,25 +38,25 @@
             this.type3dRdo = new System.Windows.Forms.CheckBox();
             this.type2dRdo = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.waterPanel = new System.Windows.Forms.Panel();
             this.movableBedPanel = new System.Windows.Forms.Panel();
+            this.bedrockChk = new System.Windows.Forms.CheckBox();
+            this.quayStableAnalysisChk = new System.Windows.Forms.CheckBox();
+            this.highSandContentFlowChk = new System.Windows.Forms.CheckBox();
+            this.waterPanel = new System.Windows.Forms.Panel();
+            this.diffusionEffectChk = new System.Windows.Forms.CheckBox();
+            this.secFlowEffectChk = new System.Windows.Forms.CheckBox();
+            this.dryBedEffectChk = new System.Windows.Forms.CheckBox();
+            this.highSandContentEffectChk = new System.Windows.Forms.CheckBox();
+            this.immersedBoundaryChk = new System.Windows.Forms.CheckBox();
+            this.sideInOutFlowChk = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.waterPanel.SuspendLayout();
             this.movableBedPanel.SuspendLayout();
+            this.waterPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ok
@@ -162,104 +162,128 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "特殊功能";
             // 
-            // checkBox1
+            // movableBedPanel
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(13, 13);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "擴散效應";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.movableBedPanel.Controls.Add(this.bedrockChk);
+            this.movableBedPanel.Controls.Add(this.quayStableAnalysisChk);
+            this.movableBedPanel.Controls.Add(this.highSandContentFlowChk);
+            this.movableBedPanel.Enabled = false;
+            this.movableBedPanel.Location = new System.Drawing.Point(214, 40);
+            this.movableBedPanel.Name = "movableBedPanel";
+            this.movableBedPanel.Size = new System.Drawing.Size(194, 150);
+            this.movableBedPanel.TabIndex = 3;
             // 
-            // checkBox2
+            // bedrockChk
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(13, 35);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(84, 16);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "二次流效應";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.bedrockChk.AutoSize = true;
+            this.bedrockChk.Location = new System.Drawing.Point(17, 10);
+            this.bedrockChk.Name = "bedrockChk";
+            this.bedrockChk.Size = new System.Drawing.Size(48, 16);
+            this.bedrockChk.TabIndex = 0;
+            this.bedrockChk.Text = "岩床";
+            this.bedrockChk.UseVisualStyleBackColor = true;
+            this.bedrockChk.CheckedChanged += new System.EventHandler(this.bedrockChk_CheckedChanged);
             // 
-            // checkBox3
+            // quayStableAnalysisChk
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(13, 57);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(72, 16);
-            this.checkBox3.TabIndex = 0;
-            this.checkBox3.Text = "乾床效應";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.quayStableAnalysisChk.AutoSize = true;
+            this.quayStableAnalysisChk.Location = new System.Drawing.Point(17, 32);
+            this.quayStableAnalysisChk.Name = "quayStableAnalysisChk";
+            this.quayStableAnalysisChk.Size = new System.Drawing.Size(96, 16);
+            this.quayStableAnalysisChk.TabIndex = 0;
+            this.quayStableAnalysisChk.Text = "岸壁穩定分析";
+            this.quayStableAnalysisChk.UseVisualStyleBackColor = true;
+            this.quayStableAnalysisChk.CheckedChanged += new System.EventHandler(this.quayStableAnalysisChk_CheckedChanged);
             // 
-            // checkBox4
+            // highSandContentFlowChk
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(13, 79);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(72, 16);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = "浸沒邊界";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.highSandContentFlowChk.AutoSize = true;
+            this.highSandContentFlowChk.Location = new System.Drawing.Point(17, 54);
+            this.highSandContentFlowChk.Name = "highSandContentFlowChk";
+            this.highSandContentFlowChk.Size = new System.Drawing.Size(84, 16);
+            this.highSandContentFlowChk.TabIndex = 0;
+            this.highSandContentFlowChk.Text = "高含砂水流";
+            this.highSandContentFlowChk.UseVisualStyleBackColor = true;
+            this.highSandContentFlowChk.CheckedChanged += new System.EventHandler(this.highSandContentFlowChk_CheckedChanged);
             // 
-            // checkBox5
+            // waterPanel
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(13, 101);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(75, 16);
-            this.checkBox5.TabIndex = 0;
-            this.checkBox5.Text = "側出/入流";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.waterPanel.Controls.Add(this.diffusionEffectChk);
+            this.waterPanel.Controls.Add(this.secFlowEffectChk);
+            this.waterPanel.Controls.Add(this.dryBedEffectChk);
+            this.waterPanel.Controls.Add(this.highSandContentEffectChk);
+            this.waterPanel.Controls.Add(this.immersedBoundaryChk);
+            this.waterPanel.Controls.Add(this.sideInOutFlowChk);
+            this.waterPanel.Location = new System.Drawing.Point(6, 40);
+            this.waterPanel.Name = "waterPanel";
+            this.waterPanel.Size = new System.Drawing.Size(194, 150);
+            this.waterPanel.TabIndex = 2;
             // 
-            // checkBox6
+            // diffusionEffectChk
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(13, 123);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(84, 16);
-            this.checkBox6.TabIndex = 0;
-            this.checkBox6.Text = "高含砂效應";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.diffusionEffectChk.AutoSize = true;
+            this.diffusionEffectChk.Location = new System.Drawing.Point(13, 13);
+            this.diffusionEffectChk.Name = "diffusionEffectChk";
+            this.diffusionEffectChk.Size = new System.Drawing.Size(72, 16);
+            this.diffusionEffectChk.TabIndex = 0;
+            this.diffusionEffectChk.Text = "擴散效應";
+            this.diffusionEffectChk.UseVisualStyleBackColor = true;
+            this.diffusionEffectChk.CheckedChanged += new System.EventHandler(this.diffusionEffectChk_CheckedChanged);
             // 
-            // checkBox7
+            // secFlowEffectChk
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(17, 10);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(48, 16);
-            this.checkBox7.TabIndex = 0;
-            this.checkBox7.Text = "岩床";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            this.secFlowEffectChk.AutoSize = true;
+            this.secFlowEffectChk.Location = new System.Drawing.Point(13, 35);
+            this.secFlowEffectChk.Name = "secFlowEffectChk";
+            this.secFlowEffectChk.Size = new System.Drawing.Size(84, 16);
+            this.secFlowEffectChk.TabIndex = 0;
+            this.secFlowEffectChk.Text = "二次流效應";
+            this.secFlowEffectChk.UseVisualStyleBackColor = true;
+            this.secFlowEffectChk.CheckedChanged += new System.EventHandler(this.secFlowEffectChk_CheckedChanged);
             // 
-            // checkBox8
+            // dryBedEffectChk
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(17, 32);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(96, 16);
-            this.checkBox8.TabIndex = 0;
-            this.checkBox8.Text = "岩壁穩定分析";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.dryBedEffectChk.AutoSize = true;
+            this.dryBedEffectChk.Location = new System.Drawing.Point(13, 57);
+            this.dryBedEffectChk.Name = "dryBedEffectChk";
+            this.dryBedEffectChk.Size = new System.Drawing.Size(72, 16);
+            this.dryBedEffectChk.TabIndex = 0;
+            this.dryBedEffectChk.Text = "乾床效應";
+            this.dryBedEffectChk.UseVisualStyleBackColor = true;
+            this.dryBedEffectChk.CheckedChanged += new System.EventHandler(this.dryBedEffectChk_CheckedChanged);
             // 
-            // checkBox9
+            // highSandContentEffectChk
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(17, 54);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(84, 16);
-            this.checkBox9.TabIndex = 0;
-            this.checkBox9.Text = "高含砂水流";
-            this.checkBox9.UseVisualStyleBackColor = true;
+            this.highSandContentEffectChk.AutoSize = true;
+            this.highSandContentEffectChk.Location = new System.Drawing.Point(13, 123);
+            this.highSandContentEffectChk.Name = "highSandContentEffectChk";
+            this.highSandContentEffectChk.Size = new System.Drawing.Size(84, 16);
+            this.highSandContentEffectChk.TabIndex = 0;
+            this.highSandContentEffectChk.Text = "高含砂效應";
+            this.highSandContentEffectChk.UseVisualStyleBackColor = true;
+            this.highSandContentEffectChk.CheckedChanged += new System.EventHandler(this.highSandContentEffectChk_CheckedChanged);
             // 
-            // label1
+            // immersedBoundaryChk
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "水理";
+            this.immersedBoundaryChk.AutoSize = true;
+            this.immersedBoundaryChk.Location = new System.Drawing.Point(13, 79);
+            this.immersedBoundaryChk.Name = "immersedBoundaryChk";
+            this.immersedBoundaryChk.Size = new System.Drawing.Size(72, 16);
+            this.immersedBoundaryChk.TabIndex = 0;
+            this.immersedBoundaryChk.Text = "浸沒邊界";
+            this.immersedBoundaryChk.UseVisualStyleBackColor = true;
+            this.immersedBoundaryChk.CheckedChanged += new System.EventHandler(this.immersedBoundaryChk_CheckedChanged);
+            // 
+            // sideInOutFlowChk
+            // 
+            this.sideInOutFlowChk.AutoSize = true;
+            this.sideInOutFlowChk.Location = new System.Drawing.Point(13, 101);
+            this.sideInOutFlowChk.Name = "sideInOutFlowChk";
+            this.sideInOutFlowChk.Size = new System.Drawing.Size(75, 16);
+            this.sideInOutFlowChk.TabIndex = 0;
+            this.sideInOutFlowChk.Text = "側出/入流";
+            this.sideInOutFlowChk.UseVisualStyleBackColor = true;
+            this.sideInOutFlowChk.CheckedChanged += new System.EventHandler(this.sideInOutFlowChk_CheckedChanged);
             // 
             // label2
             // 
@@ -270,29 +294,14 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "動床";
             // 
-            // waterPanel
+            // label1
             // 
-            this.waterPanel.Controls.Add(this.checkBox1);
-            this.waterPanel.Controls.Add(this.checkBox2);
-            this.waterPanel.Controls.Add(this.checkBox3);
-            this.waterPanel.Controls.Add(this.checkBox6);
-            this.waterPanel.Controls.Add(this.checkBox4);
-            this.waterPanel.Controls.Add(this.checkBox5);
-            this.waterPanel.Location = new System.Drawing.Point(6, 40);
-            this.waterPanel.Name = "waterPanel";
-            this.waterPanel.Size = new System.Drawing.Size(194, 150);
-            this.waterPanel.TabIndex = 2;
-            // 
-            // movableBedPanel
-            // 
-            this.movableBedPanel.Controls.Add(this.checkBox7);
-            this.movableBedPanel.Controls.Add(this.checkBox8);
-            this.movableBedPanel.Controls.Add(this.checkBox9);
-            this.movableBedPanel.Enabled = false;
-            this.movableBedPanel.Location = new System.Drawing.Point(214, 40);
-            this.movableBedPanel.Name = "movableBedPanel";
-            this.movableBedPanel.Size = new System.Drawing.Size(194, 150);
-            this.movableBedPanel.TabIndex = 3;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "水理";
             // 
             // SimulationModuleForm
             // 
@@ -316,10 +325,10 @@
             this.flowTypeGroup.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.waterPanel.ResumeLayout(false);
-            this.waterPanel.PerformLayout();
             this.movableBedPanel.ResumeLayout(false);
             this.movableBedPanel.PerformLayout();
+            this.waterPanel.ResumeLayout(false);
+            this.waterPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -336,16 +345,16 @@
         private System.Windows.Forms.CheckBox typeMovableBedRdo;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel movableBedPanel;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox bedrockChk;
+        private System.Windows.Forms.CheckBox quayStableAnalysisChk;
+        private System.Windows.Forms.CheckBox highSandContentFlowChk;
         private System.Windows.Forms.Panel waterPanel;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox diffusionEffectChk;
+        private System.Windows.Forms.CheckBox secFlowEffectChk;
+        private System.Windows.Forms.CheckBox dryBedEffectChk;
+        private System.Windows.Forms.CheckBox highSandContentEffectChk;
+        private System.Windows.Forms.CheckBox immersedBoundaryChk;
+        private System.Windows.Forms.CheckBox sideInOutFlowChk;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
     }

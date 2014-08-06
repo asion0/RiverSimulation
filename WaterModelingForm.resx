@@ -2068,7 +2068,7 @@
     <value>0</value>
   </data>
   <data name="valueParamPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 3</value>
+    <value>13, 820</value>
   </data>
   <data name="valueParamPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 670</value>
@@ -2188,7 +2188,7 @@
     <value>1</value>
   </data>
   <data name="setting3dPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 794</value>
+    <value>50, 787</value>
   </data>
   <data name="setting3dPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 670</value>
@@ -2209,7 +2209,7 @@
     <value>5</value>
   </data>
   <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 779</value>
+    <value>94, 770</value>
   </data>
   <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
     <value>365, 607</value>
@@ -2530,7 +2530,7 @@
     <value>1</value>
   </data>
   <data name="physicalParamPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 3</value>
+    <value>165, 694</value>
   </data>
   <data name="physicalParamPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 669</value>

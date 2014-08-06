@@ -77,6 +77,72 @@ namespace RiverSimulationApplication
 
             typeWaterModelingRdo.Checked = (RiverSimulationProfile.profile.GetModuleType2() == RiverSimulationProfile.ModuleType2.WaterModeling) ? true : false;
             typeMovableBedRdo.Checked = (RiverSimulationProfile.profile.GetModuleType2() == RiverSimulationProfile.ModuleType2.MovableBed) ? true : false;
+
+            diffusionEffectChk.Checked = RiverSimulationProfile.profile.diffusionEffectFunction;
+            secFlowEffectChk.Checked = RiverSimulationProfile.profile.secFlowEffectFunction;
+            diffusionEffectChk.Checked = RiverSimulationProfile.profile.diffusionEffectFunction;
+            dryBedEffectChk.Checked = RiverSimulationProfile.profile.dryBedEffectFunction;
+            immersedBoundaryChk.Checked = RiverSimulationProfile.profile.immersedBoundaryFunction;
+            sideInOutFlowChk.Checked = RiverSimulationProfile.profile.sideInOutFlowFunction;
+            highSandContentEffectChk.Checked = RiverSimulationProfile.profile.highSandContentEffectFunction;
+
+            bedrockChk.Checked = RiverSimulationProfile.profile.bedrockFunction;
+            quayStableAnalysisChk.Checked = RiverSimulationProfile.profile.quayStableAnalysisFunction;
+            highSandContentFlowChk.Checked = RiverSimulationProfile.profile.highSandContentFlowFunction;
+        }
+
+        private void diffusionEffectChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.diffusionEffectFunction = chk;
+        }
+
+        private void dryBedEffectChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.dryBedEffectFunction = chk;
+        }
+
+        private void immersedBoundaryChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.immersedBoundaryFunction = chk;
+        }
+
+        private void sideInOutFlowChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.sideInOutFlowFunction = chk;
+        }
+
+        private void highSandContentEffectChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.highSandContentEffectFunction = chk;
+        }
+
+        private void bedrockChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.bedrockFunction = chk;
+        }
+
+        private void quayStableAnalysisChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.quayStableAnalysisFunction = chk;
+        }
+
+        private void highSandContentFlowChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.highSandContentFlowFunction = chk;
+        }
+
+        private void secFlowEffectChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            RiverSimulationProfile.profile.secFlowEffectFunction = chk;
         }
     }
 }

@@ -44,6 +44,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.chezyBtn = new System.Windows.Forms.Button();
             this.manningBtn = new System.Windows.Forms.Button();
             this.chezyRdo = new System.Windows.Forms.RadioButton();
@@ -109,10 +113,13 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.physicalParamPanel = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.ksHelpBtn = new System.Windows.Forms.Button();
+            this.ksTxt = new System.Windows.Forms.TextBox();
             this.ksRadio = new System.Windows.Forms.RadioButton();
             this.label12 = new System.Windows.Forms.Label();
             this.turbulenceBackBtn = new System.Windows.Forms.Button();
@@ -140,13 +147,6 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.roughnessBackBtn = new System.Windows.Forms.Button();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.ksTxt = new System.Windows.Forms.TextBox();
-            this.ksHelpBtn = new System.Windows.Forms.Button();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -288,6 +288,26 @@
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             this.groupBox5.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            // 
+            // textBox18
+            // 
+            resources.ApplyResources(this.textBox18, "textBox18");
+            this.textBox18.Name = "textBox18";
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // textBox17
+            // 
+            resources.ApplyResources(this.textBox17, "textBox17");
+            this.textBox17.Name = "textBox17";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
             // 
             // chezyBtn
             // 
@@ -755,6 +775,11 @@
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.TabStop = false;
             // 
+            // label23
+            // 
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
+            // 
             // textBox16
             // 
             resources.ApplyResources(this.textBox16, "textBox16");
@@ -782,6 +807,18 @@
             this.panel8.Controls.Add(this.chezyRdo);
             resources.ApplyResources(this.panel8, "panel8");
             this.panel8.Name = "panel8";
+            // 
+            // ksHelpBtn
+            // 
+            resources.ApplyResources(this.ksHelpBtn, "ksHelpBtn");
+            this.ksHelpBtn.Name = "ksHelpBtn";
+            this.ksHelpBtn.UseVisualStyleBackColor = true;
+            this.ksHelpBtn.Click += new System.EventHandler(this.ksHelpBtn_Click);
+            // 
+            // ksTxt
+            // 
+            resources.ApplyResources(this.ksTxt, "ksTxt");
+            this.ksTxt.Name = "ksTxt";
             // 
             // ksRadio
             // 
@@ -974,43 +1011,6 @@
             this.roughnessBackBtn.Name = "roughnessBackBtn";
             this.roughnessBackBtn.UseVisualStyleBackColor = true;
             this.roughnessBackBtn.Click += new System.EventHandler(this.Back_Click);
-            // 
-            // textBox17
-            // 
-            resources.ApplyResources(this.textBox17, "textBox17");
-            this.textBox17.Name = "textBox17";
-            // 
-            // label18
-            // 
-            resources.ApplyResources(this.label18, "label18");
-            this.label18.Name = "label18";
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.Name = "label22";
-            // 
-            // textBox18
-            // 
-            resources.ApplyResources(this.textBox18, "textBox18");
-            this.textBox18.Name = "textBox18";
-            // 
-            // label23
-            // 
-            resources.ApplyResources(this.label23, "label23");
-            this.label23.Name = "label23";
-            // 
-            // ksTxt
-            // 
-            resources.ApplyResources(this.ksTxt, "ksTxt");
-            this.ksTxt.Name = "ksTxt";
-            // 
-            // ksHelpBtn
-            // 
-            resources.ApplyResources(this.ksHelpBtn, "ksHelpBtn");
-            this.ksHelpBtn.Name = "ksHelpBtn";
-            this.ksHelpBtn.UseVisualStyleBackColor = true;
-            this.ksHelpBtn.Click += new System.EventHandler(this.ksHelpBtn_Click);
             // 
             // WaterModelingForm
             // 

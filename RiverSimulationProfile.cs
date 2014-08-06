@@ -121,7 +121,17 @@ namespace RiverSimulationApplication
         
         private ModuleType1 moduleType1 = ModuleType1.NoSelect;
         private ModuleType2 moduleType2 = ModuleType2.NoSelect;
+        //Setting for special functions
+        public bool diffusionEffectFunction { get; set; }
+        public bool secFlowEffectFunction { get; set; }
+        public bool dryBedEffectFunction { get; set; }
+        public bool immersedBoundaryFunction { get; set; }
+        public bool sideInOutFlowFunction { get; set; }
+        public bool highSandContentEffectFunction { get; set; }
 
+        public bool bedrockFunction { get; set; }
+        public bool quayStableAnalysisFunction { get; set; }
+        public bool highSandContentFlowFunction { get; set; }
 
         public bool Is3DMode() { return moduleType1 == ModuleType1.Type3D; }
         public bool HasMovableBedMode() { return moduleType2 == ModuleType2.MovableBed; }

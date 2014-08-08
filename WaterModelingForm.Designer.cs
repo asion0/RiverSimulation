@@ -34,16 +34,14 @@
             this.constFlowRdo = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.valueParamBtn = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.secFlowEffectGrp = new System.Windows.Forms.GroupBox();
             this.autoCurvatureRdo = new System.Windows.Forms.RadioButton();
             this.curvatureRadiusRdo = new System.Windows.Forms.RadioButton();
             this.curvatureRadiusBtn = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.physicalParamBtn = new System.Windows.Forms.Button();
             this.propStratBtn = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.highSandContentEffectGrp = new System.Windows.Forms.GroupBox();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.textBox17 = new System.Windows.Forms.TextBox();
@@ -52,11 +50,11 @@
             this.manningBtn = new System.Windows.Forms.Button();
             this.chezyRdo = new System.Windows.Forms.RadioButton();
             this.manningRdo = new System.Windows.Forms.RadioButton();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.dryBedEffectGrp = new System.Windows.Forms.GroupBox();
             this.dryBedBtn = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.dryBedNumTxt = new System.Windows.Forms.TextBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.immersedBoundaryGrp = new System.Windows.Forms.GroupBox();
             this.immersedBoundaryBtn = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.immersedBoundaryNumTxt = new System.Windows.Forms.TextBox();
@@ -64,7 +62,7 @@
             this.ok = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.diffusionEffectGrp = new System.Windows.Forms.GroupBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.valueParamBackBtn = new System.Windows.Forms.Button();
             this.valueParamPanel = new System.Windows.Forms.Panel();
@@ -75,7 +73,6 @@
             this.twinEquationRdo = new System.Windows.Forms.RadioButton();
             this.zeroEquationCombo = new System.Windows.Forms.ComboBox();
             this.SingleEquationRdo = new System.Windows.Forms.RadioButton();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -94,17 +91,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.setting3dPanel = new System.Windows.Forms.Panel();
             this.setting3dBackBtn = new System.Windows.Forms.Button();
             this.immersionPanel = new System.Windows.Forms.Panel();
@@ -147,19 +133,30 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.roughnessBackBtn = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.secFlowEffectGrp.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
+            this.highSandContentEffectGrp.SuspendLayout();
+            this.dryBedEffectGrp.SuspendLayout();
+            this.immersedBoundaryGrp.SuspendLayout();
             this.mainPanel.SuspendLayout();
-            this.groupBox14.SuspendLayout();
+            this.diffusionEffectGrp.SuspendLayout();
             this.valueParamPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.setting3dPanel.SuspendLayout();
@@ -215,15 +212,15 @@
             this.valueParamBtn.UseVisualStyleBackColor = true;
             this.valueParamBtn.Click += new System.EventHandler(this.SettingButton_Click);
             // 
-            // groupBox3
+            // secFlowEffectGrp
             // 
-            this.groupBox3.Controls.Add(this.autoCurvatureRdo);
-            this.groupBox3.Controls.Add(this.curvatureRadiusRdo);
-            this.groupBox3.Controls.Add(this.curvatureRadiusBtn);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
-            this.groupBox3.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            this.secFlowEffectGrp.Controls.Add(this.autoCurvatureRdo);
+            this.secFlowEffectGrp.Controls.Add(this.curvatureRadiusRdo);
+            this.secFlowEffectGrp.Controls.Add(this.curvatureRadiusBtn);
+            resources.ApplyResources(this.secFlowEffectGrp, "secFlowEffectGrp");
+            this.secFlowEffectGrp.Name = "secFlowEffectGrp";
+            this.secFlowEffectGrp.TabStop = false;
+            this.secFlowEffectGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
             // autoCurvatureRdo
             // 
@@ -268,26 +265,16 @@
             this.propStratBtn.UseVisualStyleBackColor = true;
             this.propStratBtn.Click += new System.EventHandler(this.PropStratBtn_Click);
             // 
-            // label6
+            // highSandContentEffectGrp
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // textBox11
-            // 
-            resources.ApplyResources(this.textBox11, "textBox11");
-            this.textBox11.Name = "textBox11";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.textBox18);
-            this.groupBox5.Controls.Add(this.label22);
-            this.groupBox5.Controls.Add(this.textBox17);
-            this.groupBox5.Controls.Add(this.label18);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.TabStop = false;
-            this.groupBox5.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            this.highSandContentEffectGrp.Controls.Add(this.textBox18);
+            this.highSandContentEffectGrp.Controls.Add(this.label22);
+            this.highSandContentEffectGrp.Controls.Add(this.textBox17);
+            this.highSandContentEffectGrp.Controls.Add(this.label18);
+            resources.ApplyResources(this.highSandContentEffectGrp, "highSandContentEffectGrp");
+            this.highSandContentEffectGrp.Name = "highSandContentEffectGrp";
+            this.highSandContentEffectGrp.TabStop = false;
+            this.highSandContentEffectGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
             // textBox18
             // 
@@ -339,15 +326,17 @@
             this.manningRdo.UseVisualStyleBackColor = true;
             this.manningRdo.CheckedChanged += new System.EventHandler(this.manningRdo_CheckedChanged);
             // 
-            // groupBox7
+            // dryBedEffectGrp
             // 
-            this.groupBox7.Controls.Add(this.dryBedBtn);
-            this.groupBox7.Controls.Add(this.label20);
-            this.groupBox7.Controls.Add(this.dryBedNumTxt);
-            resources.ApplyResources(this.groupBox7, "groupBox7");
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.TabStop = false;
-            this.groupBox7.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            this.dryBedEffectGrp.Controls.Add(this.dryBedBtn);
+            this.dryBedEffectGrp.Controls.Add(this.label19);
+            this.dryBedEffectGrp.Controls.Add(this.label20);
+            this.dryBedEffectGrp.Controls.Add(this.textBox10);
+            this.dryBedEffectGrp.Controls.Add(this.dryBedNumTxt);
+            resources.ApplyResources(this.dryBedEffectGrp, "dryBedEffectGrp");
+            this.dryBedEffectGrp.Name = "dryBedEffectGrp";
+            this.dryBedEffectGrp.TabStop = false;
+            this.dryBedEffectGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
             // dryBedBtn
             // 
@@ -366,15 +355,17 @@
             resources.ApplyResources(this.dryBedNumTxt, "dryBedNumTxt");
             this.dryBedNumTxt.Name = "dryBedNumTxt";
             // 
-            // groupBox8
+            // immersedBoundaryGrp
             // 
-            this.groupBox8.Controls.Add(this.immersedBoundaryBtn);
-            this.groupBox8.Controls.Add(this.label21);
-            this.groupBox8.Controls.Add(this.immersedBoundaryNumTxt);
-            resources.ApplyResources(this.groupBox8, "groupBox8");
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.TabStop = false;
-            this.groupBox8.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            this.immersedBoundaryGrp.Controls.Add(this.immersedBoundaryBtn);
+            this.immersedBoundaryGrp.Controls.Add(this.label24);
+            this.immersedBoundaryGrp.Controls.Add(this.label21);
+            this.immersedBoundaryGrp.Controls.Add(this.immersedBoundaryNumTxt);
+            this.immersedBoundaryGrp.Controls.Add(this.textBox11);
+            resources.ApplyResources(this.immersedBoundaryGrp, "immersedBoundaryGrp");
+            this.immersedBoundaryGrp.Name = "immersedBoundaryGrp";
+            this.immersedBoundaryGrp.TabStop = false;
+            this.immersedBoundaryGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
             // immersedBoundaryBtn
             // 
@@ -416,24 +407,24 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.groupBox8);
-            this.mainPanel.Controls.Add(this.groupBox7);
-            this.mainPanel.Controls.Add(this.groupBox5);
-            this.mainPanel.Controls.Add(this.groupBox14);
+            this.mainPanel.Controls.Add(this.immersedBoundaryGrp);
+            this.mainPanel.Controls.Add(this.dryBedEffectGrp);
+            this.mainPanel.Controls.Add(this.highSandContentEffectGrp);
+            this.mainPanel.Controls.Add(this.diffusionEffectGrp);
             this.mainPanel.Controls.Add(this.groupBox4);
-            this.mainPanel.Controls.Add(this.groupBox3);
+            this.mainPanel.Controls.Add(this.secFlowEffectGrp);
             this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Controls.Add(this.flowTypeGroup);
             resources.ApplyResources(this.mainPanel, "mainPanel");
             this.mainPanel.Name = "mainPanel";
             // 
-            // groupBox14
+            // diffusionEffectGrp
             // 
-            this.groupBox14.Controls.Add(this.checkBox2);
-            resources.ApplyResources(this.groupBox14, "groupBox14");
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.TabStop = false;
-            this.groupBox14.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            this.diffusionEffectGrp.Controls.Add(this.checkBox2);
+            resources.ApplyResources(this.diffusionEffectGrp, "diffusionEffectGrp");
+            this.diffusionEffectGrp.Name = "diffusionEffectGrp";
+            this.diffusionEffectGrp.TabStop = false;
+            this.diffusionEffectGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
             // checkBox2
             // 
@@ -457,21 +448,16 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.panel7);
-            this.groupBox1.Controls.Add(this.panel6);
-            this.groupBox1.Controls.Add(this.panel5);
-            this.groupBox1.Controls.Add(this.panel4);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.comboBox4);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.textBox10);
             this.groupBox1.Controls.Add(this.textBox9);
-            this.groupBox1.Controls.Add(this.textBox6);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.panel7);
+            this.groupBox1.Controls.Add(this.textBox6);
             this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.panel5);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label19);
+            this.groupBox1.Controls.Add(this.panel4);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
@@ -479,7 +465,9 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel7.Controls.Add(this.propStratBtn);
             this.panel7.Controls.Add(this.twinEquationCombo);
+            this.panel7.Controls.Add(this.radioButton1);
             this.panel7.Controls.Add(this.zeroEquationRdo);
             this.panel7.Controls.Add(this.twinEquationRdo);
             this.panel7.Controls.Add(this.zeroEquationCombo);
@@ -531,15 +519,6 @@
             this.SingleEquationRdo.Name = "SingleEquationRdo";
             this.SingleEquationRdo.TabStop = true;
             this.SingleEquationRdo.UseVisualStyleBackColor = true;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel6.Controls.Add(this.propStratBtn);
-            this.panel6.Controls.Add(this.label6);
-            this.panel6.Controls.Add(this.textBox11);
-            resources.ApplyResources(this.panel6, "panel6");
-            this.panel6.Name = "panel6";
             // 
             // panel5
             // 
@@ -648,73 +627,6 @@
             // 
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            resources.GetString("comboBox4.Items"),
-            resources.GetString("comboBox4.Items1"),
-            resources.GetString("comboBox4.Items2")});
-            resources.ApplyResources(this.comboBox4, "comboBox4");
-            this.comboBox4.Name = "comboBox4";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            resources.GetString("comboBox2.Items"),
-            resources.GetString("comboBox2.Items1")});
-            resources.ApplyResources(this.comboBox2, "comboBox2");
-            this.comboBox2.Name = "comboBox2";
-            // 
-            // textBox10
-            // 
-            resources.ApplyResources(this.textBox10, "textBox10");
-            this.textBox10.Name = "textBox10";
-            // 
-            // textBox9
-            // 
-            resources.ApplyResources(this.textBox9, "textBox9");
-            this.textBox9.Name = "textBox9";
-            // 
-            // textBox6
-            // 
-            resources.ApplyResources(this.textBox6, "textBox6");
-            this.textBox6.Name = "textBox6";
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
             // 
             // setting3dPanel
             // 
@@ -1012,15 +924,79 @@
             this.roughnessBackBtn.UseVisualStyleBackColor = true;
             this.roughnessBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
+            // radioButton1
+            // 
+            resources.ApplyResources(this.radioButton1, "radioButton1");
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.zeroEquationRdo_CheckedChanged);
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
+            // 
+            // textBox6
+            // 
+            resources.ApplyResources(this.textBox6, "textBox6");
+            this.textBox6.Name = "textBox6";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // textBox9
+            // 
+            resources.ApplyResources(this.textBox9, "textBox9");
+            this.textBox9.Name = "textBox9";
+            // 
+            // textBox10
+            // 
+            resources.ApplyResources(this.textBox10, "textBox10");
+            this.textBox10.Name = "textBox10";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // textBox11
+            // 
+            resources.ApplyResources(this.textBox11, "textBox11");
+            this.textBox11.Name = "textBox11";
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
+            // 
             // WaterModelingForm
             // 
             this.AcceptButton = this.ok;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.dryBedPanel);
             this.Controls.Add(this.groupBox9);
-            this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.roughnessPanel);
             this.Controls.Add(this.setting3dPanel);
             this.Controls.Add(this.mainPanel);
@@ -1034,25 +1010,23 @@
             this.flowTypeGroup.ResumeLayout(false);
             this.flowTypeGroup.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.secFlowEffectGrp.ResumeLayout(false);
+            this.secFlowEffectGrp.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
+            this.highSandContentEffectGrp.ResumeLayout(false);
+            this.highSandContentEffectGrp.PerformLayout();
+            this.dryBedEffectGrp.ResumeLayout(false);
+            this.dryBedEffectGrp.PerformLayout();
+            this.immersedBoundaryGrp.ResumeLayout(false);
+            this.immersedBoundaryGrp.PerformLayout();
             this.mainPanel.ResumeLayout(false);
-            this.groupBox14.ResumeLayout(false);
-            this.groupBox14.PerformLayout();
+            this.diffusionEffectGrp.ResumeLayout(false);
+            this.diffusionEffectGrp.PerformLayout();
             this.valueParamPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1081,11 +1055,11 @@
         #endregion
 
         private System.Windows.Forms.GroupBox flowTypeGroup;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox secFlowEffectGrp;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox highSandContentEffectGrp;
+        private System.Windows.Forms.GroupBox dryBedEffectGrp;
+        private System.Windows.Forms.GroupBox immersedBoundaryGrp;
         private System.Windows.Forms.Label setting;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.WebBrowser comment;
@@ -1122,28 +1096,15 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button propStratBtn;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.Label label7;
@@ -1181,9 +1142,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button physicalParamBtn;
         private System.Windows.Forms.RadioButton ksRadio;
-        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.GroupBox diffusionEffectGrp;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox textBox16;
@@ -1198,5 +1158,17 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox ksTxt;
         private System.Windows.Forms.Button ksHelpBtn;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox textBox11;
     }
 }

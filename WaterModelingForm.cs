@@ -33,7 +33,7 @@ namespace RiverSimulationApplication
             {
                 url += "/D1-1-1.html";
             }
-            else if(c==groupBox3)
+            else if(c==secFlowEffectGrp)
             {
                 url += "/D1-1-2.html";
             }
@@ -41,7 +41,7 @@ namespace RiverSimulationApplication
             {
                 url += "/D1-1-3.html";
             }
-            else if(c==groupBox5)
+            else if(c==highSandContentEffectGrp)
             {
                 url += "/D1-1-4.html";
             }
@@ -49,11 +49,11 @@ namespace RiverSimulationApplication
             //{
             //    url += "/D1-1-5.html";
             //}
-            else if(c==groupBox7)
+            else if(c==dryBedEffectGrp)
             {
                 url += "/D1-1-6.html";
             }
-            else if(c==groupBox8)
+            else if(c==immersedBoundaryGrp)
             {
                 url += "/D1-1-7.html";
             }
@@ -82,6 +82,12 @@ namespace RiverSimulationApplication
             dryBedPanel.Visible = false;
             immersionPanel.Visible = false;
             this.CenterToParent();
+
+            diffusionEffectGrp.Enabled = RiverSimulationProfile.profile.diffusionEffectFunction;
+            secFlowEffectGrp.Enabled = RiverSimulationProfile.profile.secFlowEffectFunction;
+            dryBedEffectGrp.Enabled = RiverSimulationProfile.profile.dryBedEffectFunction;
+            immersedBoundaryGrp.Enabled = RiverSimulationProfile.profile.immersedBoundaryFunction;
+            highSandContentEffectGrp.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
         }
 
 
@@ -95,19 +101,19 @@ namespace RiverSimulationApplication
             Button orgBtn = sender as Button;
             if (orgBtn == valueParamBtn)
             {
-                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToLeft, this.ClientSize);
+                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight, this.ClientSize);
             }
             //else if (orgBtn == setting3dBtn)
             //{
-            //    sp.SlidePanel(setting3dPanel, SliderPanel.Direction.ToLeft);
+            //    sp.SlidePanel(setting3dPanel, SliderPanel.Direction.ToRight);
             //}
             //else if (orgBtn == roughnessBtn)
             //{
-            //    sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToLeft);
+            //    sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToRight);
             //}
             else if (orgBtn == physicalParamBtn)
             {
-                sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToLeft, this.ClientSize);
+                sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToRight, this.ClientSize);
             }
             //else if (orgBtn == dryBedBtn)
             //{
@@ -293,6 +299,11 @@ namespace RiverSimulationApplication
             {
 
             }
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
         }
 
 

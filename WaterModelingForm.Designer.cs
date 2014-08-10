@@ -52,12 +52,16 @@
             this.manningRdo = new System.Windows.Forms.RadioButton();
             this.dryBedEffectGrp = new System.Windows.Forms.GroupBox();
             this.dryBedBtn = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.textBox10 = new System.Windows.Forms.TextBox();
             this.dryBedNumTxt = new System.Windows.Forms.TextBox();
             this.immersedBoundaryGrp = new System.Windows.Forms.GroupBox();
             this.immersedBoundaryBtn = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.immersedBoundaryNumTxt = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
             this.setting = new System.Windows.Forms.Label();
             this.ok = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
@@ -67,12 +71,18 @@
             this.valueParamBackBtn = new System.Windows.Forms.Button();
             this.valueParamPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.twinEquationCombo = new System.Windows.Forms.ComboBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.zeroEquationRdo = new System.Windows.Forms.RadioButton();
             this.twinEquationRdo = new System.Windows.Forms.RadioButton();
             this.zeroEquationCombo = new System.Windows.Forms.ComboBox();
             this.SingleEquationRdo = new System.Windows.Forms.RadioButton();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -80,6 +90,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -109,9 +121,6 @@
             this.ksRadio = new System.Windows.Forms.RadioButton();
             this.label12 = new System.Windows.Forms.Label();
             this.turbulenceBackBtn = new System.Windows.Forms.Button();
-            this.dryBedPanel = new System.Windows.Forms.Panel();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.dryBedBackBtn = new System.Windows.Forms.Button();
             this.roughnessPanel = new System.Windows.Forms.Panel();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -133,18 +142,6 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.roughnessBackBtn = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.secFlowEffectGrp.SuspendLayout();
@@ -164,7 +161,6 @@
             this.physicalParamPanel.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.dryBedPanel.SuspendLayout();
             this.roughnessPanel.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -345,10 +341,20 @@
             this.dryBedBtn.UseVisualStyleBackColor = true;
             this.dryBedBtn.Click += new System.EventHandler(this.dryBedBtn_Click);
             // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
             // label20
             // 
             resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
+            // 
+            // textBox10
+            // 
+            resources.ApplyResources(this.textBox10, "textBox10");
+            this.textBox10.Name = "textBox10";
             // 
             // dryBedNumTxt
             // 
@@ -374,6 +380,11 @@
             this.immersedBoundaryBtn.UseVisualStyleBackColor = true;
             this.immersedBoundaryBtn.Click += new System.EventHandler(this.immersedBoundaryBtn_Click);
             // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
+            // 
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
@@ -383,6 +394,11 @@
             // 
             resources.ApplyResources(this.immersedBoundaryNumTxt, "immersedBoundaryNumTxt");
             this.immersedBoundaryNumTxt.Name = "immersedBoundaryNumTxt";
+            // 
+            // textBox11
+            // 
+            resources.ApplyResources(this.textBox11, "textBox11");
+            this.textBox11.Name = "textBox11";
             // 
             // setting
             // 
@@ -462,6 +478,21 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
+            // textBox9
+            // 
+            resources.ApplyResources(this.textBox9, "textBox9");
+            this.textBox9.Name = "textBox9";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -483,6 +514,14 @@
             this.twinEquationCombo.Items.AddRange(new object[] {
             resources.GetString("twinEquationCombo.Items")});
             this.twinEquationCombo.Name = "twinEquationCombo";
+            // 
+            // radioButton1
+            // 
+            resources.ApplyResources(this.radioButton1, "radioButton1");
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.zeroEquationRdo_CheckedChanged);
             // 
             // zeroEquationRdo
             // 
@@ -519,6 +558,17 @@
             this.SingleEquationRdo.Name = "SingleEquationRdo";
             this.SingleEquationRdo.TabStop = true;
             this.SingleEquationRdo.UseVisualStyleBackColor = true;
+            // 
+            // textBox6
+            // 
+            resources.ApplyResources(this.textBox6, "textBox6");
+            this.textBox6.Name = "textBox6";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // panel5
             // 
@@ -561,6 +611,16 @@
             // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
             // 
             // panel4
             // 
@@ -752,26 +812,6 @@
             this.turbulenceBackBtn.UseVisualStyleBackColor = true;
             this.turbulenceBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
-            // dryBedPanel
-            // 
-            this.dryBedPanel.Controls.Add(this.groupBox11);
-            this.dryBedPanel.Controls.Add(this.dryBedBackBtn);
-            resources.ApplyResources(this.dryBedPanel, "dryBedPanel");
-            this.dryBedPanel.Name = "dryBedPanel";
-            // 
-            // groupBox11
-            // 
-            resources.ApplyResources(this.groupBox11, "groupBox11");
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.TabStop = false;
-            // 
-            // dryBedBackBtn
-            // 
-            resources.ApplyResources(this.dryBedBackBtn, "dryBedBackBtn");
-            this.dryBedBackBtn.Name = "dryBedBackBtn";
-            this.dryBedBackBtn.UseVisualStyleBackColor = true;
-            this.dryBedBackBtn.Click += new System.EventHandler(this.Back_Click);
-            // 
             // roughnessPanel
             // 
             this.roughnessPanel.Controls.Add(this.groupBox13);
@@ -924,78 +964,13 @@
             this.roughnessBackBtn.UseVisualStyleBackColor = true;
             this.roughnessBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
-            // radioButton1
-            // 
-            resources.ApplyResources(this.radioButton1, "radioButton1");
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.zeroEquationRdo_CheckedChanged);
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
-            // 
-            // textBox6
-            // 
-            resources.ApplyResources(this.textBox6, "textBox6");
-            this.textBox6.Name = "textBox6";
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
-            // textBox9
-            // 
-            resources.ApplyResources(this.textBox9, "textBox9");
-            this.textBox9.Name = "textBox9";
-            // 
-            // textBox10
-            // 
-            resources.ApplyResources(this.textBox10, "textBox10");
-            this.textBox10.Name = "textBox10";
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // textBox11
-            // 
-            resources.ApplyResources(this.textBox11, "textBox11");
-            this.textBox11.Name = "textBox11";
-            // 
-            // label24
-            // 
-            resources.ApplyResources(this.label24, "label24");
-            this.label24.Name = "label24";
-            // 
             // WaterModelingForm
             // 
             this.AcceptButton = this.ok;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.physicalParamPanel);
-            this.Controls.Add(this.dryBedPanel);
+            this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.roughnessPanel);
             this.Controls.Add(this.setting3dPanel);
@@ -1038,7 +1013,6 @@
             this.groupBox10.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.dryBedPanel.ResumeLayout(false);
             this.roughnessPanel.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
@@ -1075,12 +1049,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel setting3dPanel;
         private System.Windows.Forms.Panel physicalParamPanel;
-        private System.Windows.Forms.Panel dryBedPanel;
         private System.Windows.Forms.Panel immersionPanel;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.Button immersionBackBtn;
-        private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.Button dryBedBackBtn;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button turbulenceBackBtn;
         private System.Windows.Forms.GroupBox groupBox9;

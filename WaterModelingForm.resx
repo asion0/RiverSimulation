@@ -205,7 +205,7 @@
     <value>17, 17</value>
   </data>
   <data name="valueParamBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 32</value>
+    <value>352, 32</value>
   </data>
   <data name="valueParamBtn.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -361,7 +361,7 @@
     <value>17, 18</value>
   </data>
   <data name="physicalParamBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 32</value>
+    <value>352, 32</value>
   </data>
   <data name="physicalParamBtn.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -964,7 +964,7 @@
     <value>522, 253</value>
   </data>
   <data name="setting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 524</value>
+    <value>450, 419</value>
   </data>
   <data name="setting.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -982,13 +982,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;setting.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="ok.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>876, 802</value>
+    <value>876, 697</value>
   </data>
   <data name="ok.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 32</value>
@@ -1009,7 +1009,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ok.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="comment.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1036,7 +1036,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comment.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="checkBox2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1108,7 +1108,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mainPanel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="valueParamBackBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -2041,7 +2041,7 @@
     <value>0</value>
   </data>
   <data name="valueParamPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>181, 701</value>
+    <value>181, 34</value>
   </data>
   <data name="valueParamPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 670</value>
@@ -2059,7 +2059,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueParamPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="setting3dBackBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -2179,7 +2179,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;setting3dPanel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 770</value>
@@ -2203,7 +2203,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2233,7 +2233,7 @@
     <value>0</value>
   </data>
   <data name="textBox16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 187</value>
+    <value>75, 206</value>
   </data>
   <data name="textBox16.MaxLength" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2257,7 +2257,7 @@
     <value>1</value>
   </data>
   <data name="textBox15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 157</value>
+    <value>75, 176</value>
   </data>
   <data name="textBox15.MaxLength" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2287,7 +2287,7 @@
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 190</value>
+    <value>22, 209</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 12</value>
@@ -2401,7 +2401,7 @@
     <value>16, 38</value>
   </data>
   <data name="panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 104</value>
+    <value>438, 104</value>
   </data>
   <data name="panel8.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2425,7 +2425,7 @@
     <value>NoControl</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 160</value>
+    <value>14, 179</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 12</value>
@@ -2503,7 +2503,7 @@
     <value>1</value>
   </data>
   <data name="physicalParamPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 676</value>
+    <value>215, 13</value>
   </data>
   <data name="physicalParamPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 669</value>
@@ -2521,79 +2521,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;physicalParamPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 13</value>
-  </data>
-  <data name="groupBox11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 607</value>
-  </data>
-  <data name="groupBox11.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="groupBox11.Text" xml:space="preserve">
-    <value>乾床處理</value>
-  </data>
-  <data name="&gt;&gt;groupBox11.Name" xml:space="preserve">
-    <value>groupBox11</value>
-  </data>
-  <data name="&gt;&gt;groupBox11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox11.Parent" xml:space="preserve">
-    <value>dryBedPanel</value>
-  </data>
-  <data name="&gt;&gt;groupBox11.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="dryBedBackBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="dryBedBackBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 629</value>
-  </data>
-  <data name="dryBedBackBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 32</value>
-  </data>
-  <data name="dryBedBackBtn.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="dryBedBackBtn.Text" xml:space="preserve">
-    <value>前一頁</value>
-  </data>
-  <data name="&gt;&gt;dryBedBackBtn.Name" xml:space="preserve">
-    <value>dryBedBackBtn</value>
-  </data>
-  <data name="&gt;&gt;dryBedBackBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dryBedBackBtn.Parent" xml:space="preserve">
-    <value>dryBedPanel</value>
-  </data>
-  <data name="&gt;&gt;dryBedBackBtn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="dryBedPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 722</value>
-  </data>
-  <data name="dryBedPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 670</value>
-  </data>
-  <data name="dryBedPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;dryBedPanel.Name" xml:space="preserve">
-    <value>dryBedPanel</value>
-  </data>
-  <data name="&gt;&gt;dryBedPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dryBedPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dryBedPanel.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3106,7 +3034,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;roughnessPanel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3115,10 +3043,7 @@
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>984, 846</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>984, 741</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

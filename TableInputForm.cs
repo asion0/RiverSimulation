@@ -96,7 +96,7 @@ namespace RiverSimulationApplication
 
         private void TableInputForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MessageBox.Show("超過合理範圍：0.009~0.125", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //MessageBox.Show("超過合理範圍：0.009~0.125", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
     }

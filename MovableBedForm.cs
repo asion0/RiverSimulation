@@ -26,17 +26,21 @@ namespace RiverSimulationApplication
             {
                 sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight, this.Size);
             }
-            //else if (orgBtn == setting3dBtn)
-            //{
-            //    sp.SlidePanel(setting3dPanel, SliderPanel.Direction.ToRight);
-            //}
-            else if (orgBtn == fluidTypeBtn)
+            else if (orgBtn == physicalParamBtn)
             {
-                sp.SlidePanel(fluidTypePanel, SliderPanel.Direction.ToRight, this.Size);
+                sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToRight, this.Size);
             }
+            //else if (orgBtn == fluidTypeBtn)
+            //{
+            //    sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToRight, this.Size);
+            //}
             else if (orgBtn == seabedCompositionBtn)
             {
                 sp.SlidePanel(seabedCompositionPanel, SliderPanel.Direction.ToRight, this.Size);
+            }
+            else if (orgBtn == rockbedBtn)
+            {
+                sp.SlidePanel(rockbedPanel, SliderPanel.Direction.ToRight, this.Size);
             }
             else if (orgBtn == rockStableBtn)
             {
@@ -54,13 +58,18 @@ namespace RiverSimulationApplication
             //string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             //comment.Navigate(new Uri(url));
 
-            this.Width = 912;
+            this.Width = 1000;
             this.Height = 720;
             valueParamPanel.Visible = false;
-            fluidTypePanel.Visible = false;
+            physicalParamPanel.Visible = false;
             seabedCompositionPanel.Visible = false;
             rockStablePanel.Visible = false;
+            rockbedPanel.Visible = false;
             this.CenterToParent();
+
+            this.bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
+            this.quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
+            this.highSandContentFlowGrp.Enabled = RiverSimulationProfile.profile.highSandContentFlowFunction;
         }
 
         private void Back_Click(object sender, EventArgs e)
@@ -74,49 +83,45 @@ namespace RiverSimulationApplication
             this.Close();
         }
 
-        private void normalSandyFlowPanel_EnabledChanged(object sender, EventArgs e)
-        {
-            bool ebd = (sender as Panel).Enabled;
-            selTranSandEquChk.Enabled = ebd;
-            if (ebd)
-                tranSandEquCombo.Enabled = selTranSandEquChk.Checked;
-            else
-                tranSandEquCombo.Enabled = ebd; 
+        //private void normalSandyFlowPanel_EnabledChanged(object sender, EventArgs e)
+        //{
+        //    bool ebd = (sender as Panel).Enabled;
+        //    selTranSandEquChk.Enabled = ebd;
+        //    if (ebd)
+        //        tranSandEquCombo.Enabled = selTranSandEquChk.Checked;
+        //    else
+        //        tranSandEquCombo.Enabled = ebd; 
 
-        }
+        //}
 
-        private void highSandyFlowPanel_EnabledChanged(object sender, EventArgs e)
-        {
-            bool ebd = (sender as Panel).Enabled;
-            selExpandEquChk.Enabled = ebd;
-            if (ebd)
-                expandEquCombo.Enabled = selExpandEquChk.Checked;
-            else
-                expandEquCombo.Enabled = ebd;
-        }
+        //private void highSandyFlowPanel_EnabledChanged(object sender, EventArgs e)
+        //{
+        //    bool ebd = (sender as Panel).Enabled;
+        //    selExpandEquChk.Enabled = ebd;
+        //    if (ebd)
+        //        expandEquCombo.Enabled = selExpandEquChk.Checked;
+        //    else
+        //        expandEquCombo.Enabled = ebd;
+        //}
 
         private void normalSandyFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as RadioButton).Checked;
-            normalSandyFlowPanel.Enabled = chk;
+
         }
 
         private void highSandyFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as RadioButton).Checked;
-            highSandyFlowPanel.Enabled = chk;
+
         }
 
         private void selTranSandEquChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            tranSandEquCombo.Enabled = chk;
+
         }
 
         private void selExpandEquChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            expandEquCombo.Enabled = chk;
+
         }
 
         private void sedimentParticleSizeBtn_Click(object sender, EventArgs e)
@@ -146,35 +151,35 @@ namespace RiverSimulationApplication
 
         }
 
-        private void bedrockRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as RadioButton).Checked;
-            if (chk)
-            {
-                if (erosionMechanismsChk.Checked)
-                {
-                    erosionMechanismsChk.Checked = false;
-                    erosionMechanismsChk.Checked = true;
-                }
-            }
-            else
-            {
-                waterErosionChk.Enabled = false;
-                criticalShearStressBtn.Enabled = false;
-                sedimentErosionChk.Enabled = false;
-                elasticityBtn.Enabled = false;
-                tensileStrengthBtn.Enabled = false;
-            }
-            bedrockElevationBtn.Enabled = chk;
-            erosionMechanismsChk.Enabled = chk;
-        }
+        //private void bedrockRdo_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    bool chk = (sender as RadioButton).Checked;
+        //    if (chk)
+        //    {
+        //        if (erosionMechanismsChk.Checked)
+        //        {
+        //            erosionMechanismsChk.Checked = false;
+        //            erosionMechanismsChk.Checked = true;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        waterErosionChk.Enabled = false;
+        //        criticalShearStressBtn.Enabled = false;
+        //        sedimentErosionChk.Enabled = false;
+        //        elasticityBtn.Enabled = false;
+        //        tensileStrengthBtn.Enabled = false;
+        //    }
+        //    bedrockElevationBtn.Enabled = chk;
+        //    erosionMechanismsChk.Enabled = chk;
+        //}
 
 
         private void erosionMechanismsChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
 
-            if(chk)
+            if (chk)
             {
                 if (waterErosionChk.Checked)
                 {
@@ -194,7 +199,7 @@ namespace RiverSimulationApplication
                 tensileStrengthBtn.Enabled = false;
             }
             waterErosionChk.Enabled = chk;
-            sedimentErosionChk.Enabled = chk;          
+            sedimentErosionChk.Enabled = chk;
         }
 
         private void sedimentErosionChk_CheckedChanged(object sender, EventArgs e)
@@ -382,6 +387,69 @@ namespace RiverSimulationApplication
             diffusionEquationCombo.Enabled = chk;
         }
 
+        private void selTransSandMethodChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            selTransSandMethodCombo.Enabled = chk;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void alluviumChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            alluviumPanel.Enabled = chk;
+        }
+
+        private void alluviumPanel_EnabledChanged(object sender, EventArgs e)
+        {
+            bool eab = (sender as Panel).Enabled;
+            seabedCompositionChk.Enabled = eab;
+            noScourElevationBtn.Enabled = eab;
+        }
+
+        private void bedrockChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            rockbedPanel2.Enabled = chk;
+        }
+
+        private void rockbedPanel2_EnabledChanged(object sender, EventArgs e)
+        {
+            bool eab = (sender as Panel).Enabled;
+            bedrockErosionMechanismChk.Enabled = eab;
+            bedrockElevationBtn.Enabled = eab;
+        }
+
+        private void analysisPositionChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            analysisPositionPanel.Enabled = chk;
+        }
+
+        private void infiltrationEffectChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            infiltrationEffectPanel.Enabled = chk;
+
+        }
+
+        private void quayGeometryChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            quayGeometryPanel.Enabled = chk;
+
+        }
+
+        private void quaySoilPropertiesChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            quaySoilPropertiesPanel.Enabled = chk;
+
+        }
  
 
 

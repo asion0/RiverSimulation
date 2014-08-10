@@ -49,11 +49,11 @@ namespace RiverSimulationApplication
 
         private void simulationModuleBtn_Click(object sender, EventArgs e)
         {
-            if(!RiverSimulationProfile.profile.IsSimulationModuleReady())
-            {
-                MessageBox.Show("請先完成前置設定", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+            //if(!RiverSimulationProfile.profile.IsSimulationModuleReady())
+            //{
+            //    MessageBox.Show("請先完成前置設定", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    return;
+            //}
 
             SimulationModuleForm form = new SimulationModuleForm();
             if (DialogResult.OK == form.ShowDialog())
@@ -66,6 +66,12 @@ namespace RiverSimulationApplication
 
         private void importBtn_Click(object sender, EventArgs e)
         {
+            if (!RiverSimulationProfile.profile.IsImportReady())
+            {
+                MessageBox.Show("請先完成前置設定", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            } 
+            
             ImportForm form = new ImportForm();
             if (DialogResult.OK == form.ShowDialog())
             {
@@ -125,6 +131,7 @@ namespace RiverSimulationApplication
             RiverSimulationProfile.profile.boundaryConditionsFinished = true;
             UpdateStatus();
         }
+
         private void UpdateStatus()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
@@ -136,14 +143,14 @@ namespace RiverSimulationApplication
             sampleReadyBtn.BackColor = ReadyButton;
             sampleDisableBtn.BackColor = DisableButton;
 
-            importBtn.BackColor = (p.IsImportFinished()) ? FinishedButton : (p.IsImportReady()) ? ReadyButton : DisableButton;
-            //importBtn.Enabled = p.IsImportReady();
+            //importBtn.BackColor = (p.IsImportFinished()) ? FinishedButton : (p.IsImportReady()) ? ReadyButton : DisableButton;
+            //simulationModuleBtn.BackColor = (p.IsSimulationModuleFinished()) ? FinishedButton : (p.IsSimulationModuleReady()) ? ReadyButton : DisableButton;
 
             simulationModuleBtn.BackColor = (p.IsSimulationModuleFinished()) ? FinishedButton : (p.IsSimulationModuleReady()) ? ReadyButton : DisableButton;
-            //simulationModuleBtn.Enabled = p.IsSimulationModuleReady();
+
+            importBtn.BackColor = (p.IsImportFinished()) ? FinishedButton : (p.IsImportReady()) ? ReadyButton : DisableButton;
 
             waterModelingBtn.BackColor = (p.IsWaterModelingFinished()) ? FinishedButton : (p.IsWaterModelingReady()) ? ReadyButton : DisableButton;
-            //waterModelingBtn.Enabled = p.IsWaterModelingReady();
 
             movableBedBtn.BackColor = (p.IsMovableBedFinished()) ? FinishedButton : (p.IsMovableBedReady()) ? ReadyButton : DisableButton;
            //movableBedBtn.Enabled = p.IsMovableBedReady();
@@ -165,7 +172,10 @@ namespace RiverSimulationApplication
         {
             if (!RiverSimulationProfile.profile.IsRunSimulationReady())
             {
-                MessageBox.Show("請先完成前置設定", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                String errStr = "尚有參數尚未完成：\r\n" +
+                                "水理參數 - 物理參數尚未設定！";
+
+                MessageBox.Show(errStr, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

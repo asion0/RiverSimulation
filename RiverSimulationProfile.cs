@@ -16,23 +16,23 @@ namespace RiverSimulationApplication
         }
 
         public bool IsImportFinished() 
-        { 
-            return importFinished; 
+        {
+            return importFinished;
         }
 
         public bool IsImportReady() 
-        { 
-            return true; 
+        {
+            return moduleType1 != ModuleType1.NoSelect && moduleType2 != ModuleType2.NoSelect;
         }
 
         public bool IsSimulationModuleFinished() 
-        { 
-            return moduleType1 != ModuleType1.NoSelect && moduleType2 != ModuleType2.NoSelect; 
+        {
+            return moduleType1 != ModuleType1.NoSelect && moduleType2 != ModuleType2.NoSelect;
         }
 
         public bool IsSimulationModuleReady() 
-        { 
-            return importFinished; 
+        {
+            return true;
         }
 
         public bool IsWaterModelingFinished() 
@@ -41,8 +41,8 @@ namespace RiverSimulationApplication
         }
 
         public bool IsWaterModelingReady() 
-        { 
-            return IsSimulationModuleFinished(); 
+        {
+            return IsImportFinished(); 
         }
 
         public bool IsMovableBedFinished() 
@@ -52,7 +52,7 @@ namespace RiverSimulationApplication
 
         public bool IsMovableBedReady() 
         { 
-            return IsSimulationModuleFinished() && moduleType2 == ModuleType2.MovableBed;
+            return IsImportFinished() && moduleType2 == ModuleType2.MovableBed;
         }
 
         public bool IsInitialConditionsFinished() 

@@ -19,15 +19,15 @@ namespace RiverSimulationApplication
 
         private void ImportTableForm_Load(object sender, EventArgs e)
         {
-            InitializeDataGridView(dataGridViewX);
-            InitializeDataGridView(dataGridViewY);
-            InitializeDataGridView(dataGridViewZ);
+            //InitializeDataGridView(dataGridViewX);
+            //InitializeDataGridView(dataGridViewY);
+            //InitializeDataGridView(dataGridViewZ);
         }
 
-        private void InitializeDataGridView(DataGridView g)
+        private void InitializeDataGridView(DataGridView g, int xNum, int yNum)
         {
-            int columnCount = 26;
-            int rowCount = 50;
+            int columnCount = xNum;
+            int rowCount = yNum;
             // Create an unbound DataGridView by declaring a column count.
             g.ColumnCount = columnCount;
             g.ColumnHeadersVisible = true;
@@ -41,7 +41,7 @@ namespace RiverSimulationApplication
 
             string[] row = new string[columnCount];
             // Set the column header names.
-            char c = 'A';
+            int c = 1;
             for (int i = 0; i < columnCount; ++i)
             {
                 g.Columns[i].Name = c.ToString();
@@ -58,6 +58,27 @@ namespace RiverSimulationApplication
             {
                 g.Rows.Add(row);
                 g.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+        }
+
+        private void GridNum_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generateGridBtn_Click(object sender, EventArgs e)
+        {
+            int xNum = Convert.ToInt32(xGridNum.Text);
+            int yNum = Convert.ToInt32(yGridNum.Text);
+
+            if (xNum > 0 && yNum > 0)
+            {
+                InitializeDataGridView(dataGridViewX, xNum, yNum);
+                InitializeDataGridView(dataGridViewY, xNum, yNum);
+                InitializeDataGridView(dataGridViewZ, xNum, yNum);
+
+                tabControl.Enabled = true;
+
             }
         }
 

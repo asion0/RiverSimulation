@@ -23,11 +23,11 @@ namespace RiverSimulationApplication
             Button orgBtn = sender as Button;
             if (orgBtn == waterModelingBtn)
             {
-                sp.SlidePanel(waterModelingPanel, SliderPanel.Direction.ToLeft, this.ClientSize);
+                sp.SlidePanel(waterModelingPanel, SliderPanel.Direction.ToRight, this.ClientSize);
             }
             else if (orgBtn == moveableBedBtn)
             {
-                sp.SlidePanel(moveableBedPanel, SliderPanel.Direction.ToLeft, this.ClientSize);
+                sp.SlidePanel(moveableBedPanel, SliderPanel.Direction.ToRight, this.ClientSize);
             }
         }
 
@@ -41,11 +41,16 @@ namespace RiverSimulationApplication
             //string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             //comment.Navigate(new Uri(url));
 
-            this.Width = 912;
+            this.Width = 1000;
             this.Height = 720;
             waterModelingPanel.Visible = false;
             moveableBedPanel.Visible = false;
             this.CenterToParent();
+
+            waterSurfacePanel.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
+            bottomBedPanel.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
+            bottomBedPanel2.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
+            sideInOutFlowPanel.Enabled = RiverSimulationProfile.profile.sideInOutFlowFunction;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -341,6 +346,11 @@ namespace RiverSimulationApplication
             {
 
             }
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         

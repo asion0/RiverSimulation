@@ -38,8 +38,11 @@
             this.noBgRdo = new System.Windows.Forms.RadioButton();
             this.selectBgRdo = new System.Windows.Forms.RadioButton();
             this.useGoogleBgRdo = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
-            this.inputFilePath = new System.Windows.Forms.Label();
             this.inputFileBtn = new System.Windows.Forms.Button();
             this.inputGridBtn = new System.Windows.Forms.Button();
             this.runExcelBtn = new System.Windows.Forms.Button();
@@ -48,8 +51,13 @@
             this.inputFileRdo = new System.Windows.Forms.RadioButton();
             this.inputFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.selectBgDlg = new System.Windows.Forms.OpenFileDialog();
+            this.inputFilePath = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SeparateNumTxt = new System.Windows.Forms.TextBox();
+            this.separateProportionBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,6 +98,7 @@
             // mainPanel
             // 
             this.mainPanel.Controls.Add(this.groupBox1);
+            this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Controls.Add(this.flowTypeGroup);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
@@ -103,12 +112,12 @@
             this.groupBox1.Controls.Add(this.noBgRdo);
             this.groupBox1.Controls.Add(this.selectBgRdo);
             this.groupBox1.Controls.Add(this.useGoogleBgRdo);
-            this.groupBox1.Location = new System.Drawing.Point(12, 254);
+            this.groupBox1.Location = new System.Drawing.Point(12, 305);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(366, 186);
+            this.groupBox1.Size = new System.Drawing.Size(366, 177);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "匯入航拍圖檔";
+            this.groupBox1.Text = "底圖設定";
             // 
             // selectBgFilePath
             // 
@@ -134,10 +143,10 @@
             this.noBgRdo.Checked = true;
             this.noBgRdo.Location = new System.Drawing.Point(17, 30);
             this.noBgRdo.Name = "noBgRdo";
-            this.noBgRdo.Size = new System.Drawing.Size(83, 16);
+            this.noBgRdo.Size = new System.Drawing.Size(59, 16);
             this.noBgRdo.TabIndex = 0;
             this.noBgRdo.TabStop = true;
-            this.noBgRdo.Text = "不使用底圖";
+            this.noBgRdo.Text = "不使用";
             this.noBgRdo.UseVisualStyleBackColor = true;
             this.noBgRdo.CheckedChanged += new System.EventHandler(this.noBgRdo_CheckedChanged);
             // 
@@ -157,35 +166,68 @@
             this.useGoogleBgRdo.AutoSize = true;
             this.useGoogleBgRdo.Location = new System.Drawing.Point(17, 60);
             this.useGoogleBgRdo.Name = "useGoogleBgRdo";
-            this.useGoogleBgRdo.Size = new System.Drawing.Size(117, 16);
+            this.useGoogleBgRdo.Size = new System.Drawing.Size(81, 16);
             this.useGoogleBgRdo.TabIndex = 0;
-            this.useGoogleBgRdo.Text = "由Google地圖取得";
+            this.useGoogleBgRdo.Text = "Google地圖";
             this.useGoogleBgRdo.UseVisualStyleBackColor = true;
             this.useGoogleBgRdo.CheckedChanged += new System.EventHandler(this.useGoogleBgRdo_CheckedChanged);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(366, 144);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "格網產生程式";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(17, 102);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(130, 26);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "國網";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(17, 61);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(130, 26);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "SMS";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(17, 21);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(130, 26);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "CCHE-Mesh";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
             // flowTypeGroup
             // 
-            this.flowTypeGroup.Controls.Add(this.inputFilePath);
+            this.flowTypeGroup.Controls.Add(this.separateProportionBtn);
+            this.flowTypeGroup.Controls.Add(this.SeparateNumTxt);
+            this.flowTypeGroup.Controls.Add(this.label1);
             this.flowTypeGroup.Controls.Add(this.inputFileBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridBtn);
             this.flowTypeGroup.Controls.Add(this.runExcelBtn);
             this.flowTypeGroup.Controls.Add(this.runCcheMeshBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridRdo);
             this.flowTypeGroup.Controls.Add(this.inputFileRdo);
-            this.flowTypeGroup.Location = new System.Drawing.Point(12, 11);
+            this.flowTypeGroup.Location = new System.Drawing.Point(12, 162);
             this.flowTypeGroup.Name = "flowTypeGroup";
-            this.flowTypeGroup.Size = new System.Drawing.Size(366, 227);
+            this.flowTypeGroup.Size = new System.Drawing.Size(366, 137);
             this.flowTypeGroup.TabIndex = 0;
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "計算網格來源";
-            // 
-            // inputFilePath
-            // 
-            this.inputFilePath.Enabled = false;
-            this.inputFilePath.Location = new System.Drawing.Point(31, 54);
-            this.inputFilePath.Name = "inputFilePath";
-            this.inputFilePath.Size = new System.Drawing.Size(303, 56);
-            this.inputFilePath.TabIndex = 3;
             // 
             // inputFileBtn
             // 
@@ -196,47 +238,52 @@
             this.inputFileBtn.TabIndex = 1;
             this.inputFileBtn.Text = "選取檔案";
             this.inputFileBtn.UseVisualStyleBackColor = true;
+            this.inputFileBtn.Visible = false;
             this.inputFileBtn.Click += new System.EventHandler(this.inputFileBtn_Click);
             // 
             // inputGridBtn
             // 
             this.inputGridBtn.Enabled = false;
-            this.inputGridBtn.Location = new System.Drawing.Point(106, 113);
+            this.inputGridBtn.Location = new System.Drawing.Point(106, 62);
             this.inputGridBtn.Name = "inputGridBtn";
             this.inputGridBtn.Size = new System.Drawing.Size(75, 26);
             this.inputGridBtn.TabIndex = 1;
             this.inputGridBtn.Text = "輸入格網";
             this.inputGridBtn.UseVisualStyleBackColor = true;
+            this.inputGridBtn.Visible = false;
             this.inputGridBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
             // 
             // runExcelBtn
             // 
-            this.runExcelBtn.Location = new System.Drawing.Point(17, 187);
+            this.runExcelBtn.Enabled = false;
+            this.runExcelBtn.Location = new System.Drawing.Point(230, 25);
             this.runExcelBtn.Name = "runExcelBtn";
             this.runExcelBtn.Size = new System.Drawing.Size(130, 26);
             this.runExcelBtn.TabIndex = 1;
             this.runExcelBtn.Text = "執行Excel";
             this.runExcelBtn.UseVisualStyleBackColor = true;
+            this.runExcelBtn.Visible = false;
             this.runExcelBtn.Click += new System.EventHandler(this.runExcel_Click);
             // 
             // runCcheMeshBtn
             // 
-            this.runCcheMeshBtn.Location = new System.Drawing.Point(17, 150);
+            this.runCcheMeshBtn.Location = new System.Drawing.Point(230, 62);
             this.runCcheMeshBtn.Name = "runCcheMeshBtn";
             this.runCcheMeshBtn.Size = new System.Drawing.Size(130, 26);
             this.runCcheMeshBtn.TabIndex = 1;
             this.runCcheMeshBtn.Text = "執行CCHE-Mesh";
             this.runCcheMeshBtn.UseVisualStyleBackColor = true;
+            this.runCcheMeshBtn.Visible = false;
             this.runCcheMeshBtn.Click += new System.EventHandler(this.runCcheMeshBtn_Click);
             // 
             // inputGridRdo
             // 
             this.inputGridRdo.AutoSize = true;
-            this.inputGridRdo.Location = new System.Drawing.Point(17, 118);
+            this.inputGridRdo.Location = new System.Drawing.Point(17, 67);
             this.inputGridRdo.Name = "inputGridRdo";
             this.inputGridRdo.Size = new System.Drawing.Size(71, 16);
             this.inputGridRdo.TabIndex = 0;
-            this.inputGridRdo.Text = "自行輸入";
+            this.inputGridRdo.Text = "線上輸入";
             this.inputGridRdo.UseVisualStyleBackColor = true;
             this.inputGridRdo.CheckedChanged += new System.EventHandler(this.inputGridRdo_CheckedChanged);
             // 
@@ -260,12 +307,48 @@
             // 
             this.selectBgDlg.Filter = "所有檔案|*.*|Bmp檔案|*.bmp|PNG檔案|*.png|JPG檔案|*jpg";
             // 
+            // inputFilePath
+            // 
+            this.inputFilePath.Enabled = false;
+            this.inputFilePath.Location = new System.Drawing.Point(409, 281);
+            this.inputFilePath.Name = "inputFilePath";
+            this.inputFilePath.Size = new System.Drawing.Size(456, 34);
+            this.inputFilePath.TabIndex = 3;
+            this.inputFilePath.Text = "匯入檔案";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 106);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 12);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "格網分層數目";
+            // 
+            // SeparateNumTxt
+            // 
+            this.SeparateNumTxt.Location = new System.Drawing.Point(106, 101);
+            this.SeparateNumTxt.Name = "SeparateNumTxt";
+            this.SeparateNumTxt.Size = new System.Drawing.Size(100, 22);
+            this.SeparateNumTxt.TabIndex = 3;
+            // 
+            // separateProportionBtn
+            // 
+            this.separateProportionBtn.Location = new System.Drawing.Point(230, 99);
+            this.separateProportionBtn.Name = "separateProportionBtn";
+            this.separateProportionBtn.Size = new System.Drawing.Size(130, 26);
+            this.separateProportionBtn.TabIndex = 4;
+            this.separateProportionBtn.Text = "分層比例";
+            this.separateProportionBtn.UseVisualStyleBackColor = true;
+            this.separateProportionBtn.Click += new System.EventHandler(this.separateProportionBtn_Click);
+            // 
             // ImportForm
             // 
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 682);
+            this.Controls.Add(this.inputFilePath);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.ok);
@@ -278,6 +361,7 @@
             this.mainPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.flowTypeGroup.ResumeLayout(false);
             this.flowTypeGroup.PerformLayout();
             this.ResumeLayout(false);
@@ -297,7 +381,6 @@
         private System.Windows.Forms.RadioButton selectBgRdo;
         private System.Windows.Forms.RadioButton useGoogleBgRdo;
         private System.Windows.Forms.GroupBox flowTypeGroup;
-        private System.Windows.Forms.Label inputFilePath;
         private System.Windows.Forms.Button inputFileBtn;
         private System.Windows.Forms.Button inputGridBtn;
         private System.Windows.Forms.Button runExcelBtn;
@@ -306,6 +389,14 @@
         private System.Windows.Forms.RadioButton inputFileRdo;
         private System.Windows.Forms.OpenFileDialog inputFileDlg;
         private System.Windows.Forms.OpenFileDialog selectBgDlg;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label inputFilePath;
+        private System.Windows.Forms.Button separateProportionBtn;
+        private System.Windows.Forms.TextBox SeparateNumTxt;
+        private System.Windows.Forms.Label label1;
 
     }
 }

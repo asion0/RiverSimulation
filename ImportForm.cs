@@ -25,28 +25,21 @@ namespace RiverSimulationApplication
 
         }
 
-        private void inputGridBtn_Click(object sender, EventArgs e)
-        {
-            ImportTableForm form = new ImportTableForm();
-
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-
-        }
-
         private void inputFileRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
             inputFileBtn.Enabled = chk;
             inputFilePath.Enabled = chk;
-        }
 
-        private void inputGridRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as RadioButton).Checked;
-            inputGridBtn.Enabled = chk;
+            if(chk)
+            {
+                //Auto select file.
+                DialogResult result = inputFileDlg.ShowDialog(); // Show the dialog.
+                if (result == DialogResult.OK) // Test result.
+                {
+                    inputFilePath.Text = inputFileDlg.FileName;
+                }
+            }
         }
 
         private void inputFileBtn_Click(object sender, EventArgs e)
@@ -56,6 +49,33 @@ namespace RiverSimulationApplication
             {
                 inputFilePath.Text = inputFileDlg.FileName;
             }
+        }
+
+        private void inputGridRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            inputGridBtn.Enabled = chk;
+
+            if(chk)
+            { 
+                //Auto show input form
+                ImportTableForm form = new ImportTableForm();
+                if (DialogResult.OK == form.ShowDialog())
+                {
+
+                }
+            }
+        }
+
+        private void inputGridBtn_Click(object sender, EventArgs e)
+        {
+            ImportTableForm form = new ImportTableForm();
+
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+
         }
 
         private void noBgRdo_CheckedChanged(object sender, EventArgs e)
@@ -195,6 +215,32 @@ namespace RiverSimulationApplication
             else
             {
                 MessageBox.Show("CCHE-Mesh doesn't install!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void separateProportionBtn_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            try
+            {
+                n = Convert.ToInt32(SeparateNumTxt.Text);
+            }
+            catch
+            {
+                n = -1;
+            }
+
+            if (n < 2)
+            {
+                MessageBox.Show("請輸入正確的數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(separateProportionBtn.Text, true, 1, n);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
             }
         }
     

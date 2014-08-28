@@ -20,6 +20,7 @@ namespace RiverSimulationApplication
         private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
             this.CenterToParent();
+            LoadStatus();
             UpdateStatus();
         }
 
@@ -31,6 +32,7 @@ namespace RiverSimulationApplication
             {
                 type3dRdo.Checked = !chk;
             }
+            UpdateStatus();
         }
 
         private void type3dRdo_CheckedChanged(object sender, EventArgs e)
@@ -41,6 +43,7 @@ namespace RiverSimulationApplication
             {
                 type2dRdo.Checked = !chk;
             }
+            UpdateStatus();
         }
 
         private void typeWaterModelingRdo_CheckedChanged(object sender, EventArgs e)
@@ -51,6 +54,7 @@ namespace RiverSimulationApplication
             {
                 typeMovableBedRdo.Checked = !chk;
             }
+
         }
 
         private void typeMovableBedRdo_CheckedChanged(object sender, EventArgs e)
@@ -70,7 +74,7 @@ namespace RiverSimulationApplication
             this.Close();
         }
 
-        private void UpdateStatus()
+        private void LoadStatus()
         {
             type2dRdo.Checked = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type2D) ? true : false;
             type3dRdo.Checked = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D) ? true : false;
@@ -89,6 +93,14 @@ namespace RiverSimulationApplication
             bedrockChk.Checked = RiverSimulationProfile.profile.bedrockFunction;
             quayStableAnalysisChk.Checked = RiverSimulationProfile.profile.quayStableAnalysisFunction;
             highSandContentFlowChk.Checked = RiverSimulationProfile.profile.highSandContentFlowFunction;
+        }
+
+        private void UpdateStatus()
+        {
+            secFlowEffectChk.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
+            movableBedPanel.Enabled = (RiverSimulationProfile.profile.GetModuleType2() == RiverSimulationProfile.ModuleType2.MovableBed);
+
+
         }
 
         private void diffusionEffectChk_CheckedChanged(object sender, EventArgs e)

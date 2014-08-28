@@ -43,6 +43,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
+            this.separateProportionBtn = new System.Windows.Forms.Button();
+            this.SeparateNumTxt = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.inputFileBtn = new System.Windows.Forms.Button();
             this.inputGridBtn = new System.Windows.Forms.Button();
             this.runExcelBtn = new System.Windows.Forms.Button();
@@ -52,9 +55,6 @@
             this.inputFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.selectBgDlg = new System.Windows.Forms.OpenFileDialog();
             this.inputFilePath = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SeparateNumTxt = new System.Windows.Forms.TextBox();
-            this.separateProportionBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -190,7 +190,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 26);
             this.button2.TabIndex = 1;
-            this.button2.Text = "國網";
+            this.button2.Text = "MeshLab";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -229,10 +229,36 @@
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "計算網格來源";
             // 
+            // separateProportionBtn
+            // 
+            this.separateProportionBtn.Location = new System.Drawing.Point(230, 99);
+            this.separateProportionBtn.Name = "separateProportionBtn";
+            this.separateProportionBtn.Size = new System.Drawing.Size(130, 26);
+            this.separateProportionBtn.TabIndex = 4;
+            this.separateProportionBtn.Text = "分層比例";
+            this.separateProportionBtn.UseVisualStyleBackColor = true;
+            this.separateProportionBtn.Click += new System.EventHandler(this.separateProportionBtn_Click);
+            // 
+            // SeparateNumTxt
+            // 
+            this.SeparateNumTxt.Location = new System.Drawing.Point(124, 100);
+            this.SeparateNumTxt.Name = "SeparateNumTxt";
+            this.SeparateNumTxt.Size = new System.Drawing.Size(100, 22);
+            this.SeparateNumTxt.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 106);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 12);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "垂向格網分層數目";
+            // 
             // inputFileBtn
             // 
             this.inputFileBtn.Enabled = false;
-            this.inputFileBtn.Location = new System.Drawing.Point(106, 25);
+            this.inputFileBtn.Location = new System.Drawing.Point(151, 25);
             this.inputFileBtn.Name = "inputFileBtn";
             this.inputFileBtn.Size = new System.Drawing.Size(75, 26);
             this.inputFileBtn.TabIndex = 1;
@@ -244,7 +270,7 @@
             // inputGridBtn
             // 
             this.inputGridBtn.Enabled = false;
-            this.inputGridBtn.Location = new System.Drawing.Point(106, 62);
+            this.inputGridBtn.Location = new System.Drawing.Point(151, 62);
             this.inputGridBtn.Name = "inputGridBtn";
             this.inputGridBtn.Size = new System.Drawing.Size(75, 26);
             this.inputGridBtn.TabIndex = 1;
@@ -281,9 +307,9 @@
             this.inputGridRdo.AutoSize = true;
             this.inputGridRdo.Location = new System.Drawing.Point(17, 67);
             this.inputGridRdo.Name = "inputGridRdo";
-            this.inputGridRdo.Size = new System.Drawing.Size(71, 16);
+            this.inputGridRdo.Size = new System.Drawing.Size(119, 16);
             this.inputGridRdo.TabIndex = 0;
-            this.inputGridRdo.Text = "線上輸入";
+            this.inputGridRdo.Text = "線上輸入水平格網";
             this.inputGridRdo.UseVisualStyleBackColor = true;
             this.inputGridRdo.CheckedChanged += new System.EventHandler(this.inputGridRdo_CheckedChanged);
             // 
@@ -292,9 +318,9 @@
             this.inputFileRdo.AutoSize = true;
             this.inputFileRdo.Location = new System.Drawing.Point(17, 30);
             this.inputFileRdo.Name = "inputFileRdo";
-            this.inputFileRdo.Size = new System.Drawing.Size(83, 16);
+            this.inputFileRdo.Size = new System.Drawing.Size(131, 16);
             this.inputFileRdo.TabIndex = 0;
-            this.inputFileRdo.Text = "由檔案匯入";
+            this.inputFileRdo.Text = "由檔案匯入水平格網";
             this.inputFileRdo.UseVisualStyleBackColor = true;
             this.inputFileRdo.CheckedChanged += new System.EventHandler(this.inputFileRdo_CheckedChanged);
             // 
@@ -316,32 +342,6 @@
             this.inputFilePath.TabIndex = 3;
             this.inputFilePath.Text = "匯入檔案";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 106);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "格網分層數目";
-            // 
-            // SeparateNumTxt
-            // 
-            this.SeparateNumTxt.Location = new System.Drawing.Point(106, 101);
-            this.SeparateNumTxt.Name = "SeparateNumTxt";
-            this.SeparateNumTxt.Size = new System.Drawing.Size(100, 22);
-            this.SeparateNumTxt.TabIndex = 3;
-            // 
-            // separateProportionBtn
-            // 
-            this.separateProportionBtn.Location = new System.Drawing.Point(230, 99);
-            this.separateProportionBtn.Name = "separateProportionBtn";
-            this.separateProportionBtn.Size = new System.Drawing.Size(130, 26);
-            this.separateProportionBtn.TabIndex = 4;
-            this.separateProportionBtn.Text = "分層比例";
-            this.separateProportionBtn.UseVisualStyleBackColor = true;
-            this.separateProportionBtn.Click += new System.EventHandler(this.separateProportionBtn_Click);
-            // 
             // ImportForm
             // 
             this.AcceptButton = this.ok;
@@ -356,7 +356,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ImportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "匯入";
+            this.Text = "計算格網";
             this.Load += new System.EventHandler(this.ImportForm_Load);
             this.mainPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

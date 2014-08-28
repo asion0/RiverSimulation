@@ -93,6 +93,7 @@
             // typeWaterModelingRdo
             // 
             this.typeWaterModelingRdo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.typeWaterModelingRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.typeWaterModelingRdo.Location = new System.Drawing.Point(33, 26);
             this.typeWaterModelingRdo.Name = "typeWaterModelingRdo";
             this.typeWaterModelingRdo.Size = new System.Drawing.Size(128, 96);
@@ -105,6 +106,7 @@
             // typeMovableBedRdo
             // 
             this.typeMovableBedRdo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.typeMovableBedRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.typeMovableBedRdo.Location = new System.Drawing.Point(246, 26);
             this.typeMovableBedRdo.Name = "typeMovableBedRdo";
             this.typeMovableBedRdo.Size = new System.Drawing.Size(128, 96);
@@ -128,6 +130,7 @@
             // type3dRdo
             // 
             this.type3dRdo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.type3dRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.type3dRdo.Location = new System.Drawing.Point(246, 26);
             this.type3dRdo.Name = "type3dRdo";
             this.type3dRdo.Size = new System.Drawing.Size(128, 96);
@@ -140,6 +143,7 @@
             // type2dRdo
             // 
             this.type2dRdo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.type2dRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.type2dRdo.Location = new System.Drawing.Point(33, 26);
             this.type2dRdo.Name = "type2dRdo";
             this.type2dRdo.Size = new System.Drawing.Size(128, 96);
@@ -318,7 +322,7 @@
             this.MinimizeBox = false;
             this.Name = "SimulationModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "模擬模組";
+            this.Text = "模擬功能";
             this.Load += new System.EventHandler(this.SimulationModuleForm_Load);
             this.mainPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

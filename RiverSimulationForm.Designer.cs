@@ -57,20 +57,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +79,8 @@
             // 
             this.movableBedBtn.BackColor = System.Drawing.Color.LimeGreen;
             this.movableBedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.movableBedBtn.Location = new System.Drawing.Point(497, 263);
+            this.movableBedBtn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.movableBedBtn.Location = new System.Drawing.Point(497, 250);
             this.movableBedBtn.Name = "movableBedBtn";
             this.movableBedBtn.Size = new System.Drawing.Size(102, 64);
             this.movableBedBtn.TabIndex = 2;
@@ -90,7 +91,8 @@
             // boundaryConditionsBtn
             // 
             this.boundaryConditionsBtn.BackColor = System.Drawing.Color.Goldenrod;
-            this.boundaryConditionsBtn.Location = new System.Drawing.Point(497, 369);
+            this.boundaryConditionsBtn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.boundaryConditionsBtn.Location = new System.Drawing.Point(497, 374);
             this.boundaryConditionsBtn.Name = "boundaryConditionsBtn";
             this.boundaryConditionsBtn.Size = new System.Drawing.Size(102, 64);
             this.boundaryConditionsBtn.TabIndex = 3;
@@ -101,7 +103,8 @@
             // initialConditionsBtn
             // 
             this.initialConditionsBtn.BackColor = System.Drawing.Color.Goldenrod;
-            this.initialConditionsBtn.Location = new System.Drawing.Point(247, 369);
+            this.initialConditionsBtn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.initialConditionsBtn.Location = new System.Drawing.Point(247, 374);
             this.initialConditionsBtn.Name = "initialConditionsBtn";
             this.initialConditionsBtn.Size = new System.Drawing.Size(102, 64);
             this.initialConditionsBtn.TabIndex = 4;
@@ -112,7 +115,8 @@
             // waterModelingBtn
             // 
             this.waterModelingBtn.BackColor = System.Drawing.Color.LimeGreen;
-            this.waterModelingBtn.Location = new System.Drawing.Point(247, 263);
+            this.waterModelingBtn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.waterModelingBtn.Location = new System.Drawing.Point(247, 250);
             this.waterModelingBtn.Name = "waterModelingBtn";
             this.waterModelingBtn.Size = new System.Drawing.Size(102, 64);
             this.waterModelingBtn.TabIndex = 5;
@@ -123,7 +127,8 @@
             // runSimulationBtn
             // 
             this.runSimulationBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.runSimulationBtn.Location = new System.Drawing.Point(372, 475);
+            this.runSimulationBtn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.runSimulationBtn.Location = new System.Drawing.Point(372, 481);
             this.runSimulationBtn.Name = "runSimulationBtn";
             this.runSimulationBtn.Size = new System.Drawing.Size(102, 64);
             this.runSimulationBtn.TabIndex = 6;
@@ -134,7 +139,8 @@
             // simulationModuleBtn
             // 
             this.simulationModuleBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.simulationModuleBtn.Location = new System.Drawing.Point(372, 51);
+            this.simulationModuleBtn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.simulationModuleBtn.Location = new System.Drawing.Point(372, 47);
             this.simulationModuleBtn.Name = "simulationModuleBtn";
             this.simulationModuleBtn.Size = new System.Drawing.Size(102, 64);
             this.simulationModuleBtn.TabIndex = 7;
@@ -145,7 +151,8 @@
             // importBtn
             // 
             this.importBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.importBtn.Location = new System.Drawing.Point(372, 157);
+            this.importBtn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.importBtn.Location = new System.Drawing.Point(372, 143);
             this.importBtn.Name = "importBtn";
             this.importBtn.Size = new System.Drawing.Size(102, 64);
             this.importBtn.TabIndex = 8;
@@ -161,7 +168,7 @@
             this.helpMnu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(847, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(844, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -261,7 +268,8 @@
             // simulationResultBtn
             // 
             this.simulationResultBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.simulationResultBtn.Location = new System.Drawing.Point(372, 581);
+            this.simulationResultBtn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.simulationResultBtn.Location = new System.Drawing.Point(372, 577);
             this.simulationResultBtn.Name = "simulationResultBtn";
             this.simulationResultBtn.Size = new System.Drawing.Size(102, 64);
             this.simulationResultBtn.TabIndex = 6;
@@ -347,129 +355,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(229, 175);
             this.panel1.TabIndex = 12;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 12);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "參數設定狀況";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "模擬功能";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(62, 26);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "已設定完成";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 46);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "計算格網";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(62, 46);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(125, 12);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "計算格網來源尚未設定";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 66);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "水理參數";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(62, 66);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(101, 12);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "數值參數尚未設定";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 86);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 12);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "動床參數";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.DimGray;
-            this.label12.Location = new System.Drawing.Point(62, 86);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(53, 12);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "不須設定";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 106);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 12);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "初始條件";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(62, 106);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(95, 12);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "U - 模式尚未設定";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 126);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(53, 12);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "邊界條件";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.ForeColor = System.Drawing.Color.Red;
-            this.label16.Location = new System.Drawing.Point(62, 126);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(101, 12);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "水理模式尚未設定";
+            this.panel1.Visible = false;
             // 
             // label17
             // 
@@ -482,11 +368,134 @@
             this.label17.Text = "尚未設定完成進行模擬作業";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.Red;
+            this.label16.Location = new System.Drawing.Point(62, 126);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(101, 12);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "水理模式尚未設定";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(62, 106);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(95, 12);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "U - 模式尚未設定";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.DimGray;
+            this.label12.Location = new System.Drawing.Point(62, 86);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(53, 12);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "不須設定";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(62, 66);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(101, 12);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "數值參數尚未設定";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(62, 46);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(125, 12);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "計算格網來源尚未設定";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 126);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 12);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "邊界條件";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 106);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 12);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "初始條件";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 86);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 12);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "動床參數";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 66);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "水理參數";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 46);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "計算格網";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label6.Location = new System.Drawing.Point(62, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "已設定完成";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "模擬功能";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "參數設定狀況";
+            // 
             // RiverSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 656);
+            this.ClientSize = new System.Drawing.Size(844, 656);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);

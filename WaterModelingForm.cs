@@ -83,7 +83,7 @@ namespace RiverSimulationApplication
             immersionPanel.Visible = false;
             this.CenterToParent();
 
-            diffusionEffectGrp.Enabled = RiverSimulationProfile.profile.diffusionEffectFunction;
+            //diffusionEffectGrp.Enabled = RiverSimulationProfile.profile.diffusionEffectFunction;
             secFlowEffectGrp.Enabled = RiverSimulationProfile.profile.secFlowEffectFunction;
             dryBedEffectGrp.Enabled = RiverSimulationProfile.profile.dryBedEffectFunction;
             immersedBoundaryGrp.Enabled = RiverSimulationProfile.profile.immersedBoundaryFunction;
@@ -194,15 +194,15 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void PropStratBtn_Click(object sender, EventArgs e)
-        {
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(propStratBtn.Text, true, 26, 50);
-            if (DialogResult.OK == form.ShowDialog())
-            {
+        //private void PropStratBtn_Click(object sender, EventArgs e)
+        //{
+        //    TableInputForm form = new TableInputForm();
+        //    form.SetFormMode(propStratBtn.Text, true, 26, 50);
+        //    if (DialogResult.OK == form.ShowDialog())
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         private void ok_Click(object sender, EventArgs e)
         {
@@ -302,6 +302,16 @@ namespace RiverSimulationApplication
         }
 
         private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox15_TextChanged(object sender, EventArgs e)
         {
 
         }

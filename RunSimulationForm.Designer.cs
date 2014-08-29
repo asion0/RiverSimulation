@@ -34,14 +34,17 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tbResult = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.stopFlagChk = new System.Windows.Forms.CheckBox();
+            this.startBtn = new System.Windows.Forms.Button();
+            this.msg = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 340);
+            this.progressBar.Location = new System.Drawing.Point(12, 371);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(872, 23);
+            this.progressBar.Size = new System.Drawing.Size(558, 23);
             this.progressBar.TabIndex = 0;
             // 
             // tbResult
@@ -49,29 +52,60 @@
             this.tbResult.Location = new System.Drawing.Point(12, 12);
             this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(872, 104);
+            this.tbResult.Size = new System.Drawing.Size(559, 279);
             this.tbResult.TabIndex = 1;
             this.tbResult.Visible = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(158, 54);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 37);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(558, 241);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // stopFlagChk
+            // 
+            this.stopFlagChk.AutoSize = true;
+            this.stopFlagChk.Location = new System.Drawing.Point(13, 307);
+            this.stopFlagChk.Name = "stopFlagChk";
+            this.stopFlagChk.Size = new System.Drawing.Size(276, 16);
+            this.stopFlagChk.TabIndex = 3;
+            this.stopFlagChk.Text = "到達水理最大疊代次數後仍未收歛時，繼續模擬";
+            this.stopFlagChk.UseVisualStyleBackColor = true;
+            // 
+            // startBtn
+            // 
+            this.startBtn.Location = new System.Drawing.Point(12, 330);
+            this.startBtn.Name = "startBtn";
+            this.startBtn.Size = new System.Drawing.Size(119, 31);
+            this.startBtn.TabIndex = 4;
+            this.startBtn.Text = "開始模擬";
+            this.startBtn.UseVisualStyleBackColor = true;
+            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
+            // 
+            // msg
+            // 
+            this.msg.Location = new System.Drawing.Point(12, 401);
+            this.msg.Name = "msg";
+            this.msg.Size = new System.Drawing.Size(558, 13);
+            this.msg.TabIndex = 5;
+            // 
             // RunSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 423);
+            this.ClientSize = new System.Drawing.Size(583, 423);
+            this.Controls.Add(this.msg);
+            this.Controls.Add(this.startBtn);
+            this.Controls.Add(this.stopFlagChk);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tbResult);
             this.Controls.Add(this.progressBar);
             this.Name = "RunSimulationForm";
-            this.Text = "RunSimulationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "模擬作業";
             this.Load += new System.EventHandler(this.RunSimulationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -85,5 +119,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox tbResult;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox stopFlagChk;
+        private System.Windows.Forms.Button startBtn;
+        private System.Windows.Forms.Label msg;
     }
 }

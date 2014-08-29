@@ -108,7 +108,7 @@
             this.initialConcentrationBtn.Name = "initialConcentrationBtn";
             this.initialConcentrationBtn.Size = new System.Drawing.Size(161, 26);
             this.initialConcentrationBtn.TabIndex = 2;
-            this.initialConcentrationBtn.Text = "初始濃度";
+            this.initialConcentrationBtn.Text = "濃度";
             this.initialConcentrationBtn.UseVisualStyleBackColor = true;
             this.initialConcentrationBtn.Click += new System.EventHandler(this.initialConcentrationBtn_Click);
             // 
@@ -130,9 +130,9 @@
             this.assumingSectionChk.AutoSize = true;
             this.assumingSectionChk.Location = new System.Drawing.Point(19, 127);
             this.assumingSectionChk.Name = "assumingSectionChk";
-            this.assumingSectionChk.Size = new System.Drawing.Size(89, 16);
+            this.assumingSectionChk.Size = new System.Drawing.Size(96, 16);
             this.assumingSectionChk.TabIndex = 3;
-            this.assumingSectionChk.Text = "3D 假設剖面";
+            this.assumingSectionChk.Text = "垂向流速剖面";
             this.assumingSectionChk.UseVisualStyleBackColor = true;
             this.assumingSectionChk.CheckedChanged += new System.EventHandler(this.assumingSectionChk_CheckedChanged);
             // 
@@ -143,7 +143,7 @@
             this.initialWaterLevelBtn.Name = "initialWaterLevelBtn";
             this.initialWaterLevelBtn.Size = new System.Drawing.Size(161, 26);
             this.initialWaterLevelBtn.TabIndex = 2;
-            this.initialWaterLevelBtn.Text = "初始水位";
+            this.initialWaterLevelBtn.Text = "水位";
             this.initialWaterLevelBtn.UseVisualStyleBackColor = true;
             this.initialWaterLevelBtn.Click += new System.EventHandler(this.initialWaterLevelBtn_Click);
             // 
@@ -154,7 +154,7 @@
             this.vFlowSpeedBtn.Name = "vFlowSpeedBtn";
             this.vFlowSpeedBtn.Size = new System.Drawing.Size(161, 26);
             this.vFlowSpeedBtn.TabIndex = 2;
-            this.vFlowSpeedBtn.Text = "V- 流速";
+            this.vFlowSpeedBtn.Text = "水平流速-V";
             this.vFlowSpeedBtn.UseVisualStyleBackColor = true;
             this.vFlowSpeedBtn.Click += new System.EventHandler(this.vFlowSpeedBtn_Click);
             // 
@@ -165,7 +165,7 @@
             this.uFlowSpeedBtn.Name = "uFlowSpeedBtn";
             this.uFlowSpeedBtn.Size = new System.Drawing.Size(161, 26);
             this.uFlowSpeedBtn.TabIndex = 2;
-            this.uFlowSpeedBtn.Text = "U - 流速";
+            this.uFlowSpeedBtn.Text = "水平流速-U";
             this.uFlowSpeedBtn.UseVisualStyleBackColor = true;
             this.uFlowSpeedBtn.Click += new System.EventHandler(this.uFlowSpeedBtn_Click);
             // 

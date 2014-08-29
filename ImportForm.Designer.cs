@@ -264,7 +264,6 @@
             this.inputFileBtn.TabIndex = 1;
             this.inputFileBtn.Text = "選取檔案";
             this.inputFileBtn.UseVisualStyleBackColor = true;
-            this.inputFileBtn.Visible = false;
             this.inputFileBtn.Click += new System.EventHandler(this.inputFileBtn_Click);
             // 
             // inputGridBtn
@@ -276,7 +275,6 @@
             this.inputGridBtn.TabIndex = 1;
             this.inputGridBtn.Text = "輸入格網";
             this.inputGridBtn.UseVisualStyleBackColor = true;
-            this.inputGridBtn.Visible = false;
             this.inputGridBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
             // 
             // runExcelBtn

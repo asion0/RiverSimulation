@@ -22,12 +22,7 @@ namespace RiverSimulationApplication
         private BackgroundWorker bw = new BackgroundWorker();
         private void RunSimulationForm_Load(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
-            timer1.Start();
-            timer1.Interval = 100;
-            progressBar.Maximum = 1000;
-            timer1.Tick += new EventHandler(timer1_Tick);
-            RunSimulationMain();
+
         }
 
         private void BwProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -87,11 +82,43 @@ namespace RiverSimulationApplication
             if (progressBar.Value != 1000)
             {
                 progressBar.Value++;
+                double p = (progressBar.Value / 10.0);
+                msg.Text = p.ToString() + "%";
             }
             else
             {
                 timer1.Stop();
+                EnterSimUI(false);
             }
+        }
+
+        void EnterSimUI(bool b)
+        {
+            if(b)
+            {
+                startBtn.Enabled = false;
+                stopFlagChk.Enabled = false;
+
+            }
+            else
+            {
+
+                startBtn.Enabled = true;
+                stopFlagChk.Enabled = true;
+            }
+
+        }
+
+        private void startBtn_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            timer1.Start();
+            timer1.Interval = 100;
+            progressBar.Maximum = 1000;
+            timer1.Tick += new EventHandler(timer1_Tick);
+            RunSimulationMain();
+            EnterSimUI(true);
+
         }
     }
 }

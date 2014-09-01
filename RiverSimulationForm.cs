@@ -19,7 +19,11 @@ namespace RiverSimulationApplication
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            LoginForm form = new LoginForm();
+            if (DialogResult.OK != form.ShowDialog())
+            {
+                this.Close();
+            }
             UpdateStatus();
         }
 

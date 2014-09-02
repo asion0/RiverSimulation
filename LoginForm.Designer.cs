@@ -28,56 +28,75 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.exitBtn = new System.Windows.Forms.Button();
+            this.delBtn = new System.Windows.Forms.Button();
+            this.openBtn = new System.Windows.Forms.Button();
+            this.newBtn = new System.Windows.Forms.Button();
+            this.folderOpen = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
-            // button3
+            // exitBtn
             // 
-            this.button3.Location = new System.Drawing.Point(644, 461);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(117, 40);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "button1";
-            this.button3.UseVisualStyleBackColor = true;
+            this.exitBtn.Location = new System.Drawing.Point(644, 461);
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(124, 40);
+            this.exitBtn.TabIndex = 0;
+            this.exitBtn.Text = "離開";
+            this.exitBtn.UseVisualStyleBackColor = true;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
-            // button1
+            // delBtn
             // 
-            this.button1.Location = new System.Drawing.Point(644, 399);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 40);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.delBtn.Location = new System.Drawing.Point(644, 399);
+            this.delBtn.Name = "delBtn";
+            this.delBtn.Size = new System.Drawing.Size(124, 40);
+            this.delBtn.TabIndex = 0;
+            this.delBtn.Text = "刪除專案";
+            this.delBtn.UseVisualStyleBackColor = true;
+            this.delBtn.Click += new System.EventHandler(this.delBtn_Click);
             // 
-            // button2
+            // openBtn
             // 
-            this.button2.Location = new System.Drawing.Point(644, 333);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 40);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button1";
-            this.button2.UseVisualStyleBackColor = true;
+            this.openBtn.Location = new System.Drawing.Point(644, 333);
+            this.openBtn.Name = "openBtn";
+            this.openBtn.Size = new System.Drawing.Size(124, 40);
+            this.openBtn.TabIndex = 0;
+            this.openBtn.Text = "開啟專案";
+            this.openBtn.UseVisualStyleBackColor = true;
+            this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
+            // 
+            // newBtn
+            // 
+            this.newBtn.Location = new System.Drawing.Point(644, 271);
+            this.newBtn.Name = "newBtn";
+            this.newBtn.Size = new System.Drawing.Size(124, 40);
+            this.newBtn.TabIndex = 0;
+            this.newBtn.Text = "建立專案";
+            this.newBtn.UseVisualStyleBackColor = true;
+            this.newBtn.Click += new System.EventHandler(this.newBtn_Click);
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 544);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.newBtn);
+            this.Controls.Add(this.openBtn);
+            this.Controls.Add(this.delBtn);
+            this.Controls.Add(this.exitBtn);
             this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.Text = "水理動床模式使用介面";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.Button delBtn;
+        private System.Windows.Forms.Button openBtn;
+        private System.Windows.Forms.Button newBtn;
+        private System.Windows.Forms.FolderBrowserDialog folderOpen;
     }
 }

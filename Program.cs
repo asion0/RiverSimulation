@@ -22,6 +22,9 @@ namespace RiverSimulationApplication
         }
 
         public static string currentPath;
+        public static string documentPath;
+        public static string projectFile;
+
         private static void InitialPath()
         {
             if (Environment.GetEnvironmentVariable("sfxname") == null)
@@ -32,6 +35,12 @@ namespace RiverSimulationApplication
             {   //For WinRar sfx package.
                 currentPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("sfxname"));
             }
+            documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\FlowSimulation";
+            if (!Directory.Exists(documentPath))
+            {
+                Directory.CreateDirectory(documentPath);
+            }
+
         }
     }
 }

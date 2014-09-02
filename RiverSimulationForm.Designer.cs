@@ -40,12 +40,10 @@
             this.newMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveMnuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageMnu = new System.Windows.Forms.ToolStripMenuItem();
             this.langEngMnuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.langTwMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMnu = new System.Windows.Forms.ToolStripMenuItem();
             this.feedMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMnuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,7 +176,6 @@
             this.newMnuItem,
             this.openMnuItem,
             this.saveMnuItem,
-            this.saveAsMnuItem,
             this.toolStripSeparator1,
             this.exitMnuItem});
             this.fileMnu.Name = "fileMnu";
@@ -188,44 +185,37 @@
             // newMnuItem
             // 
             this.newMnuItem.Name = "newMnuItem";
-            this.newMnuItem.Size = new System.Drawing.Size(161, 22);
-            this.newMnuItem.Text = "新增專案(N)";
+            this.newMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.newMnuItem.Text = "開新檔案(N)";
             // 
             // openMnuItem
             // 
             this.openMnuItem.Name = "openMnuItem";
-            this.openMnuItem.Size = new System.Drawing.Size(161, 22);
-            this.openMnuItem.Text = "開啟專案(O)";
+            this.openMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMnuItem.Text = "開啟舊檔(O)";
             // 
             // saveMnuItem
             // 
             this.saveMnuItem.Name = "saveMnuItem";
-            this.saveMnuItem.Size = new System.Drawing.Size(161, 22);
-            this.saveMnuItem.Text = "儲存專案(S)";
-            // 
-            // saveAsMnuItem
-            // 
-            this.saveAsMnuItem.Name = "saveAsMnuItem";
-            this.saveAsMnuItem.Size = new System.Drawing.Size(161, 22);
-            this.saveAsMnuItem.Text = "另存專案為(A)...";
+            this.saveMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMnuItem.Text = "儲存檔案(S)";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitMnuItem
             // 
             this.exitMnuItem.Name = "exitMnuItem";
-            this.exitMnuItem.Size = new System.Drawing.Size(161, 22);
+            this.exitMnuItem.Size = new System.Drawing.Size(152, 22);
             this.exitMnuItem.Text = "結束(X)";
             this.exitMnuItem.Click += new System.EventHandler(this.exitMnuItem_Click);
             // 
             // languageMnu
             // 
             this.languageMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.langEngMnuItem,
-            this.langTwMnuItem});
+            this.langEngMnuItem});
             this.languageMnu.Name = "languageMnu";
             this.languageMnu.Size = new System.Drawing.Size(82, 20);
             this.languageMnu.Text = "語系切換(L)";
@@ -233,14 +223,8 @@
             // langEngMnuItem
             // 
             this.langEngMnuItem.Name = "langEngMnuItem";
-            this.langEngMnuItem.Size = new System.Drawing.Size(139, 22);
-            this.langEngMnuItem.Text = "English(E)";
-            // 
-            // langTwMnuItem
-            // 
-            this.langTwMnuItem.Name = "langTwMnuItem";
-            this.langTwMnuItem.Size = new System.Drawing.Size(139, 22);
-            this.langTwMnuItem.Text = "繁體中文(T)";
+            this.langEngMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.langEngMnuItem.Text = "英文(E)";
             // 
             // helpMnu
             // 
@@ -254,15 +238,15 @@
             // feedMnuItem
             // 
             this.feedMnuItem.Name = "feedMnuItem";
-            this.feedMnuItem.Size = new System.Drawing.Size(138, 22);
+            this.feedMnuItem.Size = new System.Drawing.Size(152, 22);
             this.feedMnuItem.Text = "問題回饋(F)";
             this.feedMnuItem.Click += new System.EventHandler(this.feedMnuItem_Click);
             // 
             // aboutMnuItem
             // 
             this.aboutMnuItem.Name = "aboutMnuItem";
-            this.aboutMnuItem.Size = new System.Drawing.Size(138, 22);
-            this.aboutMnuItem.Text = "關於(A)";
+            this.aboutMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutMnuItem.Text = "版本說明(A)";
             this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
             // 
             // simulationResultBtn
@@ -541,12 +525,10 @@
         private System.Windows.Forms.ToolStripMenuItem newMnuItem;
         private System.Windows.Forms.ToolStripMenuItem openMnuItem;
         private System.Windows.Forms.ToolStripMenuItem saveMnuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsMnuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitMnuItem;
         private System.Windows.Forms.ToolStripMenuItem languageMnu;
         private System.Windows.Forms.ToolStripMenuItem langEngMnuItem;
-        private System.Windows.Forms.ToolStripMenuItem langTwMnuItem;
         private System.Windows.Forms.ToolStripMenuItem helpMnu;
         private System.Windows.Forms.ToolStripMenuItem aboutMnuItem;
         private System.Windows.Forms.Button simulationResultBtn;

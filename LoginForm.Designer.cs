@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.exitBtn = new System.Windows.Forms.Button();
             this.delBtn = new System.Windows.Forms.Button();
             this.openBtn = new System.Windows.Forms.Button();
             this.newBtn = new System.Windows.Forms.Button();
             this.folderOpen = new System.Windows.Forms.FolderBrowserDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // exitBtn
             // 
-            this.exitBtn.Location = new System.Drawing.Point(644, 461);
+            this.exitBtn.Location = new System.Drawing.Point(617, 454);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(124, 40);
             this.exitBtn.TabIndex = 0;
@@ -47,7 +50,7 @@
             // 
             // delBtn
             // 
-            this.delBtn.Location = new System.Drawing.Point(644, 399);
+            this.delBtn.Location = new System.Drawing.Point(617, 392);
             this.delBtn.Name = "delBtn";
             this.delBtn.Size = new System.Drawing.Size(124, 40);
             this.delBtn.TabIndex = 0;
@@ -57,7 +60,7 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(644, 333);
+            this.openBtn.Location = new System.Drawing.Point(617, 326);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(124, 40);
             this.openBtn.TabIndex = 0;
@@ -67,7 +70,7 @@
             // 
             // newBtn
             // 
-            this.newBtn.Location = new System.Drawing.Point(644, 271);
+            this.newBtn.Location = new System.Drawing.Point(617, 264);
             this.newBtn.Name = "newBtn";
             this.newBtn.Size = new System.Drawing.Size(124, 40);
             this.newBtn.TabIndex = 0;
@@ -75,18 +78,30 @@
             this.newBtn.UseVisualStyleBackColor = true;
             this.newBtn.Click += new System.EventHandler(this.newBtn_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, -1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(835, 545);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 544);
+            this.ClientSize = new System.Drawing.Size(801, 539);
             this.Controls.Add(this.newBtn);
             this.Controls.Add(this.openBtn);
             this.Controls.Add(this.delBtn);
             this.Controls.Add(this.exitBtn);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "水理動床模式使用介面";
             this.Load += new System.EventHandler(this.LoginForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -98,5 +113,6 @@
         private System.Windows.Forms.Button openBtn;
         private System.Windows.Forms.Button newBtn;
         private System.Windows.Forms.FolderBrowserDialog folderOpen;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

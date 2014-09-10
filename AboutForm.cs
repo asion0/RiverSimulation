@@ -24,6 +24,11 @@ namespace RiverSimulationApplication
         private void AboutForm_Load(object sender, EventArgs e)
         {
             version.Text = "Version " + System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
+            if(Program.IsLiteVersion())
+            {
+                version.Text += " Lite Version";
+
+            }
             string file = typeof(Program).Assembly.ManifestModule.FullyQualifiedName;
             DateTime buildTime = File.GetLastWriteTime(file);
             build.Text = "Build " + buildTime.ToString("yyyy/MM/dd HH:mm:ss");

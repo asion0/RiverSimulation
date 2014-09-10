@@ -51,12 +51,14 @@
             this.sideInOutFlowChk = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.fullPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.movableBedPanel.SuspendLayout();
             this.waterPanel.SuspendLayout();
+            this.fullPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ok
@@ -212,12 +214,8 @@
             // 
             // waterPanel
             // 
+            this.waterPanel.Controls.Add(this.fullPanel);
             this.waterPanel.Controls.Add(this.diffusionEffectChk);
-            this.waterPanel.Controls.Add(this.secFlowEffectChk);
-            this.waterPanel.Controls.Add(this.dryBedEffectChk);
-            this.waterPanel.Controls.Add(this.highSandContentEffectChk);
-            this.waterPanel.Controls.Add(this.immersedBoundaryChk);
-            this.waterPanel.Controls.Add(this.sideInOutFlowChk);
             this.waterPanel.Location = new System.Drawing.Point(6, 40);
             this.waterPanel.Name = "waterPanel";
             this.waterPanel.Size = new System.Drawing.Size(194, 150);
@@ -237,7 +235,7 @@
             // secFlowEffectChk
             // 
             this.secFlowEffectChk.AutoSize = true;
-            this.secFlowEffectChk.Location = new System.Drawing.Point(13, 35);
+            this.secFlowEffectChk.Location = new System.Drawing.Point(3, 3);
             this.secFlowEffectChk.Name = "secFlowEffectChk";
             this.secFlowEffectChk.Size = new System.Drawing.Size(84, 16);
             this.secFlowEffectChk.TabIndex = 0;
@@ -248,7 +246,7 @@
             // dryBedEffectChk
             // 
             this.dryBedEffectChk.AutoSize = true;
-            this.dryBedEffectChk.Location = new System.Drawing.Point(13, 57);
+            this.dryBedEffectChk.Location = new System.Drawing.Point(3, 25);
             this.dryBedEffectChk.Name = "dryBedEffectChk";
             this.dryBedEffectChk.Size = new System.Drawing.Size(72, 16);
             this.dryBedEffectChk.TabIndex = 0;
@@ -259,7 +257,7 @@
             // highSandContentEffectChk
             // 
             this.highSandContentEffectChk.AutoSize = true;
-            this.highSandContentEffectChk.Location = new System.Drawing.Point(13, 123);
+            this.highSandContentEffectChk.Location = new System.Drawing.Point(3, 91);
             this.highSandContentEffectChk.Name = "highSandContentEffectChk";
             this.highSandContentEffectChk.Size = new System.Drawing.Size(84, 16);
             this.highSandContentEffectChk.TabIndex = 0;
@@ -270,7 +268,7 @@
             // immersedBoundaryChk
             // 
             this.immersedBoundaryChk.AutoSize = true;
-            this.immersedBoundaryChk.Location = new System.Drawing.Point(13, 79);
+            this.immersedBoundaryChk.Location = new System.Drawing.Point(3, 47);
             this.immersedBoundaryChk.Name = "immersedBoundaryChk";
             this.immersedBoundaryChk.Size = new System.Drawing.Size(72, 16);
             this.immersedBoundaryChk.TabIndex = 0;
@@ -281,7 +279,7 @@
             // sideInOutFlowChk
             // 
             this.sideInOutFlowChk.AutoSize = true;
-            this.sideInOutFlowChk.Location = new System.Drawing.Point(13, 101);
+            this.sideInOutFlowChk.Location = new System.Drawing.Point(3, 69);
             this.sideInOutFlowChk.Name = "sideInOutFlowChk";
             this.sideInOutFlowChk.Size = new System.Drawing.Size(75, 16);
             this.sideInOutFlowChk.TabIndex = 0;
@@ -306,6 +304,18 @@
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "水理";
+            // 
+            // fullPanel
+            // 
+            this.fullPanel.Controls.Add(this.secFlowEffectChk);
+            this.fullPanel.Controls.Add(this.sideInOutFlowChk);
+            this.fullPanel.Controls.Add(this.immersedBoundaryChk);
+            this.fullPanel.Controls.Add(this.dryBedEffectChk);
+            this.fullPanel.Controls.Add(this.highSandContentEffectChk);
+            this.fullPanel.Location = new System.Drawing.Point(10, 32);
+            this.fullPanel.Name = "fullPanel";
+            this.fullPanel.Size = new System.Drawing.Size(99, 124);
+            this.fullPanel.TabIndex = 1;
             // 
             // SimulationModuleForm
             // 
@@ -333,6 +343,8 @@
             this.movableBedPanel.PerformLayout();
             this.waterPanel.ResumeLayout(false);
             this.waterPanel.PerformLayout();
+            this.fullPanel.ResumeLayout(false);
+            this.fullPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -361,5 +373,6 @@
         private System.Windows.Forms.CheckBox sideInOutFlowChk;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel fullPanel;
     }
 }

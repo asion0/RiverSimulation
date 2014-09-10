@@ -17,6 +17,12 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+        public TableInputForm(Type t)
+        {
+            InitializeComponent();
+            type = t;
+        }
+        Type type = Type.General;
         bool hideSingle = false;
         int columnCount = 26;
         int rowCount = 50;
@@ -28,6 +34,7 @@ namespace RiverSimulationApplication
             rowCount = row;
             this.title = title;
         }
+
 
         private void InitializeDataGridView()
         {
@@ -52,6 +59,13 @@ namespace RiverSimulationApplication
                 row[i] = "1";
                 c++;
             }
+
+            if (type == Type.UpVerticalDistribution)
+            {
+                dataGridView.Columns[0].Name = "位置";
+                dataGridView.Columns[1].Name = "比例";
+            }
+
             dataGridView.RowHeadersWidth = 64;
             for (int i = 0; i < rowCount; i++)
             {
@@ -59,6 +73,12 @@ namespace RiverSimulationApplication
                 dataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
           //  dataGridView.Rows[rowCount - 1].HeaderCell.Value = rowCount.ToString();
+        }
+
+        public enum Type
+        {
+            General,
+            UpVerticalDistribution,
         }
 
         private void TableInputForm_Load(object sender, EventArgs e)

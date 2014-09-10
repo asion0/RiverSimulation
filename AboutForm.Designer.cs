@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.mainName = new System.Windows.Forms.Label();
             this.version = new System.Windows.Forms.Label();
             this.logoPicBox = new System.Windows.Forms.PictureBox();
             this.build = new System.Windows.Forms.Label();
@@ -37,15 +37,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // mainName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(72, 289);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(278, 31);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "水理動床模式使用者介面";
+            this.mainName.AutoSize = true;
+            this.mainName.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.mainName.Location = new System.Drawing.Point(72, 289);
+            this.mainName.Name = "mainName";
+            this.mainName.Size = new System.Drawing.Size(278, 31);
+            this.mainName.TabIndex = 2;
+            this.mainName.Text = "水理動床模式使用者介面";
             // 
             // version
             // 
@@ -110,7 +110,7 @@
             this.Controls.Add(this.copyright1);
             this.Controls.Add(this.copyright2);
             this.Controls.Add(this.version);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.mainName);
             this.Controls.Add(this.logoPicBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -127,7 +127,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox logoPicBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label mainName;
         private System.Windows.Forms.Label version;
         private System.Windows.Forms.Label build;
         private System.Windows.Forms.Label copyright2;

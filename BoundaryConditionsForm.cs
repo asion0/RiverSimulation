@@ -172,7 +172,7 @@ namespace RiverSimulationApplication
                 MessageBox.Show("請輸入正確的分層數(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            TableInputForm form = new TableInputForm();
+            TableInputForm form = new TableInputForm(TableInputForm.Type.UpVerticalDistribution);
             form.SetFormMode(upVerticalDistributionChk.Text, true, 2, n);
             if (DialogResult.OK == form.ShowDialog())
             {

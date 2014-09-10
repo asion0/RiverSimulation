@@ -41,8 +41,16 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.physicalParamBtn = new System.Windows.Forms.Button();
             this.highSandContentEffectGrp = new System.Windows.Forms.GroupBox();
+            this.textBox23 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBox22 = new System.Windows.Forms.TextBox();
             this.textBox18 = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.chezyBtn = new System.Windows.Forms.Button();
@@ -69,6 +77,18 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -76,6 +96,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -96,15 +118,29 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.physicalParamPanel = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.twinEquationCombo = new System.Windows.Forms.ComboBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.textBox21 = new System.Windows.Forms.TextBox();
+            this.textBox19 = new System.Windows.Forms.TextBox();
+            this.zeroEquationRdo = new System.Windows.Forms.RadioButton();
+            this.twinEquationRdo = new System.Windows.Forms.RadioButton();
+            this.zeroEquationCombo = new System.Windows.Forms.ComboBox();
+            this.SingleEquationRdo = new System.Windows.Forms.RadioButton();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.ksHelpBtn = new System.Windows.Forms.Button();
             this.ksTxt = new System.Windows.Forms.TextBox();
             this.ksRadio = new System.Windows.Forms.RadioButton();
-            this.label12 = new System.Windows.Forms.Label();
             this.turbulenceBackBtn = new System.Windows.Forms.Button();
             this.roughnessPanel = new System.Windows.Forms.Panel();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
@@ -127,42 +163,7 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.roughnessBackBtn = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.twinEquationCombo = new System.Windows.Forms.ComboBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.zeroEquationRdo = new System.Windows.Forms.RadioButton();
-            this.twinEquationRdo = new System.Windows.Forms.RadioButton();
-            this.zeroEquationCombo = new System.Windows.Forms.ComboBox();
-            this.SingleEquationRdo = new System.Windows.Forms.RadioButton();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.label29 = new System.Windows.Forms.Label();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.textBox23 = new System.Windows.Forms.TextBox();
+            this.fullPanel = new System.Windows.Forms.Panel();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.secFlowEffectGrp.SuspendLayout();
@@ -173,22 +174,23 @@
             this.mainPanel.SuspendLayout();
             this.valueParamPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.setting3dPanel.SuspendLayout();
             this.immersionPanel.SuspendLayout();
             this.physicalParamPanel.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.roughnessPanel.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel10.SuspendLayout();
+            this.fullPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowTypeGroup
@@ -296,15 +298,55 @@
             this.highSandContentEffectGrp.TabStop = false;
             this.highSandContentEffectGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
+            // textBox23
+            // 
+            resources.ApplyResources(this.textBox23, "textBox23");
+            this.textBox23.Name = "textBox23";
+            // 
+            // textBox10
+            // 
+            resources.ApplyResources(this.textBox10, "textBox10");
+            this.textBox10.Name = "textBox10";
+            // 
+            // label33
+            // 
+            resources.ApplyResources(this.label33, "label33");
+            this.label33.Name = "label33";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // textBox22
+            // 
+            resources.ApplyResources(this.textBox22, "textBox22");
+            this.textBox22.Name = "textBox22";
+            // 
             // textBox18
             // 
             resources.ApplyResources(this.textBox18, "textBox18");
             this.textBox18.Name = "textBox18";
             // 
+            // label32
+            // 
+            resources.ApplyResources(this.label32, "label32");
+            this.label32.Name = "label32";
+            // 
             // label22
             // 
             resources.ApplyResources(this.label22, "label22");
             this.label22.Name = "label22";
+            // 
+            // textBox11
+            // 
+            resources.ApplyResources(this.textBox11, "textBox11");
+            this.textBox11.Name = "textBox11";
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
             // 
             // textBox17
             // 
@@ -449,11 +491,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox9);
+            this.groupBox1.Controls.Add(this.fullPanel);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.textBox6);
-            this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.panel9);
             this.groupBox1.Controls.Add(this.panel6);
             this.groupBox1.Controls.Add(this.panel5);
@@ -490,6 +529,85 @@
             resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
             this.label15.Click += new System.EventHandler(this.label15_Click);
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel9.Controls.Add(this.label29);
+            this.panel9.Controls.Add(this.textBox20);
+            this.panel9.Controls.Add(this.label30);
+            resources.ApplyResources(this.panel9, "panel9");
+            this.panel9.Name = "panel9";
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.Name = "label29";
+            // 
+            // textBox20
+            // 
+            resources.ApplyResources(this.textBox20, "textBox20");
+            this.textBox20.Name = "textBox20";
+            // 
+            // label30
+            // 
+            resources.ApplyResources(this.label30, "label30");
+            this.label30.Name = "label30";
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel6.Controls.Add(this.checkBox8);
+            this.panel6.Controls.Add(this.checkBox7);
+            this.panel6.Controls.Add(this.checkBox6);
+            this.panel6.Controls.Add(this.checkBox5);
+            this.panel6.Controls.Add(this.checkBox4);
+            this.panel6.Controls.Add(this.checkBox3);
+            this.panel6.Controls.Add(this.checkBox1);
+            resources.ApplyResources(this.panel6, "panel6");
+            this.panel6.Name = "panel6";
+            // 
+            // checkBox8
+            // 
+            resources.ApplyResources(this.checkBox8, "checkBox8");
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            resources.ApplyResources(this.checkBox7, "checkBox7");
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            resources.ApplyResources(this.checkBox6, "checkBox6");
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            resources.ApplyResources(this.checkBox5, "checkBox5");
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            resources.ApplyResources(this.checkBox4, "checkBox4");
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            resources.ApplyResources(this.checkBox3, "checkBox3");
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
@@ -532,6 +650,16 @@
             // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
+            // 
+            // label28
+            // 
+            resources.ApplyResources(this.label28, "label28");
+            this.label28.Name = "label28";
+            // 
+            // label25
+            // 
+            resources.ApplyResources(this.label25, "label25");
+            this.label25.Name = "label25";
             // 
             // label8
             // 
@@ -663,15 +791,26 @@
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.TabStop = false;
             // 
-            // label23
+            // panel10
             // 
-            resources.ApplyResources(this.label23, "label23");
-            this.label23.Name = "label23";
+            this.panel10.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel10.Controls.Add(this.label12);
+            this.panel10.Controls.Add(this.label17);
+            this.panel10.Controls.Add(this.textBox15);
+            this.panel10.Controls.Add(this.textBox16);
+            resources.ApplyResources(this.panel10, "panel10");
+            this.panel10.Name = "panel10";
             // 
-            // textBox16
+            // label12
             // 
-            resources.ApplyResources(this.textBox16, "textBox16");
-            this.textBox16.Name = "textBox16";
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
             // 
             // textBox15
             // 
@@ -679,10 +818,115 @@
             this.textBox15.Name = "textBox15";
             this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
-            // label17
+            // textBox16
             // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
+            resources.ApplyResources(this.textBox16, "textBox16");
+            this.textBox16.Name = "textBox16";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel7.Controls.Add(this.label31);
+            this.panel7.Controls.Add(this.label27);
+            this.panel7.Controls.Add(this.twinEquationCombo);
+            this.panel7.Controls.Add(this.radioButton1);
+            this.panel7.Controls.Add(this.textBox21);
+            this.panel7.Controls.Add(this.textBox19);
+            this.panel7.Controls.Add(this.zeroEquationRdo);
+            this.panel7.Controls.Add(this.twinEquationRdo);
+            this.panel7.Controls.Add(this.zeroEquationCombo);
+            this.panel7.Controls.Add(this.SingleEquationRdo);
+            resources.ApplyResources(this.panel7, "panel7");
+            this.panel7.Name = "panel7";
+            // 
+            // label31
+            // 
+            resources.ApplyResources(this.label31, "label31");
+            this.label31.Name = "label31";
+            this.label31.Click += new System.EventHandler(this.label12_Click);
+            // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
+            this.label27.Click += new System.EventHandler(this.label12_Click);
+            // 
+            // twinEquationCombo
+            // 
+            this.twinEquationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.twinEquationCombo, "twinEquationCombo");
+            this.twinEquationCombo.FormattingEnabled = true;
+            this.twinEquationCombo.Items.AddRange(new object[] {
+            resources.GetString("twinEquationCombo.Items")});
+            this.twinEquationCombo.Name = "twinEquationCombo";
+            // 
+            // radioButton1
+            // 
+            resources.ApplyResources(this.radioButton1, "radioButton1");
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // textBox21
+            // 
+            resources.ApplyResources(this.textBox21, "textBox21");
+            this.textBox21.Name = "textBox21";
+            this.textBox21.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
+            // 
+            // textBox19
+            // 
+            resources.ApplyResources(this.textBox19, "textBox19");
+            this.textBox19.Name = "textBox19";
+            this.textBox19.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
+            // 
+            // zeroEquationRdo
+            // 
+            resources.ApplyResources(this.zeroEquationRdo, "zeroEquationRdo");
+            this.zeroEquationRdo.Name = "zeroEquationRdo";
+            this.zeroEquationRdo.TabStop = true;
+            this.zeroEquationRdo.UseVisualStyleBackColor = true;
+            // 
+            // twinEquationRdo
+            // 
+            resources.ApplyResources(this.twinEquationRdo, "twinEquationRdo");
+            this.twinEquationRdo.Name = "twinEquationRdo";
+            this.twinEquationRdo.TabStop = true;
+            this.twinEquationRdo.UseVisualStyleBackColor = true;
+            // 
+            // zeroEquationCombo
+            // 
+            this.zeroEquationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.zeroEquationCombo, "zeroEquationCombo");
+            this.zeroEquationCombo.FormattingEnabled = true;
+            this.zeroEquationCombo.Items.AddRange(new object[] {
+            resources.GetString("zeroEquationCombo.Items"),
+            resources.GetString("zeroEquationCombo.Items1"),
+            resources.GetString("zeroEquationCombo.Items2"),
+            resources.GetString("zeroEquationCombo.Items3"),
+            resources.GetString("zeroEquationCombo.Items4")});
+            this.zeroEquationCombo.Name = "zeroEquationCombo";
+            // 
+            // SingleEquationRdo
+            // 
+            resources.ApplyResources(this.SingleEquationRdo, "SingleEquationRdo");
+            this.SingleEquationRdo.Name = "SingleEquationRdo";
+            this.SingleEquationRdo.TabStop = true;
+            this.SingleEquationRdo.UseVisualStyleBackColor = true;
+            // 
+            // label26
+            // 
+            resources.ApplyResources(this.label26, "label26");
+            this.label26.Name = "label26";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // label23
+            // 
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
             // 
             // panel8
             // 
@@ -716,12 +960,6 @@
             this.ksRadio.TabStop = true;
             this.ksRadio.UseVisualStyleBackColor = true;
             this.ksRadio.CheckedChanged += new System.EventHandler(this.ksRadio_CheckedChanged);
-            // 
-            // label12
-            // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.Name = "label12";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // turbulenceBackBtn
             // 
@@ -882,244 +1120,14 @@
             this.roughnessBackBtn.UseVisualStyleBackColor = true;
             this.roughnessBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
-            // label25
-            // 
-            resources.ApplyResources(this.label25, "label25");
-            this.label25.Name = "label25";
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel6.Controls.Add(this.checkBox8);
-            this.panel6.Controls.Add(this.checkBox7);
-            this.panel6.Controls.Add(this.checkBox6);
-            this.panel6.Controls.Add(this.checkBox5);
-            this.panel6.Controls.Add(this.checkBox4);
-            this.panel6.Controls.Add(this.checkBox3);
-            this.panel6.Controls.Add(this.checkBox1);
-            resources.ApplyResources(this.panel6, "panel6");
-            this.panel6.Name = "panel6";
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel7.Controls.Add(this.label31);
-            this.panel7.Controls.Add(this.label27);
-            this.panel7.Controls.Add(this.twinEquationCombo);
-            this.panel7.Controls.Add(this.radioButton1);
-            this.panel7.Controls.Add(this.textBox21);
-            this.panel7.Controls.Add(this.textBox19);
-            this.panel7.Controls.Add(this.zeroEquationRdo);
-            this.panel7.Controls.Add(this.twinEquationRdo);
-            this.panel7.Controls.Add(this.zeroEquationCombo);
-            this.panel7.Controls.Add(this.SingleEquationRdo);
-            resources.ApplyResources(this.panel7, "panel7");
-            this.panel7.Name = "panel7";
-            // 
-            // twinEquationCombo
-            // 
-            this.twinEquationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.twinEquationCombo, "twinEquationCombo");
-            this.twinEquationCombo.FormattingEnabled = true;
-            this.twinEquationCombo.Items.AddRange(new object[] {
-            resources.GetString("twinEquationCombo.Items")});
-            this.twinEquationCombo.Name = "twinEquationCombo";
-            // 
-            // radioButton1
-            // 
-            resources.ApplyResources(this.radioButton1, "radioButton1");
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // zeroEquationRdo
-            // 
-            resources.ApplyResources(this.zeroEquationRdo, "zeroEquationRdo");
-            this.zeroEquationRdo.Name = "zeroEquationRdo";
-            this.zeroEquationRdo.TabStop = true;
-            this.zeroEquationRdo.UseVisualStyleBackColor = true;
-            // 
-            // twinEquationRdo
-            // 
-            resources.ApplyResources(this.twinEquationRdo, "twinEquationRdo");
-            this.twinEquationRdo.Name = "twinEquationRdo";
-            this.twinEquationRdo.TabStop = true;
-            this.twinEquationRdo.UseVisualStyleBackColor = true;
-            // 
-            // zeroEquationCombo
-            // 
-            this.zeroEquationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.zeroEquationCombo, "zeroEquationCombo");
-            this.zeroEquationCombo.FormattingEnabled = true;
-            this.zeroEquationCombo.Items.AddRange(new object[] {
-            resources.GetString("zeroEquationCombo.Items"),
-            resources.GetString("zeroEquationCombo.Items1"),
-            resources.GetString("zeroEquationCombo.Items2"),
-            resources.GetString("zeroEquationCombo.Items3"),
-            resources.GetString("zeroEquationCombo.Items4")});
-            this.zeroEquationCombo.Name = "zeroEquationCombo";
-            // 
-            // SingleEquationRdo
-            // 
-            resources.ApplyResources(this.SingleEquationRdo, "SingleEquationRdo");
-            this.SingleEquationRdo.Name = "SingleEquationRdo";
-            this.SingleEquationRdo.TabStop = true;
-            this.SingleEquationRdo.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            // 
-            // label28
-            // 
-            resources.ApplyResources(this.label28, "label28");
-            this.label28.Name = "label28";
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel9.Controls.Add(this.label29);
-            this.panel9.Controls.Add(this.textBox20);
-            this.panel9.Controls.Add(this.label30);
-            resources.ApplyResources(this.panel9, "panel9");
-            this.panel9.Name = "panel9";
-            // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
-            // 
-            // textBox20
-            // 
-            resources.ApplyResources(this.textBox20, "textBox20");
-            this.textBox20.Name = "textBox20";
-            // 
-            // label30
-            // 
-            resources.ApplyResources(this.label30, "label30");
-            this.label30.Name = "label30";
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            resources.ApplyResources(this.checkBox3, "checkBox3");
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            resources.ApplyResources(this.checkBox4, "checkBox4");
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            resources.ApplyResources(this.checkBox5, "checkBox5");
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            resources.ApplyResources(this.checkBox6, "checkBox6");
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            resources.ApplyResources(this.checkBox7, "checkBox7");
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox8
-            // 
-            resources.ApplyResources(this.checkBox8, "checkBox8");
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // label26
-            // 
-            resources.ApplyResources(this.label26, "label26");
-            this.label26.Name = "label26";
-            // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel10.Controls.Add(this.label12);
-            this.panel10.Controls.Add(this.label17);
-            this.panel10.Controls.Add(this.textBox15);
-            this.panel10.Controls.Add(this.textBox16);
-            resources.ApplyResources(this.panel10, "panel10");
-            this.panel10.Name = "panel10";
-            // 
-            // textBox19
-            // 
-            resources.ApplyResources(this.textBox19, "textBox19");
-            this.textBox19.Name = "textBox19";
-            this.textBox19.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
-            // 
-            // label27
-            // 
-            resources.ApplyResources(this.label27, "label27");
-            this.label27.Name = "label27";
-            this.label27.Click += new System.EventHandler(this.label12_Click);
-            // 
-            // textBox21
-            // 
-            resources.ApplyResources(this.textBox21, "textBox21");
-            this.textBox21.Name = "textBox21";
-            this.textBox21.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
-            // 
-            // label31
-            // 
-            resources.ApplyResources(this.label31, "label31");
-            this.label31.Name = "label31";
-            this.label31.Click += new System.EventHandler(this.label12_Click);
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // textBox10
-            // 
-            resources.ApplyResources(this.textBox10, "textBox10");
-            this.textBox10.Name = "textBox10";
-            // 
-            // label24
-            // 
-            resources.ApplyResources(this.label24, "label24");
-            this.label24.Name = "label24";
-            // 
-            // textBox11
-            // 
-            resources.ApplyResources(this.textBox11, "textBox11");
-            this.textBox11.Name = "textBox11";
-            // 
-            // label32
-            // 
-            resources.ApplyResources(this.label32, "label32");
-            this.label32.Name = "label32";
-            // 
-            // textBox22
-            // 
-            resources.ApplyResources(this.textBox22, "textBox22");
-            this.textBox22.Name = "textBox22";
-            // 
-            // label33
-            // 
-            resources.ApplyResources(this.label33, "label33");
-            this.label33.Name = "label33";
-            // 
-            // textBox23
-            // 
-            resources.ApplyResources(this.textBox23, "textBox23");
-            this.textBox23.Name = "textBox23";
+            // fullPanel
+            // 
+            this.fullPanel.Controls.Add(this.textBox6);
+            this.fullPanel.Controls.Add(this.textBox9);
+            this.fullPanel.Controls.Add(this.label15);
+            this.fullPanel.Controls.Add(this.label16);
+            resources.ApplyResources(this.fullPanel, "fullPanel");
+            this.fullPanel.Name = "fullPanel";
             // 
             // WaterModelingForm
             // 
@@ -1155,6 +1163,10 @@
             this.valueParamPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1164,6 +1176,10 @@
             this.physicalParamPanel.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.roughnessPanel.ResumeLayout(false);
@@ -1175,14 +1191,8 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
+            this.fullPanel.ResumeLayout(false);
+            this.fullPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1323,5 +1333,6 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.TextBox textBox19;
+        private System.Windows.Forms.Panel fullPanel;
     }
 }

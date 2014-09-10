@@ -24,6 +24,14 @@ namespace RiverSimulationApplication
         public static string currentPath;
         public static string documentPath;
         public static string projectFile;
+        public static bool IsLiteVersion()
+        {
+#if _LITE_VERSION_
+            return true;
+#else
+            return false;
+#endif
+        }
 
         private static void InitialPath()
         {

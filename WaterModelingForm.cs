@@ -70,6 +70,11 @@ namespace RiverSimulationApplication
 
         private void WaterModelingForm_Load(object sender, EventArgs e)
         {
+            if(Program.IsLiteVersion())
+            {
+                fullPanel.Visible = false;
+            }
+
             string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             comment.Navigate(new Uri(url));
 

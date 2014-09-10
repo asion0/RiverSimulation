@@ -69,6 +69,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.descriptionMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -176,6 +177,7 @@
             this.newMnuItem,
             this.openMnuItem,
             this.saveMnuItem,
+            this.descriptionMnuItem,
             this.toolStripSeparator1,
             this.exitMnuItem});
             this.fileMnu.Name = "fileMnu";
@@ -223,7 +225,7 @@
             // langEngMnuItem
             // 
             this.langEngMnuItem.Name = "langEngMnuItem";
-            this.langEngMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.langEngMnuItem.Size = new System.Drawing.Size(115, 22);
             this.langEngMnuItem.Text = "英文(E)";
             // 
             // helpMnu
@@ -238,14 +240,14 @@
             // feedMnuItem
             // 
             this.feedMnuItem.Name = "feedMnuItem";
-            this.feedMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.feedMnuItem.Size = new System.Drawing.Size(140, 22);
             this.feedMnuItem.Text = "問題回饋(F)";
             this.feedMnuItem.Click += new System.EventHandler(this.feedMnuItem_Click);
             // 
             // aboutMnuItem
             // 
             this.aboutMnuItem.Name = "aboutMnuItem";
-            this.aboutMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutMnuItem.Size = new System.Drawing.Size(140, 22);
             this.aboutMnuItem.Text = "版本說明(A)";
             this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
             // 
@@ -475,6 +477,13 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "參數設定狀況";
             // 
+            // descriptionMnuItem
+            // 
+            this.descriptionMnuItem.Name = "descriptionMnuItem";
+            this.descriptionMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.descriptionMnuItem.Text = "檔案敘述(D)";
+            this.descriptionMnuItem.Click += new System.EventHandler(this.descriptionMnuItem_Click);
+            // 
             // RiverSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -554,5 +563,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ToolStripMenuItem descriptionMnuItem;
     }
 }

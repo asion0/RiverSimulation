@@ -57,6 +57,10 @@ namespace RiverSimulationApplication
         {
             //string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             //comment.Navigate(new Uri(url));
+            if(Program.IsLiteVersion())
+            {
+                fullPanel.Visible = false;
+            }
 
             this.Width = 1000;
             this.Height = 720;
@@ -448,6 +452,11 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as CheckBox).Checked;
             quaySoilPropertiesPanel.Enabled = chk;
+
+        }
+
+        private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
  

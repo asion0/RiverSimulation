@@ -79,7 +79,13 @@ namespace RiverSimulationApplication
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-
+            //string path;
+            folderOpen.RootFolder = Environment.SpecialFolder.MyDocuments;
+            if (folderOpen.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("是否刪除所選取的目錄？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                //path = folderOpen.SelectedPath;
+            }
         }
 
         private void exitBtn_Click(object sender, EventArgs e)

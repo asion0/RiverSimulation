@@ -339,6 +339,20 @@ namespace RiverSimulationApplication
             }
         }
 
+        private void descriptionMnuItem_Click(object sender, EventArgs e)
+        {
+            InputForm dlg = new InputForm();
+            dlg.Text = "檔案敘述";
+            dlg.desc.Text = "請輸入檔案敘述";
+            dlg.inputTxt.Text = "";
+            if (DialogResult.OK != dlg.ShowDialog())
+            {
+                return;
+            }
+
+
+        }
+
 
 
     }

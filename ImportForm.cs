@@ -30,7 +30,7 @@ namespace RiverSimulationApplication
             bool chk = (sender as RadioButton).Checked;
             inputFileBtn.Enabled = chk;
             inputFilePath.Enabled = chk;
-
+            /*
             if(chk)
             {
                 //Auto select file.
@@ -40,6 +40,7 @@ namespace RiverSimulationApplication
                     inputFilePath.Text = inputFileDlg.FileName;
                 }
             }
+            */
         }
 
         private void inputFileBtn_Click(object sender, EventArgs e)
@@ -55,7 +56,7 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as RadioButton).Checked;
             inputGridBtn.Enabled = chk;
-
+            /*
             if(chk)
             { 
                 //Auto show input form
@@ -65,6 +66,7 @@ namespace RiverSimulationApplication
 
                 }
             }
+            */
         }
 
         private void inputGridBtn_Click(object sender, EventArgs e)

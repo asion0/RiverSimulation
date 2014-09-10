@@ -19,6 +19,13 @@ namespace RiverSimulationApplication
 
         private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
+            if(Program.IsLiteVersion())
+            {
+                diffusionEffectChk.Visible = false;
+                diffusionEffectChk.Checked = false;
+                fullPanel.Top -= 22;
+            }
+
             this.CenterToParent();
             LoadStatus();
             UpdateStatus();
@@ -84,7 +91,6 @@ namespace RiverSimulationApplication
 
             diffusionEffectChk.Checked = RiverSimulationProfile.profile.diffusionEffectFunction;
             secFlowEffectChk.Checked = RiverSimulationProfile.profile.secFlowEffectFunction;
-            diffusionEffectChk.Checked = RiverSimulationProfile.profile.diffusionEffectFunction;
             dryBedEffectChk.Checked = RiverSimulationProfile.profile.dryBedEffectFunction;
             immersedBoundaryChk.Checked = RiverSimulationProfile.profile.immersedBoundaryFunction;
             sideInOutFlowChk.Checked = RiverSimulationProfile.profile.sideInOutFlowFunction;

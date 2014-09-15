@@ -22,5 +22,17 @@ namespace RiverSimulationApplication.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultOpenProjectFolder {
+            get {
+                return ((string)(this["DefaultOpenProjectFolder"]));
+            }
+            set {
+                this["DefaultOpenProjectFolder"] = value;
+            }
+        }
     }
 }

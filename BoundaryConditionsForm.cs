@@ -75,57 +75,57 @@ namespace RiverSimulationApplication
             boundaryThicknessCombo.Enabled = chk;
         }
 
-        private void upVerticalDistributionChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            upVerticalDistributionBtn.Enabled = chk;
-            upVerticalDistributionNoTxt.Enabled = chk;
-        }
+        //private void upVerticalDistributionChk_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    bool chk = (sender as CheckBox).Checked;
+        //    upVerticalDistributionBtn.Enabled = chk;
+        //    upVerticalDistributionNoTxt.Enabled = chk;
+        //}
 
 
-        private void upFlowConditionsChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            condNoTxt.Enabled = chk;
+        //private void upFlowConditionsChk_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    bool chk = (sender as CheckBox).Checked;
+        //    condNoTxt.Enabled = chk;
 
-            if(chk)
-            {
-                upSupercriticalFlowRdo.Enabled = true;
-                upSubcriticalFlowRdo.Enabled = true;
-                if(upSupercriticalFlowRdo.Checked)
-                {
-                    upSupercriticalFlowRdo.Checked = false;
-                    upSupercriticalFlowRdo.Checked = true;
-                }
-                if (upSubcriticalFlowRdo.Checked)
-                {
-                    upSubcriticalFlowRdo.Checked = false;
-                    upSubcriticalFlowRdo.Checked = true;
-                }
-            }
-            else
-            {
-                upSupercriticalFlowRdo.Enabled = false;
-                upSubcriticalFlowRdo.Enabled = false;
-                upSuperFlowBtn.Enabled = false;
-                upSuperWaterLevelBtn.Enabled = false;
-                upSubFlowBtn.Enabled = false;
-            }
+        //    if(chk)
+        //    {
+        //        upSupercriticalFlowRdo.Enabled = true;
+        //        upSubcriticalFlowRdo.Enabled = true;
+        //        if(upSupercriticalFlowRdo.Checked)
+        //        {
+        //            upSupercriticalFlowRdo.Checked = false;
+        //            upSupercriticalFlowRdo.Checked = true;
+        //        }
+        //        if (upSubcriticalFlowRdo.Checked)
+        //        {
+        //            upSubcriticalFlowRdo.Checked = false;
+        //            upSubcriticalFlowRdo.Checked = true;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        upSupercriticalFlowRdo.Enabled = false;
+        //        upSubcriticalFlowRdo.Enabled = false;
+        //        upSuperFlowBtn.Enabled = false;
+        //        upSuperWaterLevelBtn.Enabled = false;
+        //        upSubFlowBtn.Enabled = false;
+        //    }
             
-        }
+        //}
 
         private void upSupercriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as RadioButton).Checked;
-            upSuperFlowBtn.Enabled = chk;
-            upSuperWaterLevelBtn.Enabled = chk;
+        //    bool chk = (sender as RadioButton).Checked;
+        //    upSuperFlowBtn.Enabled = chk;
+        //    upSuperWaterLevelBtn.Enabled = chk;
         }
 
         private void upSubcriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
             upSubFlowBtn.Enabled = chk;
-     }
+        }
 
         private void downSupercriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
@@ -141,43 +141,43 @@ namespace RiverSimulationApplication
 
         private void sideInFlowChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            inPositionBtn.Enabled = chk;
-            inFlowBtn.Enabled = chk;
-            sideInFlowNumTxt.Enabled = chk;
+        //    bool chk = (sender as CheckBox).Checked;
+        //    inPositionBtn.Enabled = chk;
+        //    inFlowBtn.Enabled = chk;
+        //    sideInFlowNumTxt.Enabled = chk;
         }
 
         private void sideOutFlowChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            outPositionBtn.Enabled = chk;
-            outFlowBtn.Enabled = chk;
-            sideOutFlowNumTxt.Enabled = chk;
+        //    bool chk = (sender as CheckBox).Checked;
+        //    outPositionBtn.Enabled = chk;
+        //    outFlowBtn.Enabled = chk;
+        //    sideOutFlowNumTxt.Enabled = chk;
         }
 
         private void upVerticalDistributionBtn_Click(object sender, EventArgs e)
         {
-            int n = 0;
-            try
-            {
-                n = Convert.ToInt32(upVerticalDistributionNoTxt.Text);
-            }
-            catch
-            {
-                n = -1;
-            }
+        //    int n = 0;
+        //    try
+        //    {
+        //        n = Convert.ToInt32(upVerticalDistributionNoTxt.Text);
+        //    }
+        //    catch
+        //    {
+        //        n = -1;
+        //    }
 
-            if(n < 2)
-            {
-                MessageBox.Show("請輸入正確的分層數(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            TableInputForm form = new TableInputForm(TableInputForm.Type.UpVerticalDistribution);
-            form.SetFormMode(upVerticalDistributionChk.Text, true, 2, n);
-            if (DialogResult.OK == form.ShowDialog())
-            {
+        //    if(n < 2)
+        //    {
+        //        MessageBox.Show("請輸入正確的分層數(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        //        return;
+        //    }
+        //    TableInputForm form = new TableInputForm(TableInputForm.Type.UpVerticalDistribution);
+        //    form.SetFormMode(upVerticalDistributionChk.Text, true, 2, n);
+        //    if (DialogResult.OK == form.ShowDialog())
+        //    {
 
-            }
+        //    }
         
         }
 
@@ -186,172 +186,187 @@ namespace RiverSimulationApplication
 
         }
 
-        private void upSuperWaterLevelBtn_Click(object sender, EventArgs e)
-        {
-            int n = 0;
-            try
-            {
-                n = Convert.ToInt32(condNoTxt.Text);
-            }
-            catch
-            {
-                n = -1;
-            }
+        //private void upSuperWaterLevelBtn_Click(object sender, EventArgs e)
+        //{
+        //    int n = 0;
+        //    try
+        //    {
+        //        n = Convert.ToInt32(condNoTxt.Text);
+        //    }
+        //    catch
+        //    {
+        //        n = -1;
+        //    }
 
-            if (n < 2)
-            {
-                MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+        //    if (n < 2)
+        //    {
+        //        MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        //        return;
+        //    }
 
 
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSuperWaterLevelBtn.Text, false, n, 50);
-            if (DialogResult.OK == form.ShowDialog())
-            {
+        //    TableInputForm form = new TableInputForm();
+        //    form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSuperWaterLevelBtn.Text, false, n, 50);
+        //    if (DialogResult.OK == form.ShowDialog())
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         private void upSuperFlowBtn_Click(object sender, EventArgs e)
         {
-            int n = 0;
-            try
-            {
-                n = Convert.ToInt32(condNoTxt.Text);
-            }
-            catch
-            {
-                n = -1;
-            }
+            //int n = 0;
+            //try
+            //{
+            //    n = Convert.ToInt32(condNoTxt.Text);
+            //}
+            //catch
+            //{
+            //    n = -1;
+            //}
 
-            if (n < 2)
-            {
-                MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+            //if (n < 2)
+            //{
+            //    MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    return;
+            //}
 
 
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSuperFlowBtn.Text, false, n, 50);
-            if (DialogResult.OK == form.ShowDialog())
-            {
+            //TableInputForm form = new TableInputForm();
+            //form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSuperFlowBtn.Text, false, n, 50);
+            //if (DialogResult.OK == form.ShowDialog())
+            //{
 
-            }
+            //}
         }
 
         private void upSubFlowBtn_Click(object sender, EventArgs e)
         {
-            int n = 0;
-            try
-            {
-                n = Convert.ToInt32(condNoTxt.Text);
-            }
-            catch
-            {
-                n = -1;
-            }
+        //    int n = 0;
+        //    try
+        //    {
+        //        n = Convert.ToInt32(condNoTxt.Text);
+        //    }
+        //    catch
+        //    {
+        //        n = -1;
+        //    }
 
-            if (n < 2)
-            {
-                MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+        //    if (n < 2)
+        //    {
+        //        MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        //        return;
+        //    }
 
 
 
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSubFlowBtn.Text, false, n, 50);
-            if (DialogResult.OK == form.ShowDialog())
-            {
+        //    TableInputForm form = new TableInputForm();
+        //    form.SetFormMode(upSupercriticalFlowRdo.Text + " " + upSubFlowBtn.Text, false, n, 50);
+        //    if (DialogResult.OK == form.ShowDialog())
+        //    {
 
-            }
+        //    }
         }
 
         private void downSuperWaterLevelBtn_Click(object sender, EventArgs e)
         {
-            int n = 0;
-            try
-            {
-                n = Convert.ToInt32(condNoTxt.Text);
-            }
-            catch
-            {
-                n = -1;
-            }
+        //    int n = 0;
+        //    try
+        //    {
+        //        n = Convert.ToInt32(condNoTxt.Text);
+        //    }
+        //    catch
+        //    {
+        //        n = -1;
+        //    }
 
-            if (n < 2)
-            {
-                MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+        //    if (n < 2)
+        //    {
+        //        MessageBox.Show("請輸入正確的邊界條件數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        //        return;
+        //    }
 
 
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(downSubcriticalFlowRdo.Text + " " + downSuperWaterLevelBtn.Text, false, n, 50);
-            if (DialogResult.OK == form.ShowDialog())
-            {
+        //    TableInputForm form = new TableInputForm();
+        //    form.SetFormMode(downSubcriticalFlowRdo.Text + " " + downSuperWaterLevelBtn.Text, false, n, 50);
+        //    if (DialogResult.OK == form.ShowDialog())
+        //    {
 
-            }
-
-        }
-
-        private void inFlowBtn_Click(object sender, EventArgs e)
-        {
-            int n = 0;
-            try
-            {
-                n = Convert.ToInt32(sideInFlowNumTxt.Text);
-            }
-            catch
-            {
-                n = -1;
-            }
-
-            if (n < 2)
-            {
-                MessageBox.Show("請輸入正確的側入流數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(sideInFlowChk.Text + " " + inFlowBtn.Text, false, n, 50);
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-        }
-
-        private void outFlowBtn_Click(object sender, EventArgs e)
-        {
-            int n = 0;
-            try
-            {
-                n = Convert.ToInt32(sideOutFlowNumTxt.Text);
-            }
-            catch
-            {
-                n = -1;
-            }
-
-            if (n < 2)
-            {
-                MessageBox.Show("請輸入正確的側出流數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(sideOutFlowChk.Text + " " + outFlowBtn.Text, false, n, 50);
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-        }
-
-        private void panel8_Paint(object sender, PaintEventArgs e)
-        {
+        //    }
 
         }
+
+        //private void inFlowBtn_Click(object sender, EventArgs e)
+        //{
+        //    int n = 0;
+        //    try
+        //    {
+        //        n = Convert.ToInt32(sideInFlowNumTxt.Text);
+        //    }
+        //    catch
+        //    {
+        //        n = -1;
+        //    }
+
+        //    if (n < 2)
+        //    {
+        //        MessageBox.Show("請輸入正確的側入流數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        //        return;
+        //    }
+
+        //    TableInputForm form = new TableInputForm();
+        //    form.SetFormMode(sideInFlowChk.Text + " " + inFlowBtn.Text, false, n, 50);
+        //    if (DialogResult.OK == form.ShowDialog())
+        //    {
+
+        //    }
+        //}
+
+        //private void outFlowBtn_Click(object sender, EventArgs e)
+        //{
+        //    int n = 0;
+        //    try
+        //    {
+        //        n = Convert.ToInt32(sideOutFlowNumTxt.Text);
+        //    }
+        //    catch
+        //    {
+        //        n = -1;
+        //    }
+
+        //    if (n < 2)
+        //    {
+        //        MessageBox.Show("請輸入正確的側出流數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        //        return;
+        //    }
+
+        //    TableInputForm form = new TableInputForm();
+        //    form.SetFormMode(sideOutFlowChk.Text + " " + outFlowBtn.Text, false, n, 50);
+        //    if (DialogResult.OK == form.ShowDialog())
+        //    {
+
+        //    }
+        //}
+
+        //private void panel8_Paint(object sender, PaintEventArgs e)
+        //{
+
+        //}
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void radioButton14_CheckedChanged(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void radioButton13_CheckedChanged(object sender, EventArgs e)
+        //{
+
+        //}
 
         
     }

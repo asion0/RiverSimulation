@@ -43,15 +43,15 @@
             this.quayStableAnalysisChk = new System.Windows.Forms.CheckBox();
             this.highSandContentFlowChk = new System.Windows.Forms.CheckBox();
             this.waterPanel = new System.Windows.Forms.Panel();
-            this.diffusionEffectChk = new System.Windows.Forms.CheckBox();
+            this.fullPanel = new System.Windows.Forms.Panel();
             this.secFlowEffectChk = new System.Windows.Forms.CheckBox();
+            this.sideInOutFlowChk = new System.Windows.Forms.CheckBox();
+            this.immersedBoundaryChk = new System.Windows.Forms.CheckBox();
             this.dryBedEffectChk = new System.Windows.Forms.CheckBox();
             this.highSandContentEffectChk = new System.Windows.Forms.CheckBox();
-            this.immersedBoundaryChk = new System.Windows.Forms.CheckBox();
-            this.sideInOutFlowChk = new System.Windows.Forms.CheckBox();
+            this.diffusionEffectChk = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.fullPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
@@ -215,27 +215,28 @@
             // waterPanel
             // 
             this.waterPanel.Controls.Add(this.fullPanel);
-            this.waterPanel.Controls.Add(this.diffusionEffectChk);
             this.waterPanel.Location = new System.Drawing.Point(6, 40);
             this.waterPanel.Name = "waterPanel";
             this.waterPanel.Size = new System.Drawing.Size(194, 150);
             this.waterPanel.TabIndex = 2;
             // 
-            // diffusionEffectChk
+            // fullPanel
             // 
-            this.diffusionEffectChk.AutoSize = true;
-            this.diffusionEffectChk.Location = new System.Drawing.Point(13, 13);
-            this.diffusionEffectChk.Name = "diffusionEffectChk";
-            this.diffusionEffectChk.Size = new System.Drawing.Size(72, 16);
-            this.diffusionEffectChk.TabIndex = 0;
-            this.diffusionEffectChk.Text = "擴散效應";
-            this.diffusionEffectChk.UseVisualStyleBackColor = true;
-            this.diffusionEffectChk.CheckedChanged += new System.EventHandler(this.diffusionEffectChk_CheckedChanged);
+            this.fullPanel.Controls.Add(this.secFlowEffectChk);
+            this.fullPanel.Controls.Add(this.diffusionEffectChk);
+            this.fullPanel.Controls.Add(this.sideInOutFlowChk);
+            this.fullPanel.Controls.Add(this.immersedBoundaryChk);
+            this.fullPanel.Controls.Add(this.dryBedEffectChk);
+            this.fullPanel.Controls.Add(this.highSandContentEffectChk);
+            this.fullPanel.Location = new System.Drawing.Point(10, 3);
+            this.fullPanel.Name = "fullPanel";
+            this.fullPanel.Size = new System.Drawing.Size(181, 137);
+            this.fullPanel.TabIndex = 1;
             // 
             // secFlowEffectChk
             // 
             this.secFlowEffectChk.AutoSize = true;
-            this.secFlowEffectChk.Location = new System.Drawing.Point(3, 3);
+            this.secFlowEffectChk.Location = new System.Drawing.Point(3, 29);
             this.secFlowEffectChk.Name = "secFlowEffectChk";
             this.secFlowEffectChk.Size = new System.Drawing.Size(84, 16);
             this.secFlowEffectChk.TabIndex = 0;
@@ -243,21 +244,43 @@
             this.secFlowEffectChk.UseVisualStyleBackColor = true;
             this.secFlowEffectChk.CheckedChanged += new System.EventHandler(this.secFlowEffectChk_CheckedChanged);
             // 
+            // sideInOutFlowChk
+            // 
+            this.sideInOutFlowChk.AutoSize = true;
+            this.sideInOutFlowChk.Location = new System.Drawing.Point(3, 95);
+            this.sideInOutFlowChk.Name = "sideInOutFlowChk";
+            this.sideInOutFlowChk.Size = new System.Drawing.Size(75, 16);
+            this.sideInOutFlowChk.TabIndex = 0;
+            this.sideInOutFlowChk.Text = "側出/入流";
+            this.sideInOutFlowChk.UseVisualStyleBackColor = true;
+            this.sideInOutFlowChk.CheckedChanged += new System.EventHandler(this.sideInOutFlowChk_CheckedChanged);
+            // 
+            // immersedBoundaryChk
+            // 
+            this.immersedBoundaryChk.AutoSize = true;
+            this.immersedBoundaryChk.Location = new System.Drawing.Point(3, 73);
+            this.immersedBoundaryChk.Name = "immersedBoundaryChk";
+            this.immersedBoundaryChk.Size = new System.Drawing.Size(128, 16);
+            this.immersedBoundaryChk.TabIndex = 0;
+            this.immersedBoundaryChk.Text = "內部邊界(浸沒邊界)";
+            this.immersedBoundaryChk.UseVisualStyleBackColor = true;
+            this.immersedBoundaryChk.CheckedChanged += new System.EventHandler(this.immersedBoundaryChk_CheckedChanged);
+            // 
             // dryBedEffectChk
             // 
             this.dryBedEffectChk.AutoSize = true;
-            this.dryBedEffectChk.Location = new System.Drawing.Point(3, 25);
+            this.dryBedEffectChk.Location = new System.Drawing.Point(3, 51);
             this.dryBedEffectChk.Name = "dryBedEffectChk";
-            this.dryBedEffectChk.Size = new System.Drawing.Size(72, 16);
+            this.dryBedEffectChk.Size = new System.Drawing.Size(104, 16);
             this.dryBedEffectChk.TabIndex = 0;
-            this.dryBedEffectChk.Text = "乾床效應";
+            this.dryBedEffectChk.Text = "內部邊界(乾床)";
             this.dryBedEffectChk.UseVisualStyleBackColor = true;
             this.dryBedEffectChk.CheckedChanged += new System.EventHandler(this.dryBedEffectChk_CheckedChanged);
             // 
             // highSandContentEffectChk
             // 
             this.highSandContentEffectChk.AutoSize = true;
-            this.highSandContentEffectChk.Location = new System.Drawing.Point(3, 91);
+            this.highSandContentEffectChk.Location = new System.Drawing.Point(3, 117);
             this.highSandContentEffectChk.Name = "highSandContentEffectChk";
             this.highSandContentEffectChk.Size = new System.Drawing.Size(84, 16);
             this.highSandContentEffectChk.TabIndex = 0;
@@ -265,27 +288,16 @@
             this.highSandContentEffectChk.UseVisualStyleBackColor = true;
             this.highSandContentEffectChk.CheckedChanged += new System.EventHandler(this.highSandContentEffectChk_CheckedChanged);
             // 
-            // immersedBoundaryChk
+            // diffusionEffectChk
             // 
-            this.immersedBoundaryChk.AutoSize = true;
-            this.immersedBoundaryChk.Location = new System.Drawing.Point(3, 47);
-            this.immersedBoundaryChk.Name = "immersedBoundaryChk";
-            this.immersedBoundaryChk.Size = new System.Drawing.Size(72, 16);
-            this.immersedBoundaryChk.TabIndex = 0;
-            this.immersedBoundaryChk.Text = "浸沒邊界";
-            this.immersedBoundaryChk.UseVisualStyleBackColor = true;
-            this.immersedBoundaryChk.CheckedChanged += new System.EventHandler(this.immersedBoundaryChk_CheckedChanged);
-            // 
-            // sideInOutFlowChk
-            // 
-            this.sideInOutFlowChk.AutoSize = true;
-            this.sideInOutFlowChk.Location = new System.Drawing.Point(3, 69);
-            this.sideInOutFlowChk.Name = "sideInOutFlowChk";
-            this.sideInOutFlowChk.Size = new System.Drawing.Size(75, 16);
-            this.sideInOutFlowChk.TabIndex = 0;
-            this.sideInOutFlowChk.Text = "側出/入流";
-            this.sideInOutFlowChk.UseVisualStyleBackColor = true;
-            this.sideInOutFlowChk.CheckedChanged += new System.EventHandler(this.sideInOutFlowChk_CheckedChanged);
+            this.diffusionEffectChk.AutoSize = true;
+            this.diffusionEffectChk.Location = new System.Drawing.Point(3, 7);
+            this.diffusionEffectChk.Name = "diffusionEffectChk";
+            this.diffusionEffectChk.Size = new System.Drawing.Size(120, 16);
+            this.diffusionEffectChk.TabIndex = 0;
+            this.diffusionEffectChk.Text = "關閉移流擴散效應";
+            this.diffusionEffectChk.UseVisualStyleBackColor = true;
+            this.diffusionEffectChk.CheckedChanged += new System.EventHandler(this.diffusionEffectChk_CheckedChanged);
             // 
             // label2
             // 
@@ -304,18 +316,6 @@
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "水理";
-            // 
-            // fullPanel
-            // 
-            this.fullPanel.Controls.Add(this.secFlowEffectChk);
-            this.fullPanel.Controls.Add(this.sideInOutFlowChk);
-            this.fullPanel.Controls.Add(this.immersedBoundaryChk);
-            this.fullPanel.Controls.Add(this.dryBedEffectChk);
-            this.fullPanel.Controls.Add(this.highSandContentEffectChk);
-            this.fullPanel.Location = new System.Drawing.Point(10, 32);
-            this.fullPanel.Name = "fullPanel";
-            this.fullPanel.Size = new System.Drawing.Size(99, 124);
-            this.fullPanel.TabIndex = 1;
             // 
             // SimulationModuleForm
             // 
@@ -342,7 +342,6 @@
             this.movableBedPanel.ResumeLayout(false);
             this.movableBedPanel.PerformLayout();
             this.waterPanel.ResumeLayout(false);
-            this.waterPanel.PerformLayout();
             this.fullPanel.ResumeLayout(false);
             this.fullPanel.PerformLayout();
             this.ResumeLayout(false);

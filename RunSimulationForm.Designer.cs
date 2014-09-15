@@ -37,19 +37,21 @@
             this.stopFlagChk = new System.Windows.Forms.CheckBox();
             this.startBtn = new System.Windows.Forms.Button();
             this.msg = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 371);
+            this.progressBar.Location = new System.Drawing.Point(12, 365);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(558, 23);
             this.progressBar.TabIndex = 0;
             // 
             // tbResult
             // 
-            this.tbResult.Location = new System.Drawing.Point(12, 12);
+            this.tbResult.Location = new System.Drawing.Point(12, 72);
             this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
             this.tbResult.Size = new System.Drawing.Size(559, 279);
@@ -59,7 +61,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 37);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 97);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(558, 241);
             this.pictureBox1.TabIndex = 2;
@@ -68,7 +70,7 @@
             // stopFlagChk
             // 
             this.stopFlagChk.AutoSize = true;
-            this.stopFlagChk.Location = new System.Drawing.Point(13, 307);
+            this.stopFlagChk.Location = new System.Drawing.Point(12, 12);
             this.stopFlagChk.Name = "stopFlagChk";
             this.stopFlagChk.Size = new System.Drawing.Size(276, 16);
             this.stopFlagChk.TabIndex = 3;
@@ -77,7 +79,7 @@
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(12, 330);
+            this.startBtn.Location = new System.Drawing.Point(11, 35);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(119, 31);
             this.startBtn.TabIndex = 4;
@@ -92,12 +94,34 @@
             this.msg.Size = new System.Drawing.Size(558, 13);
             this.msg.TabIndex = 5;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(136, 35);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 31);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "暫停模擬";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.startBtn_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(261, 35);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(119, 31);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "停止模擬";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.startBtn_Click);
+            // 
             // RunSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 423);
+            this.ClientSize = new System.Drawing.Size(583, 402);
             this.Controls.Add(this.msg);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.stopFlagChk);
             this.Controls.Add(this.pictureBox1);
@@ -122,5 +146,7 @@
         private System.Windows.Forms.CheckBox stopFlagChk;
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Label msg;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

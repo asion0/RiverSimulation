@@ -35,10 +35,15 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.initialConcentrationBtn = new System.Windows.Forms.Button();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
-            this.assumingSectionChk = new System.Windows.Forms.CheckBox();
             this.initialWaterLevelBtn = new System.Windows.Forms.Button();
             this.vFlowSpeedBtn = new System.Windows.Forms.Button();
             this.uFlowSpeedBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
@@ -93,10 +98,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.initialConcentrationBtn);
-            this.groupBox2.Location = new System.Drawing.Point(12, 190);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Location = new System.Drawing.Point(12, 183);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(366, 71);
+            this.groupBox2.Size = new System.Drawing.Size(366, 94);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "動床模組";
@@ -104,18 +112,20 @@
             // initialConcentrationBtn
             // 
             this.initialConcentrationBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.initialConcentrationBtn.Location = new System.Drawing.Point(19, 22);
+            this.initialConcentrationBtn.Location = new System.Drawing.Point(19, 42);
             this.initialConcentrationBtn.Name = "initialConcentrationBtn";
-            this.initialConcentrationBtn.Size = new System.Drawing.Size(161, 26);
+            this.initialConcentrationBtn.Size = new System.Drawing.Size(148, 26);
             this.initialConcentrationBtn.TabIndex = 2;
-            this.initialConcentrationBtn.Text = "濃度";
+            this.initialConcentrationBtn.Text = "水深平均濃度";
             this.initialConcentrationBtn.UseVisualStyleBackColor = true;
             this.initialConcentrationBtn.Click += new System.EventHandler(this.initialConcentrationBtn_Click);
             // 
             // flowTypeGroup
             // 
-            this.flowTypeGroup.Controls.Add(this.assumingSectionChk);
+            this.flowTypeGroup.Controls.Add(this.label2);
+            this.flowTypeGroup.Controls.Add(this.label1);
             this.flowTypeGroup.Controls.Add(this.initialWaterLevelBtn);
+            this.flowTypeGroup.Controls.Add(this.button1);
             this.flowTypeGroup.Controls.Add(this.vFlowSpeedBtn);
             this.flowTypeGroup.Controls.Add(this.uFlowSpeedBtn);
             this.flowTypeGroup.Location = new System.Drawing.Point(12, 11);
@@ -125,23 +135,12 @@
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "水理模組";
             // 
-            // assumingSectionChk
-            // 
-            this.assumingSectionChk.AutoSize = true;
-            this.assumingSectionChk.Location = new System.Drawing.Point(19, 127);
-            this.assumingSectionChk.Name = "assumingSectionChk";
-            this.assumingSectionChk.Size = new System.Drawing.Size(96, 16);
-            this.assumingSectionChk.TabIndex = 3;
-            this.assumingSectionChk.Text = "垂向流速剖面";
-            this.assumingSectionChk.UseVisualStyleBackColor = true;
-            this.assumingSectionChk.CheckedChanged += new System.EventHandler(this.assumingSectionChk_CheckedChanged);
-            // 
             // initialWaterLevelBtn
             // 
             this.initialWaterLevelBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.initialWaterLevelBtn.Location = new System.Drawing.Point(19, 91);
+            this.initialWaterLevelBtn.Location = new System.Drawing.Point(19, 111);
             this.initialWaterLevelBtn.Name = "initialWaterLevelBtn";
-            this.initialWaterLevelBtn.Size = new System.Drawing.Size(161, 26);
+            this.initialWaterLevelBtn.Size = new System.Drawing.Size(148, 26);
             this.initialWaterLevelBtn.TabIndex = 2;
             this.initialWaterLevelBtn.Text = "水位";
             this.initialWaterLevelBtn.UseVisualStyleBackColor = true;
@@ -150,24 +149,82 @@
             // vFlowSpeedBtn
             // 
             this.vFlowSpeedBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.vFlowSpeedBtn.Location = new System.Drawing.Point(19, 56);
+            this.vFlowSpeedBtn.Location = new System.Drawing.Point(19, 76);
             this.vFlowSpeedBtn.Name = "vFlowSpeedBtn";
-            this.vFlowSpeedBtn.Size = new System.Drawing.Size(161, 26);
+            this.vFlowSpeedBtn.Size = new System.Drawing.Size(148, 26);
             this.vFlowSpeedBtn.TabIndex = 2;
-            this.vFlowSpeedBtn.Text = "水平流速-V";
+            this.vFlowSpeedBtn.Text = "水深平均流速-V";
             this.vFlowSpeedBtn.UseVisualStyleBackColor = true;
             this.vFlowSpeedBtn.Click += new System.EventHandler(this.vFlowSpeedBtn_Click);
             // 
             // uFlowSpeedBtn
             // 
             this.uFlowSpeedBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.uFlowSpeedBtn.Location = new System.Drawing.Point(19, 21);
+            this.uFlowSpeedBtn.Location = new System.Drawing.Point(19, 41);
             this.uFlowSpeedBtn.Name = "uFlowSpeedBtn";
-            this.uFlowSpeedBtn.Size = new System.Drawing.Size(161, 26);
+            this.uFlowSpeedBtn.Size = new System.Drawing.Size(148, 26);
             this.uFlowSpeedBtn.TabIndex = 2;
-            this.uFlowSpeedBtn.Text = "水平流速-U";
+            this.uFlowSpeedBtn.Text = "水深平均流速-U";
             this.uFlowSpeedBtn.UseVisualStyleBackColor = true;
             this.uFlowSpeedBtn.Click += new System.EventHandler(this.uFlowSpeedBtn_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(19, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "2D";
+            // 
+            // button1
+            // 
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button1.Location = new System.Drawing.Point(187, 41);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(161, 26);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "垂向流速剖面";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.uFlowSpeedBtn_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(187, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(19, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "3D";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(19, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "2D";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(187, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(19, 12);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "3D";
+            // 
+            // button2
+            // 
+            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button2.Location = new System.Drawing.Point(187, 42);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(148, 26);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "垂向濃度剖面";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.initialConcentrationBtn_Click);
             // 
             // InitialConditionsForm
             // 
@@ -185,6 +242,7 @@
             this.Load += new System.EventHandler(this.InitialConditionsForm_Load);
             this.mainPanel.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.flowTypeGroup.ResumeLayout(false);
             this.flowTypeGroup.PerformLayout();
             this.ResumeLayout(false);
@@ -200,10 +258,15 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button initialConcentrationBtn;
         private System.Windows.Forms.GroupBox flowTypeGroup;
-        private System.Windows.Forms.CheckBox assumingSectionChk;
         private System.Windows.Forms.Button initialWaterLevelBtn;
         private System.Windows.Forms.Button vFlowSpeedBtn;
         private System.Windows.Forms.Button uFlowSpeedBtn;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
 
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace RiverSimulationApplication
 {
@@ -62,29 +63,39 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            Program.projectFile = dlg.inputTxt.Text;
+            Program.projectFolder = dlg.inputTxt.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void openBtn_Click(object sender, EventArgs e)
         {
-            string path;
             folderOpen.RootFolder = Environment.SpecialFolder.MyDocuments;
             if (folderOpen.ShowDialog() == DialogResult.OK) 
             {
-                path = folderOpen.SelectedPath;
+                Program.projectFolder = folderOpen.SelectedPath;
             }
         }
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-            //string path;
-            folderOpen.RootFolder = Environment.SpecialFolder.MyDocuments;
-            if (folderOpen.ShowDialog() == DialogResult.OK)
+            RiverSimulationApplication.Properties.Settings s = RiverSimulationApplication.Properties.Settings.Default;
+            if(!Directory.Exists(s.DefaultOpenProjectFolder))
             {
-                MessageBox.Show("是否刪除所選取的目錄？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                s.DefaultOpenProjectFolder = Program.documentPath;
+                s.Save();
+            }
+        
+            folderOpen.ShowNewFolderButton = false;
+            folderOpen.SelectedPath = s.DefaultOpenProjectFolder;
+            if (folderOpen.ShowDialog(this) == DialogResult.OK)
+            {
+                DialogResult dialogResult = MessageBox.Show("是否刪除下列所選取的目錄？\r\n" + folderOpen.SelectedPath, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 //path = folderOpen.SelectedPath;
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Utility.DeleteFileOrFolder(folderOpen.SelectedPath);
+                }
             }
         }
 

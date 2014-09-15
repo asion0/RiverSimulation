@@ -169,6 +169,7 @@
     <Compile Include="RunSimulationForm.Designer.cs">
       <DependentUpon>RunSimulationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SliderPanel.cs" />
     <Compile Include="ImportForm.cs">
       <SubType>Form</SubType>
@@ -212,6 +213,7 @@
     <Compile Include="TableInputForm.Designer.cs">
       <DependentUpon>TableInputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility.cs" />
     <Compile Include="WaterModelingForm.cs">
       <SubType>Form</SubType>
     </Compile>

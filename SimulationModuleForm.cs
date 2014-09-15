@@ -19,12 +19,12 @@ namespace RiverSimulationApplication
 
         private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
-            if(Program.IsLiteVersion())
-            {
-                diffusionEffectChk.Visible = false;
-                diffusionEffectChk.Checked = false;
-                fullPanel.Top -= 22;
-            }
+            //if(Program.IsLiteVersion())
+            //{
+            //    diffusionEffectChk.Visible = false;
+            //    diffusionEffectChk.Checked = false;
+            //    fullPanel.Top -= 22;
+            //}
 
             this.CenterToParent();
             LoadStatus();

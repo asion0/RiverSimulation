@@ -98,8 +98,8 @@ namespace RiverSimulationApplication
             {
                 singleValueRdo.Checked = true;
             }
-            RealtimeExampleForm forma = new RealtimeExampleForm();
-            forma.Show();
+            //RealtimeExampleForm forma = new RealtimeExampleForm();
+            //forma.Show();
         }
 
         private void singleValue_CheckedChanged(object sender, EventArgs e)

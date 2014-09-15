@@ -21,9 +21,9 @@ namespace RiverSimulationApplication
             Application.Run(new RiverSimulationForm());
         }
 
-        public static string currentPath;
-        public static string documentPath;
-        public static string projectFile;
+        public static string currentPath;   //執行檔所在目錄, 會判對是否RAR包裝檔案
+        public static string documentPath;  //本專案預設文件目錄 My Documents\FlowSimulation
+        public static string projectFolder;   //專案目錄
         public static bool IsLiteVersion()
         {
 #if _LITE_VERSION_

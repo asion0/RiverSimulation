@@ -30,10 +30,10 @@ namespace RiverSimulationApplication
             {
                 sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToRight, this.Size);
             }
-            //else if (orgBtn == fluidTypeBtn)
-            //{
-            //    sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToRight, this.Size);
-            //}
+            else if (orgBtn == transSandMethodBtn)
+            {
+                sp.SlidePanel(transSandMethodPanel, SliderPanel.Direction.ToRight, this.Size);
+            }
             else if (orgBtn == seabedCompositionBtn)
             {
                 sp.SlidePanel(seabedCompositionPanel, SliderPanel.Direction.ToRight, this.Size);
@@ -69,11 +69,14 @@ namespace RiverSimulationApplication
             seabedCompositionPanel.Visible = false;
             rockStablePanel.Visible = false;
             rockbedPanel.Visible = false;
+            transSandMethodPanel.Visible = false;
+
             this.CenterToParent();
 
             this.bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
             this.quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
             this.highSandContentFlowGrp.Enabled = RiverSimulationProfile.profile.highSandContentFlowFunction;
+            this.highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
         }
 
         private void Back_Click(object sender, EventArgs e)
@@ -263,58 +266,57 @@ namespace RiverSimulationApplication
         private void cohesiveSedimentChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            amTxt.Enabled = chk;
-            ceTxt.Enabled = chk;
+            cohesiveSedimentPanel.Enabled = chk;
         }
 
-        private void seabedCompositionChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
+        //private void seabedCompositionChk_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    bool chk = (sender as CheckBox).Checked;
 
-            if (chk)
-            {
-                if (cohesiveSedimentChk.Checked)
-                {
-                    cohesiveSedimentChk.Checked = false;
-                    cohesiveSedimentChk.Checked = true;
-                }
-            }
-            else
-            {
-                amTxt.Enabled = false;
-                ceTxt.Enabled = false;
-            }
-            seabedLevelNumTxt.Enabled = chk;
-            seabedThicknessBtn.Enabled = chk;
-            sedimentCompositionRatioBtn.Enabled = chk;
-            cohesiveSedimentChk.Enabled = chk;
-        }
+        //    if (chk)
+        //    {
+        //        if (cohesiveSedimentChk.Checked)
+        //        {
+        //            cohesiveSedimentChk.Checked = false;
+        //            cohesiveSedimentChk.Checked = true;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        amTxt.Enabled = false;
+        //        ceTxt.Enabled = false;
+        //    }
+        //    seabedLevelNumTxt.Enabled = chk;
+        //    seabedThicknessBtn.Enabled = chk;
+        //    sedimentCompositionRatioBtn.Enabled = chk;
+        //    cohesiveSedimentChk.Enabled = chk;
+        //}
 
-        private void alluviumRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as RadioButton).Checked;
+        //private void alluviumRdo_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    bool chk = (sender as RadioButton).Checked;
 
-            if (chk)
-            {
-                if (seabedCompositionChk.Checked)
-                {
-                    seabedCompositionChk.Checked = false;
-                    seabedCompositionChk.Checked = true;
-                }
-            }
-            else
-            {
-                seabedLevelNumTxt.Enabled = false;
-                seabedThicknessBtn.Enabled = false;
-                sedimentCompositionRatioBtn.Enabled = false;
-                cohesiveSedimentChk.Enabled = false;
-                amTxt.Enabled = false;
-                ceTxt.Enabled = false;
-            }
-            seabedCompositionChk.Enabled = chk;
-            noScourElevationBtn.Enabled = chk;
+        //    if (chk)
+        //    {
+        //        if (seabedCompositionChk.Checked)
+        //        {
+        //            seabedCompositionChk.Checked = false;
+        //            seabedCompositionChk.Checked = true;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        seabedLevelNumTxt.Enabled = false;
+        //        seabedThicknessBtn.Enabled = false;
+        //        sedimentCompositionRatioBtn.Enabled = false;
+        //        cohesiveSedimentChk.Enabled = false;
+        //        amTxt.Enabled = false;
+        //        ceTxt.Enabled = false;
+        //    }
+        //    seabedCompositionChk.Enabled = chk;
+        //    noScourElevationBtn.Enabled = chk;
 
-        }
+        //}
 
         private void seabedThicknessBtn_Click(object sender, EventArgs e)
         {
@@ -391,11 +393,11 @@ namespace RiverSimulationApplication
             diffusionEquationCombo.Enabled = chk;
         }
 
-        private void selTransSandMethodChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            selTransSandMethodCombo.Enabled = chk;
-        }
+        //private void selTransSandMethodChk_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    bool chk = (sender as CheckBox).Checked;
+        //    selTransSandMethodCombo.Enabled = chk;
+        //}
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -405,14 +407,14 @@ namespace RiverSimulationApplication
         private void alluviumChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            alluviumPanel.Enabled = chk;
+            //cohesiveSedimentPanel.Enabled = chk;
         }
 
         private void alluviumPanel_EnabledChanged(object sender, EventArgs e)
         {
-            bool eab = (sender as Panel).Enabled;
-            seabedCompositionChk.Enabled = eab;
-            noScourElevationBtn.Enabled = eab;
+        //    bool eab = (sender as Panel).Enabled;
+        //    seabedCompositionChk.Enabled = eab;
+        //    noScourElevationBtn.Enabled = eab;
         }
 
         private void bedrockChk_CheckedChanged(object sender, EventArgs e)
@@ -457,6 +459,23 @@ namespace RiverSimulationApplication
 
         private void mainPanel_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void noScourElevationChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            noScourElevationBtn.Enabled = chk;
 
         }
  

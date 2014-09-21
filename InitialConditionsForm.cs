@@ -25,7 +25,16 @@ namespace RiverSimulationApplication
 
         private void InitialConditionsForm_Load(object sender, EventArgs e)
         {
-
+            if(RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D)
+            {
+                initialWater3DPanel.Enabled = true;
+                initialMovableBed3DPanel.Enabled = true;
+            }
+            else
+            {
+                initialWater3DPanel.Enabled = false;
+                initialMovableBed3DPanel.Enabled = false;
+            }
         }
 
         private void uFlowSpeedBtn_Click(object sender, EventArgs e)

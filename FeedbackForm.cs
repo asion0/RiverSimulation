@@ -30,5 +30,16 @@ namespace RiverSimulationApplication
             proc.StartInfo.FileName = "mailto:yang.jc4169@gmail.com?subject=水理動床模組問題回饋&body= ";
             proc.Start();
         }
+
+        private void FeedbackForm_Load(object sender, EventArgs e)
+        {
+            mrRdo.Checked = true;
+        }
+
+        private void sendBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
     }
 }

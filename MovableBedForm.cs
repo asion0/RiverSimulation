@@ -62,6 +62,25 @@ namespace RiverSimulationApplication
                 fullPanel.Visible = false;
             }
 
+            if(RiverSimulationProfile.profile.highSandContentFlowFunction)
+            {
+                this.normalSandMethodText.Visible = false;
+                this.normalSandMethodPanel.Visible = false;
+                this.highSandMethodText.Visible = true;
+                this.highSandMethodPanel.Visible = true;
+                this.highSandMethodText.Top = this.normalSandMethodText.Location.Y;
+                this.highSandMethodPanel.Top = this.normalSandMethodPanel.Location.Y;
+                this.highSandMethodPanel.Enabled = true;
+            }
+            else
+            {
+                this.normalSandMethodText.Visible = true;
+                this.normalSandMethodPanel.Visible = true;
+                this.highSandMethodText.Visible = false;
+                this.highSandMethodPanel.Visible = false;
+
+            }
+
             this.Width = 1000;
             this.Height = 720;
             valueParamPanel.Visible = false;
@@ -76,7 +95,9 @@ namespace RiverSimulationApplication
             this.bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
             this.quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
             this.highSandContentFlowGrp.Enabled = RiverSimulationProfile.profile.highSandContentFlowFunction;
-            this.highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
+            //this.highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
+            //highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentFlowFunction;
+
         }
 
         private void Back_Click(object sender, EventArgs e)
@@ -477,6 +498,16 @@ namespace RiverSimulationApplication
             bool chk = (sender as CheckBox).Checked;
             noScourElevationBtn.Enabled = chk;
 
+        }
+
+        private void hourRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            timeLbl.Text = hourRdo.Text;
+        }
+
+        private void minuteRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            timeLbl.Text = minuteRdo.Text;
         }
  
 

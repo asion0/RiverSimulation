@@ -88,37 +88,78 @@ namespace RiverSimulationApplication
             else
             {
                 timer1.Stop();
-                EnterSimUI(false);
+                EnterSimUI(Status.Ready);
             }
         }
 
-        void EnterSimUI(bool b)
+        private enum Status
         {
-            if(b)
-            {
-                startBtn.Enabled = false;
-                stopFlagChk.Enabled = false;
-
-            }
-            else
-            {
-
-                startBtn.Enabled = true;
-                stopFlagChk.Enabled = true;
-            }
-
+            Ready,
+            Running,
+            Pause,
         }
 
+        private Status status = Status.Ready;
         private void startBtn_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
-            timer1.Start();
-            timer1.Interval = 100;
-            progressBar.Maximum = 1000;
-            timer1.Tick += new EventHandler(timer1_Tick);
-            RunSimulationMain();
-            EnterSimUI(true);
+            if (status == Status.Ready)
+            {
+                timer1.Enabled = true;
+                timer1.Start();
+                timer1.Interval = 100;
+                progressBar.Maximum = 1000;
+                timer1.Tick += new EventHandler(timer1_Tick);
+                RunSimulationMain();
+                EnterSimUI(Status.Running);
+            }
+            else if (status == Status.Running)
+            {
+                timer1.Stop();
+                EnterSimUI(Status.Pause);
+            }
+            else if (status == Status.Pause)
+            {
+                timer1.Start();
+                EnterSimUI(Status.Running);
+            }
+        }
 
+        void EnterSimUI(Status s)
+        {
+            if(s==Status.Ready)
+            {
+                startBtn.Text = "開始模擬";
+                startBtn.Enabled = true;
+                stopBtn.Enabled = false;
+                stopFlagChk.Enabled = true;
+            }
+            else if (s == Status.Running)
+            {
+                startBtn.Text = "暫停模擬";
+                startBtn.Enabled = true;
+                stopBtn.Enabled = true;
+                stopFlagChk.Enabled = false;
+            }
+            else if(s == Status.Pause)
+            {
+                startBtn.Text = "繼續模擬";
+                startBtn.Enabled = true;
+                stopBtn.Enabled = true;
+                stopFlagChk.Enabled = false;
+            }
+            status = s;
+        }
+
+        private void stopBtn_Click(object sender, EventArgs e)
+        {
+            if (status == Status.Running || status == Status.Pause)
+            {
+                timer1.Stop();
+                timer1.Enabled = false;
+                timer1.Interval = 100;
+                progressBar.Value = 0;
+                EnterSimUI(Status.Ready);
+            }
         }
     }
 }

@@ -78,18 +78,20 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.minWaterDepthPanel = new System.Windows.Forms.Panel();
             this.label29 = new System.Windows.Forms.Label();
             this.textBox20 = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.threeDGrp = new System.Windows.Forms.GroupBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.twoDGrp = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -97,7 +99,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
+            this.minWaterDepthText = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -119,6 +121,8 @@
             this.physicalParamPanel = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.textBox15 = new System.Windows.Forms.TextBox();
@@ -163,8 +167,6 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.roughnessBackBtn = new System.Windows.Forms.Button();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.secFlowEffectGrp.SuspendLayout();
@@ -176,8 +178,10 @@
             this.valueParamPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.fullPanel.SuspendLayout();
-            this.panel9.SuspendLayout();
+            this.minWaterDepthPanel.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.threeDGrp.SuspendLayout();
+            this.twoDGrp.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.setting3dPanel.SuspendLayout();
@@ -494,10 +498,10 @@
             // 
             this.groupBox1.Controls.Add(this.fullPanel);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.panel9);
+            this.groupBox1.Controls.Add(this.minWaterDepthPanel);
             this.groupBox1.Controls.Add(this.panel6);
             this.groupBox1.Controls.Add(this.panel5);
-            this.groupBox1.Controls.Add(this.label28);
+            this.groupBox1.Controls.Add(this.minWaterDepthText);
             this.groupBox1.Controls.Add(this.label25);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.panel4);
@@ -540,14 +544,14 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
-            // panel9
+            // minWaterDepthPanel
             // 
-            this.panel9.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel9.Controls.Add(this.label29);
-            this.panel9.Controls.Add(this.textBox20);
-            this.panel9.Controls.Add(this.label30);
-            resources.ApplyResources(this.panel9, "panel9");
-            this.panel9.Name = "panel9";
+            this.minWaterDepthPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.minWaterDepthPanel.Controls.Add(this.label29);
+            this.minWaterDepthPanel.Controls.Add(this.textBox20);
+            this.minWaterDepthPanel.Controls.Add(this.label30);
+            resources.ApplyResources(this.minWaterDepthPanel, "minWaterDepthPanel");
+            this.minWaterDepthPanel.Name = "minWaterDepthPanel";
             // 
             // label29
             // 
@@ -567,15 +571,17 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel6.Controls.Add(this.checkBox8);
-            this.panel6.Controls.Add(this.checkBox7);
-            this.panel6.Controls.Add(this.checkBox6);
-            this.panel6.Controls.Add(this.checkBox5);
-            this.panel6.Controls.Add(this.checkBox4);
-            this.panel6.Controls.Add(this.checkBox3);
-            this.panel6.Controls.Add(this.checkBox1);
+            this.panel6.Controls.Add(this.threeDGrp);
+            this.panel6.Controls.Add(this.twoDGrp);
             resources.ApplyResources(this.panel6, "panel6");
             this.panel6.Name = "panel6";
+            // 
+            // threeDGrp
+            // 
+            this.threeDGrp.Controls.Add(this.checkBox8);
+            resources.ApplyResources(this.threeDGrp, "threeDGrp");
+            this.threeDGrp.Name = "threeDGrp";
+            this.threeDGrp.TabStop = false;
             // 
             // checkBox8
             // 
@@ -583,17 +589,29 @@
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
+            // twoDGrp
+            // 
+            this.twoDGrp.Controls.Add(this.checkBox1);
+            this.twoDGrp.Controls.Add(this.checkBox7);
+            this.twoDGrp.Controls.Add(this.checkBox5);
+            this.twoDGrp.Controls.Add(this.checkBox2);
+            this.twoDGrp.Controls.Add(this.checkBox6);
+            this.twoDGrp.Controls.Add(this.checkBox3);
+            resources.ApplyResources(this.twoDGrp, "twoDGrp");
+            this.twoDGrp.Name = "twoDGrp";
+            this.twoDGrp.TabStop = false;
+            // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // checkBox7
             // 
             resources.ApplyResources(this.checkBox7, "checkBox7");
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            resources.ApplyResources(this.checkBox6, "checkBox6");
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.UseVisualStyleBackColor = true;
             // 
             // checkBox5
             // 
@@ -601,23 +619,23 @@
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // checkBox2
             // 
-            resources.ApplyResources(this.checkBox4, "checkBox4");
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.checkBox2, "checkBox2");
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            resources.ApplyResources(this.checkBox6, "checkBox6");
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.UseVisualStyleBackColor = true;
             // 
             // checkBox3
             // 
             resources.ApplyResources(this.checkBox3, "checkBox3");
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
@@ -661,10 +679,10 @@
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
             // 
-            // label28
+            // minWaterDepthText
             // 
-            resources.ApplyResources(this.label28, "label28");
-            this.label28.Name = "label28";
+            resources.ApplyResources(this.minWaterDepthText, "minWaterDepthText");
+            this.minWaterDepthText.Name = "minWaterDepthText";
             // 
             // label25
             // 
@@ -806,6 +824,18 @@
             this.panel10.Controls.Add(this.textBox16);
             resources.ApplyResources(this.panel10, "panel10");
             this.panel10.Name = "panel10";
+            // 
+            // label35
+            // 
+            resources.ApplyResources(this.label35, "label35");
+            this.label35.Name = "label35";
+            this.label35.Click += new System.EventHandler(this.label12_Click);
+            // 
+            // label34
+            // 
+            resources.ApplyResources(this.label34, "label34");
+            this.label34.Name = "label34";
+            this.label34.Click += new System.EventHandler(this.label12_Click);
             // 
             // label12
             // 
@@ -1126,18 +1156,6 @@
             this.roughnessBackBtn.UseVisualStyleBackColor = true;
             this.roughnessBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
-            // label34
-            // 
-            resources.ApplyResources(this.label34, "label34");
-            this.label34.Name = "label34";
-            this.label34.Click += new System.EventHandler(this.label12_Click);
-            // 
-            // label35
-            // 
-            resources.ApplyResources(this.label35, "label35");
-            this.label35.Name = "label35";
-            this.label35.Click += new System.EventHandler(this.label12_Click);
-            // 
             // WaterModelingForm
             // 
             this.AcceptButton = this.ok;
@@ -1173,10 +1191,13 @@
             this.groupBox1.PerformLayout();
             this.fullPanel.ResumeLayout(false);
             this.fullPanel.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
+            this.minWaterDepthPanel.ResumeLayout(false);
+            this.minWaterDepthPanel.PerformLayout();
             this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.threeDGrp.ResumeLayout(false);
+            this.threeDGrp.PerformLayout();
+            this.twoDGrp.ResumeLayout(false);
+            this.twoDGrp.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1305,7 +1326,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel minWaterDepthPanel;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox textBox20;
         private System.Windows.Forms.Label label30;
@@ -1313,10 +1334,9 @@
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label minWaterDepthText;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.ComboBox twinEquationCombo;
@@ -1343,5 +1363,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.GroupBox threeDGrp;
+        private System.Windows.Forms.GroupBox twoDGrp;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

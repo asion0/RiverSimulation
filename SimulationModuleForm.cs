@@ -103,7 +103,7 @@ namespace RiverSimulationApplication
 
         private void UpdateStatus()
         {
-            secFlowEffectChk.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
+            secFlowEffectChk.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type2D);
             movableBedPanel.Enabled = (RiverSimulationProfile.profile.GetModuleType2() == RiverSimulationProfile.ModuleType2.MovableBed);
 
 

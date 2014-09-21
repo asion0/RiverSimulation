@@ -37,8 +37,7 @@
             this.stopFlagChk = new System.Windows.Forms.CheckBox();
             this.startBtn = new System.Windows.Forms.Button();
             this.msg = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.stopBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,25 +93,16 @@
             this.msg.Size = new System.Drawing.Size(558, 13);
             this.msg.TabIndex = 5;
             // 
-            // button1
+            // stopBtn
             // 
-            this.button1.Location = new System.Drawing.Point(136, 35);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 31);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "暫停模擬";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.startBtn_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(261, 35);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 31);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "停止模擬";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.startBtn_Click);
+            this.stopBtn.Enabled = false;
+            this.stopBtn.Location = new System.Drawing.Point(136, 35);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(119, 31);
+            this.stopBtn.TabIndex = 4;
+            this.stopBtn.Text = "停止模擬";
+            this.stopBtn.UseVisualStyleBackColor = true;
+            this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
             // 
             // RunSimulationForm
             // 
@@ -120,8 +110,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(583, 402);
             this.Controls.Add(this.msg);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.stopFlagChk);
             this.Controls.Add(this.pictureBox1);
@@ -146,7 +135,6 @@
         private System.Windows.Forms.CheckBox stopFlagChk;
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Label msg;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button stopBtn;
     }
 }

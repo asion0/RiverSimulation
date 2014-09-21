@@ -51,6 +51,18 @@ namespace RiverSimulationApplication
             bottomBedPanel.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
             bottomBedPanel2.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
             sideInOutFlowPanel.Enabled = RiverSimulationProfile.profile.sideInOutFlowFunction;
+            if(RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D)
+            {
+                upVertPanel.Enabled = true;
+                downVertPanel.Enabled = true;
+                waterUpVertPanel.Enabled = true;
+            }
+            else
+            {
+                upVertPanel.Enabled = false;
+                downVertPanel.Enabled = false;
+                waterUpVertPanel.Enabled = false;
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)

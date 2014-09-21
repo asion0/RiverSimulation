@@ -72,6 +72,8 @@ namespace RiverSimulationApplication
         {
             if(Program.IsLiteVersion())
             {
+                minWaterDepthPanel.Visible = false;
+                minWaterDepthText.Visible = false;
                 fullPanel.Visible = false;
             }
 
@@ -93,6 +95,7 @@ namespace RiverSimulationApplication
             dryBedEffectGrp.Enabled = RiverSimulationProfile.profile.dryBedEffectFunction;
             immersedBoundaryGrp.Enabled = RiverSimulationProfile.profile.immersedBoundaryFunction;
             highSandContentEffectGrp.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
+            threeDGrp.Enabled = RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D;
         }
 
 

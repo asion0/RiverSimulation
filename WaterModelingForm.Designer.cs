@@ -93,11 +93,11 @@
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.maxIterationsNumTxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.convergenceCriteria2dTxt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.convergenceCriteria3dTxt = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.minWaterDepthText = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -640,39 +640,41 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel5.Controls.Add(this.textBox5);
+            this.panel5.Controls.Add(this.maxIterationsNumTxt);
             this.panel5.Controls.Add(this.label10);
-            this.panel5.Controls.Add(this.textBox4);
+            this.panel5.Controls.Add(this.convergenceCriteria2dTxt);
             this.panel5.Controls.Add(this.label9);
-            this.panel5.Controls.Add(this.textBox8);
+            this.panel5.Controls.Add(this.convergenceCriteria3dTxt);
             this.panel5.Controls.Add(this.label14);
             resources.ApplyResources(this.panel5, "panel5");
             this.panel5.Name = "panel5";
             // 
-            // textBox5
+            // maxIterationsNumTxt
             // 
-            resources.ApplyResources(this.textBox5, "textBox5");
-            this.textBox5.Name = "textBox5";
+            resources.ApplyResources(this.maxIterationsNumTxt, "maxIterationsNumTxt");
+            this.maxIterationsNumTxt.Name = "maxIterationsNumTxt";
             // 
             // label10
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
             // 
-            // textBox4
+            // convergenceCriteria2dTxt
             // 
-            resources.ApplyResources(this.textBox4, "textBox4");
-            this.textBox4.Name = "textBox4";
+            resources.ApplyResources(this.convergenceCriteria2dTxt, "convergenceCriteria2dTxt");
+            this.convergenceCriteria2dTxt.Name = "convergenceCriteria2dTxt";
+            this.convergenceCriteria2dTxt.TextChanged += new System.EventHandler(this.convergenceCriteria2dTxt_TextChanged);
             // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
             // 
-            // textBox8
+            // convergenceCriteria3dTxt
             // 
-            resources.ApplyResources(this.textBox8, "textBox8");
-            this.textBox8.Name = "textBox8";
+            resources.ApplyResources(this.convergenceCriteria3dTxt, "convergenceCriteria3dTxt");
+            this.convergenceCriteria3dTxt.Name = "convergenceCriteria3dTxt";
+            this.convergenceCriteria3dTxt.TextChanged += new System.EventHandler(this.convergenceCriteria3dTxt_TextChanged);
             // 
             // label14
             // 
@@ -1161,8 +1163,8 @@
             this.AcceptButton = this.ok;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.valueParamPanel);
+            this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.roughnessPanel);
             this.Controls.Add(this.setting3dPanel);
             this.Controls.Add(this.mainPanel);
@@ -1266,12 +1268,12 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox maxIterationsNumTxt;
+        private System.Windows.Forms.TextBox convergenceCriteria2dTxt;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox convergenceCriteria3dTxt;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.RadioButton radioButton7;

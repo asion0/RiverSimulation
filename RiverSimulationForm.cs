@@ -188,6 +188,7 @@ namespace RiverSimulationApplication
             {
 
             }
+
             RiverSimulationProfile.profile.runSimulationFinished = true;
             UpdateStatus();
         }

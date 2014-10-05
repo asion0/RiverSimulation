@@ -1728,28 +1728,28 @@
   <data name="&gt;&gt;panel6.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="maxIterationsNumTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 73</value>
   </data>
-  <data name="textBox5.MaxLength" type="System.Int32, mscorlib">
+  <data name="maxIterationsNumTxt.MaxLength" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="maxIterationsNumTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 22</value>
   </data>
-  <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
+  <data name="maxIterationsNumTxt.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;textBox5.Name" xml:space="preserve">
-    <value>textBox5</value>
+  <data name="&gt;&gt;maxIterationsNumTxt.Name" xml:space="preserve">
+    <value>maxIterationsNumTxt</value>
   </data>
-  <data name="&gt;&gt;textBox5.Type" xml:space="preserve">
+  <data name="&gt;&gt;maxIterationsNumTxt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;maxIterationsNumTxt.Parent" xml:space="preserve">
     <value>panel5</value>
   </data>
-  <data name="&gt;&gt;textBox5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;maxIterationsNumTxt.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
@@ -1782,28 +1782,28 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="textBox4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="convergenceCriteria2dTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 13</value>
   </data>
-  <data name="textBox4.MaxLength" type="System.Int32, mscorlib">
+  <data name="convergenceCriteria2dTxt.MaxLength" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="convergenceCriteria2dTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 22</value>
   </data>
-  <data name="textBox4.TabIndex" type="System.Int32, mscorlib">
+  <data name="convergenceCriteria2dTxt.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;textBox4.Name" xml:space="preserve">
-    <value>textBox4</value>
+  <data name="&gt;&gt;convergenceCriteria2dTxt.Name" xml:space="preserve">
+    <value>convergenceCriteria2dTxt</value>
   </data>
-  <data name="&gt;&gt;textBox4.Type" xml:space="preserve">
+  <data name="&gt;&gt;convergenceCriteria2dTxt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;convergenceCriteria2dTxt.Parent" xml:space="preserve">
     <value>panel5</value>
   </data>
-  <data name="&gt;&gt;textBox4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;convergenceCriteria2dTxt.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
@@ -1836,28 +1836,28 @@
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="textBox8.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="convergenceCriteria3dTxt.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 43</value>
   </data>
-  <data name="textBox8.MaxLength" type="System.Int32, mscorlib">
+  <data name="convergenceCriteria3dTxt.MaxLength" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="textBox8.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="convergenceCriteria3dTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 22</value>
   </data>
-  <data name="textBox8.TabIndex" type="System.Int32, mscorlib">
+  <data name="convergenceCriteria3dTxt.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;textBox8.Name" xml:space="preserve">
-    <value>textBox8</value>
+  <data name="&gt;&gt;convergenceCriteria3dTxt.Name" xml:space="preserve">
+    <value>convergenceCriteria3dTxt</value>
   </data>
-  <data name="&gt;&gt;textBox8.Type" xml:space="preserve">
+  <data name="&gt;&gt;convergenceCriteria3dTxt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox8.Parent" xml:space="preserve">
+  <data name="&gt;&gt;convergenceCriteria3dTxt.Parent" xml:space="preserve">
     <value>panel5</value>
   </data>
-  <data name="&gt;&gt;textBox8.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;convergenceCriteria3dTxt.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="label14.AutoSize" type="System.Boolean, mscorlib">
@@ -2338,7 +2338,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;valueParamPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="setting3dBackBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -3235,7 +3235,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;physicalParamPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

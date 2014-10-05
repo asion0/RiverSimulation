@@ -29,42 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RunSimulationForm));
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tbResult = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.stopFlagChk = new System.Windows.Forms.CheckBox();
             this.startBtn = new System.Windows.Forms.Button();
             this.msg = new System.Windows.Forms.Label();
             this.stopBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 365);
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Location = new System.Drawing.Point(11, 473);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(558, 23);
+            this.progressBar.Size = new System.Drawing.Size(785, 23);
             this.progressBar.TabIndex = 0;
-            // 
-            // tbResult
-            // 
-            this.tbResult.Location = new System.Drawing.Point(12, 72);
-            this.tbResult.Multiline = true;
-            this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(559, 279);
-            this.tbResult.TabIndex = 1;
-            this.tbResult.Visible = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 97);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(558, 241);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
             // 
             // stopFlagChk
             // 
@@ -88,7 +72,7 @@
             // 
             // msg
             // 
-            this.msg.Location = new System.Drawing.Point(12, 401);
+            this.msg.Location = new System.Drawing.Point(290, 180);
             this.msg.Name = "msg";
             this.msg.Size = new System.Drawing.Size(558, 13);
             this.msg.TabIndex = 5;
@@ -104,23 +88,36 @@
             this.stopBtn.UseVisualStyleBackColor = true;
             this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
             // 
+            // chart1
+            // 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(11, 102);
+            this.chart1.Name = "chart1";
+            this.chart1.Size = new System.Drawing.Size(785, 365);
+            this.chart1.TabIndex = 6;
+            this.chart1.Text = "chart1";
+            // 
             // RunSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 402);
+            this.ClientSize = new System.Drawing.Size(808, 517);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.msg);
             this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.stopFlagChk);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.tbResult);
             this.Controls.Add(this.progressBar);
             this.Name = "RunSimulationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "模擬作業";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RunSimulationForm_FormClosed);
             this.Load += new System.EventHandler(this.RunSimulationForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,11 +127,11 @@
 
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.TextBox tbResult;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.CheckBox stopFlagChk;
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Label msg;
         private System.Windows.Forms.Button stopBtn;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

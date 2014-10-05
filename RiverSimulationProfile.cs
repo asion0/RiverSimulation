@@ -136,6 +136,11 @@ namespace RiverSimulationApplication
         public bool Is3DMode() { return moduleType1 == ModuleType1.Type3D; }
         public bool HasMovableBedMode() { return moduleType2 == ModuleType2.MovableBed; }
 
+        //WaterModeling 數值參數
+        public double convergenceCriteria2d;    //二維水裡收斂標準 
+        public double convergenceCriteria3d;    //三維水裡收斂標準
+
+
         private void Initialization()
         {
             moduleType1 = ModuleType1.NoSelect;

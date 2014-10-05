@@ -34,7 +34,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>Exe\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -170,6 +170,12 @@
       <DependentUpon>RunSimulationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="SimDebugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimDebugForm.Designer.cs">
+      <DependentUpon>SimDebugForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SliderPanel.cs" />
     <Compile Include="ImportForm.cs">
       <SubType>Form</SubType>
@@ -249,6 +255,9 @@
     </Compile>
     <EmbeddedResource Include="RunSimulationForm.resx">
       <DependentUpon>RunSimulationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimDebugForm.resx">
+      <DependentUpon>SimDebugForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SimulationModuleForm.resx">
       <DependentUpon>SimulationModuleForm.cs</DependentUpon>

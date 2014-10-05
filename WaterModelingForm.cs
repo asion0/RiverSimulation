@@ -96,6 +96,8 @@ namespace RiverSimulationApplication
             immersedBoundaryGrp.Enabled = RiverSimulationProfile.profile.immersedBoundaryFunction;
             highSandContentEffectGrp.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
             threeDGrp.Enabled = RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D;
+
+            UpdateStatus();
         }
 
 
@@ -324,6 +326,49 @@ namespace RiverSimulationApplication
 
         }
 
+        private void UpdateStatus()
+        {
+            convergenceCriteria3dTxt.Text = RiverSimulationProfile.profile.convergenceCriteria3d.ToString();
+            convergenceCriteria2dTxt.Text = RiverSimulationProfile.profile.convergenceCriteria2d.ToString();
+
+
+        }
+
+        private void convergenceCriteria3dTxt_TextChanged(object sender, EventArgs e)
+        {
+            double value = 0.0;
+            try
+            {
+                value = Convert.ToDouble((sender as TextBox).Text);
+                (sender as TextBox).ForeColor = Color.Black;
+            }
+            catch
+            {
+                (sender as TextBox).ForeColor = Color.Red;
+                return;
+            }
+
+            RiverSimulationProfile.profile.convergenceCriteria3d = value;
+            //UpdateStatus();
+        }
+
+        private void convergenceCriteria2dTxt_TextChanged(object sender, EventArgs e)
+        {
+            double value = 0.0;
+            try
+            {
+                value = Convert.ToDouble((sender as TextBox).Text);
+                (sender as TextBox).ForeColor = Color.Black;
+            }
+            catch
+            {
+                (sender as TextBox).ForeColor = Color.Red;
+                return;
+            }
+
+            RiverSimulationProfile.profile.convergenceCriteria2d = value;
+            //UpdateStatus();        
+        }
 
     }
 }

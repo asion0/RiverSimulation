@@ -4,7 +4,7 @@
   <description asmv2:iconFile="RiverSimulation.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.7" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.8" language="neutral" processorArchitecture="msil" />
     <commandLine file="RiverSimulationApplication.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1904128">
-      <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.7" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1901056">
+      <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.8" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZEQrSQPChbHYTX4OPYit+gqsrTya4bAkoLrVOnReQo4=</dsig:DigestValue>
+        <dsig:DigestValue>7TjP8dFcbxQ76wQYVc6QL6LqlsIhBpqFRYXO9WFTuNs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

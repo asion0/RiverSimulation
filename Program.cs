@@ -48,7 +48,6 @@ namespace RiverSimulationApplication
             {
                 Directory.CreateDirectory(documentPath);
             }
-
         }
     }
 }

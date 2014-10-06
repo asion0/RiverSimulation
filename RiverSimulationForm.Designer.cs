@@ -40,6 +40,7 @@
             this.newMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveMnuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.descriptionMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageMnu = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.descriptionMnuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -187,30 +187,37 @@
             // newMnuItem
             // 
             this.newMnuItem.Name = "newMnuItem";
-            this.newMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.newMnuItem.Size = new System.Drawing.Size(142, 22);
             this.newMnuItem.Text = "開新檔案(N)";
             // 
             // openMnuItem
             // 
             this.openMnuItem.Name = "openMnuItem";
-            this.openMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMnuItem.Size = new System.Drawing.Size(142, 22);
             this.openMnuItem.Text = "開啟舊檔(O)";
             // 
             // saveMnuItem
             // 
             this.saveMnuItem.Name = "saveMnuItem";
-            this.saveMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMnuItem.Size = new System.Drawing.Size(142, 22);
             this.saveMnuItem.Text = "儲存檔案(S)";
+            // 
+            // descriptionMnuItem
+            // 
+            this.descriptionMnuItem.Name = "descriptionMnuItem";
+            this.descriptionMnuItem.Size = new System.Drawing.Size(142, 22);
+            this.descriptionMnuItem.Text = "檔案敘述(D)";
+            this.descriptionMnuItem.Click += new System.EventHandler(this.descriptionMnuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
             // 
             // exitMnuItem
             // 
             this.exitMnuItem.Name = "exitMnuItem";
-            this.exitMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitMnuItem.Size = new System.Drawing.Size(142, 22);
             this.exitMnuItem.Text = "結束(X)";
             this.exitMnuItem.Click += new System.EventHandler(this.exitMnuItem_Click);
             // 
@@ -477,13 +484,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "參數設定狀況";
             // 
-            // descriptionMnuItem
-            // 
-            this.descriptionMnuItem.Name = "descriptionMnuItem";
-            this.descriptionMnuItem.Size = new System.Drawing.Size(152, 22);
-            this.descriptionMnuItem.Text = "檔案敘述(D)";
-            this.descriptionMnuItem.Click += new System.EventHandler(this.descriptionMnuItem_Click);
-            // 
             // RiverSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -505,6 +505,7 @@
             this.Controls.Add(this.simulationModuleBtn);
             this.Controls.Add(this.importBtn);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RiverSimulationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

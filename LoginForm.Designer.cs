@@ -97,6 +97,7 @@
             this.Controls.Add(this.delBtn);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "水理動床模式使用介面";

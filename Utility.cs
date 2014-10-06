@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace RiverSimulationApplication
 {
     class Utility
-    {
+    { 
         private const int FO_DELETE = 0x0003;
         private const int FOF_ALLOWUNDO = 0x0040;           // Preserve undo information, if possible. 
         private const int FOF_NOCONFIRMATION = 0x0010;      // Show no confirmation dialog box to the user

@@ -70,22 +70,21 @@ namespace RiverSimulationApplication
             mySeriesU.LegendText = "流速u誤差";
             mySeriesV.LegendText = "流速v誤差";
 
-
             myArea.AxisX.Name = "疊代次數";
             myArea.AxisY.Name = "error";
 
             myArea.AxisX.MajorGrid.LineColor = Color.Transparent; // X軸的刻度 縱線
             myArea.AxisY.MajorGrid.LineColor = Color.LightGray;  // Y軸的刻度 橫線
-            myArea.AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            myArea.AxisY.IsLabelAutoFit = true;
+            myArea.AxisY.IntervalAutoMode = IntervalAutoMode.FixedCount;
+            myArea.AxisY.IsLabelAutoFit = false;
 
             //myArea.AxisY.Minimum = 0.000001;
             if (true)    //using log Y axis
             {
                 myArea.AxisY.IsLogarithmic = true;
-                myArea.AxisY.Minimum = 0.000001;
-                //myArea.AxisY.Maximum = 1000.0;
                 myArea.AxisY.LogarithmBase = 10.0;
+                myArea.AxisY.Minimum = 1.0E-6;
+                myArea.AxisY.Maximum = 1000.0;
             }
             //else
             //{

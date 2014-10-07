@@ -4,11 +4,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace RiverSimulationApplication
 {
-    class Utility
-    { 
+    public static class Utility
+    {
+        const UInt32 THREAD_SUSPEND_RESUME = 0x0002;
+        [DllImport("kernel32.dll")]
+        static extern IntPtr OpenThread(UInt32 dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
+        [DllImport("kernel32.dll")]
+        static extern uint SuspendThread(IntPtr hThread);
+        [DllImport("kernel32.dll")]
+        static extern int ResumeThread(IntPtr hThread);
+
+        public static void Suspend(this Process process)
+        {
+            foreach (ProcessThread thread in process.Threads)
+            {
+                var pOpenThread = OpenThread(THREAD_SUSPEND_RESUME, false, (uint)thread.Id);
+                if (pOpenThread == IntPtr.Zero)
+                {
+                    break;
+                }
+                SuspendThread(pOpenThread);
+            }
+        }
+
+        public static void Resume(this Process process)
+        {
+            foreach (ProcessThread thread in process.Threads)
+            {
+                var pOpenThread = OpenThread(THREAD_SUSPEND_RESUME, false, (uint)thread.Id);
+                if (pOpenThread == IntPtr.Zero)
+                {
+                    break;
+                }
+                ResumeThread(pOpenThread);
+            }
+        }
+
         private const int FO_DELETE = 0x0003;
         private const int FOF_ALLOWUNDO = 0x0040;           // Preserve undo information, if possible. 
         private const int FOF_NOCONFIRMATION = 0x0010;      // Show no confirmation dialog box to the user

@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Runtime.InteropServices;
 
 namespace RiverSimulationApplication
 {
@@ -20,6 +14,7 @@ namespace RiverSimulationApplication
         {
             InitializeComponent();
         }
+
 
         private BackgroundWorker bw = new BackgroundWorker();
         private SimDebugForm simDebugForm = new SimDebugForm();
@@ -38,7 +33,6 @@ namespace RiverSimulationApplication
         private void ResetChart()
         {
             chart1.Series.SuspendUpdates();
-
             if(chart1.ChartAreas.Count != 0)
             { 
                 chart1.Series["DepthD"].Dispose();
@@ -49,8 +43,7 @@ namespace RiverSimulationApplication
                 chart1.Series.Clear();
                 chart1.ChartAreas.Clear();
             }
-    
-            InitialChart();
+                InitialChart();
             chart1.Series.ResumeUpdates();
         }
 
@@ -70,28 +63,16 @@ namespace RiverSimulationApplication
             mySeriesU.LegendText = "流速u誤差";
             mySeriesV.LegendText = "流速v誤差";
 
-            myArea.AxisX.Name = "疊代次數";
-            myArea.AxisY.Name = "error";
-
             myArea.AxisX.MajorGrid.LineColor = Color.Transparent; // X軸的刻度 縱線
             myArea.AxisY.MajorGrid.LineColor = Color.LightGray;  // Y軸的刻度 橫線
-            myArea.AxisY.IntervalAutoMode = IntervalAutoMode.FixedCount;
+            myArea.AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
             myArea.AxisY.IsLabelAutoFit = false;
 
-            //myArea.AxisY.Minimum = 0.000001;
-            if (true)    //using log Y axis
-            {
-                myArea.AxisY.IsLogarithmic = true;
-                myArea.AxisY.LogarithmBase = 10.0;
-                myArea.AxisY.Minimum = 1.0E-6;
-                myArea.AxisY.Maximum = 1000.0;
-            }
-            //else
-            //{
-            //    myArea.AxisY.IsLogarithmic = false;
-            //    myArea.AxisY.Minimum = 0.0;
-            //    myArea.AxisY.Maximum = 10.0;
-            //}
+            myArea.AxisY.IsLogarithmic = true;
+            myArea.AxisY.LogarithmBase = 10.0;
+            myArea.AxisY.Minimum = 1.0E-6;
+            myArea.AxisY.Maximum = 1000.0;
+
             myArea.AxisY.Title = "error";
             myArea.AxisX.Title = "疊代次數";
 
@@ -115,8 +96,8 @@ namespace RiverSimulationApplication
                 myArea.AxisY.StripLines.Add(lineMean);
             }
 
-
-            mySeriesD.ChartType = SeriesChartType.Spline;        // 曲線圖
+           // mySeriesD.ChartType = SeriesChartType.Spline;        // 曲線圖
+            mySeriesD.ChartType = SeriesChartType.Line;        // 曲線圖
             mySeriesD.Color = Color.Blue;               // 在圖型上的顏色
             mySeriesD.BorderWidth = 1;                   // 線型的寬度
             mySeriesD.ShadowColor = Color.Transparent;      // 陰影的顏色
@@ -294,7 +275,6 @@ namespace RiverSimulationApplication
                 pi.t = ProgressItem.Type.ShowConsole;
                 bw.ReportProgress(0, new ProgressItem(pi));
             }
-
         }
 
         private Process simProcess = new Process();
@@ -369,7 +349,7 @@ namespace RiverSimulationApplication
             {
                 if (!simProcess.HasExited)
                 {
-                    ProcessExtension.Suspend(simProcess);
+                    Utility.Suspend(simProcess);
                 }
                 //timer1.Stop();
                 EnterSimUI(Status.Pause);
@@ -378,7 +358,7 @@ namespace RiverSimulationApplication
             {
                 if (!simProcess.HasExited)
                 {
-                    ProcessExtension.Resume(simProcess);
+                    Utility.Resume(simProcess);
                 }
                 EnterSimUI(Status.Running);
             }
@@ -423,11 +403,6 @@ namespace RiverSimulationApplication
             status = s;
         }
 
-        private void tbResult_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void RunSimulationForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             simDebugForm.Hide();
@@ -436,37 +411,6 @@ namespace RiverSimulationApplication
 
     public static class ProcessExtension
     {
-        const UInt32 THREAD_SUSPEND_RESUME = 0x0002;
-        [DllImport("kernel32.dll")]
-        static extern IntPtr OpenThread(UInt32 dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
-        [DllImport("kernel32.dll")]
-        static extern uint SuspendThread(IntPtr hThread);
-        [DllImport("kernel32.dll")]
-        static extern int ResumeThread(IntPtr hThread);
 
-        public static void Suspend(this Process process)
-        {
-            foreach (ProcessThread thread in process.Threads)
-            {
-                var pOpenThread = OpenThread(THREAD_SUSPEND_RESUME, false, (uint)thread.Id);
-                if (pOpenThread == IntPtr.Zero)
-                {
-                    break;
-                }
-                SuspendThread(pOpenThread);
-            }
-        }
-        public static void Resume(this Process process)
-        {
-            foreach (ProcessThread thread in process.Threads)
-            {
-                var pOpenThread = OpenThread(THREAD_SUSPEND_RESUME, false, (uint)thread.Id);
-                if (pOpenThread == IntPtr.Zero)
-                {
-                    break;
-                }
-                ResumeThread(pOpenThread);
-            }
-        }
     }
 }

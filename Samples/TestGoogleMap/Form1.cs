@@ -14,6 +14,39 @@ namespace TestGoogleMap
 {
     public partial class Form1 : Form
     {
+        // ===========================Test Zoom Image Sample
+        // Factor for zoom the image
+        private float zoomFac = 1;
+        //set Zoom allowed
+        private bool zoomSet = false;
+ 
+        //value for moving the image in X direction
+        private float translateX=0;
+        //value for moving the image in Y direction
+        private float translateY = 0;
+ 
+        //Flag to set the moving operation set
+        private bool translateSet = false;
+        //Flag to set mouse down on the image
+        private bool translate = false;
+ 
+        //set on the mouse down to know from where moving starts
+        private float transStartX;
+        private float transStartY;
+ 
+        //Current Image position after moving 
+        private float curImageX=0;
+        private float curImageY=0;
+ 
+
+        //temporary storage in bitmap
+        Image bmp;
+ 
+        float ratio;
+        float translateRatio;
+
+        // ===========================Test Zoom Image Sample End
+ 
         public Form1()
         {
             InitializeComponent();
@@ -23,38 +56,205 @@ namespace TestGoogleMap
         private RiverGrid rg = new RiverGrid();
         private void Form1_Load(object sender, EventArgs e)
         {
+            // ===========================Test Zoom Image Sample
+            //Picture box event handlers
+            pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
 
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
 
+            //Store the image in to bytes array
+            //It is not advisable to store bitmap as such
 
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            int x, y, w, h;
-            if(panel1.Size.Width > panel1.Size.Height)
+            //Change the path name for your file
+            if (System.IO.File.Exists(Application.StartupPath + "//test.jpg") != true)
             {
-                h = w = panel1.Size.Height;
-                y = 0;
-                x = (panel1.Size.Width - w) / 2;
+                MessageBox.Show("Your Image file does not exists");
+                return;
+            }
+
+            if (bmp != null)
+            {
+                bmp.Dispose();
+            }
+            bmp = new Bitmap(Application.StartupPath + "//test.jpg");
+
+            // Check potrait or landscape
+            if (bmp.Width > bmp.Height)
+            {
+                ratio = (float)pictureBox1.Width / (float)bmp.Width;
+                translateRatio = (float)bmp.Width / (float)pictureBox1.Width;
+
             }
             else
             {
-                h = w = panel1.Size.Width;
-                x = 0;
-                y = (panel1.Size.Height - h) / 2;
+                ratio = (float)pictureBox1.Height / (float)bmp.Height;
+                translateRatio = (float)bmp.Height / (float)pictureBox1.Height;
+
             }
-            g.DrawImage(gridBmp, x, y, w, h);
-            //Pen p = new Pen(Color.Black);
-            //g.DrawLine(p, 0, 0, 100, 200);
-            //g.DrawImage(gridBmp, 0, 0, 200, 200);
+
+
+            this.Shown += new EventHandler(Form1_Shown);
+            this.Disposed += new EventHandler(Form1_Disposed);
+            // ===========================Test Zoom Image Sample End
+
+
+
+            //this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+            //this.UpdateStyles();
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseWheel);
+            SetColorSample();
+        }
+        // ===========================Test Zoom Image Sample
+        protected void Form1_Disposed(object sender, EventArgs e)
+        {
+            //Dispose the bmp when form is disposed.
+            if (bmp != null)
+            {
+                bmp.Dispose();
+            }
+        }
+
+        protected void Form1_Shown(object sender, EventArgs e)
+        {
+            //Draw the image initially
+            zoomSet = true;
+            pictureBox1.Refresh();
+            zoomSet = false;
+
+        }
+
+        //Zoom Button
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "" || Single.TryParse(textBox1.Text, out zoomFac) == false) { return; }
+            //set Zoom allowed
+            zoomSet = true;
+
+            //call the picture box paint
+            pictureBox1.Refresh();
+            pictureBox1.Cursor = Cursors.Arrow;
+
+            //moving operation unset
+            translateSet = false;
+
+        }
+
+        //Move / Pan button
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Chnage the cursor
+            pictureBox1.Cursor = Cursors.Hand;
+            //set moving operation is allowed
+            translateSet = true;
+
+            zoomSet = false;
+        }
+
+        protected void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            //If move button clicked
+            if (translateSet == true)
+            {
+                //mouse down is true
+                translate = true;
+                //starting coordinates for move
+                transStartX = e.X;
+                transStartY = e.Y;
+
+            }
+        }
+        protected void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            //If mouse down is true
+            if (translate == true)
+            {
+                //calculate the total distance to move from 0,0
+                //previous image position+ current moving distance
+                translateX = curImageX + ((e.X - transStartX) * (translateRatio / zoomFac));
+                translateY = curImageY + ((e.Y - transStartY) * (translateRatio / zoomFac));
+                //call picturebox to update the image in the new position
+            }
+
+            pictureBox1.Refresh();
+            //set mouse down operation end
+            translate = false;
+            //set present position of the image after move.
+            curImageX = translateX;
+            curImageY = translateY;
+        }
+        protected void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            //Conditions to avoid to proceed further.
+            if (bmp == null) { return; }
+            if (translateSet == false && zoomSet == false) { return; }
+
+            Graphics g = e.Graphics;
+
+            //Scale transform operation on the picture box device context
+            //zoomFac is global variable which can be used to get desired zoom
+            g.ScaleTransform(ratio * zoomFac, ratio * zoomFac);
+
+            //move image to new position
+            if (translateSet == true)
+            {
+                g.TranslateTransform(translateX, translateY);
+            }
+
+            //Drawback the bitmap to the transformed decive context
+
+            //Apply double buffering (Draw to a bitmap first and then draw to picturebox) if
+            // using large image and experience flickering
+
+            g.DrawImage(bmp, 0, 0);
+
+
+        }
+
+        // ===========================Test Zoom Image Sample End
+        private void SetColorSample()
+        {
+            bgColorSamplePanel.BackColor = bkColor;
+            lineColorSamplePanel.BackColor = lineColor;
         }
 
         private  Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
+        Bitmap tlBmp, trBmp, blBmp, brBmp;
+
+        private void FreeStaticMaps()
+        {
+            if (tlBmp != null)
+            {
+                tlBmp.Dispose();
+                tlBmp = null;
+            }
+            if (trBmp != null)
+            {
+                trBmp.Dispose();
+                trBmp = null;
+            }
+            if (blBmp != null)
+            {
+                blBmp.Dispose();
+                blBmp = null;
+            }
+            if (brBmp != null)
+            {
+                brBmp.Dispose();
+                brBmp = null;
+            }
+        }
+
         private void useMapChk_CheckedChanged(object sender, EventArgs e)
         {
             if (!(sender as CheckBox).Checked)
+            {
+                FreeStaticMaps();
+                DrawGrid();
+                panel1.Refresh(); 
                 return;
+            }
 
             if(rg.IsReadFinished())
             {
@@ -62,6 +262,7 @@ namespace TestGoogleMap
                 string tr = Environment.CurrentDirectory + "\\tr.jpg";
                 string bl = Environment.CurrentDirectory + "\\bl.jpg";
                 string br = Environment.CurrentDirectory + "\\br.jpg";
+
                 if (File.Exists(tl))
                 {
                     File.Delete(tl);
@@ -75,20 +276,16 @@ namespace TestGoogleMap
                 } if (File.Exists(br))
                 {
                     File.Delete(br);
-                } 
+                }
+
+                FreeStaticMaps();
+
                 rg.DownloadGridMap(tl, tr, bl, br);
-                Bitmap tlBmp, trBmp, blBmp, brBmp;
                 tlBmp = new Bitmap(tl);
                 trBmp = new Bitmap(tr);
                 blBmp = new Bitmap(bl);
                 brBmp = new Bitmap(br);
 
-                Graphics g = Graphics.FromImage(gridBmp);
-                g.DrawImage(tlBmp, 640, 640);
-                g.DrawImage(trBmp, 0, 640);
-                g.DrawImage(blBmp, 640, 0);
-                g.DrawImage(brBmp, 0, 0);
-                //gridBmp.Save(Environment.CurrentDirectory + "\\Big.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                 DrawGrid();
                 panel1.Refresh();
             }
@@ -98,14 +295,23 @@ namespace TestGoogleMap
         {
             CoordinateTransform ct = new CoordinateTransform();
             Graphics g = Graphics.FromImage(gridBmp);
-            //(rg.GetTopLeft.x, rg.GetTopLeft.y)
+
             CoorPoint lt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
             CoorPoint rb = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
 
-            Pen pen = new Pen(Color.Orange, 2.0F);
-            //Point pt1 = new Point(0, 0);
-            //Point pt2 = new Point(1280, 1280);
-            //g.DrawLine(pen, pt1, pt2);
+            if (tlBmp != null && trBmp != null && blBmp != null && brBmp != null)
+            {
+                g.DrawImage(tlBmp, 640, 640);
+                g.DrawImage(trBmp, 0, 640);
+                g.DrawImage(blBmp, 640, 0);
+                g.DrawImage(brBmp, 0, 0);
+            }
+            else
+            {
+                g.Clear(bkColor);
+            }
+
+            Pen pen = new Pen(lineColor, lineWidth);
             for (int i = 0; i < rg.GetI; ++i)
             {
                 for (int j = 0; j < rg.GetJ; ++j)
@@ -125,16 +331,10 @@ namespace TestGoogleMap
                         y2 = (int)(1280.0 * (rg.inputCoor[i + 1, j].y - lt.y) / (rb.y - lt.y));
                         g.DrawLine(pen, x1, y1, x2, y2);
                     }
-
-                    //g.DrawLine(pen, pt1, pt2);
                 }
-
             }
-        }
-
-        private void panel1_Resize(object sender, EventArgs e)
-        {
-            panel1.Refresh();
+            g.Dispose();
+            panel1.BackgroundImage = gridBmp;
         }
 
         private void loadBtn_Click(object sender, EventArgs e)
@@ -143,7 +343,7 @@ namespace TestGoogleMap
             if (result == DialogResult.OK) // Test result.
             {
                 inputFilePath.Text = inputFileDlg.FileName;
-                if (!rg.ReadInputFile(Environment.CurrentDirectory + "\\cchemesh.geo"))
+                if (!rg.ReadInputFile(inputFilePath.Text))
                 {
                     MessageBox.Show("無法載入檔案!");
                     return;
@@ -157,6 +357,74 @@ namespace TestGoogleMap
             }
         }
 
+        private Color bkColor = Color.White;
+        private void selBgColorBtn_Click(object sender, EventArgs e)
+        {
+            // Show the color dialog.
+            colorDialog1.Color = bkColor;
+            DialogResult result = colorDialog1.ShowDialog();
+            // See if user pressed ok.
+            if (result == DialogResult.OK)
+            {
+                // Set form background to the selected color.
+                bkColor = colorDialog1.Color;
+                SetColorSample();
+            }
+        }
+
+        private Color lineColor = Color.Orange;
+        private void selLineColorBtn_Click(object sender, EventArgs e)
+        {
+            // Show the color dialog.
+            colorDialog1.Color = lineColor;
+            DialogResult result = colorDialog1.ShowDialog();
+            // See if user pressed ok.
+            if (result == DialogResult.OK)
+            {
+                // Set form background to the selected color.
+                lineColor = colorDialog1.Color;
+                SetColorSample();
+            }
+        }
+
+        float lineWidth = 2.0F;
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                lineWidth = (float)Convert.ToDouble((sender as TextBox).Text);
+                //DrawGrid();
+               // panel1.Refresh();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
+        {
+            DrawGrid();
+            panel1.Refresh();
+        }
+
+        private int fontSize = 20;    
+        private void panel1_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            // Update the drawing based upon the mouse wheel scrolling.
+
+            int numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 120;
+            int numberOfPixelsToMove = numberOfTextLinesToMove * fontSize;
+
+            //if (numberOfPixelsToMove != 0)
+            //{
+            //    System.Drawing.Drawing2D.Matrix translateMatrix = new System.Drawing.Drawing2D.Matrix();
+            //    translateMatrix.Translate(0, numberOfPixelsToMove);
+            //    mousePath.Transform(translateMatrix);
+            //}
+            panel1.Invalidate();
+        }
     }
 
     public class RiverGrid
@@ -190,6 +458,7 @@ namespace TestGoogleMap
         {
             get { return this.topLeft;  }
         }
+
         public CoorPoint GetBottomRight
         {
             get { return this.bottomRight; }
@@ -242,22 +511,16 @@ namespace TestGoogleMap
                 CoordinateTransform coorConv = new CoordinateTransform();
                 //CoorPoint topLeft = coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY);
                 //CoorPoint bottomRight = coorConv.CalTwd97ToLatLonCoorRad(minX, minY);
-                zoomScale = GetZoomScale(coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY), coorConv.CalTwd97ToLatLonCoorRad(minX, minY));
+                zoomScale = CalZoomScale(coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY), coorConv.CalTwd97ToLatLonCoorRad(minX, minY));
                 if(zoomScale ==0)
                 {
                     return false;
                 }
-                CoorPoint center = coorConv.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
 
+                CoorPoint center = coorConv.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
                 bottomRight = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
                 topLeft = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
                 centerPoint = center.RadToDegree();
-                //bool b = false;
-                //b = DownloadStaticMap((tl.x + c.x) / 2, (tl.y + c.y) / 2, z, Environment.CurrentDirectory + "\\br.jpg");
-                //b = DownloadStaticMap((br.x + c.x) / 2, (tl.y + c.y) / 2, z, Environment.CurrentDirectory + "\\bl.jpg");
-                //b = DownloadStaticMap((tl.x + c.x) / 2, (br.y + c.y) / 2, z, Environment.CurrentDirectory + "\\tr.jpg");
-                //b = DownloadStaticMap((br.x + c.x) / 2, (br.y + c.y) / 2, z, Environment.CurrentDirectory + "\\tl.jpg");
-
             }
             catch (Exception e)
             {
@@ -269,7 +532,6 @@ namespace TestGoogleMap
         
         public bool DownloadGridMap(string tl, string tr, string bl, string br)
         {
-
             bool b = false;
             b = DownloadStaticMap((topLeft.x + centerPoint.x) / 2, (topLeft.y + centerPoint.y) / 2, zoomScale, br);
             b = DownloadStaticMap((bottomRight.x + centerPoint.x) / 2, (topLeft.y + centerPoint.y) / 2, zoomScale, bl);
@@ -278,7 +540,7 @@ namespace TestGoogleMap
             return true;
         }
 
-        private int GetZoomScale(CoorPoint tl, CoorPoint br)
+        private int CalZoomScale(CoorPoint tl, CoorPoint br)
         {
             CoordinateTransform coorConv = new CoordinateTransform();
             for (int i = 21; i > 1; --i)
@@ -316,42 +578,36 @@ namespace TestGoogleMap
     {
         public CoorPoint()
 	    {
-            _x = 0.0;
-            _y = 0.0;
+            _x = 0.0; _y = 0.0;
 	    }
 
         public CoorPoint(double x1, double y1)
         {
-            _x = x1;
-            _y = y1;
+            _x = x1; _y = y1;
         }
 
         private double _x, _y;
         public double x
         {
-            //set the person name
             set { this._x = value; }
-            //get the person name 
             get { return this._x; }
         }
 
         public double y
         {
-            //set the person name
             set { this._y = value; }
-            //get the person name 
             get { return this._y; }
         }
 
         public override string ToString()
-        {
+        {   //Format for Google API 
             return y.ToString() + ", " + x.ToString();
         }
+
         public CoorPoint RadToDegree()
         {
             return new CoorPoint((x * 180) / Math.PI, (y * 180) / Math.PI);
         }
-
     }
 
     public class CoordinateTransform
@@ -372,55 +628,11 @@ namespace TestGoogleMap
 
         public CoordinateTransform()
         {
-            //
-            // TODO: 在此加入建構函式的程式碼
-            //
+
         }
-
-        ////給WGS84經緯度度分秒轉成TWD97坐標
-        //public string lonlat_To_twd97(int lonD, int lonM, int lonS, int latD, int latM, int latS)
-        //{
-        //    double RadianLon = (double)(lonD) + (double)lonM / 60 + (double)lonS / 3600;
-        //    double RadianLat = (double)(latD) + (double)latM / 60 + (double)latS / 3600;
-        //    return Cal_lonlat_To_twd97(RadianLon, RadianLat);
-        //}
-        ////給WGS84經緯度弧度轉成TWD97坐標
-        //public string lonlat_To_twd97(double RadianLon, double RadianLat)
-        //{
-        //    return Cal_lonlat_To_twd97(RadianLon, RadianLat);
-        //}
-
-        //給TWD97坐標 轉成 WGS84 度分秒字串 (type1傳度分秒 2傳弧度)
-        //public string Twd97ToLonLatString(double XValue, double YValue, int Type)
-        //{
-
-        //    string lonlat = "";
-
-        //    if (Type == 1)
-        //    {
-        //        string[] Answer = Cal_TWD97_To_lonlat(XValue, YValue).Split(',');
-        //        int LonDValue = (int)double.Parse(Answer[0]);
-        //        int LonMValue = (int)((double.Parse(Answer[0]) - LonDValue) * 60);
-        //        double LonSValue = (((double.Parse(Answer[0]) - LonDValue) * 60) - LonMValue) * 60;
-
-        //        int LatDValue = (int)double.Parse(Answer[1]);
-        //        int LatMValue = (int)((double.Parse(Answer[1]) - LatDValue) * 60);
-        //        double LatSValue = (((double.Parse(Answer[1]) - LatDValue) * 60) - LatMValue) * 60;
-
-        //        lonlat = LonDValue + "度" + LonMValue + "分" + LonSValue + "秒," + LatDValue + "度" + LatMValue + "分" + LatSValue + "秒,";
-        //    }
-        //    else if (Type == 2)
-        //    {
-        //        lonlat = CalTwd97ToLonLatString(XValue, YValue);
-        //    }
-
-        //    return lonlat;
-        //}
 
         public CoorPoint CalLonLatDegToTwd97(double lon, double lat)
         {
-            //string TWD97 = "";
-
             lon = (lon - Math.Floor((lon + 180) / 360) * 360) * Math.PI / 180;
             lat = lat * Math.PI / 180;
 
@@ -437,7 +649,6 @@ namespace TestGoogleMap
             // y
             double y = dy + k0 * (M + V * Math.Tan(lat) * (Math.Pow(A, 2) / 2 + (5 - T + 9 * C + 4 * Math.Pow(C, 2)) * Math.Pow(A, 4) / 24 + (61 - 58 * T + Math.Pow(T, 2) + 600 * C - 330 * e2) * Math.Pow(A, 6) / 720));
 
-            //TWD97 = y.ToString() + "," + x.ToString();
             return new CoorPoint(x, y);
         }
 
@@ -481,14 +692,7 @@ namespace TestGoogleMap
             double Q7 = (5 - 2 * C1 + 28 * T1 - 3 * Math.Pow(C1, 2) + 8 * e2 + 24 * Math.Pow(T1, 2)) * Math.Pow(D, 5) / 120.0;
             double lon = lon0 + (Q5 - Q6 + Q7) / Math.Cos(fp);
             return new CoorPoint(lon, lat);
-
-
         }
-
-        //public CoorPoint CalLatLonRadToLatLonDeg(double x, double y)
-        //{
-        //    return new CoorPoint((x * 180) / Math.PI, (y * 180) / Math.PI);
-        //}
         
         public CoorPoint CalTwd97ToLonLatCoorDeg(double x, double y)
         {
@@ -509,10 +713,8 @@ namespace TestGoogleMap
 
         public CoorPoint CalCenterLatLonToOffsetPixelLonLat(double cx, double cy, int dx, int dy, int zoomScale)
         {
-           
             double lat = Math.PI * dx / (128 * Math.Pow(2, zoomScale)) + cx;
             double lon = Math.Asin(Math.Tanh((Atanh(Math.Sin(cy)) - Math.PI * dy / (128 * Math.Pow(2, zoomScale)))));
-
             return  new CoorPoint(lat, lon);
         }
     }

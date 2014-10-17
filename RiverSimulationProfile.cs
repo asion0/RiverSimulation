@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Drawing;
 
 namespace RiverSimulationApplication
 {
@@ -136,6 +138,7 @@ namespace RiverSimulationApplication
         public bool Is3DMode() { return moduleType1 == ModuleType1.Type3D; }
         public bool HasMovableBedMode() { return moduleType2 == ModuleType2.MovableBed; }
 
+        public RiverGrid inputGrid = null;
         //WaterModeling 數值參數
         public double convergenceCriteria2d;    //二維水裡收斂標準 
         public double convergenceCriteria3d;    //三維水裡收斂標準
@@ -147,5 +150,187 @@ namespace RiverSimulationApplication
             moduleType2 = ModuleType2.NoSelect;
         }
 
+        public bool ReadInputGridGeo(string s)
+        {
+            inputGrid = new RiverGrid();
+            return inputGrid.ReadInputFile(s);
+        }
+
+        public void ClearInputGrid()
+        {
+            inputGrid = null;
+        }
+
+        public bool IsMapPosition()
+        {
+            if (null == inputGrid || inputGrid.GetTopLeft.x < 120.0 || inputGrid.GetTopLeft.y < 23.0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+        public enum BackgroundMapType
+        {
+            None,
+            GoogleStaticMap,
+            ImportImage
+        };
+        private BackgroundMapType bkImgType = BackgroundMapType.None;
+        public BackgroundMapType GetBackgroundMapType() 
+        {
+            if (bkImgType == BackgroundMapType.ImportImage && importBmp==null)
+            {
+                return BackgroundMapType.None;
+            }
+            return bkImgType; 
+        }
+
+        private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
+        private Bitmap importBmp;
+        private Bitmap tlBmp, trBmp, blBmp, brBmp;
+        public Bitmap GetGridBitmap()  
+        {
+    
+            switch (bkImgType)
+            {
+                case BackgroundMapType.None:
+                    return gridBmp;
+
+                case BackgroundMapType.GoogleStaticMap:
+                    return gridBmp;
+
+                case BackgroundMapType.ImportImage:
+                    return importBmp;
+
+            }
+            return null;
+        }
+
+        private void FreeStaticMaps()
+        {
+            if (tlBmp != null)
+            {
+                tlBmp.Dispose();
+                tlBmp = null;
+            }
+            if (trBmp != null)
+            {
+                trBmp.Dispose();
+                trBmp = null;
+            }
+            if (blBmp != null)
+            {
+                blBmp.Dispose();
+                blBmp = null;
+            }
+            if (brBmp != null)
+            {
+                brBmp.Dispose();
+                brBmp = null;
+            }
+        }
+
+        public void ClearBackgroundBitmap()
+        {
+            FreeStaticMaps();
+            bkImgType = BackgroundMapType.None;
+        }
+
+        
+        public CoorPoint GetTopLeft()
+        {
+            CoordinateTransform ct = new CoordinateTransform();
+            CoorPoint pt = new CoorPoint();
+            switch (bkImgType)
+            {
+                case BackgroundMapType.None:
+                    pt = ct.CalLonLatDegToTwd97(inputGrid.GetTopLeft.x, inputGrid.GetTopLeft.y);
+                    break;
+                case BackgroundMapType.GoogleStaticMap:
+                    pt = ct.CalLonLatDegToTwd97(inputGrid.GetTopLeft.x, inputGrid.GetTopLeft.y);
+                    break;
+                case BackgroundMapType.ImportImage:
+                    pt = topLeft;
+                    break;
+            }
+            return pt;
+        }
+
+        public CoorPoint GetBottomRight()
+        {
+            CoordinateTransform ct = new CoordinateTransform();
+            CoorPoint pt = new CoorPoint();
+            switch (bkImgType)
+            {
+                case BackgroundMapType.None:
+                    pt = ct.CalLonLatDegToTwd97(inputGrid.GetBottomRight.x, inputGrid.GetBottomRight.y);
+                    break;
+                case BackgroundMapType.GoogleStaticMap:
+                    pt = ct.CalLonLatDegToTwd97(inputGrid.GetBottomRight.x, inputGrid.GetBottomRight.y);
+                    break;
+                case BackgroundMapType.ImportImage:
+                    pt = bottomRight;
+                    break;
+            }
+            return pt;
+        }
+
+        public bool DownloadGoogleStaticMap()
+        {
+            string tl = Environment.CurrentDirectory + "\\tl.jpg";
+            string tr = Environment.CurrentDirectory + "\\tr.jpg";
+            string bl = Environment.CurrentDirectory + "\\bl.jpg";
+            string br = Environment.CurrentDirectory + "\\br.jpg";
+
+            if (File.Exists(tl))
+            {
+                File.Delete(tl);
+            }
+            if (File.Exists(tr))
+            {
+                File.Delete(tr);
+            } if (File.Exists(bl))
+            {
+                File.Delete(bl);
+            } if (File.Exists(br))
+            {
+                File.Delete(br);
+            }
+            FreeStaticMaps();
+            inputGrid.DownloadGridMap(tl, tr, bl, br);
+            tlBmp = new Bitmap(tl);
+            trBmp = new Bitmap(tr);
+            blBmp = new Bitmap(bl);
+            brBmp = new Bitmap(br);
+            bkImgType = BackgroundMapType.GoogleStaticMap;
+
+            if (tlBmp != null && trBmp != null && blBmp != null && brBmp != null)
+            {
+                Graphics g = Graphics.FromImage(gridBmp);
+                g.DrawImage(tlBmp, 640, 640);
+                g.DrawImage(trBmp, 0, 640);
+                g.DrawImage(blBmp, 640, 0);
+                g.DrawImage(brBmp, 0, 0);
+                g.Dispose();
+            }
+            return true;
+        }
+
+        public void SetImportImageMode()
+        {
+            bkImgType = BackgroundMapType.ImportImage;
+        }
+
+        private CoorPoint bottomRight = new CoorPoint();
+        private CoorPoint topLeft = new CoorPoint();       
+        public void SetImportImage(string s, double e, double n, double w, double h)
+        {
+            importBmp = new Bitmap(s);
+
+            topLeft = new CoorPoint(e, n - h);
+            bottomRight = new CoorPoint(e + w, n);
+        }
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.stopFlagChk = new System.Windows.Forms.CheckBox();
@@ -38,6 +38,7 @@
             this.stopBtn = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.progTxt = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,9 +46,9 @@
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(11, 473);
+            this.progressBar.Location = new System.Drawing.Point(11, 459);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(785, 23);
+            this.progressBar.Size = new System.Drawing.Size(680, 32);
             this.progressBar.TabIndex = 0;
             // 
             // stopFlagChk
@@ -93,19 +94,32 @@
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
             this.chart1.Location = new System.Drawing.Point(11, 102);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(785, 365);
+            this.chart1.Size = new System.Drawing.Size(785, 351);
             this.chart1.TabIndex = 6;
             this.chart1.Text = "chart1";
+            // 
+            // progTxt
+            // 
+            this.progTxt.BackColor = System.Drawing.SystemColors.Control;
+            this.progTxt.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.progTxt.ForeColor = System.Drawing.Color.Black;
+            this.progTxt.Location = new System.Drawing.Point(696, 465);
+            this.progTxt.Name = "progTxt";
+            this.progTxt.Size = new System.Drawing.Size(100, 23);
+            this.progTxt.TabIndex = 7;
+            this.progTxt.Text = "0.0";
+            this.progTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RunSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 517);
+            this.ClientSize = new System.Drawing.Size(808, 529);
+            this.Controls.Add(this.progTxt);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.msg);
             this.Controls.Add(this.stopBtn);
@@ -133,5 +147,6 @@
         private System.Windows.Forms.Button stopBtn;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Label progTxt;
     }
 }

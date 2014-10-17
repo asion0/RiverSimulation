@@ -285,9 +285,26 @@ namespace PictureBoxCtrl
             PicBox.Capture = false;
         }
 
-        private void PicBox_BackgroundImageChanged (object sender, EventArgs e)
+        #endregion
+
+        #region Control events
+
+        private void PicBox_BackgroundImageChanged(object sender, EventArgs e)
         {
-            PicBox.Capture = false;
+            PictureBox p = sender as PictureBox;
+            Image i = p.BackgroundImage;
+
+            double imgRatio = i.Width / i.Height;
+            double ctlRatio = p.Size..Width / p.Size.Height;
+
+            if(imgRatio > ctlRatio)
+            {   //圖寬 容器直 上下留空
+
+            }
+            else
+            {   //圖直 容器寬 左右留空
+
+            }
         }
 
 		#endregion

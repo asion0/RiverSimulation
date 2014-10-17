@@ -26,6 +26,8 @@ namespace RiverSimulationApplication
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BwRunWorkerCompleted);
             bw.WorkerReportsProgress = true;
             //InitialChart();
+            this.progTxt.BackColor = Color.Transparent;
+            //this.progTxt.Parent = progressBar;
 
             this.progressBar.Maximum = 10000;
         }
@@ -87,7 +89,7 @@ namespace RiverSimulationApplication
                 StripLine lineMean = new StripLine();
 
                 lineMean.Text = "收斂值 : " + RiverSimulationProfile.profile.convergenceCriteria2d.ToString();
-                lineMean.BorderColor = Color.Black; // 線條的顏色
+                lineMean.BorderColor = Color.Red; // 線條的顏色
                 lineMean.BorderDashStyle = ChartDashStyle.Dash;
                 lineMean.BorderWidth = 1;
                 lineMean.IntervalOffsetType = DateTimeIntervalType.Auto;
@@ -106,7 +108,7 @@ namespace RiverSimulationApplication
             mySeriesD.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
 
             mySeriesU.ChartType = SeriesChartType.Spline;        // 曲線圖
-            mySeriesU.Color = Color.Red;               // 在圖型上的顏色
+            mySeriesU.Color = Color.Orange;               // 在圖型上的顏色
             mySeriesU.BorderWidth = 1;                   // 線型的寬度
             mySeriesU.ShadowColor = Color.Transparent;      // 陰影的顏色
             mySeriesU.ShadowOffset = 2;                  // 陰影位置的角度
@@ -122,6 +124,8 @@ namespace RiverSimulationApplication
             mySeriesV.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
         }
 
+        private double xStart = 0.0;
+        private double xScale = 500.0;
         private void BwProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             ProgressItem pi = (ProgressItem)e.UserState;
@@ -134,8 +138,19 @@ namespace RiverSimulationApplication
             }
 
             this.progressBar.Value = (int)(pi.prog * 100);
+            this.progTxt.Text = pi.prog.ToString() + "%";
+            if (this.progressBar.Value == this.progressBar.Maximum)
+            {
+                MessageBox.Show("模擬完成");
+            }
             if (pi.t == ProgressItem.Type.ShowProgress)
             {
+                return;
+            }
+
+            if(pi.t == ProgressItem.Type.ShowDivergence)
+            {
+                MessageBox.Show("模式發散");
                 return;
             }
 
@@ -144,10 +159,10 @@ namespace RiverSimulationApplication
                 return;
             }
             ChartArea myArea = chart1.ChartAreas["Base"];
-            if( pi.x > (myArea.AxisX.Maximum * 0.95))
-            {
-                myArea.AxisX.Maximum += myArea.AxisX.Maximum;
-            }
+            //if( pi.x > (myArea.AxisX.Maximum * 0.95))
+            //{
+            //    myArea.AxisX.Maximum += myArea.AxisX.Maximum;
+            //}
 
             double dd = 0.000001;
             if (pi.z < dd)
@@ -164,6 +179,16 @@ namespace RiverSimulationApplication
             }
 
             chart1.Series.SuspendUpdates();
+            if (chart1.Series["DepthD"].Points.Count == 500)
+            {
+                chart1.Series["DepthD"].Points.Clear();
+                chart1.Series["FlowU"].Points.Clear();
+                chart1.Series["FlowV"].Points.Clear();
+                xStart += xScale;
+                myArea.AxisX.Minimum = xStart;
+                myArea.AxisX.Maximum = xStart + xScale;
+            }
+
             chart1.Series["DepthD"].Points.AddXY(pi.x, String.Format("{0:0.000000}", pi.z));
             chart1.Series["FlowU"].Points.AddXY(pi.x, String.Format("{0:0.000000}", pi.u));
             chart1.Series["FlowV"].Points.AddXY(pi.x, String.Format("{0:0.000000}", pi.v));
@@ -203,7 +228,8 @@ namespace RiverSimulationApplication
             {
                 ShowConsole,
                 ShowProgress,
-                ShowChart
+                ShowChart,
+                ShowDivergence
             };
             public Type t;
             public ProgressItem()
@@ -270,6 +296,11 @@ namespace RiverSimulationApplication
 
                 bw.ReportProgress(0, new ProgressItem(pi));
             }
+            else if(s.Contains("DIVERGENCE"))
+            {
+                pi.t = ProgressItem.Type.ShowDivergence;
+                bw.ReportProgress(0, new ProgressItem(pi));
+            }
             else
             {
                 pi.t = ProgressItem.Type.ShowConsole;
@@ -319,6 +350,7 @@ namespace RiverSimulationApplication
                 ParsingResult(line);
                 line = reader.ReadLine();
             }
+            ParsingResult(line);
             simProcess.WaitForExit();
         }
 

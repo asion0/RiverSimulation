@@ -15,6 +15,7 @@ namespace TestGoogleMap
     public partial class Form1 : Form
     {
         // ===========================Test Zoom Image Sample
+        /*
         // Factor for zoom the image
         private float zoomFac = 1;
         //set Zoom allowed
@@ -44,7 +45,7 @@ namespace TestGoogleMap
  
         float ratio;
         float translateRatio;
-
+        */
         // ===========================Test Zoom Image Sample End
  
         public Form1()
@@ -57,6 +58,7 @@ namespace TestGoogleMap
         private void Form1_Load(object sender, EventArgs e)
         {
             // ===========================Test Zoom Image Sample
+            /*
             //Picture box event handlers
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
@@ -97,6 +99,7 @@ namespace TestGoogleMap
 
             this.Shown += new EventHandler(Form1_Shown);
             this.Disposed += new EventHandler(Form1_Disposed);
+             * */
             // ===========================Test Zoom Image Sample End
 
 
@@ -107,6 +110,7 @@ namespace TestGoogleMap
             SetColorSample();
         }
         // ===========================Test Zoom Image Sample
+        /*
         protected void Form1_Disposed(object sender, EventArgs e)
         {
             //Dispose the bmp when form is disposed.
@@ -211,7 +215,7 @@ namespace TestGoogleMap
 
 
         }
-
+        */
         // ===========================Test Zoom Image Sample End
         private void SetColorSample()
         {
@@ -252,7 +256,7 @@ namespace TestGoogleMap
             {
                 FreeStaticMaps();
                 DrawGrid();
-                panel1.Refresh(); 
+                pictureBox1.Refresh(); 
                 return;
             }
 
@@ -287,7 +291,7 @@ namespace TestGoogleMap
                 brBmp = new Bitmap(br);
 
                 DrawGrid();
-                panel1.Refresh();
+                pictureBox1.Refresh();
             }
         }
 
@@ -334,7 +338,7 @@ namespace TestGoogleMap
                 }
             }
             g.Dispose();
-            panel1.BackgroundImage = gridBmp;
+            pictureBox1.BackgroundImage = gridBmp;
         }
 
         private void loadBtn_Click(object sender, EventArgs e)
@@ -353,7 +357,7 @@ namespace TestGoogleMap
                     useMapChk.Enabled = false;
                 }
                 DrawGrid();
-                panel1.Refresh();
+                pictureBox1.Refresh();
             }
         }
 
@@ -406,7 +410,7 @@ namespace TestGoogleMap
         private void refreshBtn_Click(object sender, EventArgs e)
         {
             DrawGrid();
-            panel1.Refresh();
+            pictureBox1.Refresh();
         }
 
         private int fontSize = 20;    
@@ -423,7 +427,7 @@ namespace TestGoogleMap
             //    translateMatrix.Translate(0, numberOfPixelsToMove);
             //    mousePath.Transform(translateMatrix);
             //}
-            panel1.Invalidate();
+            pictureBox1.Invalidate();
         }
     }
 

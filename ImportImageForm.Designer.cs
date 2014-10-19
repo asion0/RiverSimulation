@@ -77,7 +77,7 @@
             this.eTxt.Name = "eTxt";
             this.eTxt.Size = new System.Drawing.Size(100, 22);
             this.eTxt.TabIndex = 3;
-            this.eTxt.Text = "269958.74";
+            this.eTxt.Text = "269958.74 ";
             // 
             // label3
             // 

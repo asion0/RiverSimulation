@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.9")]
 [assembly: AssemblyFileVersion("1.0.09")]
 
-//1.0.0.8 - Demo 匯入網格 in 20141018
+//1.0.0.9 - Demo 匯入網格 in 20141018
 //1.0.0.8 - Demo 模擬收斂圖 in 20141006
 //1.0.0.7 - Modify for 20140916修改回應.pdf in 20140916
 //1.0.0.6 - Modify for 20140827v3修改回應.pdf in 20140915

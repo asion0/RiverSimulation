@@ -314,6 +314,11 @@ namespace RiverSimulationApplication
                 g.DrawImage(blBmp, 640, 0);
                 g.DrawImage(brBmp, 0, 0);
                 g.Dispose();
+                tlBmp.Dispose();
+                trBmp.Dispose();
+                blBmp.Dispose();
+                brBmp.Dispose();
+                //gridBmp.Save(Environment.CurrentDirectory + "Big.jpg");
             }
             return true;
         }
@@ -329,7 +334,7 @@ namespace RiverSimulationApplication
         {
             importBmp = new Bitmap(s);
 
-            topLeft = new CoorPoint(e, n - h);
+            topLeft = new CoorPoint(e, n + h);
             bottomRight = new CoorPoint(e + w, n);
         }
     }

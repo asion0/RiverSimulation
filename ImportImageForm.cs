@@ -24,8 +24,10 @@ namespace RiverSimulationApplication
 
         }
 
-        public double e, n, w, h;
-
+        public double e = 269958.74;
+        public double n = 2733516.753;
+        public double w = 1129.091;
+        public double h = 648.143;
         private void ok_Click(object sender, EventArgs e)
         {
             this.e = n = w = h = 0.0;
@@ -44,6 +46,14 @@ namespace RiverSimulationApplication
 
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void ImportImageForm_Load(object sender, EventArgs e)
+        {
+            eTxt.Text = this.e.ToString();
+            nTxt.Text = this.n.ToString();
+            wTxt.Text = this.w.ToString();
+            hTxt.Text = this.h.ToString();
         }
     }
 

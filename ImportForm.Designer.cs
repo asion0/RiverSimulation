@@ -55,6 +55,7 @@
             this.selectBgDlg = new System.Windows.Forms.OpenFileDialog();
             this.mapPanel = new System.Windows.Forms.Panel();
             this.mapPicBox = new System.Windows.Forms.PictureBox();
+            this.imgInfoBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -98,6 +99,7 @@
             // bitmapGrp
             // 
             this.bitmapGrp.Controls.Add(this.selectBgFilePath);
+            this.bitmapGrp.Controls.Add(this.imgInfoBtn);
             this.bitmapGrp.Controls.Add(this.selectBgBtn);
             this.bitmapGrp.Controls.Add(this.noBgRdo);
             this.bitmapGrp.Controls.Add(this.selectBgRdo);
@@ -122,7 +124,7 @@
             this.selectBgBtn.Enabled = false;
             this.selectBgBtn.Location = new System.Drawing.Point(106, 85);
             this.selectBgBtn.Name = "selectBgBtn";
-            this.selectBgBtn.Size = new System.Drawing.Size(75, 26);
+            this.selectBgBtn.Size = new System.Drawing.Size(90, 26);
             this.selectBgBtn.TabIndex = 1;
             this.selectBgBtn.Text = "選取";
             this.selectBgBtn.UseVisualStyleBackColor = true;
@@ -346,6 +348,17 @@
             this.mapPicBox.TabIndex = 0;
             this.mapPicBox.TabStop = false;
             // 
+            // imgInfoBtn
+            // 
+            this.imgInfoBtn.Enabled = false;
+            this.imgInfoBtn.Location = new System.Drawing.Point(202, 85);
+            this.imgInfoBtn.Name = "imgInfoBtn";
+            this.imgInfoBtn.Size = new System.Drawing.Size(90, 26);
+            this.imgInfoBtn.TabIndex = 1;
+            this.imgInfoBtn.Text = "輸入圖檔資訊";
+            this.imgInfoBtn.UseVisualStyleBackColor = true;
+            this.imgInfoBtn.Click += new System.EventHandler(this.imgInfoBtn_Click);
+            // 
             // ImportForm
             // 
             this.AcceptButton = this.ok;
@@ -402,6 +415,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel mapPanel;
         private System.Windows.Forms.PictureBox mapPicBox;
+        private System.Windows.Forms.Button imgInfoBtn;
 
     }
 }

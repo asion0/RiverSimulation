@@ -124,6 +124,7 @@ namespace RiverSimulationApplication
                 form.SetImage(selectBgDlg.FileName);
                 if (DialogResult.OK == form.ShowDialog())
                 {
+                    imgInfoBtn.Enabled = true;
                     RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                     UpdateStatus();
                 }
@@ -135,6 +136,23 @@ namespace RiverSimulationApplication
 
             }
         }
+
+        private void imgInfoBtn_Click(object sender, EventArgs e)
+        {
+            ImportImageForm form = new ImportImageForm();
+            form.SetImage(selectBgDlg.FileName);
+            form.e = RiverSimulationProfile.profile.sourceE;
+            form.n = RiverSimulationProfile.profile.sourceN;
+            form.w = RiverSimulationProfile.profile.sourceW;
+            form.h = RiverSimulationProfile.profile.sourceH;
+            if (DialogResult.OK == form.ShowDialog())
+            {
+                imgInfoBtn.Enabled = true;
+                RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
+                UpdateStatus();
+            }
+
+        }   
 
         private void ok_Click(object sender, EventArgs e)
         {
@@ -321,6 +339,7 @@ namespace RiverSimulationApplication
                 g = Graphics.FromImage(picBoxBmp);
                 g.DrawImage(RiverSimulationProfile.profile.GetGridBitmap(), 0, 0);
             }
+            lineWidth = w / 512.0F;
 
             Pen pen = new Pen(lineColor, lineWidth);
             for (int i = 0; i < rg.GetI; ++i)
@@ -356,6 +375,6 @@ namespace RiverSimulationApplication
                 DrawGrid();
                 mapPicBox.Refresh();
             }
-        }    
+        } 
     }
 }

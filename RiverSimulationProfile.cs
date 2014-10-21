@@ -329,13 +329,25 @@ namespace RiverSimulationApplication
         }
 
         private CoorPoint bottomRight = new CoorPoint();
-        private CoorPoint topLeft = new CoorPoint();       
+        private CoorPoint topLeft = new CoorPoint();
+        public string imagePath;
+        public double sourceE;
+        public double sourceN;
+        public double sourceW;
+        public double sourceH;
         public void SetImportImage(string s, double e, double n, double w, double h)
         {
             importBmp = new Bitmap(s);
-
-            topLeft = new CoorPoint(e, n + h);
-            bottomRight = new CoorPoint(e + w, n);
+            importBmp.SetResolution(96.0F, 96.0F);
+            //topLeft = new CoorPoint(e, n + h);
+            //bottomRight = new CoorPoint(e + w, n);
+            topLeft = new CoorPoint(e, n);
+            bottomRight = new CoorPoint(e + w, n - h);
+            imagePath = s;
+            sourceE = e;
+            sourceN = n;
+            sourceW = w;
+            sourceH = h;
         }
     }
 }

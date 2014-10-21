@@ -60,7 +60,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 1;
-            this.label1.Text = "左下角座標";
+            this.label1.Text = "左上角座標";
             // 
             // label2
             // 
@@ -172,6 +172,7 @@
             this.Name = "ImportImageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "輸入航拍圖資訊";
+            this.Load += new System.EventHandler(this.ImportImageForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -32,9 +32,10 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.9")]
-[assembly: AssemblyFileVersion("1.0.09")]
+[assembly: AssemblyVersion("1.0.0.10")]
+[assembly: AssemblyFileVersion("1.0.10")]
 
+//1.0.0.10 - Fixed import image resulation issue.
 //1.0.0.9 - Demo 匯入網格 in 20141018
 //1.0.0.8 - Demo 模擬收斂圖 in 20141006
 //1.0.0.7 - Modify for 20140916修改回應.pdf in 20140916

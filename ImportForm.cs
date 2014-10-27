@@ -290,10 +290,10 @@ namespace RiverSimulationApplication
             form.SetFormMode(separateProportionBtn.Text, true, 1, n);
             if (DialogResult.OK == form.ShowDialog())
             {
-
+               
             }
         }
-
+        
 
         private Color bkColor = Color.White;
         private Color lineColor = Color.Orange;
@@ -303,11 +303,6 @@ namespace RiverSimulationApplication
             RiverGrid rg = RiverSimulationProfile.profile.inputGrid;
             //CoordinateTransform ct = new CoordinateTransform();
 
-            //CoorPoint pt = new CoorPoint();
-            //pt = RiverSimulationProfile.profile.GetTopLeft();
-            //CoorPoint lt = ct.CalLonLatDegToTwd97(pt.x, pt.y);
-            //pt = RiverSimulationProfile.profile.GetBottomRight();
-            //CoorPoint rb = ct.CalLonLatDegToTwd97(pt.x, pt.y);
             CoorPoint lt = RiverSimulationProfile.profile.GetTopLeft();
             CoorPoint rb = RiverSimulationProfile.profile.GetBottomRight();
 
@@ -339,6 +334,8 @@ namespace RiverSimulationApplication
                 g = Graphics.FromImage(picBoxBmp);
                 g.DrawImage(RiverSimulationProfile.profile.GetGridBitmap(), 0, 0);
             }
+
+
             lineWidth = w / 512.0F;
 
             Pen pen = new Pen(lineColor, lineWidth);

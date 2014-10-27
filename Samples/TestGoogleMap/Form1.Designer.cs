@@ -44,6 +44,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.xLabel = new System.Windows.Forms.Label();
+            this.yLabel = new System.Windows.Forms.Label();
+            this.gPicBox = new PictureBoxCtrl.GridPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -88,9 +91,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 98);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(910, 45);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1013, 518);
+            this.pictureBox1.Size = new System.Drawing.Size(34, 33);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
@@ -189,11 +193,42 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // xLabel
+            // 
+            this.xLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.xLabel.Location = new System.Drawing.Point(301, 65);
+            this.xLabel.Name = "xLabel";
+            this.xLabel.Size = new System.Drawing.Size(204, 17);
+            this.xLabel.TabIndex = 5;
+            this.xLabel.Text = "0";
+            // 
+            // yLabel
+            // 
+            this.yLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.yLabel.Location = new System.Drawing.Point(511, 65);
+            this.yLabel.Name = "yLabel";
+            this.yLabel.Size = new System.Drawing.Size(96, 17);
+            this.yLabel.TabIndex = 5;
+            this.yLabel.Text = "0";
+            // 
+            // gPicBox
+            // 
+            this.gPicBox.Border = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.gPicBox.Grid = null;
+            this.gPicBox.Location = new System.Drawing.Point(13, 99);
+            this.gPicBox.Name = "gPicBox";
+            this.gPicBox.SelectedI = -1;
+            this.gPicBox.SelectRow = false;
+            this.gPicBox.Size = new System.Drawing.Size(1013, 517);
+            this.gPicBox.TabIndex = 13;
+            this.gPicBox.GridChangedEvent += new PictureBoxCtrl.GridPictureBox.myDelegate(this.gPicBox_GridChangedEvent);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 628);
+            this.Controls.Add(this.gPicBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox2);
@@ -203,6 +238,8 @@
             this.Controls.Add(this.selLineColorBtn);
             this.Controls.Add(this.selBgColorBtn);
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.yLabel);
+            this.Controls.Add(this.xLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.inputFilePath);
@@ -237,6 +274,9 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label xLabel;
+        private System.Windows.Forms.Label yLabel;
+        private PictureBoxCtrl.GridPictureBox gPicBox;
     }
 }
 

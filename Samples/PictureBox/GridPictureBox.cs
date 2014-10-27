@@ -1,77 +1,194 @@
-ï»¿using System;
-using System.Collections.Generic;
+/* Title:
+ * PictureBox with zoom and scroll functionallity
+ * 
+ * Author:
+ * Alexander Kloep Apr. 2005
+ * Alexander.Kloep@gmx.net
+ * 
+ * Reason:
+ * In a past project i designed a GUI with a PictureBox control on it. Because of the low screen 
+ * resolution i couldn´t make the GUI big enough to show the whole picture. So i decided to develop
+ * my own scrollable picturebox with the special highlight of zooming functionallity.
+ * 
+ * The solution: 
+ * When the mouse cursor enters the ctrl, the cursorstyle changes and you are able to zoom in or out 
+ * with the mousewheel. The princip of the zooming effect is to raise or to lower the inner picturebox 
+ * size by a fixed zooming factor. The scroolbars appear automatically when the inner picturebox
+ * gets bigger than the ctrl.
+ *  
+ * Here it is...
+ * 
+ * Last modification: 06/04/2005
+ */
+
+#region Usings
+
+using System;
+using System.Collections;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Drawing.Drawing2D;
+#endregion
 
-namespace TestGoogleMap
+namespace PictureBoxCtrl
 {
-    public partial class Form1 : Form
-    {
-        // ===========================Test Zoom Image Sample
-        /*
-        // Factor for zoom the image
-        private float zoomFac = 1;
-        //set Zoom allowed
-        private bool zoomSet = false;
- 
-        //value for moving the image in X direction
-        private float translateX=0;
-        //value for moving the image in Y direction
-        private float translateY = 0;
- 
-        //Flag to set the moving operation set
-        private bool translateSet = false;
-        //Flag to set mouse down on the image
-        private bool translate = false;
- 
-        //set on the mouse down to know from where moving starts
-        private float transStartX;
-        private float transStartY;
- 
-        //Current Image position after moving 
-        private float curImageX=0;
-        private float curImageY=0;
- 
+	/// <summary>
+	/// Summary for the PictureBox Ctrl
+	/// </summary>
+	public class GridPictureBox : System.Windows.Forms.UserControl
+	{
+		#region Members
 
-        //temporary storage in bitmap
-        Image bmp;
- 
-        float ratio;
-        float translateRatio;
-        */
-        // ===========================Test Zoom Image Sample End
- 
-        public Form1()
+		private System.Windows.Forms.PictureBox PicBox;
+		private System.Windows.Forms.Panel OuterPanel;
+		private System.ComponentModel.Container components = null;
+        private RiverGrid rg=null;
+        private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
+        private Bitmap tlBmp, trBmp, blBmp, brBmp;
+        private Color bkColor = Color.White;
+        private Color lineColor = Color.Orange;
+        private float lineWidth = 2.0F;
+        //private int fontSize = 20;
+        private int selectedI = -1;
+        //private int selectedJ = -1;
+        private bool selectRow = false;
+        #endregion
+
+		#region Constants
+
+		private double ZOOMFACTOR = 1.25;	// = 25% smaller or larger
+		private int MINMAX = 5;				// 5 times bigger or smaller than the ctrl
+
+		#endregion
+
+		#region Designer generated code
+
+		private void InitializeComponent()
+		{
+            this.PicBox = new System.Windows.Forms.PictureBox();
+            this.OuterPanel = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBox)).BeginInit();
+            this.OuterPanel.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // PicBox
+            // 
+            this.PicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PicBox.ErrorImage = null;
+            this.PicBox.InitialImage = null;
+            this.PicBox.Location = new System.Drawing.Point(0, 0);
+            this.PicBox.Name = "PicBox";
+            this.PicBox.Size = new System.Drawing.Size(138, 135);
+            this.PicBox.TabIndex = 3;
+            this.PicBox.TabStop = false;
+            this.PicBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicBox_MouseClick);
+            this.PicBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PicBox_MouseMove);
+            // 
+            // OuterPanel
+            // 
+            this.OuterPanel.AutoScroll = true;
+            this.OuterPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.OuterPanel.Controls.Add(this.PicBox);
+            this.OuterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OuterPanel.Location = new System.Drawing.Point(0, 0);
+            this.OuterPanel.Name = "OuterPanel";
+            this.OuterPanel.Size = new System.Drawing.Size(210, 190);
+            this.OuterPanel.TabIndex = 4;
+            this.OuterPanel.Resize += new System.EventHandler(this.OuterPanel_Resize);
+            // 
+            // GridPictureBox
+            // 
+            this.Controls.Add(this.OuterPanel);
+            this.Name = "GridPictureBox";
+            this.Size = new System.Drawing.Size(210, 190);
+            ((System.ComponentModel.ISupportInitialize)(this.PicBox)).EndInit();
+            this.OuterPanel.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+		}
+		#endregion
+
+		#region Constructors
+
+        public GridPictureBox()
+		{
+			InitializeComponent ();
+			InitCtrl ();	// my special settings for the ctrl
+		}
+
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Property to select the picture which is displayed in the picturebox. If the 
+		/// file doesn´t exist or we receive an exception, the picturebox displays 
+		/// a red cross.
+		/// </summary>
+		/// <value>Complete filename of the picture, including path information</value>
+		/// <remarks>Supported fileformat: *.gif, *.tif, *.jpg, *.bmp</remarks>
+		[ Browsable ( false ) ]
+		public RiverGrid Grid
+		{
+			get { return rg; }
+			set 
+			{
+				if ( null != value )
+				{
+				    rg = value;
+                    DrawGrid();
+                    Refresh();
+    			}
+			}
+		}
+
+        public int SelectedI
         {
-            InitializeComponent();
+            get { return selectedI; }
+            set
+            { 
+                selectedI = value;
+                DrawGrid();
+                Refresh();
+            }
         }
 
-
-        private PictureBoxCtrl.RiverGrid rg = new PictureBoxCtrl.RiverGrid();
-        private void Form1_Load(object sender, EventArgs e)
+        public void SetMapBackground(string tl, string tr, string bl, string br)
         {
-            //this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseWheel);
-            gPicBox.SelectRow = true;
-            SetColorSample();
+            FreeStaticMaps();
+            tlBmp = new Bitmap(tl);
+            trBmp = new Bitmap(tr);
+            blBmp = new Bitmap(bl);
+            brBmp = new Bitmap(br);
+            DrawGrid();
+            PicBox.Refresh();
+        }
+        public bool SelectRow
+        {
+            get { return selectRow; }
+            set { selectRow = value; }
         }
 
-        private void SetColorSample()
-        {
-            bgColorSamplePanel.BackColor = bkColor;
-            lineColorSamplePanel.BackColor = lineColor;
-        }
+		/// <summary>
+		/// Set the frametype of the picturbox
+		/// </summary>
+		[ Browsable ( false ) ]
+		public BorderStyle Border
+		{
+			get { return OuterPanel.BorderStyle; }
+			set { OuterPanel.BorderStyle = value; }
+		}
 
-//        private  Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
-//        Bitmap tlBmp, trBmp, blBmp, brBmp;
-/*
+		#endregion
+
+		#region Other Methods
         private void FreeStaticMaps()
         {
             if (tlBmp != null)
@@ -95,58 +212,21 @@ namespace TestGoogleMap
                 brBmp = null;
             }
         }
-*/
-        private void useMapChk_CheckedChanged(object sender, EventArgs e)
+
+        public void ClearMapBackground()
         {
-            if (!(sender as CheckBox).Checked)
-            {
-                gPicBox.ClearMapBackground();
-                return;
-            }
-
-            if(rg.IsReadFinished())
-            {
-                string tl = Environment.CurrentDirectory + "\\tl.jpg";
-                string tr = Environment.CurrentDirectory + "\\tr.jpg";
-                string bl = Environment.CurrentDirectory + "\\bl.jpg";
-                string br = Environment.CurrentDirectory + "\\br.jpg";
-
-                if (File.Exists(tl))
-                {
-                    File.Delete(tl);
-                }
-                if (File.Exists(tr))
-                {
-                    File.Delete(tr);
-                } if (File.Exists(bl))
-                {
-                    File.Delete(bl);
-                } if (File.Exists(br))
-                {
-                    File.Delete(br);
-                }
-
- //             FreeStaticMaps();
-
-                rg.DownloadGridMap(tl, tr, bl, br);
-                gPicBox.SetMapBackground(tl, tr, bl, br);
-                //tlBmp = new Bitmap(tl);
-                //trBmp = new Bitmap(tr);
-                //blBmp = new Bitmap(bl);
-                //brBmp = new Bitmap(br);
-
-                //DrawGrid();
-                //pictureBox1.Refresh();
-            }
+            FreeStaticMaps();
+            DrawGrid();
+            PicBox.Refresh(); 
         }
-/*
-        private Matrix GetMatrix()
+
+        public Matrix GetMatrix()
         {
-            CoordinateTransform ct = new CoordinateTransform();
-            if(!rg.IsReadFinished())
+            if (rg==null || !rg.IsReadFinished())
             {
                 return null;
             }
+            CoordinateTransform ct = new CoordinateTransform();
             CoorPoint lt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
             CoorPoint rb = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
 
@@ -185,43 +265,23 @@ namespace TestGoogleMap
             Pen selPen = new Pen(Color.Red, lineWidth);
             Pen testPen = new Pen(Color.Green, 10.0f);
             g.DrawLine(testPen, 0, 0, 894, 70);
-            //System.Drawing.Drawing2D.Matrix m = new System.Drawing.Drawing2D.Matrix(1f, 0, 0, -1f, 0, 0);
-            //float xScale = 1280.0f / (float)(rb.x - lt.x);
-            //float yScale = 1280.0f / (float)(lt.y - rb.y);
-
-            //m.Scale(xScale, yScale);
-            
-            //m.Translate((float)-lt.x, (float)-lt.y);
             g.Transform = m;
-            //g.RotateTransform(45.0f);
-            //float xScale = 1280.0f / (float)(rb.x - lt.x);
-            //float yScale = 1280.0f / (float)(rb.y - lt.y);
-            //g.ScaleTransform(1280.0f / (float)(lt.x - rb.x), 1280.0f / (float)(rb.y - lt.y));
-            //g.TranslateTransform(0 - (float)lt.x, 0 - (float)rb.y);
-            //g.ScaleTransform(xScale, yScale);
-            //g.ScaleTransform(1.01f, 1.0f);
 
-
-            //g.DrawLine(pen, (float)lt.x, (float)lt.y, (float)rb.x, (float)rb.y);
             for (int i = 0; i < rg.GetI; ++i)
             {
                 for (int j = 0; j < rg.GetJ; ++j)
                 {
-//                    int x1 = (int)(1280.0 * (rg.inputCoor[i, j].x - lt.x) / (rb.x - lt.x));
-//                    int y1 = (int)(1280.0 * (rg.inputCoor[i, j].y - lt.y) / (rb.y - lt.y));
                     float x1 = (float)rg.inputCoor[i, j].x;
                     float y1 = (float)rg.inputCoor[i, j].y;
                     PointF[] p = new PointF[] { new PointF(x1, y1) };
                     m.TransformPoints(p);
 
                     float x2 = 0, y2 = 0;
-                    if(j != rg.GetJ - 1)
+                    if (j != rg.GetJ - 1)
                     {
-                        //x2 = (int)(1280.0 * (rg.inputCoor[i, j + 1].x - lt.x) / (rb.x - lt.x));
-                        //y2 = (int)(1280.0 * (rg.inputCoor[i, j + 1].y - lt.y) / (rb.y - lt.y));
                         x2 = (float)rg.inputCoor[i, j + 1].x;
                         y2 = (float)rg.inputCoor[i, j + 1].y;
-                        if (i == lastSelI)
+                        if (i == selectedI)
                         {
                             g.DrawLine(selPen, x1, y1, x2, y2);
                         }
@@ -232,100 +292,150 @@ namespace TestGoogleMap
                     }
                     if (i != rg.GetI - 1)
                     {
-//                        x2 = (int)(1280.0 * (rg.inputCoor[i + 1, j].x - lt.x) / (rb.x - lt.x));
-//                        y2 = (int)(1280.0 * (rg.inputCoor[i + 1, j].y - lt.y) / (rb.y - lt.y));
                         x2 = (float)rg.inputCoor[i + 1, j].x;
                         y2 = (float)rg.inputCoor[i + 1, j].y;
                         g.DrawLine(pen, x1, y1, x2, y2);
                     }
-                    //if(i>1 && j >3)
-                    //{
-                    //    g.Dispose();
-                    //    pictureBox1.BackgroundImage = gridBmp;
-                    //    return;
-                    //}
                 }
             }
             g.Dispose();
-            pictureBox1.BackgroundImage = gridBmp;
-        }
-*/
-        private void loadBtn_Click(object sender, EventArgs e)
-        {
-            DialogResult result = inputFileDlg.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
-            {
-                inputFilePath.Text = inputFileDlg.FileName;
-                if (!rg.ReadInputFile(inputFilePath.Text))
-                {
-                    MessageBox.Show("ç„¡æ³•è¼‰å…¥æª”æ¡ˆ!");
-                    return;
-                }
-                if(rg.GetTopLeft.x < 120.0 || rg.GetTopLeft.y < 23.0)
-                {
-                    useMapChk.Enabled = false;
-                }
-                gPicBox.Grid = rg;
-            }
+            PicBox.BackgroundImage = gridBmp;
         }
 
-        private Color bkColor = Color.White;
-        private void selBgColorBtn_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Special settings for the picturebox ctrl
+		/// </summary>
+		private void InitCtrl ()
+		{
+			PicBox.SizeMode = PictureBoxSizeMode.Zoom;
+			PicBox.Location = new Point (0, 0);
+			OuterPanel.Dock = DockStyle.Fill;
+			OuterPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
+			OuterPanel.AutoScroll = true;
+			OuterPanel.MouseEnter += new EventHandler(PicBox_MouseEnter);
+			PicBox.MouseEnter += new EventHandler(PicBox_MouseEnter);
+			OuterPanel.MouseWheel += new MouseEventHandler(PicBox_MouseWheel);
+		}
+
+		/// <summary>
+		/// Create a simple red cross as a bitmap and display it in the picturebox
+		/// </summary>
+		private void RedCross ()
+		{
+			Bitmap bmp = new Bitmap ( OuterPanel.Width, OuterPanel.Height, System.Drawing.Imaging.PixelFormat.Format16bppRgb555 );
+			Graphics gr;
+			gr = Graphics.FromImage ( bmp );
+			Pen pencil = new Pen ( Color.Red, 5 );
+			gr.DrawLine ( pencil, 0, 0, OuterPanel.Width, OuterPanel.Height );
+			gr.DrawLine ( pencil, 0, OuterPanel.Height, OuterPanel.Width, 0  );
+			PicBox.Image = bmp;
+			gr.Dispose ();
+		}
+
+		#endregion
+
+		#region Zooming Methods
+
+		/// <summary>
+		/// Make the PictureBox dimensions larger to effect the Zoom.
+		/// </summary>
+		/// <remarks>Maximum 5 times bigger</remarks>
+		private void ZoomIn() 
+		{
+			if ( ( PicBox.Width < ( MINMAX * OuterPanel.Width ) ) &&
+				( PicBox.Height < ( MINMAX * OuterPanel.Height ) ) )
+			{
+				PicBox.Width = Convert.ToInt32 ( PicBox.Width * ZOOMFACTOR );
+				PicBox.Height = Convert.ToInt32 ( PicBox.Height * ZOOMFACTOR );
+				PicBox.SizeMode = PictureBoxSizeMode.StretchImage; 
+			}
+		}
+
+		/// <summary>
+		/// Make the PictureBox dimensions smaller to effect the Zoom.
+		/// </summary>
+		/// <remarks>Minimum 5 times smaller</remarks>
+		private void ZoomOut() 
+		{
+			if ( ( PicBox.Width > ( OuterPanel.Width / MINMAX ) ) &&
+				( PicBox.Height > ( OuterPanel.Height / MINMAX ) ) )
+			{
+				PicBox.SizeMode = PictureBoxSizeMode.StretchImage; 
+				PicBox.Width = Convert.ToInt32 ( PicBox.Width / ZOOMFACTOR );
+				PicBox.Height = Convert.ToInt32 ( PicBox.Height / ZOOMFACTOR );
+			}		
+		}
+
+		#endregion
+
+		#region Mouse events
+
+		/// <summary>
+		/// We use the mousewheel to zoom the picture in or out
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void PicBox_MouseWheel(object sender, MouseEventArgs e)
+		{
+			if ( e.Delta < 0 )
+			{
+				//ZoomIn ();
+			}
+			else
+			{
+				//ZoomOut ();
+			}
+		}
+
+		/// <summary>
+		/// Make sure that the PicBox have the focus, otherwise it doesn´t receive 
+		/// mousewheel events !.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void PicBox_MouseEnter(object sender, EventArgs e)
+		{
+			if ( PicBox.Focused == false )
+			{
+				PicBox.Focus ();
+			}
+		}
+        public delegate void myDelegate(string s);
+        public event myDelegate GridChangedEvent;
+
+       // public delegate void myDelegate2(int row);
+       // public event myDelegate2 SelectedRowChangedEvent;
+        
+        #endregion
+
+		#region Disposing
+
+		/// <summary>
+		/// Die verwendeten Ressourcen bereinigen.
+		/// </summary>
+		protected override void Dispose( bool disposing )
+		{
+			if( disposing )
+			{
+				if( components != null )
+					components.Dispose();
+			}
+			base.Dispose( disposing );
+		}
+
+		#endregion
+
+        private void OuterPanel_Resize(object sender, EventArgs e)
         {
-            // Show the color dialog.
-            colorDialog1.Color = bkColor;
-            DialogResult result = colorDialog1.ShowDialog();
-            // See if user pressed ok.
-            if (result == DialogResult.OK)
-            {
-                // Set form background to the selected color.
-                bkColor = colorDialog1.Color;
-                SetColorSample();
-            }
-        }
-
-        private Color lineColor = Color.Orange;
-        private void selLineColorBtn_Click(object sender, EventArgs e)
-        {
-            // Show the color dialog.
-            colorDialog1.Color = lineColor;
-            DialogResult result = colorDialog1.ShowDialog();
-            // See if user pressed ok.
-            if (result == DialogResult.OK)
-            {
-                // Set form background to the selected color.
-                lineColor = colorDialog1.Color;
-                SetColorSample();
-            }
-        }
-
-        float lineWidth = 2.0F;
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-
-                lineWidth = (float)Convert.ToDouble((sender as TextBox).Text);
-                //DrawGrid();
-               // panel1.Refresh();
-            }
-            catch
-            {
-
-            }
-        }
-
-        private void refreshBtn_Click(object sender, EventArgs e)
-        {
-            //DrawGrid();
-            //pictureBox1.Refresh();
+            PicBox.Width = Width;
+            PicBox.Height = Height;
         }
 
         protected PointF TranslateZoomMousePosition(int x, int y)
         {
-            Image img = gPicBox.BackgroundImage;
-            int w = gPicBox.Width;
-            int h = gPicBox.Height;
+            Image img = PicBox.BackgroundImage;
+            int w = PicBox.Width;
+            int h = PicBox.Height;
             // test to make sure our image is not null
             if (img == null) return new PointF(x, y);
             // Make sure our control width and height are not 0 and our 
@@ -367,13 +477,82 @@ namespace TestGoogleMap
             return new Point((int)newX, (int)newY);
         }
 
-        int lastSelI = -1;
-        private void gPicBox_GridChangedEvent(string s)
+        private int GetNearestI(float x, float y)
         {
-            xLabel.Text = s;
+            int foundI = -1;
+            int foundJ = -1;
+            float minDis = float.MaxValue;
+            for (int i = 0; i < rg.GetI; ++i)
+            {
+                for (int j = 0; j < rg.GetJ; ++j)
+                {
+                    float x0 = (float)rg.inputCoor[i, j].x;
+                    float y0 = (float)rg.inputCoor[i, j].y;
+                    float dis = (x0 - x) * (x0 - x) + (y0 - y) * (y0 - y);
+                    if (dis < minDis)
+                    {
+                        minDis = dis;
+                        foundI = i;
+                        foundJ = j;
+                    }
+                }
+            }
+            return foundI;
         }
-    }
-/*
+
+        private void PicBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!selectRow)
+            {
+                return;
+            }
+
+            Matrix m = GetMatrix();
+            if (m == null)
+            {
+                return;
+            }
+
+            PointF p0 = TranslateZoomMousePosition(e.X, e.Y);
+            PointF[] p = new PointF[1] { p0 };
+            //PointF[] p = new PointF[4] { new PointF(609, 29), new PointF(664, 67) ,new PointF(404, 490) ,new PointF(349, 380) };
+            //p[0] = new PointF(609, 29); p[1] = new PointF(664, 67); p[2] = new PointF(404, 490); p[3] = new PointF(349, 380);
+
+            //PointF[] p1 = new PointF[4] { new PointF(270746.457f, 2733465.149f), new PointF(664, 67), new PointF(404, 490), new PointF(349, 380) };
+            //PointF[] p2 = (PointF[])p.Clone();
+            //PointF[] p3 = (PointF[])p.Clone();
+            //PointF[] p4 = (PointF[])p.Clone();
+
+            //m.TransformPoints(p1);
+            //m.TransformVectors(p2);
+            m.Invert();
+            m.TransformPoints(p);
+            //m.TransformVectors(p4);
+            this.GridChangedEvent(e.X.ToString() + "/" + p0.X.ToString() + "/" + p[0].X.ToString() + ", " +
+                e.Y.ToString() + "/" + p0.Y.ToString() + "/" + p[0].Y.ToString());
+            
+            //xLabel.Text = e.X.ToString() + "/" + p0.X.ToString() + "/" + p[0].X.ToString();
+            //yLabel.Text = e.Y.ToString() + "/" + p0.Y.ToString() + "/" + p[0].Y.ToString();
+            
+            int sel = GetNearestI(p[0].X, p[0].Y);
+            if (SelectedI != sel)
+            {
+                SelectedI = sel;
+                //lastSelI = sel;
+                //DrawGrid();
+                //pictureBox1.Refresh();
+            }
+            
+        }
+
+        private void PicBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (selectRow && SelectedI != -1)
+            {
+                //SelectedRowChangedEvent(SelectedI);
+            }
+        }
+	}
     public class RiverGrid
     {
         public RiverGrid()
@@ -520,7 +699,6 @@ namespace TestGoogleMap
         }
 
     }
-
     public class CoorPoint
     {
         public CoorPoint()
@@ -559,11 +737,11 @@ namespace TestGoogleMap
 
     public class CoordinateTransform
     {
-        //è½‰æ›ç¶²ç«™
+        //Âà´«ºô¯¸
         //http://gis.cy1000.com.tw/transcoor/transcoor.asp
-        //äºŒåº¦åˆ†å¸¶åº§æ¨™ 
-        //åº§æ¨™ç³»çµ± TWD97, ä¸­å¤®ç¶“ç·š å°ç£åœ°å€121ä»¥å…¬å°ºç‚ºå–®ä½
-        //è½‰ç‚ºWGS84 for Google Map
+        //¤G«×¤À±a®y¼Ð 
+        //®y¼Ð¨t²Î TWD97, ¤¤¥¡¸g½u ¥xÆW¦a°Ï121¥H¤½¤Ø¬°³æ¦ì
+        //Âà¬°WGS84 for Google Map
         private static double a = 6378137.0;
         private static double b = 6356752.3142451;
         private double lon0 = 121 * Math.PI / 180;
@@ -626,14 +804,14 @@ namespace TestGoogleMap
 
             double D = x / (N1 * k0);
 
-            // è¨ˆç®—ç·¯åº¦
+            // ­pºâ½n«×
             double Q1 = N1 * Math.Tan(fp) / R1;
             double Q2 = (Math.Pow(D, 2) / 2.0);
             double Q3 = (5 + 3 * T1 + 10 * C1 - 4 * Math.Pow(C1, 2) - 9 * e2) * Math.Pow(D, 4) / 24.0;
             double Q4 = (61 + 90 * T1 + 298 * C1 + 45 * Math.Pow(T1, 2) - 3 * Math.Pow(C1, 2) - 252 * e2) * Math.Pow(D, 6) / 720.0;
             double lat = fp - Q1 * (Q2 - Q3 + Q4);
 
-            // è¨ˆç®—ç¶“åº¦
+            // ­pºâ¸g«×
             double Q5 = D;
             double Q6 = (1 + 2 * T1 + C1) * Math.Pow(D, 3) / 6;
             double Q7 = (5 - 2 * C1 + 28 * T1 - 3 * Math.Pow(C1, 2) + 8 * e2 + 24 * Math.Pow(T1, 2)) * Math.Pow(D, 5) / 120.0;
@@ -665,5 +843,5 @@ namespace TestGoogleMap
             return  new CoorPoint(lat, lon);
         }
     }
- * */
+
 }

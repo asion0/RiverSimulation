@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
+using PictureBoxCtrl;
 
 namespace RiverSimulationApplication
 {
@@ -180,64 +181,63 @@ namespace RiverSimulationApplication
         private BackgroundMapType bkImgType = BackgroundMapType.None;
         public BackgroundMapType GetBackgroundMapType() 
         {
-            if (bkImgType == BackgroundMapType.ImportImage && importBmp==null)
+            if (bkImgType == BackgroundMapType.ImportImage)
             {
                 return BackgroundMapType.None;
             }
             return bkImgType; 
         }
-
-        private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
-        private Bitmap importBmp;
-        private Bitmap tlBmp, trBmp, blBmp, brBmp;
-        public Bitmap GetGridBitmap()  
-        {
+        //private Bitmap importBmp;
+        /*
+         private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
+         private Bitmap tlBmp, trBmp, blBmp, brBmp;
+         public Bitmap GetGridBitmap()  
+         {
     
-            switch (bkImgType)
-            {
-                case BackgroundMapType.None:
-                    return gridBmp;
+             switch (bkImgType)
+             {
+                 case BackgroundMapType.None:
+                     return gridBmp;
 
-                case BackgroundMapType.GoogleStaticMap:
-                    return gridBmp;
+                 case BackgroundMapType.GoogleStaticMap:
+                     return gridBmp;
 
-                case BackgroundMapType.ImportImage:
-                    return importBmp;
+                 case BackgroundMapType.ImportImage:
+                     return importBmp;
 
-            }
-            return null;
-        }
-
-        private void FreeStaticMaps()
-        {
-            if (tlBmp != null)
-            {
-                tlBmp.Dispose();
-                tlBmp = null;
-            }
-            if (trBmp != null)
-            {
-                trBmp.Dispose();
-                trBmp = null;
-            }
-            if (blBmp != null)
-            {
-                blBmp.Dispose();
-                blBmp = null;
-            }
-            if (brBmp != null)
-            {
-                brBmp.Dispose();
-                brBmp = null;
-            }
-        }
-
+             }
+             return null;
+         }
+        
+         private void FreeStaticMaps()
+         {
+             if (tlBmp != null)
+             {
+                 tlBmp.Dispose();
+                 tlBmp = null;
+             }
+             if (trBmp != null)
+             {
+                 trBmp.Dispose();
+                 trBmp = null;
+             }
+             if (blBmp != null)
+             {
+                 blBmp.Dispose();
+                 blBmp = null;
+             }
+             if (brBmp != null)
+             {
+                 brBmp.Dispose();
+                 brBmp = null;
+             }
+         }
+         
         public void ClearBackgroundBitmap()
         {
             FreeStaticMaps();
             bkImgType = BackgroundMapType.None;
         }
-
         
         public CoorPoint GetTopLeft()
         {
@@ -276,13 +276,13 @@ namespace RiverSimulationApplication
             }
             return pt;
         }
-
+        */
+        public string tl = Environment.CurrentDirectory + "\\tl.jpg";
+        public string tr = Environment.CurrentDirectory + "\\tr.jpg";
+        public string bl = Environment.CurrentDirectory + "\\bl.jpg";
+        public string br = Environment.CurrentDirectory + "\\br.jpg";
         public bool DownloadGoogleStaticMap()
         {
-            string tl = Environment.CurrentDirectory + "\\tl.jpg";
-            string tr = Environment.CurrentDirectory + "\\tr.jpg";
-            string bl = Environment.CurrentDirectory + "\\bl.jpg";
-            string br = Environment.CurrentDirectory + "\\br.jpg";
 
             if (File.Exists(tl))
             {
@@ -298,38 +298,19 @@ namespace RiverSimulationApplication
             {
                 File.Delete(br);
             }
-            FreeStaticMaps();
             inputGrid.DownloadGridMap(tl, tr, bl, br);
-            tlBmp = new Bitmap(tl);
-            trBmp = new Bitmap(tr);
-            blBmp = new Bitmap(bl);
-            brBmp = new Bitmap(br);
             bkImgType = BackgroundMapType.GoogleStaticMap;
-
-            if (tlBmp != null && trBmp != null && blBmp != null && brBmp != null)
-            {
-                Graphics g = Graphics.FromImage(gridBmp);
-                g.DrawImage(tlBmp, 640, 640);
-                g.DrawImage(trBmp, 0, 640);
-                g.DrawImage(blBmp, 640, 0);
-                g.DrawImage(brBmp, 0, 0);
-                g.Dispose();
-                tlBmp.Dispose();
-                trBmp.Dispose();
-                blBmp.Dispose();
-                brBmp.Dispose();
-                //gridBmp.Save(Environment.CurrentDirectory + "Big.jpg");
-            }
             return true;
         }
+        
 
         public void SetImportImageMode()
         {
             bkImgType = BackgroundMapType.ImportImage;
         }
 
-        private CoorPoint bottomRight = new CoorPoint();
-        private CoorPoint topLeft = new CoorPoint();
+        //private CoorPoint bottomRight = new CoorPoint();
+        //private CoorPoint topLeft = new CoorPoint();
         public string imagePath;
         public double sourceE;
         public double sourceN;
@@ -337,12 +318,10 @@ namespace RiverSimulationApplication
         public double sourceH;
         public void SetImportImage(string s, double e, double n, double w, double h)
         {
-            importBmp = new Bitmap(s);
-            importBmp.SetResolution(96.0F, 96.0F);
-            //topLeft = new CoorPoint(e, n + h);
-            //bottomRight = new CoorPoint(e + w, n);
-            topLeft = new CoorPoint(e, n);
-            bottomRight = new CoorPoint(e + w, n - h);
+            //importBmp = new Bitmap(s);
+            //importBmp.SetResolution(96.0F, 96.0F);
+            //topLeft = new CoorPoint(e, n);
+            //bottomRight = new CoorPoint(e + w, n - h);
             imagePath = s;
             sourceE = e;
             sourceN = n;

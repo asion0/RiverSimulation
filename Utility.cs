@@ -79,7 +79,7 @@ namespace RiverSimulationApplication
         }
     }
 
-
+/*
     public class RiverGrid
     {
         public RiverGrid()
@@ -371,5 +371,5 @@ namespace RiverSimulationApplication
             return new CoorPoint(lat, lon);
         }
     }
-
+*/
 }

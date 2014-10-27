@@ -33,6 +33,7 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.bitmapGrp = new System.Windows.Forms.GroupBox();
             this.selectBgFilePath = new System.Windows.Forms.Label();
+            this.imgInfoBtn = new System.Windows.Forms.Button();
             this.selectBgBtn = new System.Windows.Forms.Button();
             this.noBgRdo = new System.Windows.Forms.RadioButton();
             this.selectBgRdo = new System.Windows.Forms.RadioButton();
@@ -53,15 +54,11 @@
             this.inputFileRdo = new System.Windows.Forms.RadioButton();
             this.inputFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.selectBgDlg = new System.Windows.Forms.OpenFileDialog();
-            this.mapPanel = new System.Windows.Forms.Panel();
-            this.mapPicBox = new System.Windows.Forms.PictureBox();
-            this.imgInfoBtn = new System.Windows.Forms.Button();
+            this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
             this.mainPanel.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
-            this.mapPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mapPicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // comment
@@ -72,13 +69,13 @@
             this.comment.MinimumSize = new System.Drawing.Size(20, 20);
             this.comment.Name = "comment";
             this.comment.ScrollBarsEnabled = false;
-            this.comment.Size = new System.Drawing.Size(468, 225);
+            this.comment.Size = new System.Drawing.Size(479, 225);
             this.comment.TabIndex = 9;
             // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ok.Location = new System.Drawing.Point(777, 638);
+            this.ok.Location = new System.Drawing.Point(788, 638);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 8;
@@ -118,6 +115,17 @@
             this.selectBgFilePath.Name = "selectBgFilePath";
             this.selectBgFilePath.Size = new System.Drawing.Size(303, 51);
             this.selectBgFilePath.TabIndex = 3;
+            // 
+            // imgInfoBtn
+            // 
+            this.imgInfoBtn.Enabled = false;
+            this.imgInfoBtn.Location = new System.Drawing.Point(202, 85);
+            this.imgInfoBtn.Name = "imgInfoBtn";
+            this.imgInfoBtn.Size = new System.Drawing.Size(90, 26);
+            this.imgInfoBtn.TabIndex = 1;
+            this.imgInfoBtn.Text = "輸入圖檔資訊";
+            this.imgInfoBtn.UseVisualStyleBackColor = true;
+            this.imgInfoBtn.Click += new System.EventHandler(this.imgInfoBtn_Click);
             // 
             // selectBgBtn
             // 
@@ -325,39 +333,16 @@
             // 
             this.selectBgDlg.Filter = "所有檔案|*.*|Bmp檔案|*.bmp|PNG檔案|*.png|JPG檔案|*jpg";
             // 
-            // mapPanel
-            // 
-            this.mapPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mapPanel.Controls.Add(this.mapPicBox);
-            this.mapPanel.Location = new System.Drawing.Point(405, 261);
-            this.mapPanel.Name = "mapPanel";
-            this.mapPanel.Size = new System.Drawing.Size(468, 371);
-            this.mapPanel.TabIndex = 11;
-            // 
             // mapPicBox
             // 
-            this.mapPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mapPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.mapPicBox.Location = new System.Drawing.Point(0, 0);
+            this.mapPicBox.Border = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mapPicBox.Grid = null;
+            this.mapPicBox.Location = new System.Drawing.Point(405, 253);
             this.mapPicBox.Name = "mapPicBox";
-            this.mapPicBox.Size = new System.Drawing.Size(468, 371);
-            this.mapPicBox.TabIndex = 0;
-            this.mapPicBox.TabStop = false;
-            // 
-            // imgInfoBtn
-            // 
-            this.imgInfoBtn.Enabled = false;
-            this.imgInfoBtn.Location = new System.Drawing.Point(202, 85);
-            this.imgInfoBtn.Name = "imgInfoBtn";
-            this.imgInfoBtn.Size = new System.Drawing.Size(90, 26);
-            this.imgInfoBtn.TabIndex = 1;
-            this.imgInfoBtn.Text = "輸入圖檔資訊";
-            this.imgInfoBtn.UseVisualStyleBackColor = true;
-            this.imgInfoBtn.Click += new System.EventHandler(this.imgInfoBtn_Click);
+            this.mapPicBox.SelectedI = -1;
+            this.mapPicBox.SelectRow = false;
+            this.mapPicBox.Size = new System.Drawing.Size(479, 379);
+            this.mapPicBox.TabIndex = 11;
             // 
             // ImportForm
             // 
@@ -365,7 +350,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 682);
-            this.Controls.Add(this.mapPanel);
+            this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.ok);
@@ -380,8 +365,6 @@
             this.groupBox2.ResumeLayout(false);
             this.flowTypeGroup.ResumeLayout(false);
             this.flowTypeGroup.PerformLayout();
-            this.mapPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mapPicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -413,9 +396,8 @@
         private System.Windows.Forms.Button separateProportionBtn;
         private System.Windows.Forms.TextBox SeparateNumTxt;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel mapPanel;
-        private System.Windows.Forms.PictureBox mapPicBox;
         private System.Windows.Forms.Button imgInfoBtn;
+        private PictureBoxCtrl.GridPictureBox mapPicBox;
 
     }
 }

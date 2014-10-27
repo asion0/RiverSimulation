@@ -372,6 +372,11 @@ namespace TestGoogleMap
         {
             xLabel.Text = s;
         }
+
+        private void gPicBox_SelectedRowChangedEvent(int row)
+        {
+            yLabel.Text = row.ToString();
+        }
     }
 /*
     public class RiverGrid

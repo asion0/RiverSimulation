@@ -22,6 +22,11 @@ namespace RiverSimulationApplication
 
         private void ImportForm_Load(object sender, EventArgs e)
         {
+            //bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
+            if (RiverSimulationProfile.profile.inputGrid != null)
+            {
+                mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
+            }
             UpdateStatus();
         }
 
@@ -54,6 +59,7 @@ namespace RiverSimulationApplication
                     MessageBox.Show("無法讀取所選檔案", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
+                mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
                 UpdateStatus();
             }
         }
@@ -83,21 +89,23 @@ namespace RiverSimulationApplication
             {
 
             }
-
         }
 
         private void noBgRdo_CheckedChanged(object sender, EventArgs e)
         {
-            RiverSimulationProfile.profile.ClearBackgroundBitmap();
+            //RiverSimulationProfile.profile.ClearBackgroundBitmap();
+            mapPicBox.ClearMapBackground();
             UpdateStatus();
         }
 
         private void useGoogleBgRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
             if (chk)
             {
                 RiverSimulationProfile.profile.DownloadGoogleStaticMap();
+                mapPicBox.SetMapBackground(p.tl, p.tr, p.bl, p.br);
                 UpdateStatus();
             }
 
@@ -294,7 +302,7 @@ namespace RiverSimulationApplication
             }
         }
         
-
+        /*
         private Color bkColor = Color.White;
         private Color lineColor = Color.Orange;
         private float lineWidth = 2.0F;
@@ -335,7 +343,6 @@ namespace RiverSimulationApplication
                 g.DrawImage(RiverSimulationProfile.profile.GetGridBitmap(), 0, 0);
             }
 
-
             lineWidth = w / 512.0F;
 
             Pen pen = new Pen(lineColor, lineWidth);
@@ -363,15 +370,15 @@ namespace RiverSimulationApplication
             g.Dispose();
             mapPicBox.BackgroundImage = picBoxBmp;
         }
-
+        */
         private void UpdateStatus()
         {
             bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
-            if(RiverSimulationProfile.profile.inputGrid != null)
-            {
-                DrawGrid();
-                mapPicBox.Refresh();
-            }
+            //if(RiverSimulationProfile.profile.inputGrid != null)
+            //{
+            //    DrawGrid();
+            //    mapPicBox.Refresh();
+            //}
         } 
     }
 }

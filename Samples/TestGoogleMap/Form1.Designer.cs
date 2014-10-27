@@ -222,6 +222,7 @@
             this.gPicBox.Size = new System.Drawing.Size(1013, 517);
             this.gPicBox.TabIndex = 13;
             this.gPicBox.GridChangedEvent += new PictureBoxCtrl.GridPictureBox.myDelegate(this.gPicBox_GridChangedEvent);
+            this.gPicBox.SelectedRowChangedEvent += new PictureBoxCtrl.GridPictureBox.myDelegate2(this.gPicBox_SelectedRowChangedEvent);
             // 
             // Form1
             // 

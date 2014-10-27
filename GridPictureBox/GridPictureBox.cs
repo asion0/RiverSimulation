@@ -43,10 +43,17 @@ namespace PictureBoxCtrl
 	{
 		#region Members
 
+        private enum BackgroundMapType
+        {
+            None,
+            GoogleStaticMap,
+            ImportImage
+        };
+
 		private System.Windows.Forms.PictureBox PicBox;
 		private System.Windows.Forms.Panel OuterPanel;
 		private System.ComponentModel.Container components = null;
-        private RiverGrid rg=null;
+        private PictureBoxCtrl.RiverGrid rg = null;
         private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
         private Bitmap tlBmp, trBmp, blBmp, brBmp;
         private Color bkColor = Color.White;
@@ -160,6 +167,47 @@ namespace PictureBoxCtrl
             }
         }
 
+        private CoorPoint bottomRight = new CoorPoint();
+        private CoorPoint topLeft = new CoorPoint();
+        private BackgroundMapType bkImgType = BackgroundMapType.None;
+        private CoorPoint GetTopLeft()
+        {
+            CoordinateTransform ct = new CoordinateTransform();
+            CoorPoint pt = new CoorPoint();
+            switch (bkImgType)
+            {
+                case BackgroundMapType.None:
+                    pt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
+                    break;
+                case BackgroundMapType.GoogleStaticMap:
+                    pt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
+                    break;
+                case BackgroundMapType.ImportImage:
+                    pt = topLeft;
+                    break;
+            }
+            return pt;
+        }
+
+        private CoorPoint GetBottomRight()
+        {
+            CoordinateTransform ct = new CoordinateTransform();
+            CoorPoint pt = new CoorPoint();
+            switch (bkImgType)
+            {
+                case BackgroundMapType.None:
+                    pt = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
+                    break;
+                case BackgroundMapType.GoogleStaticMap:
+                    pt = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
+                    break;
+                case BackgroundMapType.ImportImage:
+                    pt = bottomRight;
+                    break;
+            }
+            return pt;
+        }
+ 
         public void SetMapBackground(string tl, string tr, string bl, string br)
         {
             FreeStaticMaps();
@@ -170,6 +218,23 @@ namespace PictureBoxCtrl
             DrawGrid();
             PicBox.Refresh();
         }
+
+        private Bitmap importBmp;
+        public void SetMapBackground(string s, double e, double n, double w, double h)
+        {
+            importBmp = new Bitmap(s);
+            importBmp.SetResolution(96.0F, 96.0F);
+            topLeft = new CoorPoint(e, n);
+            bottomRight = new CoorPoint(e + w, n - h);
+
+            importBmp = new Bitmap(s);
+            importBmp.SetResolution(96.0F, 96.0F);
+            //topLeft = new CoorPoint(e, n + h);
+            //bottomRight = new CoorPoint(e + w, n);
+            topLeft = new CoorPoint(e, n);
+            bottomRight = new CoorPoint(e + w, n - h);
+        }
+
         public bool SelectRow
         {
             get { return selectRow; }
@@ -227,8 +292,10 @@ namespace PictureBoxCtrl
                 return null;
             }
             CoordinateTransform ct = new CoordinateTransform();
-            CoorPoint lt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
-            CoorPoint rb = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
+            //CoorPoint lt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
+            //CoorPoint rb = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
+            CoorPoint lt = GetTopLeft();
+            CoorPoint rb = GetBottomRight(); ;
 
             Matrix m = new Matrix(1f, 0, 0, -1f, 0, 0);
             float xScale = 1280.0f / (float)(rb.x - lt.x);
@@ -553,6 +620,7 @@ namespace PictureBoxCtrl
             }
         }
 	}
+
     public class RiverGrid
     {
         public RiverGrid()

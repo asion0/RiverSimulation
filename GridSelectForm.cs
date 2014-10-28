@@ -33,6 +33,8 @@ namespace RiverSimulationApplication
             {
                 listBox.Items.Add(objectName + (i + 1).ToString());
             }
+
+            ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
         }
     }
 }

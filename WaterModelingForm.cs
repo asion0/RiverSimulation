@@ -80,8 +80,8 @@ namespace RiverSimulationApplication
             string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             comment.Navigate(new Uri(url));
 
-            this.Width = 1000;
-            this.Height = 720;
+            //this.Width = 1000;
+            //this.Height = 780;
             valueParamPanel.Visible = false;
             setting3dPanel.Visible = false;
             roughnessPanel.Visible = false;

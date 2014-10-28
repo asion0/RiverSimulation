@@ -65,17 +65,17 @@
             // 
             this.comment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comment.Location = new System.Drawing.Point(405, 13);
+            this.comment.Location = new System.Drawing.Point(516, 12);
             this.comment.MinimumSize = new System.Drawing.Size(20, 20);
             this.comment.Name = "comment";
             this.comment.ScrollBarsEnabled = false;
-            this.comment.Size = new System.Drawing.Size(479, 225);
+            this.comment.Size = new System.Drawing.Size(452, 224);
             this.comment.TabIndex = 9;
             // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ok.Location = new System.Drawing.Point(788, 638);
+            this.ok.Location = new System.Drawing.Point(872, 702);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 8;
@@ -90,7 +90,7 @@
             this.mainPanel.Controls.Add(this.flowTypeGroup);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(391, 670);
+            this.mainPanel.Size = new System.Drawing.Size(500, 692);
             this.mainPanel.TabIndex = 10;
             // 
             // bitmapGrp
@@ -104,7 +104,7 @@
             this.bitmapGrp.Enabled = false;
             this.bitmapGrp.Location = new System.Drawing.Point(12, 305);
             this.bitmapGrp.Name = "bitmapGrp";
-            this.bitmapGrp.Size = new System.Drawing.Size(366, 177);
+            this.bitmapGrp.Size = new System.Drawing.Size(472, 177);
             this.bitmapGrp.TabIndex = 0;
             this.bitmapGrp.TabStop = false;
             this.bitmapGrp.Text = "底圖設定";
@@ -180,7 +180,7 @@
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(366, 144);
+            this.groupBox2.Size = new System.Drawing.Size(472, 144);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "格網產生程式";
@@ -225,7 +225,7 @@
             this.flowTypeGroup.Controls.Add(this.inputFileRdo);
             this.flowTypeGroup.Location = new System.Drawing.Point(12, 162);
             this.flowTypeGroup.Name = "flowTypeGroup";
-            this.flowTypeGroup.Size = new System.Drawing.Size(366, 137);
+            this.flowTypeGroup.Size = new System.Drawing.Size(472, 137);
             this.flowTypeGroup.TabIndex = 0;
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "計算網格來源";
@@ -335,13 +335,16 @@
             // 
             // mapPicBox
             // 
+            this.mapPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mapPicBox.Border = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mapPicBox.Grid = null;
-            this.mapPicBox.Location = new System.Drawing.Point(405, 253);
+            this.mapPicBox.Location = new System.Drawing.Point(516, 252);
             this.mapPicBox.Name = "mapPicBox";
             this.mapPicBox.SelectedI = -1;
             this.mapPicBox.SelectRow = false;
-            this.mapPicBox.Size = new System.Drawing.Size(479, 379);
+            this.mapPicBox.Size = new System.Drawing.Size(452, 440);
             this.mapPicBox.TabIndex = 11;
             // 
             // ImportForm
@@ -349,7 +352,7 @@
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 682);
+            this.ClientSize = new System.Drawing.Size(984, 742);
             this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);

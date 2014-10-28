@@ -170,6 +170,15 @@ namespace PictureBoxCtrl
         private CoorPoint bottomRight = new CoorPoint();
         private CoorPoint topLeft = new CoorPoint();
         private BackgroundMapType bkImgType = BackgroundMapType.None;
+        private BackgroundMapType GetBackgroundMapType()
+        {
+            //if (bkImgType == BackgroundMapType.ImportImage)
+            //{
+            //    return BackgroundMapType.None;
+            //}
+            return bkImgType;
+        }
+
         private CoorPoint GetTopLeft()
         {
             CoordinateTransform ct = new CoordinateTransform();
@@ -208,13 +217,30 @@ namespace PictureBoxCtrl
             return pt;
         }
  
+        private Bitmap LoadBitmapWithoutLockFile(string s)
+        {
+            Bitmap tmp = new Bitmap(s);
+            Bitmap img = new Bitmap(tmp);
+            tmp.Dispose();
+            return img;
+        }
+
         public void SetMapBackground(string tl, string tr, string bl, string br)
         {
             FreeStaticMaps();
-            tlBmp = new Bitmap(tl);
-            trBmp = new Bitmap(tr);
-            blBmp = new Bitmap(bl);
-            brBmp = new Bitmap(br);
+            tlBmp = LoadBitmapWithoutLockFile(tl);
+            trBmp = LoadBitmapWithoutLockFile(tr);
+            blBmp = LoadBitmapWithoutLockFile(bl);
+            brBmp = LoadBitmapWithoutLockFile(br);
+            bkImgType = BackgroundMapType.GoogleStaticMap;
+
+            Graphics g = Graphics.FromImage(gridBmp );
+            g.DrawImage(tlBmp, 640, 640);
+            g.DrawImage(trBmp, 0, 640);
+            g.DrawImage(blBmp, 640, 0);
+            g.DrawImage(brBmp, 0, 0);
+            g.Dispose();
+
             DrawGrid();
             PicBox.Refresh();
         }
@@ -222,17 +248,46 @@ namespace PictureBoxCtrl
         private Bitmap importBmp;
         public void SetMapBackground(string s, double e, double n, double w, double h)
         {
-            importBmp = new Bitmap(s);
+            if(s == null || s.Length == 0)
+            {
+                bkImgType = BackgroundMapType.None;
+                DrawGrid();
+                PicBox.Refresh();
+                return;
+            }
+            importBmp = LoadBitmapWithoutLockFile(s);
+            if (importBmp == null || importBmp.Width < 100 || importBmp.Height < 100)
+            {
+                bkImgType = BackgroundMapType.None;
+                DrawGrid();
+                PicBox.Refresh();
+                return;
+            }
             importBmp.SetResolution(96.0F, 96.0F);
             topLeft = new CoorPoint(e, n);
             bottomRight = new CoorPoint(e + w, n - h);
 
-            importBmp = new Bitmap(s);
-            importBmp.SetResolution(96.0F, 96.0F);
-            //topLeft = new CoorPoint(e, n + h);
-            //bottomRight = new CoorPoint(e + w, n);
-            topLeft = new CoorPoint(e, n);
-            bottomRight = new CoorPoint(e + w, n - h);
+            bkImgType = BackgroundMapType.ImportImage;
+            DrawGrid();
+            PicBox.Refresh();
+        }
+
+        public Bitmap GetGridBitmap()
+        {
+
+            switch (bkImgType)
+            {
+                case BackgroundMapType.None:
+                    return gridBmp;
+
+                case BackgroundMapType.GoogleStaticMap:
+                    return gridBmp;
+
+                case BackgroundMapType.ImportImage:
+                    return importBmp;
+
+            }
+            return null;
         }
 
         public bool SelectRow
@@ -281,6 +336,7 @@ namespace PictureBoxCtrl
         public void ClearMapBackground()
         {
             FreeStaticMaps();
+            bkImgType = BackgroundMapType.None;
             DrawGrid();
             PicBox.Refresh(); 
         }
@@ -292,14 +348,32 @@ namespace PictureBoxCtrl
                 return null;
             }
             CoordinateTransform ct = new CoordinateTransform();
-            //CoorPoint lt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
-            //CoorPoint rb = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
             CoorPoint lt = GetTopLeft();
             CoorPoint rb = GetBottomRight(); ;
 
+            float w = 0;
+            float h = 0;
+            if (BackgroundMapType.GoogleStaticMap == bkImgType)
+            {
+                w = GetGridBitmap().Width;
+                h = GetGridBitmap().Height;
+            }
+            else if (BackgroundMapType.ImportImage == bkImgType)
+            {
+                w = GetGridBitmap().Width;
+                h = GetGridBitmap().Height;
+            }
+            else //if (BackgroundMapType.None == bkImgType)
+            {
+                w = 640 * 2;
+                h = 640 * 2;
+            }
+
+
+
             Matrix m = new Matrix(1f, 0, 0, -1f, 0, 0);
-            float xScale = 1280.0f / (float)(rb.x - lt.x);
-            float yScale = 1280.0f / (float)(lt.y - rb.y);
+            float xScale = w / (float)(rb.x - lt.x);
+            float yScale = h / (float)(lt.y - rb.y);
 
             m.Scale(xScale, yScale);
             m.Translate((float)-lt.x, (float)-lt.y);
@@ -315,19 +389,48 @@ namespace PictureBoxCtrl
                 return;
             }
 
-            Graphics g = Graphics.FromImage(gridBmp);
+            //Graphics g = Graphics.FromImage(gridBmp);
+            Graphics g;
+            Bitmap picBoxBmp;
 
-            if (tlBmp != null && trBmp != null && blBmp != null && brBmp != null)
+            int w = 0;
+            int h = 0;
+            if (BackgroundMapType.GoogleStaticMap == bkImgType)
             {
-                g.DrawImage(tlBmp, 640, 640);
-                g.DrawImage(trBmp, 0, 640);
-                g.DrawImage(blBmp, 640, 0);
-                g.DrawImage(brBmp, 0, 0);
+                w = GetGridBitmap().Width;
+                h = GetGridBitmap().Height;
+                picBoxBmp = new Bitmap(w, h);
+                g = Graphics.FromImage(picBoxBmp);
+                g.DrawImage(GetGridBitmap(), 0, 0);
             }
-            else
+            else if (BackgroundMapType.ImportImage == bkImgType)
             {
+                w = GetGridBitmap().Width;
+                h = GetGridBitmap().Height;
+                picBoxBmp = new Bitmap(w, h);
+                g = Graphics.FromImage(picBoxBmp);
+                g.DrawImage(GetGridBitmap(), 0, 0);
+            }
+            else //if (BackgroundMapType.None == bkImgType)
+            {
+                w = 640 * 2;
+                h = 640 * 2;
+                picBoxBmp = new Bitmap(w, h);
+                g = Graphics.FromImage(picBoxBmp);
                 g.Clear(bkColor);
             }
+
+            //if (tlBmp != null && trBmp != null && blBmp != null && brBmp != null)
+            //{
+            //    g.DrawImage(tlBmp, 640, 640);
+            //    g.DrawImage(trBmp, 0, 640);
+            //    g.DrawImage(blBmp, 640, 0);
+            //    g.DrawImage(brBmp, 0, 0);
+            //}
+            //else
+            //{
+            //    g.Clear(bkColor);
+            //}
 
             Pen pen = new Pen(lineColor, lineWidth);
             Pen selPen = new Pen(Color.Red, lineWidth);
@@ -366,7 +469,7 @@ namespace PictureBoxCtrl
                 }
             }
             g.Dispose();
-            PicBox.BackgroundImage = gridBmp;
+            PicBox.BackgroundImage = picBoxBmp;
         }
 
 		/// <summary>

@@ -28,23 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GridSelectForm));
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.listBox = new System.Windows.Forms.ListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
             this.SuspendLayout();
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
-            this.pictureBox.Location = new System.Drawing.Point(178, 47);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(602, 340);
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
             // 
             // listBox
             // 
+            this.listBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBox.FormattingEnabled = true;
             this.listBox.ItemHeight = 12;
             this.listBox.Location = new System.Drawing.Point(13, 47);
@@ -52,25 +43,38 @@
             this.listBox.Size = new System.Drawing.Size(159, 340);
             this.listBox.TabIndex = 1;
             // 
+            // mapPicBox
+            // 
+            this.mapPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapPicBox.Border = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mapPicBox.Grid = null;
+            this.mapPicBox.Location = new System.Drawing.Point(178, 47);
+            this.mapPicBox.Name = "mapPicBox";
+            this.mapPicBox.SelectedI = -1;
+            this.mapPicBox.SelectRow = false;
+            this.mapPicBox.Size = new System.Drawing.Size(602, 340);
+            this.mapPicBox.TabIndex = 2;
+            // 
             // GridSelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 395);
+            this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.listBox);
-            this.Controls.Add(this.pictureBox);
             this.Name = "GridSelectForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "GridSelectForm";
             this.Load += new System.EventHandler(this.GridSelectForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.ListBox listBox;
+        private PictureBoxCtrl.GridPictureBox mapPicBox;
     }
 }

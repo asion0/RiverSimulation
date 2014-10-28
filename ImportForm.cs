@@ -93,9 +93,14 @@ namespace RiverSimulationApplication
 
         private void noBgRdo_CheckedChanged(object sender, EventArgs e)
         {
+            bool chk = (sender as RadioButton).Checked;
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
             //RiverSimulationProfile.profile.ClearBackgroundBitmap();
-            mapPicBox.ClearMapBackground();
-            UpdateStatus();
+            if (chk)
+            {
+                mapPicBox.ClearMapBackground();
+                UpdateStatus();
+            }
         }
 
         private void useGoogleBgRdo_CheckedChanged(object sender, EventArgs e)
@@ -114,10 +119,12 @@ namespace RiverSimulationApplication
         private void selectBgRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
             selectBgBtn.Enabled = chk;
             if (chk)
             {
                 RiverSimulationProfile.profile.SetImportImageMode();
+                mapPicBox.SetMapBackground(p.imagePath, p.sourceE, p.sourceN, p.sourceW, p.sourceH);
                 UpdateStatus();
             }
         }
@@ -134,6 +141,7 @@ namespace RiverSimulationApplication
                 {
                     imgInfoBtn.Enabled = true;
                     RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
+                    mapPicBox.SetMapBackground(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                     UpdateStatus();
                 }
                 else
@@ -157,6 +165,7 @@ namespace RiverSimulationApplication
             {
                 imgInfoBtn.Enabled = true;
                 RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
+                mapPicBox.SetMapBackground(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                 UpdateStatus();
             }
 

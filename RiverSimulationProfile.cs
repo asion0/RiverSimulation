@@ -9,7 +9,7 @@ using PictureBoxCtrl;
 
 namespace RiverSimulationApplication
 {
-    class RiverSimulationProfile
+    public class RiverSimulationProfile
     {
         public static RiverSimulationProfile profile = new RiverSimulationProfile();
 
@@ -181,10 +181,10 @@ namespace RiverSimulationApplication
         private BackgroundMapType bkImgType = BackgroundMapType.None;
         public BackgroundMapType GetBackgroundMapType() 
         {
-            if (bkImgType == BackgroundMapType.ImportImage)
-            {
-                return BackgroundMapType.None;
-            }
+            //if (bkImgType == BackgroundMapType.ImportImage)
+            //{
+            //    return BackgroundMapType.None;
+            //}
             return bkImgType; 
         }
         //private Bitmap importBmp;
@@ -302,7 +302,6 @@ namespace RiverSimulationApplication
             bkImgType = BackgroundMapType.GoogleStaticMap;
             return true;
         }
-        
 
         public void SetImportImageMode()
         {
@@ -318,10 +317,6 @@ namespace RiverSimulationApplication
         public double sourceH;
         public void SetImportImage(string s, double e, double n, double w, double h)
         {
-            //importBmp = new Bitmap(s);
-            //importBmp.SetResolution(96.0F, 96.0F);
-            //topLeft = new CoorPoint(e, n);
-            //bottomRight = new CoorPoint(e + w, n - h);
             imagePath = s;
             sourceE = e;
             sourceN = n;

@@ -65,7 +65,6 @@
             this.immersedBoundaryBtn = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.immersedBoundaryNumTxt = new System.Windows.Forms.TextBox();
-            this.setting = new System.Windows.Forms.Label();
             this.ok = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
             this.mainPanel = new System.Windows.Forms.Panel();
@@ -167,6 +166,7 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.roughnessBackBtn = new System.Windows.Forms.Button();
+            this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.secFlowEffectGrp.SuspendLayout();
@@ -446,12 +446,6 @@
             // 
             resources.ApplyResources(this.immersedBoundaryNumTxt, "immersedBoundaryNumTxt");
             this.immersedBoundaryNumTxt.Name = "immersedBoundaryNumTxt";
-            // 
-            // setting
-            // 
-            resources.ApplyResources(this.setting, "setting");
-            this.setting.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.setting.Name = "setting";
             // 
             // ok
             // 
@@ -1158,11 +1152,21 @@
             this.roughnessBackBtn.UseVisualStyleBackColor = true;
             this.roughnessBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
+            // mapPicBox
+            // 
+            resources.ApplyResources(this.mapPicBox, "mapPicBox");
+            this.mapPicBox.Border = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mapPicBox.Grid = null;
+            this.mapPicBox.Name = "mapPicBox";
+            this.mapPicBox.SelectedI = -1;
+            this.mapPicBox.SelectRow = false;
+            // 
             // WaterModelingForm
             // 
             this.AcceptButton = this.ok;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.roughnessPanel);
@@ -1170,7 +1174,6 @@
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.ok);
-            this.Controls.Add(this.setting);
             this.Name = "WaterModelingForm";
             this.Load += new System.EventHandler(this.WaterModelingForm_Load);
             this.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
@@ -1236,7 +1239,6 @@
         private System.Windows.Forms.GroupBox highSandContentEffectGrp;
         private System.Windows.Forms.GroupBox dryBedEffectGrp;
         private System.Windows.Forms.GroupBox immersedBoundaryGrp;
-        private System.Windows.Forms.Label setting;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.WebBrowser comment;
         private System.Windows.Forms.RadioButton variableFlowRdo;
@@ -1368,5 +1370,6 @@
         private System.Windows.Forms.GroupBox threeDGrp;
         private System.Windows.Forms.GroupBox twoDGrp;
         private System.Windows.Forms.CheckBox checkBox2;
+        private PictureBoxCtrl.GridPictureBox mapPicBox;
     }
 }

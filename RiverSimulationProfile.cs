@@ -146,11 +146,38 @@ namespace RiverSimulationApplication
 
         //乾床資訊
         public int dryBedNum = 0;
-        public Point[][] dryBedPts = null; 
+        public Point[][] dryBedPts = null;
         public void ResizeDryBedPts(int n)
         {
-            if(dryBedPts==null)
+            if (n <= 0)
+                return;
 
+            if (dryBedPts == null)
+            {
+                dryBedPts = new Point[n][];
+            }
+            else if (n > dryBedPts.Length)
+            {
+                Array.Resize(ref dryBedPts, n);
+            }
+        }
+
+        //浸沒邊界資訊
+        public int immersedBoundaryNum = 0;
+        public Point[][] immersedBoundaryPts = null;
+        public void ResizeImmersedBoundary(int n)
+        {
+            if (n <= 0)
+                return;
+
+            if (immersedBoundaryPts == null)
+            {
+                immersedBoundaryPts = new Point[n][];
+            }
+            else if (n > immersedBoundaryPts.Length)
+            {
+                Array.Resize(ref immersedBoundaryPts, n);
+            }
         }
 
         private void Initialization()

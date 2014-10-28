@@ -267,9 +267,10 @@ namespace RiverSimulationApplication
                 MessageBox.Show("請輸入正確的乾床數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            RiverSimulationProfile.profile
+
+            RiverSimulationProfile.profile.ResizeDryBedPts(n);
             GridSelectForm form = new GridSelectForm();
-            form.SetFormMode("乾床圈選", n, "乾床");
+            form.SetFormMode("乾床圈選", n, "乾床", GridSelectForm.SelectType.DryBed);
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -294,8 +295,9 @@ namespace RiverSimulationApplication
                 return;
             }
 
+            RiverSimulationProfile.profile.ResizeImmersedBoundary(n);
             GridSelectForm form = new GridSelectForm();
-            form.SetFormMode("浸沒邊界選取", n, "邊界");
+            form.SetFormMode("浸沒邊界選取", n, "邊界", GridSelectForm.SelectType.ImmersedBoundary);
             if (DialogResult.OK == form.ShowDialog())
             {
 

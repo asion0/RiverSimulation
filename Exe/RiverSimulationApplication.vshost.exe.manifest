@@ -44,25 +44,25 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="36864">
-      <assemblyIdentity name="GridPictureBox" version="1.0.5414.26350" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="GridPictureBox" version="1.0.5415.4759" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NWEc6tU7gR7KrzTmcqeFg2V1LIzRhy9CbiPm0Jme9bY=</dsig:DigestValue>
+        <dsig:DigestValue>651KY9vI4X4gcd092caiqvxoZZuO7j4ObygcpzRhaWw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1858048">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1859072">
       <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.11" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Rl3HI3kss3ys//PGfeJWA272L//Bp5YOKGJAlKF5TVY=</dsig:DigestValue>
+        <dsig:DigestValue>y8zBubWZrO/TiaE3C2MQZ3KQXk/DDKLqtNBH41/QZBA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

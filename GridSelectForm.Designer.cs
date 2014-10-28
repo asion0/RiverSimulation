@@ -30,6 +30,7 @@
         {
             this.listBox = new System.Windows.Forms.ListBox();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
+            this.editBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox
@@ -54,15 +55,27 @@
             this.mapPicBox.Location = new System.Drawing.Point(178, 47);
             this.mapPicBox.Name = "mapPicBox";
             this.mapPicBox.SelectedI = -1;
+            this.mapPicBox.SelectGroup = false;
             this.mapPicBox.SelectRow = false;
             this.mapPicBox.Size = new System.Drawing.Size(602, 340);
             this.mapPicBox.TabIndex = 2;
+            this.mapPicBox.SelectedGroupChangedEvent += new PictureBoxCtrl.GridPictureBox.myDelegate3(this.mapPicBox_SelectedGroupChangedEvent);
+            // 
+            // editBtn
+            // 
+            this.editBtn.Location = new System.Drawing.Point(13, 13);
+            this.editBtn.Name = "editBtn";
+            this.editBtn.Size = new System.Drawing.Size(159, 23);
+            this.editBtn.TabIndex = 3;
+            this.editBtn.Text = "編輯";
+            this.editBtn.UseVisualStyleBackColor = true;
             // 
             // GridSelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 395);
+            this.Controls.Add(this.editBtn);
             this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.listBox);
             this.Name = "GridSelectForm";
@@ -77,5 +90,6 @@
 
         private System.Windows.Forms.ListBox listBox;
         private PictureBoxCtrl.GridPictureBox mapPicBox;
+        private System.Windows.Forms.Button editBtn;
     }
 }

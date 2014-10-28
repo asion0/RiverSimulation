@@ -63,6 +63,7 @@ namespace PictureBoxCtrl
         private int selectedI = -1;
         //private int selectedJ = -1;
         private bool selectRow = false;
+        private bool selectGroup = false;
         #endregion
 
 		#region Constants
@@ -95,8 +96,11 @@ namespace PictureBoxCtrl
             this.PicBox.Size = new System.Drawing.Size(138, 135);
             this.PicBox.TabIndex = 3;
             this.PicBox.TabStop = false;
+            this.PicBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PicBox_Paint);
             this.PicBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicBox_MouseClick);
+            this.PicBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PicBox_MouseDown);
             this.PicBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PicBox_MouseMove);
+            this.PicBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PicBox_MouseUp);
             // 
             // OuterPanel
             // 
@@ -296,6 +300,12 @@ namespace PictureBoxCtrl
             set { selectRow = value; }
         }
 
+        public bool SelectGroup
+        {
+            get { return selectGroup; }
+            set { selectGroup = value; }
+        }
+
 		/// <summary>
 		/// Set the frametype of the picturbox
 		/// </summary>
@@ -444,7 +454,7 @@ namespace PictureBoxCtrl
                     float x1 = (float)rg.inputCoor[i, j].x;
                     float y1 = (float)rg.inputCoor[i, j].y;
                     PointF[] p = new PointF[] { new PointF(x1, y1) };
-                    m.TransformPoints(p);
+                    //m.TransformPoints(p);
 
                     float x2 = 0, y2 = 0;
                     if (j != rg.GetJ - 1)
@@ -466,6 +476,22 @@ namespace PictureBoxCtrl
                         y2 = (float)rg.inputCoor[i + 1, j].y;
                         g.DrawLine(pen, x1, y1, x2, y2);
                     }
+                }
+            }
+
+            if (hilightGrid != null && hilightGrid.Length > 0)
+            {
+                foreach (Point p in hilightGrid)
+                {
+                    float x1 = (float)rg.inputCoor[p.X, p.Y].x;
+                    float y1 = (float)rg.inputCoor[p.X, p.Y].y;
+                    //PointF[] pf = new PointF[] { new PointF(x1, y1) };
+                    //m.TransformPoints(pf);
+                    //g.DrawEllipse(selectedPen, pf[0].X - selectedPen.Width / 2, pf[0].Y - selectedPen.Width / 2, selectedPen.Width, selectedPen.Width);
+                    //g.DrawEllipse(selectedPen, x1 - selectedPen.Width / 2, y1 - selectedPen.Width / 2, selectedPen.Width, selectedPen.Width);
+                    //g.DrawLine(selectedPen, x1-10, y1-10, x1, y1);
+                    float ew = selectedPenW;
+                    g.DrawEllipse(selectedPen, x1 - ew / 2, y1 - ew / 2, ew, ew);
                 }
             }
             g.Dispose();
@@ -502,6 +528,20 @@ namespace PictureBoxCtrl
 			gr.Dispose ();
 		}
 
+        Point[] hilightGrid = null;
+        public void SetSelectedGrid(Point[] pts)
+        {
+            if (pts == null)
+            {
+                hilightGrid = null;
+                DrawGrid();
+                PicBox.Refresh();
+                return;
+            }
+            hilightGrid = (Point[])pts.Clone();
+            DrawGrid();
+            PicBox.Refresh();
+        }
 		#endregion
 
 		#region Zooming Methods
@@ -575,6 +615,9 @@ namespace PictureBoxCtrl
 
         public delegate void myDelegate2(int row);
         public event myDelegate2 SelectedRowChangedEvent;
+
+        public delegate void myDelegate3(Point[] pts);
+        public event myDelegate3 SelectedGroupChangedEvent;
         
         #endregion
 
@@ -670,13 +713,8 @@ namespace PictureBoxCtrl
             return foundI;
         }
 
-        private void PicBox_MouseMove(object sender, MouseEventArgs e)
+        private void DoSelectRow(MouseEventArgs e)
         {
-            if (!selectRow)
-            {
-                return;
-            }
-
             Matrix m = GetMatrix();
             if (m == null)
             {
@@ -685,34 +723,50 @@ namespace PictureBoxCtrl
 
             PointF p0 = TranslateZoomMousePosition(e.X, e.Y);
             PointF[] p = new PointF[1] { p0 };
-            //PointF[] p = new PointF[4] { new PointF(609, 29), new PointF(664, 67) ,new PointF(404, 490) ,new PointF(349, 380) };
-            //p[0] = new PointF(609, 29); p[1] = new PointF(664, 67); p[2] = new PointF(404, 490); p[3] = new PointF(349, 380);
 
-            //PointF[] p1 = new PointF[4] { new PointF(270746.457f, 2733465.149f), new PointF(664, 67), new PointF(404, 490), new PointF(349, 380) };
-            //PointF[] p2 = (PointF[])p.Clone();
-            //PointF[] p3 = (PointF[])p.Clone();
-            //PointF[] p4 = (PointF[])p.Clone();
-
-            //m.TransformPoints(p1);
-            //m.TransformVectors(p2);
             m.Invert();
             m.TransformPoints(p);
-            //m.TransformVectors(p4);
+
             this.GridChangedEvent(e.X.ToString() + "/" + p0.X.ToString() + "/" + p[0].X.ToString() + ", " +
                 e.Y.ToString() + "/" + p0.Y.ToString() + "/" + p[0].Y.ToString());
-            
-            //xLabel.Text = e.X.ToString() + "/" + p0.X.ToString() + "/" + p[0].X.ToString();
-            //yLabel.Text = e.Y.ToString() + "/" + p0.Y.ToString() + "/" + p[0].Y.ToString();
-            
+
             int sel = GetNearestI(p[0].X, p[0].Y);
             if (SelectedI != sel)
             {
                 SelectedI = sel;
-                //lastSelI = sel;
-                //DrawGrid();
-                //pictureBox1.Refresh();
             }
-            
+        }
+        private void DoSelectGroup(MouseEventArgs e)
+        {
+            Point p = new Point(e.X, e.Y);
+            if (groupPath.Count == 0)
+            {
+                groupPath.Add(p);
+                return;
+            }
+
+            Point p0 = groupPath[groupPath.Count - 1];
+
+            if (p0.X != e.X && p0.Y != e.Y)
+            {
+                groupPath.Add(p);
+                PicBox.Refresh();
+            }
+        }
+
+        private void PicBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (selectRow)
+            {
+                DoSelectRow(e);
+                return;
+            }
+
+            if(selectGroup && mouseDown)
+            {
+                DoSelectGroup(e);
+                return;
+            }
         }
 
         private void PicBox_MouseClick(object sender, MouseEventArgs e)
@@ -720,7 +774,99 @@ namespace PictureBoxCtrl
             if (selectRow && SelectedI != -1)
             {
                 SelectedRowChangedEvent(SelectedI);
+                return;
             }
+        }
+
+        bool mouseDown = false;
+        System.Collections.Generic.List<Point> groupPath = new System.Collections.Generic.List<Point>();
+        private void PicBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (selectGroup)
+            {
+                mouseDown = true;
+                PicBox.Capture = true;
+                groupPath.Clear();
+            }
+        }
+
+        private void DoCloseGroupPath()
+        {
+            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            Point[] pts = groupPath.ToArray();
+            PointF p0 = TranslateZoomMousePosition(pts[0].X, pts[0].Y);
+            foreach(Point p in pts)
+            {
+                PointF p1 = TranslateZoomMousePosition(p.X, p.Y);
+                gp.AddLine(p0, p1);
+                p0 = p1;
+            }
+            gp.CloseFigure();
+
+            Matrix m = GetMatrix();
+            if (m == null)
+            {
+                return;
+            }
+
+            System.Collections.Generic.List<Point> ptList = new System.Collections.Generic.List<Point>();
+            for (int i = 0; i < rg.GetI; ++i)
+            {
+                for (int j = 0; j < rg.GetJ; ++j)
+                {
+                    PointF[] p = new PointF[1] { new PointF((float)rg.inputCoor[i, j].x, (float)rg.inputCoor[i, j].y) };
+                    m.TransformPoints(p);
+                    if (gp.IsVisible(p[0].X, p[0].Y))
+                    {
+                        ptList.Add(new Point(i, j));
+                    }
+                }
+            }
+            if(ptList.Count > 0)
+            {
+                pts = ptList.ToArray();
+                SetSelectedGrid(pts);
+                if (SelectedGroupChangedEvent != null)
+                {
+                    SelectedGroupChangedEvent(pts);
+                }
+                DrawGrid();
+                PicBox.Refresh();
+            }
+        }
+
+        private void PicBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (selectGroup && mouseDown)
+            {
+                mouseDown = false;
+                PicBox.Capture = false;
+                //Notify
+                if(groupPath.Count > 3)
+                {
+                    DoCloseGroupPath();
+                }
+                groupPath.Clear();
+            }
+        }
+
+        Pen groupPen = new Pen(Color.Blue, 2.0f);
+        private const float selectedPenW = 4.0f;
+        Pen selectedPen = new Pen(Color.Green, selectedPenW - 2);
+        private void PicBox_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            if (selectGroup && groupPath.Count > 1)
+            {
+               // g.Transform = null;
+                g.DrawLines(groupPen, groupPath.ToArray());
+            }
+
+
+
+
+
+
         }
 	}
 

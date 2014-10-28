@@ -16,11 +16,21 @@ namespace RiverSimulationApplication
         {
             InitializeComponent();
         }
-        public void SetFormMode(string title, int numbers, string name)
+
+        public enum SelectType
+        {
+            DryBed,
+            ImmersedBoundary,
+
+        };
+
+        private SelectType st = SelectType.DryBed;
+        public void SetFormMode(string title, int numbers, string name, SelectType t)
         {
             objectNum = numbers;
             this.title = title;
             objectName = name;
+            st = t;
         }
 
         private string title;
@@ -34,12 +44,38 @@ namespace RiverSimulationApplication
                 listBox.Items.Add(objectName + (i + 1).ToString());
             }
 
+            listBox.SelectedIndex = 0;
             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
         }
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
             int index = (sender as ListBox).SelectedIndex;
+            mapPicBox.SelectGroup = true;
+            if (st == SelectType.DryBed)
+            {
+                mapPicBox.SetSelectedGrid(p.dryBedPts[index]);
+            }
+            else if (st == SelectType.ImmersedBoundary)
+            {
+                mapPicBox.SetSelectedGrid(p.immersedBoundaryPts[index]);
+            }
+
+        }
+
+        private void mapPicBox_SelectedGroupChangedEvent(Point[] pts)
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            int index = listBox.SelectedIndex;
+            if (st == SelectType.DryBed)
+            {
+                p.dryBedPts[index] = (Point[])pts.Clone();
+            }
+            else if (st == SelectType.ImmersedBoundary)
+            {
+                p.immersedBoundaryPts[index] = (Point[])pts.Clone();
+            }
         }
     }
 }

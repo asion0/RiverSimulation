@@ -42,6 +42,7 @@
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(159, 340);
             this.listBox.TabIndex = 1;
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
             // mapPicBox
             // 

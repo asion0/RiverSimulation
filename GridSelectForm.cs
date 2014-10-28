@@ -36,5 +36,10 @@ namespace RiverSimulationApplication
 
             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
         }
+
+        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = (sender as ListBox).SelectedIndex;
+        }
     }
 }

@@ -144,6 +144,14 @@ namespace RiverSimulationApplication
         public double convergenceCriteria2d;    //二維水裡收斂標準 
         public double convergenceCriteria3d;    //三維水裡收斂標準
 
+        //乾床資訊
+        public int dryBedNum = 0;
+        public Point[][] dryBedPts = null; 
+        public void ResizeDryBedPts(int n)
+        {
+            if(dryBedPts==null)
+
+        }
 
         private void Initialization()
         {

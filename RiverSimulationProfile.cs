@@ -145,39 +145,51 @@ namespace RiverSimulationApplication
         public double convergenceCriteria3d;    //三維水裡收斂標準
 
         //乾床資訊
-        public int dryBedNum = 0;
-        public Point[][] dryBedPts = null;
+       // private int _dryBedNum = 0;
+        private List<Point>[] _dryBedPts = null;
         public void ResizeDryBedPts(int n)
         {
             if (n <= 0)
                 return;
 
-            if (dryBedPts == null)
+            if (_dryBedPts == null)
             {
-                dryBedPts = new Point[n][];
+                _dryBedPts = new List<Point>[n];
             }
-            else if (n > dryBedPts.Length)
+            else if (n > _dryBedPts.Length)
             {
-                Array.Resize(ref dryBedPts, n);
+                Array.Resize(ref _dryBedPts, n);
             }
         }
 
+        public List<Point>[] DryBedPts
+        {
+            get { return _dryBedPts; }
+            set { _dryBedPts = (List<Point>[])value.Clone(); }
+        }
+
         //浸沒邊界資訊
-        public int immersedBoundaryNum = 0;
-        public Point[][] immersedBoundaryPts = null;
+        //private int _immersedBoundaryNum = 0;
+        private List<Point>[] _immersedBoundaryPts = null;
         public void ResizeImmersedBoundary(int n)
         {
             if (n <= 0)
                 return;
 
-            if (immersedBoundaryPts == null)
+            if (_immersedBoundaryPts == null)
             {
-                immersedBoundaryPts = new Point[n][];
+                _immersedBoundaryPts = new List<Point>[n];
             }
-            else if (n > immersedBoundaryPts.Length)
+            else if (n > _immersedBoundaryPts.Length)
             {
-                Array.Resize(ref immersedBoundaryPts, n);
+                Array.Resize(ref _immersedBoundaryPts, n);
             }
+        }
+
+        public List<Point>[] ImmersedBoundaryPts
+        {
+            get { return _immersedBoundaryPts; }
+            set { _immersedBoundaryPts = (List<Point>[])value.Clone(); }
         }
 
         private void Initialization()

@@ -392,17 +392,14 @@ namespace PictureBoxCtrl
 
         private void DrawGrid()
         {
-            //CoordinateTransform ct = new CoordinateTransform();
             Matrix m = GetMatrix();
             if (m == null)
             {
                 return;
             }
 
-            //Graphics g = Graphics.FromImage(gridBmp);
             Graphics g;
             Bitmap picBoxBmp;
-
             int w = 0;
             int h = 0;
             if (BackgroundMapType.GoogleStaticMap == bkImgType)
@@ -430,22 +427,8 @@ namespace PictureBoxCtrl
                 g.Clear(bkColor);
             }
 
-            //if (tlBmp != null && trBmp != null && blBmp != null && brBmp != null)
-            //{
-            //    g.DrawImage(tlBmp, 640, 640);
-            //    g.DrawImage(trBmp, 0, 640);
-            //    g.DrawImage(blBmp, 640, 0);
-            //    g.DrawImage(brBmp, 0, 0);
-            //}
-            //else
-            //{
-            //    g.Clear(bkColor);
-            //}
-
             Pen pen = new Pen(lineColor, lineWidth);
             Pen selPen = new Pen(Color.Red, lineWidth);
-            //Pen testPen = new Pen(Color.Green, 10.0f);
-            //g.DrawLine(testPen, 0, 0, 894, 70);
             g.Transform = m;
             for (int i = 0; i < rg.GetI; ++i)
             {
@@ -479,19 +462,23 @@ namespace PictureBoxCtrl
                 }
             }
 
-            if (hilightGrid != null && hilightGrid.Length > 0)
+            if(hilightIndex != -1)
             {
-                foreach (Point p in hilightGrid)
+                System.Collections.Generic.List<Point> pl = hilightGrid[hilightIndex];
+                if (pl != null && pl.Count > 0)
                 {
-                    float x1 = (float)rg.inputCoor[p.X, p.Y].x;
-                    float y1 = (float)rg.inputCoor[p.X, p.Y].y;
-                    //PointF[] pf = new PointF[] { new PointF(x1, y1) };
-                    //m.TransformPoints(pf);
-                    //g.DrawEllipse(selectedPen, pf[0].X - selectedPen.Width / 2, pf[0].Y - selectedPen.Width / 2, selectedPen.Width, selectedPen.Width);
-                    //g.DrawEllipse(selectedPen, x1 - selectedPen.Width / 2, y1 - selectedPen.Width / 2, selectedPen.Width, selectedPen.Width);
-                    //g.DrawLine(selectedPen, x1-10, y1-10, x1, y1);
-                    float ew = selectedPenW;
-                    g.DrawEllipse(selectedPen, x1 - ew / 2, y1 - ew / 2, ew, ew);
+                    foreach (Point p in pl)
+                    {
+                        float x1 = (float)rg.inputCoor[p.X, p.Y].x;
+                        float y1 = (float)rg.inputCoor[p.X, p.Y].y;
+                        //PointF[] pf = new PointF[] { new PointF(x1, y1) };
+                        //m.TransformPoints(pf);
+                        //g.DrawEllipse(selectedPen, pf[0].X - selectedPen.Width / 2, pf[0].Y - selectedPen.Width / 2, selectedPen.Width, selectedPen.Width);
+                        //g.DrawEllipse(selectedPen, x1 - selectedPen.Width / 2, y1 - selectedPen.Width / 2, selectedPen.Width, selectedPen.Width);
+                        //g.DrawLine(selectedPen, x1-10, y1-10, x1, y1);
+                        float ew = selectedPenW;
+                        g.DrawEllipse(selectedPen, x1 - ew / 2, y1 - ew / 2, ew, ew);
+                    }
                 }
             }
             g.Dispose();
@@ -528,8 +515,57 @@ namespace PictureBoxCtrl
 			gr.Dispose ();
 		}
 
-        Point[] hilightGrid = null;
-        public void SetSelectedGrid(Point[] pts)
+        System.Collections.Generic.List<Point>[] hilightGrid = null;
+        int hilightIndex = -1;
+        int[] hilightColor = null;
+        private bool IsNeighboring(int i, int j)
+        {
+            System.Collections.Generic.List<Point> ps = hilightGrid[i];
+            System.Collections.Generic.List<Point> pt = hilightGrid[j];
+            foreach (Point p in ps)
+            {
+                Point p1 = new Point(p.X, p.Y - 1);
+                Point p2 = new Point(p.X, p.Y + 1);
+                Point p3 = new Point(p.X - 1, p.Y);
+                Point p4 = new Point(p.X - 1, p.Y);
+
+                foreach (Point pp in pt)
+                {
+                    if(pp == p1 || pp == p2 | pp == p3 || pp == p4)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void ColoringGrid()
+        {
+            bool[,] adj = new bool[hilightGrid.Length, hilightGrid.Length];
+            if(hilightColor==null || hilightColor.Length != hilightGrid.Length)
+            {
+                hilightColor = new int[hilightGrid.Length];
+            }
+
+            for(int i = 0; i < hilightGrid.Length; ++i)
+            {
+                for(int j = i; j < hilightGrid.Length; j++)
+                {
+                    if (hilightGrid[i] == null || hilightGrid[j] == null)
+                    {   //尚未設定的Group必不相鄰
+                        adj[i, j] = false;
+                    }
+                    else
+                    {   //已設定的Group需檢查相鄰
+                        adj[i, j] = IsNeighboring(i, j);
+                    }
+                }
+            }
+
+        }
+
+        public void SetSelectedGrid(System.Collections.Generic.List<Point>[] pts, int index)
         {
             if (pts == null)
             {
@@ -538,7 +574,9 @@ namespace PictureBoxCtrl
                 PicBox.Refresh();
                 return;
             }
-            hilightGrid = (Point[])pts.Clone();
+            hilightGrid = pts;
+            hilightIndex = index;
+            ColoringGrid();
             DrawGrid();
             PicBox.Refresh();
         }
@@ -616,7 +654,7 @@ namespace PictureBoxCtrl
         public delegate void myDelegate2(int row);
         public event myDelegate2 SelectedRowChangedEvent;
 
-        public delegate void myDelegate3(Point[] pts);
+        public delegate void myDelegate3(System.Collections.Generic.List<Point> pts);
         public event myDelegate3 SelectedGroupChangedEvent;
         
         #endregion
@@ -736,6 +774,7 @@ namespace PictureBoxCtrl
                 SelectedI = sel;
             }
         }
+
         private void DoSelectGroup(MouseEventArgs e)
         {
             Point p = new Point(e.X, e.Y);
@@ -793,12 +832,16 @@ namespace PictureBoxCtrl
         private void DoCloseGroupPath()
         {
             System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
-            Point[] pts = groupPath.ToArray();
-            PointF p0 = TranslateZoomMousePosition(pts[0].X, pts[0].Y);
-            foreach(Point p in pts)
+            PointF p0 = groupPath[0], p1;
+            bool first = true;
+            foreach (Point p in groupPath)
             {
-                PointF p1 = TranslateZoomMousePosition(p.X, p.Y);
-                gp.AddLine(p0, p1);
+                p1 = TranslateZoomMousePosition(p.X, p.Y);
+                if (!first)
+                {
+                    gp.AddLine(p0, p1);
+                }
+                first = false;
                 p0 = p1;
             }
             gp.CloseFigure();
@@ -822,16 +865,17 @@ namespace PictureBoxCtrl
                     }
                 }
             }
+
+            groupPath.Clear();
             if(ptList.Count > 0)
             {
-                pts = ptList.ToArray();
-                SetSelectedGrid(pts);
+                //SetSelectedGrid(ptList, hilightIndex);
                 if (SelectedGroupChangedEvent != null)
                 {
-                    SelectedGroupChangedEvent(pts);
+                    SelectedGroupChangedEvent(ptList);
                 }
-                DrawGrid();
-                PicBox.Refresh();
+                //DrawGrid();
+                //PicBox.Refresh();
             }
         }
 
@@ -861,12 +905,6 @@ namespace PictureBoxCtrl
                // g.Transform = null;
                 g.DrawLines(groupPen, groupPath.ToArray());
             }
-
-
-
-
-
-
         }
 	}
 
@@ -1016,6 +1054,7 @@ namespace PictureBoxCtrl
         }
 
     }
+
     public class CoorPoint
     {
         public CoorPoint()
@@ -1160,5 +1199,4 @@ namespace PictureBoxCtrl
             return  new CoorPoint(lat, lon);
         }
     }
-
 }

@@ -183,10 +183,44 @@ namespace RiverSimulationApplication
             return isRemove;
         }
 
-        private void mapPicBox_SelectedGroupChangedEvent(List<Point> pts)
+        private void UpdateSelectedGroup(List<Point> pts)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             int index = listBox.SelectedIndex;
+
+            if (st == SelectType.DryBed)
+            {
+                p.DryBedPts[index] = new List<Point>(pts);
+                SetPicBoxGrid(listBox.SelectedIndex);
+            }
+            else if (st == SelectType.ImmersedBoundary)
+            {
+                p.ImmersedBoundaryPts[index] = new List<Point>(pts);
+                SetPicBoxGrid(listBox.SelectedIndex);
+            }
+        }
+
+        private List<Point> GetSelectedGroup()
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            int index = listBox.SelectedIndex;
+
+            if (st == SelectType.DryBed)
+            {
+                return p.DryBedPts[index];
+            }
+            else if (st == SelectType.ImmersedBoundary)
+            {
+                return p.ImmersedBoundaryPts[index];
+            }
+            return null;
+        }
+
+        private void mapPicBox_SelectedGroupChangedEvent(List<Point> pts)
+        {
+            int index = listBox.SelectedIndex;
+            UpdateSelectedGroup(pts);
+
             //檢查連續
             if (!IsContinuous(pts))
             {
@@ -209,16 +243,8 @@ namespace RiverSimulationApplication
                 }
             }
 
-            if (st == SelectType.DryBed)
-            {
-                p.DryBedPts[index] = new List<Point>(pts);
-                SetPicBoxGrid(listBox.SelectedIndex);
-            }
-            else if (st == SelectType.ImmersedBoundary)
-            {
-                p.ImmersedBoundaryPts[index] = new List<Point>(pts);
-                SetPicBoxGrid(listBox.SelectedIndex);
-            }
+            UpdateSelectedGroup(pts);
+
         }
     }
 }

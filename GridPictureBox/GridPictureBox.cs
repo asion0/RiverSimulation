@@ -56,8 +56,6 @@ namespace PictureBoxCtrl
         private PictureBoxCtrl.RiverGrid rg = null;
         private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
         private Bitmap tlBmp, trBmp, blBmp, brBmp;
-        private Color bkColor = Color.White;
-        private Color lineColor = Color.Orange;
         private float lineWidth = 2.0F;
         //private int fontSize = 20;
         private int selectedI = -1;
@@ -469,9 +467,6 @@ namespace PictureBoxCtrl
                 return;
             }
 
-            Color[] colorTable = new Color[] { 
-                Color.LightSeaGreen, Color.LightCoral, Color.HotPink,  Color.LightSkyBlue, 
-                Color.Gold, Color.Tan, Color.PeachPuff, Color.LightSalmon };
             for(int i = 0; i < hilightGrid.Length; ++i)
             { 
                 System.Collections.Generic.List<Point> pl = hilightGrid[i];
@@ -485,7 +480,8 @@ namespace PictureBoxCtrl
                     }
                     else
                     {
-                        grpPen = new Pen(Color.Blue, selectedPenW - 2);
+                        
+                        grpPen = new Pen((showAlert) ? alertColor : selectedColor, selectedPenW - 2);
                     }
                     foreach (Point p in pl)
                     {
@@ -530,7 +526,7 @@ namespace PictureBoxCtrl
 			PicBox.Image = bmp;
 			gr.Dispose ();
 		}
-
+        /*
         private bool IsNeighboring(int i, int j)
         {
             System.Collections.Generic.List<Point> ps = hilightGrid[i];
@@ -552,82 +548,14 @@ namespace PictureBoxCtrl
             }
             return false;
         }
-
+        */
         System.Collections.Generic.List<Point>[] hilightGrid = null;
         int hilightIndex = -1;
-        int[] hilightColor = null;
-        private void ColoringGrid()
-        {
-            bool[,] adj = new bool[hilightGrid.Length, hilightGrid.Length];
-            if(hilightColor==null || hilightColor.Length != hilightGrid.Length)
-            {
-                hilightColor = new int[hilightGrid.Length];
-            }
-
-            for(int i = 0; i < hilightGrid.Length; ++i)
-            {
-                hilightColor[i] = -1;
-                //adj[i, i] = false;
-                for(int j = i + 1; j < hilightGrid.Length; j++)
-                {
-                    if (hilightGrid[i] == null || hilightGrid[j] == null || i == hilightIndex || j == hilightIndex)
-                    {   //尚未設定的Group必不相鄰
-                        adj[i, j] = false;
-                    }
-                    else
-                    {   //已設定的Group需檢查相鄰
-                        adj[i, j] = IsNeighboring(i, j);
-                        adj[j, i] = adj[i, j];
-                    }
-                }
-            }
-
-            int[] degree = new int[hilightGrid.Length];
-            for (int i = 0; i < hilightGrid.Length; ++i)
-            {
-                for (int j = 0; j < hilightGrid.Length; ++j)
-                {
-                    if (i != j && adj[i, j])
-                    {
-                        degree[i]++;
-                    }
-                }
-            }
-
-            for (int i = 0; i < hilightGrid.Length; ++i)
-            {
-                if (degree[i] > 0)
-                    break;
-                if (i == hilightGrid.Length - 1)
-                    return;
-            }
-            bool[] used = new bool[hilightGrid.Length];
-            // 依照順序替各個點塗色。O(V^2)。
-            for (int i = 0; i < hilightGrid.Length; ++i)
-            {
-                // 先把鄰點所用的顏色都記錄起來
-                Array.Clear(used, 0, used.Length);
-                for (int j = 0; j < hilightGrid.Length; ++j)
-                {
-                    if (i != j && adj[i, j] && hilightColor[j] != -1)
-                    {
-                        used[hilightColor[j]] = true;
-                    }
-                }
-
-                // 最差的情況就是此顏色與所有鄰點都不同色
-                for (int j = 0; j < degree[i] + 1; ++j)
-                {
-                    if (!used[j])
-                    {
-                        hilightColor[i] = j;
-                        break;
-                    }
-                }
-            }
-        }
-
-        public void SetSelectedGrid(System.Collections.Generic.List<Point>[] pts, int index)
+        private int[] hilightColor = null;
+        public int[] GetGroupColors() { return hilightColor; }
+        public Color[] GetColorTable() { return colorTable; }
+        bool showAlert = false;
+        public void SetSelectedGrid(System.Collections.Generic.List<Point>[] pts, int index, bool alert)
         {
             if (pts == null)
             {
@@ -636,9 +564,11 @@ namespace PictureBoxCtrl
                 PicBox.Refresh();
                 return;
             }
+            showAlert = alert;
             hilightGrid = pts;
             hilightIndex = index;
-            ColoringGrid();
+            hilightColor = GroupColoringTool.ColoringGrid(hilightGrid, hilightIndex);
+            //ColoringGrid();
             DrawGrid();
             PicBox.Refresh();
         }
@@ -956,9 +886,6 @@ namespace PictureBoxCtrl
             }
         }
 
-        Pen groupPen = new Pen(Color.Blue, 2.0f);
-        private const float selectedPenW = 4.0f;
-        Pen selectedPen = new Pen(Color.Green, selectedPenW - 2);
         private void PicBox_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -968,7 +895,22 @@ namespace PictureBoxCtrl
                 g.DrawLines(groupPen, groupPath.ToArray());
             }
         }
-	}
+
+        private Color bkColor = Color.White;
+        ColorConverter cc = new ColorConverter();
+        private Color lineColor = Color.FromArgb(0xF9A00F | -16777216);
+        Pen groupPen = new Pen(Color.Blue, 2.0f);
+        private const float selectedPenW = 4.0f;
+        private Color selectedColor = Color.Blue;
+        private Color alertColor = Color.Red;
+        private Color[] colorTable = new Color[] { 
+            Color.FromArgb(0xC289FC | -16777216),
+            Color.FromArgb(0xD2E27E | -16777216),
+            Color.FromArgb(0xE289B8 | -16777216),
+            Color.FromArgb(0x0C8728 | -16777216),
+                Color.LightSeaGreen, Color.LightCoral, Color.HotPink,  Color.LightSkyBlue, 
+                Color.Gold, Color.Tan, Color.PeachPuff, Color.LightSalmon };
+    }
 
     public class RiverGrid
     {
@@ -1113,6 +1055,105 @@ namespace PictureBoxCtrl
             }
 
             return true;
+        }
+
+    }
+
+    public static class GroupColoringTool
+    {
+        public static int[] ColoringGrid(System.Collections.Generic.List<Point>[] pts, int selIndex)
+        {
+            int[] groupColors = new int[pts.Length];
+            bool[,] adj = new bool[pts.Length, pts.Length];
+            if (groupColors == null || groupColors.Length != pts.Length)
+            {
+                groupColors = new int[pts.Length];
+            }
+
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                groupColors[i] = -1;
+                //adj[i, i] = false;
+                for (int j = i + 1; j < pts.Length; j++)
+                {
+                    if (pts[i] == null || pts[j] == null || i == selIndex || j == selIndex)
+                    {   //尚未設定的Group必不相鄰
+                        adj[i, j] = false;
+                    }
+                    else
+                    {   //已設定的Group需檢查相鄰
+                        adj[i, j] = IsNeighboring(pts, i, j);
+                        adj[j, i] = adj[i, j];
+                    }
+                }
+            }
+
+            int[] degree = new int[pts.Length];
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                for (int j = 0; j < pts.Length; ++j)
+                {
+                    if (i != j && adj[i, j])
+                    {
+                        degree[i]++;
+                    }
+                }
+            }
+
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                if (degree[i] > 0)
+                    break;
+                if (i == pts.Length - 1)
+                    return groupColors;
+            }
+            bool[] used = new bool[pts.Length];
+            // 依照順序替各個點塗色。O(V^2)。
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                // 先把鄰點所用的顏色都記錄起來
+                Array.Clear(used, 0, used.Length);
+                for (int j = 0; j < pts.Length; ++j)
+                {
+                    if (i != j && adj[i, j] && groupColors[j] != -1)
+                    {
+                        used[groupColors[j]] = true;
+                    }
+                }
+
+                // 最差的情況就是此顏色與所有鄰點都不同色
+                for (int j = 0; j < degree[i] + 1; ++j)
+                {
+                    if (!used[j])
+                    {
+                        groupColors[i] = j;
+                        break;
+                    }
+                }
+            }
+            return groupColors;
+        }
+
+        private static bool IsNeighboring(System.Collections.Generic.List<Point>[] pts, int i, int j)
+        {
+            System.Collections.Generic.List<Point> ps = pts[i];
+            System.Collections.Generic.List<Point> pt = pts[j];
+            foreach (Point p in ps)
+            {
+                Point p1 = new Point(p.X, p.Y - 1);
+                Point p2 = new Point(p.X, p.Y + 1);
+                Point p3 = new Point(p.X - 1, p.Y);
+                Point p4 = new Point(p.X + 1, p.Y);
+
+                foreach (Point pp in pt)
+                {
+                    if (pp == p1 || pp == p2 | pp == p3 || pp == p4)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
     }

@@ -48,39 +48,25 @@ namespace RiverSimulationApplication
             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
         }
 
-        private void SetPicBoxGrid(int index)
+        private void SetPicBoxGrid(int index, bool alert)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             mapPicBox.SelectGroup = true;
             if (st == SelectType.DryBed)
             {
-                mapPicBox.SetSelectedGrid(p.DryBedPts, index);
+                mapPicBox.SetSelectedGrid(p.DryBedPts, index, alert);
             }
             else if (st == SelectType.ImmersedBoundary)
             {
-                mapPicBox.SetSelectedGrid(p.ImmersedBoundaryPts, index);
+                mapPicBox.SetSelectedGrid(p.ImmersedBoundaryPts, index, alert);
             }
         }
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetPicBoxGrid((sender as ListBox).SelectedIndex);
-            /*
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            int index = (sender as ListBox).SelectedIndex;
-            mapPicBox.SelectGroup = true;
-            if (st == SelectType.DryBed)
-            {
-                mapPicBox.SetSelectedGrid(p.DryBedPts, index);
-            }
-            else if (st == SelectType.ImmersedBoundary)
-            {
-                mapPicBox.SetSelectedGrid(p.ImmersedBoundaryPts, index);
-            }
-             * */
-
+            SetPicBoxGrid((sender as ListBox).SelectedIndex, false);
         }
-
+        /*
         private bool IsContinuous(List<Point> pts)
         {
             Point[] workQueue = new Point[pts.Count];
@@ -157,7 +143,7 @@ namespace RiverSimulationApplication
             }
             return false;
         }
-
+        */
         private bool RemoveOverlapping(ref List<Point> pts, int pass)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
@@ -183,20 +169,20 @@ namespace RiverSimulationApplication
             return isRemove;
         }
 
-        private void UpdateSelectedGroup(List<Point> pts)
+        private void UpdateSelectedGroup(List<Point> pts, bool alert = false)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             int index = listBox.SelectedIndex;
 
             if (st == SelectType.DryBed)
             {
-                p.DryBedPts[index] = new List<Point>(pts);
-                SetPicBoxGrid(listBox.SelectedIndex);
+                p.DryBedPts[index] = (pts==null) ? null : new List<Point>(pts);
+                SetPicBoxGrid(listBox.SelectedIndex, alert);
             }
             else if (st == SelectType.ImmersedBoundary)
             {
-                p.ImmersedBoundaryPts[index] = new List<Point>(pts);
-                SetPicBoxGrid(listBox.SelectedIndex);
+                p.ImmersedBoundaryPts[index] = (pts == null) ? null : new List<Point>(pts);
+                SetPicBoxGrid(listBox.SelectedIndex, alert);
             }
         }
 
@@ -219,32 +205,65 @@ namespace RiverSimulationApplication
         private void mapPicBox_SelectedGroupChangedEvent(List<Point> pts)
         {
             int index = listBox.SelectedIndex;
-            UpdateSelectedGroup(pts);
 
             //檢查連續
-            if (!IsContinuous(pts))
+            if (!GroupGridUtility.IsContinuous(pts))
             {
+                UpdateSelectedGroup(pts, true);
                 MessageBox.Show("請圈選連續區域！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                mapPicBox.Refresh();
+                UpdateSelectedGroup(null);
                 return;
             }
             //檢查重疊
-            if (IsOverlapping(pts, index))
+            if (GroupGridUtility.IsOverlapping(pts, index))
             {
+                UpdateSelectedGroup(pts, true);
                 if (DialogResult.Yes == MessageBox.Show("圈選到重覆區域，是否刪減重複範圍(選「否」將放棄此次圈選)", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
                 {
-                    bool b = RemoveOverlapping(ref pts, index);
-
+                    RemoveOverlapping(ref pts, index);
+                    if (!GroupGridUtility.IsContinuous(pts))
+                    {
+                        UpdateSelectedGroup(pts, true);
+                        MessageBox.Show("刪減後不是連續區域，請重新選取！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        UpdateSelectedGroup(null);
+                        return;
+                    }
                 }
                 else
                 {
-                    mapPicBox.Refresh();
+                    UpdateSelectedGroup(null);
                     return;
                 }
             }
 
             UpdateSelectedGroup(pts);
 
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            var p = RiverSimulationProfile.profile;
+            int index = listBox.SelectedIndex;
+
+            GridGroupTableForm form = new GridGroupTableForm();
+            form.SetGroupColors(mapPicBox.GetGroupColors());
+            form.SetColorTable(mapPicBox.GetColorTable());
+            if (st == SelectType.DryBed)
+            {
+                form.SetFormMode("編輯" + objectName + (listBox.SelectedIndex + 1).ToString(), objectName);
+                form.SetGridData(p.DryBedPts, index);
+            }
+            else if (st == SelectType.ImmersedBoundary)
+            {
+                form.SetFormMode("編輯" + objectName + (listBox.SelectedIndex + 1).ToString(), objectName);
+                form.SetGridData(p.ImmersedBoundaryPts, index);
+            }
+
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+            SetPicBoxGrid(listBox.SelectedIndex, false);
         }
     }
 }

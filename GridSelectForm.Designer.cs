@@ -69,6 +69,7 @@
             this.editBtn.TabIndex = 3;
             this.editBtn.Text = "編輯";
             this.editBtn.UseVisualStyleBackColor = true;
+            this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
             // 
             // GridSelectForm
             // 

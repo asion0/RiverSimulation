@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using PictureBoxCtrl;
+using System.Drawing;
 
 namespace RiverSimulationApplication
 {
@@ -102,5 +103,155 @@ namespace RiverSimulationApplication
                 gp.ClearMapBackground();
             }
         }
+    }
+
+    public static class GroupGridUtility
+    {
+        public static bool IsContinuous(List<Point> pts)
+        {
+            Point[] workQueue = new Point[pts.Count];
+            workQueue[0] = pts[0];
+            for (int i = 1; i < workQueue.Length; ++i)
+            {
+                workQueue[i].X = -1;
+                workQueue[i].Y = -1;
+            }
+            int ptr = 1;
+            for (int i = 0; i < workQueue.Length; ++i)
+            {
+                Point p0 = workQueue[i];
+                if (-1 == p0.X)
+                {
+                    break;
+                }
+
+                Point p1 = new Point(p0.X, p0.Y - 1);
+                Point p2 = new Point(p0.X, p0.Y + 1);
+                Point p3 = new Point(p0.X - 1, p0.Y);
+                Point p4 = new Point(p0.X + 1, p0.Y);
+
+                foreach (Point p in pts)
+                {
+                    if (p1 == p)
+                    {
+                        if (!workQueue.Contains(p1))
+                        {
+                            workQueue[ptr++] = p1;
+                        }
+                    }
+                    if (p2 == p)
+                    {
+                        if (!workQueue.Contains(p2))
+                        {
+                            workQueue[ptr++] = p2;
+                        }
+                    }
+                    if (p3 == p)
+                    {
+                        if (!workQueue.Contains(p3))
+                        {
+                            workQueue[ptr++] = p3;
+                        }
+                    }
+                    if (p4 == p)
+                    {
+                        if (!workQueue.Contains(p4))
+                        {
+                            workQueue[ptr++] = p4;
+                        }
+                    }
+                }
+            }
+            return (ptr == pts.Count);
+        }
+
+        public static bool IsOverlapping(List<Point> pts, int pass)
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            for (int i = 0; i < p.DryBedPts.Length; ++i)
+            {
+                if (i == pass || p.DryBedPts[i] == null)
+                    continue;
+                foreach (Point pt in p.DryBedPts[i])
+                {
+                    foreach (Point pp in pts)
+                    {
+                        if (pt == pp)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool IsAllInEmpty(List<Point>[] pts, List<Point> pl)
+        {
+            foreach (Point p in pl)
+            {
+                foreach (List<Point> ppl in pts)
+                {
+                    if (ppl == null)
+                        continue;
+                    if (ppl.Contains(p))
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            return true;
+        }
+
+        public static int WhichGroup(List<Point>[] pts, Point pt, List<Point> addional = null, int passIndex = -1)
+        {
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                List<Point> pl = pts[i];
+                if (pl == null || (passIndex != -1 && i == passIndex))
+                    continue;
+                if(pl.Contains(pt))
+                {
+                    return i;
+                }
+            }
+
+            if (addional != null)
+            {
+                if (addional.Contains(pt))
+                {
+                    return -2;
+                }
+            }
+            return -1;
+        }
+
+        public static bool IsAllInclude(List<Point> pl1, List<Point> pl2)
+        {
+            foreach (Point p in pl2)
+            {
+                if (!pl1.Contains(p))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static void RemovePoints(ref List<Point> pl1, List<Point> pl2)
+        {
+            foreach (Point p in pl2)
+            {
+                pl1.Remove(p);
+            }
+        }
+
+        public static void MergePoints(ref List<Point> pl1, List<Point> pl2)
+        {
+            foreach (Point p in pl2)
+            {
+                pl1.Add(p);
+            }
+        }     
+    
     }
 }

@@ -112,6 +112,12 @@
     <Compile Include="FeedbackForm.Designer.cs">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GridGroupTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridGroupTableForm.Designer.cs">
+      <DependentUpon>GridGroupTableForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportImageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FeedbackForm.resx">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridGroupTableForm.resx">
+      <DependentUpon>GridGroupTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportImageForm.resx">
       <DependentUpon>ImportImageForm.cs</DependentUpon>

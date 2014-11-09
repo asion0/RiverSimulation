@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiverSimulationApplication", "RiverSimulationApplication.csproj", "{91684D66-7410-451A-9C18-0A0FEB7BFFB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A96B3B89-66ED-466C-8703-F44E86433097} = {A96B3B89-66ED-466C-8703-F44E86433097}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpOutput", "DumpOutput\DumpOutput.csproj", "{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}"
 EndProject

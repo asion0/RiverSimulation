@@ -32,9 +32,10 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.11")]
-[assembly: AssemblyFileVersion("1.0.11")]
+[assembly: AssemblyVersion("1.0.0.12")]
+[assembly: AssemblyFileVersion("1.0.12")]
 
+//1.0.0.12 - Release in 20141110 for display multiple dry bed in select form.
 //1.0.0.11 - Add GridPictureBox control
 //1.0.0.10 - Fixed import image resulation issue.
 //1.0.0.9 - Demo 匯入網格 in 20141018

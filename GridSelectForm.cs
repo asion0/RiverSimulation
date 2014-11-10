@@ -144,30 +144,6 @@ namespace RiverSimulationApplication
             return false;
         }
         */
-        private bool RemoveOverlapping(ref List<Point> pts, int pass)
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            bool isRemove = false;
-            //List<Point> ptsResult = new List<Point>(pts);
-            for (int i = 0; i < p.DryBedPts.Length; ++i)
-            {   //尋訪全部的乾床群組
-                if (i == pass || p.DryBedPts[i] == null)
-                    continue;
-                foreach (Point pt in p.DryBedPts[i])
-                {   //被尋訪的乾床群組內的每個點
-                    foreach (Point pp in pts)
-                    {   //尋訪此次選取的群組
-                        if (pt == pp)
-                        {
-                            pts.Remove(pp);
-                            isRemove = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            return isRemove;
-        }
 
         private void UpdateSelectedGroup(List<Point> pts, bool alert = false)
         {
@@ -202,28 +178,29 @@ namespace RiverSimulationApplication
             return null;
         }
 
-        private void mapPicBox_SelectedGroupChangedEvent(List<Point> pts)
+        private void mapPicBox_SelectedGroupChangedEvent(List<Point> pl)
         {
             int index = listBox.SelectedIndex;
 
             //檢查連續
-            if (!GroupGridUtility.IsContinuous(pts))
+            if (!GroupGridUtility.IsContinuous(pl))
             {
-                UpdateSelectedGroup(pts, true);
+                UpdateSelectedGroup(pl, true);
                 MessageBox.Show("請圈選連續區域！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 UpdateSelectedGroup(null);
                 return;
             }
             //檢查重疊
-            if (GroupGridUtility.IsOverlapping(pts, index))
+            var rg = (st == SelectType.DryBed) ? RiverSimulationProfile.profile.DryBedPts : RiverSimulationProfile.profile.ImmersedBoundaryPts;
+            if (GroupGridUtility.IsOverlapping(rg, pl, index))
             {
-                UpdateSelectedGroup(pts, true);
+                UpdateSelectedGroup(pl, true);
                 if (DialogResult.Yes == MessageBox.Show("圈選到重覆區域，是否刪減重複範圍(選「否」將放棄此次圈選)", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
                 {
-                    RemoveOverlapping(ref pts, index);
-                    if (!GroupGridUtility.IsContinuous(pts))
+                    GroupGridUtility.RemoveOverlapping(ref pl, rg, index);
+                    if (!GroupGridUtility.IsContinuous(pl))
                     {
-                        UpdateSelectedGroup(pts, true);
+                        UpdateSelectedGroup(pl, true);
                         MessageBox.Show("刪減後不是連續區域，請重新選取！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         UpdateSelectedGroup(null);
                         return;
@@ -236,7 +213,7 @@ namespace RiverSimulationApplication
                 }
             }
 
-            UpdateSelectedGroup(pts);
+            UpdateSelectedGroup(pl);
 
         }
 

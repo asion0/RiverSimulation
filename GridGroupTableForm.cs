@@ -119,38 +119,12 @@ namespace RiverSimulationApplication
                     }
                     else
                     {
-                        if (grpId == -2)
-                            grpId = selIndex;
                         cr = (alert) ? alertColor : selectedColor;
                         dataGv[j, i].Value = objectName + (grpId + 1).ToString();
                     }
                     dataGv[j, i].Style.BackColor = cr;
                 }
             }
-
-            //for (int i = 0; i < pts.Length; ++i)
-            //{
-            //    List<Point> pl = (newPl != null && i == selIndex) ? newPl : pts[i];
-            //    if (pl != null && pl.Count > 0)
-            //    {
-            //        Color cr;
-            //        if (i != selIndex)
-            //        {
-            //            cr = colorTable[(groupColors[i] >= 0) ? groupColors[i] % colorTable.Length : 0];
-            //        }
-            //        else
-            //        {
-
-            //            cr = (alert) ? alertColor : selectedColor;
-            //        }
-            //        foreach (Point p in pl)
-            //        {
-            //            dataGv[p.Y, p.X].Value = objectName + (i + 1).ToString();
-            //            dataGv[p.Y, p.X].Style.BackColor = cr;
-            //        }
-            //    }
-            //}
-
         }
 
         private void dataGv_SelectionChanged(object sender, EventArgs e)

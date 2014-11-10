@@ -107,10 +107,11 @@ namespace RiverSimulationApplication
 
     public static class GroupGridUtility
     {
-        public static bool IsContinuous(List<Point> pts)
+        //檢查一群組所有的格網點是否連續(上下左右視為連續，對角與間隔視為不連續))
+        public static bool IsContinuous(List<Point> pl)
         {
-            Point[] workQueue = new Point[pts.Count];
-            workQueue[0] = pts[0];
+            Point[] workQueue = new Point[pl.Count];
+            workQueue[0] = pl[0];
             for (int i = 1; i < workQueue.Length; ++i)
             {
                 workQueue[i].X = -1;
@@ -130,7 +131,7 @@ namespace RiverSimulationApplication
                 Point p3 = new Point(p0.X - 1, p0.Y);
                 Point p4 = new Point(p0.X + 1, p0.Y);
 
-                foreach (Point p in pts)
+                foreach (Point p in pl)
                 {
                     if (p1 == p)
                     {
@@ -162,19 +163,19 @@ namespace RiverSimulationApplication
                     }
                 }
             }
-            return (ptr == pts.Count);
+            return (ptr == pl.Count);
         }
 
-        public static bool IsOverlapping(List<Point> pts, int pass)
+        //檢查一群組是否與現有群組重複
+        public static bool IsOverlapping(List<Point>[] pts, List<Point> pl, int passIndex)
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            for (int i = 0; i < p.DryBedPts.Length; ++i)
+            for (int i = 0; i < pts.Length; ++i)
             {
-                if (i == pass || p.DryBedPts[i] == null)
+                if (i == passIndex || pts[i] == null)
                     continue;
-                foreach (Point pt in p.DryBedPts[i])
+                foreach (Point pt in pts[i])
                 {
-                    foreach (Point pp in pts)
+                    foreach (Point pp in pl)
                     {
                         if (pt == pp)
                             return true;
@@ -184,6 +185,33 @@ namespace RiverSimulationApplication
             return false;
         }
 
+        //刪除一群組中與其他群組重複的格網點
+        public static bool RemoveOverlapping(ref List<Point> pl, List<Point>[] pts, int passIndex)
+        {
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
+            bool isRemove = false;
+            //List<Point> ptsResult = new List<Point>(pts);
+            for (int i = 0; i < pts.Length; ++i)
+            {   //尋訪全部的乾床群組
+                if (i == passIndex || pts[i] == null)
+                    continue;
+                foreach (Point pt in pts[i])
+                {   //被尋訪的乾床群組內的每個點
+                    foreach (Point pp in pl)
+                    {   //尋訪此次選取的群組
+                        if (pt == pp)
+                        {
+                            pl.Remove(pp);
+                            isRemove = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            return isRemove;
+        }
+
+        //檢查一群組是否與都位於空白處(不屬於任何群組)
         public static bool IsAllInEmpty(List<Point>[] pts, List<Point> pl)
         {
             foreach (Point p in pl)
@@ -202,6 +230,7 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        //查詢一格網點位於哪個群組？
         public static int WhichGroup(List<Point>[] pts, Point pt, List<Point> addional = null, int passIndex = -1)
         {
             for (int i = 0; i < pts.Length; ++i)
@@ -219,12 +248,13 @@ namespace RiverSimulationApplication
             {
                 if (addional.Contains(pt))
                 {
-                    return -2;
+                    return passIndex;
                 }
             }
             return -1;
         }
 
+        //檢查pl2群組所有格網點是否完全包含在pl1群組中
         public static bool IsAllInclude(List<Point> pl1, List<Point> pl2)
         {
             foreach (Point p in pl2)
@@ -237,6 +267,7 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        //移除在pl1群組中所有pl2群組包含的格網點
         public static void RemovePoints(ref List<Point> pl1, List<Point> pl2)
         {
             foreach (Point p in pl2)
@@ -245,6 +276,7 @@ namespace RiverSimulationApplication
             }
         }
 
+        //將pl2群組中所有的格網點加至pl2群組
         public static void MergePoints(ref List<Point> pl1, List<Point> pl2)
         {
             foreach (Point p in pl2)

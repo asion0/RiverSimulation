@@ -311,83 +311,9 @@ namespace RiverSimulationApplication
             }
         }
         
-        /*
-        private Color bkColor = Color.White;
-        private Color lineColor = Color.Orange;
-        private float lineWidth = 2.0F;
-        private void DrawGrid()
-        {
-            RiverGrid rg = RiverSimulationProfile.profile.inputGrid;
-            //CoordinateTransform ct = new CoordinateTransform();
-
-            CoorPoint lt = RiverSimulationProfile.profile.GetTopLeft();
-            CoorPoint rb = RiverSimulationProfile.profile.GetBottomRight();
-
-            int w = 0;
-            int h = 0;
-            Bitmap picBoxBmp;
-            Graphics g;
-            if (RiverSimulationProfile.BackgroundMapType.None == RiverSimulationProfile.profile.GetBackgroundMapType())
-            {
-                w = 640 * 2;
-                h = 640 * 2;
-                picBoxBmp = new Bitmap(w, h);
-                g = Graphics.FromImage(picBoxBmp);
-                g.Clear(bkColor);
-            }
-            else if (RiverSimulationProfile.BackgroundMapType.GoogleStaticMap == RiverSimulationProfile.profile.GetBackgroundMapType())
-            {
-                w = RiverSimulationProfile.profile.GetGridBitmap().Width;
-                h = RiverSimulationProfile.profile.GetGridBitmap().Height;
-                picBoxBmp = new Bitmap(w, h);
-                g = Graphics.FromImage(picBoxBmp);
-                g.DrawImage(RiverSimulationProfile.profile.GetGridBitmap(), 0, 0);
-            }
-            else
-            {
-                w = RiverSimulationProfile.profile.GetGridBitmap().Width;
-                h = RiverSimulationProfile.profile.GetGridBitmap().Height;
-                picBoxBmp = new Bitmap(w, h);
-                g = Graphics.FromImage(picBoxBmp);
-                g.DrawImage(RiverSimulationProfile.profile.GetGridBitmap(), 0, 0);
-            }
-
-            lineWidth = w / 512.0F;
-
-            Pen pen = new Pen(lineColor, lineWidth);
-            for (int i = 0; i < rg.GetI; ++i)
-            {
-                for (int j = 0; j < rg.GetJ; ++j)
-                {
-                    int x1 = (int)(w * (rg.inputCoor[i, j].x - lt.x) / (rb.x - lt.x));
-                    int y1 = (int)(h * (rg.inputCoor[i, j].y - lt.y) / (rb.y - lt.y));
-                    int x2 = 0, y2 = 0;
-                    if (j != rg.GetJ - 1)
-                    {
-                        x2 = (int)(w * (rg.inputCoor[i, j + 1].x - lt.x) / (rb.x - lt.x));
-                        y2 = (int)(h * (rg.inputCoor[i, j + 1].y - lt.y) / (rb.y - lt.y));
-                        g.DrawLine(pen, x1, y1, x2, y2);
-                    }
-                    if (i != rg.GetI - 1)
-                    {
-                        x2 = (int)(w * (rg.inputCoor[i + 1, j].x - lt.x) / (rb.x - lt.x));
-                        y2 = (int)(h * (rg.inputCoor[i + 1, j].y - lt.y) / (rb.y - lt.y));
-                        g.DrawLine(pen, x1, y1, x2, y2);
-                    }
-                }
-            }
-            g.Dispose();
-            mapPicBox.BackgroundImage = picBoxBmp;
-        }
-        */
         private void UpdateStatus()
         {
             bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
-            //if(RiverSimulationProfile.profile.inputGrid != null)
-            //{
-            //    DrawGrid();
-            //    mapPicBox.Refresh();
-            //}
         } 
     }
 }

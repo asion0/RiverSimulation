@@ -42,10 +42,19 @@ namespace RiverSimulationApplication
             pts = p;
             selIndex = i;
         }
+        public void SetSelectionItems(ListBox lb)
+        {
+            for(int i=0; i<lb.Items.Count; ++i)
+            {
+                selCombo.Items.Add(lb.Items[i].ToString());
+            }
+
+        }
 
         private void GridGroupTableForm_Load(object sender, EventArgs e)
         {
             InitialDataGrid();
+            selCombo.SelectedIndex = selIndex;
             FillDataGrid();
         }
 
@@ -138,7 +147,7 @@ namespace RiverSimulationApplication
             {
                 pl.Add(new Point(dataGv.SelectedCells[i].RowIndex, dataGv.SelectedCells[i].ColumnIndex));
             }
-            addBtn.Enabled = GroupGridUtility.IsAllInEmpty(pts, pl);
+            addBtn.Enabled = GroupGridUtility.IsAllInEmpty(pts, pl, selIndex);
             removeBtn.Enabled = (pts[selIndex] == null) ? false :GroupGridUtility.IsAllInclude(pts[selIndex], pl);
         }
 
@@ -203,6 +212,13 @@ namespace RiverSimulationApplication
             pts[selIndex] = new List<Point>(plSelected);
             FillDataGrid();
             dataGv.ClearSelection();
+        }
+
+        private void dryBedCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            groupColors = GroupGridUtility.ColoringGrid(pts, selCombo.SelectedIndex);
+            selIndex = selCombo.SelectedIndex;
+            FillDataGrid();
         }
     }
 }

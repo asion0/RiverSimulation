@@ -88,6 +88,8 @@
             this.mainPanel.Controls.Add(this.bitmapGrp);
             this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Controls.Add(this.flowTypeGroup);
+            this.mainPanel.Controls.Add(this.runExcelBtn);
+            this.mainPanel.Controls.Add(this.runCcheMeshBtn);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(500, 692);
@@ -219,8 +221,6 @@
             this.flowTypeGroup.Controls.Add(this.label1);
             this.flowTypeGroup.Controls.Add(this.inputFileBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridBtn);
-            this.flowTypeGroup.Controls.Add(this.runExcelBtn);
-            this.flowTypeGroup.Controls.Add(this.runCcheMeshBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridRdo);
             this.flowTypeGroup.Controls.Add(this.inputFileRdo);
             this.flowTypeGroup.Location = new System.Drawing.Point(12, 162);
@@ -281,7 +281,7 @@
             // runExcelBtn
             // 
             this.runExcelBtn.Enabled = false;
-            this.runExcelBtn.Location = new System.Drawing.Point(230, 25);
+            this.runExcelBtn.Location = new System.Drawing.Point(12, 501);
             this.runExcelBtn.Name = "runExcelBtn";
             this.runExcelBtn.Size = new System.Drawing.Size(130, 26);
             this.runExcelBtn.TabIndex = 1;
@@ -292,7 +292,7 @@
             // 
             // runCcheMeshBtn
             // 
-            this.runCcheMeshBtn.Location = new System.Drawing.Point(230, 62);
+            this.runCcheMeshBtn.Location = new System.Drawing.Point(148, 501);
             this.runCcheMeshBtn.Name = "runCcheMeshBtn";
             this.runCcheMeshBtn.Size = new System.Drawing.Size(130, 26);
             this.runCcheMeshBtn.TabIndex = 1;
@@ -343,6 +343,7 @@
             this.mapPicBox.Location = new System.Drawing.Point(516, 252);
             this.mapPicBox.Name = "mapPicBox";
             this.mapPicBox.SelectedI = -1;
+            this.mapPicBox.SelectGroup = false;
             this.mapPicBox.SelectRow = false;
             this.mapPicBox.Size = new System.Drawing.Size(452, 440);
             this.mapPicBox.TabIndex = 11;

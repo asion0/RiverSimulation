@@ -1162,15 +1162,19 @@ namespace PictureBoxCtrl
     {
         public CoorPoint()
 	    {
-            _x = 0.0; _y = 0.0;
+            _x = 0.0; 
+            _y = 0.0;
+            _z = 0.0;
 	    }
 
-        public CoorPoint(double x1, double y1)
+        public CoorPoint(double x1, double y1, double z1 = 0.0)
         {
-            _x = x1; _y = y1;
+            _x = x1; 
+            _y = y1;
+            _z = z1;
         }
 
-        private double _x, _y;
+        private double _x, _y, _z;
         public double x
         {
             set { this._x = value; }
@@ -1181,6 +1185,12 @@ namespace PictureBoxCtrl
         {
             set { this._y = value; }
             get { return this._y; }
+        }
+
+        public double z
+        {
+            set { this._z = value; }
+            get { return this._z; }
         }
 
         public override string ToString()

@@ -221,10 +221,11 @@ namespace RiverSimulationApplication
         {
             var p = RiverSimulationProfile.profile;
             int index = listBox.SelectedIndex;
-
+            
             GridGroupTableForm form = new GridGroupTableForm();
             form.SetGroupColors(mapPicBox.GetGroupColors());
             form.SetColorTable(mapPicBox.GetColorTable());
+            form.SetSelectionItems(listBox);
             if (st == SelectType.DryBed)
             {
                 form.SetFormMode("編輯" + objectName + (listBox.SelectedIndex + 1).ToString(), objectName);

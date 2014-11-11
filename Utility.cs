@@ -212,14 +212,17 @@ namespace RiverSimulationApplication
         }
 
         //檢查一群組是否與都位於空白處(不屬於任何群組)
-        public static bool IsAllInEmpty(List<Point>[] pts, List<Point> pl)
+        public static bool IsAllInEmpty(List<Point>[] pts, List<Point> pl, int passIndex)
         {
             foreach (Point p in pl)
             {
-                foreach (List<Point> ppl in pts)
+                for (int i = 0; i < pts.Length; ++i )
                 {
-                    if (ppl == null)
+                    List<Point> ppl = pts[i];
+
+                    if (i == passIndex || ppl == null)
                         continue;
+
                     if (ppl.Contains(p))
                     {
                         return false;
@@ -281,9 +284,200 @@ namespace RiverSimulationApplication
         {
             foreach (Point p in pl2)
             {
-                pl1.Add(p);
+                if (!pl1.Contains(p))
+                {
+                    pl1.Add(p);
+                }
             }
-        }     
-    
+        }
+
+        //傳回兩個群組是否相鄰
+        private static bool IsNeighboring(System.Collections.Generic.List<Point>[] pts, int i, int j)
+        {
+            System.Collections.Generic.List<Point> ps = pts[i];
+            System.Collections.Generic.List<Point> pt = pts[j];
+            foreach (Point p in ps)
+            {
+                Point p1 = new Point(p.X, p.Y - 1);
+                Point p2 = new Point(p.X, p.Y + 1);
+                Point p3 = new Point(p.X - 1, p.Y);
+                Point p4 = new Point(p.X + 1, p.Y);
+
+                foreach (Point pp in pt)
+                {
+                    if (pp == p1 || pp == p2 | pp == p3 || pp == p4)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        //計算不同群組配色 使相鄰群組必不同色
+        public static int[] ColoringGrid(System.Collections.Generic.List<Point>[] pts, int selIndex)
+        {
+            int[] groupColors = new int[pts.Length];
+            bool[,] adj = new bool[pts.Length, pts.Length];
+            if (groupColors == null || groupColors.Length != pts.Length)
+            {
+                groupColors = new int[pts.Length];
+            }
+
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                groupColors[i] = -1;
+                //adj[i, i] = false;
+                for (int j = i + 1; j < pts.Length; j++)
+                {
+                    if (pts[i] == null || pts[j] == null || i == selIndex || j == selIndex)
+                    {   //尚未設定的Group必不相鄰
+                        adj[i, j] = false;
+                    }
+                    else
+                    {   //已設定的Group需檢查相鄰
+                        adj[i, j] = IsNeighboring(pts, i, j);
+                        adj[j, i] = adj[i, j];
+                    }
+                }
+            }
+
+            int[] degree = new int[pts.Length];
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                for (int j = 0; j < pts.Length; ++j)
+                {
+                    if (i != j && adj[i, j])
+                    {
+                        degree[i]++;
+                    }
+                }
+            }
+
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                if (degree[i] > 0)
+                    break;
+                if (i == pts.Length - 1)
+                    return groupColors;
+            }
+            bool[] used = new bool[pts.Length];
+            // 依照順序替各個點塗色。O(V^2)。
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                // 先把鄰點所用的顏色都記錄起來
+                Array.Clear(used, 0, used.Length);
+                for (int j = 0; j < pts.Length; ++j)
+                {
+                    if (i != j && adj[i, j] && groupColors[j] != -1)
+                    {
+                        used[groupColors[j]] = true;
+                    }
+                }
+
+                // 最差的情況就是此顏色與所有鄰點都不同色
+                for (int j = 0; j < degree[i] + 1; ++j)
+                {
+                    if (!used[j])
+                    {
+                        groupColors[i] = j;
+                        break;
+                    }
+                }
+            }
+            return groupColors;
+        }
+
+    }
+
+    public static class DataGridViewUtility
+    {
+        public static void PasteFromeExcel(DataGridView v)
+        {
+            try
+            {
+                string[] lines = Clipboard.GetText().Split('\n');
+                int row = v.CurrentCell.RowIndex;
+                int col = v.CurrentCell.ColumnIndex;
+                foreach (string line in lines)
+                {
+                    if (row >= v.RowCount)
+                    {
+                        break;
+                    }
+
+                    string[] cells = line.Split('\t');
+                    for (int i = 0; i < cells.Length; ++i)
+                    {
+                        if (col + i >= v.ColumnCount)
+                        {
+                            break;
+                        }
+
+                        DataGridViewCell c = v[col + i, row];
+                        if (c == null || c.ReadOnly)
+                        {
+                            continue;
+                        }
+
+                        if (c.Value == null || c.Value.ToString() != cells[i])
+                        {
+                            c.Value = Convert.ChangeType(cells[i], c.ValueType);
+                        }
+
+                    }
+                    ++row;
+                }
+            }
+            catch (FormatException)
+            {
+                //MessageBox.Show("The data you pasted is in the wrong format for the cell");
+                return;
+            }            
+
+        }
+
+        public static void CopyToClipboard(DataGridView v)
+        {
+            Clipboard.SetDataObject(v.GetClipboardContent());
+        }
+
+        public static void InitializeDataGridView(DataGridView v, int colCount, int rowCount, int columnWidth = 48, int rowHeadersWidth = 64)
+        {
+            v.Rows.Clear();
+            // Create an unbound DataGridView by declaring a column count.
+            v.ColumnCount = colCount;
+            v.ColumnHeadersVisible = true;
+
+            // Set the column header style.
+            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+
+            columnHeaderStyle.BackColor = Color.Beige;
+            //columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+            v.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+
+            string[] row = new string[colCount];
+            // Set the column header names.
+            //int c = 1;
+            for (int i = 0; i < colCount; ++i)
+            {
+                v.Columns[i].Name = (i + 1).ToString();
+                v.Columns[i].Width = columnWidth;
+                //row[i] = "1";
+                //c++;
+            }
+            v.RowHeadersWidth = rowHeadersWidth;
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                v.Rows.Add(row);
+                v.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+        }
+
+        public static void FillDataByRiverGrid(CoorPoint[,] inputCoor, DataGridView xv, DataGridView yv, DataGridView zv)
+        {
+
+        }
     }
 }

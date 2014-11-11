@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageX = new System.Windows.Forms.TabPage();
             this.dataGridViewX = new System.Windows.Forms.DataGridView();
@@ -40,6 +41,9 @@
             this.yGridNum = new System.Windows.Forms.TextBox();
             this.xGridNum = new System.Windows.Forms.TextBox();
             this.generateGridBtn = new System.Windows.Forms.Button();
+            this.copyPasteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPageX.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX)).BeginInit();
@@ -47,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewY)).BeginInit();
             this.tabPageZ.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewZ)).BeginInit();
+            this.copyPasteMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -81,6 +86,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewX.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewX.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridViewX.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewX.Name = "dataGridViewX";
             this.dataGridViewX.RowTemplate.Height = 24;
@@ -93,7 +99,7 @@
             this.tabPageY.Location = new System.Drawing.Point(4, 22);
             this.tabPageY.Name = "tabPageY";
             this.tabPageY.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageY.Size = new System.Drawing.Size(963, 601);
+            this.tabPageY.Size = new System.Drawing.Size(963, 562);
             this.tabPageY.TabIndex = 1;
             this.tabPageY.Text = "Y";
             this.tabPageY.UseVisualStyleBackColor = true;
@@ -116,7 +122,7 @@
             this.tabPageZ.Location = new System.Drawing.Point(4, 22);
             this.tabPageZ.Name = "tabPageZ";
             this.tabPageZ.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageZ.Size = new System.Drawing.Size(963, 601);
+            this.tabPageZ.Size = new System.Drawing.Size(963, 562);
             this.tabPageZ.TabIndex = 2;
             this.tabPageZ.Text = "Z";
             this.tabPageZ.UseVisualStyleBackColor = true;
@@ -177,6 +183,30 @@
             this.generateGridBtn.UseVisualStyleBackColor = true;
             this.generateGridBtn.Click += new System.EventHandler(this.generateGridBtn_Click);
             // 
+            // copyPasteMenuStrip
+            // 
+            this.copyPasteMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem});
+            this.copyPasteMenuStrip.Name = "contextMenuStrip1";
+            this.copyPasteMenuStrip.Size = new System.Drawing.Size(161, 70);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.copyToolStripMenuItem.Text = "複製(C)";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.pasteToolStripMenuItem.Text = "貼上(P)";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
             // ImportTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -199,6 +229,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewY)).EndInit();
             this.tabPageZ.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewZ)).EndInit();
+            this.copyPasteMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,5 +249,8 @@
         private System.Windows.Forms.TextBox yGridNum;
         private System.Windows.Forms.TextBox xGridNum;
         private System.Windows.Forms.Button generateGridBtn;
+        private System.Windows.Forms.ContextMenuStrip copyPasteMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
     }
 }

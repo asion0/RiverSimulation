@@ -24,6 +24,7 @@ namespace RiverSimulationApplication
             //InitializeDataGridView(dataGridViewZ);
         }
 
+        /*
         private void InitializeDataGridView(DataGridView g, int xNum, int yNum)
         {
             int columnCount = xNum;
@@ -60,6 +61,7 @@ namespace RiverSimulationApplication
                 g.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
         }
+        */
 
         private void GridNum_TextChanged(object sender, EventArgs e)
         {
@@ -68,19 +70,53 @@ namespace RiverSimulationApplication
 
         private void generateGridBtn_Click(object sender, EventArgs e)
         {
-            int xNum = Convert.ToInt32(xGridNum.Text);
-            int yNum = Convert.ToInt32(yGridNum.Text);
-
-            if (xNum > 0 && yNum > 0)
+            int xNum =0, yNum = 0;
+            try
             {
-                InitializeDataGridView(dataGridViewX, xNum, yNum);
-                InitializeDataGridView(dataGridViewY, xNum, yNum);
-                InitializeDataGridView(dataGridViewZ, xNum, yNum);
-
-                tabControl.Enabled = true;
-
+                xNum = Convert.ToInt32(xGridNum.Text);
+                yNum = Convert.ToInt32(yGridNum.Text);
             }
+            catch
+            {
+            }
+            if (xNum <= 0 && yNum <= 0)
+            {
+                MessageBox.Show("請輸入正確的數字", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DataGridViewUtility.InitializeDataGridView(dataGridViewX, xNum, yNum);
+            DataGridViewUtility.InitializeDataGridView(dataGridViewY, xNum, yNum);
+            DataGridViewUtility.InitializeDataGridView(dataGridViewZ, xNum, yNum);
+            tabControl.Enabled = true;
         }
 
+        private DataGridView GetCurrentDataGridView()
+        {
+            if(0 == tabControl.SelectedIndex)
+            {
+                return dataGridViewX;
+            }
+            else if (1 == tabControl.SelectedIndex)
+            {
+                return dataGridViewY;
+            }
+            else if (2 == tabControl.SelectedIndex)
+            {
+                return dataGridViewZ;
+            }
+            return null;
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            DataGridViewUtility.PasteFromeExcel(GetCurrentDataGridView());
+        }
+        
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewUtility.CopyToClipboard(GetCurrentDataGridView());
+        }
     }
 }

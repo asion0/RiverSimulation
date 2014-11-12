@@ -21,6 +21,11 @@ namespace RiverSimulationApplication
         private void RunSimulationForm_Load(object sender, EventArgs e)
         {
             simDebugForm.Show();
+            if (Program.IsLiteDemoVersion())
+            {
+                simDebugForm.Visible = false;
+            }
+
             bw.DoWork += new DoWorkEventHandler(BwDoWork);
             bw.ProgressChanged += new ProgressChangedEventHandler(BwProgressChanged);
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BwRunWorkerCompleted);

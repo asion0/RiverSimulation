@@ -19,12 +19,13 @@ namespace RiverSimulationApplication
 
         private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
-            //if(Program.IsLiteVersion())
-            //{
-            //    diffusionEffectChk.Visible = false;
-            //    diffusionEffectChk.Checked = false;
-            //    fullPanel.Top -= 22;
-            //}
+            if (Program.IsLiteDemoVersion())
+            {
+                immersedBoundaryChk.Enabled = false;
+                sideInOutFlowChk.Enabled = false;
+                highSandContentEffectChk.Enabled = false;
+                movableBedPanel.Enabled = false;
+            }
 
             this.CenterToParent();
             LoadStatus();
@@ -72,7 +73,15 @@ namespace RiverSimulationApplication
             {
                 typeWaterModelingRdo.Checked = !chk;
             }
-            movableBedPanel.Enabled = chk;
+            if (Program.IsLiteDemoVersion())
+            {
+                movableBedPanel.Enabled = false;
+            }
+            else
+            {
+                movableBedPanel.Enabled = chk;
+            }
+
         }
 
         private void ok_Click(object sender, EventArgs e)

@@ -18,19 +18,38 @@ namespace RiverSimulationApplication
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             InitialPath();
+            functionStruct = new FunctionStruct();
             Application.Run(new RiverSimulationForm());
         }
 
         public static string currentPath;   //執行檔所在目錄, 會判對是否RAR包裝檔案
         public static string documentPath;  //本專案預設文件目錄 My Documents\FlowSimulation
         public static string projectFolder;   //專案目錄
+
+        public class FunctionStruct
+        {
+            public FunctionStruct()
+            {
+#if _LITE_VERSION_
+            isLiteVersion = true;
+            isLiteDemoVersion = true;
+#else
+            isLiteVersion = false;
+            isLiteDemoVersion = false;
+#endif
+            }
+
+            public bool isLiteVersion;
+            public bool isLiteDemoVersion;
+        }
+        public static FunctionStruct functionStruct;
         public static bool IsLiteVersion()
         {
-#if _LITE_VERSION_
-            return true;
-#else
-            return false;
-#endif
+            return functionStruct.isLiteVersion;
+        }
+        public static bool IsLiteDemoVersion()
+        {
+            return functionStruct.isLiteVersion;
         }
 
         private static void InitialPath()

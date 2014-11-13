@@ -10,12 +10,14 @@ using System.IO;
 using System.Net;
 using PictureBoxCtrl;
 using System.Drawing;
+using System.Security.Cryptography;
+using System.Net.Mail;
 
 namespace RiverSimulationApplication
 {
     public static class Utility
     {
-        const UInt32 THREAD_SUSPEND_RESUME = 0x0002;
+        private const UInt32 THREAD_SUSPEND_RESUME = 0x0002;
         [DllImport("kernel32.dll")]
         static extern IntPtr OpenThread(UInt32 dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
         [DllImport("kernel32.dll")]
@@ -52,10 +54,8 @@ namespace RiverSimulationApplication
         private const int FO_DELETE = 0x0003;
         private const int FOF_ALLOWUNDO = 0x0040;           // Preserve undo information, if possible. 
         private const int FOF_NOCONFIRMATION = 0x0010;      // Show no confirmation dialog box to the user
-
-        // Struct which contains information that the SHFileOperation function uses to perform file operations. 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        public struct SHFILEOPSTRUCT
+        private struct SHFILEOPSTRUCT
         {
             public IntPtr hwnd;
             [MarshalAs(UnmanagedType.U4)]
@@ -68,7 +68,6 @@ namespace RiverSimulationApplication
             public IntPtr hNameMappings;
             public string lpszProgressTitle;
         }
-
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern int SHFileOperation(ref SHFILEOPSTRUCT FileOp);
         public static void DeleteFileOrFolder(string path)
@@ -79,6 +78,129 @@ namespace RiverSimulationApplication
             fileop.fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION;
             SHFileOperation(ref fileop);
         }
+
+        private static string kid = @"Philae is a robotic European Space Agency lander that accompanied the Rosetta spacecraft until its designated landing on Comet 67P/Churyumov–Gerasimenko";
+        public static string Encrypt(string toBeEncrypt)
+        {
+            byte[] k = new byte[8];
+            for (int i = 0; i < kid.Length; ++i)
+            {
+                k[i % 8] += (byte)kid[i];
+            }
+
+            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+            byte[] inputByteArray = Encoding.Default.GetBytes(toBeEncrypt);
+            des.Key = k;
+            des.IV = k;
+            MemoryStream ms = new MemoryStream();
+            CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write);
+            cs.Write(inputByteArray, 0, inputByteArray.Length);
+            cs.FlushFinalBlock();
+            StringBuilder ret = new StringBuilder();
+            foreach (byte b in ms.ToArray())
+            {
+                ret.AppendFormat("{0:X2}", b);
+            }
+            ret.ToString();
+            return ret.ToString();
+        }
+
+        public static string Decrypt(string toBeDecrypt)
+        {
+            byte[] k = new byte[8];
+            for (int i = 0; i < kid.Length; ++i)
+            {
+                k[i % 8] += (byte)kid[i];
+            }
+
+            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+            byte[] inputByteArray = new byte[toBeDecrypt.Length / 2];
+            for (int x = 0; x < toBeDecrypt.Length / 2; x++)
+            {
+                int i = (Convert.ToInt32(toBeDecrypt.Substring(x * 2, 2), 16));
+                inputByteArray[x] = (byte)i;
+            }
+
+            des.Key = k;
+            des.IV = k;
+            MemoryStream ms = new MemoryStream();
+            CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
+            cs.Write(inputByteArray, 0, inputByteArray.Length);
+            cs.FlushFinalBlock();
+
+            StringBuilder ret = new StringBuilder();
+            return System.Text.Encoding.Default.GetString(ms.ToArray());
+        }
+        
+        public static string GetOSType()
+        {
+            Version ver = System.Environment.OSVersion.Version;
+            string OSType = "";
+
+             System.OperatingSystem osInfo =System.Environment.OSVersion;
+         
+             // Determine the platform.
+             switch(osInfo.Platform)
+             {
+                // Platform is Windows 95, Windows 98, 
+                // Windows 98 Second Edition, or Windows Me.
+                case System.PlatformID.Win32Windows:
+                   switch (osInfo.Version.Minor)
+                   {
+                      case 0:
+                         Console.WriteLine ("Windows 95");
+                         break;
+                      case 10:
+                         if(osInfo.Version.Revision.ToString()=="2222A")
+                            OSType = "Windows 98 Second Edition";
+                         else
+                            OSType = "Windows 98";
+                         break;
+                      case  90:
+                         OSType = "Windows Me";
+                         break;
+                   }
+                   break;
+         
+                // Platform is Windows NT 3.51, Windows NT 4.0, Windows 2000,
+                // or Windows XP.
+                case System.PlatformID.Win32NT:
+                   switch(osInfo.Version.Major)
+                   {
+                      case 3:
+                         OSType = "Windows NT 3.51";
+                         break;
+                      case 4:
+                         OSType = "Windows NT 4.0";
+                         break;
+                      case 5:
+                         if (osInfo.Version.Minor==0) 
+                            OSType = "Windows 2000";
+                         else
+                           OSType = "Windows XP";
+                         break;
+                      case 6:
+                         if (osInfo.Version.Minor == 0)
+                             OSType = "Windows Vista";
+                         else
+                             OSType = "Windows 7";
+                         break;
+                      case 7:
+                         if (osInfo.Version.Minor == 0)
+                             OSType = "Windows 8";
+                         else
+                             OSType = "Windows 8.1";
+                         break;
+                       default:
+                         OSType = "Unknown Windows version";
+                         break;
+                   }
+                   break;
+             }
+
+            return OSType;
+        }
+
     }
 
     public static class ControllerUtility
@@ -479,5 +601,67 @@ namespace RiverSimulationApplication
         {
 
         }
+    }
+
+    public static class GmailUtility
+    {
+        public static bool IsMailAddressValidate(string addr)
+        {
+            try
+            {
+                MailAddress from = new MailAddress(addr);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static void SendGmail(string mail, string pwd, string[] address, string cc, string subject, string msg, string[] attachments)
+        {
+            MailAddress from = new MailAddress(mail, "Resed Model Feedback");
+            MailAddress[] to = new MailAddress[address.Length];
+            for (int i = 0; i < address.Length; ++i)
+            {
+                string[] ss = address[i].Split('\t');
+                to[i] = new MailAddress(ss[1], ss[0]);
+            }
+
+
+            MailMessage message = new MailMessage(from, to[0]);
+            message.IsBodyHtml = true;
+            message.BodyEncoding = System.Text.Encoding.UTF8;
+            message.SubjectEncoding = System.Text.Encoding.UTF8;
+            message.Priority = MailPriority.Normal;
+            message.Subject = subject;
+            var m = new System.Net.Mail.MailMessage();
+            m.Body = msg;
+            message.Body = m.Body;
+            if(to.Length > 1)
+            {
+                for(int i=1; i<to.Length; ++i)
+                {
+                    message.To.Add(to[i]);
+                }
+            }
+            message.CC.Add(new MailAddress(cc));
+
+
+            foreach (string s in attachments)
+            {
+                message.Attachments.Add(new System.Net.Mail.Attachment(s));
+            }
+
+            SmtpClient MySmtp = new SmtpClient("smtp.gmail.com", 587);
+            MySmtp.Credentials = new System.Net.NetworkCredential(mail, pwd);
+            
+            MySmtp.EnableSsl = true;
+            MySmtp.Send(message);
+
+            MySmtp = null;
+            message.Dispose();
+        }
+
     }
 }

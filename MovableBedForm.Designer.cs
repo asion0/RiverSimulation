@@ -53,7 +53,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comment = new System.Windows.Forms.WebBrowser();
-            this.setting = new System.Windows.Forms.Label();
             this.ok = new System.Windows.Forms.Button();
             this.valueParamPanel = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -162,17 +161,19 @@
             this.highSandMethodText = new System.Windows.Forms.Label();
             this.normalSandMethodText = new System.Windows.Forms.Label();
             this.highSandMethodPanel = new System.Windows.Forms.Panel();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.normalSandMethodPanel = new System.Windows.Forms.Panel();
+            this.radioButton13 = new System.Windows.Forms.RadioButton();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.normalSandMethodPanel = new System.Windows.Forms.Panel();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.radioButton12 = new System.Windows.Forms.RadioButton();
-            this.radioButton13 = new System.Windows.Forms.RadioButton();
+            this.previewPicBox = new System.Windows.Forms.PictureBox();
+            this.previewPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.quayStableAnalysisGrp.SuspendLayout();
             this.bedrockGrp.SuspendLayout();
@@ -202,6 +203,8 @@
             this.groupBox5.SuspendLayout();
             this.highSandMethodPanel.SuspendLayout();
             this.normalSandMethodPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewPicBox)).BeginInit();
+            this.previewPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -462,19 +465,6 @@
             this.comment.Size = new System.Drawing.Size(450, 225);
             this.comment.TabIndex = 9;
             // 
-            // setting
-            // 
-            this.setting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.setting.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.setting.Location = new System.Drawing.Point(522, 263);
-            this.setting.Name = "setting";
-            this.setting.Size = new System.Drawing.Size(450, 419);
-            this.setting.TabIndex = 8;
-            this.setting.Text = "設定內容";
-            // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -718,7 +708,7 @@
             // 
             this.physicalParamPanel.Controls.Add(this.groupBox1);
             this.physicalParamPanel.Controls.Add(this.fluidTypeBackBtn);
-            this.physicalParamPanel.Location = new System.Drawing.Point(55, 697);
+            this.physicalParamPanel.Location = new System.Drawing.Point(55, 102);
             this.physicalParamPanel.Name = "physicalParamPanel";
             this.physicalParamPanel.Size = new System.Drawing.Size(500, 670);
             this.physicalParamPanel.TabIndex = 12;
@@ -786,9 +776,9 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(144, 650);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(337, 480);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
-            this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 670);
+            this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
             // 
             // groupBox7
@@ -950,7 +940,7 @@
             // seabedThicknessBtn
             // 
             this.seabedThicknessBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.seabedThicknessBtn.Location = new System.Drawing.Point(138, 55);
+            this.seabedThicknessBtn.Location = new System.Drawing.Point(24, 52);
             this.seabedThicknessBtn.Name = "seabedThicknessBtn";
             this.seabedThicknessBtn.Size = new System.Drawing.Size(111, 26);
             this.seabedThicknessBtn.TabIndex = 6;
@@ -961,7 +951,7 @@
             // sedimentCompositionRatioBtn
             // 
             this.sedimentCompositionRatioBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.sedimentCompositionRatioBtn.Location = new System.Drawing.Point(21, 55);
+            this.sedimentCompositionRatioBtn.Location = new System.Drawing.Point(141, 52);
             this.sedimentCompositionRatioBtn.Name = "sedimentCompositionRatioBtn";
             this.sedimentCompositionRatioBtn.Size = new System.Drawing.Size(111, 26);
             this.sedimentCompositionRatioBtn.TabIndex = 6;
@@ -973,7 +963,7 @@
             // 
             this.seabedCompositionBackBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.seabedCompositionBackBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.seabedCompositionBackBtn.Location = new System.Drawing.Point(12, 629);
+            this.seabedCompositionBackBtn.Location = new System.Drawing.Point(12, 618);
             this.seabedCompositionBackBtn.Name = "seabedCompositionBackBtn";
             this.seabedCompositionBackBtn.Size = new System.Drawing.Size(477, 32);
             this.seabedCompositionBackBtn.TabIndex = 4;
@@ -1641,50 +1631,27 @@
             this.highSandMethodPanel.Visible = false;
             this.highSandMethodPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // radioButton6
+            // radioButton13
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(284, 20);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(77, 16);
-            this.radioButton6.TabIndex = 1;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "輸砂公式3";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton13.AutoSize = true;
+            this.radioButton13.Location = new System.Drawing.Point(18, 20);
+            this.radioButton13.Name = "radioButton13";
+            this.radioButton13.Size = new System.Drawing.Size(101, 16);
+            this.radioButton13.TabIndex = 1;
+            this.radioButton13.TabStop = true;
+            this.radioButton13.Text = "一般輸砂公式1";
+            this.radioButton13.UseVisualStyleBackColor = true;
             // 
-            // radioButton7
+            // radioButton12
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(147, 20);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(77, 16);
-            this.radioButton7.TabIndex = 1;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "輸砂公式2";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            // 
-            // radioButton8
-            // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(18, 20);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(77, 16);
-            this.radioButton8.TabIndex = 1;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "輸砂公式1";
-            this.radioButton8.UseVisualStyleBackColor = true;
-            // 
-            // normalSandMethodPanel
-            // 
-            this.normalSandMethodPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.normalSandMethodPanel.Controls.Add(this.radioButton8);
-            this.normalSandMethodPanel.Controls.Add(this.radioButton6);
-            this.normalSandMethodPanel.Controls.Add(this.radioButton7);
-            this.normalSandMethodPanel.Location = new System.Drawing.Point(13, 37);
-            this.normalSandMethodPanel.Name = "normalSandMethodPanel";
-            this.normalSandMethodPanel.Size = new System.Drawing.Size(445, 59);
-            this.normalSandMethodPanel.TabIndex = 12;
-            this.normalSandMethodPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Location = new System.Drawing.Point(284, 20);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(101, 16);
+            this.radioButton12.TabIndex = 1;
+            this.radioButton12.TabStop = true;
+            this.radioButton12.Text = "一般輸砂公式3";
+            this.radioButton12.UseVisualStyleBackColor = true;
             // 
             // radioButton5
             // 
@@ -1696,6 +1663,17 @@
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "高含砂輸砂公式3";
             this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Location = new System.Drawing.Point(147, 20);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(101, 16);
+            this.radioButton11.TabIndex = 1;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "一般輸砂公式2";
+            this.radioButton11.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
@@ -1719,6 +1697,51 @@
             this.radioButton4.Text = "高含砂輸砂公式1";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
+            // normalSandMethodPanel
+            // 
+            this.normalSandMethodPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.normalSandMethodPanel.Controls.Add(this.radioButton8);
+            this.normalSandMethodPanel.Controls.Add(this.radioButton6);
+            this.normalSandMethodPanel.Controls.Add(this.radioButton7);
+            this.normalSandMethodPanel.Location = new System.Drawing.Point(13, 37);
+            this.normalSandMethodPanel.Name = "normalSandMethodPanel";
+            this.normalSandMethodPanel.Size = new System.Drawing.Size(445, 59);
+            this.normalSandMethodPanel.TabIndex = 12;
+            this.normalSandMethodPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Location = new System.Drawing.Point(18, 20);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(77, 16);
+            this.radioButton8.TabIndex = 1;
+            this.radioButton8.TabStop = true;
+            this.radioButton8.Text = "輸砂公式1";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(284, 20);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(77, 16);
+            this.radioButton6.TabIndex = 1;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "輸砂公式3";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(147, 20);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(77, 16);
+            this.radioButton7.TabIndex = 1;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "輸砂公式2";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1731,38 +1754,34 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Back_Click);
             // 
-            // radioButton11
+            // previewPicBox
             // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(147, 20);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(101, 16);
-            this.radioButton11.TabIndex = 1;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "一般輸砂公式2";
-            this.radioButton11.UseVisualStyleBackColor = true;
+            this.previewPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewPicBox.BackColor = System.Drawing.Color.White;
+            this.previewPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.previewPicBox.Location = new System.Drawing.Point(0, 0);
+            this.previewPicBox.Margin = new System.Windows.Forms.Padding(0);
+            this.previewPicBox.Name = "previewPicBox";
+            this.previewPicBox.Size = new System.Drawing.Size(200, 200);
+            this.previewPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.previewPicBox.TabIndex = 13;
+            this.previewPicBox.TabStop = false;
             // 
-            // radioButton12
+            // previewPanel
             // 
-            this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(284, 20);
-            this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(101, 16);
-            this.radioButton12.TabIndex = 1;
-            this.radioButton12.TabStop = true;
-            this.radioButton12.Text = "一般輸砂公式3";
-            this.radioButton12.UseVisualStyleBackColor = true;
-            // 
-            // radioButton13
-            // 
-            this.radioButton13.AutoSize = true;
-            this.radioButton13.Location = new System.Drawing.Point(18, 20);
-            this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(101, 16);
-            this.radioButton13.TabIndex = 1;
-            this.radioButton13.TabStop = true;
-            this.radioButton13.Text = "一般輸砂公式1";
-            this.radioButton13.UseVisualStyleBackColor = true;
+            this.previewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewPanel.AutoScroll = true;
+            this.previewPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.previewPanel.Controls.Add(this.previewPicBox);
+            this.previewPanel.Location = new System.Drawing.Point(522, 263);
+            this.previewPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.previewPanel.Name = "previewPanel";
+            this.previewPanel.Size = new System.Drawing.Size(450, 419);
+            this.previewPanel.TabIndex = 14;
             // 
             // MovableBedForm
             // 
@@ -1770,6 +1789,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 741);
+            this.Controls.Add(this.previewPanel);
             this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.rockStablePanel);
@@ -1779,7 +1799,7 @@
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
-            this.Controls.Add(this.setting);
+            this.MinimumSize = new System.Drawing.Size(1000, 780);
             this.Name = "MovableBedForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "動床參數";
@@ -1827,6 +1847,9 @@
             this.highSandMethodPanel.PerformLayout();
             this.normalSandMethodPanel.ResumeLayout(false);
             this.normalSandMethodPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewPicBox)).EndInit();
+            this.previewPanel.ResumeLayout(false);
+            this.previewPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1843,7 +1866,6 @@
         private System.Windows.Forms.Button valueParamBtn;
         private System.Windows.Forms.GroupBox flowTypeGroup;
         private System.Windows.Forms.WebBrowser comment;
-        private System.Windows.Forms.Label setting;
         private System.Windows.Forms.Button seabedCompositionBtn;
         private System.Windows.Forms.Button rockbedBtn;
         private System.Windows.Forms.Label label3;
@@ -1978,5 +2000,7 @@
         private System.Windows.Forms.RadioButton radioButton13;
         private System.Windows.Forms.RadioButton radioButton12;
         private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.PictureBox previewPicBox;
+        private System.Windows.Forms.Panel previewPanel;
     }
 }

@@ -140,6 +140,9 @@ namespace RiverSimulationApplication
         public bool HasMovableBedMode() { return moduleType2 == ModuleType2.MovableBed; }
 
         public RiverGrid inputGrid = null;
+        public int separateNum = 0;
+        public double[] separateArray = null;
+
         //WaterModeling 數值參數
         public double convergenceCriteria2d;    //二維水裡收斂標準 
         public double convergenceCriteria3d;    //三維水裡收斂標準
@@ -370,5 +373,12 @@ namespace RiverSimulationApplication
             sourceW = w;
             sourceH = h;
         }
+
+        //動床參數 - 物理參數頁面
+        public int sedimentParticlesNum = 3;
+        public int seabedLevelNum = 6;
+        public double[] seabedLevelArray = null;
+        public double[,] sedimentCompositionRatioArray = null;
+
     }
 }

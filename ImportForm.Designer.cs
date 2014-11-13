@@ -48,17 +48,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.inputFileBtn = new System.Windows.Forms.Button();
             this.inputGridBtn = new System.Windows.Forms.Button();
-            this.runExcelBtn = new System.Windows.Forms.Button();
-            this.runCcheMeshBtn = new System.Windows.Forms.Button();
             this.inputGridRdo = new System.Windows.Forms.RadioButton();
             this.inputFileRdo = new System.Windows.Forms.RadioButton();
+            this.runExcelBtn = new System.Windows.Forms.Button();
+            this.runCcheMeshBtn = new System.Windows.Forms.Button();
             this.inputFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.selectBgDlg = new System.Windows.Forms.OpenFileDialog();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
+            this.previewSpratePanel = new System.Windows.Forms.Panel();
+            this.previewSpratePicBox = new System.Windows.Forms.PictureBox();
             this.mainPanel.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
+            this.previewSpratePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewSpratePicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // comment
@@ -278,6 +282,28 @@
             this.inputGridBtn.UseVisualStyleBackColor = true;
             this.inputGridBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
             // 
+            // inputGridRdo
+            // 
+            this.inputGridRdo.AutoSize = true;
+            this.inputGridRdo.Location = new System.Drawing.Point(17, 67);
+            this.inputGridRdo.Name = "inputGridRdo";
+            this.inputGridRdo.Size = new System.Drawing.Size(119, 16);
+            this.inputGridRdo.TabIndex = 0;
+            this.inputGridRdo.Text = "線上輸入水平格網";
+            this.inputGridRdo.UseVisualStyleBackColor = true;
+            this.inputGridRdo.CheckedChanged += new System.EventHandler(this.inputGridRdo_CheckedChanged);
+            // 
+            // inputFileRdo
+            // 
+            this.inputFileRdo.AutoSize = true;
+            this.inputFileRdo.Location = new System.Drawing.Point(17, 30);
+            this.inputFileRdo.Name = "inputFileRdo";
+            this.inputFileRdo.Size = new System.Drawing.Size(131, 16);
+            this.inputFileRdo.TabIndex = 0;
+            this.inputFileRdo.Text = "由檔案匯入水平格網";
+            this.inputFileRdo.UseVisualStyleBackColor = true;
+            this.inputFileRdo.CheckedChanged += new System.EventHandler(this.inputFileRdo_CheckedChanged);
+            // 
             // runExcelBtn
             // 
             this.runExcelBtn.Enabled = false;
@@ -300,28 +326,6 @@
             this.runCcheMeshBtn.UseVisualStyleBackColor = true;
             this.runCcheMeshBtn.Visible = false;
             this.runCcheMeshBtn.Click += new System.EventHandler(this.runCcheMeshBtn_Click);
-            // 
-            // inputGridRdo
-            // 
-            this.inputGridRdo.AutoSize = true;
-            this.inputGridRdo.Location = new System.Drawing.Point(17, 67);
-            this.inputGridRdo.Name = "inputGridRdo";
-            this.inputGridRdo.Size = new System.Drawing.Size(119, 16);
-            this.inputGridRdo.TabIndex = 0;
-            this.inputGridRdo.Text = "線上輸入水平格網";
-            this.inputGridRdo.UseVisualStyleBackColor = true;
-            this.inputGridRdo.CheckedChanged += new System.EventHandler(this.inputGridRdo_CheckedChanged);
-            // 
-            // inputFileRdo
-            // 
-            this.inputFileRdo.AutoSize = true;
-            this.inputFileRdo.Location = new System.Drawing.Point(17, 30);
-            this.inputFileRdo.Name = "inputFileRdo";
-            this.inputFileRdo.Size = new System.Drawing.Size(131, 16);
-            this.inputFileRdo.TabIndex = 0;
-            this.inputFileRdo.Text = "由檔案匯入水平格網";
-            this.inputFileRdo.UseVisualStyleBackColor = true;
-            this.inputFileRdo.CheckedChanged += new System.EventHandler(this.inputFileRdo_CheckedChanged);
             // 
             // inputFileDlg
             // 
@@ -348,12 +352,36 @@
             this.mapPicBox.Size = new System.Drawing.Size(452, 440);
             this.mapPicBox.TabIndex = 11;
             // 
+            // previewSpratePanel
+            // 
+            this.previewSpratePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewSpratePanel.Controls.Add(this.previewSpratePicBox);
+            this.previewSpratePanel.Location = new System.Drawing.Point(516, 252);
+            this.previewSpratePanel.Name = "previewSpratePanel";
+            this.previewSpratePanel.Size = new System.Drawing.Size(452, 440);
+            this.previewSpratePanel.TabIndex = 12;
+            this.previewSpratePanel.Visible = false;
+            // 
+            // previewSpratePicBox
+            // 
+            this.previewSpratePicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewSpratePicBox.Location = new System.Drawing.Point(0, 0);
+            this.previewSpratePicBox.Name = "previewSpratePicBox";
+            this.previewSpratePicBox.Size = new System.Drawing.Size(452, 440);
+            this.previewSpratePicBox.TabIndex = 13;
+            this.previewSpratePicBox.TabStop = false;
+            // 
             // ImportForm
             // 
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 742);
+            this.Controls.Add(this.previewSpratePanel);
             this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
@@ -369,6 +397,8 @@
             this.groupBox2.ResumeLayout(false);
             this.flowTypeGroup.ResumeLayout(false);
             this.flowTypeGroup.PerformLayout();
+            this.previewSpratePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.previewSpratePicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -402,6 +432,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button imgInfoBtn;
         private PictureBoxCtrl.GridPictureBox mapPicBox;
+        private System.Windows.Forms.Panel previewSpratePanel;
+        private System.Windows.Forms.PictureBox previewSpratePicBox;
 
     }
 }

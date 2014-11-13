@@ -27,6 +27,8 @@ namespace RiverSimulationApplication
             {
                 mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
             }
+            SeparateNumTxt.Enabled = RiverSimulationProfile.profile.Is3DMode();
+            separateProportionBtn.Enabled = RiverSimulationProfile.profile.Is3DMode();
             UpdateStatus();
         }
 
@@ -60,6 +62,7 @@ namespace RiverSimulationApplication
                     return;
                 }
                 mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
+                ShowGridMap(true);
                 UpdateStatus();
             }
         }
@@ -99,10 +102,24 @@ namespace RiverSimulationApplication
             if (chk)
             {
                 mapPicBox.ClearMapBackground();
+                ShowGridMap(true);
                 UpdateStatus();
             }
         }
 
+        private void ShowGridMap(bool b)
+        {
+            if(b)
+            {
+                mapPicBox.Visible = true;
+                previewSpratePanel.Visible = false;
+            }
+            else
+            {
+                mapPicBox.Visible = false;
+                previewSpratePanel.Visible = true;
+            }
+        }
         private void useGoogleBgRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
@@ -111,6 +128,7 @@ namespace RiverSimulationApplication
             {
                 RiverSimulationProfile.profile.DownloadGoogleStaticMap();
                 mapPicBox.SetMapBackground(p.tl, p.tr, p.bl, p.br);
+                ShowGridMap(true);
                 UpdateStatus();
             }
 
@@ -125,6 +143,7 @@ namespace RiverSimulationApplication
             {
                 RiverSimulationProfile.profile.SetImportImageMode();
                 mapPicBox.SetMapBackground(p.imagePath, p.sourceE, p.sourceN, p.sourceW, p.sourceH);
+                ShowGridMap(true);
                 UpdateStatus();
             }
         }
@@ -142,6 +161,7 @@ namespace RiverSimulationApplication
                     imgInfoBtn.Enabled = true;
                     RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                     mapPicBox.SetMapBackground(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
+                    ShowGridMap(true);
                     UpdateStatus();
                 }
                 else
@@ -166,6 +186,7 @@ namespace RiverSimulationApplication
                 imgInfoBtn.Enabled = true;
                 RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                 mapPicBox.SetMapBackground(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
+                ShowGridMap(true);
                 UpdateStatus();
             }
 
@@ -173,6 +194,10 @@ namespace RiverSimulationApplication
 
         private void ok_Click(object sender, EventArgs e)
         {
+            if (!DoConvert())
+            {
+                return;
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -287,33 +312,140 @@ namespace RiverSimulationApplication
 
         private void separateProportionBtn_Click(object sender, EventArgs e)
         {
-            int n = 0;
-            try
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            if (!DoConvert())
             {
-                n = Convert.ToInt32(SeparateNumTxt.Text);
-            }
-            catch
-            {
-                n = -1;
-            }
-
-            if (n < 2)
-            {
-                MessageBox.Show("請輸入正確的數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(separateProportionBtn.Text, true, 1, n);
-            if (DialogResult.OK == form.ShowDialog())
+            form.SetFormMode(separateProportionBtn.Text, 1, p.separateNum, separateProportionBtn.Text, "分層比例", "格網分層",
+                TableInputForm.InputFormType.SeparateForm, 90, 120, true, true, false, p.separateArray);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
             {
-               
+                p.separateArray = (double[])form.SeparateData().Clone();
+                ShowGridMap(false);
+                DrawPreview();
             }
         }
         
         private void UpdateStatus()
         {
             bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
-        } 
+        }
+
+        private bool DoConvert()
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            int n = 0;
+            if (!ControllerUtility.CheckConvertInt32(ref n, SeparateNumTxt.Text, "請輸入正確的垂向格網分層數目！", ControllerUtility.CheckType.GreaterThanTwo))
+            {
+                return false;
+            }
+            if (p.separateNum != n && p.separateNum != 0)
+            {
+                MessageBox.Show("變更垂向格網分層數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.separateArray = null;
+            }
+            p.separateNum = n;
+            return true;
+        }
+        private void DrawPreview()
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            if (p.separateArray == null)
+            {
+                return;
+            }
+
+            const int SeparateWidth = 400;     //右方顯示泥砂顆粒狀態欄位寬度
+            const int SeparatePicWidth = 125;     //右方顯示泥砂顆粒狀態欄位寬度
+            const int SeparateTextX = 200;     //右方顯示泥砂顆粒狀態欄位寬度
+            const int SeparateTextSize = 12;     //右方顯示泥砂顆粒狀態欄位寬度
+            const int SeparateTextHeight = 40;     //右方顯示泥砂顆粒狀態欄位寬度
+            const int SeparateMinHeight = 400;     //右方顯示泥砂顆粒狀態欄位寬度
+            const int SeparateHeightGap = 5;     //右方顯示泥砂顆粒狀態欄位寬度
+            const int textGap = 5;     //右方顯示泥砂顆粒狀態欄位寬度
+
+            Font leftFont = new Font("微軟正黑體", SeparateTextSize, FontStyle.Regular, GraphicsUnit.Point);
+
+            int w = SeparateWidth;
+            int h = p.separateNum * SeparateTextHeight;
+            if (h < SeparateMinHeight)
+                h = SeparateMinHeight;
+
+            Bitmap picBoxBmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(picBoxBmp);
+
+            Pen pen = new Pen(Color.Black, 1.0f);
+            SolidBrush brush = new SolidBrush(Color.Black);
+
+            float startY = SeparateHeightGap;
+            float textY = SeparateHeightGap;
+            float realH = h - 2 * SeparateHeightGap;
+            Point pt1 = new Point(0, (int)startY);
+            Point pt2 = new Point(SeparatePicWidth, (int)(startY));
+            g.DrawLine(pen, pt1, pt2);
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Near;
+            stringFormat.LineAlignment = StringAlignment.Near;
+
+            RectangleF rcText = new RectangleF(SeparateTextX, 0, SeparateWidth - SeparateTextX, SeparateTextSize + SeparateHeightGap);
+            string txt = "1";
+            g.DrawString(txt, leftFont, brush, rcText, stringFormat);
+
+            pt1 = new Point(SeparatePicWidth + textGap, (int)startY);
+            pt2 = new Point(SeparateTextX - textGap, (int)(textY + SeparateTextSize / 2));
+            g.DrawLine(pen, pt1, pt2);
+
+            textY += realH / p.separateNum;
+            for (int i = 1; i < p.separateNum - 1; ++i)
+            {
+                startY = SeparateHeightGap + (float)(1.0 - p.separateArray[p.separateNum - i - 1]) * realH;
+                pt1 = new Point(0, (int)startY);
+                pt2 = new Point(SeparatePicWidth, (int)(startY));
+                g.DrawLine(pen, pt1, pt2);
+
+
+                rcText = new RectangleF(SeparateTextX, textY, SeparateWidth - SeparateTextX, SeparateTextSize + SeparateHeightGap);
+                txt = (p.separateArray[p.separateNum - i - 1]).ToString();
+                g.DrawString(txt, leftFont, brush, rcText, stringFormat);
+
+                pt1 = new Point(SeparatePicWidth + textGap, (int)startY);
+                pt2 = new Point(SeparateTextX - textGap, (int)(textY + SeparateTextSize / 2));
+                g.DrawLine(pen, pt1, pt2);
+
+                textY += realH / p.separateNum;
+
+
+            }
+            pt1 = new Point(0, h - SeparateHeightGap);
+            pt2 = new Point(SeparatePicWidth, h - SeparateHeightGap);
+            g.DrawLine(pen, pt1, pt2);
+
+            pt1 = new Point(SeparatePicWidth, SeparateHeightGap);
+            pt2 = new Point(SeparatePicWidth, h - SeparateHeightGap);
+            g.DrawLine(pen, pt1, pt2);
+
+            rcText = new RectangleF(SeparateTextX, h - SeparateTextSize - SeparateHeightGap, SeparateWidth - SeparateTextX, SeparateTextSize + SeparateHeightGap);
+            txt = "0";
+            g.DrawString(txt, leftFont, brush, rcText, stringFormat);
+
+            pt1 = new Point(SeparatePicWidth + textGap, h - SeparateHeightGap);
+            pt2 = new Point(SeparateTextX - textGap, h - SeparateTextSize - SeparateHeightGap + SeparateTextSize / 2);
+            g.DrawLine(pen, pt1, pt2);
+
+            g.Dispose();
+            this.previewSpratePicBox.Image = picBoxBmp;
+
+            int picW = (previewSpratePicBox.Width > w) ? previewSpratePanel.Width : w;
+            int picH = (previewSpratePicBox.Height > h) ? previewSpratePanel.Height : h;
+            previewSpratePicBox.Width = picW;
+            previewSpratePicBox.Height = picH;
+
+            previewSpratePanel.AutoScrollMinSize = new Size(w, h);
+        }
+
     }
 }

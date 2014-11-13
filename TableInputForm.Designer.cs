@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.tableValueRdo = new System.Windows.Forms.RadioButton();
             this.singleValueRdo = new System.Windows.Forms.RadioButton();
             this.singleValueText = new System.Windows.Forms.TextBox();
+            this.copyPasteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.copyPasteMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -48,6 +53,7 @@
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.Size = new System.Drawing.Size(781, 409);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
             // tableValueRdo
             // 
@@ -79,11 +85,36 @@
             this.singleValueText.Size = new System.Drawing.Size(141, 22);
             this.singleValueText.TabIndex = 2;
             // 
+            // copyPasteMenuStrip
+            // 
+            this.copyPasteMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem});
+            this.copyPasteMenuStrip.Name = "contextMenuStrip1";
+            this.copyPasteMenuStrip.Size = new System.Drawing.Size(158, 48);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.copyToolStripMenuItem.Text = "複製(C)";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.pasteToolStripMenuItem.Text = "貼上(P)";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
             // TableInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 501);
+            this.ContextMenuStrip = this.copyPasteMenuStrip;
             this.Controls.Add(this.singleValueText);
             this.Controls.Add(this.singleValueRdo);
             this.Controls.Add(this.tableValueRdo);
@@ -91,9 +122,11 @@
             this.Name = "TableInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TableInputForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TableInputForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TableInputForm_FormClosed);
             this.Load += new System.EventHandler(this.TableInputForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.copyPasteMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,5 +138,8 @@
         private System.Windows.Forms.RadioButton tableValueRdo;
         private System.Windows.Forms.RadioButton singleValueRdo;
         private System.Windows.Forms.TextBox singleValueText;
+        private System.Windows.Forms.ContextMenuStrip copyPasteMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
     }
 }

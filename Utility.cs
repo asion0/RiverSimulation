@@ -182,13 +182,11 @@ namespace RiverSimulationApplication
                       case 6:
                          if (osInfo.Version.Minor == 0)
                              OSType = "Windows Vista";
-                         else
+                         else if (osInfo.Version.Minor == 1)
                              OSType = "Windows 7";
-                         break;
-                      case 7:
-                         if (osInfo.Version.Minor == 0)
+                         else if (osInfo.Version.Minor == 2)
                              OSType = "Windows 8";
-                         else
+                         else if (osInfo.Version.Minor == 3)
                              OSType = "Windows 8.1";
                          break;
                        default:
@@ -197,7 +195,6 @@ namespace RiverSimulationApplication
                    }
                    break;
              }
-
             return OSType;
         }
 
@@ -225,6 +222,65 @@ namespace RiverSimulationApplication
                 gp.ClearMapBackground();
             }
         }
+
+        public enum CheckType
+        {
+            NoCheck,
+            NotNegative,
+            GreaterThanZero,
+            GreaterThanOne,
+            GreaterThanTwo,
+            GreaterThanThree,
+        }
+
+        public static bool CheckConvertInt32(ref int n, string txt, string alertMsg, CheckType t)
+        {
+            try
+            {
+                n = Convert.ToInt32(txt);
+                switch (t)
+                {
+                    case CheckType.NoCheck:
+                        return true;
+                    case CheckType.NotNegative:
+                        if (n >= 0)
+                        {
+                            return true;
+                        }
+                        break;
+                    case CheckType.GreaterThanZero:
+                        if (n > 0)
+                        {
+                            return true;
+                        }
+                        break;
+                    case CheckType.GreaterThanOne:
+                        if (n > 1)
+                        {
+                            return true;
+                        }
+                        break;
+                    case CheckType.GreaterThanTwo:
+                        if (n > 2)
+                        {
+                            return true;
+                        }
+                        break;
+                    case CheckType.GreaterThanThree:
+                        if (n > 3)
+                        {
+                            return true;
+                        }
+                        break;
+                }
+            }
+            catch
+            {
+            }
+            MessageBox.Show(alertMsg, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            return false;
+        }
+
     }
 
     public static class GroupGridUtility
@@ -564,7 +620,8 @@ namespace RiverSimulationApplication
             Clipboard.SetDataObject(v.GetClipboardContent());
         }
 
-        public static void InitializeDataGridView(DataGridView v, int colCount, int rowCount, int columnWidth = 48, int rowHeadersWidth = 64)
+        public static void InitializeDataGridView(DataGridView v, int colCount, int rowCount, int columnWidth = 48, int rowHeadersWidth = 64,
+            string tableName = "", string colName = "", string rowName = "", bool nocolNum = false, bool noRowNum = false)
         {
             v.Rows.Clear();
             // Create an unbound DataGridView by declaring a column count.
@@ -583,17 +640,25 @@ namespace RiverSimulationApplication
             //int c = 1;
             for (int i = 0; i < colCount; ++i)
             {
-                v.Columns[i].Name = (i + 1).ToString();
+                string name = colName;
+                if (!nocolNum)
+                {
+                    name += " " + (i + 1).ToString();
+                }
+                v.Columns[i].Name = name;
                 v.Columns[i].Width = columnWidth;
-                //row[i] = "1";
-                //c++;
             }
             v.RowHeadersWidth = rowHeadersWidth;
 
             for (int i = 0; i < rowCount; i++)
             {
                 v.Rows.Add(row);
-                v.Rows[i].HeaderCell.Value = (i + 1).ToString();
+                string name = rowName;
+                if (!noRowNum)
+                {
+                    name += " " + (i + 1).ToString();
+                }
+                v.Rows[i].HeaderCell.Value = name;
             }
         }
 
@@ -645,8 +710,11 @@ namespace RiverSimulationApplication
                     message.To.Add(to[i]);
                 }
             }
-            message.CC.Add(new MailAddress(cc));
 
+            if (cc.Length > 0)
+            {
+                message.CC.Add(new MailAddress(cc));
+            }
 
             foreach (string s in attachments)
             {
@@ -662,6 +730,7 @@ namespace RiverSimulationApplication
             MySmtp = null;
             message.Dispose();
         }
+
 
     }
 }

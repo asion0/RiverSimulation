@@ -112,7 +112,7 @@ namespace RiverSimulationApplication
                 Program.programSetting.feedMailAddress, 
                 Program.programSetting.feedMailKey,
                 Program.programSetting.feedMailTo.ToArray(),
-                mailTxt.Text,
+                "",     //mailTxt.Text,
                 "ResedModel問題回饋" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss"),
                 mailBody.ToString(),
                 attach);

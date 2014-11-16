@@ -339,9 +339,12 @@ namespace RiverSimulationApplication
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             int n = 0;
-            if (!ControllerUtility.CheckConvertInt32(ref n, SeparateNumTxt.Text, "請輸入正確的垂向格網分層數目！", ControllerUtility.CheckType.GreaterThanTwo))
-            {
-                return false;
+            if(p.Is3DMode())
+            { 
+                if (!ControllerUtility.CheckConvertInt32(ref n, SeparateNumTxt.Text, "請輸入正確的垂向格網分層數目！", ControllerUtility.CheckType.GreaterThanTwo))
+                {
+                    return false;
+                }
             }
             if (p.separateNum != n && p.separateNum != 0)
             {

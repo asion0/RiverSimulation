@@ -79,7 +79,7 @@
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ok.Location = new System.Drawing.Point(872, 702);
+            this.ok.Location = new System.Drawing.Point(872, 701);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 8;
@@ -193,6 +193,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(17, 102);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 26);
@@ -202,6 +203,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(17, 61);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 26);
@@ -349,7 +351,7 @@
             this.mapPicBox.SelectedI = -1;
             this.mapPicBox.SelectGroup = false;
             this.mapPicBox.SelectRow = false;
-            this.mapPicBox.Size = new System.Drawing.Size(452, 440);
+            this.mapPicBox.Size = new System.Drawing.Size(452, 439);
             this.mapPicBox.TabIndex = 11;
             // 
             // previewSpratePanel
@@ -360,7 +362,7 @@
             this.previewSpratePanel.Controls.Add(this.previewSpratePicBox);
             this.previewSpratePanel.Location = new System.Drawing.Point(516, 252);
             this.previewSpratePanel.Name = "previewSpratePanel";
-            this.previewSpratePanel.Size = new System.Drawing.Size(452, 440);
+            this.previewSpratePanel.Size = new System.Drawing.Size(452, 439);
             this.previewSpratePanel.TabIndex = 12;
             this.previewSpratePanel.Visible = false;
             // 
@@ -371,7 +373,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.previewSpratePicBox.Location = new System.Drawing.Point(0, 0);
             this.previewSpratePicBox.Name = "previewSpratePicBox";
-            this.previewSpratePicBox.Size = new System.Drawing.Size(452, 440);
+            this.previewSpratePicBox.Size = new System.Drawing.Size(452, 439);
             this.previewSpratePicBox.TabIndex = 13;
             this.previewSpratePicBox.TabStop = false;
             // 
@@ -380,7 +382,7 @@
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 742);
+            this.ClientSize = new System.Drawing.Size(984, 741);
             this.Controls.Add(this.previewSpratePanel);
             this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.mainPanel);

@@ -54,7 +54,7 @@ namespace RiverSimulationApplication
             if(RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D)
             {
                 upVertPanel.Enabled = true;
-                downVertPanel.Enabled = true;
+                //downVertPanel.Enabled = true;
                 waterUpVertPanel.Enabled = true;
             }
             else

@@ -316,37 +316,47 @@ namespace RiverSimulationApplication
         private Process simProcess = new Process();
         void BwDoWork(object sender, DoWorkEventArgs e)
         {
-            if (simDebugForm.runMode == SimDebugForm.RunMode.OutputFile)
+            //if (simDebugForm.runMode == SimDebugForm.RunMode.OutputFile)
+            //{
+            //    simProcess.StartInfo.FileName = Environment.CurrentDirectory +"\\DumpOutput.exe";
+            //    simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+            //    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " " + simDebugForm.dataFile;
+            //    simProcess.StartInfo.UseShellExecute = false;
+            //    simProcess.StartInfo.RedirectStandardOutput = true;
+            //    simProcess.StartInfo.CreateNoWindow = true;
+            //    simProcess.Start();
+            //}
+            //else if (simDebugForm.runMode == SimDebugForm.RunMode.InputData)
+            //{
+            //    simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\10062.exe";
+            //    simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+            //    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3D " + simDebugForm.dataFile + " out";
+            //    simProcess.StartInfo.UseShellExecute = false;
+            //    simProcess.StartInfo.RedirectStandardOutput = true;
+            //    simProcess.StartInfo.CreateNoWindow = true;
+            //    simProcess.Start();
+            //}
+            //else if (simDebugForm.runMode == SimDebugForm.RunMode.ExternalFile)
+            //{
+            //    simProcess.StartInfo.FileName = Program.currentPath + "\\" + simDebugForm.inputFile;
+            //    simProcess.StartInfo.WorkingDirectory = Program.currentPath;
+            //    simProcess.StartInfo.Arguments = simDebugForm.dataFile;
+            //    simProcess.StartInfo.UseShellExecute = false;
+            //    simProcess.StartInfo.RedirectStandardOutput = true;
+            //    simProcess.StartInfo.CreateNoWindow = true;
+            //    simProcess.Start();
+            //}
             {
-                simProcess.StartInfo.FileName = Environment.CurrentDirectory +"\\DumpOutput.exe";
-                simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-                simProcess.StartInfo.Arguments = simDebugForm.inputFile + " " + simDebugForm.dataFile;
-                simProcess.StartInfo.UseShellExecute = false;
-                simProcess.StartInfo.RedirectStandardOutput = true;
-                simProcess.StartInfo.CreateNoWindow = true;
-                simProcess.Start();
-            }
-            else if (simDebugForm.runMode == SimDebugForm.RunMode.InputData)
-            {
+                string strInputFile = "IamReadyNow.i";
+                RiverSimulationProfile.profile.GenerateInputFile(Environment.CurrentDirectory + "\\" + strInputFile);
                 simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\10062.exe";
                 simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-                simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3D " + simDebugForm.dataFile + " out";
+                simProcess.StartInfo.Arguments = strInputFile + " 123 3D " + simDebugForm.dataFile + " out";
                 simProcess.StartInfo.UseShellExecute = false;
                 simProcess.StartInfo.RedirectStandardOutput = true;
                 simProcess.StartInfo.CreateNoWindow = true;
                 simProcess.Start();
             }
-            else if (simDebugForm.runMode == SimDebugForm.RunMode.ExternalFile)
-            {
-                simProcess.StartInfo.FileName = Program.currentPath + "\\" + simDebugForm.inputFile;
-                simProcess.StartInfo.WorkingDirectory = Program.currentPath;
-                simProcess.StartInfo.Arguments = simDebugForm.dataFile;
-                simProcess.StartInfo.UseShellExecute = false;
-                simProcess.StartInfo.RedirectStandardOutput = true;
-                simProcess.StartInfo.CreateNoWindow = true;
-                simProcess.Start();
-            }
-
             inRunning = false;
             StreamReader reader = simProcess.StandardOutput;//截取輸出流
             string line = reader.ReadLine();//每次讀取一行

@@ -45,11 +45,11 @@
             this.waterPanel = new System.Windows.Forms.Panel();
             this.fullPanel = new System.Windows.Forms.Panel();
             this.secFlowEffectChk = new System.Windows.Forms.CheckBox();
+            this.diffusionEffectChk = new System.Windows.Forms.CheckBox();
             this.sideInOutFlowChk = new System.Windows.Forms.CheckBox();
             this.immersedBoundaryChk = new System.Windows.Forms.CheckBox();
             this.dryBedEffectChk = new System.Windows.Forms.CheckBox();
             this.highSandContentEffectChk = new System.Windows.Forms.CheckBox();
-            this.diffusionEffectChk = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
@@ -244,9 +244,21 @@
             this.secFlowEffectChk.UseVisualStyleBackColor = true;
             this.secFlowEffectChk.CheckedChanged += new System.EventHandler(this.secFlowEffectChk_CheckedChanged);
             // 
+            // diffusionEffectChk
+            // 
+            this.diffusionEffectChk.AutoSize = true;
+            this.diffusionEffectChk.Location = new System.Drawing.Point(3, 7);
+            this.diffusionEffectChk.Name = "diffusionEffectChk";
+            this.diffusionEffectChk.Size = new System.Drawing.Size(120, 16);
+            this.diffusionEffectChk.TabIndex = 0;
+            this.diffusionEffectChk.Text = "關閉移流擴散效應";
+            this.diffusionEffectChk.UseVisualStyleBackColor = true;
+            this.diffusionEffectChk.CheckedChanged += new System.EventHandler(this.diffusionEffectChk_CheckedChanged);
+            // 
             // sideInOutFlowChk
             // 
             this.sideInOutFlowChk.AutoSize = true;
+            this.sideInOutFlowChk.Enabled = false;
             this.sideInOutFlowChk.Location = new System.Drawing.Point(3, 95);
             this.sideInOutFlowChk.Name = "sideInOutFlowChk";
             this.sideInOutFlowChk.Size = new System.Drawing.Size(75, 16);
@@ -258,11 +270,12 @@
             // immersedBoundaryChk
             // 
             this.immersedBoundaryChk.AutoSize = true;
+            this.immersedBoundaryChk.Enabled = false;
             this.immersedBoundaryChk.Location = new System.Drawing.Point(3, 73);
             this.immersedBoundaryChk.Name = "immersedBoundaryChk";
-            this.immersedBoundaryChk.Size = new System.Drawing.Size(128, 16);
+            this.immersedBoundaryChk.Size = new System.Drawing.Size(140, 16);
             this.immersedBoundaryChk.TabIndex = 0;
-            this.immersedBoundaryChk.Text = "內部邊界(浸沒邊界)";
+            this.immersedBoundaryChk.Text = "結構物設置(浸沒邊界)";
             this.immersedBoundaryChk.UseVisualStyleBackColor = true;
             this.immersedBoundaryChk.CheckedChanged += new System.EventHandler(this.immersedBoundaryChk_CheckedChanged);
             // 
@@ -271,15 +284,16 @@
             this.dryBedEffectChk.AutoSize = true;
             this.dryBedEffectChk.Location = new System.Drawing.Point(3, 51);
             this.dryBedEffectChk.Name = "dryBedEffectChk";
-            this.dryBedEffectChk.Size = new System.Drawing.Size(104, 16);
+            this.dryBedEffectChk.Size = new System.Drawing.Size(140, 16);
             this.dryBedEffectChk.TabIndex = 0;
-            this.dryBedEffectChk.Text = "內部邊界(乾床)";
+            this.dryBedEffectChk.Text = "結構物設置(調整底床)";
             this.dryBedEffectChk.UseVisualStyleBackColor = true;
             this.dryBedEffectChk.CheckedChanged += new System.EventHandler(this.dryBedEffectChk_CheckedChanged);
             // 
             // highSandContentEffectChk
             // 
             this.highSandContentEffectChk.AutoSize = true;
+            this.highSandContentEffectChk.Enabled = false;
             this.highSandContentEffectChk.Location = new System.Drawing.Point(3, 117);
             this.highSandContentEffectChk.Name = "highSandContentEffectChk";
             this.highSandContentEffectChk.Size = new System.Drawing.Size(84, 16);
@@ -287,17 +301,6 @@
             this.highSandContentEffectChk.Text = "高含砂效應";
             this.highSandContentEffectChk.UseVisualStyleBackColor = true;
             this.highSandContentEffectChk.CheckedChanged += new System.EventHandler(this.highSandContentEffectChk_CheckedChanged);
-            // 
-            // diffusionEffectChk
-            // 
-            this.diffusionEffectChk.AutoSize = true;
-            this.diffusionEffectChk.Location = new System.Drawing.Point(3, 7);
-            this.diffusionEffectChk.Name = "diffusionEffectChk";
-            this.diffusionEffectChk.Size = new System.Drawing.Size(120, 16);
-            this.diffusionEffectChk.TabIndex = 0;
-            this.diffusionEffectChk.Text = "關閉移流擴散效應";
-            this.diffusionEffectChk.UseVisualStyleBackColor = true;
-            this.diffusionEffectChk.CheckedChanged += new System.EventHandler(this.diffusionEffectChk_CheckedChanged);
             // 
             // label2
             // 

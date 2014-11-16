@@ -380,5 +380,23 @@ namespace RiverSimulationApplication
         public double[] seabedLevelArray = null;
         public double[,] sedimentCompositionRatioArray = null;
 
+
+        public bool GenerateInputFile(string file)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("1234");
+            sb.AppendLine("= = = = = =");
+            sb.Append("\r\n");
+            sb.AppendLine();
+            sb.AppendLine();
+
+            
+            using (StreamWriter outfile = new StreamWriter(file))
+            {
+                outfile.Write(sb.ToString());
+            }
+
+            return true;
+        }
     }
 }

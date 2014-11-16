@@ -1159,6 +1159,7 @@
             this.mapPicBox.Grid = null;
             this.mapPicBox.Name = "mapPicBox";
             this.mapPicBox.SelectedI = -1;
+            this.mapPicBox.SelectGroup = false;
             this.mapPicBox.SelectRow = false;
             // 
             // WaterModelingForm

@@ -354,6 +354,7 @@ namespace RiverSimulationApplication
             p.separateNum = n;
             return true;
         }
+
         private void DrawPreview()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;

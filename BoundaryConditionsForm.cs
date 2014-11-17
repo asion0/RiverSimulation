@@ -63,6 +63,8 @@ namespace RiverSimulationApplication
                 downVertPanel.Enabled = false;
                 waterUpVertPanel.Enabled = false;
             }
+            UpdateStatus();
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -308,78 +310,24 @@ namespace RiverSimulationApplication
 
         }
 
-        //private void inFlowBtn_Click(object sender, EventArgs e)
-        //{
-        //    int n = 0;
-        //    try
-        //    {
-        //        n = Convert.ToInt32(sideInFlowNumTxt.Text);
-        //    }
-        //    catch
-        //    {
-        //        n = -1;
-        //    }
+        private void noSidewallSlideRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            RiverSimulationProfile.profile.sidewallBoundarySlip = !(noSidewallSlideRdo.Checked);
+        }
 
-        //    if (n < 2)
-        //    {
-        //        MessageBox.Show("請輸入正確的側入流數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        //        return;
-        //    }
+        private void sidewallSlideRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            RiverSimulationProfile.profile.sidewallBoundarySlip = sidewallSlideRdo.Checked;
 
-        //    TableInputForm form = new TableInputForm();
-        //    form.SetFormMode(sideInFlowChk.Text + " " + inFlowBtn.Text, false, n, 50);
-        //    if (DialogResult.OK == form.ShowDialog())
-        //    {
+        }
 
-        //    }
-        //}
+        private void UpdateStatus()
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
 
-        //private void outFlowBtn_Click(object sender, EventArgs e)
-        //{
-        //    int n = 0;
-        //    try
-        //    {
-        //        n = Convert.ToInt32(sideOutFlowNumTxt.Text);
-        //    }
-        //    catch
-        //    {
-        //        n = -1;
-        //    }
-
-        //    if (n < 2)
-        //    {
-        //        MessageBox.Show("請輸入正確的側出流數目(大於2)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        //        return;
-        //    }
-
-        //    TableInputForm form = new TableInputForm();
-        //    form.SetFormMode(sideOutFlowChk.Text + " " + outFlowBtn.Text, false, n, 50);
-        //    if (DialogResult.OK == form.ShowDialog())
-        //    {
-
-        //    }
-        //}
-
-        //private void panel8_Paint(object sender, PaintEventArgs e)
-        //{
-
-        //}
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void radioButton14_CheckedChanged(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void radioButton13_CheckedChanged(object sender, EventArgs e)
-        //{
-
-        //}
-
-        
+            noSidewallSlideRdo.Checked = !p.sidewallBoundarySlip;
+            sidewallSlideRdo.Checked = p.sidewallBoundarySlip;
+        }
     }
+
 }

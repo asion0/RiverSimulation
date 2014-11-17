@@ -140,12 +140,13 @@ namespace RiverSimulationApplication
         public bool HasMovableBedMode() { return moduleType2 == ModuleType2.MovableBed; }
 
         public RiverGrid inputGrid = null;
-        public int separateNum = 0;
+        public int separateNum = 0;             //垂向格網分層數目0.1.1
         public double[] separateArray = null;
 
         //WaterModeling 數值參數
         public double convergenceCriteria2d;    //二維水裡收斂標準 
         public double convergenceCriteria3d;    //三維水裡收斂標準
+        public int maxIterationsNum = 0;        //水理最大疊代次數。1.1.2.3
 
         //乾床資訊
        // private int _dryBedNum = 0;
@@ -174,6 +175,8 @@ namespace RiverSimulationApplication
         //浸沒邊界資訊
         //private int _immersedBoundaryNum = 0;
         private List<Point>[] _immersedBoundaryPts = null;
+        public bool sidewallBoundarySlip = false;      //4.1.3.1
+
         public void ResizeImmersedBoundary(int n)
         {
             if (n <= 0)
@@ -375,7 +378,7 @@ namespace RiverSimulationApplication
         }
 
         //動床參數 - 物理參數頁面
-        public int sedimentParticlesNum = 3;
+        public int sedimentParticlesNum = 3;            //2.2.4 泥砂顆粒數目
         public int seabedLevelNum = 6;
         public double[] seabedLevelArray = null;
         public double[,] sedimentCompositionRatioArray = null;
@@ -384,16 +387,48 @@ namespace RiverSimulationApplication
         public bool GenerateInputFile(string file)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("1234");
-            sb.AppendLine("= = = = = =");
-            sb.Append("\r\n");
-            sb.AppendLine();
-            sb.AppendLine();
+            sb.Append("2011m4.i       m4.dat         \n");
+
+            sb.AppendFormat("{0,8}", inputGrid.GetI.ToString());
+            sb.AppendFormat("{0,8}", inputGrid.GetJ.ToString());
+            sb.AppendFormat("{0,8}", sedimentParticlesNum.ToString());
+            sb.AppendFormat("{0,8}", 10.ToString());    //模式預設值
+            sb.AppendFormat("{0,8}", 5.ToString());     //模式預設值
+            sb.AppendFormat("{0,8}", 0.ToString());     //模式預設值
+            sb.AppendFormat("{0,8}", separateNum.ToString());     //垂向格網分層數目0.1.1
+            sb.Append("\n");
+            //**模式列印輸出格式，建議採預設值
+            sb.Append("       0       1       0       0       0       0               0                \n");
+            sb.Append("      20       0      20       0      20       0      20       0      20       0\n");
+            sb.Append("      20       0      20       0      20       0      20       0      20       0\n");
+            sb.Append("      20       0      20       0      20       0      20       0      20       0\n");
+            sb.Append("       0  100000      20       0      20       0      20       0      20       0\n");
+            sb.Append("      20       0      20       0      20       0      20       0       0  100000\n");
+            sb.Append("      20       0      20       0      20       1       4       0      20       0\n");
+            sb.Append("      20       0      20       0      20       0      20       0      20       0\n");
+            sb.Append("      20       0      20       0      20       0      20       0      20       0\n");
+            sb.Append("      20       0      20       0      20       0      20       0      20       0\n");
+            sb.Append("      20       0      20       0      20       0      20       0      20       0\n");
+            sb.Append("       1       1       1       1       1       1       1       1       1       0\n");
+            sb.Append("      20       0                                                                \n");
+
+            sb.AppendFormat("{0,8}", (secFlowEffectFunction ? 1 : 0).ToString());     //是否計算二次流效應
+            sb.AppendFormat("{0,8}", (diffusionEffectFunction ? 1 : 0).ToString());     //是否計算二次流效應
+            sb.AppendFormat("{0,8}", (1).ToString());     //是否計算傳輸(propogation)效應 不讓使用者更改。
+            sb.AppendFormat("{0,8}", (sidewallBoundarySlip ? 1 : 0).ToString());     //1:滑移；0:非滑移。4.1.3.1
+            sb.AppendFormat("{0,8}", (moduleType2 == ModuleType2.MovableBed ? 1 : 0).ToString());     //對照“模擬功能”-“模組選擇”。若執行動床計算需產生SED.dat檔案。
+            sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
+            sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
+            sb.AppendFormat("{0,8}", (quayStableAnalysisFunction ? 1 : 0).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。
+            sb.AppendFormat("{0,8}", maxIterationsNum.ToString());     //水理最大疊代次數。1.1.2.3
 
             
             using (StreamWriter outfile = new StreamWriter(file))
             {
                 outfile.Write(sb.ToString());
+
+
+                outfile.Close();
             }
 
             return true;

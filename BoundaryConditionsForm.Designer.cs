@@ -55,8 +55,8 @@
             this.upSupercriticalFlowRdo = new System.Windows.Forms.RadioButton();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.sidewallSlideRdo = new System.Windows.Forms.RadioButton();
+            this.noSidewallSlideRdo = new System.Windows.Forms.RadioButton();
             this.label18 = new System.Windows.Forms.Label();
             this.sideInOutFlowPanel = new System.Windows.Forms.Panel();
             this.sideInFlowChk = new System.Windows.Forms.CheckBox();
@@ -431,8 +431,8 @@
             // 
             this.panel8.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel8.Controls.Add(this.label25);
-            this.panel8.Controls.Add(this.radioButton8);
-            this.panel8.Controls.Add(this.radioButton7);
+            this.panel8.Controls.Add(this.sidewallSlideRdo);
+            this.panel8.Controls.Add(this.noSidewallSlideRdo);
             this.panel8.Controls.Add(this.label18);
             this.panel8.Controls.Add(this.sideInOutFlowPanel);
             this.panel8.Location = new System.Drawing.Point(18, 273);
@@ -449,29 +449,29 @@
             this.label25.TabIndex = 16;
             this.label25.Text = "側壁邊界滑移";
             // 
-            // radioButton8
+            // sidewallSlideRdo
             // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(31, 32);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(47, 16);
-            this.radioButton8.TabIndex = 3;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "滑移";
-            this.radioButton8.UseVisualStyleBackColor = true;
-            this.radioButton8.CheckedChanged += new System.EventHandler(this.upSupercriticalFlowRdo_CheckedChanged);
+            this.sidewallSlideRdo.AutoSize = true;
+            this.sidewallSlideRdo.Location = new System.Drawing.Point(94, 27);
+            this.sidewallSlideRdo.Name = "sidewallSlideRdo";
+            this.sidewallSlideRdo.Size = new System.Drawing.Size(47, 16);
+            this.sidewallSlideRdo.TabIndex = 3;
+            this.sidewallSlideRdo.TabStop = true;
+            this.sidewallSlideRdo.Text = "滑移";
+            this.sidewallSlideRdo.UseVisualStyleBackColor = true;
+            this.sidewallSlideRdo.CheckedChanged += new System.EventHandler(this.sidewallSlideRdo_CheckedChanged);
             // 
-            // radioButton7
+            // noSidewallSlideRdo
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(108, 31);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(59, 16);
-            this.radioButton7.TabIndex = 3;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "非滑移";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            this.radioButton7.CheckedChanged += new System.EventHandler(this.upSupercriticalFlowRdo_CheckedChanged);
+            this.noSidewallSlideRdo.AutoSize = true;
+            this.noSidewallSlideRdo.Location = new System.Drawing.Point(16, 27);
+            this.noSidewallSlideRdo.Name = "noSidewallSlideRdo";
+            this.noSidewallSlideRdo.Size = new System.Drawing.Size(59, 16);
+            this.noSidewallSlideRdo.TabIndex = 3;
+            this.noSidewallSlideRdo.TabStop = true;
+            this.noSidewallSlideRdo.Text = "非滑移";
+            this.noSidewallSlideRdo.UseVisualStyleBackColor = true;
+            this.noSidewallSlideRdo.CheckedChanged += new System.EventHandler(this.noSidewallSlideRdo_CheckedChanged);
             // 
             // label18
             // 
@@ -1361,8 +1361,8 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton sidewallSlideRdo;
+        private System.Windows.Forms.RadioButton noSidewallSlideRdo;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label10;

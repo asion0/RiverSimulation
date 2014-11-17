@@ -216,6 +216,10 @@ namespace RiverSimulationApplication
 
         private void ok_Click(object sender, EventArgs e)
         {
+            if (!DoConvert())
+            {
+                return;
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -372,5 +376,16 @@ namespace RiverSimulationApplication
             //UpdateStatus();        
         }
 
+        private bool DoConvert()
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            int n = 0;
+            if (!ControllerUtility.CheckConvertInt32(ref n, maxIterationsNumTxt.Text, "請輸入正確的水理最大疊代次數！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+            p.maxIterationsNum = n;
+            return true;
+        }
     }
 }

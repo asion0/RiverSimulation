@@ -141,7 +141,7 @@ namespace RiverSimulationApplication
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             Color FinishedButton = Color.LimeGreen;
             Color ReadyButton = Color.Gold;
-            Color DisableButton = Color.Red;
+            Color DisableButton = Color.FromArgb(255, 174, 201);     //20141117 客製化
             
             sampleFinishedBtn.BackColor = FinishedButton;
             sampleReadyBtn.BackColor = ReadyButton;

@@ -62,7 +62,7 @@ namespace RiverSimulationApplication
                     return;
                 }
                 mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
-                ShowGridMap(true);
+                ShowGridMap(PicBoxType.GridMap);
                 UpdateStatus();
             }
         }
@@ -102,24 +102,35 @@ namespace RiverSimulationApplication
             if (chk)
             {
                 mapPicBox.ClearMapBackground();
-                ShowGridMap(true);
+                ShowGridMap(PicBoxType.GridMap);
                 UpdateStatus();
             }
         }
 
-        private void ShowGridMap(bool b)
+        enum PicBoxType
         {
-            if(b)
+            None,
+            GridMap,    //格網地圖
+            Sprate,     //3D垂向分層圖
+        }
+
+        private void ShowGridMap(PicBoxType t)
+        {
+            switch(t)
             {
+                case PicBoxType.GridMap:
                 mapPicBox.Visible = true;
                 previewSpratePanel.Visible = false;
-            }
-            else
-            {
+                break;
+                case PicBoxType.Sprate:
                 mapPicBox.Visible = false;
                 previewSpratePanel.Visible = true;
+                break;
+                default:
+                break;
             }
         }
+
         private void useGoogleBgRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
@@ -128,7 +139,7 @@ namespace RiverSimulationApplication
             {
                 RiverSimulationProfile.profile.DownloadGoogleStaticMap();
                 mapPicBox.SetMapBackground(p.tl, p.tr, p.bl, p.br);
-                ShowGridMap(true);
+                ShowGridMap(PicBoxType.GridMap);
                 UpdateStatus();
             }
 
@@ -143,7 +154,7 @@ namespace RiverSimulationApplication
             {
                 RiverSimulationProfile.profile.SetImportImageMode();
                 mapPicBox.SetMapBackground(p.imagePath, p.sourceE, p.sourceN, p.sourceW, p.sourceH);
-                ShowGridMap(true);
+                ShowGridMap(PicBoxType.GridMap);
                 UpdateStatus();
             }
         }
@@ -161,7 +172,7 @@ namespace RiverSimulationApplication
                     imgInfoBtn.Enabled = true;
                     RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                     mapPicBox.SetMapBackground(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
-                    ShowGridMap(true);
+                    ShowGridMap(PicBoxType.GridMap);
                     UpdateStatus();
                 }
                 else
@@ -186,7 +197,7 @@ namespace RiverSimulationApplication
                 imgInfoBtn.Enabled = true;
                 RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                 mapPicBox.SetMapBackground(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
-                ShowGridMap(true);
+                ShowGridMap(PicBoxType.GridMap);
                 UpdateStatus();
             }
 
@@ -325,7 +336,7 @@ namespace RiverSimulationApplication
             if (DialogResult.OK == r)
             {
                 p.separateArray = (double[])form.SeparateData().Clone();
-                ShowGridMap(false);
+                ShowGridMap(PicBoxType.Sprate);
                 DrawPreview();
             }
         }
@@ -449,6 +460,19 @@ namespace RiverSimulationApplication
             previewSpratePicBox.Height = picH;
 
             previewSpratePanel.AutoScrollMinSize = new Size(w, h);
+        }
+
+        private void showGridMapCtrls_MouseHover(object sender, EventArgs e)
+        {
+            ShowGridMap(PicBoxType.GridMap);
+
+        }
+
+        private void showSeparateCtrls_MouseHover(object sender, EventArgs e)
+        {
+            ShowGridMap(PicBoxType.Sprate);
+
+
         }
 
     }

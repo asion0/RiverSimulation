@@ -80,8 +80,8 @@ namespace RiverSimulationApplication
                 this.highSandMethodPanel.Visible = false;
             }
 
-            this.Width = 1000;
-            this.Height = 720;
+            //this.Width = 1000;
+            //this.Height = 720;
             valueParamPanel.Visible = false;
             physicalParamPanel.Visible = false;
             seabedCompositionPanel.Visible = false;
@@ -536,6 +536,17 @@ namespace RiverSimulationApplication
         private void minuteRdo_CheckedChanged(object sender, EventArgs e)
         {
             timeLbl.Text = minuteRdo.Text;
+        }
+
+        private void sedimentParticlesNumTxt_MouseHover(object sender, EventArgs e)
+        {
+
+            string url = "file:///" + Environment.CurrentDirectory.Replace('\\', '/') + "/D1-2-1-3.html"; ;
+            if (comment.Url == null || comment.Url.ToString() != url)
+            {
+                comment.Navigate(new Uri(url));
+            }
+
         }
  
 

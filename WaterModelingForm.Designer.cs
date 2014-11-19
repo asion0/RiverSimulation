@@ -460,7 +460,6 @@
             resources.ApplyResources(this.comment, "comment");
             this.comment.IsWebBrowserContextMenuEnabled = false;
             this.comment.Name = "comment";
-            this.comment.ScrollBarsEnabled = false;
             // 
             // mainPanel
             // 
@@ -1167,7 +1166,6 @@
             this.AcceptButton = this.ok;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.roughnessPanel);
@@ -1175,6 +1173,7 @@
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.ok);
+            this.Controls.Add(this.mapPicBox);
             this.Name = "WaterModelingForm";
             this.Load += new System.EventHandler(this.WaterModelingForm_Load);
             this.MouseHover += new System.EventHandler(this.groupBox_MouseHover);

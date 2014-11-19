@@ -132,6 +132,7 @@
             this.imgInfoBtn.Text = "輸入圖檔資訊";
             this.imgInfoBtn.UseVisualStyleBackColor = true;
             this.imgInfoBtn.Click += new System.EventHandler(this.imgInfoBtn_Click);
+            this.imgInfoBtn.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // selectBgBtn
             // 
@@ -143,6 +144,7 @@
             this.selectBgBtn.Text = "選取";
             this.selectBgBtn.UseVisualStyleBackColor = true;
             this.selectBgBtn.Click += new System.EventHandler(this.selectBgBtn_Click);
+            this.selectBgBtn.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // noBgRdo
             // 
@@ -156,6 +158,7 @@
             this.noBgRdo.Text = "不使用";
             this.noBgRdo.UseVisualStyleBackColor = true;
             this.noBgRdo.CheckedChanged += new System.EventHandler(this.noBgRdo_CheckedChanged);
+            this.noBgRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // selectBgRdo
             // 
@@ -167,6 +170,7 @@
             this.selectBgRdo.Text = "選取圖檔";
             this.selectBgRdo.UseVisualStyleBackColor = true;
             this.selectBgRdo.CheckedChanged += new System.EventHandler(this.selectBgRdo_CheckedChanged);
+            this.selectBgRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // useGoogleBgRdo
             // 
@@ -178,6 +182,7 @@
             this.useGoogleBgRdo.Text = "Google地圖";
             this.useGoogleBgRdo.UseVisualStyleBackColor = true;
             this.useGoogleBgRdo.CheckedChanged += new System.EventHandler(this.useGoogleBgRdo_CheckedChanged);
+            this.useGoogleBgRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // groupBox2
             // 
@@ -245,6 +250,7 @@
             this.separateProportionBtn.Text = "分層比例";
             this.separateProportionBtn.UseVisualStyleBackColor = true;
             this.separateProportionBtn.Click += new System.EventHandler(this.separateProportionBtn_Click);
+            this.separateProportionBtn.MouseHover += new System.EventHandler(this.showSeparateCtrls_MouseHover);
             // 
             // SeparateNumTxt
             // 
@@ -252,6 +258,7 @@
             this.SeparateNumTxt.Name = "SeparateNumTxt";
             this.SeparateNumTxt.Size = new System.Drawing.Size(100, 22);
             this.SeparateNumTxt.TabIndex = 3;
+            this.SeparateNumTxt.MouseHover += new System.EventHandler(this.showSeparateCtrls_MouseHover);
             // 
             // label1
             // 
@@ -261,6 +268,7 @@
             this.label1.Size = new System.Drawing.Size(101, 12);
             this.label1.TabIndex = 2;
             this.label1.Text = "垂向格網分層數目";
+            this.label1.MouseHover += new System.EventHandler(this.showSeparateCtrls_MouseHover);
             // 
             // inputFileBtn
             // 
@@ -272,6 +280,7 @@
             this.inputFileBtn.Text = "選取檔案";
             this.inputFileBtn.UseVisualStyleBackColor = true;
             this.inputFileBtn.Click += new System.EventHandler(this.inputFileBtn_Click);
+            this.inputFileBtn.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // inputGridBtn
             // 
@@ -283,6 +292,7 @@
             this.inputGridBtn.Text = "輸入格網";
             this.inputGridBtn.UseVisualStyleBackColor = true;
             this.inputGridBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
+            this.inputGridBtn.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // inputGridRdo
             // 
@@ -294,6 +304,7 @@
             this.inputGridRdo.Text = "線上輸入水平格網";
             this.inputGridRdo.UseVisualStyleBackColor = true;
             this.inputGridRdo.CheckedChanged += new System.EventHandler(this.inputGridRdo_CheckedChanged);
+            this.inputGridRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // inputFileRdo
             // 
@@ -305,6 +316,7 @@
             this.inputFileRdo.Text = "由檔案匯入水平格網";
             this.inputFileRdo.UseVisualStyleBackColor = true;
             this.inputFileRdo.CheckedChanged += new System.EventHandler(this.inputFileRdo_CheckedChanged);
+            this.inputFileRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // runExcelBtn
             // 

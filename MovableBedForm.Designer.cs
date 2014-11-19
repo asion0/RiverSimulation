@@ -56,9 +56,12 @@
             this.ok = new System.Windows.Forms.Button();
             this.valueParamPanel = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.outputCtrl2DGrp = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.outputCtrl3DGrp = new System.Windows.Forms.GroupBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.fullPanel = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -174,9 +177,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.previewPicBox = new System.Windows.Forms.PictureBox();
             this.previewPanel = new System.Windows.Forms.Panel();
-            this.outputCtrl3DGrp = new System.Windows.Forms.GroupBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.outputCtrl2DGrp = new System.Windows.Forms.GroupBox();
             this.mainPanel.SuspendLayout();
             this.quayStableAnalysisGrp.SuspendLayout();
             this.bedrockGrp.SuspendLayout();
@@ -186,6 +186,8 @@
             this.flowTypeGroup.SuspendLayout();
             this.valueParamPanel.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.outputCtrl2DGrp.SuspendLayout();
+            this.outputCtrl3DGrp.SuspendLayout();
             this.fullPanel.SuspendLayout();
             this.physicalParamPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -208,8 +210,6 @@
             this.normalSandMethodPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewPicBox)).BeginInit();
             this.previewPanel.SuspendLayout();
-            this.outputCtrl3DGrp.SuspendLayout();
-            this.outputCtrl2DGrp.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -463,18 +463,17 @@
             // 
             this.comment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comment.Location = new System.Drawing.Point(522, 13);
+            this.comment.Location = new System.Drawing.Point(509, 2);
             this.comment.MinimumSize = new System.Drawing.Size(20, 20);
             this.comment.Name = "comment";
-            this.comment.ScrollBarsEnabled = false;
-            this.comment.Size = new System.Drawing.Size(450, 225);
+            this.comment.Size = new System.Drawing.Size(517, 258);
             this.comment.TabIndex = 9;
             // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ok.Location = new System.Drawing.Point(876, 697);
+            this.ok.Location = new System.Drawing.Point(916, 696);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 11;
@@ -511,6 +510,28 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "數值參數";
             // 
+            // outputCtrl2DGrp
+            // 
+            this.outputCtrl2DGrp.Controls.Add(this.checkBox1);
+            this.outputCtrl2DGrp.Controls.Add(this.checkBox3);
+            this.outputCtrl2DGrp.Controls.Add(this.checkBox2);
+            this.outputCtrl2DGrp.Location = new System.Drawing.Point(44, 134);
+            this.outputCtrl2DGrp.Name = "outputCtrl2DGrp";
+            this.outputCtrl2DGrp.Size = new System.Drawing.Size(160, 94);
+            this.outputCtrl2DGrp.TabIndex = 1;
+            this.outputCtrl2DGrp.TabStop = false;
+            this.outputCtrl2DGrp.Text = "2D";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(13, 21);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.TabIndex = 25;
+            this.checkBox1.Text = "底床高程";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
@@ -531,15 +552,27 @@
             this.checkBox2.Text = "濃度";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // outputCtrl3DGrp
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(13, 21);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
-            this.checkBox1.TabIndex = 25;
-            this.checkBox1.Text = "底床高程";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.outputCtrl3DGrp.Controls.Add(this.checkBox8);
+            this.outputCtrl3DGrp.Enabled = false;
+            this.outputCtrl3DGrp.Location = new System.Drawing.Point(216, 134);
+            this.outputCtrl3DGrp.Name = "outputCtrl3DGrp";
+            this.outputCtrl3DGrp.Size = new System.Drawing.Size(160, 94);
+            this.outputCtrl3DGrp.TabIndex = 1;
+            this.outputCtrl3DGrp.TabStop = false;
+            this.outputCtrl3DGrp.Text = "3D";
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.checkBox8.Location = new System.Drawing.Point(12, 18);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(96, 16);
+            this.checkBox8.TabIndex = 0;
+            this.checkBox8.Text = "三維流速資訊";
+            this.checkBox8.UseVisualStyleBackColor = true;
             // 
             // fullPanel
             // 
@@ -712,7 +745,7 @@
             // 
             this.physicalParamPanel.Controls.Add(this.groupBox1);
             this.physicalParamPanel.Controls.Add(this.fluidTypeBackBtn);
-            this.physicalParamPanel.Location = new System.Drawing.Point(55, 693);
+            this.physicalParamPanel.Location = new System.Drawing.Point(55, 212);
             this.physicalParamPanel.Name = "physicalParamPanel";
             this.physicalParamPanel.Size = new System.Drawing.Size(500, 670);
             this.physicalParamPanel.TabIndex = 12;
@@ -753,6 +786,7 @@
             this.sedimentParticlesNumTxt.Name = "sedimentParticlesNumTxt";
             this.sedimentParticlesNumTxt.Size = new System.Drawing.Size(162, 22);
             this.sedimentParticlesNumTxt.TabIndex = 5;
+            this.sedimentParticlesNumTxt.MouseHover += new System.EventHandler(this.sedimentParticlesNumTxt_MouseHover);
             // 
             // label14
             // 
@@ -1768,7 +1802,7 @@
             this.previewPicBox.Location = new System.Drawing.Point(0, 0);
             this.previewPicBox.Margin = new System.Windows.Forms.Padding(0);
             this.previewPicBox.Name = "previewPicBox";
-            this.previewPicBox.Size = new System.Drawing.Size(200, 200);
+            this.previewPicBox.Size = new System.Drawing.Size(240, 200);
             this.previewPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.previewPicBox.TabIndex = 13;
             this.previewPicBox.TabStop = false;
@@ -1784,60 +1818,26 @@
             this.previewPanel.Location = new System.Drawing.Point(522, 263);
             this.previewPanel.Margin = new System.Windows.Forms.Padding(0);
             this.previewPanel.Name = "previewPanel";
-            this.previewPanel.Size = new System.Drawing.Size(450, 419);
+            this.previewPanel.Size = new System.Drawing.Size(490, 418);
             this.previewPanel.TabIndex = 14;
-            // 
-            // outputCtrl3DGrp
-            // 
-            this.outputCtrl3DGrp.Controls.Add(this.checkBox8);
-            this.outputCtrl3DGrp.Enabled = false;
-            this.outputCtrl3DGrp.Location = new System.Drawing.Point(216, 134);
-            this.outputCtrl3DGrp.Name = "outputCtrl3DGrp";
-            this.outputCtrl3DGrp.Size = new System.Drawing.Size(160, 94);
-            this.outputCtrl3DGrp.TabIndex = 1;
-            this.outputCtrl3DGrp.TabStop = false;
-            this.outputCtrl3DGrp.Text = "3D";
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.checkBox8.Location = new System.Drawing.Point(12, 18);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(96, 16);
-            this.checkBox8.TabIndex = 0;
-            this.checkBox8.Text = "三維流速資訊";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // outputCtrl2DGrp
-            // 
-            this.outputCtrl2DGrp.Controls.Add(this.checkBox1);
-            this.outputCtrl2DGrp.Controls.Add(this.checkBox3);
-            this.outputCtrl2DGrp.Controls.Add(this.checkBox2);
-            this.outputCtrl2DGrp.Location = new System.Drawing.Point(44, 134);
-            this.outputCtrl2DGrp.Name = "outputCtrl2DGrp";
-            this.outputCtrl2DGrp.Size = new System.Drawing.Size(160, 94);
-            this.outputCtrl2DGrp.TabIndex = 1;
-            this.outputCtrl2DGrp.TabStop = false;
-            this.outputCtrl2DGrp.Text = "2D";
             // 
             // MovableBedForm
             // 
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 742);
+            this.ClientSize = new System.Drawing.Size(1024, 741);
+            this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.rockStablePanel);
             this.Controls.Add(this.seabedCompositionPanel);
-            this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.previewPanel);
-            this.MinimumSize = new System.Drawing.Size(1000, 780);
+            this.MinimumSize = new System.Drawing.Size(1000, 720);
             this.Name = "MovableBedForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "動床參數";
@@ -1852,6 +1852,10 @@
             this.valueParamPanel.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.outputCtrl2DGrp.ResumeLayout(false);
+            this.outputCtrl2DGrp.PerformLayout();
+            this.outputCtrl3DGrp.ResumeLayout(false);
+            this.outputCtrl3DGrp.PerformLayout();
             this.fullPanel.ResumeLayout(false);
             this.fullPanel.PerformLayout();
             this.physicalParamPanel.ResumeLayout(false);
@@ -1888,10 +1892,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.previewPicBox)).EndInit();
             this.previewPanel.ResumeLayout(false);
             this.previewPanel.PerformLayout();
-            this.outputCtrl3DGrp.ResumeLayout(false);
-            this.outputCtrl3DGrp.PerformLayout();
-            this.outputCtrl2DGrp.ResumeLayout(false);
-            this.outputCtrl2DGrp.PerformLayout();
             this.ResumeLayout(false);
 
         }

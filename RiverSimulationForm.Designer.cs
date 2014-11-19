@@ -181,43 +181,43 @@
             this.toolStripSeparator1,
             this.exitMnuItem});
             this.fileMnu.Name = "fileMnu";
-            this.fileMnu.Size = new System.Drawing.Size(58, 20);
+            this.fileMnu.Size = new System.Drawing.Size(57, 20);
             this.fileMnu.Text = "檔案(F)";
             // 
             // newMnuItem
             // 
             this.newMnuItem.Name = "newMnuItem";
-            this.newMnuItem.Size = new System.Drawing.Size(142, 22);
+            this.newMnuItem.Size = new System.Drawing.Size(140, 22);
             this.newMnuItem.Text = "開新檔案(N)";
             // 
             // openMnuItem
             // 
             this.openMnuItem.Name = "openMnuItem";
-            this.openMnuItem.Size = new System.Drawing.Size(142, 22);
+            this.openMnuItem.Size = new System.Drawing.Size(140, 22);
             this.openMnuItem.Text = "開啟舊檔(O)";
             // 
             // saveMnuItem
             // 
             this.saveMnuItem.Name = "saveMnuItem";
-            this.saveMnuItem.Size = new System.Drawing.Size(142, 22);
+            this.saveMnuItem.Size = new System.Drawing.Size(140, 22);
             this.saveMnuItem.Text = "儲存檔案(S)";
             // 
             // descriptionMnuItem
             // 
             this.descriptionMnuItem.Name = "descriptionMnuItem";
-            this.descriptionMnuItem.Size = new System.Drawing.Size(142, 22);
+            this.descriptionMnuItem.Size = new System.Drawing.Size(140, 22);
             this.descriptionMnuItem.Text = "檔案敘述(D)";
             this.descriptionMnuItem.Click += new System.EventHandler(this.descriptionMnuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
             // 
             // exitMnuItem
             // 
             this.exitMnuItem.Name = "exitMnuItem";
-            this.exitMnuItem.Size = new System.Drawing.Size(142, 22);
+            this.exitMnuItem.Size = new System.Drawing.Size(140, 22);
             this.exitMnuItem.Text = "結束(X)";
             this.exitMnuItem.Click += new System.EventHandler(this.exitMnuItem_Click);
             // 
@@ -226,13 +226,13 @@
             this.languageMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.langEngMnuItem});
             this.languageMnu.Name = "languageMnu";
-            this.languageMnu.Size = new System.Drawing.Size(82, 20);
+            this.languageMnu.Size = new System.Drawing.Size(81, 20);
             this.languageMnu.Text = "語系切換(L)";
             // 
             // langEngMnuItem
             // 
             this.langEngMnuItem.Name = "langEngMnuItem";
-            this.langEngMnuItem.Size = new System.Drawing.Size(115, 22);
+            this.langEngMnuItem.Size = new System.Drawing.Size(113, 22);
             this.langEngMnuItem.Text = "英文(E)";
             // 
             // helpMnu
@@ -241,20 +241,20 @@
             this.feedMnuItem,
             this.aboutMnuItem});
             this.helpMnu.Name = "helpMnu";
-            this.helpMnu.Size = new System.Drawing.Size(61, 20);
+            this.helpMnu.Size = new System.Drawing.Size(60, 20);
             this.helpMnu.Text = "說明(H)";
             // 
             // feedMnuItem
             // 
             this.feedMnuItem.Name = "feedMnuItem";
-            this.feedMnuItem.Size = new System.Drawing.Size(140, 22);
+            this.feedMnuItem.Size = new System.Drawing.Size(138, 22);
             this.feedMnuItem.Text = "問題回饋(F)";
             this.feedMnuItem.Click += new System.EventHandler(this.feedMnuItem_Click);
             // 
             // aboutMnuItem
             // 
             this.aboutMnuItem.Name = "aboutMnuItem";
-            this.aboutMnuItem.Size = new System.Drawing.Size(140, 22);
+            this.aboutMnuItem.Size = new System.Drawing.Size(138, 22);
             this.aboutMnuItem.Text = "版本說明(A)";
             this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
             // 
@@ -507,6 +507,8 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RiverSimulationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "水理動床模式使用者介面";

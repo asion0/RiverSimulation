@@ -149,12 +149,28 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as RadioButton).Checked;
             manningBtn.Enabled = chk;
+            if(chk)
+            {
+                string url = "file:///" + Environment.CurrentDirectory.Replace('\\', '/') + "/D1-2-1-1.html"; ;
+                if (comment.Url.ToString() != url)
+                {
+                    comment.Navigate(new Uri(url));
+                }
+            }
         }
 
         private void chezyRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
             chezyBtn.Enabled = chk;
+            if (chk)
+            {
+                string url = "file:///" + Environment.CurrentDirectory.Replace('\\', '/') + "/D1-2-1-2.html"; ;
+                if (comment.Url.ToString() != url)
+                {
+                    comment.Navigate(new Uri(url));
+                }
+            }
         }
 
         private void curvatureRadiusRdo_CheckedChanged(object sender, EventArgs e)

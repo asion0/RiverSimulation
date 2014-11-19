@@ -174,6 +174,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.previewPicBox = new System.Windows.Forms.PictureBox();
             this.previewPanel = new System.Windows.Forms.Panel();
+            this.outputCtrl3DGrp = new System.Windows.Forms.GroupBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.outputCtrl2DGrp = new System.Windows.Forms.GroupBox();
             this.mainPanel.SuspendLayout();
             this.quayStableAnalysisGrp.SuspendLayout();
             this.bedrockGrp.SuspendLayout();
@@ -205,6 +208,8 @@
             this.normalSandMethodPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewPicBox)).BeginInit();
             this.previewPanel.SuspendLayout();
+            this.outputCtrl3DGrp.SuspendLayout();
+            this.outputCtrl2DGrp.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -361,7 +366,7 @@
             // diffusionEquationChk
             // 
             this.diffusionEquationChk.AutoSize = true;
-            this.diffusionEquationChk.Location = new System.Drawing.Point(64, 208);
+            this.diffusionEquationChk.Location = new System.Drawing.Point(64, 251);
             this.diffusionEquationChk.Name = "diffusionEquationChk";
             this.diffusionEquationChk.Size = new System.Drawing.Size(96, 16);
             this.diffusionEquationChk.TabIndex = 1;
@@ -378,7 +383,7 @@
             "擴散公式1",
             "擴散公式2",
             "擴散公式3"});
-            this.diffusionEquationCombo.Location = new System.Drawing.Point(166, 204);
+            this.diffusionEquationCombo.Location = new System.Drawing.Point(166, 247);
             this.diffusionEquationCombo.Name = "diffusionEquationCombo";
             this.diffusionEquationCombo.Size = new System.Drawing.Size(121, 20);
             this.diffusionEquationCombo.TabIndex = 0;
@@ -481,16 +486,15 @@
             // 
             this.valueParamPanel.Controls.Add(this.groupBox10);
             this.valueParamPanel.Controls.Add(this.valueParamBackBtn);
-            this.valueParamPanel.Location = new System.Drawing.Point(185, 625);
+            this.valueParamPanel.Location = new System.Drawing.Point(144, 105);
             this.valueParamPanel.Name = "valueParamPanel";
             this.valueParamPanel.Size = new System.Drawing.Size(500, 670);
             this.valueParamPanel.TabIndex = 12;
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.checkBox3);
-            this.groupBox10.Controls.Add(this.checkBox2);
-            this.groupBox10.Controls.Add(this.checkBox1);
+            this.groupBox10.Controls.Add(this.outputCtrl2DGrp);
+            this.groupBox10.Controls.Add(this.outputCtrl3DGrp);
             this.groupBox10.Controls.Add(this.fullPanel);
             this.groupBox10.Controls.Add(this.diffusionEquationChk);
             this.groupBox10.Controls.Add(this.diffusionEquationCombo);
@@ -510,7 +514,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(166, 170);
+            this.checkBox3.Location = new System.Drawing.Point(13, 68);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(72, 16);
             this.checkBox3.TabIndex = 25;
@@ -520,7 +524,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(166, 145);
+            this.checkBox2.Location = new System.Drawing.Point(13, 43);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(48, 16);
             this.checkBox2.TabIndex = 25;
@@ -530,7 +534,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(166, 123);
+            this.checkBox1.Location = new System.Drawing.Point(13, 21);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 16);
             this.checkBox1.TabIndex = 25;
@@ -547,7 +551,7 @@
             this.fullPanel.Controls.Add(this.textBox7);
             this.fullPanel.Controls.Add(this.textBox4);
             this.fullPanel.Controls.Add(this.textBox12);
-            this.fullPanel.Location = new System.Drawing.Point(6, 240);
+            this.fullPanel.Location = new System.Drawing.Point(6, 283);
             this.fullPanel.Name = "fullPanel";
             this.fullPanel.Size = new System.Drawing.Size(404, 206);
             this.fullPanel.TabIndex = 24;
@@ -653,7 +657,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label23.Location = new System.Drawing.Point(107, 124);
+            this.label23.Location = new System.Drawing.Point(42, 119);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(53, 12);
             this.label23.TabIndex = 5;
@@ -708,7 +712,7 @@
             // 
             this.physicalParamPanel.Controls.Add(this.groupBox1);
             this.physicalParamPanel.Controls.Add(this.fluidTypeBackBtn);
-            this.physicalParamPanel.Location = new System.Drawing.Point(55, 102);
+            this.physicalParamPanel.Location = new System.Drawing.Point(55, 693);
             this.physicalParamPanel.Name = "physicalParamPanel";
             this.physicalParamPanel.Size = new System.Drawing.Size(500, 670);
             this.physicalParamPanel.TabIndex = 12;
@@ -776,7 +780,7 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(337, 480);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(243, 588);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
             this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
@@ -1577,7 +1581,7 @@
             // 
             this.transSandMethodPanel.Controls.Add(this.groupBox5);
             this.transSandMethodPanel.Controls.Add(this.button1);
-            this.transSandMethodPanel.Location = new System.Drawing.Point(231, 598);
+            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 624);
             this.transSandMethodPanel.Name = "transSandMethodPanel";
             this.transSandMethodPanel.Size = new System.Drawing.Size(500, 670);
             this.transSandMethodPanel.TabIndex = 12;
@@ -1783,13 +1787,46 @@
             this.previewPanel.Size = new System.Drawing.Size(450, 419);
             this.previewPanel.TabIndex = 14;
             // 
+            // outputCtrl3DGrp
+            // 
+            this.outputCtrl3DGrp.Controls.Add(this.checkBox8);
+            this.outputCtrl3DGrp.Enabled = false;
+            this.outputCtrl3DGrp.Location = new System.Drawing.Point(216, 134);
+            this.outputCtrl3DGrp.Name = "outputCtrl3DGrp";
+            this.outputCtrl3DGrp.Size = new System.Drawing.Size(160, 94);
+            this.outputCtrl3DGrp.TabIndex = 1;
+            this.outputCtrl3DGrp.TabStop = false;
+            this.outputCtrl3DGrp.Text = "3D";
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.checkBox8.Location = new System.Drawing.Point(12, 18);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(96, 16);
+            this.checkBox8.TabIndex = 0;
+            this.checkBox8.Text = "三維流速資訊";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // outputCtrl2DGrp
+            // 
+            this.outputCtrl2DGrp.Controls.Add(this.checkBox1);
+            this.outputCtrl2DGrp.Controls.Add(this.checkBox3);
+            this.outputCtrl2DGrp.Controls.Add(this.checkBox2);
+            this.outputCtrl2DGrp.Location = new System.Drawing.Point(44, 134);
+            this.outputCtrl2DGrp.Name = "outputCtrl2DGrp";
+            this.outputCtrl2DGrp.Size = new System.Drawing.Size(160, 94);
+            this.outputCtrl2DGrp.TabIndex = 1;
+            this.outputCtrl2DGrp.TabStop = false;
+            this.outputCtrl2DGrp.Text = "2D";
+            // 
             // MovableBedForm
             // 
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 741);
-            this.Controls.Add(this.previewPanel);
+            this.ClientSize = new System.Drawing.Size(984, 742);
             this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.rockStablePanel);
@@ -1799,6 +1836,7 @@
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
+            this.Controls.Add(this.previewPanel);
             this.MinimumSize = new System.Drawing.Size(1000, 780);
             this.Name = "MovableBedForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -1850,6 +1888,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.previewPicBox)).EndInit();
             this.previewPanel.ResumeLayout(false);
             this.previewPanel.PerformLayout();
+            this.outputCtrl3DGrp.ResumeLayout(false);
+            this.outputCtrl3DGrp.PerformLayout();
+            this.outputCtrl2DGrp.ResumeLayout(false);
+            this.outputCtrl2DGrp.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2002,5 +2044,8 @@
         private System.Windows.Forms.RadioButton radioButton11;
         private System.Windows.Forms.PictureBox previewPicBox;
         private System.Windows.Forms.Panel previewPanel;
+        private System.Windows.Forms.GroupBox outputCtrl2DGrp;
+        private System.Windows.Forms.GroupBox outputCtrl3DGrp;
+        private System.Windows.Forms.CheckBox checkBox8;
     }
 }

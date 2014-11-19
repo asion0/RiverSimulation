@@ -107,6 +107,7 @@ namespace RiverSimulationApplication
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             sedimentParticlesNumTxt.Text = p.sedimentParticlesNum.ToString();
             seabedLevelNumTxt.Text = p.seabedLevelNum.ToString();
+            outputCtrl3DGrp.Enabled = p.Is3DMode();
 
             DrawPreview();
         }

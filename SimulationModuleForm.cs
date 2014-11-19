@@ -62,7 +62,7 @@ namespace RiverSimulationApplication
             {
                 typeMovableBedRdo.Checked = !chk;
             }
-
+            UpdateStatus();
         }
 
         private void typeMovableBedRdo_CheckedChanged(object sender, EventArgs e)
@@ -81,7 +81,7 @@ namespace RiverSimulationApplication
             {
                 movableBedPanel.Enabled = chk;
             }
-
+            UpdateStatus();
         }
 
         private void ok_Click(object sender, EventArgs e)
@@ -112,10 +112,11 @@ namespace RiverSimulationApplication
 
         private void UpdateStatus()
         {
-            secFlowEffectChk.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type2D);
-            movableBedPanel.Enabled = (RiverSimulationProfile.profile.GetModuleType2() == RiverSimulationProfile.ModuleType2.MovableBed);
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
 
-
+            secFlowEffectChk.Enabled = (p.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type2D);
+            movableBedPanel.Enabled = (p.GetModuleType2() == RiverSimulationProfile.ModuleType2.MovableBed);
+            highSandContentEffectChk.Enabled = (p.GetModuleType2() == RiverSimulationProfile.ModuleType2.WaterModeling);
         }
 
         private void diffusionEffectChk_CheckedChanged(object sender, EventArgs e)
@@ -164,6 +165,9 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as CheckBox).Checked;
             RiverSimulationProfile.profile.highSandContentFlowFunction = chk;
+            //20141119 新增規格，使水理"高含砂效應"與動床"高含砂效應"同步
+            highSandContentEffectChk.Checked = RiverSimulationProfile.profile.highSandContentFlowFunction;
+
         }
 
         private void secFlowEffectChk_CheckedChanged(object sender, EventArgs e)

@@ -46,7 +46,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.upSuperFlowBtn = new System.Windows.Forms.Button();
-            this.waterUpVertPanel = new System.Windows.Forms.Panel();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.button7 = new System.Windows.Forms.Button();
@@ -101,7 +100,6 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.downVertPanel = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
             this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.radioButton12 = new System.Windows.Forms.RadioButton();
@@ -112,13 +110,11 @@
             this.label24 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button11 = new System.Windows.Forms.Button();
-            this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.radioButton13 = new System.Windows.Forms.RadioButton();
             this.label22 = new System.Windows.Forms.Label();
             this.radioButton14 = new System.Windows.Forms.RadioButton();
-            this.button12 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.upVertPanel = new System.Windows.Forms.Panel();
             this.button13 = new System.Windows.Forms.Button();
@@ -129,13 +125,21 @@
             this.button14 = new System.Windows.Forms.Button();
             this.radioButton16 = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.label23 = new System.Windows.Forms.Label();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.upSand3DPanel = new System.Windows.Forms.Panel();
+            this.waterUpVert3dPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.waterModelingPanel.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.waterUpVertPanel.SuspendLayout();
             this.panel8.SuspendLayout();
             this.sideInOutFlowPanel.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -145,11 +149,12 @@
             this.groupBox3.SuspendLayout();
             this.bottomBedPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.downVertPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.upVertPanel.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.upSand3DPanel.SuspendLayout();
+            this.waterUpVert3dPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -245,7 +250,7 @@
             // 
             this.waterModelingPanel.Controls.Add(this.groupBox10);
             this.waterModelingPanel.Controls.Add(this.waterModelingBackBtn);
-            this.waterModelingPanel.Location = new System.Drawing.Point(12, 80);
+            this.waterModelingPanel.Location = new System.Drawing.Point(4, 43);
             this.waterModelingPanel.Name = "waterModelingPanel";
             this.waterModelingPanel.Size = new System.Drawing.Size(500, 670);
             this.waterModelingPanel.TabIndex = 14;
@@ -281,7 +286,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 258);
+            this.label16.Location = new System.Drawing.Point(16, 235);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(29, 12);
             this.label16.TabIndex = 7;
@@ -290,7 +295,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 174);
+            this.label12.Location = new System.Drawing.Point(16, 147);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 7;
@@ -299,7 +304,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 430);
+            this.label1.Location = new System.Drawing.Point(16, 415);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 7;
@@ -308,22 +313,21 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel6.Controls.Add(this.label19);
+            this.panel6.Controls.Add(this.waterUpVert3dPanel);
             this.panel6.Controls.Add(this.label14);
             this.panel6.Controls.Add(this.upSuperFlowBtn);
-            this.panel6.Controls.Add(this.waterUpVertPanel);
             this.panel6.Controls.Add(this.upSubFlowBtn);
             this.panel6.Controls.Add(this.upSubcriticalFlowRdo);
             this.panel6.Controls.Add(this.upSupercriticalFlowRdo);
             this.panel6.Location = new System.Drawing.Point(18, 35);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(437, 132);
+            this.panel6.Size = new System.Drawing.Size(437, 100);
             this.panel6.TabIndex = 5;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(17, 63);
+            this.label19.Location = new System.Drawing.Point(6, 7);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(99, 12);
             this.label19.TabIndex = 10;
@@ -340,30 +344,19 @@
             // 
             // upSuperFlowBtn
             // 
-            this.upSuperFlowBtn.Location = new System.Drawing.Point(108, 27);
+            this.upSuperFlowBtn.Location = new System.Drawing.Point(103, 27);
             this.upSuperFlowBtn.Name = "upSuperFlowBtn";
-            this.upSuperFlowBtn.Size = new System.Drawing.Size(82, 26);
+            this.upSuperFlowBtn.Size = new System.Drawing.Size(104, 26);
             this.upSuperFlowBtn.TabIndex = 5;
             this.upSuperFlowBtn.Text = "設定";
             this.upSuperFlowBtn.UseVisualStyleBackColor = true;
             this.upSuperFlowBtn.Click += new System.EventHandler(this.upSuperFlowBtn_Click);
             // 
-            // waterUpVertPanel
-            // 
-            this.waterUpVertPanel.BackColor = System.Drawing.Color.LightGray;
-            this.waterUpVertPanel.Controls.Add(this.radioButton5);
-            this.waterUpVertPanel.Controls.Add(this.radioButton6);
-            this.waterUpVertPanel.Controls.Add(this.button7);
-            this.waterUpVertPanel.Location = new System.Drawing.Point(16, 79);
-            this.waterUpVertPanel.Name = "waterUpVertPanel";
-            this.waterUpVertPanel.Size = new System.Drawing.Size(407, 40);
-            this.waterUpVertPanel.TabIndex = 15;
-            // 
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
             this.radioButton5.Enabled = false;
-            this.radioButton5.Location = new System.Drawing.Point(15, 12);
+            this.radioButton5.Location = new System.Drawing.Point(112, 4);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(59, 16);
             this.radioButton5.TabIndex = 6;
@@ -375,7 +368,7 @@
             // 
             this.radioButton6.AutoSize = true;
             this.radioButton6.Enabled = false;
-            this.radioButton6.Location = new System.Drawing.Point(82, 12);
+            this.radioButton6.Location = new System.Drawing.Point(179, 5);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(71, 16);
             this.radioButton6.TabIndex = 7;
@@ -386,7 +379,7 @@
             // button7
             // 
             this.button7.Enabled = false;
-            this.button7.Location = new System.Drawing.Point(158, 7);
+            this.button7.Location = new System.Drawing.Point(251, 0);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(104, 26);
             this.button7.TabIndex = 8;
@@ -395,9 +388,9 @@
             // 
             // upSubFlowBtn
             // 
-            this.upSubFlowBtn.Location = new System.Drawing.Point(279, 27);
+            this.upSubFlowBtn.Location = new System.Drawing.Point(298, 27);
             this.upSubFlowBtn.Name = "upSubFlowBtn";
-            this.upSubFlowBtn.Size = new System.Drawing.Size(83, 26);
+            this.upSubFlowBtn.Size = new System.Drawing.Size(104, 26);
             this.upSubFlowBtn.TabIndex = 5;
             this.upSubFlowBtn.Text = "設定";
             this.upSubFlowBtn.UseVisualStyleBackColor = true;
@@ -406,7 +399,7 @@
             // upSubcriticalFlowRdo
             // 
             this.upSubcriticalFlowRdo.AutoSize = true;
-            this.upSubcriticalFlowRdo.Location = new System.Drawing.Point(205, 32);
+            this.upSubcriticalFlowRdo.Location = new System.Drawing.Point(226, 32);
             this.upSubcriticalFlowRdo.Name = "upSubcriticalFlowRdo";
             this.upSubcriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.upSubcriticalFlowRdo.TabIndex = 3;
@@ -435,7 +428,7 @@
             this.panel8.Controls.Add(this.noSidewallSlideRdo);
             this.panel8.Controls.Add(this.label18);
             this.panel8.Controls.Add(this.sideInOutFlowPanel);
-            this.panel8.Location = new System.Drawing.Point(18, 273);
+            this.panel8.Location = new System.Drawing.Point(18, 250);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(437, 150);
             this.panel8.TabIndex = 5;
@@ -540,7 +533,7 @@
             this.panel7.Controls.Add(this.downSupercriticalFlowRdo);
             this.panel7.Controls.Add(this.downSubcriticalFlowRdo);
             this.panel7.Controls.Add(this.downSuperWaterLevelBtn);
-            this.panel7.Location = new System.Drawing.Point(18, 189);
+            this.panel7.Location = new System.Drawing.Point(18, 162);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(437, 61);
             this.panel7.TabIndex = 5;
@@ -592,7 +585,7 @@
             this.waterSurfacePanel.Controls.Add(this.textBox4);
             this.waterSurfacePanel.Controls.Add(this.textBox3);
             this.waterSurfacePanel.Controls.Add(this.textBox15);
-            this.waterSurfacePanel.Location = new System.Drawing.Point(18, 445);
+            this.waterSurfacePanel.Location = new System.Drawing.Point(18, 430);
             this.waterSurfacePanel.Name = "waterSurfacePanel";
             this.waterSurfacePanel.Size = new System.Drawing.Size(437, 70);
             this.waterSurfacePanel.TabIndex = 5;
@@ -681,7 +674,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 524);
+            this.label2.Location = new System.Drawing.Point(16, 517);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 7;
@@ -695,7 +688,7 @@
             this.bottomBedPanel.Controls.Add(this.label11);
             this.bottomBedPanel.Controls.Add(this.comboBox1);
             this.bottomBedPanel.Controls.Add(this.boundaryThicknessCombo);
-            this.bottomBedPanel.Location = new System.Drawing.Point(18, 538);
+            this.bottomBedPanel.Location = new System.Drawing.Point(18, 531);
             this.bottomBedPanel.Name = "bottomBedPanel";
             this.bottomBedPanel.Size = new System.Drawing.Size(437, 60);
             this.bottomBedPanel.TabIndex = 5;
@@ -763,7 +756,7 @@
             // 
             this.moveableBedPanel.Controls.Add(this.groupBox3);
             this.moveableBedPanel.Controls.Add(this.moveableBedBackBtn);
-            this.moveableBedPanel.Location = new System.Drawing.Point(480, 42);
+            this.moveableBedPanel.Location = new System.Drawing.Point(485, 42);
             this.moveableBedPanel.Name = "moveableBedPanel";
             this.moveableBedPanel.Size = new System.Drawing.Size(500, 670);
             this.moveableBedPanel.TabIndex = 15;
@@ -786,7 +779,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 471);
+            this.label9.Location = new System.Drawing.Point(16, 449);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(89, 12);
             this.label9.TabIndex = 7;
@@ -803,7 +796,7 @@
             this.bottomBedPanel2.Controls.Add(this.comboBox2);
             this.bottomBedPanel2.Controls.Add(this.checkBox4);
             this.bottomBedPanel2.Enabled = false;
-            this.bottomBedPanel2.Location = new System.Drawing.Point(18, 487);
+            this.bottomBedPanel2.Location = new System.Drawing.Point(18, 465);
             this.bottomBedPanel2.Name = "bottomBedPanel2";
             this.bottomBedPanel2.Size = new System.Drawing.Size(440, 113);
             this.bottomBedPanel2.TabIndex = 5;
@@ -811,18 +804,18 @@
             // button5
             // 
             this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(110, 79);
+            this.button5.Location = new System.Drawing.Point(106, 79);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(81, 26);
+            this.button5.Size = new System.Drawing.Size(104, 26);
             this.button5.TabIndex = 5;
             this.button5.Text = "設定";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(110, 54);
+            this.textBox1.Location = new System.Drawing.Point(106, 54);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(81, 22);
+            this.textBox1.Size = new System.Drawing.Size(104, 22);
             this.textBox1.TabIndex = 4;
             this.textBox1.Visible = false;
             // 
@@ -896,21 +889,23 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.label20);
+            this.panel1.Controls.Add(this.radioButton11);
             this.panel1.Controls.Add(this.radioButton3);
+            this.panel1.Controls.Add(this.radioButton12);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.downVertPanel);
             this.panel1.Controls.Add(this.radioButton4);
             this.panel1.Location = new System.Drawing.Point(18, 358);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(440, 105);
+            this.panel1.Size = new System.Drawing.Size(440, 79);
             this.panel1.TabIndex = 5;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(14, 39);
+            this.label20.Location = new System.Drawing.Point(14, 49);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(99, 12);
             this.label20.TabIndex = 3;
@@ -920,45 +915,34 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Enabled = false;
-            this.radioButton3.Location = new System.Drawing.Point(16, 12);
+            this.radioButton3.Location = new System.Drawing.Point(186, 12);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(14, 13);
+            this.radioButton3.Size = new System.Drawing.Size(71, 16);
             this.radioButton3.TabIndex = 2;
+            this.radioButton3.Text = "給定濃度";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(246, 6);
+            this.textBox2.Location = new System.Drawing.Point(65, 8);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(81, 22);
+            this.textBox2.Size = new System.Drawing.Size(104, 22);
             this.textBox2.TabIndex = 4;
             this.textBox2.Visible = false;
             // 
             // button4
             // 
             this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(34, 5);
+            this.button4.Location = new System.Drawing.Point(258, 7);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(131, 26);
+            this.button4.Size = new System.Drawing.Size(104, 26);
             this.button4.TabIndex = 1;
-            this.button4.Text = "濃度";
+            this.button4.Text = "設定";
             this.button4.UseVisualStyleBackColor = true;
-            // 
-            // downVertPanel
-            // 
-            this.downVertPanel.BackColor = System.Drawing.Color.LightGray;
-            this.downVertPanel.Controls.Add(this.button10);
-            this.downVertPanel.Controls.Add(this.radioButton11);
-            this.downVertPanel.Controls.Add(this.radioButton12);
-            this.downVertPanel.Enabled = false;
-            this.downVertPanel.Location = new System.Drawing.Point(16, 54);
-            this.downVertPanel.Name = "downVertPanel";
-            this.downVertPanel.Size = new System.Drawing.Size(407, 40);
-            this.downVertPanel.TabIndex = 15;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(158, 7);
+            this.button10.Location = new System.Drawing.Point(258, 41);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(104, 26);
             this.button10.TabIndex = 1;
@@ -968,7 +952,7 @@
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(15, 12);
+            this.radioButton11.Location = new System.Drawing.Point(118, 47);
             this.radioButton11.Name = "radioButton11";
             this.radioButton11.Size = new System.Drawing.Size(59, 16);
             this.radioButton11.TabIndex = 3;
@@ -979,7 +963,7 @@
             // radioButton12
             // 
             this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(82, 12);
+            this.radioButton12.Location = new System.Drawing.Point(186, 47);
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(71, 16);
             this.radioButton12.TabIndex = 3;
@@ -991,7 +975,7 @@
             // 
             this.radioButton4.AutoSize = true;
             this.radioButton4.Checked = true;
-            this.radioButton4.Location = new System.Drawing.Point(197, 10);
+            this.radioButton4.Location = new System.Drawing.Point(16, 12);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(47, 16);
             this.radioButton4.TabIndex = 3;
@@ -1027,9 +1011,9 @@
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(10, 10);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(77, 12);
+            this.label27.Size = new System.Drawing.Size(53, 12);
             this.label27.TabIndex = 4;
-            this.label27.Text = "入流泥砂設定";
+            this.label27.Text = "入流泥砂";
             // 
             // label24
             // 
@@ -1037,20 +1021,19 @@
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(110, 17);
             this.label24.TabIndex = 3;
-            this.label24.Text = "上游邊界底床高程";
+            this.label24.Text = "上游邊界底床";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.LightGray;
+            this.panel4.Controls.Add(this.upSand3DPanel);
             this.panel4.Controls.Add(this.button11);
-            this.panel4.Controls.Add(this.label23);
-            this.panel4.Controls.Add(this.label21);
             this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.label21);
             this.panel4.Controls.Add(this.radioButton13);
             this.panel4.Controls.Add(this.label22);
             this.panel4.Controls.Add(this.radioButton14);
-            this.panel4.Controls.Add(this.button12);
             this.panel4.Location = new System.Drawing.Point(12, 25);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(407, 97);
@@ -1058,35 +1041,26 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(91, 5);
+            this.button11.Location = new System.Drawing.Point(136, 33);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(104, 26);
             this.button11.TabIndex = 1;
             this.button11.Text = "設定";
             this.button11.UseVisualStyleBackColor = true;
             // 
-            // label23
-            // 
-            this.label23.Location = new System.Drawing.Point(6, 68);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(85, 15);
-            this.label23.TabIndex = 3;
-            this.label23.Text = "底床粒徑比例";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label21
             // 
-            this.label21.Location = new System.Drawing.Point(4, 12);
+            this.label21.Location = new System.Drawing.Point(5, 40);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(87, 15);
+            this.label21.Size = new System.Drawing.Size(125, 18);
             this.label21.TabIndex = 3;
-            this.label21.Text = "懸浮載濃度";
+            this.label21.Text = "懸浮載水深平均濃度";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(276, 33);
+            this.button1.Location = new System.Drawing.Point(292, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 26);
             this.button1.TabIndex = 1;
@@ -1097,19 +1071,19 @@
             // 
             this.radioButton13.AutoSize = true;
             this.radioButton13.Checked = true;
-            this.radioButton13.Location = new System.Drawing.Point(100, 38);
+            this.radioButton13.Location = new System.Drawing.Point(116, 11);
             this.radioButton13.Name = "radioButton13";
             this.radioButton13.Size = new System.Drawing.Size(95, 16);
             this.radioButton13.TabIndex = 3;
             this.radioButton13.TabStop = true;
-            this.radioButton13.Text = "模式自行反應";
+            this.radioButton13.Text = "模式自動計算";
             this.radioButton13.UseVisualStyleBackColor = true;
             // 
             // label22
             // 
-            this.label22.Location = new System.Drawing.Point(6, 40);
+            this.label22.Location = new System.Drawing.Point(6, 13);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(85, 14);
+            this.label22.Size = new System.Drawing.Size(104, 14);
             this.label22.TabIndex = 3;
             this.label22.Text = "底床載通量";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1118,21 +1092,12 @@
             // 
             this.radioButton14.AutoSize = true;
             this.radioButton14.Enabled = false;
-            this.radioButton14.Location = new System.Drawing.Point(205, 38);
+            this.radioButton14.Location = new System.Drawing.Point(221, 11);
             this.radioButton14.Name = "radioButton14";
             this.radioButton14.Size = new System.Drawing.Size(71, 16);
             this.radioButton14.TabIndex = 3;
             this.radioButton14.Text = "自行輸入";
             this.radioButton14.UseVisualStyleBackColor = true;
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(91, 61);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(104, 26);
-            this.button12.TabIndex = 1;
-            this.button12.Text = "設定";
-            this.button12.UseVisualStyleBackColor = true;
             // 
             // label15
             // 
@@ -1189,8 +1154,11 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.LightGray;
+            this.panel5.Controls.Add(this.button3);
+            this.panel5.Controls.Add(this.label28);
             this.panel5.Controls.Add(this.radioButton15);
             this.panel5.Controls.Add(this.button14);
+            this.panel5.Controls.Add(this.label29);
             this.panel5.Controls.Add(this.radioButton16);
             this.panel5.Location = new System.Drawing.Point(12, 152);
             this.panel5.Name = "panel5";
@@ -1200,7 +1168,7 @@
             // radioButton15
             // 
             this.radioButton15.AutoSize = true;
-            this.radioButton15.Location = new System.Drawing.Point(10, 12);
+            this.radioButton15.Location = new System.Drawing.Point(46, 14);
             this.radioButton15.Name = "radioButton15";
             this.radioButton15.Size = new System.Drawing.Size(167, 16);
             this.radioButton15.TabIndex = 3;
@@ -1210,7 +1178,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(83, 31);
+            this.button14.Location = new System.Drawing.Point(292, 9);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(104, 26);
             this.button14.TabIndex = 1;
@@ -1220,7 +1188,7 @@
             // radioButton16
             // 
             this.radioButton16.AutoSize = true;
-            this.radioButton16.Location = new System.Drawing.Point(10, 36);
+            this.radioButton16.Location = new System.Drawing.Point(219, 14);
             this.radioButton16.Name = "radioButton16";
             this.radioButton16.Size = new System.Drawing.Size(71, 16);
             this.radioButton16.TabIndex = 3;
@@ -1239,6 +1207,97 @@
             this.moveableBedBackBtn.Text = "回前頁";
             this.moveableBedBackBtn.UseVisualStyleBackColor = true;
             this.moveableBedBackBtn.Click += new System.EventHandler(this.Back_Click);
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Enabled = false;
+            this.radioButton7.Location = new System.Drawing.Point(218, 5);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(71, 16);
+            this.radioButton7.TabIndex = 3;
+            this.radioButton7.Text = "自行輸入";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(3, 7);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(104, 14);
+            this.label23.TabIndex = 3;
+            this.label23.Text = "垂直濃度分布(3D)";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Checked = true;
+            this.radioButton8.Location = new System.Drawing.Point(113, 5);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(95, 16);
+            this.radioButton8.TabIndex = 3;
+            this.radioButton8.TabStop = true;
+            this.radioButton8.Text = "模式自動計算";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(289, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(104, 26);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "設定";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(13, 16);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(29, 12);
+            this.label28.TabIndex = 4;
+            this.label28.Text = "高程";
+            // 
+            // label29
+            // 
+            this.label29.Location = new System.Drawing.Point(6, 38);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(83, 18);
+            this.label29.TabIndex = 3;
+            this.label29.Text = "底床粒徑比例";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(95, 34);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(104, 26);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "設定";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // upSand3DPanel
+            // 
+            this.upSand3DPanel.Controls.Add(this.label23);
+            this.upSand3DPanel.Controls.Add(this.radioButton7);
+            this.upSand3DPanel.Controls.Add(this.button2);
+            this.upSand3DPanel.Controls.Add(this.radioButton8);
+            this.upSand3DPanel.Location = new System.Drawing.Point(9, 63);
+            this.upSand3DPanel.Name = "upSand3DPanel";
+            this.upSand3DPanel.Size = new System.Drawing.Size(395, 28);
+            this.upSand3DPanel.TabIndex = 4;
+            // 
+            // waterUpVert3dPanel
+            // 
+            this.waterUpVert3dPanel.Controls.Add(this.label19);
+            this.waterUpVert3dPanel.Controls.Add(this.radioButton5);
+            this.waterUpVert3dPanel.Controls.Add(this.button7);
+            this.waterUpVert3dPanel.Controls.Add(this.radioButton6);
+            this.waterUpVert3dPanel.Location = new System.Drawing.Point(11, 59);
+            this.waterUpVert3dPanel.Name = "waterUpVert3dPanel";
+            this.waterUpVert3dPanel.Size = new System.Drawing.Size(421, 26);
+            this.waterUpVert3dPanel.TabIndex = 11;
             // 
             // BoundaryConditionsForm
             // 
@@ -1263,8 +1322,6 @@
             this.groupBox10.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.waterUpVertPanel.ResumeLayout(false);
-            this.waterUpVertPanel.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.sideInOutFlowPanel.ResumeLayout(false);
@@ -1282,8 +1339,6 @@
             this.bottomBedPanel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.downVertPanel.ResumeLayout(false);
-            this.downVertPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1292,6 +1347,10 @@
             this.upVertPanel.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.upSand3DPanel.ResumeLayout(false);
+            this.upSand3DPanel.PerformLayout();
+            this.waterUpVert3dPanel.ResumeLayout(false);
+            this.waterUpVert3dPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1381,23 +1440,28 @@
         private System.Windows.Forms.RadioButton radioButton14;
         private System.Windows.Forms.RadioButton radioButton13;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.RadioButton radioButton16;
         private System.Windows.Forms.RadioButton radioButton15;
-        private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Panel downVertPanel;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel upVertPanel;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel waterUpVertPanel;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Panel upSand3DPanel;
+        private System.Windows.Forms.Panel waterUpVert3dPanel;
     }
 }

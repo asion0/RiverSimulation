@@ -40,6 +40,7 @@ namespace RiverSimulationApplication
         {
             //string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             //comment.Navigate(new Uri(url));
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
 
             this.Width = 1000;
             this.Height = 720;
@@ -51,18 +52,10 @@ namespace RiverSimulationApplication
             bottomBedPanel.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
             bottomBedPanel2.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
             sideInOutFlowPanel.Enabled = RiverSimulationProfile.profile.sideInOutFlowFunction;
-            if(RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D)
-            {
-                upVertPanel.Enabled = true;
-                //downVertPanel.Enabled = true;
-                waterUpVertPanel.Enabled = true;
-            }
-            else
-            {
-                upVertPanel.Enabled = false;
-                downVertPanel.Enabled = false;
-                waterUpVertPanel.Enabled = false;
-            }
+            
+            upVertPanel.Enabled = p.Is3DMode();
+            upSand3DPanel.Enabled = p.Is3DMode();
+            waterUpVert3dPanel.Enabled = p.Is3DMode();
             UpdateStatus();
 
         }

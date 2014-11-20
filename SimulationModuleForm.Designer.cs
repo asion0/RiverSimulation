@@ -48,7 +48,7 @@
             this.diffusionEffectChk = new System.Windows.Forms.CheckBox();
             this.sideInOutFlowChk = new System.Windows.Forms.CheckBox();
             this.immersedBoundaryChk = new System.Windows.Forms.CheckBox();
-            this.dryBedEffectChk = new System.Windows.Forms.CheckBox();
+            this.structureSetChk = new System.Windows.Forms.CheckBox();
             this.highSandContentEffectChk = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -128,6 +128,7 @@
             this.flowTypeGroup.TabIndex = 1;
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "維度選擇";
+            this.flowTypeGroup.Enter += new System.EventHandler(this.flowTypeGroup_Enter);
             // 
             // type3dRdo
             // 
@@ -226,7 +227,7 @@
             this.fullPanel.Controls.Add(this.diffusionEffectChk);
             this.fullPanel.Controls.Add(this.sideInOutFlowChk);
             this.fullPanel.Controls.Add(this.immersedBoundaryChk);
-            this.fullPanel.Controls.Add(this.dryBedEffectChk);
+            this.fullPanel.Controls.Add(this.structureSetChk);
             this.fullPanel.Controls.Add(this.highSandContentEffectChk);
             this.fullPanel.Location = new System.Drawing.Point(10, 3);
             this.fullPanel.Name = "fullPanel";
@@ -259,7 +260,7 @@
             // 
             this.sideInOutFlowChk.AutoSize = true;
             this.sideInOutFlowChk.Enabled = false;
-            this.sideInOutFlowChk.Location = new System.Drawing.Point(3, 95);
+            this.sideInOutFlowChk.Location = new System.Drawing.Point(3, 73);
             this.sideInOutFlowChk.Name = "sideInOutFlowChk";
             this.sideInOutFlowChk.Size = new System.Drawing.Size(75, 16);
             this.sideInOutFlowChk.TabIndex = 0;
@@ -271,30 +272,30 @@
             // 
             this.immersedBoundaryChk.AutoSize = true;
             this.immersedBoundaryChk.Enabled = false;
-            this.immersedBoundaryChk.Location = new System.Drawing.Point(3, 73);
+            this.immersedBoundaryChk.Location = new System.Drawing.Point(3, 116);
             this.immersedBoundaryChk.Name = "immersedBoundaryChk";
             this.immersedBoundaryChk.Size = new System.Drawing.Size(140, 16);
             this.immersedBoundaryChk.TabIndex = 0;
             this.immersedBoundaryChk.Text = "結構物設置(浸沒邊界)";
             this.immersedBoundaryChk.UseVisualStyleBackColor = true;
-            this.immersedBoundaryChk.CheckedChanged += new System.EventHandler(this.immersedBoundaryChk_CheckedChanged);
+            this.immersedBoundaryChk.Visible = false;
             // 
-            // dryBedEffectChk
+            // structureSetChk
             // 
-            this.dryBedEffectChk.AutoSize = true;
-            this.dryBedEffectChk.Location = new System.Drawing.Point(3, 51);
-            this.dryBedEffectChk.Name = "dryBedEffectChk";
-            this.dryBedEffectChk.Size = new System.Drawing.Size(140, 16);
-            this.dryBedEffectChk.TabIndex = 0;
-            this.dryBedEffectChk.Text = "結構物設置(調整底床)";
-            this.dryBedEffectChk.UseVisualStyleBackColor = true;
-            this.dryBedEffectChk.CheckedChanged += new System.EventHandler(this.dryBedEffectChk_CheckedChanged);
+            this.structureSetChk.AutoSize = true;
+            this.structureSetChk.Location = new System.Drawing.Point(3, 51);
+            this.structureSetChk.Name = "structureSetChk";
+            this.structureSetChk.Size = new System.Drawing.Size(84, 16);
+            this.structureSetChk.TabIndex = 0;
+            this.structureSetChk.Text = "結構物設置";
+            this.structureSetChk.UseVisualStyleBackColor = true;
+            this.structureSetChk.CheckedChanged += new System.EventHandler(this.structureSetChk_CheckedChanged);
             // 
             // highSandContentEffectChk
             // 
             this.highSandContentEffectChk.AutoSize = true;
             this.highSandContentEffectChk.Enabled = false;
-            this.highSandContentEffectChk.Location = new System.Drawing.Point(3, 117);
+            this.highSandContentEffectChk.Location = new System.Drawing.Point(3, 95);
             this.highSandContentEffectChk.Name = "highSandContentEffectChk";
             this.highSandContentEffectChk.Size = new System.Drawing.Size(84, 16);
             this.highSandContentEffectChk.TabIndex = 0;
@@ -369,7 +370,7 @@
         private System.Windows.Forms.Panel waterPanel;
         private System.Windows.Forms.CheckBox diffusionEffectChk;
         private System.Windows.Forms.CheckBox secFlowEffectChk;
-        private System.Windows.Forms.CheckBox dryBedEffectChk;
+        private System.Windows.Forms.CheckBox structureSetChk;
         private System.Windows.Forms.CheckBox highSandContentEffectChk;
         private System.Windows.Forms.CheckBox immersedBoundaryChk;
         private System.Windows.Forms.CheckBox sideInOutFlowChk;

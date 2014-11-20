@@ -134,6 +134,7 @@
             this.label29 = new System.Windows.Forms.Label();
             this.radioButton16 = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
+            this.downSand3DPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -155,6 +156,7 @@
             this.upSand3DPanel.SuspendLayout();
             this.upVertPanel.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.downSand3DPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -580,7 +582,7 @@
             this.downSuperWaterLevelBtn.Name = "downSuperWaterLevelBtn";
             this.downSuperWaterLevelBtn.Size = new System.Drawing.Size(96, 26);
             this.downSuperWaterLevelBtn.TabIndex = 5;
-            this.downSuperWaterLevelBtn.Text = "水位";
+            this.downSuperWaterLevelBtn.Text = "設定";
             this.downSuperWaterLevelBtn.UseVisualStyleBackColor = true;
             this.downSuperWaterLevelBtn.Click += new System.EventHandler(this.downSuperWaterLevelBtn_Click);
             // 
@@ -771,6 +773,7 @@
             this.moveableBedPanel.Name = "moveableBedPanel";
             this.moveableBedPanel.Size = new System.Drawing.Size(500, 670);
             this.moveableBedPanel.TabIndex = 15;
+            this.moveableBedPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.moveableBedPanel_Paint);
             // 
             // groupBox3
             // 
@@ -900,14 +903,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.button10);
-            this.panel1.Controls.Add(this.label20);
-            this.panel1.Controls.Add(this.radioButton11);
             this.panel1.Controls.Add(this.radioButton3);
-            this.panel1.Controls.Add(this.radioButton12);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.radioButton4);
+            this.panel1.Controls.Add(this.downSand3DPanel);
             this.panel1.Location = new System.Drawing.Point(18, 358);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(440, 79);
@@ -915,7 +915,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(258, 41);
+            this.button10.Location = new System.Drawing.Point(255, 9);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(104, 26);
             this.button10.TabIndex = 1;
@@ -925,7 +925,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(14, 49);
+            this.label20.Location = new System.Drawing.Point(11, 16);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(99, 12);
             this.label20.TabIndex = 3;
@@ -934,7 +934,7 @@
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(118, 47);
+            this.radioButton11.Location = new System.Drawing.Point(115, 14);
             this.radioButton11.Name = "radioButton11";
             this.radioButton11.Size = new System.Drawing.Size(59, 16);
             this.radioButton11.TabIndex = 3;
@@ -956,7 +956,7 @@
             // radioButton12
             // 
             this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(186, 47);
+            this.radioButton12.Location = new System.Drawing.Point(183, 14);
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(71, 16);
             this.radioButton12.TabIndex = 3;
@@ -1097,10 +1097,10 @@
             this.radioButton8.Checked = true;
             this.radioButton8.Location = new System.Drawing.Point(113, 5);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(95, 16);
+            this.radioButton8.Size = new System.Drawing.Size(59, 16);
             this.radioButton8.TabIndex = 3;
             this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "模式自動計算";
+            this.radioButton8.Text = "均一值";
             this.radioButton8.UseVisualStyleBackColor = true;
             // 
             // button11
@@ -1299,6 +1299,17 @@
             this.moveableBedBackBtn.UseVisualStyleBackColor = true;
             this.moveableBedBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
+            // downSand3DPanel
+            // 
+            this.downSand3DPanel.Controls.Add(this.button10);
+            this.downSand3DPanel.Controls.Add(this.label20);
+            this.downSand3DPanel.Controls.Add(this.radioButton12);
+            this.downSand3DPanel.Controls.Add(this.radioButton11);
+            this.downSand3DPanel.Location = new System.Drawing.Point(3, 35);
+            this.downSand3DPanel.Name = "downSand3DPanel";
+            this.downSand3DPanel.Size = new System.Drawing.Size(434, 41);
+            this.downSand3DPanel.TabIndex = 5;
+            // 
             // BoundaryConditionsForm
             // 
             this.AcceptButton = this.ok;
@@ -1351,6 +1362,8 @@
             this.upVertPanel.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.downSand3DPanel.ResumeLayout(false);
+            this.downSand3DPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1463,5 +1476,6 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Panel upSand3DPanel;
         private System.Windows.Forms.Panel waterUpVert3dPanel;
+        private System.Windows.Forms.Panel downSand3DPanel;
     }
 }

@@ -512,30 +512,38 @@ namespace PictureBoxCtrl
                 g.DrawLine(pen, p1, p0);
             }
 
-            if(hilightIndex == -1)
+            if(hilightIndexType == -1)
             {
                 g.Dispose();
-                //PicBox.BackgroundImage = picBoxBmp;
                 PicBox.Image = picBoxBmp;
                 return;
             }
 
-            for(int i = 0; i < hilightGrid.Length; ++i)
-            { 
-                System.Collections.Generic.List<Point> pl = hilightGrid[i];
-                if (pl != null && pl.Count > 0)
+            for (int tp = 0; tp < HilightGridNumber; ++tp)
+            {
+                if (hilightGrid[tp] == null)
+                    continue;
+
+                for (int i = 0; i < hilightGrid[tp].Length; ++i)
                 {
-                    Pen grpPen = null;
-                    if (i != hilightIndex)
+                    System.Collections.Generic.List<Point> pl = hilightGrid[tp][i];
+                    if (pl == null || pl.Count == 0)
                     {
-                        int colorIndex = (hilightColor[i] >= 0) ? hilightColor[i] % colorTable.Length : 0;
-                        grpPen = new Pen(colorTable[colorIndex], selectedPenW - 2);
+                        continue;
                     }
-                    else
-                    {
-                        
+
+                    
+                    Pen grpPen = null;
+                    if (tp == hilightIndexType && i == hilightIndexCount)
+                    {   //被選取的點集合標示不同顏色
                         grpPen = new Pen((showAlert) ? alertColor : selectedColor, selectedPenW - 2);
                     }
+                    else
+                    {   //否則各自有所屬的顏色
+                        int colorIndex = tp;
+                        grpPen = new Pen(colorTable[colorIndex], selectedPenW - 2);
+                    }
+
                     foreach (Point p in pl)
                     {
                         float x1 = (float)rg.inputCoor[p.X, p.Y].x;
@@ -544,10 +552,10 @@ namespace PictureBoxCtrl
 
                         g.DrawEllipse(grpPen, x1 - ew / 2, y1 - ew / 2, ew, ew);
                     }
+                    
                 }
             }
             g.Dispose();
-            //PicBox.BackgroundImage = picBoxBmp;
             PicBox.Image = picBoxBmp;
         }
 
@@ -580,48 +588,31 @@ namespace PictureBoxCtrl
 			PicBox.Image = bmp;
 			gr.Dispose ();
 		}
-        /*
-        private bool IsNeighboring(int i, int j)
-        {
-            System.Collections.Generic.List<Point> ps = hilightGrid[i];
-            System.Collections.Generic.List<Point> pt = hilightGrid[j];
-            foreach (Point p in ps)
-            {
-                Point p1 = new Point(p.X, p.Y - 1);
-                Point p2 = new Point(p.X, p.Y + 1);
-                Point p3 = new Point(p.X - 1, p.Y);
-                Point p4 = new Point(p.X + 1, p.Y);
 
-                foreach (Point pp in pt)
-                {
-                    if(pp == p1 || pp == p2 | pp == p3 || pp == p4)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        */
-        System.Collections.Generic.List<Point>[] hilightGrid = null;
-        int hilightIndex = -1;
+        const int HilightGridNumber = 4;
+        System.Collections.Generic.List<Point>[][] hilightGrid = new System.Collections.Generic.List<Point>[HilightGridNumber][];
+        int hilightIndexType = -1;
+        int hilightIndexCount = -1;
         private int[] hilightColor = null;
         public int[] GetGroupColors() { return hilightColor; }
         public Color[] GetColorTable() { return colorTable; }
         bool showAlert = false;
-        public void SetSelectedGrid(System.Collections.Generic.List<Point>[] pts, int index, bool alert)
+        public void SetSelectedGrid(System.Collections.Generic.List<Point>[] pts1,
+            System.Collections.Generic.List<Point>[] pts2,
+            System.Collections.Generic.List<Point>[] pts3,
+            System.Collections.Generic.List<Point>[] pts4, 
+            int indexType, int indexCount, bool alert)
         {
-            if (pts == null)
-            {
-                hilightGrid = null;
-                DrawGrid();
-                PicBox.Refresh();
-                return;
-            }
+
+            
             showAlert = alert;
-            hilightGrid = pts;
-            hilightIndex = index;
-            hilightColor = GroupColoringTool.ColoringGrid(hilightGrid, hilightIndex);
+            hilightGrid[0] = pts1;
+            hilightGrid[1] = pts2;
+            hilightGrid[2] = pts3;
+            hilightGrid[3] = pts4;
+            hilightIndexType = indexType;
+            hilightIndexCount = indexCount;
+            //hilightColor = GroupColoringTool.ColoringGrid(hilightGrid, hilightIndex);
             //ColoringGrid();
             DrawGrid();
             PicBox.Refresh();

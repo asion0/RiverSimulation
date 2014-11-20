@@ -535,7 +535,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(13, 68);
+            this.checkBox3.Location = new System.Drawing.Point(13, 65);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(72, 16);
             this.checkBox3.TabIndex = 25;
@@ -547,9 +547,9 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(13, 43);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(48, 16);
+            this.checkBox2.Size = new System.Drawing.Size(96, 16);
             this.checkBox2.TabIndex = 25;
-            this.checkBox2.Text = "濃度";
+            this.checkBox2.Text = "水深平均濃度";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // outputCtrl3DGrp
@@ -571,7 +571,7 @@
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(96, 16);
             this.checkBox8.TabIndex = 0;
-            this.checkBox8.Text = "三維流速資訊";
+            this.checkBox8.Text = "三維濃度資訊";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
             // fullPanel
@@ -1827,9 +1827,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 741);
+            this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.transSandMethodPanel);
-            this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.rockStablePanel);
             this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.rockbedPanel);

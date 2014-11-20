@@ -19,13 +19,7 @@ namespace RiverSimulationApplication
 
         private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
-            if (Program.programVersion.DemoVersion)
-            {
-                immersedBoundaryChk.Enabled = false;
-                sideInOutFlowChk.Enabled = false;
-                highSandContentEffectChk.Enabled = false;
-                movableBedPanel.Enabled = false;
-            }
+
 
             this.CenterToParent();
             LoadStatus();
@@ -93,8 +87,8 @@ namespace RiverSimulationApplication
 
             diffusionEffectChk.Checked = RiverSimulationProfile.profile.diffusionEffectFunction;
             secFlowEffectChk.Checked = RiverSimulationProfile.profile.secFlowEffectFunction;
-            dryBedEffectChk.Checked = RiverSimulationProfile.profile.dryBedEffectFunction;
-            immersedBoundaryChk.Checked = RiverSimulationProfile.profile.immersedBoundaryFunction;
+            structureSetChk.Checked = RiverSimulationProfile.profile.structureSetFunction;
+            //immersedBoundaryChk.Checked = RiverSimulationProfile.profile.immersedBoundaryFunction;
             sideInOutFlowChk.Checked = RiverSimulationProfile.profile.sideInOutFlowFunction;
             highSandContentEffectChk.Checked = RiverSimulationProfile.profile.highSandContentEffectFunction;
 
@@ -110,6 +104,12 @@ namespace RiverSimulationApplication
             secFlowEffectChk.Enabled = (p.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type2D);
             movableBedPanel.Enabled = (p.GetModuleType2() == RiverSimulationProfile.ModuleType2.MovableBed);
             highSandContentEffectChk.Enabled = (p.GetModuleType2() == RiverSimulationProfile.ModuleType2.WaterModeling);
+
+            if (Program.programVersion.DemoVersion)
+            {
+                sideInOutFlowChk.Enabled = false;
+                highSandContentEffectChk.Enabled = false;
+            }
         }
 
         private void diffusionEffectChk_CheckedChanged(object sender, EventArgs e)
@@ -118,17 +118,16 @@ namespace RiverSimulationApplication
             RiverSimulationProfile.profile.diffusionEffectFunction = chk;
         }
 
-        private void dryBedEffectChk_CheckedChanged(object sender, EventArgs e)
+        private void structureSetChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.dryBedEffectFunction = chk;
+            RiverSimulationProfile.profile.structureSetFunction = chk;
         }
 
-        private void immersedBoundaryChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.immersedBoundaryFunction = chk;
-        }
+        //private void immersedBoundaryChk_CheckedChanged(object sender, EventArgs e)
+        //{
+
+        //}
 
         private void sideInOutFlowChk_CheckedChanged(object sender, EventArgs e)
         {
@@ -168,5 +167,11 @@ namespace RiverSimulationApplication
             bool chk = (sender as CheckBox).Checked;
             RiverSimulationProfile.profile.secFlowEffectFunction = chk;
         }
+
+        private void flowTypeGroup_Enter(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

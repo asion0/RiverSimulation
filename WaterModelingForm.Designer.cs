@@ -57,14 +57,20 @@
             this.manningBtn = new System.Windows.Forms.Button();
             this.chezyRdo = new System.Windows.Forms.RadioButton();
             this.manningRdo = new System.Windows.Forms.RadioButton();
-            this.dryBedEffectGrp = new System.Windows.Forms.GroupBox();
-            this.dryBedBtn = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.dryBedNumTxt = new System.Windows.Forms.TextBox();
-            this.immersedBoundaryGrp = new System.Windows.Forms.GroupBox();
-            this.immersedBoundaryBtn = new System.Windows.Forms.Button();
+            this.structureSetGrp = new System.Windows.Forms.GroupBox();
+            this.sedimentationWeirChk = new System.Windows.Forms.CheckBox();
+            this.groundsillWorkChk = new System.Windows.Forms.CheckBox();
+            this.bridgePierChk = new System.Windows.Forms.CheckBox();
+            this.tBarChk = new System.Windows.Forms.CheckBox();
+            this.structureSetBtn = new System.Windows.Forms.Button();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.immersedBoundaryNumTxt = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.sedimentationWeirNumTxt = new System.Windows.Forms.TextBox();
+            this.groundsillWorkNumTxt = new System.Windows.Forms.TextBox();
+            this.bridgePierNumTxt = new System.Windows.Forms.TextBox();
+            this.tBarNumTxt = new System.Windows.Forms.TextBox();
             this.ok = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
             this.mainPanel = new System.Windows.Forms.Panel();
@@ -172,8 +178,7 @@
             this.secFlowEffectGrp.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.highSandContentEffectGrp.SuspendLayout();
-            this.dryBedEffectGrp.SuspendLayout();
-            this.immersedBoundaryGrp.SuspendLayout();
+            this.structureSetGrp.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.valueParamPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -393,59 +398,100 @@
             this.manningRdo.UseVisualStyleBackColor = true;
             this.manningRdo.CheckedChanged += new System.EventHandler(this.manningRdo_CheckedChanged);
             // 
-            // dryBedEffectGrp
+            // structureSetGrp
             // 
-            this.dryBedEffectGrp.Controls.Add(this.dryBedBtn);
-            this.dryBedEffectGrp.Controls.Add(this.label20);
-            this.dryBedEffectGrp.Controls.Add(this.dryBedNumTxt);
-            resources.ApplyResources(this.dryBedEffectGrp, "dryBedEffectGrp");
-            this.dryBedEffectGrp.Name = "dryBedEffectGrp";
-            this.dryBedEffectGrp.TabStop = false;
-            this.dryBedEffectGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            this.structureSetGrp.Controls.Add(this.sedimentationWeirChk);
+            this.structureSetGrp.Controls.Add(this.groundsillWorkChk);
+            this.structureSetGrp.Controls.Add(this.bridgePierChk);
+            this.structureSetGrp.Controls.Add(this.tBarChk);
+            this.structureSetGrp.Controls.Add(this.structureSetBtn);
+            this.structureSetGrp.Controls.Add(this.label36);
+            this.structureSetGrp.Controls.Add(this.label28);
+            this.structureSetGrp.Controls.Add(this.label21);
+            this.structureSetGrp.Controls.Add(this.label20);
+            this.structureSetGrp.Controls.Add(this.sedimentationWeirNumTxt);
+            this.structureSetGrp.Controls.Add(this.groundsillWorkNumTxt);
+            this.structureSetGrp.Controls.Add(this.bridgePierNumTxt);
+            this.structureSetGrp.Controls.Add(this.tBarNumTxt);
+            resources.ApplyResources(this.structureSetGrp, "structureSetGrp");
+            this.structureSetGrp.Name = "structureSetGrp";
+            this.structureSetGrp.TabStop = false;
+            this.structureSetGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
             // 
-            // dryBedBtn
+            // sedimentationWeirChk
             // 
-            resources.ApplyResources(this.dryBedBtn, "dryBedBtn");
-            this.dryBedBtn.Name = "dryBedBtn";
-            this.dryBedBtn.UseVisualStyleBackColor = true;
-            this.dryBedBtn.Click += new System.EventHandler(this.dryBedBtn_Click);
+            resources.ApplyResources(this.sedimentationWeirChk, "sedimentationWeirChk");
+            this.sedimentationWeirChk.Name = "sedimentationWeirChk";
+            this.sedimentationWeirChk.UseVisualStyleBackColor = true;
+            this.sedimentationWeirChk.CheckedChanged += new System.EventHandler(this.sedimentationWeirChk_CheckedChanged);
             // 
-            // label20
+            // groundsillWorkChk
             // 
-            resources.ApplyResources(this.label20, "label20");
-            this.label20.Name = "label20";
+            resources.ApplyResources(this.groundsillWorkChk, "groundsillWorkChk");
+            this.groundsillWorkChk.Name = "groundsillWorkChk";
+            this.groundsillWorkChk.UseVisualStyleBackColor = true;
+            this.groundsillWorkChk.CheckedChanged += new System.EventHandler(this.groundsillWorkChk_CheckedChanged);
             // 
-            // dryBedNumTxt
+            // bridgePierChk
             // 
-            resources.ApplyResources(this.dryBedNumTxt, "dryBedNumTxt");
-            this.dryBedNumTxt.Name = "dryBedNumTxt";
+            resources.ApplyResources(this.bridgePierChk, "bridgePierChk");
+            this.bridgePierChk.Name = "bridgePierChk";
+            this.bridgePierChk.UseVisualStyleBackColor = true;
+            this.bridgePierChk.CheckedChanged += new System.EventHandler(this.bridgePierChk_CheckedChanged);
             // 
-            // immersedBoundaryGrp
+            // tBarChk
             // 
-            this.immersedBoundaryGrp.Controls.Add(this.immersedBoundaryBtn);
-            this.immersedBoundaryGrp.Controls.Add(this.label21);
-            this.immersedBoundaryGrp.Controls.Add(this.immersedBoundaryNumTxt);
-            resources.ApplyResources(this.immersedBoundaryGrp, "immersedBoundaryGrp");
-            this.immersedBoundaryGrp.Name = "immersedBoundaryGrp";
-            this.immersedBoundaryGrp.TabStop = false;
-            this.immersedBoundaryGrp.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
+            resources.ApplyResources(this.tBarChk, "tBarChk");
+            this.tBarChk.Name = "tBarChk";
+            this.tBarChk.UseVisualStyleBackColor = true;
+            this.tBarChk.CheckedChanged += new System.EventHandler(this.tBarChk_CheckedChanged);
             // 
-            // immersedBoundaryBtn
+            // structureSetBtn
             // 
-            resources.ApplyResources(this.immersedBoundaryBtn, "immersedBoundaryBtn");
-            this.immersedBoundaryBtn.Name = "immersedBoundaryBtn";
-            this.immersedBoundaryBtn.UseVisualStyleBackColor = true;
-            this.immersedBoundaryBtn.Click += new System.EventHandler(this.immersedBoundaryBtn_Click);
+            resources.ApplyResources(this.structureSetBtn, "structureSetBtn");
+            this.structureSetBtn.Name = "structureSetBtn";
+            this.structureSetBtn.UseVisualStyleBackColor = true;
+            this.structureSetBtn.Click += new System.EventHandler(this.structureSetBtn_Click);
+            // 
+            // label36
+            // 
+            resources.ApplyResources(this.label36, "label36");
+            this.label36.Name = "label36";
+            // 
+            // label28
+            // 
+            resources.ApplyResources(this.label28, "label28");
+            this.label28.Name = "label28";
             // 
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
             this.label21.Name = "label21";
             // 
-            // immersedBoundaryNumTxt
+            // label20
             // 
-            resources.ApplyResources(this.immersedBoundaryNumTxt, "immersedBoundaryNumTxt");
-            this.immersedBoundaryNumTxt.Name = "immersedBoundaryNumTxt";
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
+            // 
+            // sedimentationWeirNumTxt
+            // 
+            resources.ApplyResources(this.sedimentationWeirNumTxt, "sedimentationWeirNumTxt");
+            this.sedimentationWeirNumTxt.Name = "sedimentationWeirNumTxt";
+            // 
+            // groundsillWorkNumTxt
+            // 
+            resources.ApplyResources(this.groundsillWorkNumTxt, "groundsillWorkNumTxt");
+            this.groundsillWorkNumTxt.Name = "groundsillWorkNumTxt";
+            // 
+            // bridgePierNumTxt
+            // 
+            resources.ApplyResources(this.bridgePierNumTxt, "bridgePierNumTxt");
+            this.bridgePierNumTxt.Name = "bridgePierNumTxt";
+            // 
+            // tBarNumTxt
+            // 
+            resources.ApplyResources(this.tBarNumTxt, "tBarNumTxt");
+            this.tBarNumTxt.Name = "tBarNumTxt";
             // 
             // ok
             // 
@@ -463,8 +509,7 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.immersedBoundaryGrp);
-            this.mainPanel.Controls.Add(this.dryBedEffectGrp);
+            this.mainPanel.Controls.Add(this.structureSetGrp);
             this.mainPanel.Controls.Add(this.highSandContentEffectGrp);
             this.mainPanel.Controls.Add(this.groupBox4);
             this.mainPanel.Controls.Add(this.secFlowEffectGrp);
@@ -1186,10 +1231,8 @@
             this.groupBox4.ResumeLayout(false);
             this.highSandContentEffectGrp.ResumeLayout(false);
             this.highSandContentEffectGrp.PerformLayout();
-            this.dryBedEffectGrp.ResumeLayout(false);
-            this.dryBedEffectGrp.PerformLayout();
-            this.immersedBoundaryGrp.ResumeLayout(false);
-            this.immersedBoundaryGrp.PerformLayout();
+            this.structureSetGrp.ResumeLayout(false);
+            this.structureSetGrp.PerformLayout();
             this.mainPanel.ResumeLayout(false);
             this.valueParamPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -1237,8 +1280,7 @@
         private System.Windows.Forms.GroupBox secFlowEffectGrp;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox highSandContentEffectGrp;
-        private System.Windows.Forms.GroupBox dryBedEffectGrp;
-        private System.Windows.Forms.GroupBox immersedBoundaryGrp;
+        private System.Windows.Forms.GroupBox structureSetGrp;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.WebBrowser comment;
         private System.Windows.Forms.RadioButton variableFlowRdo;
@@ -1296,11 +1338,8 @@
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.RadioButton radioButton8;
         private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.Button dryBedBtn;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox dryBedNumTxt;
-        private System.Windows.Forms.Button immersedBoundaryBtn;
-        private System.Windows.Forms.TextBox immersedBoundaryNumTxt;
+        private System.Windows.Forms.Button structureSetBtn;
+        private System.Windows.Forms.TextBox tBarNumTxt;
         private System.Windows.Forms.Button chezyBtn;
         private System.Windows.Forms.Button manningBtn;
         private System.Windows.Forms.RadioButton chezyRdo;
@@ -1364,12 +1403,22 @@
         private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.TextBox textBox19;
         private System.Windows.Forms.Panel fullPanel;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.GroupBox threeDGrp;
         private System.Windows.Forms.GroupBox twoDGrp;
         private System.Windows.Forms.CheckBox checkBox2;
         private PictureBoxCtrl.GridPictureBox mapPicBox;
+        private System.Windows.Forms.CheckBox sedimentationWeirChk;
+        private System.Windows.Forms.CheckBox groundsillWorkChk;
+        private System.Windows.Forms.CheckBox bridgePierChk;
+        private System.Windows.Forms.CheckBox tBarChk;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox sedimentationWeirNumTxt;
+        private System.Windows.Forms.TextBox groundsillWorkNumTxt;
+        private System.Windows.Forms.TextBox bridgePierNumTxt;
     }
 }

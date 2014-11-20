@@ -127,8 +127,9 @@ namespace RiverSimulationApplication
         //Setting for special functions
         public bool diffusionEffectFunction { get; set; }
         public bool secFlowEffectFunction { get; set; }
-        public bool dryBedEffectFunction { get; set; }
-        public bool immersedBoundaryFunction { get; set; }
+        public bool structureSetFunction { get; set; }
+        //public bool dryBedEffectFunction { get; set; }
+        //public bool immersedBoundaryFunction { get; set; }
         public bool sideInOutFlowFunction { get; set; }
         public bool highSandContentEffectFunction { get; set; }
 
@@ -148,28 +149,64 @@ namespace RiverSimulationApplication
         public double convergenceCriteria3d;    //三維水裡收斂標準
         public int maxIterationsNum = 0;        //水理最大疊代次數。1.1.2.3
 
-        //乾床資訊
-       // private int _dryBedNum = 0;
-        private List<Point>[] _dryBedPts = null;
-        public void ResizeDryBedPts(int n)
+        //結構物設置
+        public bool tBarCheck = false;
+        public bool bridgePierCheck = false;
+        public bool groundsillWorkCheck = false;
+        public bool sedimentationWeirCheck = false;
+        public int tBarNum = 0;
+        public int bridgePierNum = 0;
+        public int groundsillWorkNum = 0;
+        public int sedimentationWeirNum = 0;
+
+        // private int _dryBedNum = 0;
+        private List<Point>[] _tBarPts = null;
+        private List<Point>[] _bridgePierPts = null;
+        private List<Point>[] _groundsillWorkPts = null;
+        private List<Point>[] _sedimentationWeirPts = null;
+
+        private void ResizeListPointArrayPts(ref List<Point>[] pts, int n)
         {
             if (n <= 0)
                 return;
 
-            if (_dryBedPts == null)
+            if (pts == null)
             {
-                _dryBedPts = new List<Point>[n];
+                pts = new List<Point>[n];
             }
-            else if (n > _dryBedPts.Length)
+            else if (n > pts.Length)
             {
-                Array.Resize(ref _dryBedPts, n);
+                Array.Resize(ref pts, n);
             }
         }
 
-        public List<Point>[] DryBedPts
+        public void ResizeStructureSetPts(int n1, int n2, int n3, int n4)
         {
-            get { return _dryBedPts; }
-            set { _dryBedPts = (List<Point>[])value.Clone(); }
+            ResizeListPointArrayPts(ref _tBarPts, n1);
+            ResizeListPointArrayPts(ref _bridgePierPts, n2);
+            ResizeListPointArrayPts(ref _groundsillWorkPts, n3);
+            ResizeListPointArrayPts(ref _sedimentationWeirPts, n4);
+        }
+
+        public List<Point>[] TBarPts
+        {
+            get { return _tBarPts; }
+            set { _tBarPts = (List<Point>[])value.Clone(); }
+        }
+        public List<Point>[] BridgePierPts
+        {
+            get { return _bridgePierPts; }
+            set { _bridgePierPts = (List<Point>[])value.Clone(); }
+        }
+        public List<Point>[] GroundsillWorkPts
+        {
+            get { return _groundsillWorkPts; }
+            set { _groundsillWorkPts = (List<Point>[])value.Clone(); }
+        }
+        public List<Point>[] SedimentationWeirPts
+        {
+            get { return _sedimentationWeirPts; }
+            set { _sedimentationWeirPts = (List<Point>[])value.Clone(); }
         }
 
         //浸沒邊界資訊

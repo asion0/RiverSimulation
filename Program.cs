@@ -22,10 +22,11 @@ namespace RiverSimulationApplication
             InitialProgram("ResedModel.rmx");
 
             //Test function
-            string f1 = Environment.CurrentDirectory + "\\cchemesh.geo";
-            string f2 = Environment.CurrentDirectory + "\\t.i";
-            RiverSimulationProfile.profile.ReadInputGridGeo(f1);
-            RiverSimulationProfile.profile.GenerateInputFile(f2);
+            //string f1 = Environment.CurrentDirectory + "\\cchemesh.geo";
+            //string f2 = Environment.CurrentDirectory + "\\t.i";
+            //RiverSimulationProfile.profile.ReadInputGridGeo(f1);
+            //RiverSimulationProfile.profile.GenerateInputFile(f2);
+
             Application.Run(new RiverSimulationForm());
         }
 

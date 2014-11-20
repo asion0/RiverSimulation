@@ -56,6 +56,7 @@ namespace RiverSimulationApplication
             upVertPanel.Enabled = p.Is3DMode();
             upSand3DPanel.Enabled = p.Is3DMode();
             waterUpVert3dPanel.Enabled = p.Is3DMode();
+
             UpdateStatus();
 
         }
@@ -317,9 +318,17 @@ namespace RiverSimulationApplication
         private void UpdateStatus()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
-
+            if (Program.programVersion.DemoVersion)
+            {
+                downSand3DPanel.Enabled = false;
+            }
             noSidewallSlideRdo.Checked = !p.sidewallBoundarySlip;
             sidewallSlideRdo.Checked = p.sidewallBoundarySlip;
+        }
+
+        private void moveableBedPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

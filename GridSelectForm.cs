@@ -19,168 +19,171 @@ namespace RiverSimulationApplication
 
         public enum SelectType
         {
-            DryBed,
-            ImmersedBoundary,
-
+            StructureSet,
         };
 
-        private SelectType st = SelectType.DryBed;
-        public void SetFormMode(string title, int numbers, string name, SelectType t)
+        public enum StructureType
         {
-            objectNum = numbers;
-            this.title = title;
-            objectName = name;
-            st = t;
-        }
+            TBar,
+            BridgePier,
+            GroundSillWork,
+            SedimentationWeir,
+            StructureTypeSize,
+        };
+        const int StructureTypeNumber = (int)StructureType.StructureTypeSize;
+
+        private SelectType st = SelectType.StructureSet;
 
         private string title;
-        private int objectNum;
-        private string objectName;
+        private string[] structureName = new string[StructureTypeNumber];
+        private int[] structureNum = new int[StructureTypeNumber];
+        private StructureType[] typeIndex = null;
+        public void SetFormMode(string title, int num1, string name1, int num2, string name2, int num3, string name3, int num4, string name4, SelectType t = SelectType.StructureSet)
+        {
+            structureName[0] = name1;
+            structureName[1] = name2;
+            structureName[2] = name3;
+            structureName[3] = name4;
+            structureNum[0] = num1;
+            structureNum[1] = num2;
+            structureNum[2] = num3;
+            structureNum[3] = num4;
+            typeIndex = new StructureType[num1 + num2 + num3 + num4];
+            this.title = title;
+            this.st = t;
+        }
+
         private void GridSelectForm_Load(object sender, EventArgs e)
         {
             this.Text = title;
-            for (int i = 0; i < objectNum; ++i)
+            int typeCount = 0;
+            for (int n = 0; n < StructureTypeNumber; ++n)
             {
-                listBox.Items.Add(objectName + (i + 1).ToString());
+                for (int i = 0; i < structureNum[n]; ++i)
+                {
+                    listBox.Items.Add(structureName[n] + (i + 1).ToString());
+                    typeIndex[typeCount++] = (StructureType)n;
+                }
             }
-
             listBox.SelectedIndex = 0;
             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
+        }
+
+        private void CalcTypeCount(int index, ref int type, ref int count)
+        {
+            if (index >= typeIndex.Length)
+                return;
+            
+            StructureType lastType = StructureType.StructureTypeSize;
+            int c = 0;
+
+            for (int i = 0; i <= index; ++i)
+            {
+                if(typeIndex[i] != lastType)
+                {
+                    c = 0;
+                    lastType = typeIndex[i];
+                }
+                else
+                {
+                    ++c;
+                }
+
+            }
+            type = (lastType==StructureType.StructureTypeSize) ? -1 : (int)lastType;
+            count = c;
         }
 
         private void SetPicBoxGrid(int index, bool alert)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             mapPicBox.SelectGroup = true;
-            if (st == SelectType.DryBed)
-            {
-                mapPicBox.SetSelectedGrid(p.DryBedPts, index, alert);
-            }
-            else if (st == SelectType.ImmersedBoundary)
-            {
-                mapPicBox.SetSelectedGrid(p.ImmersedBoundaryPts, index, alert);
-            }
+
+            int type = -1, count = 0;
+            CalcTypeCount(index, ref type, ref count);
+            mapPicBox.SetSelectedGrid(p.TBarPts, p.BridgePierPts, p.GroundsillWorkPts, p.SedimentationWeirPts, type, count, alert);
         }
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetPicBoxGrid((sender as ListBox).SelectedIndex, false);
         }
-        /*
-        private bool IsContinuous(List<Point> pts)
-        {
-            Point[] workQueue = new Point[pts.Count];
-            workQueue[0] = pts[0];
-            for (int i = 1; i < workQueue.Length; ++i )
-            {
-                workQueue[i].X = -1;
-                workQueue[i].Y = -1;
-            }
-            int ptr = 1;
-            for (int i = 0; i < workQueue.Length; ++i)
-            {
-                Point p0 = workQueue[i];
-                if (-1 == p0.X)
-                {
-                    break;
-                }
-
-                Point p1 = new Point(p0.X, p0.Y - 1);
-                Point p2 = new Point(p0.X, p0.Y + 1);
-                Point p3 = new Point(p0.X - 1, p0.Y);
-                Point p4 = new Point(p0.X + 1, p0.Y);
-
-                foreach (Point p in pts)
-                {
-                    if (p1 == p)
-                    {
-                        if (!workQueue.Contains(p1))
-                        {
-                            workQueue[ptr++] = p1;
-                        }
-                    }
-                    if (p2 == p)
-                    {
-                        if (!workQueue.Contains(p2))
-                        {
-                            workQueue[ptr++] = p2;
-                        }
-                    }
-                    if (p3 == p)
-                    {
-                        if (!workQueue.Contains(p3))
-                        {
-                            workQueue[ptr++] = p3;
-                        }
-                    }
-                    if (p4 == p)
-                    {
-                        if (!workQueue.Contains(p4))
-                        {
-                            workQueue[ptr++] = p4;
-                        }
-                    }
-                }
-            }
-            return (ptr == pts.Count);
-        }
-
-        private bool IsOverlapping(List<Point> pts, int pass)
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            for(int i = 0; i < p.DryBedPts.Length; ++i)
-            {
-                if (i == pass || p.DryBedPts[i] == null)
-                    continue;
-                foreach(Point pt in p.DryBedPts[i])
-                {
-                    foreach(Point pp in pts)
-                    {
-                        if (pt == pp)
-                            return true;
-                    }
-                }
-            }
-            return false;
-        }
-        */
 
         private void UpdateSelectedGroup(List<Point> pts, bool alert = false)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             int index = listBox.SelectedIndex;
 
-            if (st == SelectType.DryBed)
+            int type = -1, count = 0;
+            CalcTypeCount(index, ref type, ref count);
+
+            switch(type)
             {
-                p.DryBedPts[index] = (pts==null) ? null : new List<Point>(pts);
-                SetPicBoxGrid(listBox.SelectedIndex, alert);
+                case 0:
+                    p.TBarPts[count] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 1:
+                    p.BridgePierPts[count] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 2:
+                    p.GroundsillWorkPts[count] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 3:
+                    p.SedimentationWeirPts[count] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                default:
+                    break;
             }
-            else if (st == SelectType.ImmersedBoundary)
-            {
-                p.ImmersedBoundaryPts[index] = (pts == null) ? null : new List<Point>(pts);
-                SetPicBoxGrid(listBox.SelectedIndex, alert);
-            }
+            mapPicBox.SetSelectedGrid(p.TBarPts, p.BridgePierPts, p.GroundsillWorkPts, p.SedimentationWeirPts, type, count, alert);
         }
 
-        private List<Point> GetSelectedGroup()
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            int index = listBox.SelectedIndex;
+        //private List<Point> GetSelectedGroup()
+        //{
+        //    RiverSimulationProfile p = RiverSimulationProfile.profile;
+        //    int index = listBox.SelectedIndex;
 
-            if (st == SelectType.DryBed)
-            {
-                return p.DryBedPts[index];
+        //    if (st == SelectType.StructureSet)
+        //    {
+        //        return p.DryBedPts[index];
+        //    }
+        //    return null;
+        //}
+        private bool CheckOverlapping(List<Point> pl, List<Point>[] rg, int count)
+        {
+            if (rg == null)
+            {   
+                return true;
             }
-            else if (st == SelectType.ImmersedBoundary)
+
+            if (GroupGridUtility.IsOverlapping(rg, pl, count))
             {
-                return p.ImmersedBoundaryPts[index];
+                UpdateSelectedGroup(pl, true);
+                if (DialogResult.Yes == MessageBox.Show("圈選到重覆區域，是否刪減重複範圍(選「否」將放棄此次圈選)", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                {
+                    GroupGridUtility.RemoveOverlapping(ref pl, rg, count);
+                    if (!GroupGridUtility.IsContinuous(pl))
+                    {
+                        UpdateSelectedGroup(pl, true);
+                        MessageBox.Show("刪減後不是連續區域，請重新選取！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        UpdateSelectedGroup(null);
+                        return false;
+                    }
+                }
+                else
+                {
+                    UpdateSelectedGroup(null);
+                    return false;
+                }
             }
-            return null;
+            return true;
         }
 
         private void mapPicBox_SelectedGroupChangedEvent(List<Point> pl)
         {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
             int index = listBox.SelectedIndex;
+            int type = -1, count = 0;
+            CalcTypeCount(index, ref type, ref count);
 
             //檢查連續
             if (!GroupGridUtility.IsContinuous(pl))
@@ -190,58 +193,80 @@ namespace RiverSimulationApplication
                 UpdateSelectedGroup(null);
                 return;
             }
+
             //檢查重疊
-            var rg = (st == SelectType.DryBed) ? RiverSimulationProfile.profile.DryBedPts : RiverSimulationProfile.profile.ImmersedBoundaryPts;
-            if (GroupGridUtility.IsOverlapping(rg, pl, index))
+            for (int n = 0; n < StructureTypeNumber; ++n)
             {
-                UpdateSelectedGroup(pl, true);
-                if (DialogResult.Yes == MessageBox.Show("圈選到重覆區域，是否刪減重複範圍(選「否」將放棄此次圈選)", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                bool overlapping = false;
+                switch(n)
                 {
-                    GroupGridUtility.RemoveOverlapping(ref pl, rg, index);
-                    if (!GroupGridUtility.IsContinuous(pl))
-                    {
-                        UpdateSelectedGroup(pl, true);
-                        MessageBox.Show("刪減後不是連續區域，請重新選取！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        UpdateSelectedGroup(null);
-                        return;
-                    }
+                    case 0:
+                        overlapping = CheckOverlapping(pl, p.TBarPts, (n == type) ? count : -1);
+                        break;
+                    case 1:
+                        overlapping = CheckOverlapping(pl, p.BridgePierPts, (n == type) ? count : -1);
+                        break;
+                    case 2:
+                        overlapping = CheckOverlapping(pl, p.GroundsillWorkPts, (n == type) ? count : -1);
+                        break;
+                    case 3:
+                        overlapping = CheckOverlapping(pl, p.SedimentationWeirPts, (n == type) ? count : -1);
+                        break;
+                    default:
+                        break;
                 }
-                else
+                if(!overlapping)
                 {
-                    UpdateSelectedGroup(null);
                     return;
                 }
             }
-
             UpdateSelectedGroup(pl);
+
+            //if (GroupGridUtility.IsOverlapping(rg, pl, index))
+            //{
+            //    UpdateSelectedGroup(pl, true);
+            //    if (DialogResult.Yes == MessageBox.Show("圈選到重覆區域，是否刪減重複範圍(選「否」將放棄此次圈選)", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            //    {
+            //        GroupGridUtility.RemoveOverlapping(ref pl, rg, index);
+            //        if (!GroupGridUtility.IsContinuous(pl))
+            //        {
+            //            UpdateSelectedGroup(pl, true);
+            //            MessageBox.Show("刪減後不是連續區域，請重新選取！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //            UpdateSelectedGroup(null);
+            //            return;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        UpdateSelectedGroup(null);
+            //        return;
+            //    }
+            //}
+
+            //UpdateSelectedGroup(pl);
 
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            var p = RiverSimulationProfile.profile;
-            int index = listBox.SelectedIndex;
+            //var p = RiverSimulationProfile.profile;
+            //int index = listBox.SelectedIndex;
             
-            GridGroupTableForm form = new GridGroupTableForm();
-            form.SetGroupColors(mapPicBox.GetGroupColors());
-            form.SetColorTable(mapPicBox.GetColorTable());
-            form.SetSelectionItems(listBox);
-            if (st == SelectType.DryBed)
-            {
-                form.SetFormMode("編輯" + objectName + (listBox.SelectedIndex + 1).ToString(), objectName);
-                form.SetGridData(p.DryBedPts, index);
-            }
-            else if (st == SelectType.ImmersedBoundary)
-            {
-                form.SetFormMode("編輯" + objectName + (listBox.SelectedIndex + 1).ToString(), objectName);
-                form.SetGridData(p.ImmersedBoundaryPts, index);
-            }
+            //GridGroupTableForm form = new GridGroupTableForm();
+            //form.SetGroupColors(mapPicBox.GetGroupColors());
+            //form.SetColorTable(mapPicBox.GetColorTable());
+            //form.SetSelectionItems(listBox);
+            //if (st == SelectType.StructureSet)
+            //{
+            //    form.SetFormMode("編輯" + structureName[(int)typeIndex[listBox.SelectedIndex]] + (listBox.SelectedIndex + 1).ToString(), structureName[(int)typeIndex[listBox.SelectedIndex]]);
+            //    form.SetGridData(p.DryBedPts, index);
+            //}
 
-            if (DialogResult.OK == form.ShowDialog())
-            {
+            //if (DialogResult.OK == form.ShowDialog())
+            //{
 
-            }
-            SetPicBoxGrid(listBox.SelectedIndex, false);
+            //}
+            //SetPicBoxGrid(listBox.SelectedIndex, false);
         }
     }
 }

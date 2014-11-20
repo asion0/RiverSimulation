@@ -57,7 +57,7 @@ namespace RiverSimulationApplication
         {
             //string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             //comment.Navigate(new Uri(url));
-            if(Program.IsLiteVersion())
+            if (Program.programVersion.LiteVersion)
             {
                 fullPanel.Visible = false;
             }

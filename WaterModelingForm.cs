@@ -70,7 +70,7 @@ namespace RiverSimulationApplication
 
         private void WaterModelingForm_Load(object sender, EventArgs e)
         {
-            if(Program.IsLiteVersion())
+            if(Program.programVersion.LiteVersion)
             {
                 minWaterDepthPanel.Visible = false;
                 minWaterDepthText.Visible = false;

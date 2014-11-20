@@ -20,7 +20,7 @@ namespace RiverSimulationApplication
             Application.SetCompatibleTextRenderingDefault(false);
             InitialPath();
             InitialProgram("ResedModel.rmx");
-            functionStruct = new FunctionStruct();
+
             //Test function
             string f1 = Environment.CurrentDirectory + "\\cchemesh.geo";
             string f2 = Environment.CurrentDirectory + "\\t.i";
@@ -32,7 +32,8 @@ namespace RiverSimulationApplication
         public static string currentPath;   //執行檔所在目錄, 會判對是否RAR包裝檔案
         public static string documentPath;  //本專案預設文件目錄 My Documents\FlowSimulation
         public static string projectFolder;   //專案目錄
-        public static FunctionStruct functionStruct;
+        public static ProgramVersion programVersion = new ProgramVersion(); //
+
         public static ProgramSetting programSetting = null;
         public class ProgramSetting
         {
@@ -106,37 +107,45 @@ namespace RiverSimulationApplication
             programSetting = new ProgramSetting(path);
         }
 
-        public class FunctionStruct
+        public class ProgramVersion
         {
-            public FunctionStruct()
+            public ProgramVersion()
             {
 #if _LITE_VERSION_
-            isLiteVersion = true;
-            isLiteDemoVersion = true;
+            _LiteVersion = true;
+            _LiteDemoVersion = true;
+#elif _DEMO_VERSION_
+            _LiteVersion = false;
+            _DemoVersion = true;
 #else
-            isLiteVersion = false;
-            isLiteDemoVersion = false;
+            _LiteVersion = false;
+            _DemoVersion = false;
 #endif
             }
+            public bool LiteVersion
+            { get { return _LiteVersion; } }
 
-            public bool isLiteVersion;
-            public bool isLiteDemoVersion;
+            public bool DemoVersion
+            { get { return _DemoVersion; } }
+
+            private bool _LiteVersion;
+            private bool _DemoVersion;
         }
 
-        public static bool IsLiteVersion()
-        {
-            return functionStruct.isLiteVersion;
-        }
+        //public static bool IsLiteVersion()
+        //{
+        //    return functionStruct.isLiteVersion;
+        //}
 
-        public static bool IsLiteDemoVersion()
-        {
-            return functionStruct.isLiteVersion;
-        }
+        //public static bool IsLiteDemoVersion()
+        //{
+        //    return functionStruct.isLiteVersion;
+        //}
 
         public static string GetVersionString()
         {
             string ver = "Version " + System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
-            if (Program.IsLiteVersion())
+            if (Program.programVersion.LiteVersion)
             {
                 ver += " Lite Version";
             }

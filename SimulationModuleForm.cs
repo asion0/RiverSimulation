@@ -19,7 +19,7 @@ namespace RiverSimulationApplication
 
         private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
-            if (Program.IsLiteDemoVersion())
+            if (Program.programVersion.DemoVersion)
             {
                 immersedBoundaryChk.Enabled = false;
                 sideInOutFlowChk.Enabled = false;
@@ -73,14 +73,7 @@ namespace RiverSimulationApplication
             {
                 typeWaterModelingRdo.Checked = !chk;
             }
-            if (Program.IsLiteDemoVersion())
-            {
-                movableBedPanel.Enabled = false;
-            }
-            else
-            {
-                movableBedPanel.Enabled = chk;
-            }
+
             UpdateStatus();
         }
 

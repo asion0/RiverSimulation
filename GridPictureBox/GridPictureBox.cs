@@ -86,12 +86,13 @@ namespace PictureBoxCtrl
             this.PicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PicBox.BackgroundImageLayout = ImageLayout.Zoom;
             this.PicBox.ErrorImage = null;
             this.PicBox.InitialImage = null;
             this.PicBox.Location = new System.Drawing.Point(0, 0);
             this.PicBox.Name = "PicBox";
             this.PicBox.Size = new System.Drawing.Size(138, 135);
+            this.PicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PicBox.TabIndex = 3;
             this.PicBox.TabStop = false;
             this.PicBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PicBox_Paint);
@@ -388,6 +389,23 @@ namespace PictureBoxCtrl
             return m;
         }
 
+        PointF[] GetArrowPoint(int w, int h, double p1x, double p1y, double p2x, double p2y)
+        {
+            PointF[] pts = new PointF[2]; 
+            PointF p1 = new PointF((float)p1x, (float)p1y);
+            PointF p2 = new PointF((float)p2x, (float)p2y);
+            float dx = p2.X - p1.X;
+            float dy = p2.Y - p1.Y;
+            float dd12 = (float)Math.Sqrt(dx * dx + dy * dy);
+            float ddAll = (float)Math.Sqrt(w * w + h * h);
+            float m1 = ddAll / (300 * dd12);
+            float m2 = ddAll / (40 * dd12);
+            pts[1] = new PointF(p1.X + m1 * (p1.X - p2.X), p1.Y + m1 * (p1.Y - p2.Y));
+            pts[0] = new PointF(p1.X + m2 * (p1.X - p2.X), p1.Y + m2 * (p1.Y - p2.Y));
+
+            return pts;
+        }
+
         private void DrawGrid()
         {
             Matrix m = GetMatrix();
@@ -459,11 +477,46 @@ namespace PictureBoxCtrl
                     }
                 }
             }
+            //Draw input arrow
+            pen.StartCap = LineCap.Flat;
+            pen.EndCap = LineCap.Custom;
+            pen.CustomEndCap = new AdjustableArrowCap(4.0f, 4.0f);
+            //pen.SetLineCap
+            pen.Width = 3.5f;
+
+            const int arrowCount = 4;
+            PointF p0 = new PointF();
+            PointF p1 = new PointF(); 
+
+            PointF[] ptStart = GetArrowPoint(w, h, rg.inputCoor[0, 0].x, rg.inputCoor[0, 0].y, rg.inputCoor[1, 0].x, rg.inputCoor[1, 0].y);
+            PointF[] ptEnd = GetArrowPoint(w, h, rg.inputCoor[0, rg.GetJ - 1].x, rg.inputCoor[0, rg.GetJ - 1].y, rg.inputCoor[1, rg.GetJ - 1].x, rg.inputCoor[1, rg.GetJ - 1].y);
+            for (int i = 0; i <= arrowCount; ++i)
+            {
+                p0.X = ptStart[0].X + i * (ptEnd[0].X - ptStart[0].X) / arrowCount;
+                p0.Y = ptStart[0].Y + i * (ptEnd[0].Y - ptStart[0].Y) / arrowCount;
+                p1.X = ptStart[1].X + i * (ptEnd[1].X - ptStart[1].X) / arrowCount;
+                p1.Y = ptStart[1].Y + i * (ptEnd[1].Y - ptStart[1].Y) / arrowCount;
+
+                g.DrawLine(pen, p0, p1);
+            }
+
+            ptStart = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, 0].x, rg.inputCoor[rg.GetI - 1, 0].y, rg.inputCoor[rg.GetI - 2, 0].x, rg.inputCoor[rg.GetI - 2, 0].y);
+            ptEnd = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].y, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].y);
+            for (int i = 0; i <= arrowCount; ++i)
+            {
+                p0.X = ptStart[0].X + i * (ptEnd[0].X - ptStart[0].X) / arrowCount;
+                p0.Y = ptStart[0].Y + i * (ptEnd[0].Y - ptStart[0].Y) / arrowCount;
+                p1.X = ptStart[1].X + i * (ptEnd[1].X - ptStart[1].X) / arrowCount;
+                p1.Y = ptStart[1].Y + i * (ptEnd[1].Y - ptStart[1].Y) / arrowCount;
+
+                g.DrawLine(pen, p1, p0);
+            }
 
             if(hilightIndex == -1)
             {
                 g.Dispose();
-                PicBox.BackgroundImage = picBoxBmp;
+                //PicBox.BackgroundImage = picBoxBmp;
+                PicBox.Image = picBoxBmp;
                 return;
             }
 
@@ -494,7 +547,8 @@ namespace PictureBoxCtrl
                 }
             }
             g.Dispose();
-            PicBox.BackgroundImage = picBoxBmp;
+            //PicBox.BackgroundImage = picBoxBmp;
+            PicBox.Image = picBoxBmp;
         }
 
 		/// <summary>
@@ -676,7 +730,8 @@ namespace PictureBoxCtrl
 
         protected PointF TranslateZoomMousePosition(int x, int y)
         {
-            Image img = PicBox.BackgroundImage;
+            //Image img = PicBox.BackgroundImage;
+            Image img = PicBox.Image;
             int w = PicBox.Width;
             int h = PicBox.Height;
             // test to make sure our image is not null
@@ -823,7 +878,14 @@ namespace PictureBoxCtrl
 
         private void DoCloseGroupPath()
         {
-            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            Matrix m = GetMatrix();
+            if (m == null)
+            {
+                return;
+            }
+
+            //將Mouse Move圈選的線段連線為封閉區域gp, gp內的Point為PictureBox的實際螢幕座標
+            GraphicsPath gp = new GraphicsPath();
             PointF p0 = groupPath[0], p1;
             bool first = true;
             foreach (Point p in groupPath)
@@ -838,12 +900,7 @@ namespace PictureBoxCtrl
             }
             gp.CloseFigure();
 
-            Matrix m = GetMatrix();
-            if (m == null)
-            {
-                return;
-            }
-
+            //尋訪所有格網點，判斷是否被gp所圈選，計算出被圈選的所有格網點ptList，ptList內的Point為格網點的I,J索引值
             System.Collections.Generic.List<Point> ptList = new System.Collections.Generic.List<Point>();
             for (int i = 0; i < rg.GetI; ++i)
             {
@@ -857,17 +914,12 @@ namespace PictureBoxCtrl
                     }
                 }
             }
-
             groupPath.Clear();
-            if(ptList.Count > 0)
+
+            //有找到被圈選的格網點則出發通知事件
+            if(ptList.Count > 0 && SelectedGroupChangedEvent != null)
             {
-                //SetSelectedGrid(ptList, hilightIndex);
-                if (SelectedGroupChangedEvent != null)
-                {
-                    SelectedGroupChangedEvent(ptList);
-                }
-                //DrawGrid();
-                //PicBox.Refresh();
+                SelectedGroupChangedEvent(ptList);
             }
         }
 
@@ -894,6 +946,37 @@ namespace PictureBoxCtrl
                // g.Transform = null;
                 g.DrawLines(groupPen, groupPath.ToArray());
             }
+/*            
+            Matrix m = GetMatrix();
+            if (m == null)
+            {
+                return;
+            }
+
+            Pen pen = new Pen(lineColor, lineWidth);
+            Pen selPen = new Pen(Color.Red, lineWidth);
+            //g.Transform = m;
+ 
+            float x1 = (float)(rg.inputCoor[0, 0].x + rg.inputCoor[0, rg.inputCoor.GetLength(1) - 1].x) / 2.0f;
+            float y1 = (float)(rg.inputCoor[0, 0].y + rg.inputCoor[0, rg.inputCoor.GetLength(1) - 1].y) / 2.0f;
+            PointF[] p = new PointF[3] { new PointF(x1, y1), new PointF((float)rg.inputCoor[0, 0].x, (float)rg.inputCoor[0, 0].y),
+                new PointF((float)rg.inputCoor[0, rg.inputCoor.GetLength(1) - 1].x, (float)rg.inputCoor[0, rg.inputCoor.GetLength(1) - 1].y)};
+           
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Near;
+            stringFormat.LineAlignment = StringAlignment.Near;
+            //Pen pen = new Pen(Color.Black, 1.0f);
+            SolidBrush brush = new SolidBrush(Color.Black);
+            string txt = "入流方向";
+            Font leftFont = new Font("微軟正黑體", 12, FontStyle.Regular, GraphicsUnit.Point);
+            m.TransformPoints(p);
+            RectangleF rcText = new RectangleF(p[0].X, p[0].Y, 120, 16); ;
+
+            g.DrawString(txt, leftFont, brush, rcText, stringFormat);
+            g.DrawLine(selPen, p[1], p[2]);
+            g.DrawLine(selPen, 0, 0, 400f, 400f);
+            //g.Dispose();
+ */
         }
 
         private Color bkColor = Color.White;

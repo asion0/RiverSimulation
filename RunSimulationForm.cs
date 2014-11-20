@@ -21,7 +21,7 @@ namespace RiverSimulationApplication
         private void RunSimulationForm_Load(object sender, EventArgs e)
         {
             simDebugForm.Show();
-            if (Program.IsLiteDemoVersion())
+            if (Program.programVersion.DemoVersion)
             {
                 simDebugForm.Visible = false;
             }

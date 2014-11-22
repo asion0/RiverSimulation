@@ -16,6 +16,8 @@ namespace RiverSimulationApplication
         {
             InitializeComponent();
         }
+        RiverSimulationProfile p = RiverSimulationProfile.profile;
+
         private SliderPanel sp = new SliderPanel();
 
         private void SettingButton_Click(object sender, EventArgs e)
@@ -40,7 +42,6 @@ namespace RiverSimulationApplication
         {
             //string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
             //comment.Navigate(new Uri(url));
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
 
             this.Width = 1000;
             this.Height = 720;
@@ -48,9 +49,9 @@ namespace RiverSimulationApplication
             moveableBedPanel.Visible = false;
             this.CenterToParent();
 
-            waterSurfacePanel.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
-            bottomBedPanel.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
-            bottomBedPanel2.Enabled = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D);
+            waterSurfacePanel.Enabled = p.Is3DMode();
+            bottomBedPanel.Enabled = p.Is3DMode();
+            bottomBedPanel2.Enabled = p.Is3DMode();
             sideInOutFlowPanel.Enabled = RiverSimulationProfile.profile.sideInOutFlowFunction;
             
             upVertPanel.Enabled = p.Is3DMode();

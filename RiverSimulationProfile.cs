@@ -12,11 +12,183 @@ namespace RiverSimulationApplication
     public class RiverSimulationProfile
     {
         public static RiverSimulationProfile profile = new RiverSimulationProfile();
-
+ 
+        #region Constructor
         public RiverSimulationProfile()
         {
             Initialization();
         }
+        #endregion
+
+        //模組特殊功能
+        #region SimulationFunction
+        public enum DimensionType { None, Type2D, Type3D }
+        public enum ModelingType { None, WaterModeling, MovableBed }
+
+        public DimensionType dimensionType { get; set; }   //維度選擇
+        public ModelingType modelingType { get; set; }      //模組選擇
+
+        //Special Functions
+        //水理
+        public bool closeDiffusionEffectFunction { get; set; }              //關閉移流擴散效應
+        public bool secondFlowEffectFunction { get; set; }                  //二次流效應
+        public bool structureSetFunction { get; set; }                      //結構物設置
+        public bool sideInOutFlowFunction { get; set; }                     //側出入流
+        public bool waterHighSandContentEffectFunction { get; set; }        //水理高含砂效應
+
+        //動床
+        public bool bedrockFunction { get; set; }                           //岩床
+        public bool quayStableAnalysisFunction { get; set; }                //岩壁穩定分析
+        public bool movableBedHighSandContentEffectFunction { get; set; }   //動床高含砂效應
+        #endregion
+
+        //全域參數
+        #region GlobalSetting
+        public Int32 verticalLevelNumber { get; set; }      //0.1.1 垂向格網分層數目
+        public double[] levelProportion { get; set; }       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
+        #endregion
+
+        //水理參數
+        #region WaterModeling   
+        public enum FlowType
+        {
+            None,
+            ConstantFlow,
+            VariableFlow,
+        }
+        public FlowType flowType = FlowType.None;               //1.0 定/變量流
+        //1.1 數值參數 =========================================
+        //1.1.1 時間
+        public double totalSimulationTime { get; set; }         //1.1.1.1 總模擬時間
+        public double timeSpan2d { get; set; }                  //1.1.1.2 二維時間間距
+        public Int32 outputFrequency { get; set; }              //1.1.1.3 輸出頻率
+        public Int32 steppingTimesInVertVslcTime { get; set; }  //1.1.1.4 垂直方向計算時間步進次數
+        //1.1.2 收斂條件
+        public double waterModelingConvergenceCriteria2d { get; set; }          //1.1.2.1 二維水理收斂標準
+        public double waterModelingConvergenceCriteria3d { get; set; }          //1.1.2.2 三維水理收斂標準
+        public Int32 waterModelingMaxIterationTimes { get; set; }               //1.1.2.3 水理最大疊代次數
+        //1.1.3 輸出控制
+        public double minWaterDeoth { get; set; }                               //1.1.4 最小水深 單一數值 m 0.0001 實數(>0) 實數 8 格 (隱藏版功能)
+        public double viscosityFactorAdditionInMainstream { get; set; }         //1.1.5 主流方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
+        public double viscosityFactorAdditionInSideDirection { get; set; }      //1.1.6 側方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
+        //1.2 物理參數 =========================================
+        public enum RoughnessType
+        {   //糙度係數 種類
+            None,
+            ManningN,
+            Chezy,
+        }
+        public RoughnessType roughnessType { get; set; }        //1.2.1 糙度係數 二選一 整數 8 格
+        public double manningN { get; set; }                    //1.2.1.1 Manning n 二選一 -- 均一值
+        public double[,] manningNArray { get; set; }             //1.2.1.1 Manning n 二選一 -- 矩陣[I,J]
+        public double chezy { get; set; }                       //1.2.1.2 Chezy 二選一 -- 均一值
+        public double[,] chezyArray { get; set; }               //1.2.1.2 Chezy 二選一 -- 矩陣[I,J]
+        public double roughnessHeightKs { get; set; }           //1.2.1.3 粗糙高度 ks mm -- 均一值
+        public double[,] roughnessHeightKsArray { get; set; }   //1.2.1.3 粗糙高度 ks mm -- 矩陣[I,J]
+
+        public enum TurbulenceViscosityType     
+        {   //紊流黏滯係數 種類
+            None,
+            UserDefine,
+            ZeroEquation,
+            SingleEquation,
+            TwinEquation,
+        }
+        public TurbulenceViscosityType turbulenceViscosityType { get; set; }    //1.2.2 紊流黏滯係數 四選一 整數 8 格 
+        //1.2.2.1 使用者輸入 模擬功能為二維或三維都可選擇此項輸入
+        //1.2.2.1.1 紊流黏滯係數 Ns/m2 實數(>0) 實數 8 格
+        public double tvInMainstreamDirection { get; set; }     //需確認
+        public double tvInSideDirection { get; set; }           //需確認
+        public enum ZeroEquationType
+        {   //零方程 種類
+            None,
+            Constant,
+            Parabolic1,
+            Parabolic2,
+            TypeA,
+            TypeB,
+        }
+        public ZeroEquationType zeroEquationType { get; set; }  //1.2.2.2 零方程 五選一 總共 5 種選項
+        //1.2.2.3 單方程 --
+        //1.2.2.4 雙方程(k-ε) 三維 only，僅一項，不用下拉選單。
+
+        //1.2.3 其他
+        public double gravityConstant { get; set; }             //1.2.3.1 重力常數 單一數值 m/s2 9.81 實數 Free
+        public double waterDensity { get; set; }                //1.2.3.2 水密度 單一數值 kg/m3 1000 實數(>0) Free
+        
+        //1.3 二次流效應 二維 only
+        public enum CurvatureRadiusType
+        {
+            None,
+            AutoCurvatureRadius,
+            InputCurvatureRadius,
+        }
+        public CurvatureRadiusType curvatureRadiusType { get; set; }      //1.3.1 曲率半徑 是否自動計算
+        public double[,] curvatureRadius { get; set; }      //1.3.1 曲率半徑 矩陣(I,J) m 0 實數 Free
+
+        //1.4 結構物設置 四種結構物：丁壩、橋墩、固床工、攔河堰。
+        public bool tBarSet { get; set; }                   //丁壩設置
+        public bool bridgePierSet { get; set; }             //橋墩設置
+        public bool groundsillWorkSet { get; set; }         //固床工設置
+        public bool sedimentationWeirSet { get; set; }      //攔河堰設置
+        //1.4.1 結構物數量
+        public Int32 tBarNumber { get; set; }               //丁壩數量
+        public Int32 bridgePierNumber { get; set; }         //橋墩數量
+        public Int32 groundsillWorkNumber { get; set; }     //固床工數量
+        public Int32 sedimentationWeirNumber { get; set; }  //攔河堰數量 
+        //1.4.1.1 格網位置
+        public List<Point>[] _tBarSets { get; set; }                //丁壩位置集合
+        public List<Point>[] _bridgePierSets { get; set; }          //橋墩位置集合
+        public List<Point>[] _groundsillWorkSets { get; set; }      //固床工位置集合
+        public List<Point>[] _sedimentationWeirSets { get; set; }   //攔河堰位置集合
+
+        //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
+        public double highSandEffectAlpha1 { get; set; }
+        public double highSandEffectBeta1 { get; set; }
+        public double highSandEffectC1 { get; set; }
+        public double highSandEffectAlpha2 { get; set; }
+        public double highSandEffectBeta2 { get; set; }          
+        public double highSandEffectC2 { get; set; }
+        #endregion
+
+        //功能檢查
+        #region Fuction Check
+        public bool Is3DMode() { return dimensionType == DimensionType.Type3D; }
+        public bool Is2DMode() { return dimensionType == DimensionType.Type2D; }
+        public bool IsWaterModelingMode() { return modelingType == ModelingType.WaterModeling; }
+        public bool IsMovableBedMode() { return modelingType == ModelingType.MovableBed; }
+        public bool IsConstantFlowType() { return flowType == FlowType.ConstantFlow; }
+        public bool IsVariableFlowType() { return flowType == FlowType.VariableFlow; }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public bool IsImportFinished() 
         {
@@ -25,12 +197,12 @@ namespace RiverSimulationApplication
 
         public bool IsImportReady() 
         {
-            return moduleType1 != ModuleType1.NoSelect && moduleType2 != ModuleType2.NoSelect;
+            return dimensionType != DimensionType.None && modelingType != ModelingType.None;
         }
 
         public bool IsSimulationModuleFinished() 
         {
-            return moduleType1 != ModuleType1.NoSelect && moduleType2 != ModuleType2.NoSelect;
+            return dimensionType != DimensionType.None && modelingType != ModelingType.None;
         }
 
         public bool IsSimulationModuleReady() 
@@ -54,8 +226,8 @@ namespace RiverSimulationApplication
         }
 
         public bool IsMovableBedReady() 
-        { 
-            return IsImportFinished() && moduleType2 == ModuleType2.MovableBed;
+        {
+            return IsImportFinished() && modelingType == ModelingType.MovableBed;
         }
 
         public bool IsInitialConditionsFinished() 
@@ -65,7 +237,7 @@ namespace RiverSimulationApplication
 
         public bool IsInitialConditionsReady() 
         {
-            if (moduleType2 == ModuleType2.MovableBed)
+            if (modelingType == ModelingType.MovableBed)
                 return IsWaterModelingFinished() && IsMovableBedFinished();
             else
                 return IsWaterModelingFinished();
@@ -78,7 +250,7 @@ namespace RiverSimulationApplication
 
         public bool IsBoundaryConditionsReady() 
         {
-            if (moduleType2 == ModuleType2.MovableBed)
+            if (modelingType == ModelingType.MovableBed)
                 return IsWaterModelingFinished() && IsMovableBedFinished(); 
             else
                 return IsWaterModelingFinished();
@@ -114,31 +286,23 @@ namespace RiverSimulationApplication
         public bool runSimulationFinished = false;
 
         //public bool ModuleSelectUsability() { return importFinished; }
-        public enum ModuleType1 { NoSelect, Type2D, Type3D }
-        public enum ModuleType2 { NoSelect, WaterModeling, MovableBed }
 
-        public void SetModuleType1(ModuleType1 t) { moduleType1 = t; }
-        public ModuleType1 GetModuleType1() { return moduleType1; }
-        public void SetModuleType2(ModuleType2 t) { moduleType2 = t; }
-        public ModuleType2 GetModuleType2() { return moduleType2; }
+        public void SetModuleType1(DimensionType t) { dimensionType = t; }
+        public DimensionType GetModuleType1() { return dimensionType; }
+        public void SetModuleType2(ModelingType t) { modelingType = t; }
+        public ModelingType GetModuleType2() { return modelingType; }
         
-        private ModuleType1 moduleType1 = ModuleType1.NoSelect;
-        private ModuleType2 moduleType2 = ModuleType2.NoSelect;
-        //Setting for special functions
-        public bool diffusionEffectFunction { get; set; }
-        public bool secFlowEffectFunction { get; set; }
-        public bool structureSetFunction { get; set; }
-        //public bool dryBedEffectFunction { get; set; }
-        //public bool immersedBoundaryFunction { get; set; }
-        public bool sideInOutFlowFunction { get; set; }
-        public bool highSandContentEffectFunction { get; set; }
+        ////Setting for special functions
+        //public bool diffusionEffectFunction { get; set; }
+        //public bool secFlowEffectFunction { get; set; }
+        //public bool structureSetFunction { get; set; }
+        ////public bool dryBedEffectFunction { get; set; }
+        ////public bool immersedBoundaryFunction { get; set; }
+        //public bool sideInOutFlowFunction { get; set; }
+        //public bool highSandContentEffectFunction { get; set; }
 
-        public bool bedrockFunction { get; set; }
-        public bool quayStableAnalysisFunction { get; set; }
-        public bool highSandContentFlowFunction { get; set; }
 
-        public bool Is3DMode() { return moduleType1 == ModuleType1.Type3D; }
-        public bool HasMovableBedMode() { return moduleType2 == ModuleType2.MovableBed; }
+        public bool HasMovableBedMode() { return modelingType == ModelingType.MovableBed; }
 
         public RiverGrid inputGrid = null;
         public int separateNum = 0;             //垂向格網分層數目0.1.1
@@ -237,8 +401,8 @@ namespace RiverSimulationApplication
 
         private void Initialization()
         {
-            moduleType1 = ModuleType1.NoSelect;
-            moduleType2 = ModuleType2.NoSelect;
+            dimensionType = DimensionType.None;
+            modelingType = ModelingType.None;
         }
 
         public bool ReadInputGridGeo(string s)
@@ -449,11 +613,11 @@ namespace RiverSimulationApplication
             sb.Append("       1       1       1       1       1       1       1       1       1       0\n");
             sb.Append("      20       0                                                                \n");
 
-            sb.AppendFormat("{0,8}", (secFlowEffectFunction ? 1 : 0).ToString());     //是否計算二次流效應
-            sb.AppendFormat("{0,8}", (diffusionEffectFunction ? 1 : 0).ToString());     //是否計算二次流效應
+            sb.AppendFormat("{0,8}", (secondFlowEffectFunction ? 1 : 0).ToString());     //是否計算二次流效應
+            sb.AppendFormat("{0,8}", (closeDiffusionEffectFunction ? 0 : 1).ToString());     //是否關閉移流擴散效應
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算傳輸(propogation)效應 不讓使用者更改。
             sb.AppendFormat("{0,8}", (sidewallBoundarySlip ? 1 : 0).ToString());     //1:滑移；0:非滑移。4.1.3.1
-            sb.AppendFormat("{0,8}", (moduleType2 == ModuleType2.MovableBed ? 1 : 0).ToString());     //對照“模擬功能”-“模組選擇”。若執行動床計算需產生SED.dat檔案。
+            sb.AppendFormat("{0,8}", (modelingType == ModelingType.MovableBed ? 1 : 0).ToString());     //對照“模擬功能”-“模組選擇”。若執行動床計算需產生SED.dat檔案。
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
             sb.AppendFormat("{0,8}", (quayStableAnalysisFunction ? 1 : 0).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。

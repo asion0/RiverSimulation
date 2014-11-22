@@ -17,55 +17,20 @@ namespace RiverSimulationApplication
         {
             InitializeComponent();
         }
+
+        private RiverSimulationProfile p = RiverSimulationProfile.profile;
         private SliderPanel sp = new SliderPanel();
-
-        private void groupBox_MouseHover(object sender, EventArgs e)
+        public void SetForm(RiverSimulationProfile profile)
         {
-            GroupBox c = sender as GroupBox;
-            string url = "file:///./" + Environment.CurrentDirectory.Replace('\\', '/');
-            
-
-            if(c==flowTypeGroup)
-            {
-                url += "/D1-1-0.html";
-            }
-            else if(c==groupBox2)
-            {
-                url += "/D1-1-1.html";
-            }
-            else if(c==secFlowEffectGrp)
-            {
-                url += "/D1-1-2.html";
-            }
-            else if(c==groupBox4)
-            {
-                url += "/D1-1-3.html";
-            }
-            else if(c==highSandContentEffectGrp)
-            {
-                url += "/D1-1-4.html";
-            }
-            //else if(c==groupBox6)
-            //{
-            //    url += "/D1-1-5.html";
-            //}
-            else if(c==structureSetGrp)
-            {
-                url += "/D1-1-6.html";
-            }
-            else
-            {
-                url += "/D1-1.html";
-            }
-
-            if (comment.Url.ToString() != url)
-            {
-                comment.Navigate(new Uri(url));
-            }
+            p = profile;
         }
 
         private void WaterModelingForm_Load(object sender, EventArgs e)
         {
+            valueParamPanel.Visible = false;        //隱藏數值參數面板
+            physicalParamPanel.Visible = false;     //隱藏物理參數面板
+
+
             if(Program.programVersion.LiteVersion)
             {
                 minWaterDepthPanel.Visible = false;
@@ -73,30 +38,172 @@ namespace RiverSimulationApplication
                 fullPanel.Visible = false;
             }
 
-            string url = "file:///" + Environment.CurrentDirectory + "/D1-1.html";
-            comment.Navigate(new Uri(url));
+            ControllerUtility.SetHtmlUrl(comment, "D1-1.html");
 
-            //this.Width = 1000;
-            //this.Height = 780;
-            valueParamPanel.Visible = false;
-            setting3dPanel.Visible = false;
-            roughnessPanel.Visible = false;
-            physicalParamPanel.Visible = false;
-            //dryBedPanel.Visible = false;
-            immersionPanel.Visible = false;
-            this.CenterToParent();
 
-            //diffusionEffectGrp.Enabled = RiverSimulationProfile.profile.diffusionEffectFunction;
-            secFlowEffectGrp.Enabled = RiverSimulationProfile.profile.secFlowEffectFunction;
-            structureSetGrp.Enabled = RiverSimulationProfile.profile.structureSetFunction;
-            //immersedBoundaryGrp.Enabled = RiverSimulationProfile.profile.immersedBoundaryFunction;
-            highSandContentEffectGrp.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
-            threeDGrp.Enabled = RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D;
             
             LoadStatus();
             UpdateStatus();
         }
 
+        private void LoadStatus()
+        {
+            if(p.IsMovableBedMode())
+            {   //使用者選動床模組，則此處一定為變量流。
+                p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
+            }
+            switch (p.flowType)
+            {
+                case RiverSimulationProfile.FlowType.ConstantFlow:
+                    constantFlowRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.FlowType.VariableFlow:
+                    variableFlowRdo.Checked = true;
+                    break;
+                default:
+                    constantFlowRdo.Checked = false;
+                    variableFlowRdo.Checked = false;
+                    break;
+            }
+
+            //1.1 數值參數 =========================================
+            //1.1.1 時間
+            totalSimulationTimeTxt.Text = p.totalSimulationTime.ToString();
+            timeSpan2dTxt.Text = p.timeSpan2d.ToString();
+            outputFrequencyTxt.Text = p.outputFrequency.ToString();
+            steppingTimesInVertVslcTimeTxt.Text = p.steppingTimesInVertVslcTime.ToString();
+
+            //1.1.2 收斂條件
+            waterModelingConvergenceCriteria2dTxt.Text = p.waterModelingConvergenceCriteria2d.ToString();
+            waterModelingConvergenceCriteria3dTxt.Text = p.waterModelingConvergenceCriteria3d.ToString();
+            
+            //1.1.3 輸出控制
+            minWaterDeothTxt.Text = p.minWaterDeoth.ToString();
+            viscosityFactorAdditionInMainstreamTxt.Text = p.viscosityFactorAdditionInMainstream.ToString();
+            viscosityFactorAdditionInSideDirectionTxt.Text = p.viscosityFactorAdditionInSideDirection.ToString();
+           
+            //1.2 物理參數 =========================================
+
+            switch (p.roughnessType)
+            {
+                case RiverSimulationProfile.RoughnessType.ManningN:
+                    manningNRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.RoughnessType.Chezy:
+                    chezyRdo.Checked = true;
+                    break;
+                default:
+                    manningNRdo.Checked = false;
+                    chezyRdo.Checked = false;
+                    break;
+            }
+
+            //1.2.2 紊流黏滯係數
+            switch (p.turbulenceViscosityType)
+            {
+                case RiverSimulationProfile.TurbulenceViscosityType.UserDefine:
+                    userDefineRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation:
+                    zeroEquationRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TurbulenceViscosityType.SingleEquation:
+                    singleEquationRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TurbulenceViscosityType.TwinEquation:
+                    twinEquationRdo.Checked = true;
+                    break;
+                default:
+                    userDefineRdo.Checked = false;
+                    zeroEquationRdo.Checked = false;
+                    singleEquationRdo.Checked = false;
+                    twinEquationRdo.Checked = false;
+                    break;
+            }
+            zeroEquationTypeCombo.SelectedIndex = (int)p.zeroEquationType;
+
+            //1.2.3 其他
+            gravityConstantTxt.Text = p.gravityConstant.ToString();
+            waterDensityTxt.Text = p.waterDensity.ToString();
+
+            //1.3 二次流效應 二維 only
+            switch (p.curvatureRadiusType)
+            {
+                case RiverSimulationProfile.CurvatureRadiusType.AutoCurvatureRadius:
+                    autoCurvatureRadiusRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.CurvatureRadiusType.InputCurvatureRadius:
+                    inputCurvatureRadiusRdo.Checked = true;
+                    break;
+                default:
+                    autoCurvatureRadiusRdo.Checked = false;
+                    inputCurvatureRadiusRdo.Checked = false;
+                    break;
+            }
+
+            //結構物設置
+            tBarSetChk.Checked = p.tBarSet;
+            tBarNumberTxt.Text = p.tBarNumber.ToString();
+
+            bridgePierSetChk.Checked = p.bridgePierSet;
+            bridgePierNumberTxt.Text = p.bridgePierNumber.ToString();
+
+            groundsillWorkSetChk.Checked = p.groundsillWorkSet;
+            groundsillWorkNumberTxt.Text = p.groundsillWorkNumber.ToString();
+
+            sedimentationWeirSetChk.Checked = p.sedimentationWeirSet;
+            sedimentationWeirNumberTxt.Text = p.sedimentationWeirNumber.ToString();
+
+            //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
+            highSandEffectAlpha1Txt.Text = p.highSandEffectAlpha1.ToString();
+            highSandEffectBeta1Txt.Text = p.highSandEffectBeta1.ToString();
+            highSandEffectC1Txt.Text = p.highSandEffectC1.ToString();
+            highSandEffectAlpha2Txt.Text = p.highSandEffectAlpha1.ToString();
+            highSandEffectBeta2Txt.Text = p.highSandEffectBeta2.ToString();
+            highSandEffectC1Txt.Text = p.highSandEffectC2.ToString();
+        }
+
+        private void UpdateStatus()
+        {
+            if (p.IsMovableBedMode())
+            {
+                constantFlowRdo.Enabled = false;
+            }
+            if (p.IsConstantFlowType())
+            {   //模擬功能如果為定量流，則總模擬時間與時間間距相同，使用者不輸入。
+                totalSimulationTimeTxt.Enabled = false;
+                timeSpan2dTxt.Enabled = false;
+                outputFrequencyTxt.Enabled = false; //模擬功能如果為定量流，則輸出頻率為1，使用者不輸入。
+            }
+            outputControl3dGrp.Enabled = p.Is3DMode();
+
+            manningNBtn.Enabled = (p.roughnessType == RiverSimulationProfile.RoughnessType.ManningN);
+            chezyBtn.Enabled = (p.roughnessType == RiverSimulationProfile.RoughnessType.Chezy);
+            roughnessHeightKsBtn.Enabled = p.Is3DMode();
+            roughnessHeightKsHelpBtn.Enabled = p.Is3DMode();
+
+
+            tvInMainstreamDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
+            tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
+            zeroEquationTypeCombo.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation);
+            twinEquationRdo.Enabled = p.Is3DMode();
+            if (p.Is2DMode())
+            {   //二維只有 1 種選項：constant，其他則灰掉
+                zeroEquationTypeCombo.SelectedIndex = 0;
+                zeroEquationTypeCombo.Enabled = false;
+            }
+            secFlowEffectGrp.Enabled = p.Is2DMode();    //二維 only。
+            highSandContentEffectGrp.Enabled = p.IsWaterModelingMode();     //水理 only 
+
+
+            UpdateActiveFunctions();
+        }
+
+        private void UpdateActiveFunctions()
+        {
+
+          
+        }
 
         private void Back_Click(object sender, EventArgs e)
         {
@@ -141,11 +248,54 @@ namespace RiverSimulationApplication
 
             }
         }
+        private void groupBox_MouseHover(object sender, EventArgs e)
+        {
+            GroupBox c = sender as GroupBox;
+            string url = "file:///./" + Environment.CurrentDirectory.Replace('\\', '/');
 
+
+            if (c == flowTypeGroup)
+            {
+                url += "/D1-1-0.html";
+            }
+            else if (c == groupBox2)
+            {
+                url += "/D1-1-1.html";
+            }
+            else if (c == secFlowEffectGrp)
+            {
+                url += "/D1-1-2.html";
+            }
+            else if (c == groupBox4)
+            {
+                url += "/D1-1-3.html";
+            }
+            else if (c == highSandContentEffectGrp)
+            {
+                url += "/D1-1-4.html";
+            }
+            //else if(c==groupBox6)
+            //{
+            //    url += "/D1-1-5.html";
+            //}
+            else if (c == structureSetGrp)
+            {
+                url += "/D1-1-6.html";
+            }
+            else
+            {
+                url += "/D1-1.html";
+            }
+
+            if (comment.Url.ToString() != url)
+            {
+                comment.Navigate(new Uri(url));
+            }
+        }
         private void manningRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            manningBtn.Enabled = chk;
+            manningNBtn.Enabled = chk;
             if(chk)
             {
                 string url = "file:///" + Environment.CurrentDirectory.Replace('\\', '/') + "/D1-2-1-1.html"; ;
@@ -175,12 +325,7 @@ namespace RiverSimulationApplication
             bool chk = (sender as RadioButton).Checked;
             curvatureRadiusBtn.Enabled = chk; 
         }
-        private void ksRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as RadioButton).Checked;
-            ksTxt.Enabled = chk;
-            ksHelpBtn.Enabled = chk;
-        }
+
 
         private void autoCurvatureRdo_CheckedChanged(object sender, EventArgs e)
         {
@@ -200,7 +345,7 @@ namespace RiverSimulationApplication
         private void manningBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(manningBtn.Text, false, 26, 50);
+            form.SetFormMode(manningNBtn.Text, false, 26, 50);
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -253,7 +398,7 @@ namespace RiverSimulationApplication
         private void zeroEquationRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            zeroEquationCombo.Enabled = chk;
+            zeroEquationTypeCombo.Enabled = chk;
         }
 
         private void twinEquationRdo_CheckedChanged(object sender, EventArgs e)
@@ -284,10 +429,10 @@ namespace RiverSimulationApplication
             p.ResizeStructureSetPts(p.tBarNum, p.bridgePierNum, p.groundsillWorkNum, p.sedimentationWeirNum);
             GridSelectForm form = new GridSelectForm();
             form.SetFormMode(structureSetGrp.Text,
-                (p.tBarCheck) ? p.tBarNum : 0, tBarChk.Text,
-                (p.bridgePierCheck) ? p.bridgePierNum : 0, bridgePierChk.Text,
-                (p.groundsillWorkCheck) ? p.groundsillWorkNum : 0, groundsillWorkChk.Text,
-                (p.sedimentationWeirCheck) ? p.sedimentationWeirNum : 0, sedimentationWeirChk.Text);
+                (p.tBarCheck) ? p.tBarNum : 0, tBarSetChk.Text,
+                (p.bridgePierCheck) ? p.bridgePierNum : 0, bridgePierSetChk.Text,
+                (p.groundsillWorkCheck) ? p.groundsillWorkNum : 0, groundsillWorkSetChk.Text,
+                (p.sedimentationWeirCheck) ? p.sedimentationWeirNum : 0, sedimentationWeirSetChk.Text);
 
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
@@ -320,25 +465,6 @@ namespace RiverSimulationApplication
         private void textBox15_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void LoadStatus()
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            tBarChk.Checked = p.tBarCheck;
-            tBarNumTxt.Text = p.tBarNum.ToString();
-            bridgePierChk.Checked = p.bridgePierCheck;
-            bridgePierNumTxt.Text = p.bridgePierNum.ToString();
-            groundsillWorkChk.Checked = p.groundsillWorkCheck;
-            groundsillWorkNumTxt.Text = p.groundsillWorkNum.ToString();
-            sedimentationWeirChk.Checked = p.sedimentationWeirCheck;
-            sedimentationWeirNumTxt.Text = p.sedimentationWeirNum.ToString();
-        }
-
-        private void UpdateStatus()
-        {
-            convergenceCriteria3dTxt.Text = RiverSimulationProfile.profile.convergenceCriteria3d.ToString();
-            convergenceCriteria2dTxt.Text = RiverSimulationProfile.profile.convergenceCriteria2d.ToString();
         }
 
         private void convergenceCriteria3dTxt_TextChanged(object sender, EventArgs e)
@@ -383,7 +509,7 @@ namespace RiverSimulationApplication
             int n = 0;
             if (p.tBarCheck)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, tBarNumTxt.Text, "請輸入正確的丁壩數量！", ControllerUtility.CheckType.GreaterThanZero))
+                if (!ControllerUtility.CheckConvertInt32(ref n, tBarNumberTxt.Text, "請輸入正確的丁壩數量！", ControllerUtility.CheckType.GreaterThanZero))
                 {
                     return false;
                 }
@@ -396,7 +522,7 @@ namespace RiverSimulationApplication
 
             if (p.bridgePierCheck)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, bridgePierNumTxt.Text, "請輸入正確的橋墩數量！", ControllerUtility.CheckType.GreaterThanZero))
+                if (!ControllerUtility.CheckConvertInt32(ref n, bridgePierNumberTxt.Text, "請輸入正確的橋墩數量！", ControllerUtility.CheckType.GreaterThanZero))
                 {
                     return false;
                 }
@@ -409,7 +535,7 @@ namespace RiverSimulationApplication
 
             if (p.groundsillWorkCheck)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, groundsillWorkNumTxt.Text, "請輸入正確的固床工數量！", ControllerUtility.CheckType.GreaterThanZero))
+                if (!ControllerUtility.CheckConvertInt32(ref n, groundsillWorkNumberTxt.Text, "請輸入正確的固床工數量！", ControllerUtility.CheckType.GreaterThanZero))
                 {
                     return false;
                 }
@@ -422,7 +548,7 @@ namespace RiverSimulationApplication
 
             if (p.sedimentationWeirCheck)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, sedimentationWeirNumTxt.Text, "請輸入正確的攔河堰數量！", ControllerUtility.CheckType.GreaterThanZero))
+                if (!ControllerUtility.CheckConvertInt32(ref n, sedimentationWeirNumberTxt.Text, "請輸入正確的攔河堰數量！", ControllerUtility.CheckType.GreaterThanZero))
                 {
                     return false;
                 }
@@ -456,29 +582,46 @@ namespace RiverSimulationApplication
         private void tBarChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            tBarNumTxt.Enabled = chk;
+            tBarNumberTxt.Enabled = chk;
             RiverSimulationProfile.profile.tBarCheck = chk;
         }
 
         private void bridgePierChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            bridgePierNumTxt.Enabled = chk;
+            bridgePierNumberTxt.Enabled = chk;
             RiverSimulationProfile.profile.bridgePierCheck = chk;
         }
 
         private void groundsillWorkChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            groundsillWorkNumTxt.Enabled = chk;
+            groundsillWorkNumberTxt.Enabled = chk;
             RiverSimulationProfile.profile.groundsillWorkCheck = chk;
         }
 
         private void sedimentationWeirChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            sedimentationWeirNumTxt.Enabled = chk;
+            sedimentationWeirNumberTxt.Enabled = chk;
             RiverSimulationProfile.profile.sedimentationWeirCheck = chk;
+        }
+        ////////////////////////////////////////////////////////////////////////////////
+        private void flowTypeRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (constantFlowRdo.Checked)
+            {
+                p.flowType = RiverSimulationProfile.FlowType.ConstantFlow;
+            }
+            else if (variableFlowRdo.Checked)
+            {
+                p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
+            }
+            else
+            {
+                p.flowType = RiverSimulationProfile.FlowType.None;
+            }
+            UpdateStatus();
         }
 
 

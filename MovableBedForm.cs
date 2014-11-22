@@ -18,6 +18,7 @@ namespace RiverSimulationApplication
         }
 
         private SliderPanel sp = new SliderPanel();
+        RiverSimulationProfile p = RiverSimulationProfile.profile;
 
         private void SettingButton_Click(object sender, EventArgs e)
         {
@@ -62,7 +63,7 @@ namespace RiverSimulationApplication
                 fullPanel.Visible = false;
             }
 
-            if(RiverSimulationProfile.profile.highSandContentFlowFunction)
+            if(p.waterHighSandContentEffectFunction)
             {
                 this.normalSandMethodText.Visible = false;
                 this.normalSandMethodPanel.Visible = false;
@@ -93,7 +94,7 @@ namespace RiverSimulationApplication
 
             this.bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
             this.quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
-            this.highSandContentFlowGrp.Enabled = RiverSimulationProfile.profile.highSandContentFlowFunction;
+            this.highSandContentFlowGrp.Enabled = p.waterHighSandContentEffectFunction;
             //this.highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
             //highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentFlowFunction;
             previewPicBox.Width = previewPanel.Width;

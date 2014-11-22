@@ -17,6 +17,7 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+        RiverSimulationProfile p = RiverSimulationProfile.profile;
         private void ok_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -25,7 +26,7 @@ namespace RiverSimulationApplication
 
         private void InitialConditionsForm_Load(object sender, EventArgs e)
         {
-            if(RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D)
+            if(p.Is3DMode())
             {
                 initialWater3DPanel.Enabled = true;
                 initialMovableBed3DPanel.Enabled = true;

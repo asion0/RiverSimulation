@@ -17,161 +17,165 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+        private RiverSimulationProfile p = RiverSimulationProfile.profile;
+        public void SetForm(RiverSimulationProfile profile)
+        {
+            p = profile;
+        }
+
         private void SimulationModuleForm_Load(object sender, EventArgs e)
         {
-
-
-            this.CenterToParent();
             LoadStatus();
             UpdateStatus();
         }
 
-        private void type2dRdo_CheckedChanged(object sender, EventArgs e)
+        private void LoadStatus()
         {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.SetModuleType1((chk) ? RiverSimulationProfile.ModuleType1.Type2D : RiverSimulationProfile.ModuleType1.Type3D);
-            if(type3dRdo.Checked == chk)
+            switch(p.dimensionType)
             {
-                type3dRdo.Checked = !chk;
+                case RiverSimulationProfile.DimensionType.Type2D:
+                    dimension2dRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.DimensionType.Type3D:
+                    dimension3dRdo.Checked = true;
+                    break;
+                default:
+                    dimension2dRdo.Checked = false;
+                    dimension3dRdo.Checked = false;
+                    break;
+            }
+
+            switch (p.modelingType)
+            {
+                case RiverSimulationProfile.ModelingType.WaterModeling:
+                    waterModelingRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.ModelingType.MovableBed:
+                    movableBedRdo.Checked = true;
+                    break;
+                default:
+                    waterModelingRdo.Checked = false;
+                    movableBedRdo.Checked = false;
+                    break;
+            }
+
+            closeDiffusionEffectFunctionChk.Checked = p.closeDiffusionEffectFunction;
+            secondFlowEffectFunctionChk.Checked = p.secondFlowEffectFunction;
+            structureSetFunctionChk.Checked = p.structureSetFunction;
+            sideInOutFlowFunctionChk.Checked = p.sideInOutFlowFunction;
+            waterHighSandContentEffectFunctionChk.Checked = p.waterHighSandContentEffectFunction;
+
+            bedrockFunctionChk.Checked = p.bedrockFunction;
+            quayStableAnalysisFunctionChk.Checked = p.quayStableAnalysisFunction;
+            movableBedHighSandContentEffectFunctionChk.Checked = p.movableBedHighSandContentEffectFunction;
+        }
+
+        private void UpdateStatus()
+        {
+            secondFlowEffectFunctionChk.Enabled = p.Is2DMode();
+            movableBedPanel.Enabled = p.IsMovableBedMode();
+            if(p.IsMovableBedMode())
+            {   //如果是動床模式，則動床高含砂效應與水理高含砂效應連動
+                waterHighSandContentEffectFunctionChk.Checked = movableBedHighSandContentEffectFunctionChk.Checked;
+            }
+            waterPanel.Enabled = p.IsWaterModelingMode() || p.IsMovableBedMode();
+            waterHighSandContentEffectFunctionChk.Enabled = p.IsWaterModelingMode();
+
+            UpdateActiveFunctions();
+        }
+
+        private void UpdateActiveFunctions()
+        {
+
+            if (Program.programVersion.DemoVersion)
+            {
+                //waterPanel.Enabled = false;
+                sideInOutFlowFunctionChk.Enabled = false;
+                waterHighSandContentEffectFunctionChk.Enabled = false;
+            }
+        }
+
+        private void dimensionRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            if(dimension2dRdo.Checked)
+            {
+                p.dimensionType = RiverSimulationProfile.DimensionType.Type2D;
+            }
+            else if (dimension3dRdo.Checked)
+            {
+                p.dimensionType = RiverSimulationProfile.DimensionType.Type3D;
+            }
+            else
+            {
+                p.dimensionType = RiverSimulationProfile.DimensionType.None;
             }
             UpdateStatus();
         }
 
-        private void type3dRdo_CheckedChanged(object sender, EventArgs e)
+        private void modelingRdo_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.SetModuleType1((chk) ? RiverSimulationProfile.ModuleType1.Type3D : RiverSimulationProfile.ModuleType1.Type2D);
-            if (type2dRdo.Checked == chk)
+            if (waterModelingRdo.Checked)
             {
-                type2dRdo.Checked = !chk;
+                p.modelingType = RiverSimulationProfile.ModelingType.WaterModeling;
             }
-            UpdateStatus();
-        }
-
-        private void typeWaterModelingRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.SetModuleType2( (chk) ? RiverSimulationProfile.ModuleType2.WaterModeling : RiverSimulationProfile.ModuleType2.MovableBed);
-            if (typeMovableBedRdo.Checked == chk)
+            else if (movableBedRdo.Checked)
             {
-                typeMovableBedRdo.Checked = !chk;
+                p.modelingType = RiverSimulationProfile.ModelingType.MovableBed;
             }
-            UpdateStatus();
-        }
-
-        private void typeMovableBedRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.SetModuleType2((chk) ? RiverSimulationProfile.ModuleType2.MovableBed : RiverSimulationProfile.ModuleType2.WaterModeling);
-            if (typeWaterModelingRdo.Checked == chk)
+            else
             {
-                typeWaterModelingRdo.Checked = !chk;
+                p.modelingType = RiverSimulationProfile.ModelingType.None;
             }
-
             UpdateStatus();
         }
 
         private void ok_Click(object sender, EventArgs e)
         {
+            //本畫面無被動控件，不須呼叫DoConvert
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void LoadStatus()
+        private void closeDiffusionEffectFunctionChk_CheckedChanged(object sender, EventArgs e)
         {
-            type2dRdo.Checked = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type2D) ? true : false;
-            type3dRdo.Checked = (RiverSimulationProfile.profile.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type3D) ? true : false;
-
-            typeWaterModelingRdo.Checked = (RiverSimulationProfile.profile.GetModuleType2() == RiverSimulationProfile.ModuleType2.WaterModeling) ? true : false;
-            typeMovableBedRdo.Checked = (RiverSimulationProfile.profile.GetModuleType2() == RiverSimulationProfile.ModuleType2.MovableBed) ? true : false;
-
-            diffusionEffectChk.Checked = RiverSimulationProfile.profile.diffusionEffectFunction;
-            secFlowEffectChk.Checked = RiverSimulationProfile.profile.secFlowEffectFunction;
-            structureSetChk.Checked = RiverSimulationProfile.profile.structureSetFunction;
-            //immersedBoundaryChk.Checked = RiverSimulationProfile.profile.immersedBoundaryFunction;
-            sideInOutFlowChk.Checked = RiverSimulationProfile.profile.sideInOutFlowFunction;
-            highSandContentEffectChk.Checked = RiverSimulationProfile.profile.highSandContentEffectFunction;
-
-            bedrockChk.Checked = RiverSimulationProfile.profile.bedrockFunction;
-            quayStableAnalysisChk.Checked = RiverSimulationProfile.profile.quayStableAnalysisFunction;
-            highSandContentFlowChk.Checked = RiverSimulationProfile.profile.highSandContentFlowFunction;
+            p.closeDiffusionEffectFunction = (sender as CheckBox).Checked;
         }
 
-        private void UpdateStatus()
+        private void secondFlowEffectFunctionChk_CheckedChanged(object sender, EventArgs e)
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-
-            secFlowEffectChk.Enabled = (p.GetModuleType1() == RiverSimulationProfile.ModuleType1.Type2D);
-            movableBedPanel.Enabled = (p.GetModuleType2() == RiverSimulationProfile.ModuleType2.MovableBed);
-            highSandContentEffectChk.Enabled = (p.GetModuleType2() == RiverSimulationProfile.ModuleType2.WaterModeling);
-
-            if (Program.programVersion.DemoVersion)
-            {
-                sideInOutFlowChk.Enabled = false;
-                highSandContentEffectChk.Enabled = false;
-            }
+            p.secondFlowEffectFunction = (sender as CheckBox).Checked;
         }
 
-        private void diffusionEffectChk_CheckedChanged(object sender, EventArgs e)
+        private void structureSetFunctionChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.diffusionEffectFunction = chk;
+            p.structureSetFunction = (sender as CheckBox).Checked;
         }
 
-        private void structureSetChk_CheckedChanged(object sender, EventArgs e)
+        private void sideInOutFlowFunctionChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.structureSetFunction = chk;
+            p.sideInOutFlowFunction = (sender as CheckBox).Checked;
         }
 
-        //private void immersedBoundaryChk_CheckedChanged(object sender, EventArgs e)
-        //{
-
-        //}
-
-        private void sideInOutFlowChk_CheckedChanged(object sender, EventArgs e)
+        private void waterHighSandContentEffectFunctionChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.sideInOutFlowFunction = chk;
+            p.waterHighSandContentEffectFunction = (sender as CheckBox).Checked;
         }
 
-        private void highSandContentEffectChk_CheckedChanged(object sender, EventArgs e)
+        private void bedrockFunctionChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.highSandContentEffectFunction = chk;
+            p.bedrockFunction = (sender as CheckBox).Checked;
         }
 
-        private void bedrockChk_CheckedChanged(object sender, EventArgs e)
+        private void quayStableAnalysisFunctionChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.bedrockFunction = chk;
+            p.quayStableAnalysisFunction = (sender as CheckBox).Checked;
         }
 
-        private void quayStableAnalysisChk_CheckedChanged(object sender, EventArgs e)
+        private void movableBedHighSandContentEffectFunctionChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.quayStableAnalysisFunction = chk;
+            p.movableBedHighSandContentEffectFunction = (sender as CheckBox).Checked;
+            UpdateStatus();
         }
-
-        private void highSandContentFlowChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.highSandContentFlowFunction = chk;
-            //20141119 新增規格，使水理"高含砂效應"與動床"高含砂效應"同步
-            highSandContentEffectChk.Checked = RiverSimulationProfile.profile.highSandContentFlowFunction;
-
-        }
-
-        private void secFlowEffectChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            RiverSimulationProfile.profile.secFlowEffectFunction = chk;
-        }
-
-        private void flowTypeGroup_Enter(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

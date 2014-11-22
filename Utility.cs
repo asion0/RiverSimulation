@@ -281,6 +281,14 @@ namespace RiverSimulationApplication
             return false;
         }
 
+        public static void SetHtmlUrl(WebBrowser b, string u)
+        {
+            string url = "file:///" + Environment.CurrentDirectory + "" + u;
+            if (b.Url == null || b.Url.ToString() != url)
+            {
+                b.Navigate(new Uri(url));
+            }
+        }
     }
 
     public static class GroupGridUtility

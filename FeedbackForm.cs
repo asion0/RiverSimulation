@@ -45,8 +45,8 @@ namespace RiverSimulationApplication
                 }
                 sb.Append(ss[0] + "<" + ss[1] + ">");
             }
-            sendToTxt.Text = sb.ToString();
-            sendToTxt.Select(0, -1);
+            //sendToTxt.Text = sb.ToString();
+            //sendToTxt.Select(0, -1);
             nameTxt.Select();
         }
 
@@ -200,6 +200,11 @@ namespace RiverSimulationApplication
                 // 允許拖拉動作繼續 (這時滑鼠游標應該會顯示 +)
                 e.Effect = DragDropEffects.All;
             }
+        }
+
+        private void sendToTxt_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

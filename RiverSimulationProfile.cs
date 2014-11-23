@@ -44,8 +44,12 @@ namespace RiverSimulationApplication
 
         //全域參數
         #region GlobalSetting
-        public Int32 verticalLevelNumber { get; set; }      //0.1.1 垂向格網分層數目
-        public double[] levelProportion { get; set; }       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
+        public RiverGrid inputGrid = null;
+        //public int separateNum = 0;             //垂向格網分層數目0.1.1
+        //public double[] separateArray = null;
+
+        public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
+        public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
         #endregion
 
         //水理參數
@@ -59,18 +63,28 @@ namespace RiverSimulationApplication
         public FlowType flowType = FlowType.None;               //1.0 定/變量流
         //1.1 數值參數 =========================================
         //1.1.1 時間
-        public double totalSimulationTime { get; set; }         //1.1.1.1 總模擬時間
-        public double timeSpan2d { get; set; }                  //1.1.1.2 二維時間間距
-        public Int32 outputFrequency { get; set; }              //1.1.1.3 輸出頻率
-        public Int32 steppingTimesInVertVslcTime { get; set; }  //1.1.1.4 垂直方向計算時間步進次數
+        public double totalSimulationTime;         //1.1.1.1 總模擬時間
+        public double timeSpan2d;                  //1.1.1.2 二維時間間距
+        public Int32 outputFrequency;              //1.1.1.3 輸出頻率
+        public Int32 steppingTimesInVertVslcTime;  //1.1.1.4 垂直方向計算時間步進次數
         //1.1.2 收斂條件
-        public double waterModelingConvergenceCriteria2d { get; set; }          //1.1.2.1 二維水理收斂標準
-        public double waterModelingConvergenceCriteria3d { get; set; }          //1.1.2.2 三維水理收斂標準
-        public Int32 waterModelingMaxIterationTimes { get; set; }               //1.1.2.3 水理最大疊代次數
+        public double waterModelingConvergenceCriteria2d;          //1.1.2.1 二維水理收斂標準
+        public double waterModelingConvergenceCriteria3d;          //1.1.2.2 三維水理收斂標準
+        public Int32 waterModelingMaxIterationTimes;               //1.1.2.3 水理最大疊代次數
         //1.1.3 輸出控制
-        public double minWaterDeoth { get; set; }                               //1.1.4 最小水深 單一數值 m 0.0001 實數(>0) 實數 8 格 (隱藏版功能)
-        public double viscosityFactorAdditionInMainstream { get; set; }         //1.1.5 主流方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
-        public double viscosityFactorAdditionInSideDirection { get; set; }      //1.1.6 側方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
+        //2D
+        public bool outputControlInitialBottomElevation { get; set; }   //1.1.3 輸出控制 初始底床高程
+        public bool outputControlLevel { get; set; }                    //1.1.3 輸出控制 水位
+        public bool outputControlDepth { get; set; }                    //1.1.3 輸出控制 水深
+        public bool outputControlAverageDepthFlowRate { get; set; }     //1.1.3 輸出控制 水深平均流速
+        public bool outputControlFlow { get; set; }                     //1.1.3 輸出控制 流量
+        public bool outputControlBottomShearingStress { get; set; }     //1.1.3 輸出控制 底床剪應力
+        //3D
+        public bool outputControlVelocityInformation3D { get; set; }    //1.1.3 輸出控制 三維流速資訊
+
+        public double minWaterDeoth;                               //1.1.4 最小水深 單一數值 m 0.0001 實數(>0) 實數 8 格 (隱藏版功能)
+        public double viscosityFactorAdditionInMainstream;         //1.1.5 主流方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
+        public double viscosityFactorAdditionInSideDirection;      //1.1.6 側方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
         //1.2 物理參數 =========================================
         public enum RoughnessType
         {   //糙度係數 種類
@@ -99,6 +113,7 @@ namespace RiverSimulationApplication
         //1.2.2.1.1 紊流黏滯係數 Ns/m2 實數(>0) 實數 8 格
         public double tvInMainstreamDirection { get; set; }     //需確認
         public double tvInSideDirection { get; set; }           //需確認
+
         public enum ZeroEquationType
         {   //零方程 種類
             None,
@@ -137,10 +152,19 @@ namespace RiverSimulationApplication
         public Int32 groundsillWorkNumber { get; set; }     //固床工數量
         public Int32 sedimentationWeirNumber { get; set; }  //攔河堰數量 
         //1.4.1.1 格網位置
-        public List<Point>[] _tBarSets { get; set; }                //丁壩位置集合
-        public List<Point>[] _bridgePierSets { get; set; }          //橋墩位置集合
-        public List<Point>[] _groundsillWorkSets { get; set; }      //固床工位置集合
-        public List<Point>[] _sedimentationWeirSets { get; set; }   //攔河堰位置集合
+        public List<Point>[] tBarSets;                 //丁壩位置集合
+        public List<Point>[] bridgePierSets;           //橋墩位置集合
+        public List<Point>[] groundsillWorkSets;       //固床工位置集合
+        public List<Point>[] sedimentationWeirSets;    //攔河堰位置集合
+
+        public enum StructureType
+        {
+            TBar,
+            BridgePier,
+            GroundSillWork,
+            SedimentationWeir,
+            StructureTypeSize,
+        };
 
         //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
         public double highSandEffectAlpha1 { get; set; }
@@ -149,6 +173,68 @@ namespace RiverSimulationApplication
         public double highSandEffectAlpha2 { get; set; }
         public double highSandEffectBeta2 { get; set; }          
         public double highSandEffectC2 { get; set; }
+
+        //Support Functions
+        private void ResizeListPointArraySets(ref List<Point>[] pts, int n)
+        {
+            if (n <= 0)
+                return;
+
+            if (pts == null)
+            {
+                pts = new List<Point>[n];
+            }
+            else if (n > pts.Length)
+            {
+                Array.Resize(ref pts, n);
+            }
+        }
+
+        public void ResizeStructureSets(int n1, int n2, int n3, int n4)
+        {
+            ResizeListPointArraySets(ref tBarSets, n1);
+            ResizeListPointArraySets(ref bridgePierSets, n2);
+            ResizeListPointArraySets(ref groundsillWorkSets, n3);
+            ResizeListPointArraySets(ref sedimentationWeirSets, n4);
+        }
+
+        public List<Point>[] BridgePierSets
+        {
+            get { return bridgePierSets; }
+            set { bridgePierSets = (List<Point>[])value.Clone(); }
+        }
+        public List<Point>[] GroundsillWorkSets
+        {
+            get { return groundsillWorkSets; }
+            set { groundsillWorkSets = (List<Point>[])value.Clone(); }
+        }
+        public List<Point>[] SedimentationWeirSets
+        {
+            get { return sedimentationWeirSets; }
+            set { sedimentationWeirSets = (List<Point>[])value.Clone(); }
+        }
+
+        public void UpdateStructureSet(List<Point> pts, int type, int index)
+        {
+            switch (type)
+            {
+                case 0:
+                    tBarSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 1:
+                    bridgePierSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 2:
+                    groundsillWorkSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 3:
+                    sedimentationWeirSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         #endregion
 
         //功能檢查
@@ -287,10 +373,10 @@ namespace RiverSimulationApplication
 
         //public bool ModuleSelectUsability() { return importFinished; }
 
-        public void SetModuleType1(DimensionType t) { dimensionType = t; }
-        public DimensionType GetModuleType1() { return dimensionType; }
-        public void SetModuleType2(ModelingType t) { modelingType = t; }
-        public ModelingType GetModuleType2() { return modelingType; }
+        //public void SetModuleType1(DimensionType t) { dimensionType = t; }
+        //public DimensionType GetModuleType1() { return dimensionType; }
+        //public void SetModuleType2(ModelingType t) { modelingType = t; }
+        //public ModelingType GetModuleType2() { return modelingType; }
         
         ////Setting for special functions
         //public bool diffusionEffectFunction { get; set; }
@@ -302,76 +388,37 @@ namespace RiverSimulationApplication
         //public bool highSandContentEffectFunction { get; set; }
 
 
-        public bool HasMovableBedMode() { return modelingType == ModelingType.MovableBed; }
+        //public bool HasMovableBedMode() { return modelingType == ModelingType.MovableBed; }
 
-        public RiverGrid inputGrid = null;
-        public int separateNum = 0;             //垂向格網分層數目0.1.1
-        public double[] separateArray = null;
 
         //WaterModeling 數值參數
-        public double convergenceCriteria2d;    //二維水裡收斂標準 
-        public double convergenceCriteria3d;    //三維水裡收斂標準
+        //public double convergenceCriteria2d;    //二維水裡收斂標準 
+        //public double convergenceCriteria3d;    //三維水裡收斂標準
         public int maxIterationsNum = 0;        //水理最大疊代次數。1.1.2.3
 
         //結構物設置
-        public bool tBarCheck = false;
-        public bool bridgePierCheck = false;
-        public bool groundsillWorkCheck = false;
-        public bool sedimentationWeirCheck = false;
-        public int tBarNum = 0;
-        public int bridgePierNum = 0;
-        public int groundsillWorkNum = 0;
-        public int sedimentationWeirNum = 0;
+        //public bool tBarCheck = false;
+        //public bool bridgePierCheck = false;
+        //public bool groundsillWorkCheck = false;
+        //public bool sedimentationWeirCheck = false;
+        //public int tBarNum = 0;
+        //public int bridgePierNum = 0;
+        //public int groundsillWorkNum = 0;
+        //public int sedimentationWeirNum = 0;
 
         // private int _dryBedNum = 0;
-        private List<Point>[] _tBarPts = null;
-        private List<Point>[] _bridgePierPts = null;
-        private List<Point>[] _groundsillWorkPts = null;
-        private List<Point>[] _sedimentationWeirPts = null;
+        //private List<Point>[] _tBarPts = null;
+        //private List<Point>[] _bridgePierPts = null;
+        //private List<Point>[] _groundsillWorkPts = null;
+        //private List<Point>[] _sedimentationWeirPts = null;
 
-        private void ResizeListPointArrayPts(ref List<Point>[] pts, int n)
-        {
-            if (n <= 0)
-                return;
 
-            if (pts == null)
-            {
-                pts = new List<Point>[n];
-            }
-            else if (n > pts.Length)
-            {
-                Array.Resize(ref pts, n);
-            }
-        }
+        //public List<Point>[] TBarSets
+        //{
+        //    get { return _tBarSets; }
+        //    set { _tBarSets = (List<Point>[])value.Clone(); }
+        //}
 
-        public void ResizeStructureSetPts(int n1, int n2, int n3, int n4)
-        {
-            ResizeListPointArrayPts(ref _tBarPts, n1);
-            ResizeListPointArrayPts(ref _bridgePierPts, n2);
-            ResizeListPointArrayPts(ref _groundsillWorkPts, n3);
-            ResizeListPointArrayPts(ref _sedimentationWeirPts, n4);
-        }
-
-        public List<Point>[] TBarPts
-        {
-            get { return _tBarPts; }
-            set { _tBarPts = (List<Point>[])value.Clone(); }
-        }
-        public List<Point>[] BridgePierPts
-        {
-            get { return _bridgePierPts; }
-            set { _bridgePierPts = (List<Point>[])value.Clone(); }
-        }
-        public List<Point>[] GroundsillWorkPts
-        {
-            get { return _groundsillWorkPts; }
-            set { _groundsillWorkPts = (List<Point>[])value.Clone(); }
-        }
-        public List<Point>[] SedimentationWeirPts
-        {
-            get { return _sedimentationWeirPts; }
-            set { _sedimentationWeirPts = (List<Point>[])value.Clone(); }
-        }
 
         //浸沒邊界資訊
         //private int _immersedBoundaryNum = 0;
@@ -401,8 +448,105 @@ namespace RiverSimulationApplication
 
         private void Initialization()
         {
-            dimensionType = DimensionType.None;
-            modelingType = ModelingType.None;
+            //模組特殊功能高程
+            dimensionType = DimensionType.None;   //維度選擇
+            modelingType = ModelingType.None;      //模組選擇
+
+            //Special Functions
+            //水理
+            closeDiffusionEffectFunction = false;              //關閉移流擴散效應
+            secondFlowEffectFunction = false;                  //二次流效應
+            structureSetFunction = false;                      //結構物設置
+            sideInOutFlowFunction = false;                     //側出入流
+            waterHighSandContentEffectFunction = false;        //水理高含砂效應
+
+            //動床
+            bedrockFunction = false;                           //岩床
+            quayStableAnalysisFunction = false;                //岩壁穩定分析
+            movableBedHighSandContentEffectFunction = false;   //動床高含砂效應
+
+            //全域參數
+            inputGrid = null;
+            verticalLevelNumber = 19;      //0.1.1 垂向格網分層數目
+            levelProportion = null;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
+
+            //水理參數
+            flowType = FlowType.None;               //1.0 定/變量流
+            //1.1 數值參數 =========================================
+            //1.1.1 時間
+            totalSimulationTime = 0;         //1.1.1.1 總模擬時間
+            timeSpan2d = 0;                  //1.1.1.2 二維時間間距
+            outputFrequency = 0;              //1.1.1.3 輸出頻率
+            steppingTimesInVertVslcTime = 10;  //1.1.1.4 垂直方向計算時間步進次數
+            //1.1.2 收斂條件
+            waterModelingConvergenceCriteria2d = 0.0001;          //1.1.2.1 二維水理收斂標準
+            waterModelingConvergenceCriteria3d = 0.0001;          //1.1.2.2 三維水理收斂標準
+            waterModelingMaxIterationTimes = 10000;               //1.1.2.3 水理最大疊代次數
+
+            //1.1.3 輸出控制
+            //2D
+            outputControlInitialBottomElevation = false;   //1.1.3 輸出控制 初始底床高程
+            outputControlLevel = false;                    //1.1.3 輸出控制 水位
+            outputControlDepth = false;                    //1.1.3 輸出控制 水深
+            outputControlAverageDepthFlowRate = false;     //1.1.3 輸出控制 水深平均流速
+            outputControlFlow = false;                     //1.1.3 輸出控制 流量
+            outputControlBottomShearingStress = false;     //1.1.3 輸出控制 底床剪應力
+            //3D
+            outputControlVelocityInformation3D = false;    //1.1.3 輸出控制 三維流速資訊
+
+            minWaterDeoth = 0.0001;                               //1.1.4 最小水深 單一數值 m 0.0001 實數(>0) 實數 8 格 (隱藏版功能)
+            viscosityFactorAdditionInMainstream = 1;         //1.1.5 主流方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
+            viscosityFactorAdditionInSideDirection = 1;      //1.1.6 側方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
+            //1.2 物理參數 =========================================
+            roughnessType = RoughnessType.None;        //1.2.1 糙度係數 二選一 整數 8 格
+            manningN = 0;                    //1.2.1.1 Manning n 二選一 -- 均一值
+            manningNArray = null;             //1.2.1.1 Manning n 二選一 -- 矩陣[I,J]
+            chezy = 0;                       //1.2.1.2 Chezy 二選一 -- 均一值
+            chezyArray = null;               //1.2.1.2 Chezy 二選一 -- 矩陣[I,J]
+            roughnessHeightKs = 0;           //1.2.1.3 粗糙高度 ks mm -- 均一值
+            roughnessHeightKsArray = null;   //1.2.1.3 粗糙高度 ks mm -- 矩陣[I,J]
+
+            turbulenceViscosityType = TurbulenceViscosityType.None;    //1.2.2 紊流黏滯係數 四選一 整數 8 格 
+            //1.2.2.1 使用者輸入 模擬功能為二維或三維都可選擇此項輸入
+            //1.2.2.1.1 紊流黏滯係數 Ns/m2 實數(>0) 實數 8 格
+            tvInMainstreamDirection = 0;     //需確認
+            tvInSideDirection = 0;           //需確認
+            zeroEquationType = ZeroEquationType.None;  //1.2.2.2 零方程 五選一 總共 5 種選項
+            //1.2.2.3 單方程 --
+            //1.2.2.4 雙方程(k-ε) 三維 only，僅一項，不用下拉選單。
+
+            //1.2.3 其他
+            gravityConstant = 9.81;             //1.2.3.1 重力常數 單一數值 m/s2 9.81 實數 Free
+            waterDensity = 1000;                //1.2.3.2 水密度 單一數值 kg/m3 1000 實數(>0) Free
+
+            //1.3 二次流效應 二維 only
+            curvatureRadiusType = 0;      //1.3.1 曲率半徑 是否自動計算
+            curvatureRadius = null;      //1.3.1 曲率半徑 矩陣(I,J) m 0 實數 Free
+
+            //1.4 結構物設置 四種結構物：丁壩、橋墩、固床工、攔河堰。
+            tBarSet = false;                   //丁壩設置
+            bridgePierSet = false;             //橋墩設置
+            groundsillWorkSet = false;         //固床工設置
+            sedimentationWeirSet = false;      //攔河堰設置
+            //1.4.1 結構物數量
+            tBarNumber = 0;               //丁壩數量
+            bridgePierNumber = 0;         //橋墩數量
+            groundsillWorkNumber = 0;     //固床工數量
+            sedimentationWeirNumber = 0;  //攔河堰數量 
+            //1.4.1.1 格網位置
+            tBarSets = null;                 //丁壩位置集合
+            bridgePierSets = null;           //橋墩位置集合
+            groundsillWorkSets = null;       //固床工位置集合
+            sedimentationWeirSets = null;    //攔河堰位置集合
+
+            //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
+            highSandEffectAlpha1 = 0;
+            highSandEffectBeta1 = 0;
+            highSandEffectC1 = 0;
+            highSandEffectAlpha2 = 0;
+            highSandEffectBeta2 = 0;          
+            highSandEffectC2 = 0;
+
         }
 
         public bool ReadInputGridGeo(string s)
@@ -596,7 +740,7 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", 10.ToString());    //模式預設值
             sb.AppendFormat("{0,8}", 5.ToString());     //模式預設值
             sb.AppendFormat("{0,8}", 0.ToString());     //模式預設值
-            sb.AppendFormat("{0,8}", separateNum.ToString());     //垂向格網分層數目0.1.1
+            sb.AppendFormat("{0,8}", verticalLevelNumber.ToString());     //垂向格網分層數目0.1.1
             sb.Append("\n");
             //**模式列印輸出格式，建議採預設值
             sb.Append("       0       1       0       0       0       0               0                \n");

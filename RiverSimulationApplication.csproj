@@ -112,11 +112,11 @@
     <Compile Include="FeedbackForm.Designer.cs">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GridGroupTableForm.cs">
+    <Compile Include="StructureSetTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GridGroupTableForm.Designer.cs">
-      <DependentUpon>GridGroupTableForm.cs</DependentUpon>
+    <Compile Include="StructureSetTableForm.Designer.cs">
+      <DependentUpon>StructureSetTableForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportImageForm.cs">
       <SubType>Form</SubType>
@@ -136,11 +136,11 @@
     <Compile Include="KsHelp.Designer.cs">
       <DependentUpon>KsHelp.cs</DependentUpon>
     </Compile>
-    <Compile Include="GridSelectForm.cs">
+    <Compile Include="StructureSetForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GridSelectForm.Designer.cs">
-      <DependentUpon>GridSelectForm.cs</DependentUpon>
+    <Compile Include="StructureSetForm.Designer.cs">
+      <DependentUpon>StructureSetForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -208,8 +208,8 @@
     <EmbeddedResource Include="FeedbackForm.resx">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GridGroupTableForm.resx">
-      <DependentUpon>GridGroupTableForm.cs</DependentUpon>
+    <EmbeddedResource Include="StructureSetTableForm.resx">
+      <DependentUpon>StructureSetTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportImageForm.resx">
       <DependentUpon>ImportImageForm.cs</DependentUpon>
@@ -220,8 +220,8 @@
     <EmbeddedResource Include="KsHelp.resx">
       <DependentUpon>KsHelp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GridSelectForm.resx">
-      <DependentUpon>GridSelectForm.cs</DependentUpon>
+    <EmbeddedResource Include="StructureSetForm.resx">
+      <DependentUpon>StructureSetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

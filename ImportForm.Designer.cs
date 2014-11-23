@@ -41,17 +41,17 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.runCcheMeshBtn = new System.Windows.Forms.Button();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
-            this.separateProportionBtn = new System.Windows.Forms.Button();
-            this.SeparateNumTxt = new System.Windows.Forms.TextBox();
+            this.levelProportionBtn = new System.Windows.Forms.Button();
+            this.verticalLevelNumberTxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.inputFileBtn = new System.Windows.Forms.Button();
             this.inputGridBtn = new System.Windows.Forms.Button();
             this.inputGridRdo = new System.Windows.Forms.RadioButton();
             this.inputFileRdo = new System.Windows.Forms.RadioButton();
             this.runExcelBtn = new System.Windows.Forms.Button();
-            this.runCcheMeshBtn = new System.Windows.Forms.Button();
+            this.runCcheMeshBtn2 = new System.Windows.Forms.Button();
             this.inputFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.selectBgDlg = new System.Windows.Forms.OpenFileDialog();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
@@ -93,7 +93,7 @@
             this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Controls.Add(this.flowTypeGroup);
             this.mainPanel.Controls.Add(this.runExcelBtn);
-            this.mainPanel.Controls.Add(this.runCcheMeshBtn);
+            this.mainPanel.Controls.Add(this.runCcheMeshBtn2);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(500, 692);
@@ -188,7 +188,7 @@
             // 
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.runCcheMeshBtn);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(472, 144);
@@ -216,19 +216,20 @@
             this.button1.Text = "SMS";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // runCcheMeshBtn
             // 
-            this.button4.Location = new System.Drawing.Point(17, 21);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(130, 26);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "CCHE-Mesh";
-            this.button4.UseVisualStyleBackColor = true;
+            this.runCcheMeshBtn.Location = new System.Drawing.Point(17, 21);
+            this.runCcheMeshBtn.Name = "runCcheMeshBtn";
+            this.runCcheMeshBtn.Size = new System.Drawing.Size(130, 26);
+            this.runCcheMeshBtn.TabIndex = 1;
+            this.runCcheMeshBtn.Text = "CCHE-Mesh";
+            this.runCcheMeshBtn.UseVisualStyleBackColor = true;
+            this.runCcheMeshBtn.Click += new System.EventHandler(this.runCcheMeshBtn_Click);
             // 
             // flowTypeGroup
             // 
-            this.flowTypeGroup.Controls.Add(this.separateProportionBtn);
-            this.flowTypeGroup.Controls.Add(this.SeparateNumTxt);
+            this.flowTypeGroup.Controls.Add(this.levelProportionBtn);
+            this.flowTypeGroup.Controls.Add(this.verticalLevelNumberTxt);
             this.flowTypeGroup.Controls.Add(this.label1);
             this.flowTypeGroup.Controls.Add(this.inputFileBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridBtn);
@@ -241,24 +242,24 @@
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "計算網格來源";
             // 
-            // separateProportionBtn
+            // levelProportionBtn
             // 
-            this.separateProportionBtn.Location = new System.Drawing.Point(230, 99);
-            this.separateProportionBtn.Name = "separateProportionBtn";
-            this.separateProportionBtn.Size = new System.Drawing.Size(130, 26);
-            this.separateProportionBtn.TabIndex = 4;
-            this.separateProportionBtn.Text = "分層比例";
-            this.separateProportionBtn.UseVisualStyleBackColor = true;
-            this.separateProportionBtn.Click += new System.EventHandler(this.separateProportionBtn_Click);
-            this.separateProportionBtn.MouseHover += new System.EventHandler(this.showSeparateCtrls_MouseHover);
+            this.levelProportionBtn.Location = new System.Drawing.Point(230, 99);
+            this.levelProportionBtn.Name = "levelProportionBtn";
+            this.levelProportionBtn.Size = new System.Drawing.Size(130, 26);
+            this.levelProportionBtn.TabIndex = 4;
+            this.levelProportionBtn.Text = "分層比例";
+            this.levelProportionBtn.UseVisualStyleBackColor = true;
+            this.levelProportionBtn.Click += new System.EventHandler(this.separateProportionBtn_Click);
+            this.levelProportionBtn.MouseHover += new System.EventHandler(this.showSeparateCtrls_MouseHover);
             // 
-            // SeparateNumTxt
+            // verticalLevelNumberTxt
             // 
-            this.SeparateNumTxt.Location = new System.Drawing.Point(124, 100);
-            this.SeparateNumTxt.Name = "SeparateNumTxt";
-            this.SeparateNumTxt.Size = new System.Drawing.Size(100, 22);
-            this.SeparateNumTxt.TabIndex = 3;
-            this.SeparateNumTxt.MouseHover += new System.EventHandler(this.showSeparateCtrls_MouseHover);
+            this.verticalLevelNumberTxt.Location = new System.Drawing.Point(124, 100);
+            this.verticalLevelNumberTxt.Name = "verticalLevelNumberTxt";
+            this.verticalLevelNumberTxt.Size = new System.Drawing.Size(100, 22);
+            this.verticalLevelNumberTxt.TabIndex = 3;
+            this.verticalLevelNumberTxt.MouseHover += new System.EventHandler(this.showSeparateCtrls_MouseHover);
             // 
             // label1
             // 
@@ -330,16 +331,16 @@
             this.runExcelBtn.Visible = false;
             this.runExcelBtn.Click += new System.EventHandler(this.runExcel_Click);
             // 
-            // runCcheMeshBtn
+            // runCcheMeshBtn2
             // 
-            this.runCcheMeshBtn.Location = new System.Drawing.Point(148, 501);
-            this.runCcheMeshBtn.Name = "runCcheMeshBtn";
-            this.runCcheMeshBtn.Size = new System.Drawing.Size(130, 26);
-            this.runCcheMeshBtn.TabIndex = 1;
-            this.runCcheMeshBtn.Text = "執行CCHE-Mesh";
-            this.runCcheMeshBtn.UseVisualStyleBackColor = true;
-            this.runCcheMeshBtn.Visible = false;
-            this.runCcheMeshBtn.Click += new System.EventHandler(this.runCcheMeshBtn_Click);
+            this.runCcheMeshBtn2.Location = new System.Drawing.Point(148, 501);
+            this.runCcheMeshBtn2.Name = "runCcheMeshBtn2";
+            this.runCcheMeshBtn2.Size = new System.Drawing.Size(130, 26);
+            this.runCcheMeshBtn2.TabIndex = 1;
+            this.runCcheMeshBtn2.Text = "執行CCHE-Mesh";
+            this.runCcheMeshBtn2.UseVisualStyleBackColor = true;
+            this.runCcheMeshBtn2.Visible = false;
+            this.runCcheMeshBtn2.Click += new System.EventHandler(this.runCcheMeshBtn_Click);
             // 
             // inputFileDlg
             // 
@@ -432,7 +433,7 @@
         private System.Windows.Forms.Button inputFileBtn;
         private System.Windows.Forms.Button inputGridBtn;
         private System.Windows.Forms.Button runExcelBtn;
-        private System.Windows.Forms.Button runCcheMeshBtn;
+        private System.Windows.Forms.Button runCcheMeshBtn2;
         private System.Windows.Forms.RadioButton inputGridRdo;
         private System.Windows.Forms.RadioButton inputFileRdo;
         private System.Windows.Forms.OpenFileDialog inputFileDlg;
@@ -440,9 +441,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button separateProportionBtn;
-        private System.Windows.Forms.TextBox SeparateNumTxt;
+        private System.Windows.Forms.Button runCcheMeshBtn;
+        private System.Windows.Forms.Button levelProportionBtn;
+        private System.Windows.Forms.TextBox verticalLevelNumberTxt;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button imgInfoBtn;
         private PictureBoxCtrl.GridPictureBox mapPicBox;

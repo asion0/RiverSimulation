@@ -213,22 +213,25 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(12, 111);
+            this.label8.Location = new System.Drawing.Point(16, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(96, 11);
             this.label8.TabIndex = 2;
             this.label8.Text = "寄給 :";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label8.Visible = false;
             // 
             // sendToTxt
             // 
             this.sendToTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.sendToTxt.Location = new System.Drawing.Point(114, 107);
+            this.sendToTxt.Location = new System.Drawing.Point(118, -1);
             this.sendToTxt.Name = "sendToTxt";
             this.sendToTxt.ReadOnly = true;
             this.sendToTxt.Size = new System.Drawing.Size(514, 22);
             this.sendToTxt.TabIndex = 3;
+            this.sendToTxt.Visible = false;
+            this.sendToTxt.TextChanged += new System.EventHandler(this.sendToTxt_TextChanged);
             // 
             // status
             // 
@@ -258,9 +261,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.attachListBox.FormattingEnabled = true;
             this.attachListBox.ItemHeight = 12;
-            this.attachListBox.Location = new System.Drawing.Point(114, 135);
+            this.attachListBox.Location = new System.Drawing.Point(114, 111);
             this.attachListBox.Name = "attachListBox";
-            this.attachListBox.Size = new System.Drawing.Size(386, 40);
+            this.attachListBox.Size = new System.Drawing.Size(386, 64);
             this.attachListBox.TabIndex = 8;
             this.attachListBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.attachListBox_DragDrop);
             this.attachListBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.attachListBox_DragEnter);

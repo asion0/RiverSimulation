@@ -20,16 +20,66 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+        private RiverSimulationProfile p = RiverSimulationProfile.profile;
+        private SliderPanel sp = new SliderPanel();
+        public void SetForm(RiverSimulationProfile profile)
+        {
+            p = profile;
+        }
+
         private void ImportForm_Load(object sender, EventArgs e)
         {
             //bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
-            if (RiverSimulationProfile.profile.inputGrid != null)
+            if (p.inputGrid != null)
             {
-                mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
+                mapPicBox.Grid = p.inputGrid;
             }
-            SeparateNumTxt.Enabled = RiverSimulationProfile.profile.Is3DMode();
-            separateProportionBtn.Enabled = RiverSimulationProfile.profile.Is3DMode();
+
+            LoadStatus();
             UpdateStatus();
+        }
+
+        private void LoadStatus()
+        {
+            verticalLevelNumberTxt.Text = p.verticalLevelNumber.ToString();
+        }
+
+        private void UpdateStatus()
+        {
+            bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
+            UpdateActiveFunctions();
+        }
+
+        private void UpdateActiveFunctions()
+        {
+            verticalLevelNumberTxt.Enabled = p.Is3DMode();
+            levelProportionBtn.Enabled = p.Is3DMode();
+        }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+            if (!DoConvert())
+            {
+                return;
+            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private bool DoConvert()
+        {
+            if (!ControllerUtility.CheckConvertInt32(ref p.verticalLevelNumber, verticalLevelNumberTxt, "請輸入正確的垂向格網分層數目！", ControllerUtility.CheckType.GreaterThanTwo))
+            {
+                return false;
+            }
+
+            //if (p.verticalLevelNumber != n && p.verticalLevelNumber != 0)
+            //{
+            //    MessageBox.Show("變更垂向格網分層數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    p.levelProportion = null;
+            //}
+            //p.verticalLevelNumber = n;
+            return true;
         }
 
         private void inputFileRdo_CheckedChanged(object sender, EventArgs e)
@@ -203,15 +253,7 @@ namespace RiverSimulationApplication
 
         }   
 
-        private void ok_Click(object sender, EventArgs e)
-        {
-            if (!DoConvert())
-            {
-                return;
-            }
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
+
 
         private void runExcel_Click(object sender, EventArgs e)
         {
@@ -317,7 +359,7 @@ namespace RiverSimulationApplication
             }
             else
             {
-                MessageBox.Show("CCHE-Mesh doesn't install!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("CCHE-Mesh未安裝!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -330,46 +372,22 @@ namespace RiverSimulationApplication
             }
 
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(separateProportionBtn.Text, 1, p.separateNum, separateProportionBtn.Text, "分層比例", "格網分層",
-                TableInputForm.InputFormType.SeparateForm, 90, 120, true, true, false, p.separateArray);
+            form.SetFormMode(levelProportionBtn.Text, 1, p.verticalLevelNumber, levelProportionBtn.Text, "分層比例", "格網分層",
+                TableInputForm.InputFormType.SeparateForm, 90, 120, true, true, false, p.levelProportion);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
-                p.separateArray = (double[])form.SeparateData().Clone();
+                p.levelProportion = (double[])form.SeparateData().Clone();
                 ShowGridMap(PicBoxType.Sprate);
                 DrawPreview();
             }
         }
         
-        private void UpdateStatus()
-        {
-            bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
-        }
-
-        private bool DoConvert()
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            int n = 0;
-            if(p.Is3DMode())
-            { 
-                if (!ControllerUtility.CheckConvertInt32(ref n, SeparateNumTxt.Text, "請輸入正確的垂向格網分層數目！", ControllerUtility.CheckType.GreaterThanTwo))
-                {
-                    return false;
-                }
-            }
-            if (p.separateNum != n && p.separateNum != 0)
-            {
-                MessageBox.Show("變更垂向格網分層數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                p.separateArray = null;
-            }
-            p.separateNum = n;
-            return true;
-        }
 
         private void DrawPreview()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
-            if (p.separateArray == null)
+            if (p.levelProportion == null)
             {
                 return;
             }
@@ -386,7 +404,7 @@ namespace RiverSimulationApplication
             Font leftFont = new Font("微軟正黑體", SeparateTextSize, FontStyle.Regular, GraphicsUnit.Point);
 
             int w = SeparateWidth;
-            int h = p.separateNum * SeparateTextHeight;
+            int h = p.verticalLevelNumber * SeparateTextHeight;
             if (h < SeparateMinHeight)
                 h = SeparateMinHeight;
 
@@ -414,24 +432,24 @@ namespace RiverSimulationApplication
             pt2 = new Point(SeparateTextX - textGap, (int)(textY + SeparateTextSize / 2));
             g.DrawLine(pen, pt1, pt2);
 
-            textY += realH / p.separateNum;
-            for (int i = 1; i < p.separateNum - 1; ++i)
+            textY += realH / p.verticalLevelNumber;
+            for (int i = 1; i < p.verticalLevelNumber - 1; ++i)
             {
-                startY = SeparateHeightGap + (float)(1.0 - p.separateArray[p.separateNum - i - 1]) * realH;
+                startY = SeparateHeightGap + (float)(1.0 - p.levelProportion[p.verticalLevelNumber - i - 1]) * realH;
                 pt1 = new Point(0, (int)startY);
                 pt2 = new Point(SeparatePicWidth, (int)(startY));
                 g.DrawLine(pen, pt1, pt2);
 
 
                 rcText = new RectangleF(SeparateTextX, textY, SeparateWidth - SeparateTextX, SeparateTextSize + SeparateHeightGap);
-                txt = (p.separateArray[p.separateNum - i - 1]).ToString();
+                txt = (p.levelProportion[p.verticalLevelNumber - i - 1]).ToString();
                 g.DrawString(txt, leftFont, brush, rcText, stringFormat);
 
                 pt1 = new Point(SeparatePicWidth + textGap, (int)startY);
                 pt2 = new Point(SeparateTextX - textGap, (int)(textY + SeparateTextSize / 2));
                 g.DrawLine(pen, pt1, pt2);
 
-                textY += realH / p.separateNum;
+                textY += realH / p.verticalLevelNumber;
 
 
             }

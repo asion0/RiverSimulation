@@ -1,6 +1,6 @@
 ﻿namespace RiverSimulationApplication
 {
-    partial class GridSelectForm
+    partial class StructureSetForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,7 @@
             this.listBox.ItemHeight = 12;
             this.listBox.Location = new System.Drawing.Point(13, 47);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(159, 340);
+            this.listBox.Size = new System.Drawing.Size(159, 472);
             this.listBox.TabIndex = 1;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
@@ -57,7 +57,7 @@
             this.mapPicBox.SelectedI = -1;
             this.mapPicBox.SelectGroup = false;
             this.mapPicBox.SelectRow = false;
-            this.mapPicBox.Size = new System.Drawing.Size(602, 340);
+            this.mapPicBox.Size = new System.Drawing.Size(602, 472);
             this.mapPicBox.TabIndex = 2;
             this.mapPicBox.SelectedGroupChangedEvent += new PictureBoxCtrl.GridPictureBox.myDelegate3(this.mapPicBox_SelectedGroupChangedEvent);
             // 
@@ -71,18 +71,18 @@
             this.editBtn.UseVisualStyleBackColor = true;
             this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
             // 
-            // GridSelectForm
+            // StructureSetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 395);
+            this.ClientSize = new System.Drawing.Size(792, 529);
             this.Controls.Add(this.editBtn);
             this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.listBox);
-            this.Name = "GridSelectForm";
+            this.Name = "StructureSetForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "GridSelectForm";
-            this.Load += new System.EventHandler(this.GridSelectForm_Load);
+            this.Load += new System.EventHandler(this.StructureSetForm_Load);
             this.ResumeLayout(false);
 
         }

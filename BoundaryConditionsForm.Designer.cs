@@ -97,14 +97,15 @@
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button10 = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton12 = new System.Windows.Forms.RadioButton();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.downSand3DPanel = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label27 = new System.Windows.Forms.Label();
@@ -121,11 +122,6 @@
             this.radioButton13 = new System.Windows.Forms.RadioButton();
             this.label22 = new System.Windows.Forms.Label();
             this.radioButton14 = new System.Windows.Forms.RadioButton();
-            this.label15 = new System.Windows.Forms.Label();
-            this.upVertPanel = new System.Windows.Forms.Panel();
-            this.button13 = new System.Windows.Forms.Button();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
@@ -134,7 +130,6 @@
             this.label29 = new System.Windows.Forms.Label();
             this.radioButton16 = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
-            this.downSand3DPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -151,12 +146,11 @@
             this.groupBox3.SuspendLayout();
             this.bottomBedPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.downSand3DPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.upSand3DPanel.SuspendLayout();
-            this.upVertPanel.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.downSand3DPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -793,7 +787,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 449);
+            this.label9.Location = new System.Drawing.Point(16, 387);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(89, 12);
             this.label9.TabIndex = 7;
@@ -810,7 +804,7 @@
             this.bottomBedPanel2.Controls.Add(this.comboBox2);
             this.bottomBedPanel2.Controls.Add(this.checkBox4);
             this.bottomBedPanel2.Enabled = false;
-            this.bottomBedPanel2.Location = new System.Drawing.Point(18, 465);
+            this.bottomBedPanel2.Location = new System.Drawing.Point(18, 403);
             this.bottomBedPanel2.Name = "bottomBedPanel2";
             this.bottomBedPanel2.Size = new System.Drawing.Size(440, 113);
             this.bottomBedPanel2.TabIndex = 5;
@@ -894,7 +888,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 343);
+            this.label6.Location = new System.Drawing.Point(16, 278);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 7;
@@ -908,39 +902,10 @@
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.radioButton4);
             this.panel1.Controls.Add(this.downSand3DPanel);
-            this.panel1.Location = new System.Drawing.Point(18, 358);
+            this.panel1.Location = new System.Drawing.Point(18, 293);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(440, 79);
             this.panel1.TabIndex = 5;
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(255, 9);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(104, 26);
-            this.button10.TabIndex = 1;
-            this.button10.Text = "設定";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(11, 16);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(99, 12);
-            this.label20.TabIndex = 3;
-            this.label20.Text = "垂直濃度分布(3D)";
-            // 
-            // radioButton11
-            // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(115, 14);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(59, 16);
-            this.radioButton11.TabIndex = 3;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "均一值";
-            this.radioButton11.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
@@ -952,17 +917,6 @@
             this.radioButton3.TabIndex = 2;
             this.radioButton3.Text = "給定濃度";
             this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton12
-            // 
-            this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(183, 14);
-            this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(71, 16);
-            this.radioButton12.TabIndex = 3;
-            this.radioButton12.TabStop = true;
-            this.radioButton12.Text = "自行輸入";
-            this.radioButton12.UseVisualStyleBackColor = true;
             // 
             // textBox2
             // 
@@ -994,6 +948,57 @@
             this.radioButton4.Text = "通量";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
+            // downSand3DPanel
+            // 
+            this.downSand3DPanel.Controls.Add(this.button10);
+            this.downSand3DPanel.Controls.Add(this.label20);
+            this.downSand3DPanel.Controls.Add(this.radioButton12);
+            this.downSand3DPanel.Controls.Add(this.radioButton11);
+            this.downSand3DPanel.Location = new System.Drawing.Point(3, 35);
+            this.downSand3DPanel.Name = "downSand3DPanel";
+            this.downSand3DPanel.Size = new System.Drawing.Size(434, 41);
+            this.downSand3DPanel.TabIndex = 5;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(255, 9);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(104, 26);
+            this.button10.TabIndex = 1;
+            this.button10.Text = "設定";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(11, 16);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(99, 12);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "垂直濃度分布(3D)";
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Location = new System.Drawing.Point(183, 14);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(71, 16);
+            this.radioButton12.TabIndex = 3;
+            this.radioButton12.TabStop = true;
+            this.radioButton12.Text = "自行輸入";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Location = new System.Drawing.Point(115, 14);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(59, 16);
+            this.radioButton11.TabIndex = 3;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "均一值";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -1009,12 +1014,10 @@
             this.panel2.Controls.Add(this.label27);
             this.panel2.Controls.Add(this.label24);
             this.panel2.Controls.Add(this.panel4);
-            this.panel2.Controls.Add(this.label15);
-            this.panel2.Controls.Add(this.upVertPanel);
             this.panel2.Controls.Add(this.panel5);
             this.panel2.Location = new System.Drawing.Point(18, 35);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(440, 299);
+            this.panel2.Size = new System.Drawing.Size(440, 231);
             this.panel2.TabIndex = 5;
             // 
             // label27
@@ -1163,58 +1166,6 @@
             this.radioButton14.Text = "自行輸入";
             this.radioButton14.UseVisualStyleBackColor = true;
             // 
-            // label15
-            // 
-            this.label15.Location = new System.Drawing.Point(10, 225);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(110, 17);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "垂直濃度分布(3D)";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // upVertPanel
-            // 
-            this.upVertPanel.BackColor = System.Drawing.Color.LightGray;
-            this.upVertPanel.Controls.Add(this.button13);
-            this.upVertPanel.Controls.Add(this.radioButton9);
-            this.upVertPanel.Controls.Add(this.radioButton10);
-            this.upVertPanel.Enabled = false;
-            this.upVertPanel.Location = new System.Drawing.Point(12, 245);
-            this.upVertPanel.Name = "upVertPanel";
-            this.upVertPanel.Size = new System.Drawing.Size(407, 40);
-            this.upVertPanel.TabIndex = 15;
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(158, 7);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(104, 26);
-            this.button13.TabIndex = 1;
-            this.button13.Text = "設定";
-            this.button13.UseVisualStyleBackColor = true;
-            // 
-            // radioButton9
-            // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(15, 12);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(59, 16);
-            this.radioButton9.TabIndex = 3;
-            this.radioButton9.TabStop = true;
-            this.radioButton9.Text = "均一值";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            // 
-            // radioButton10
-            // 
-            this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(82, 12);
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(71, 16);
-            this.radioButton10.TabIndex = 3;
-            this.radioButton10.TabStop = true;
-            this.radioButton10.Text = "自行輸入";
-            this.radioButton10.UseVisualStyleBackColor = true;
-            // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.LightGray;
@@ -1299,17 +1250,6 @@
             this.moveableBedBackBtn.UseVisualStyleBackColor = true;
             this.moveableBedBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
-            // downSand3DPanel
-            // 
-            this.downSand3DPanel.Controls.Add(this.button10);
-            this.downSand3DPanel.Controls.Add(this.label20);
-            this.downSand3DPanel.Controls.Add(this.radioButton12);
-            this.downSand3DPanel.Controls.Add(this.radioButton11);
-            this.downSand3DPanel.Location = new System.Drawing.Point(3, 35);
-            this.downSand3DPanel.Name = "downSand3DPanel";
-            this.downSand3DPanel.Size = new System.Drawing.Size(434, 41);
-            this.downSand3DPanel.TabIndex = 5;
-            // 
             // BoundaryConditionsForm
             // 
             this.AcceptButton = this.ok;
@@ -1352,18 +1292,16 @@
             this.bottomBedPanel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.downSand3DPanel.ResumeLayout(false);
+            this.downSand3DPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.upSand3DPanel.ResumeLayout(false);
             this.upSand3DPanel.PerformLayout();
-            this.upVertPanel.ResumeLayout(false);
-            this.upVertPanel.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.downSand3DPanel.ResumeLayout(false);
-            this.downSand3DPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1446,9 +1384,6 @@
         private System.Windows.Forms.RadioButton radioButton11;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.RadioButton radioButton10;
-        private System.Windows.Forms.RadioButton radioButton9;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.RadioButton radioButton14;
         private System.Windows.Forms.RadioButton radioButton13;
@@ -1456,13 +1391,11 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.RadioButton radioButton16;
         private System.Windows.Forms.RadioButton radioButton15;
-        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel upVertPanel;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;

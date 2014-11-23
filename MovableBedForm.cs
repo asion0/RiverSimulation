@@ -117,10 +117,11 @@ namespace RiverSimulationApplication
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             int n = 0;
-            if (!ControllerUtility.CheckConvertInt32(ref n, seabedLevelNumTxt.Text, "請輸入正確的底床分層數目！", ControllerUtility.CheckType.GreaterThanThree))
+            if (!ControllerUtility.CheckConvertInt32(ref n, seabedLevelNumTxt, "請輸入正確的底床分層數目！", ControllerUtility.CheckType.GreaterThanThree))
             {
                 return false;
             }
+
             if (p.seabedLevelNum != n)
             {
                 MessageBox.Show("變更底床分層數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -129,7 +130,7 @@ namespace RiverSimulationApplication
             }
             p.seabedLevelNum = n;
 
-            if (!ControllerUtility.CheckConvertInt32(ref n, sedimentParticlesNumTxt.Text, "請輸入正確的泥砂顆粒數目！", ControllerUtility.CheckType.GreaterThanTwo))
+            if (!ControllerUtility.CheckConvertInt32(ref n, sedimentParticlesNumTxt, "請輸入正確的泥砂顆粒數目！", ControllerUtility.CheckType.GreaterThanTwo))
             {
                 return false;
             }

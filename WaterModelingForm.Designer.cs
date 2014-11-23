@@ -77,7 +77,7 @@
             this.valueParamBackBtn = new System.Windows.Forms.Button();
             this.valueParamPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.fullPanel = new System.Windows.Forms.Panel();
+            this.turbulenceViscosityPanel = new System.Windows.Forms.Panel();
             this.viscosityFactorAdditionInMainstreamTxt = new System.Windows.Forms.TextBox();
             this.viscosityFactorAdditionInSideDirectionTxt = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -89,14 +89,14 @@
             this.label30 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.outputControl3dGrp = new System.Windows.Forms.GroupBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.outputControlVelocityInformation3DChk = new System.Windows.Forms.CheckBox();
             this.outputControl2dGrp = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.outputControlInitialBottomElevationChk = new System.Windows.Forms.CheckBox();
+            this.outputControlFlowChk = new System.Windows.Forms.CheckBox();
+            this.outputControlLevelChk = new System.Windows.Forms.CheckBox();
+            this.outputControlAverageDepthFlowRateChk = new System.Windows.Forms.CheckBox();
+            this.outputControlBottomShearingStressChk = new System.Windows.Forms.CheckBox();
+            this.outputControlDepthChk = new System.Windows.Forms.CheckBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.maxIterationsNumTxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -142,11 +142,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.roughnessHeightKsHelpBtn = new System.Windows.Forms.Button();
+            this.roughnessHeightKsBtn = new System.Windows.Forms.Button();
             this.turbulenceBackBtn = new System.Windows.Forms.Button();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
-            this.roughnessHeightKsBtn = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.flowTypeGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.secFlowEffectGrp.SuspendLayout();
@@ -156,7 +156,7 @@
             this.mainPanel.SuspendLayout();
             this.valueParamPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.fullPanel.SuspendLayout();
+            this.turbulenceViscosityPanel.SuspendLayout();
             this.minWaterDepthPanel.SuspendLayout();
             this.panel6.SuspendLayout();
             this.outputControl3dGrp.SuspendLayout();
@@ -357,7 +357,7 @@
             this.chezyRdo.Name = "chezyRdo";
             this.chezyRdo.TabStop = true;
             this.chezyRdo.UseVisualStyleBackColor = true;
-            this.chezyRdo.CheckedChanged += new System.EventHandler(this.chezyRdo_CheckedChanged);
+            this.chezyRdo.CheckedChanged += new System.EventHandler(this.roughnessType_CheckedChanged);
             // 
             // manningNRdo
             // 
@@ -365,7 +365,7 @@
             this.manningNRdo.Name = "manningNRdo";
             this.manningNRdo.TabStop = true;
             this.manningNRdo.UseVisualStyleBackColor = true;
-            this.manningNRdo.CheckedChanged += new System.EventHandler(this.manningRdo_CheckedChanged);
+            this.manningNRdo.CheckedChanged += new System.EventHandler(this.roughnessType_CheckedChanged);
             // 
             // structureSetGrp
             // 
@@ -503,7 +503,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.fullPanel);
+            this.groupBox1.Controls.Add(this.turbulenceViscosityPanel);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.minWaterDepthPanel);
             this.groupBox1.Controls.Add(this.panel6);
@@ -516,14 +516,14 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // fullPanel
+            // turbulenceViscosityPanel
             // 
-            this.fullPanel.Controls.Add(this.viscosityFactorAdditionInMainstreamTxt);
-            this.fullPanel.Controls.Add(this.viscosityFactorAdditionInSideDirectionTxt);
-            this.fullPanel.Controls.Add(this.label15);
-            this.fullPanel.Controls.Add(this.label16);
-            resources.ApplyResources(this.fullPanel, "fullPanel");
-            this.fullPanel.Name = "fullPanel";
+            this.turbulenceViscosityPanel.Controls.Add(this.viscosityFactorAdditionInMainstreamTxt);
+            this.turbulenceViscosityPanel.Controls.Add(this.viscosityFactorAdditionInSideDirectionTxt);
+            this.turbulenceViscosityPanel.Controls.Add(this.label15);
+            this.turbulenceViscosityPanel.Controls.Add(this.label16);
+            resources.ApplyResources(this.turbulenceViscosityPanel, "turbulenceViscosityPanel");
+            this.turbulenceViscosityPanel.Name = "turbulenceViscosityPanel";
             // 
             // viscosityFactorAdditionInMainstreamTxt
             // 
@@ -539,7 +539,6 @@
             // 
             resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // label16
             // 
@@ -585,64 +584,71 @@
             // 
             // outputControl3dGrp
             // 
-            this.outputControl3dGrp.Controls.Add(this.checkBox8);
+            this.outputControl3dGrp.Controls.Add(this.outputControlVelocityInformation3DChk);
             resources.ApplyResources(this.outputControl3dGrp, "outputControl3dGrp");
             this.outputControl3dGrp.Name = "outputControl3dGrp";
             this.outputControl3dGrp.TabStop = false;
             // 
-            // checkBox8
+            // outputControlVelocityInformation3DChk
             // 
-            resources.ApplyResources(this.checkBox8, "checkBox8");
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.outputControlVelocityInformation3DChk, "outputControlVelocityInformation3DChk");
+            this.outputControlVelocityInformation3DChk.Name = "outputControlVelocityInformation3DChk";
+            this.outputControlVelocityInformation3DChk.UseVisualStyleBackColor = true;
+            this.outputControlVelocityInformation3DChk.CheckedChanged += new System.EventHandler(this.outputControl_CheckedChanged);
             // 
             // outputControl2dGrp
             // 
-            this.outputControl2dGrp.Controls.Add(this.checkBox1);
-            this.outputControl2dGrp.Controls.Add(this.checkBox7);
-            this.outputControl2dGrp.Controls.Add(this.checkBox5);
-            this.outputControl2dGrp.Controls.Add(this.checkBox2);
-            this.outputControl2dGrp.Controls.Add(this.checkBox6);
-            this.outputControl2dGrp.Controls.Add(this.checkBox3);
+            this.outputControl2dGrp.Controls.Add(this.outputControlInitialBottomElevationChk);
+            this.outputControl2dGrp.Controls.Add(this.outputControlFlowChk);
+            this.outputControl2dGrp.Controls.Add(this.outputControlLevelChk);
+            this.outputControl2dGrp.Controls.Add(this.outputControlAverageDepthFlowRateChk);
+            this.outputControl2dGrp.Controls.Add(this.outputControlBottomShearingStressChk);
+            this.outputControl2dGrp.Controls.Add(this.outputControlDepthChk);
             resources.ApplyResources(this.outputControl2dGrp, "outputControl2dGrp");
             this.outputControl2dGrp.Name = "outputControl2dGrp";
             this.outputControl2dGrp.TabStop = false;
             // 
-            // checkBox1
+            // outputControlInitialBottomElevationChk
             // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.outputControlInitialBottomElevationChk, "outputControlInitialBottomElevationChk");
+            this.outputControlInitialBottomElevationChk.Name = "outputControlInitialBottomElevationChk";
+            this.outputControlInitialBottomElevationChk.UseVisualStyleBackColor = true;
+            this.outputControlInitialBottomElevationChk.CheckedChanged += new System.EventHandler(this.outputControl_CheckedChanged);
             // 
-            // checkBox7
+            // outputControlFlowChk
             // 
-            resources.ApplyResources(this.checkBox7, "checkBox7");
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.outputControlFlowChk, "outputControlFlowChk");
+            this.outputControlFlowChk.Name = "outputControlFlowChk";
+            this.outputControlFlowChk.UseVisualStyleBackColor = true;
+            this.outputControlFlowChk.CheckedChanged += new System.EventHandler(this.outputControl_CheckedChanged);
             // 
-            // checkBox5
+            // outputControlLevelChk
             // 
-            resources.ApplyResources(this.checkBox5, "checkBox5");
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.outputControlLevelChk, "outputControlLevelChk");
+            this.outputControlLevelChk.Name = "outputControlLevelChk";
+            this.outputControlLevelChk.UseVisualStyleBackColor = true;
+            this.outputControlLevelChk.CheckedChanged += new System.EventHandler(this.outputControl_CheckedChanged);
             // 
-            // checkBox2
+            // outputControlAverageDepthFlowRateChk
             // 
-            resources.ApplyResources(this.checkBox2, "checkBox2");
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.outputControlAverageDepthFlowRateChk, "outputControlAverageDepthFlowRateChk");
+            this.outputControlAverageDepthFlowRateChk.Name = "outputControlAverageDepthFlowRateChk";
+            this.outputControlAverageDepthFlowRateChk.UseVisualStyleBackColor = true;
+            this.outputControlAverageDepthFlowRateChk.CheckedChanged += new System.EventHandler(this.outputControl_CheckedChanged);
             // 
-            // checkBox6
+            // outputControlBottomShearingStressChk
             // 
-            resources.ApplyResources(this.checkBox6, "checkBox6");
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.outputControlBottomShearingStressChk, "outputControlBottomShearingStressChk");
+            this.outputControlBottomShearingStressChk.Name = "outputControlBottomShearingStressChk";
+            this.outputControlBottomShearingStressChk.UseVisualStyleBackColor = true;
+            this.outputControlBottomShearingStressChk.CheckedChanged += new System.EventHandler(this.outputControl_CheckedChanged);
             // 
-            // checkBox3
+            // outputControlDepthChk
             // 
-            resources.ApplyResources(this.checkBox3, "checkBox3");
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.outputControlDepthChk, "outputControlDepthChk");
+            this.outputControlDepthChk.Name = "outputControlDepthChk";
+            this.outputControlDepthChk.UseVisualStyleBackColor = true;
+            this.outputControlDepthChk.CheckedChanged += new System.EventHandler(this.outputControl_CheckedChanged);
             // 
             // panel5
             // 
@@ -670,7 +676,6 @@
             // 
             resources.ApplyResources(this.waterModelingConvergenceCriteria2dTxt, "waterModelingConvergenceCriteria2dTxt");
             this.waterModelingConvergenceCriteria2dTxt.Name = "waterModelingConvergenceCriteria2dTxt";
-            this.waterModelingConvergenceCriteria2dTxt.TextChanged += new System.EventHandler(this.convergenceCriteria2dTxt_TextChanged);
             // 
             // label9
             // 
@@ -681,7 +686,6 @@
             // 
             resources.ApplyResources(this.waterModelingConvergenceCriteria3dTxt, "waterModelingConvergenceCriteria3dTxt");
             this.waterModelingConvergenceCriteria3dTxt.Name = "waterModelingConvergenceCriteria3dTxt";
-            this.waterModelingConvergenceCriteria3dTxt.TextChanged += new System.EventHandler(this.convergenceCriteria3dTxt_TextChanged);
             // 
             // label14
             // 
@@ -804,19 +808,16 @@
             // 
             resources.ApplyResources(this.label35, "label35");
             this.label35.Name = "label35";
-            this.label35.Click += new System.EventHandler(this.label12_Click);
             // 
             // label34
             // 
             resources.ApplyResources(this.label34, "label34");
             this.label34.Name = "label34";
-            this.label34.Click += new System.EventHandler(this.label12_Click);
             // 
             // label12
             // 
             resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label17
             // 
@@ -827,7 +828,6 @@
             // 
             resources.ApplyResources(this.gravityConstantTxt, "gravityConstantTxt");
             this.gravityConstantTxt.Name = "gravityConstantTxt";
-            this.gravityConstantTxt.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
             // waterDensityTxt
             // 
@@ -854,13 +854,11 @@
             // 
             resources.ApplyResources(this.label31, "label31");
             this.label31.Name = "label31";
-            this.label31.Click += new System.EventHandler(this.label12_Click);
             // 
             // label27
             // 
             resources.ApplyResources(this.label27, "label27");
             this.label27.Name = "label27";
-            this.label27.Click += new System.EventHandler(this.label12_Click);
             // 
             // twinEquationCombo
             // 
@@ -877,18 +875,17 @@
             this.userDefineRdo.Name = "userDefineRdo";
             this.userDefineRdo.TabStop = true;
             this.userDefineRdo.UseVisualStyleBackColor = true;
+            this.userDefineRdo.CheckedChanged += new System.EventHandler(this.turbulenceViscosityType_CheckedChanged);
             // 
             // tvInSideDirectionTxt
             // 
             resources.ApplyResources(this.tvInSideDirectionTxt, "tvInSideDirectionTxt");
             this.tvInSideDirectionTxt.Name = "tvInSideDirectionTxt";
-            this.tvInSideDirectionTxt.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
             // tvInMainstreamDirectionTxt
             // 
             resources.ApplyResources(this.tvInMainstreamDirectionTxt, "tvInMainstreamDirectionTxt");
             this.tvInMainstreamDirectionTxt.Name = "tvInMainstreamDirectionTxt";
-            this.tvInMainstreamDirectionTxt.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
             // zeroEquationRdo
             // 
@@ -896,6 +893,7 @@
             this.zeroEquationRdo.Name = "zeroEquationRdo";
             this.zeroEquationRdo.TabStop = true;
             this.zeroEquationRdo.UseVisualStyleBackColor = true;
+            this.zeroEquationRdo.CheckedChanged += new System.EventHandler(this.turbulenceViscosityType_CheckedChanged);
             // 
             // twinEquationRdo
             // 
@@ -903,6 +901,7 @@
             this.twinEquationRdo.Name = "twinEquationRdo";
             this.twinEquationRdo.TabStop = true;
             this.twinEquationRdo.UseVisualStyleBackColor = true;
+            this.twinEquationRdo.CheckedChanged += new System.EventHandler(this.turbulenceViscosityType_CheckedChanged);
             // 
             // zeroEquationTypeCombo
             // 
@@ -916,6 +915,7 @@
             resources.GetString("zeroEquationTypeCombo.Items3"),
             resources.GetString("zeroEquationTypeCombo.Items4")});
             this.zeroEquationTypeCombo.Name = "zeroEquationTypeCombo";
+            this.zeroEquationTypeCombo.SelectedIndexChanged += new System.EventHandler(this.zeroEquationTypeCombo_SelectedIndexChanged);
             // 
             // singleEquationRdo
             // 
@@ -952,12 +952,24 @@
             resources.ApplyResources(this.panel8, "panel8");
             this.panel8.Name = "panel8";
             // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
             // roughnessHeightKsHelpBtn
             // 
             resources.ApplyResources(this.roughnessHeightKsHelpBtn, "roughnessHeightKsHelpBtn");
             this.roughnessHeightKsHelpBtn.Name = "roughnessHeightKsHelpBtn";
             this.roughnessHeightKsHelpBtn.UseVisualStyleBackColor = true;
-            this.roughnessHeightKsHelpBtn.Click += new System.EventHandler(this.ksHelpBtn_Click);
+            this.roughnessHeightKsHelpBtn.Click += new System.EventHandler(this.roughnessHeightKsHelpBtn_Click);
+            // 
+            // roughnessHeightKsBtn
+            // 
+            resources.ApplyResources(this.roughnessHeightKsBtn, "roughnessHeightKsBtn");
+            this.roughnessHeightKsBtn.Name = "roughnessHeightKsBtn";
+            this.roughnessHeightKsBtn.UseVisualStyleBackColor = true;
+            this.roughnessHeightKsBtn.Click += new System.EventHandler(this.roughnessHeightKsBtn_Click);
             // 
             // turbulenceBackBtn
             // 
@@ -976,18 +988,6 @@
             this.mapPicBox.SelectGroup = false;
             this.mapPicBox.SelectRow = false;
             // 
-            // roughnessHeightKsBtn
-            // 
-            resources.ApplyResources(this.roughnessHeightKsBtn, "roughnessHeightKsBtn");
-            this.roughnessHeightKsBtn.Name = "roughnessHeightKsBtn";
-            this.roughnessHeightKsBtn.UseVisualStyleBackColor = true;
-            this.roughnessHeightKsBtn.Click += new System.EventHandler(this.chezyBtn_Click);
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
             // WaterModelingForm
             // 
             this.AcceptButton = this.ok;
@@ -1002,7 +1002,6 @@
             this.Name = "WaterModelingForm";
             this.Load += new System.EventHandler(this.WaterModelingForm_Load);
             this.MouseHover += new System.EventHandler(this.groupBox_MouseHover);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WaterModelingForm_MouseMove);
             this.flowTypeGroup.ResumeLayout(false);
             this.flowTypeGroup.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1017,8 +1016,8 @@
             this.valueParamPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.fullPanel.ResumeLayout(false);
-            this.fullPanel.PerformLayout();
+            this.turbulenceViscosityPanel.ResumeLayout(false);
+            this.turbulenceViscosityPanel.PerformLayout();
             this.minWaterDepthPanel.ResumeLayout(false);
             this.minWaterDepthPanel.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -1114,12 +1113,12 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox minWaterDeothTxt;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox outputControlVelocityInformation3DChk;
+        private System.Windows.Forms.CheckBox outputControlFlowChk;
+        private System.Windows.Forms.CheckBox outputControlBottomShearingStressChk;
+        private System.Windows.Forms.CheckBox outputControlLevelChk;
+        private System.Windows.Forms.CheckBox outputControlDepthChk;
+        private System.Windows.Forms.CheckBox outputControlInitialBottomElevationChk;
         private System.Windows.Forms.Label minWaterDepthText;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel7;
@@ -1143,12 +1142,12 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox tvInSideDirectionTxt;
         private System.Windows.Forms.TextBox tvInMainstreamDirectionTxt;
-        private System.Windows.Forms.Panel fullPanel;
+        private System.Windows.Forms.Panel turbulenceViscosityPanel;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.GroupBox outputControl3dGrp;
         private System.Windows.Forms.GroupBox outputControl2dGrp;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox outputControlAverageDepthFlowRateChk;
         private PictureBoxCtrl.GridPictureBox mapPicBox;
         private System.Windows.Forms.CheckBox sedimentationWeirSetChk;
         private System.Windows.Forms.CheckBox groundsillWorkSetChk;

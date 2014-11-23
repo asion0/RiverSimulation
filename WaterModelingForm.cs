@@ -30,14 +30,6 @@ namespace RiverSimulationApplication
             valueParamPanel.Visible = false;        //隱藏數值參數面板
             physicalParamPanel.Visible = false;     //隱藏物理參數面板
 
-
-            if(Program.programVersion.LiteVersion)
-            {
-                minWaterDepthPanel.Visible = false;
-                minWaterDepthText.Visible = false;
-                fullPanel.Visible = false;
-            }
-
             ControllerUtility.SetHtmlUrl(comment, "D1-1.html");
 
 
@@ -160,21 +152,22 @@ namespace RiverSimulationApplication
             highSandEffectC1Txt.Text = p.highSandEffectC1.ToString();
             highSandEffectAlpha2Txt.Text = p.highSandEffectAlpha1.ToString();
             highSandEffectBeta2Txt.Text = p.highSandEffectBeta2.ToString();
-            highSandEffectC1Txt.Text = p.highSandEffectC2.ToString();
+            highSandEffectC2Txt.Text = p.highSandEffectC2.ToString();
         }
 
         private void UpdateStatus()
         {
+            constantFlowRdo.Enabled = !p.IsMovableBedMode();
             if (p.IsMovableBedMode())
-            {
-                constantFlowRdo.Enabled = false;
+            {   //使用者選動床模組，則此處一定為變量流
+                p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
             }
-            if (p.IsConstantFlowType())
-            {   //模擬功能如果為定量流，則總模擬時間與時間間距相同，使用者不輸入。
-                totalSimulationTimeTxt.Enabled = false;
-                timeSpan2dTxt.Enabled = false;
-                outputFrequencyTxt.Enabled = false; //模擬功能如果為定量流，則輸出頻率為1，使用者不輸入。
-            }
+
+            //模擬功能如果為定量流，則總模擬時間與時間間距相同，使用者不輸入。
+            totalSimulationTimeTxt.Enabled = !p.IsConstantFlowType();
+            timeSpan2dTxt.Enabled = !p.IsConstantFlowType();
+            outputFrequencyTxt.Enabled = !p.IsConstantFlowType(); //模擬功能如果為定量流，則輸出頻率為1，使用者不輸入。
+
             outputControl3dGrp.Enabled = p.Is3DMode();
 
             manningNBtn.Enabled = (p.roughnessType == RiverSimulationProfile.RoughnessType.ManningN);
@@ -187,27 +180,148 @@ namespace RiverSimulationApplication
             tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
             zeroEquationTypeCombo.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation);
             twinEquationRdo.Enabled = p.Is3DMode();
+            zeroEquationTypeCombo.Enabled = p.Is3DMode();
             if (p.Is2DMode())
             {   //二維只有 1 種選項：constant，其他則灰掉
                 zeroEquationTypeCombo.SelectedIndex = 0;
-                zeroEquationTypeCombo.Enabled = false;
             }
+
             secFlowEffectGrp.Enabled = p.Is2DMode();    //二維 only。
             highSandContentEffectGrp.Enabled = p.IsWaterModelingMode();     //水理 only 
 
+            tBarNumberTxt.Enabled = p.tBarSet;
+            bridgePierNumberTxt.Enabled = p.bridgePierSet;
+            groundsillWorkNumberTxt.Enabled = p.groundsillWorkSet;
+            sedimentationWeirNumberTxt.Enabled = p.sedimentationWeirSet;
 
             UpdateActiveFunctions();
         }
 
         private void UpdateActiveFunctions()
         {
-
+            if (Program.programVersion.LiteVersion)
+            {
+                minWaterDepthPanel.Visible = false;
+                turbulenceViscosityPanel.Visible = false;
+            }
           
+        }
+
+        private bool DoConvert()
+        {
+            if (!ControllerUtility.CheckConvertDouble(ref p.totalSimulationTime, totalSimulationTimeTxt, "請輸入正確的總模擬時間！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.timeSpan2d, timeSpan2dTxt, "請輸入正確的二維時間間距！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertInt32(ref p.outputFrequency, outputFrequencyTxt, "請輸入正確的輸出頻率！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertInt32(ref p.steppingTimesInVertVslcTime, steppingTimesInVertVslcTimeTxt, "請輸入正確的垂直方向計算時間步進次數！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.waterModelingConvergenceCriteria2d, waterModelingConvergenceCriteria2dTxt, "請輸入正確的二維水理收斂標準！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+            if (!ControllerUtility.CheckConvertDouble(ref p.waterModelingConvergenceCriteria3d, waterModelingConvergenceCriteria3dTxt, "請輸入正確的三維水理收斂標準！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.minWaterDeoth, minWaterDeothTxt, "請輸入正確的最小水深！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }            
+            if (!ControllerUtility.CheckConvertDouble(ref p.viscosityFactorAdditionInMainstream, viscosityFactorAdditionInMainstreamTxt, "請輸入正確的主流方向黏滯係數加成比例！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }            
+            if (!ControllerUtility.CheckConvertDouble(ref p.viscosityFactorAdditionInSideDirection, viscosityFactorAdditionInSideDirectionTxt, "請輸入正確的側方向黏滯係數加成比例！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ConvertStructureSetNumber())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ConvertStructureSetNumber()
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            int n = 0;
+            if (p.tBarSet)
+            {
+                if (!ControllerUtility.CheckConvertInt32(ref n, tBarNumberTxt, "請輸入正確的丁壩數量！", ControllerUtility.CheckType.GreaterThanZero))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                n = 0;
+            }
+            p.tBarNumber = n;
+
+            if (p.bridgePierSet)
+            {
+                if (!ControllerUtility.CheckConvertInt32(ref n, bridgePierNumberTxt, "請輸入正確的橋墩數量！", ControllerUtility.CheckType.GreaterThanZero))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                n = 0;
+            }
+            p.bridgePierNumber = n;
+
+            if (p.groundsillWorkSet)
+            {
+                if (!ControllerUtility.CheckConvertInt32(ref n, groundsillWorkNumberTxt, "請輸入正確的固床工數量！", ControllerUtility.CheckType.GreaterThanZero))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                n = 0;
+            }
+            p.groundsillWorkNumber = n;
+
+            if (p.sedimentationWeirSet)
+            {
+                if (!ControllerUtility.CheckConvertInt32(ref n, sedimentationWeirNumberTxt, "請輸入正確的攔河堰數量！", ControllerUtility.CheckType.GreaterThanZero))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                n = 0;
+            }
+            p.sedimentationWeirNumber = n;
+            return true;
         }
 
         private void Back_Click(object sender, EventArgs e)
         {
             sp.SlidePanel(null, SliderPanel.Direction.Back, this.ClientSize);
+            ControllerUtility.SetHtmlUrl(comment, "D1-1.html");
+
         }
 
         private void SettingButton_Click(object sender, EventArgs e)
@@ -217,128 +331,111 @@ namespace RiverSimulationApplication
             {
                 sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight, this.ClientSize);
             }
-            //else if (orgBtn == setting3dBtn)
-            //{
-            //    sp.SlidePanel(setting3dPanel, SliderPanel.Direction.ToRight);
-            //}
-            //else if (orgBtn == roughnessBtn)
-            //{
-            //    sp.SlidePanel(roughnessPanel, SliderPanel.Direction.ToRight);
-            //}
             else if (orgBtn == physicalParamBtn)
             {
                 sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToRight, this.ClientSize);
             }
-            //else if (orgBtn == dryBedBtn)
-            //{
-            //    sp.SlidePanel(dryBedPanel, SliderPanel.Direction.ToLeft);
-            //}
-            //else if (orgBtn == immersionBtn)
-            //{
-            //    sp.SlidePanel(immersionPanel, SliderPanel.Direction.ToLeft);
-            //}
         }
 
-        private void inputManningBtn_Click(object sender, EventArgs e)
+        private void ok_Click(object sender, EventArgs e)
         {
-            TableInputForm form = new TableInputForm();
-
-            if (DialogResult.OK == form.ShowDialog())
+            if (!DoConvert())
             {
-
+                return;
             }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
+
         private void groupBox_MouseHover(object sender, EventArgs e)
         {
             GroupBox c = sender as GroupBox;
-            string url = "file:///./" + Environment.CurrentDirectory.Replace('\\', '/');
+            string url;
 
 
             if (c == flowTypeGroup)
             {
-                url += "/D1-1-0.html";
+                url = "D1-1-0.html";
             }
             else if (c == groupBox2)
             {
-                url += "/D1-1-1.html";
+                url = "D1-1-1.html";
             }
             else if (c == secFlowEffectGrp)
             {
-                url += "/D1-1-2.html";
+                url = "D1-1-2.html";
             }
             else if (c == groupBox4)
             {
-                url += "/D1-1-3.html";
+                url = "D1-1-3.html";
             }
             else if (c == highSandContentEffectGrp)
             {
-                url += "/D1-1-4.html";
+                url = "D1-1-4.html";
             }
-            //else if(c==groupBox6)
-            //{
-            //    url += "/D1-1-5.html";
-            //}
             else if (c == structureSetGrp)
             {
-                url += "/D1-1-6.html";
+                url = "D1-1-6.html";
             }
             else
             {
-                url += "/D1-1.html";
+                url = "D1-1.html";
             }
 
-            if (comment.Url.ToString() != url)
+            ControllerUtility.SetHtmlUrl(comment, url);
+        }
+
+        private void flowTypeRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (constantFlowRdo.Checked)
             {
-                comment.Navigate(new Uri(url));
+                p.flowType = RiverSimulationProfile.FlowType.ConstantFlow;
             }
-        }
-        private void manningRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as RadioButton).Checked;
-            manningNBtn.Enabled = chk;
-            if(chk)
+            else if (variableFlowRdo.Checked)
             {
-                string url = "file:///" + Environment.CurrentDirectory.Replace('\\', '/') + "/D1-2-1-1.html"; ;
-                if (comment.Url.ToString() != url)
-                {
-                    comment.Navigate(new Uri(url));
-                }
+                p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
             }
-        }
-
-        private void chezyRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as RadioButton).Checked;
-            chezyBtn.Enabled = chk;
-            if (chk)
+            else
             {
-                string url = "file:///" + Environment.CurrentDirectory.Replace('\\', '/') + "/D1-2-1-2.html"; ;
-                if (comment.Url.ToString() != url)
-                {
-                    comment.Navigate(new Uri(url));
-                }
+                p.flowType = RiverSimulationProfile.FlowType.None;
             }
+            UpdateStatus();
         }
 
-        private void curvatureRadiusRdo_CheckedChanged(object sender, EventArgs e)
+        private void outputControl_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as RadioButton).Checked;
-            curvatureRadiusBtn.Enabled = chk; 
-        }
-
-
-        private void autoCurvatureRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            //curvatureRadiusBtn.Enabled = false;
-        }
-
-        private void curvatureRadiusBtn_Click(object sender, EventArgs e)
-        {
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(curvatureRadiusBtn.Text, true, 26, 50);
-            if (DialogResult.OK == form.ShowDialog())
+            bool chk = (sender as CheckBox).Checked;
+            if(sender as CheckBox == outputControlInitialBottomElevationChk)
             {
-
+                p.outputControlInitialBottomElevation = chk;
+            }
+            else if(sender as CheckBox == outputControlLevelChk)
+            {
+                p.outputControlLevel = chk;
+            }
+            else if (sender as CheckBox == outputControlLevelChk)
+            {
+                p.outputControlLevel = chk;
+            }
+            else if (sender as CheckBox == outputControlDepthChk)
+            {
+                p.outputControlDepth = chk;
+            }
+            else if (sender as CheckBox == outputControlAverageDepthFlowRateChk)
+            {
+                p.outputControlAverageDepthFlowRate = chk;
+            }
+            else if (sender as CheckBox == outputControlFlowChk)
+            {
+                p.outputControlFlow = chk;
+            }
+            else if (sender as CheckBox == outputControlBottomShearingStressChk)
+            {
+                p.outputControlBottomShearingStress = chk;
+            }
+            else if (sender as CheckBox == outputControlVelocityInformation3DChk)
+            {
+                p.outputControlVelocityInformation3D = chk;
             }
         }
 
@@ -362,77 +459,145 @@ namespace RiverSimulationApplication
             }
         }
 
-        //private void PropStratBtn_Click(object sender, EventArgs e)
-        //{
-        //    TableInputForm form = new TableInputForm();
-        //    form.SetFormMode(propStratBtn.Text, true, 26, 50);
-        //    if (DialogResult.OK == form.ShowDialog())
-        //    {
-
-        //    }
-        //}
-
-        private void ok_Click(object sender, EventArgs e)
+        private void roughnessHeightKsBtn_Click(object sender, EventArgs e)
         {
-            if (!DoConvert())
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(chezyBtn.Text, true, 26, 50);
+            if (DialogResult.OK == form.ShowDialog())
             {
-                return;
+
             }
-            this.DialogResult = DialogResult.OK;
-            this.Close();
         }
 
-        //private void UserInputPanel_EnabledChanged(object sender, EventArgs e)
-        //{
-        //    bool enabled = (sender as Panel).Enabled;
-        //    xParam.Enabled = enabled;
-        //    yParam.Enabled = enabled;
-        //}
+        private void roughnessHeightKsHelpBtn_Click(object sender, EventArgs e)
+        {
+            KsHelpForm form = new KsHelpForm();
+            if (DialogResult.OK == form.ShowDialog())
+            {
 
-        //private void userInputRdo_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    bool chk = (sender as RadioButton).Checked;
-        //    userInputPanel.Enabled = chk;
-        //}
+            }
+        }
 
-        private void zeroEquationRdo_CheckedChanged(object sender, EventArgs e)
+        private void roughnessType_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            zeroEquationTypeCombo.Enabled = chk;
+            if (chk && sender as RadioButton == manningNRdo)
+            {
+                p.roughnessType = RiverSimulationProfile.RoughnessType.ManningN;
+                ControllerUtility.SetHtmlUrl(comment, "D1-2-1-1.html");
+            }
+            else if (chk && sender as RadioButton == chezyRdo)
+            {
+                p.roughnessType = RiverSimulationProfile.RoughnessType.Chezy;
+                ControllerUtility.SetHtmlUrl(comment, "D1-2-1-2.html");
+            }
+            else
+            {
+                //p.roughnessType = RiverSimulationProfile.RoughnessType.None;
+            }
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
         }
 
-        private void twinEquationRdo_CheckedChanged(object sender, EventArgs e)
+        private void turbulenceViscosityType_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            twinEquationCombo.Enabled = chk;
+            if (chk && sender as RadioButton == userDefineRdo)
+            {
+                p.turbulenceViscosityType = RiverSimulationProfile.TurbulenceViscosityType.UserDefine;
+            }
+            else if (chk && sender as RadioButton == chezyRdo)
+            {
+                p.turbulenceViscosityType = RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation;
+            }
+            else if (chk && sender as RadioButton == chezyRdo)
+            {
+                p.turbulenceViscosityType = RiverSimulationProfile.TurbulenceViscosityType.TwinEquation;
+            }
+            else
+            {
+                //p.turbulenceViscosityType = RiverSimulationProfile.TurbulenceViscosityType.None;
+            }
+            UpdateStatus();     //操作此UI會有互動變化則需呼叫
         }
 
-        private void WaterModelingForm_MouseMove(object sender, MouseEventArgs e)
+        private void zeroEquationTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            p.zeroEquationType = (RiverSimulationProfile.ZeroEquationType)zeroEquationTypeCombo.SelectedIndex;
+        }
 
+        private void curvatureRadiusRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            p.curvatureRadiusType = RiverSimulationProfile.CurvatureRadiusType.InputCurvatureRadius;
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+        }
+
+        private void autoCurvatureRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            p.curvatureRadiusType = RiverSimulationProfile.CurvatureRadiusType.AutoCurvatureRadius;
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+        }
+
+        private void curvatureRadiusBtn_Click(object sender, EventArgs e)
+        {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(curvatureRadiusBtn.Text, true, 26, 50);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void tBarChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.tBarSet = chk;
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+        }
+
+        private void bridgePierChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.bridgePierSet = chk;
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+        }
+
+        private void groundsillWorkChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.groundsillWorkSet = chk;
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+        }
+
+        private void sedimentationWeirChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.sedimentationWeirSet = chk;
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
         }
 
         private void structureSetBtn_Click(object sender, EventArgs e)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
-            if (!ConvertStructureSetNum())
+            if (!ConvertStructureSetNumber())
             {
                 return;
             }
 
-            if(p.tBarNum + p.bridgePierNum + p.groundsillWorkNum + p.sedimentationWeirNum == 0)
+            if (p.tBarNumber + p.bridgePierNumber + p.groundsillWorkNumber + p.sedimentationWeirNumber == 0)
             {
                 MessageBox.Show("請設置結構物數量！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            p.ResizeStructureSetPts(p.tBarNum, p.bridgePierNum, p.groundsillWorkNum, p.sedimentationWeirNum);
-            GridSelectForm form = new GridSelectForm();
+            p.ResizeStructureSets(p.tBarNumber, p.bridgePierNumber, p.groundsillWorkNumber, p.sedimentationWeirNumber);
+            StructureSetForm form = new StructureSetForm();
             form.SetFormMode(structureSetGrp.Text,
-                (p.tBarCheck) ? p.tBarNum : 0, tBarSetChk.Text,
-                (p.bridgePierCheck) ? p.bridgePierNum : 0, bridgePierSetChk.Text,
-                (p.groundsillWorkCheck) ? p.groundsillWorkNum : 0, groundsillWorkSetChk.Text,
-                (p.sedimentationWeirCheck) ? p.sedimentationWeirNum : 0, sedimentationWeirSetChk.Text);
+                (p.tBarSet) ? p.tBarNumber : 0, tBarSetChk.Text,
+                (p.bridgePierSet) ? p.bridgePierNumber : 0, bridgePierSetChk.Text,
+                (p.groundsillWorkSet) ? p.groundsillWorkNumber : 0, groundsillWorkSetChk.Text,
+                (p.sedimentationWeirSet) ? p.sedimentationWeirNumber : 0, sedimentationWeirSetChk.Text);
 
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
@@ -442,188 +607,6 @@ namespace RiverSimulationApplication
                 //DrawPreview();
             }
         }
-
-        private void ksHelpBtn_Click(object sender, EventArgs e)
-        {
-            KsHelpForm form = new KsHelpForm();
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox15_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void convergenceCriteria3dTxt_TextChanged(object sender, EventArgs e)
-        {
-            double value = 0.0;
-            try
-            {
-                value = Convert.ToDouble((sender as TextBox).Text);
-                (sender as TextBox).ForeColor = Color.Black;
-            }
-            catch
-            {
-                (sender as TextBox).ForeColor = Color.Red;
-                return;
-            }
-
-            RiverSimulationProfile.profile.convergenceCriteria3d = value;
-            //UpdateStatus();
-        }
-
-        private void convergenceCriteria2dTxt_TextChanged(object sender, EventArgs e)
-        {
-            double value = 0.0;
-            try
-            {
-                value = Convert.ToDouble((sender as TextBox).Text);
-                (sender as TextBox).ForeColor = Color.Black;
-            }
-            catch
-            {
-                (sender as TextBox).ForeColor = Color.Red;
-                return;
-            }
-
-            RiverSimulationProfile.profile.convergenceCriteria2d = value;
-            //UpdateStatus();        
-        }
-
-        private bool ConvertStructureSetNum()
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            int n = 0;
-            if (p.tBarCheck)
-            {
-                if (!ControllerUtility.CheckConvertInt32(ref n, tBarNumberTxt.Text, "請輸入正確的丁壩數量！", ControllerUtility.CheckType.GreaterThanZero))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                n = 0;
-            }
-            p.tBarNum = n;
-
-            if (p.bridgePierCheck)
-            {
-                if (!ControllerUtility.CheckConvertInt32(ref n, bridgePierNumberTxt.Text, "請輸入正確的橋墩數量！", ControllerUtility.CheckType.GreaterThanZero))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                n = 0;
-            }
-            p.bridgePierNum = n;
-
-            if (p.groundsillWorkCheck)
-            {
-                if (!ControllerUtility.CheckConvertInt32(ref n, groundsillWorkNumberTxt.Text, "請輸入正確的固床工數量！", ControllerUtility.CheckType.GreaterThanZero))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                n = 0;
-            }
-            p.groundsillWorkNum = n;
-
-            if (p.sedimentationWeirCheck)
-            {
-                if (!ControllerUtility.CheckConvertInt32(ref n, sedimentationWeirNumberTxt.Text, "請輸入正確的攔河堰數量！", ControllerUtility.CheckType.GreaterThanZero))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                n = 0;
-            }
-            p.sedimentationWeirNum = n;
-            return true;
-        }
-
-        private bool DoConvert()
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            int n = 0;
-            if (!ControllerUtility.CheckConvertInt32(ref n, maxIterationsNumTxt.Text, "請輸入正確的水理最大疊代次數！", ControllerUtility.CheckType.GreaterThanZero))
-            {
-                return false;
-            }
-            p.maxIterationsNum = n;
-
-            if(!ConvertStructureSetNum())
-            {
-                return false;
-            }
-            
-            return true;
-        }
-
-        private void tBarChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            tBarNumberTxt.Enabled = chk;
-            RiverSimulationProfile.profile.tBarCheck = chk;
-        }
-
-        private void bridgePierChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            bridgePierNumberTxt.Enabled = chk;
-            RiverSimulationProfile.profile.bridgePierCheck = chk;
-        }
-
-        private void groundsillWorkChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            groundsillWorkNumberTxt.Enabled = chk;
-            RiverSimulationProfile.profile.groundsillWorkCheck = chk;
-        }
-
-        private void sedimentationWeirChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            sedimentationWeirNumberTxt.Enabled = chk;
-            RiverSimulationProfile.profile.sedimentationWeirCheck = chk;
-        }
-        ////////////////////////////////////////////////////////////////////////////////
-        private void flowTypeRdo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (constantFlowRdo.Checked)
-            {
-                p.flowType = RiverSimulationProfile.FlowType.ConstantFlow;
-            }
-            else if (variableFlowRdo.Checked)
-            {
-                p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
-            }
-            else
-            {
-                p.flowType = RiverSimulationProfile.FlowType.None;
-            }
-            UpdateStatus();
-        }
-
 
     }
 }

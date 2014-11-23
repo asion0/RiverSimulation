@@ -89,17 +89,17 @@ namespace RiverSimulationApplication
             myArea.AxisX.Maximum = 500.0;
 
             // 設定平均值的 Line
-            if (RiverSimulationProfile.profile.convergenceCriteria2d != 0.0)
+            if (RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d != 0.0)
             {
                 StripLine lineMean = new StripLine();
 
-                lineMean.Text = "收斂值 : " + RiverSimulationProfile.profile.convergenceCriteria2d.ToString();
+                lineMean.Text = "收斂值 : " + RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d.ToString();
                 lineMean.BorderColor = Color.Red; // 線條的顏色
                 lineMean.BorderDashStyle = ChartDashStyle.Dash;
                 lineMean.BorderWidth = 1;
                 lineMean.IntervalOffsetType = DateTimeIntervalType.Auto;
                 //lineMean.Interval = RiverSimulationProfile.profile.convergenceCriteria2d;
-                lineMean.IntervalOffset = Math.Log10(RiverSimulationProfile.profile.convergenceCriteria2d);
+                lineMean.IntervalOffset = Math.Log10(RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d);
                 myArea.AxisY.StripLines.Add(lineMean);
             }
 
@@ -316,36 +316,37 @@ namespace RiverSimulationApplication
         private Process simProcess = new Process();
         void BwDoWork(object sender, DoWorkEventArgs e)
         {
-            //if (simDebugForm.runMode == SimDebugForm.RunMode.OutputFile)
-            //{
-            //    simProcess.StartInfo.FileName = Environment.CurrentDirectory +"\\DumpOutput.exe";
-            //    simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-            //    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " " + simDebugForm.dataFile;
-            //    simProcess.StartInfo.UseShellExecute = false;
-            //    simProcess.StartInfo.RedirectStandardOutput = true;
-            //    simProcess.StartInfo.CreateNoWindow = true;
-            //    simProcess.Start();
-            //}
-            //else if (simDebugForm.runMode == SimDebugForm.RunMode.InputData)
-            //{
-            //    simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\10062.exe";
-            //    simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-            //    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3D " + simDebugForm.dataFile + " out";
-            //    simProcess.StartInfo.UseShellExecute = false;
-            //    simProcess.StartInfo.RedirectStandardOutput = true;
-            //    simProcess.StartInfo.CreateNoWindow = true;
-            //    simProcess.Start();
-            //}
-            //else if (simDebugForm.runMode == SimDebugForm.RunMode.ExternalFile)
-            //{
-            //    simProcess.StartInfo.FileName = Program.currentPath + "\\" + simDebugForm.inputFile;
-            //    simProcess.StartInfo.WorkingDirectory = Program.currentPath;
-            //    simProcess.StartInfo.Arguments = simDebugForm.dataFile;
-            //    simProcess.StartInfo.UseShellExecute = false;
-            //    simProcess.StartInfo.RedirectStandardOutput = true;
-            //    simProcess.StartInfo.CreateNoWindow = true;
-            //    simProcess.Start();
-            //}
+            if (simDebugForm.runMode == SimDebugForm.RunMode.OutputFile)
+            {
+                simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\DumpOutput.exe";
+                simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+                simProcess.StartInfo.Arguments = simDebugForm.inputFile + " " + simDebugForm.dataFile;
+                simProcess.StartInfo.UseShellExecute = false;
+                simProcess.StartInfo.RedirectStandardOutput = true;
+                simProcess.StartInfo.CreateNoWindow = true;
+                simProcess.Start();
+            }
+            else if (simDebugForm.runMode == SimDebugForm.RunMode.InputData)
+            {
+                simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\10062.exe";
+                simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+                simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3D " + simDebugForm.dataFile + " out";
+                simProcess.StartInfo.UseShellExecute = false;
+                simProcess.StartInfo.RedirectStandardOutput = true;
+                simProcess.StartInfo.CreateNoWindow = true;
+                simProcess.Start();
+            }
+            else if (simDebugForm.runMode == SimDebugForm.RunMode.ExternalFile)
+            {
+                simProcess.StartInfo.FileName = Program.currentPath + "\\" + simDebugForm.inputFile;
+                simProcess.StartInfo.WorkingDirectory = Program.currentPath;
+                simProcess.StartInfo.Arguments = simDebugForm.dataFile;
+                simProcess.StartInfo.UseShellExecute = false;
+                simProcess.StartInfo.RedirectStandardOutput = true;
+                simProcess.StartInfo.CreateNoWindow = true;
+                simProcess.Start();
+            }
+            else
             {
                 string strInputFile = "IamReadyNow.i";
                 RiverSimulationProfile.profile.GenerateInputFile(Environment.CurrentDirectory + "\\" + strInputFile);

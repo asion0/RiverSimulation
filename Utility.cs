@@ -233,43 +233,51 @@ namespace RiverSimulationApplication
             GreaterThanThree,
         }
 
-        public static bool CheckConvertInt32(ref int n, string txt, string alertMsg, CheckType t)
+        public static bool CheckConvertInt32(ref int data, TextBox txt, string alertMsg, CheckType t)
         {
+            if (!txt.Enabled)
+            {
+                return true;
+            }
+
+            Int32 n = 0;
+            bool converted = false;
             try
             {
-                n = Convert.ToInt32(txt);
+                n = Convert.ToInt32(txt.Text);
                 switch (t)
                 {
                     case CheckType.NoCheck:
-                        return true;
+                        converted = true;
+                        break;
                     case CheckType.NotNegative:
                         if (n >= 0)
                         {
-                            return true;
+                            converted = true;
                         }
                         break;
                     case CheckType.GreaterThanZero:
                         if (n > 0)
                         {
-                            return true;
+                            converted = true;
                         }
                         break;
                     case CheckType.GreaterThanOne:
                         if (n > 1)
                         {
-                            return true;
+                            converted = true;
                         }
                         break;
                     case CheckType.GreaterThanTwo:
                         if (n > 2)
                         {
-                            return true;
+                            converted = true;
                         }
                         break;
                     case CheckType.GreaterThanThree:
                         if (n > 3)
                         {
-                            return true;
+                            converted = true;
                         }
                         break;
                 }
@@ -277,13 +285,85 @@ namespace RiverSimulationApplication
             catch
             {
             }
-            MessageBox.Show(alertMsg, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            return false;
+
+            if (converted)
+            {
+                data = n;
+            }
+            else
+            {
+                MessageBox.Show(alertMsg, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            return converted;
         }
 
+        public static bool CheckConvertDouble(ref double data, TextBox txt, string alertMsg, CheckType t)
+        {
+            if (!txt.Enabled)
+            {
+                return true;
+            }
+
+            double d = 0;
+            bool converted = false;
+            try
+            {
+                d = Convert.ToDouble(txt.Text);
+                switch (t)
+                {
+                    case CheckType.NoCheck:
+                        converted = true;
+                        break;
+                    case CheckType.NotNegative:
+                        if (d >= 0f)
+                        {
+                            converted = true;
+                        }
+                        break;
+                    case CheckType.GreaterThanZero:
+                        if (d > 0f)
+                        {
+                            converted = true;
+                        }
+                        break;
+                    case CheckType.GreaterThanOne:
+                        if (d > 1f)
+                        {
+                            converted = true;
+                        }
+                        break;
+                    case CheckType.GreaterThanTwo:
+                        if (d > 2f)
+                        {
+                            converted = true;
+                        }
+                        break;
+                    case CheckType.GreaterThanThree:
+                        if (d > 3f)
+                        {
+                            converted = true;
+                        }
+                        break;
+                }
+            }
+            catch
+            {
+            }
+
+            if (converted)
+            {
+                data = d;
+            }
+            else
+            {
+                MessageBox.Show(alertMsg, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            return converted;
+        }
+        
         public static void SetHtmlUrl(WebBrowser b, string u)
         {
-            string url = "file:///" + Environment.CurrentDirectory + "" + u;
+            string url = "file:///" + Environment.CurrentDirectory.Replace('\\', '/') + "/" + u;
             if (b.Url == null || b.Url.ToString() != url)
             {
                 b.Navigate(new Uri(url));
@@ -291,7 +371,7 @@ namespace RiverSimulationApplication
         }
     }
 
-    public static class GroupGridUtility
+    public static class StructureSetUtility
     {
         //檢查一群組所有的格網點是否連續(上下左右視為連續，對角與間隔視為不連續))
         public static bool IsContinuous(List<Point> pl)
@@ -398,38 +478,133 @@ namespace RiverSimulationApplication
         }
 
         //檢查一群組是否與都位於空白處(不屬於任何群組)
-        public static bool IsAllInEmpty(List<Point>[] pts, List<Point> pl, int passIndex)
+        public static bool IsAllInEmpty(RiverSimulationProfile profile, List<Point> pl, int passType, int passIndex)
         {
             foreach (Point p in pl)
             {
-                for (int i = 0; i < pts.Length; ++i )
+                for (int n = 0; n < (int)RiverSimulationProfile.StructureType.StructureTypeSize; ++n)
                 {
-                    List<Point> ppl = pts[i];
-
-                    if (i == passIndex || ppl == null)
-                        continue;
-
-                    if (ppl.Contains(p))
+                    List<Point>[] pts = null;
+                    switch (n)
                     {
-                        return false;
+                        case 0:
+                            pts = profile.tBarSets;
+                            break;
+                        case 1:
+                            pts = profile.bridgePierSets;
+                            break;
+                        case 2:
+                            pts = profile.groundsillWorkSets;
+                            break;
+                        case 3:
+                            pts = profile.sedimentationWeirSets;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (null == pts)
+                    {
+                        continue;
+                    }
+
+                    for (int i = 0; i < pts.Length; ++i)
+                    {
+                        List<Point> ppl = pts[i];
+
+                        if (i == passIndex || ppl == null)
+                            continue;
+
+                        if (ppl.Contains(p))
+                        {
+                            return false;
+                        }
                     }
                 }
-
             }
             return true;
         }
 
-        //查詢一格網點位於哪個群組？
-        public static int WhichGroup(List<Point>[] pts, Point pt, List<Point> addional = null, int passIndex = -1)
+        //查詢一格網點位於哪個結構物群組？
+        //public static int WhichGroup(List<Point>[] pts, Point pt, List<Point> addional = null, int passIndex = -1)
+        //{
+        //    for (int i = 0; i < pts.Length; ++i)
+        //    {
+        //        List<Point> pl = pts[i];
+        //        if (pl == null || (passIndex != -1 && i == passIndex))
+        //            continue;
+        //        if(pl.Contains(pt))
+        //        {
+        //            return i;
+        //        }
+        //    }
+
+        //    if (addional != null)
+        //    {
+        //        if (addional.Contains(pt))
+        //        {
+        //            return passIndex;
+        //        }
+        //    }
+        //    return -1;
+        //}
+        public static List<Point>[] GetStructureSets(RiverSimulationProfile profile, int type)
         {
-            for (int i = 0; i < pts.Length; ++i)
+            List<Point>[] pts = null;
+            switch (type)
             {
-                List<Point> pl = pts[i];
-                if (pl == null || (passIndex != -1 && i == passIndex))
-                    continue;
-                if(pl.Contains(pt))
+                case 0:
+                    pts = profile.tBarSets;
+                    break;
+                case 1:
+                    pts = profile.bridgePierSets;
+                    break;
+                case 2:
+                    pts = profile.groundsillWorkSets;
+                    break;
+                case 3:
+                    pts = profile.sedimentationWeirSets;
+                    break;
+                default:
+                    break;
+            }
+            return pts;
+        }
+
+        public static List<Point> GetStructureSet(RiverSimulationProfile profile, int type, int index)
+        {
+            List<Point>[] pts = GetStructureSets(profile, type);
+            if (pts == null)
+            {
+                return null;
+            }
+            else
+            {
+                return pts[index];
+            }
+        }
+
+        //查詢一格網點位於哪個結構物群組？
+        public static Point WhichGroup(RiverSimulationProfile profile, Point pt, List<Point> addional = null, int passType = -1, int passIndex = -1)
+        {
+
+            for (int n = 0; n < (int)RiverSimulationProfile.StructureType.StructureTypeSize; ++n)
+            {
+                List<Point>[] pts = GetStructureSets(profile, n); 
+                if (null == pts)
                 {
-                    return i;
+                    continue;
+                }
+
+                for (int i = 0; i < pts.Length; ++i)
+                {
+                    List<Point> pl = pts[i];
+                    if (pl == null || (passIndex != -1 && i == passIndex))
+                        continue;
+                    if (pl.Contains(pt))
+                    {
+                        return new Point(n, i);
+                    }
                 }
             }
 
@@ -437,10 +612,10 @@ namespace RiverSimulationApplication
             {
                 if (addional.Contains(pt))
                 {
-                    return passIndex;
+                    return new Point(passType, passIndex);
                 }
             }
-            return -1;
+            return new Point(-1, -1);
         }
 
         //檢查pl2群組所有格網點是否完全包含在pl1群組中
@@ -574,6 +749,51 @@ namespace RiverSimulationApplication
             return groupColors;
         }
 
+        //檢查結構物清單，得知是哪種結構物的第幾個？
+        public static void CalcTypeCount(int index, ref int type, ref int count, RiverSimulationProfile.StructureType[] typeIndex)
+        {
+            if (index >= typeIndex.Length)
+                return;
+
+            RiverSimulationProfile.StructureType lastType = RiverSimulationProfile.StructureType.StructureTypeSize;
+            int c = 0;
+
+            for (int i = 0; i <= index; ++i)
+            {
+                if (typeIndex[i] != lastType)
+                {
+                    c = 0;
+                    lastType = typeIndex[i];
+                }
+                else
+                {
+                    ++c;
+                }
+
+            }
+            type = (lastType == RiverSimulationProfile.StructureType.StructureTypeSize) ? -1 : (int)lastType;
+            count = c;
+        }
+
+        public static void EditBottomElevation(RiverSimulationProfile profile, string title, int type, int index)
+        {
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(title, profile.inputGrid.GetJ, profile.inputGrid.GetI, "", "", "",
+                TableInputForm.InputFormType.BottomElevationForm, 90, 120, true, false, false, profile.inputGrid.inputCoor);
+            form.SetFormModeExtraData(GetStructureSet(profile, type, index));
+
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.levelProportion = (double[])form.SeparateData().Clone();
+                //ShowGridMap(PicBoxType.Sprate);
+                //DrawPreview();
+            }
+       //public void SetFormMode(string title, int colCount, int rowCount, string tableName = "", string colName = "", string rowName = "", 
+       //     InputFormType inputFormType = InputFormType.Generic, int colWidth = 48, int rowHeadersWidth = 64,
+       //    bool onlyTable = true, bool nocolNum = false, bool noRowNum = false, object initData = null)
+        }
     }
 
     public static class DataGridViewUtility
@@ -628,8 +848,12 @@ namespace RiverSimulationApplication
             Clipboard.SetDataObject(v.GetClipboardContent());
         }
 
-        public static void InitializeDataGridView(DataGridView v, int colCount, int rowCount, int columnWidth = 48, int rowHeadersWidth = 64,
-            string tableName = "", string colName = "", string rowName = "", bool nocolNum = false, bool noRowNum = false)
+        public static void InitializeDataGridView(DataGridView v, 
+            int colCount, int rowCount, 
+            int columnWidth = 48, int rowHeadersWidth = 64,
+            string tableName = "", string colName = "", string rowName = "", 
+            bool nocolNum = false, bool noRowNum = false,
+            bool invertCol = false, bool invertRow = false)
         {
             v.Rows.Clear();
             // Create an unbound DataGridView by declaring a column count.
@@ -651,7 +875,14 @@ namespace RiverSimulationApplication
                 string name = colName;
                 if (!nocolNum)
                 {
-                    name += " " + (i + 1).ToString();
+                    if (invertCol)
+                    {
+                        name += " " + (colCount - i).ToString();
+                    }
+                    else
+                    {
+                        name += " " + (i + 1).ToString();
+                    }
                 }
                 v.Columns[i].Name = name;
                 v.Columns[i].Width = columnWidth;
@@ -664,7 +895,14 @@ namespace RiverSimulationApplication
                 string name = rowName;
                 if (!noRowNum)
                 {
-                    name += " " + (i + 1).ToString();
+                    if (invertRow)
+                    {
+                        name += " " + (rowCount - i).ToString();
+                    }
+                    else
+                    {
+                        name += " " + (i + 1).ToString();
+                    }
                 }
                 v.Rows[i].HeaderCell.Value = name;
             }

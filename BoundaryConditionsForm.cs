@@ -54,7 +54,7 @@ namespace RiverSimulationApplication
             bottomBedPanel2.Enabled = p.Is3DMode();
             sideInOutFlowPanel.Enabled = RiverSimulationProfile.profile.sideInOutFlowFunction;
             
-            upVertPanel.Enabled = p.Is3DMode();
+            //upVertPanel.Enabled = p.Is3DMode();
             upSand3DPanel.Enabled = p.Is3DMode();
             waterUpVert3dPanel.Enabled = p.Is3DMode();
 

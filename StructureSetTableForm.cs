@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RiverSimulationApplication
 {
-    public partial class GridGroupTableForm : Form
+    public partial class StructureSetTableForm : Form
     {
-        public GridGroupTableForm()
+        public StructureSetTableForm()
         {
             InitializeComponent();
         }
@@ -23,9 +23,11 @@ namespace RiverSimulationApplication
             objectName = name;
         }
 
+        private RiverSimulationProfile p = RiverSimulationProfile.profile;
+
         private int[] groupColors = null;
         private Color[] colorTable = null;
-        private List<Point>[] pts = null;
+        //private List<Point>[] pts = null;
         private int selIndex = -1;
         public void SetGroupColors(int[] gc)
         {
@@ -37,17 +39,26 @@ namespace RiverSimulationApplication
             colorTable = ct;
         }
 
-        public void SetGridData(List<Point>[] p, int i)
-        {
-            pts = p;
-            selIndex = i;
-        }
-        public void SetSelectionItems(ListBox lb)
+        //public void SetGridData(List<Point>[] p, int i)
+        //{
+        //    pts = p;
+        //    selIndex = i;
+        //}
+
+        private string[] structureName;
+        private int[] structureNum;
+        private RiverSimulationProfile.StructureType[] typeIndex = null;
+
+        public void SetSelectionItems(ListBox lb, string[] structureName, int[] structureNum, RiverSimulationProfile.StructureType[] typeIndex)
         {
             for(int i=0; i<lb.Items.Count; ++i)
             {
                 selCombo.Items.Add(lb.Items[i].ToString());
             }
+            this.structureName = structureName;
+            this.structureNum = structureNum;
+            this.typeIndex = typeIndex;
+            selIndex = lb.SelectedIndex;
 
         }
 
@@ -60,7 +71,6 @@ namespace RiverSimulationApplication
 
         private void InitialDataGrid()
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
             {
                 int columnCount = p.inputGrid.GetJ;
                 int rowCount = p.inputGrid.GetI;
@@ -102,11 +112,14 @@ namespace RiverSimulationApplication
 
         private Color selectedColor = Color.Blue;
         private Color alertColor = Color.Red;
-        private void FillDataGrid(List<Point> newPl = null, bool alert = false)
+        private void FillDataGrid(List<Point> newPl = null, bool alert = false, bool fillZ = false)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             var rg = p.inputGrid;
 
+            int type = 0, count = 0;
+            StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
+    
             Point pt = new Point();
             for (int i = 0; i < rg.GetI; ++i)
             {
@@ -114,23 +127,53 @@ namespace RiverSimulationApplication
                 {
                     pt.X = i;
                     pt.Y = j;
-                    int grpId = GroupGridUtility.WhichGroup(pts, pt, newPl, (newPl==null) ? -1 : selIndex);
+                    Point grpId = StructureSetUtility.WhichGroup(p, pt, newPl, (newPl == null) ? -1 : type, (newPl == null) ? -1 : count);
+
+
                     Color cr;
-                    if (grpId == -1)
-                    {
+                    if (grpId.X == -1 && grpId.Y == -1)
+                    {   //空白處
                         cr = Color.White;
-                        dataGv[j, i].Value = "";
+                        if (fillZ)
+                        {
+                            dataGv[j, i].Value = p.inputGrid.inputCoor[i, j].z.ToString();
+                            dataGv[j, i].ReadOnly = true;
+                        }
+                        else
+                        {
+                            dataGv[j, i].Value = "";
+                            dataGv[j, i].ReadOnly = true;
+                        }
                     }
-                    else if (grpId >= 0 && grpId != selIndex)
-                    {
-                        cr = colorTable[(groupColors[grpId] > 0) ? groupColors[grpId] % colorTable.Length : 0];
-                        dataGv[j, i].Value = objectName + (grpId + 1).ToString();
+                    else if (grpId.X == type && grpId.Y == count)
+                    {   //被選取的結構物
+                        cr = (alert) ? alertColor : selectedColor;
+                        if (fillZ)
+                        {
+                            dataGv[j, i].Value = p.inputGrid.inputCoor[i, j].z.ToString();
+                            dataGv[j, i].ReadOnly = false;
+                        }
+                        else
+                        {
+                            dataGv[j, i].Value = structureName[grpId.X] + (grpId.Y + 1).ToString();
+                            dataGv[j, i].ReadOnly = true;
+                        }
                     }
                     else
-                    {
-                        cr = (alert) ? alertColor : selectedColor;
-                        dataGv[j, i].Value = objectName + (grpId + 1).ToString();
+                    {   //其他結構物
+                        cr = colorTable[grpId.X % colorTable.Length];
+                        if (fillZ)
+                        {
+                            dataGv[j, i].Value = p.inputGrid.inputCoor[i, j].z.ToString();
+                            dataGv[j, i].ReadOnly = false;
+                        }
+                        else
+                        {
+                            dataGv[j, i].Value = structureName[grpId.X] + (grpId.Y + 1).ToString();
+                            dataGv[j, i].ReadOnly = true;
+                        }
                     }
+
                     dataGv[j, i].Style.BackColor = cr;
                 }
             }
@@ -142,13 +185,20 @@ namespace RiverSimulationApplication
             if (selectedCellCount <= 0)
                 return;
 
+            int type = 0, count = 0;
+            StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
+
             List<Point> pl = new List<Point>();
             for (int i = 0; i < selectedCellCount; ++i)
-            {
+            {   //pl 所有被選取的點集合
                 pl.Add(new Point(dataGv.SelectedCells[i].RowIndex, dataGv.SelectedCells[i].ColumnIndex));
             }
-            addBtn.Enabled = GroupGridUtility.IsAllInEmpty(pts, pl, selIndex);
-            removeBtn.Enabled = (pts[selIndex] == null) ? false :GroupGridUtility.IsAllInclude(pts[selIndex], pl);
+            addBtn.Enabled = StructureSetUtility.IsAllInEmpty(p, pl, type, count);
+
+            List<Point> pts = StructureSetUtility.GetStructureSet(p, type, count);
+            removeBtn.Enabled = (pts == null) ? false : StructureSetUtility.IsAllInclude(pts, pl);
+
+            editBtn.Enabled = (null != StructureSetUtility.GetStructureSet(p, type, count));
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -157,32 +207,36 @@ namespace RiverSimulationApplication
             if (selectedCellCount <= 0)
                 return;
 
-            List<Point> pl = new List<Point>();
+            int type = 0, count = 0;
+            StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
+
+            List<Point> pl = new List<Point>();     //表格內被選取的格網點
             for (int i = 0; i < selectedCellCount; ++i)
             {
                 pl.Add(new Point(dataGv.SelectedCells[i].RowIndex, dataGv.SelectedCells[i].ColumnIndex));
             }
 
-
-            List<Point> plSelected = null;
-            if(null != pts[selIndex])
-            {
-                plSelected = new List<Point>(pts[selIndex]);
-                GroupGridUtility.MergePoints(ref plSelected, pl);
+            List<Point> pts = StructureSetUtility.GetStructureSet(p, type, count);
+            List<Point> plSelected = (pts == null) ? null : new List<Point>(pts);
+            if(null != plSelected)
+            {   //正在編輯的結構物不為空則合併被選取的格網點到正在編輯的結構物中
+                StructureSetUtility.MergePoints(ref plSelected, pl);
             }
             else
-            {
+            {   //正在編輯的結構物還沒有任何格網點
                 plSelected = new List<Point>(pl);
             }
 
-            if (!GroupGridUtility.IsContinuous(plSelected))
-            {
+            if (!StructureSetUtility.IsContinuous(plSelected))
+            {   //檢查是否連續
                 FillDataGrid(plSelected, true);
                 MessageBox.Show("新增後不是連續區域，請重新選取！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 FillDataGrid();
                 return;
             }
-            pts[selIndex] = new List<Point>(plSelected);
+
+            p.UpdateStructureSet(plSelected, type, count);
+
             FillDataGrid();
             dataGv.ClearSelection();
         }
@@ -193,32 +247,48 @@ namespace RiverSimulationApplication
             if (selectedCellCount <= 0)
                 return;
 
+            int type = 0, count = 0;
+            StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
+
             List<Point> pl = new List<Point>();
             for (int i = 0; i < selectedCellCount; ++i)
             {
                 pl.Add(new Point(dataGv.SelectedCells[i].RowIndex, dataGv.SelectedCells[i].ColumnIndex));
             }
 
-            List<Point> plSelected = new List<Point>(pts[selIndex]);
-            GroupGridUtility.RemovePoints(ref plSelected, pl);
+            List<Point> pts = StructureSetUtility.GetStructureSet(p, type, count);
+            List<Point> plSelected = (pts == null) ? null : new List<Point>(pts);
+            StructureSetUtility.RemovePoints(ref plSelected, pl);
 
-            if (!GroupGridUtility.IsContinuous(plSelected))
+            if (!StructureSetUtility.IsContinuous(plSelected))
             {
                 FillDataGrid(plSelected, true);
                 MessageBox.Show("刪減後不是連續區域，請重新選取！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 FillDataGrid();
                 return;
             }
-            pts[selIndex] = new List<Point>(plSelected);
+            p.UpdateStructureSet(plSelected, type, count);
             FillDataGrid();
             dataGv.ClearSelection();
         }
 
         private void dryBedCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            groupColors = GroupGridUtility.ColoringGrid(pts, selCombo.SelectedIndex);
+            //groupColors = StructureSetUtility.ColoringGrid(pts, selCombo.SelectedIndex);
             selIndex = selCombo.SelectedIndex;
+            int type = 0, count = 0;
+            StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
+            editBtn.Enabled = (null != StructureSetUtility.GetStructureSet(p, type, count));
             FillDataGrid();
+        }
+
+        private void edit_Click(object sender, EventArgs e)
+        {
+            int type = 0, count = 0;
+            StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
+            
+            StructureSetUtility.EditBottomElevation(p, "編輯" + structureName[type] + (1 + count).ToString() + "高程", type, count);
+ 
         }
     }
 }

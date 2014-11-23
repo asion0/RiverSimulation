@@ -36,6 +36,8 @@
             this.copyPasteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.averageBtn = new System.Windows.Forms.Button();
+            this.ok = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.copyPasteMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +53,7 @@
             this.dataGridView.Location = new System.Drawing.Point(-1, 91);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 24;
-            this.dataGridView.Size = new System.Drawing.Size(781, 409);
+            this.dataGridView.Size = new System.Drawing.Size(781, 366);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
@@ -109,12 +111,37 @@
             this.pasteToolStripMenuItem.Text = "貼上(P)";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
+            // averageBtn
+            // 
+            this.averageBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.averageBtn.Location = new System.Drawing.Point(12, 466);
+            this.averageBtn.Name = "averageBtn";
+            this.averageBtn.Size = new System.Drawing.Size(120, 26);
+            this.averageBtn.TabIndex = 3;
+            this.averageBtn.Text = "平均分配";
+            this.averageBtn.UseVisualStyleBackColor = true;
+            this.averageBtn.Visible = false;
+            this.averageBtn.Click += new System.EventHandler(this.averageBtn_Click);
+            // 
+            // ok
+            // 
+            this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ok.Location = new System.Drawing.Point(648, 466);
+            this.ok.Name = "ok";
+            this.ok.Size = new System.Drawing.Size(120, 26);
+            this.ok.TabIndex = 4;
+            this.ok.Text = "完成";
+            this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
+            // 
             // TableInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 501);
             this.ContextMenuStrip = this.copyPasteMenuStrip;
+            this.Controls.Add(this.ok);
+            this.Controls.Add(this.averageBtn);
             this.Controls.Add(this.singleValueText);
             this.Controls.Add(this.singleValueRdo);
             this.Controls.Add(this.tableValueRdo);
@@ -141,5 +168,7 @@
         private System.Windows.Forms.ContextMenuStrip copyPasteMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.Button averageBtn;
+        private System.Windows.Forms.Button ok;
     }
 }

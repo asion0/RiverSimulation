@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PictureBoxCtrl;
 
 namespace RiverSimulationApplication
 {
@@ -35,6 +36,7 @@ namespace RiverSimulationApplication
             this.rowCount = rowCount;
             this.title = title;
         }
+
         string tableName;
         string colName;
         string rowName;
@@ -61,10 +63,28 @@ namespace RiverSimulationApplication
             CreateData(initData);
         }
 
+       private List<Point> bottomElevationPts = null;
+        public void SetFormModeExtraData(object data1)
+        {
+             if(_inputFormType == InputFormType.BottomElevationForm)
+             {
+                 bottomElevationPts = new List<Point>((List<Point>)data1);
+             }
+           
+        }
+
         private void InitializeDataGridView()
         {
-            DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
-                tableName, colName, rowName, nocolNum, noRowNum);
+            if (inputFormType == InputFormType.SeparateForm)
+            {
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum, false, true);
+            }
+            else
+            {
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum);
+            }
 
             FillDataGridView();
          }
@@ -86,14 +106,18 @@ namespace RiverSimulationApplication
                 dataGridView.Top = 0;
                 dataGridView.Enabled = true;
             }
-            this.Text = title;
-            InitializeDataGridView();
-            if(!hideSingle)
+            else
             {
                 singleValueRdo.Checked = true;
+            }            
+            this.Text = title;
+            InitializeDataGridView();
+
+            if(inputFormType == InputFormType.SeparateForm)
+            {
+                averageBtn.Visible = true;
+
             }
-            //RealtimeExampleForm forma = new RealtimeExampleForm();
-            //forma.Show();
         }
 
         private void singleValue_CheckedChanged(object sender, EventArgs e)
@@ -125,6 +149,7 @@ namespace RiverSimulationApplication
             SeabedThicknessForm,    //底床分層厚度輸入
             SedimentCompositionRatioForm,   //泥砂組成比例輸入
             SeparateForm,       //垂直向隔網分層比例輸入
+            BottomElevationForm,    //編輯底床高程
         }
 
         private InputFormType _inputFormType = InputFormType.Generic;
@@ -200,7 +225,17 @@ namespace RiverSimulationApplication
                     {
                         _data = (double [])(d as double[]).Clone();
                     }
-                    break;            
+                    break;
+                case InputFormType.BottomElevationForm:
+                    if (d == null)
+                    {
+                        _data = new CoorPoint[colCount, rowCount];
+                    }
+                    else
+                    {
+                        _data = (CoorPoint[,])(d as CoorPoint[,]).Clone();
+                    }
+                    break;               
             }
         }
 
@@ -233,12 +268,37 @@ namespace RiverSimulationApplication
                 case InputFormType.SeparateForm:
                     for (int i = 0; i < rowCount; ++i)
                     {
-                        dataGridView[0, i].Value = (_data as double[])[i].ToString();
+                        dataGridView[0, rowCount - i - 1].Value = (_data as double[])[i].ToString();
                     }
                     dataGridView[0, 0].ReadOnly = true;
+                    dataGridView[0, 0].Style.BackColor = Color.LightGray;
+                    dataGridView[0, 0].Style.ForeColor = Color.Red;
                     dataGridView[0, rowCount - 1].ReadOnly = true;
-                    AutoFinishConvertSeparateCell();
-                    break;  
+                    dataGridView[0, rowCount - 1].Style.BackColor = Color.LightGray;
+                    dataGridView[0, rowCount - 1].Style.ForeColor = Color.Red;
+                    dataGridView[0, 0].Selected = false;
+                    dataGridView[0, 1].Selected = true;
+                    dataGridView[0, 0].Value = 1.ToString("F6");
+                    dataGridView[0, rowCount - 1].Value = 0.ToString("F6");
+                    break;
+                case InputFormType.BottomElevationForm:
+                    for (int i = 0; i < colCount; ++i)
+                    {
+                        for (int j = 0; j < rowCount; ++j)
+                        {
+                            if (bottomElevationPts.Contains(new Point(j, i)))
+                            {
+                                dataGridView[i, j].Value = (_data as CoorPoint[,])[j, i].z.ToString();
+                                dataGridView[i, j].ReadOnly = false;
+                            }
+                            else
+                            {
+                                dataGridView[i, j].ReadOnly = true;
+                                dataGridView[i, j].Style.BackColor = Color.Gray;
+                            }
+                        }
+                    }
+                    break;            
             }
         }
 
@@ -266,7 +326,7 @@ namespace RiverSimulationApplication
                 DataGridView v = dataGridView;
                 for (int i = 0; i < rowCount; ++i)
                 {
-                    (_data as double[])[i] = Convert.ToDouble(v[0, i].Value);
+                    (_data as double[])[rowCount - i - 1] = Convert.ToDouble(v[0, i].Value);
                 }
             }
             catch
@@ -290,6 +350,26 @@ namespace RiverSimulationApplication
                     for (int j = 0; j < rowCount; ++j)
                     {
                         (_data as double[,])[i, j] = Convert.ToDouble(v[i, j].Value);
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ConvertBottomElevationData()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                for (int i = 0; i < colCount; ++i)
+                {
+                    for (int j = 0; j < rowCount; ++j)
+                    {
+                        (_data as CoorPoint[,])[j, i].z = Convert.ToDouble(v[i, j].Value);
                     }
                 }
             }
@@ -345,26 +425,24 @@ namespace RiverSimulationApplication
 
         private bool AutoFinishConvertSeparateCell()
         {
-            double last = 0.0;
+            double last = 1.0;
             bool allPass = true;
-            dataGridView[0, 0].Value = "0";
             for (int i = 1; i < rowCount - 1; ++i)
             {
                 try
                 {
                     double v = Convert.ToDouble(dataGridView[0, i].Value);
-                    if (last > v || v > 1.0)
+                    if (last <= v || v >= 1.0)
                     {
                         return false;
                     }
-                    last = Convert.ToDouble(dataGridView[0, i].Value);
+                    last = v;
                 }
                 catch
                 {
                     return false;
                 }
             }
-            dataGridView[0, rowCount - 1].Value = "1";
             return allPass;
         }
 
@@ -376,18 +454,35 @@ namespace RiverSimulationApplication
                     //_data = null;
                     break;
                 case InputFormType.SeabedThicknessForm:
-                    
                     break;
                 case InputFormType.SedimentCompositionRatioForm:
                     AutoFinishConvertSedimentCompositionRatioCell();
                     break;
                 case InputFormType.SeparateForm:
                     AutoFinishConvertSeparateCell();
-                    break;            
+                    break;
+                case InputFormType.BottomElevationForm:
+                    break;        
             }
         }
 
         private void TableInputForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void averageBtn_Click(object sender, EventArgs e)
+        {
+            double step = 1.0 / (rowCount - 1);
+            double v = 1.0 - step;
+            for (int i = 1; i < rowCount - 1; ++i)
+            {
+                dataGridView[0, i].Value = v.ToString("F6");
+                v -= step;
+            }
+        }
+
+        private void ok_Click(object sender, EventArgs e)
         {
             bool isSuccess = false;
             switch (_inputFormType)
@@ -402,18 +497,21 @@ namespace RiverSimulationApplication
                     isSuccess = ConvertSedimentCompositionRatioData();
                     break;
                 case InputFormType.SeparateForm:
-                    if(AutoFinishConvertSeparateCell())
+                    if (AutoFinishConvertSeparateCell())
                     {
                         isSuccess = ConvertSeparateData();
                     }
+                    break;
+                case InputFormType.BottomElevationForm:
+                    isSuccess = ConvertBottomElevationData();
                     break;
             }
 
             if (!isSuccess)
             {
                 //e.Cancel = true;
-                MessageBox.Show("輸入資料格式錯誤，將不被採用！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                DialogResult = DialogResult.Cancel;
+                MessageBox.Show("輸入資料格式錯誤！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
             else
             {

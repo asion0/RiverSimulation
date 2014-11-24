@@ -198,7 +198,8 @@ namespace RiverSimulationApplication
             List<Point> pts = StructureSetUtility.GetStructureSet(p, type, count);
             removeBtn.Enabled = (pts == null) ? false : StructureSetUtility.IsAllInclude(pts, pl);
 
-            editBtn.Enabled = (null != StructureSetUtility.GetStructureSet(p, type, count));
+            editBtn.Enabled = (null != StructureSetUtility.GetStructureSet(p, type, count)) && 
+                (type == (int)RiverSimulationProfile.StructureType.GroundSillWork || type == (int)RiverSimulationProfile.StructureType.SedimentationWeir);
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -278,7 +279,9 @@ namespace RiverSimulationApplication
             selIndex = selCombo.SelectedIndex;
             int type = 0, count = 0;
             StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
-            editBtn.Enabled = (null != StructureSetUtility.GetStructureSet(p, type, count));
+            editBtn.Enabled = (null != StructureSetUtility.GetStructureSet(p, type, count)) &&
+                 (type == (int)RiverSimulationProfile.StructureType.GroundSillWork || type == (int)RiverSimulationProfile.StructureType.SedimentationWeir);
+
             FillDataGrid();
         }
 
@@ -286,8 +289,14 @@ namespace RiverSimulationApplication
         {
             int type = 0, count = 0;
             StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
-            
-            StructureSetUtility.EditBottomElevation(p, "編輯" + structureName[type] + (1 + count).ToString() + "高程", type, count);
+            if (type == (int)RiverSimulationProfile.StructureType.GroundSillWork || type == (int)RiverSimulationProfile.StructureType.SedimentationWeir)
+            {
+                StructureSetUtility.EditBottomElevation(p, "編輯" + structureName[type] + (1 + count).ToString() + "高程", type, count);
+            }
+            else
+            {
+                MessageBox.Show("此結構物不可編輯高程！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
  
         }
     }

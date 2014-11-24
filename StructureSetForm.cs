@@ -169,7 +169,7 @@ namespace RiverSimulationApplication
                 }
             }
             UpdateSelectedGroup(pl);
-            StructureSetUtility.EditBottomElevation(p, "編輯" + structureName[type] + (1 + count).ToString() + "高程", type, count);
+            //StructureSetUtility.EditBottomElevation(p, "編輯" + structureName[type] + (1 + count).ToString() + "高程", type, count);
             //if (StructureSetUtility.IsOverlapping(rg, pl, index))
             //{
             //    UpdateSelectedGroup(pl, true);

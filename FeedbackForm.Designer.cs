@@ -270,6 +270,7 @@
             // 
             // addAttachBtn
             // 
+            this.addAttachBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addAttachBtn.Location = new System.Drawing.Point(506, 135);
             this.addAttachBtn.Name = "addAttachBtn";
             this.addAttachBtn.Size = new System.Drawing.Size(58, 40);
@@ -280,6 +281,7 @@
             // 
             // clearAttachBtn
             // 
+            this.clearAttachBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.clearAttachBtn.Location = new System.Drawing.Point(570, 135);
             this.clearAttachBtn.Name = "clearAttachBtn";
             this.clearAttachBtn.Size = new System.Drawing.Size(58, 40);

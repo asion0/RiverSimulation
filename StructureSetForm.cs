@@ -168,7 +168,12 @@ namespace RiverSimulationApplication
                     return;
                 }
             }
-            UpdateSelectedGroup(pl);
+
+            //最後確認 [20141121]更新客製化需求 回報問題 新增規格
+            if (DialogResult.OK == MessageBox.Show("請確認以此次圈選範圍取代原先資料。", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.None))
+            {
+                UpdateSelectedGroup(pl);
+            }
             //StructureSetUtility.EditBottomElevation(p, "編輯" + structureName[type] + (1 + count).ToString() + "高程", type, count);
             //if (StructureSetUtility.IsOverlapping(rg, pl, index))
             //{

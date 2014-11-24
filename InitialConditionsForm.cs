@@ -26,6 +26,8 @@ namespace RiverSimulationApplication
 
         private void InitialConditionsForm_Load(object sender, EventArgs e)
         {
+            ControllerUtility.SetHtmlUrl(comment, "Logo.html");
+
             if(p.Is3DMode())
             {
                 initialWater3DPanel.Enabled = true;

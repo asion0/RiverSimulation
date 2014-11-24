@@ -40,8 +40,7 @@ namespace RiverSimulationApplication
 
         private void BoundaryConditionsForm_Load(object sender, EventArgs e)
         {
-            //string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
-            //comment.Navigate(new Uri(url));
+            ControllerUtility.SetHtmlUrl(comment, "Logo.html");
 
             this.Width = 1000;
             this.Height = 720;

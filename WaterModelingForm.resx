@@ -1503,11 +1503,14 @@
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label29.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="label29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 17</value>
+    <value>19, 23</value>
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
@@ -1533,8 +1536,11 @@
   <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="minWaterDeothTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="minWaterDeothTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 14</value>
+    <value>186, 20</value>
   </data>
   <data name="minWaterDeothTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 22</value>
@@ -1554,6 +1560,9 @@
   <data name="&gt;&gt;minWaterDeothTxt.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label30.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1561,7 +1570,7 @@
     <value>NoControl</value>
   </data>
   <data name="label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>356, 17</value>
+    <value>356, 23</value>
   </data>
   <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
     <value>14, 12</value>
@@ -1584,11 +1593,44 @@
   <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="minWaterDepthText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="minWaterDepthText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="minWaterDepthText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 0</value>
+  </data>
+  <data name="minWaterDepthText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
+  </data>
+  <data name="minWaterDepthText.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="minWaterDepthText.Text" xml:space="preserve">
+    <value>最小水深</value>
+  </data>
+  <data name="minWaterDepthText.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;minWaterDepthText.Name" xml:space="preserve">
+    <value>minWaterDepthText</value>
+  </data>
+  <data name="&gt;&gt;minWaterDepthText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;minWaterDepthText.Parent" xml:space="preserve">
+    <value>minWaterDepthPanel</value>
+  </data>
+  <data name="&gt;&gt;minWaterDepthText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="minWaterDepthPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 471</value>
+    <value>18, 458</value>
   </data>
   <data name="minWaterDepthPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>435, 48</value>
+    <value>435, 61</value>
   </data>
   <data name="minWaterDepthPanel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2073,39 +2115,6 @@
   <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="minWaterDepthText.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="minWaterDepthText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="minWaterDepthText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 456</value>
-  </data>
-  <data name="minWaterDepthText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
-  </data>
-  <data name="minWaterDepthText.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="minWaterDepthText.Text" xml:space="preserve">
-    <value>最小水深</value>
-  </data>
-  <data name="minWaterDepthText.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;minWaterDepthText.Name" xml:space="preserve">
-    <value>minWaterDepthText</value>
-  </data>
-  <data name="&gt;&gt;minWaterDepthText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;minWaterDepthText.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;minWaterDepthText.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="label25.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2137,7 +2146,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2170,7 +2179,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2194,7 +2203,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2221,7 +2230,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -2242,7 +2251,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;totalSimulationTimeTxt.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;totalSimulationTimeTxt.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -2272,7 +2281,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -2302,7 +2311,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -2329,7 +2338,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -2353,7 +2362,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;steppingTimesInVertVslcTimeTxt.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;steppingTimesInVertVslcTimeTxt.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -2374,7 +2383,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;timeSpan2dTxt.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;timeSpan2dTxt.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -2398,7 +2407,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;outputFrequencyTxt.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;outputFrequencyTxt.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -2428,31 +2437,31 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>panel4</value>
+    <value>valueTimePanel</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="valueTimePanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 39</value>
   </data>
-  <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="valueTimePanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>435, 138</value>
   </data>
-  <data name="panel4.TabIndex" type="System.Int32, mscorlib">
+  <data name="valueTimePanel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;panel4.Name" xml:space="preserve">
-    <value>panel4</value>
+  <data name="&gt;&gt;valueTimePanel.Name" xml:space="preserve">
+    <value>valueTimePanel</value>
   </data>
-  <data name="&gt;&gt;panel4.Type" xml:space="preserve">
+  <data name="&gt;&gt;valueTimePanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;valueTimePanel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;valueTimePanel.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>新細明體, 9pt</value>
@@ -2482,7 +2491,7 @@
     <value>0</value>
   </data>
   <data name="valueParamPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 639</value>
+    <value>145, 630</value>
   </data>
   <data name="valueParamPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 670</value>
@@ -3271,7 +3280,7 @@
     <value>1</value>
   </data>
   <data name="physicalParamPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 676</value>
+    <value>12, 671</value>
   </data>
   <data name="physicalParamPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 680</value>
@@ -3307,7 +3316,7 @@
     <value>mapPicBox</value>
   </data>
   <data name="&gt;&gt;mapPicBox.Type" xml:space="preserve">
-    <value>PictureBoxCtrl.GridPictureBox, GridPictureBox, Version=1.0.5439.38787, Culture=neutral, PublicKeyToken=null</value>
+    <value>PictureBoxCtrl.GridPictureBox, GridPictureBox, Version=1.0.5441.17664, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;mapPicBox.Parent" xml:space="preserve">
     <value>$this</value>

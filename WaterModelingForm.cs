@@ -30,7 +30,7 @@ namespace RiverSimulationApplication
             valueParamPanel.Visible = false;        //隱藏數值參數面板
             physicalParamPanel.Visible = false;     //隱藏物理參數面板
 
-            ControllerUtility.SetHtmlUrl(comment, "D1-1.html");
+            ControllerUtility.SetHtmlUrl(comment, "Logo.html");
 
 
             
@@ -157,11 +157,12 @@ namespace RiverSimulationApplication
 
         private void UpdateStatus()
         {
-            constantFlowRdo.Enabled = !p.IsMovableBedMode();
-            if (p.IsMovableBedMode())
-            {   //使用者選動床模組，則此處一定為變量流
-                p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
-            }
+            //20141124 取消此規格
+            //constantFlowRdo.Enabled = !p.IsMovableBedMode();
+            //if (p.IsMovableBedMode())
+            //{   //使用者選動床模組，則此處一定為變量流
+            //    p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
+            //}
 
             //模擬功能如果為定量流，則總模擬時間與時間間距相同，使用者不輸入。
             totalSimulationTimeTxt.Enabled = !p.IsConstantFlowType();
@@ -265,7 +266,7 @@ namespace RiverSimulationApplication
             int n = 0;
             if (p.tBarSet)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, tBarNumberTxt, "請輸入正確的丁壩數量！", ControllerUtility.CheckType.GreaterThanZero))
+                if (!ControllerUtility.CheckConvertInt32(ref n, tBarNumberTxt, "請輸入正確的丁壩數量！", ControllerUtility.CheckType.GreaterThanOne))
                 {
                     return false;
                 }
@@ -278,7 +279,7 @@ namespace RiverSimulationApplication
 
             if (p.bridgePierSet)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, bridgePierNumberTxt, "請輸入正確的橋墩數量！", ControllerUtility.CheckType.GreaterThanZero))
+                if (!ControllerUtility.CheckConvertInt32(ref n, bridgePierNumberTxt, "請輸入正確的橋墩數量！", ControllerUtility.CheckType.GreaterThanOne))
                 {
                     return false;
                 }
@@ -291,7 +292,7 @@ namespace RiverSimulationApplication
 
             if (p.groundsillWorkSet)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, groundsillWorkNumberTxt, "請輸入正確的固床工數量！", ControllerUtility.CheckType.GreaterThanZero))
+                if (!ControllerUtility.CheckConvertInt32(ref n, groundsillWorkNumberTxt, "請輸入正確的固床工數量！", ControllerUtility.CheckType.GreaterThanOne))
                 {
                     return false;
                 }
@@ -304,7 +305,7 @@ namespace RiverSimulationApplication
 
             if (p.sedimentationWeirSet)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, sedimentationWeirNumberTxt, "請輸入正確的攔河堰數量！", ControllerUtility.CheckType.GreaterThanZero))
+                if (!ControllerUtility.CheckConvertInt32(ref n, sedimentationWeirNumberTxt, "請輸入正確的攔河堰數量！", ControllerUtility.CheckType.GreaterThanOne))
                 {
                     return false;
                 }
@@ -320,7 +321,7 @@ namespace RiverSimulationApplication
         private void Back_Click(object sender, EventArgs e)
         {
             sp.SlidePanel(null, SliderPanel.Direction.Back, this.ClientSize);
-            ControllerUtility.SetHtmlUrl(comment, "D1-1.html");
+            ControllerUtility.SetHtmlUrl(comment, "Logo.html");
 
         }
 
@@ -349,40 +350,40 @@ namespace RiverSimulationApplication
 
         private void groupBox_MouseHover(object sender, EventArgs e)
         {
-            GroupBox c = sender as GroupBox;
-            string url;
+            //GroupBox c = sender as GroupBox;
+            //string url;
 
 
-            if (c == flowTypeGroup)
-            {
-                url = "D1-1-0.html";
-            }
-            else if (c == groupBox2)
-            {
-                url = "D1-1-1.html";
-            }
-            else if (c == secFlowEffectGrp)
-            {
-                url = "D1-1-2.html";
-            }
-            else if (c == groupBox4)
-            {
-                url = "D1-1-3.html";
-            }
-            else if (c == highSandContentEffectGrp)
-            {
-                url = "D1-1-4.html";
-            }
-            else if (c == structureSetGrp)
-            {
-                url = "D1-1-6.html";
-            }
-            else
-            {
-                url = "D1-1.html";
-            }
+            //if (c == flowTypeGroup)
+            //{
+            //    url = "D1-1-0.html";
+            //}
+            //else if (c == groupBox2)
+            //{
+            //    url = "D1-1-1.html";
+            //}
+            //else if (c == secFlowEffectGrp)
+            //{
+            //    url = "D1-1-2.html";
+            //}
+            //else if (c == groupBox4)
+            //{
+            //    url = "D1-1-3.html";
+            //}
+            //else if (c == highSandContentEffectGrp)
+            //{
+            //    url = "D1-1-4.html";
+            //}
+            //else if (c == structureSetGrp)
+            //{
+            //    url = "D1-1-6.html";
+            //}
+            //else
+            //{
+            //    url = "D1-1.html";
+            //}
 
-            ControllerUtility.SetHtmlUrl(comment, url);
+            //ControllerUtility.SetHtmlUrl(comment, url);
         }
 
         private void flowTypeRdo_CheckedChanged(object sender, EventArgs e)
@@ -442,7 +443,7 @@ namespace RiverSimulationApplication
         private void manningBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(manningNBtn.Text, false, 26, 50);
+            form.SetFormMode(manningNBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -452,7 +453,7 @@ namespace RiverSimulationApplication
         private void chezyBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(chezyBtn.Text, true, 26, 50);
+            form.SetFormMode(chezyBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -462,7 +463,7 @@ namespace RiverSimulationApplication
         private void roughnessHeightKsBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(chezyBtn.Text, true, 26, 50);
+            form.SetFormMode(roughnessHeightKsBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -606,6 +607,16 @@ namespace RiverSimulationApplication
                 //ShowGridMap(PicBoxType.Sprate);
                 //DrawPreview();
             }
+        }
+
+        private void valueTimePanel_MouseHover(object sender, EventArgs e)
+        {
+            ControllerUtility.SetHtmlUrl(comment, "D1-1.html");
+        }
+
+        private void timeTxt_Enter(object sender, EventArgs e)
+        {
+            ControllerUtility.SetHtmlUrl(comment, "D1-1.html");
         }
 
     }

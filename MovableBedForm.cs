@@ -33,6 +33,7 @@ namespace RiverSimulationApplication
             }
             else if (orgBtn == transSandMethodBtn)
             {
+                ControllerUtility.SetHtmlUrl(comment, "D2-4.html");
                 sp.SlidePanel(transSandMethodPanel, SliderPanel.Direction.ToRight, this.Size);
             }
             else if (orgBtn == seabedCompositionBtn)
@@ -56,33 +57,6 @@ namespace RiverSimulationApplication
 
         private void MovableBedForm_Load(object sender, EventArgs e)
         {
-            //string url = "file:///./" + Environment.CurrentDirectory + "\\D1-1.html";
-            //comment.Navigate(new Uri(url));
-            if (Program.programVersion.LiteVersion)
-            {
-                fullPanel.Visible = false;
-            }
-
-            if(p.waterHighSandContentEffectFunction)
-            {
-                this.normalSandMethodText.Visible = false;
-                this.normalSandMethodPanel.Visible = false;
-                this.highSandMethodText.Visible = true;
-                this.highSandMethodPanel.Visible = true;
-                this.highSandMethodText.Top = this.normalSandMethodText.Location.Y;
-                this.highSandMethodPanel.Top = this.normalSandMethodPanel.Location.Y;
-                this.highSandMethodPanel.Enabled = true;
-            }
-            else
-            {
-                this.normalSandMethodText.Visible = true;
-                this.normalSandMethodPanel.Visible = true;
-                this.highSandMethodText.Visible = false;
-                this.highSandMethodPanel.Visible = false;
-            }
-
-            //this.Width = 1000;
-            //this.Height = 720;
             valueParamPanel.Visible = false;
             physicalParamPanel.Visible = false;
             seabedCompositionPanel.Visible = false;
@@ -90,11 +64,10 @@ namespace RiverSimulationApplication
             rockbedPanel.Visible = false;
             transSandMethodPanel.Visible = false;
 
+            ControllerUtility.SetHtmlUrl(comment, "Logo.html");
+
             this.CenterToParent();
 
-            this.bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
-            this.quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
-            this.highSandContentFlowGrp.Enabled = p.waterHighSandContentEffectFunction;
             //this.highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
             //highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentFlowFunction;
             previewPicBox.Width = previewPanel.Width;
@@ -111,6 +84,31 @@ namespace RiverSimulationApplication
             outputCtrl3DGrp.Enabled = p.Is3DMode();
 
             DrawPreview();
+            if (Program.programVersion.LiteVersion)
+            {
+                fullPanel.Visible = false;
+            }
+            this.bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
+            this.quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
+            this.highSandContentFlowGrp.Enabled = p.waterHighSandContentEffectFunction;
+
+            if (p.waterHighSandContentEffectFunction)
+            {
+                this.normalSandMethodText.Visible = false;
+                this.normalSandMethodPanel.Visible = false;
+                this.highSandMethodText.Visible = true;
+                this.highSandMethodPanel.Visible = true;
+                this.highSandMethodText.Top = this.normalSandMethodText.Location.Y;
+                this.highSandMethodPanel.Top = this.normalSandMethodPanel.Location.Y;
+                this.highSandMethodPanel.Enabled = true;
+            }
+            else
+            {
+                this.normalSandMethodText.Visible = true;
+                this.normalSandMethodPanel.Visible = true;
+                this.highSandMethodText.Visible = false;
+                this.highSandMethodPanel.Visible = false;
+            }
         }
 
         private bool DoConvert()
@@ -151,6 +149,8 @@ namespace RiverSimulationApplication
             {
                 sp.SlidePanel(null, SliderPanel.Direction.Back, this.Size);
             }
+            ControllerUtility.SetHtmlUrl(comment, "Logo.html");
+
         }
 
         private void ok_Click(object sender, EventArgs e)
@@ -311,8 +311,11 @@ namespace RiverSimulationApplication
             const int SeabedLevelLineHeight = 12;           //左方顯示底床分層狀態文字高度
             const int SeabedLevelGap = 8;               //左方顯示底床分層狀態文字垂直間隔
             const int SedimentParticlesGap = 8;               //右方顯示泥砂顆粒狀態文字垂直間隔
-            Font leftFont = new Font("微軟正黑體", SeabedLevelLineHeight, FontStyle.Regular, GraphicsUnit.Point);
-            Font rightFont = new Font("微軟正黑體", SedimentParticlesLineHeight, FontStyle.Regular, GraphicsUnit.Point);
+
+            Font leftFont = Control.DefaultFont;
+            Font rightFont = Control.DefaultFont;
+            //Font leftFont = new Font("微軟正黑體", SeabedLevelLineHeight, FontStyle.Regular, GraphicsUnit.Point);
+            //Font rightFont = new Font("微軟正黑體", SedimentParticlesLineHeight, FontStyle.Regular, GraphicsUnit.Point);
 
             int cellH = (p.sedimentParticlesNum * SedimentParticlesLineHeight) + (p.sedimentParticlesNum + 1) * SedimentParticlesGap;
 
@@ -344,6 +347,10 @@ namespace RiverSimulationApplication
 
                 RectangleF rcLeftTxt1 = new RectangleF(0, startY, SeabedLevelWidth, SeabedLevelLineHeight + SeabedLevelGap);
                 string txt = "底床分層" + " " + (p.seabedLevelArray.Length - i).ToString();
+                if(i == 0)
+                {
+                    txt = "作用層";
+                }
                 g.DrawString(txt, leftFont, leftBrush, rcLeftTxt1, stringFormat);
 
                 RectangleF rcLeftTxt2 = new RectangleF(0, startY + SeabedLevelGap + SeabedLevelLineHeight, SeabedLevelWidth, SeabedLevelLineHeight + SeabedLevelGap);
@@ -397,8 +404,8 @@ namespace RiverSimulationApplication
             }
 
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(seabedThicknessBtn.Text, p.seabedLevelNum, 1, seabedThicknessBtn.Text, "", "底床分層厚度",
-                TableInputForm.InputFormType.SeabedThicknessForm, 90, 120, true, false, true, p.seabedLevelArray);
+            form.SetFormMode(seabedThicknessBtn.Text, 1, p.seabedLevelNum, seabedThicknessBtn.Text, "底床分層厚度", "底床分層",
+                TableInputForm.InputFormType.SeabedThicknessForm, 90, 120, true, true, false, p.seabedLevelArray);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
@@ -542,13 +549,7 @@ namespace RiverSimulationApplication
 
         private void sedimentParticlesNumTxt_MouseHover(object sender, EventArgs e)
         {
-
-            string url = "file:///" + Environment.CurrentDirectory.Replace('\\', '/') + "/D1-2-1-3.html"; ;
-            if (comment.Url == null || comment.Url.ToString() != url)
-            {
-                comment.Navigate(new Uri(url));
-            }
-
+            ControllerUtility.SetHtmlUrl(comment, "D1-2-1-3.html");
         }
  
 

@@ -15,6 +15,12 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+        private RiverSimulationProfile p = RiverSimulationProfile.profile;
+        private SliderPanel sp = new SliderPanel();
+        public void SetForm(RiverSimulationProfile profile)
+        {
+            p = profile;
+        }
 
         private BackgroundWorker bw = new BackgroundWorker();
         private SimDebugForm simDebugForm = new SimDebugForm();
@@ -35,6 +41,18 @@ namespace RiverSimulationApplication
             //this.progTxt.Parent = progressBar;
 
             this.progressBar.Maximum = 10000;
+            LoadStatus();
+            UpdateStatus();
+
+        }
+
+        private void UpdateStatus()
+        {
+        }
+
+        private void LoadStatus()
+        {
+            maxIterationsNumTxt.Text = p.maxIterationsNum.ToString();
         }
 
         private void ResetChart()
@@ -383,12 +401,25 @@ namespace RiverSimulationApplication
             Running,
             Pause,
         }
+        private bool DoConvert()
+        {
+            if (!ControllerUtility.CheckConvertInt32(ref p.maxIterationsNum, maxIterationsNumTxt, "請輸入正確的水理最大疊代次數！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+            return true;
+        }
 
         private Status status = Status.Ready;
         private void startBtn_Click(object sender, EventArgs e)
         {
             if (status == Status.Ready)
             {
+                if (!DoConvert())
+                {
+                    return;
+                }
+
                 ResetChart();
                 RunSimulationMain();
                 EnterSimUI(Status.Running);

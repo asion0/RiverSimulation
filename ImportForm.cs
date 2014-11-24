@@ -29,7 +29,7 @@ namespace RiverSimulationApplication
 
         private void ImportForm_Load(object sender, EventArgs e)
         {
-            //bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
+            ControllerUtility.SetHtmlUrl(comment, "Logo.html");
             if (p.inputGrid != null)
             {
                 mapPicBox.Grid = p.inputGrid;

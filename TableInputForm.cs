@@ -35,13 +35,15 @@ namespace RiverSimulationApplication
             this.colCount = colCount;
             this.rowCount = rowCount;
             this.title = title;
+            CreateData(null);
+
         }
 
         string tableName;
         string colName;
         string rowName;
-        bool nocolNum = true;
-        bool noRowNum = true;
+        bool nocolNum = false;
+        bool noRowNum = false;
          int colWidth = 48;
         int rowHeadersWidth = 64;
        public void SetFormMode(string title, int colCount, int rowCount, string tableName = "", string colName = "", string rowName = "", 
@@ -80,6 +82,23 @@ namespace RiverSimulationApplication
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum, false, true);
             }
+            else if(inputFormType == InputFormType.Generic)
+            {
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum);
+            }
+            else if (inputFormType == InputFormType.SeabedThicknessForm)
+            {
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum, false, true);
+                dataGridView.Rows[0].HeaderCell.Value = "作用層";
+            }
+            else if (inputFormType == InputFormType.SedimentCompositionRatioForm)
+            {
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum, false, true);
+                dataGridView.Rows[0].HeaderCell.Value = "作用層";
+            }
             else
             {
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
@@ -112,6 +131,11 @@ namespace RiverSimulationApplication
             }            
             this.Text = title;
             InitializeDataGridView();
+
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
             if(inputFormType == InputFormType.SeparateForm)
             {
@@ -194,12 +218,12 @@ namespace RiverSimulationApplication
             switch(_inputFormType)
             {
                 case InputFormType.Generic:
-                    _data = null;
+                    _data = new double[colCount, rowCount];
                     break;
                 case InputFormType.SeabedThicknessForm:
                     if (d == null)
                     {
-                        _data = new double[colCount];
+                        _data = new double[rowCount];
                     }
                     else
                     {
@@ -246,9 +270,9 @@ namespace RiverSimulationApplication
                 case InputFormType.Generic:
                     break;
                 case InputFormType.SeabedThicknessForm:
-                    for (int i = 0; i < colCount; ++i)
+                    for (int i = 0; i < rowCount; ++i)
                     {
-                        dataGridView[i, 0].Value = (_data as double[])[i].ToString();
+                        dataGridView[0, rowCount - i - 1].Value = (_data as double[])[i].ToString();
                     }
                     break;
                 case InputFormType.SedimentCompositionRatioForm:
@@ -256,7 +280,7 @@ namespace RiverSimulationApplication
                     {
                         for (int j = 0; j < rowCount; ++j)
                         {
-                            dataGridView[i,j].Value = (_data as double[,])[i, j].ToString();
+                            dataGridView[i, rowCount - j - 1].Value = (_data as double[,])[i, j].ToString();
                             if(i == colCount - 1)
                             {
                                 dataGridView[i, j].ReadOnly = true;
@@ -307,9 +331,9 @@ namespace RiverSimulationApplication
             try
             {
                 DataGridView v = dataGridView;
-                for (int i = 0; i < colCount; ++i)
+                for (int i = 0; i < rowCount; ++i)
                 {
-                    (_data as double[])[i] = Convert.ToDouble(v[i, 0].Value);
+                    (_data as double[])[rowCount - i - 1] = Convert.ToDouble(v[0, i].Value);
                 }
             }
             catch
@@ -349,7 +373,7 @@ namespace RiverSimulationApplication
                 {
                     for (int j = 0; j < rowCount; ++j)
                     {
-                        (_data as double[,])[i, j] = Convert.ToDouble(v[i, j].Value);
+                        (_data as double[,])[i, rowCount - j - 1] = Convert.ToDouble(v[i, j].Value);
                     }
                 }
             }
@@ -446,7 +470,7 @@ namespace RiverSimulationApplication
             return allPass;
         }
 
-        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void AutoFunction()
         {
             switch (_inputFormType)
             {
@@ -462,8 +486,12 @@ namespace RiverSimulationApplication
                     AutoFinishConvertSeparateCell();
                     break;
                 case InputFormType.BottomElevationForm:
-                    break;        
+                    break;
             }
+        }
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            AutoFunction();
         }
 
         private void TableInputForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -517,6 +545,11 @@ namespace RiverSimulationApplication
             {
                 DialogResult = DialogResult.OK;
             }
+        }
+
+        private void dataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            AutoFunction();
         }
     }
 }

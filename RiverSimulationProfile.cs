@@ -394,7 +394,7 @@ namespace RiverSimulationApplication
         //WaterModeling 數值參數
         //public double convergenceCriteria2d;    //二維水裡收斂標準 
         //public double convergenceCriteria3d;    //三維水裡收斂標準
-        public int maxIterationsNum = 0;        //水理最大疊代次數。1.1.2.3
+        public int maxIterationsNum = 10000;        //水理最大疊代次數。1.1.2.3
 
         //結構物設置
         //public bool tBarCheck = false;

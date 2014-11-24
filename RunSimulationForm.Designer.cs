@@ -39,6 +39,8 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.progTxt = new System.Windows.Forms.Label();
+            this.maxIterationsNumTxt = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,9 +48,9 @@
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(11, 459);
+            this.progressBar.Location = new System.Drawing.Point(11, 528);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(680, 32);
+            this.progressBar.Size = new System.Drawing.Size(800, 32);
             this.progressBar.TabIndex = 0;
             // 
             // stopFlagChk
@@ -63,7 +65,7 @@
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(11, 35);
+            this.startBtn.Location = new System.Drawing.Point(11, 61);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(119, 31);
             this.startBtn.TabIndex = 4;
@@ -81,7 +83,7 @@
             // stopBtn
             // 
             this.stopBtn.Enabled = false;
-            this.stopBtn.Location = new System.Drawing.Point(136, 35);
+            this.stopBtn.Location = new System.Drawing.Point(136, 61);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(119, 31);
             this.stopBtn.TabIndex = 4;
@@ -98,7 +100,7 @@
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(11, 102);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(785, 351);
+            this.chart1.Size = new System.Drawing.Size(905, 420);
             this.chart1.TabIndex = 6;
             this.chart1.Text = "chart1";
             // 
@@ -108,18 +110,39 @@
             this.progTxt.BackColor = System.Drawing.SystemColors.Control;
             this.progTxt.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.progTxt.ForeColor = System.Drawing.Color.Black;
-            this.progTxt.Location = new System.Drawing.Point(696, 465);
+            this.progTxt.Location = new System.Drawing.Point(816, 534);
             this.progTxt.Name = "progTxt";
             this.progTxt.Size = new System.Drawing.Size(100, 23);
             this.progTxt.TabIndex = 7;
             this.progTxt.Text = "0.0";
             this.progTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // maxIterationsNumTxt
+            // 
+            this.maxIterationsNumTxt.Location = new System.Drawing.Point(117, 33);
+            this.maxIterationsNumTxt.MaxLength = 8;
+            this.maxIterationsNumTxt.Name = "maxIterationsNumTxt";
+            this.maxIterationsNumTxt.Size = new System.Drawing.Size(160, 22);
+            this.maxIterationsNumTxt.TabIndex = 9;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label10.Location = new System.Drawing.Point(10, 38);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(101, 12);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "水理最大疊代次數";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // RunSimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 529);
+            this.ClientSize = new System.Drawing.Size(928, 598);
+            this.Controls.Add(this.maxIterationsNumTxt);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.progTxt);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.msg);
@@ -149,5 +172,7 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label progTxt;
+        private System.Windows.Forms.TextBox maxIterationsNumTxt;
+        private System.Windows.Forms.Label label10;
     }
 }

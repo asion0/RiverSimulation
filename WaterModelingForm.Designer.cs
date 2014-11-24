@@ -87,6 +87,7 @@
             this.label29 = new System.Windows.Forms.Label();
             this.minWaterDeothTxt = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
+            this.minWaterDepthText = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.outputControl3dGrp = new System.Windows.Forms.GroupBox();
             this.outputControlVelocityInformation3DChk = new System.Windows.Forms.CheckBox();
@@ -104,10 +105,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.waterModelingConvergenceCriteria3dTxt = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.minWaterDepthText = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.valueTimePanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.totalSimulationTimeTxt = new System.Windows.Forms.TextBox();
@@ -162,7 +162,7 @@
             this.outputControl3dGrp.SuspendLayout();
             this.outputControl2dGrp.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.valueTimePanel.SuspendLayout();
             this.physicalParamPanel.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -508,10 +508,9 @@
             this.groupBox1.Controls.Add(this.minWaterDepthPanel);
             this.groupBox1.Controls.Add(this.panel6);
             this.groupBox1.Controls.Add(this.panel5);
-            this.groupBox1.Controls.Add(this.minWaterDepthText);
             this.groupBox1.Controls.Add(this.label25);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.panel4);
+            this.groupBox1.Controls.Add(this.valueTimePanel);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
@@ -556,6 +555,7 @@
             this.minWaterDepthPanel.Controls.Add(this.label29);
             this.minWaterDepthPanel.Controls.Add(this.minWaterDeothTxt);
             this.minWaterDepthPanel.Controls.Add(this.label30);
+            this.minWaterDepthPanel.Controls.Add(this.minWaterDepthText);
             resources.ApplyResources(this.minWaterDepthPanel, "minWaterDepthPanel");
             this.minWaterDepthPanel.Name = "minWaterDepthPanel";
             // 
@@ -573,6 +573,11 @@
             // 
             resources.ApplyResources(this.label30, "label30");
             this.label30.Name = "label30";
+            // 
+            // minWaterDepthText
+            // 
+            resources.ApplyResources(this.minWaterDepthText, "minWaterDepthText");
+            this.minWaterDepthText.Name = "minWaterDepthText";
             // 
             // panel6
             // 
@@ -692,11 +697,6 @@
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
             // 
-            // minWaterDepthText
-            // 
-            resources.ApplyResources(this.minWaterDepthText, "minWaterDepthText");
-            this.minWaterDepthText.Name = "minWaterDepthText";
-            // 
             // label25
             // 
             resources.ApplyResources(this.label25, "label25");
@@ -707,21 +707,22 @@
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
             // 
-            // panel4
+            // valueTimePanel
             // 
-            this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.totalSimulationTimeTxt);
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.steppingTimesInVertVslcTimeTxt);
-            this.panel4.Controls.Add(this.timeSpan2dTxt);
-            this.panel4.Controls.Add(this.outputFrequencyTxt);
-            this.panel4.Controls.Add(this.label13);
-            resources.ApplyResources(this.panel4, "panel4");
-            this.panel4.Name = "panel4";
+            this.valueTimePanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.valueTimePanel.Controls.Add(this.label1);
+            this.valueTimePanel.Controls.Add(this.label2);
+            this.valueTimePanel.Controls.Add(this.totalSimulationTimeTxt);
+            this.valueTimePanel.Controls.Add(this.label3);
+            this.valueTimePanel.Controls.Add(this.label5);
+            this.valueTimePanel.Controls.Add(this.label4);
+            this.valueTimePanel.Controls.Add(this.steppingTimesInVertVslcTimeTxt);
+            this.valueTimePanel.Controls.Add(this.timeSpan2dTxt);
+            this.valueTimePanel.Controls.Add(this.outputFrequencyTxt);
+            this.valueTimePanel.Controls.Add(this.label13);
+            resources.ApplyResources(this.valueTimePanel, "valueTimePanel");
+            this.valueTimePanel.Name = "valueTimePanel";
+            this.valueTimePanel.MouseHover += new System.EventHandler(this.valueTimePanel_MouseHover);
             // 
             // label1
             // 
@@ -737,6 +738,7 @@
             // 
             resources.ApplyResources(this.totalSimulationTimeTxt, "totalSimulationTimeTxt");
             this.totalSimulationTimeTxt.Name = "totalSimulationTimeTxt";
+            this.totalSimulationTimeTxt.Enter += new System.EventHandler(this.timeTxt_Enter);
             // 
             // label3
             // 
@@ -757,16 +759,19 @@
             // 
             resources.ApplyResources(this.steppingTimesInVertVslcTimeTxt, "steppingTimesInVertVslcTimeTxt");
             this.steppingTimesInVertVslcTimeTxt.Name = "steppingTimesInVertVslcTimeTxt";
+            this.steppingTimesInVertVslcTimeTxt.Enter += new System.EventHandler(this.timeTxt_Enter);
             // 
             // timeSpan2dTxt
             // 
             resources.ApplyResources(this.timeSpan2dTxt, "timeSpan2dTxt");
             this.timeSpan2dTxt.Name = "timeSpan2dTxt";
+            this.timeSpan2dTxt.Enter += new System.EventHandler(this.timeTxt_Enter);
             // 
             // outputFrequencyTxt
             // 
             resources.ApplyResources(this.outputFrequencyTxt, "outputFrequencyTxt");
             this.outputFrequencyTxt.Name = "outputFrequencyTxt";
+            this.outputFrequencyTxt.Enter += new System.EventHandler(this.timeTxt_Enter);
             // 
             // label13
             // 
@@ -1027,8 +1032,8 @@
             this.outputControl2dGrp.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.valueTimePanel.ResumeLayout(false);
+            this.valueTimePanel.PerformLayout();
             this.physicalParamPanel.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
@@ -1089,7 +1094,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button physicalParamBtn;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel valueTimePanel;
         private System.Windows.Forms.TextBox waterDensityTxt;
         private System.Windows.Forms.TextBox gravityConstantTxt;
         private System.Windows.Forms.Label label17;

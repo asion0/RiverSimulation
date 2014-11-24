@@ -485,7 +485,7 @@
             // 
             this.valueParamPanel.Controls.Add(this.groupBox10);
             this.valueParamPanel.Controls.Add(this.valueParamBackBtn);
-            this.valueParamPanel.Location = new System.Drawing.Point(144, 105);
+            this.valueParamPanel.Location = new System.Drawing.Point(144, 656);
             this.valueParamPanel.Name = "valueParamPanel";
             this.valueParamPanel.Size = new System.Drawing.Size(500, 670);
             this.valueParamPanel.TabIndex = 12;
@@ -745,7 +745,7 @@
             // 
             this.physicalParamPanel.Controls.Add(this.groupBox1);
             this.physicalParamPanel.Controls.Add(this.fluidTypeBackBtn);
-            this.physicalParamPanel.Location = new System.Drawing.Point(55, 212);
+            this.physicalParamPanel.Location = new System.Drawing.Point(55, 696);
             this.physicalParamPanel.Name = "physicalParamPanel";
             this.physicalParamPanel.Size = new System.Drawing.Size(500, 670);
             this.physicalParamPanel.TabIndex = 12;
@@ -814,7 +814,7 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(243, 588);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(243, 615);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
             this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
@@ -1615,7 +1615,7 @@
             // 
             this.transSandMethodPanel.Controls.Add(this.groupBox5);
             this.transSandMethodPanel.Controls.Add(this.button1);
-            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 624);
+            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 638);
             this.transSandMethodPanel.Name = "transSandMethodPanel";
             this.transSandMethodPanel.Size = new System.Drawing.Size(500, 670);
             this.transSandMethodPanel.TabIndex = 12;
@@ -1674,10 +1674,10 @@
             this.radioButton13.AutoSize = true;
             this.radioButton13.Location = new System.Drawing.Point(18, 20);
             this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(101, 16);
+            this.radioButton13.Size = new System.Drawing.Size(97, 16);
             this.radioButton13.TabIndex = 1;
             this.radioButton13.TabStop = true;
-            this.radioButton13.Text = "一般輸砂公式1";
+            this.radioButton13.Text = "Van Rijn(1984)";
             this.radioButton13.UseVisualStyleBackColor = true;
             // 
             // radioButton12
@@ -1685,10 +1685,10 @@
             this.radioButton12.AutoSize = true;
             this.radioButton12.Location = new System.Drawing.Point(284, 20);
             this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(101, 16);
+            this.radioButton12.Size = new System.Drawing.Size(114, 16);
             this.radioButton12.TabIndex = 1;
             this.radioButton12.TabStop = true;
-            this.radioButton12.Text = "一般輸砂公式3";
+            this.radioButton12.Text = "Rickenmann(1991)";
             this.radioButton12.UseVisualStyleBackColor = true;
             // 
             // radioButton5
@@ -1707,10 +1707,10 @@
             this.radioButton11.AutoSize = true;
             this.radioButton11.Location = new System.Drawing.Point(147, 20);
             this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(101, 16);
+            this.radioButton11.Size = new System.Drawing.Size(111, 16);
             this.radioButton11.TabIndex = 1;
             this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "一般輸砂公式2";
+            this.radioButton11.Text = "Gary Parker(1990)";
             this.radioButton11.UseVisualStyleBackColor = true;
             // 
             // radioButton3
@@ -1797,7 +1797,7 @@
             this.previewPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.previewPicBox.BackColor = System.Drawing.Color.White;
+            this.previewPicBox.BackColor = System.Drawing.SystemColors.Control;
             this.previewPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.previewPicBox.Location = new System.Drawing.Point(0, 0);
             this.previewPicBox.Margin = new System.Windows.Forms.Padding(0);
@@ -1814,6 +1814,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.previewPanel.AutoScroll = true;
             this.previewPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.previewPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.previewPanel.Controls.Add(this.previewPicBox);
             this.previewPanel.Location = new System.Drawing.Point(522, 263);
             this.previewPanel.Margin = new System.Windows.Forms.Padding(0);

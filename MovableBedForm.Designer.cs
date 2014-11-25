@@ -485,7 +485,7 @@
             // 
             this.valueParamPanel.Controls.Add(this.groupBox10);
             this.valueParamPanel.Controls.Add(this.valueParamBackBtn);
-            this.valueParamPanel.Location = new System.Drawing.Point(144, 656);
+            this.valueParamPanel.Location = new System.Drawing.Point(144, 184);
             this.valueParamPanel.Name = "valueParamPanel";
             this.valueParamPanel.Size = new System.Drawing.Size(500, 670);
             this.valueParamPanel.TabIndex = 12;
@@ -1615,7 +1615,7 @@
             // 
             this.transSandMethodPanel.Controls.Add(this.groupBox5);
             this.transSandMethodPanel.Controls.Add(this.button1);
-            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 243);
+            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 638);
             this.transSandMethodPanel.Name = "transSandMethodPanel";
             this.transSandMethodPanel.Size = new System.Drawing.Size(500, 670);
             this.transSandMethodPanel.TabIndex = 12;

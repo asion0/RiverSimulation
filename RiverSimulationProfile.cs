@@ -237,6 +237,50 @@ namespace RiverSimulationApplication
 
         #endregion
 
+        //動床參數
+        //2.1 數值參數 =========================================
+        public double waterTimeSpan;                //2.1.1 時間間距
+        public Int32 waterOutputFrequency;          //2.1.2 輸出頻率
+
+        //2.1.3 輸出控制
+        //2D
+        public bool outputControlBottomElevation { get; set; }      //2.1.3 輸出控制 初始底床高程
+        public bool outputControlAverageDepthDensity { get; set; }  //2.1.3 輸出控制 水深平均流速
+        public bool outputControlErosionDepth { get; set; }         //2.1.3 沖淤深度
+
+        //3D
+        public bool outputControlDensityInformation3D { get; set; }  //2.1.3 輸出控制 三維流速資訊
+
+        //2.1.4 選擇擴散公式
+        public enum DiffusionFormulaType
+        {   //紊流黏滯係數 種類
+            None,
+            Formula1,
+            Formula2,
+            Formula3,
+        }
+        DiffusionFormulaType diffusionFormula;      //2.1.4 擴散公式
+
+        public double diffusionBonusProportionalInMainstream;   //2.1.5 主流方向擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
+        public double diffusionBonusProportionalInSideflow;     //2.1.6 側方向擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
+        public double diffusionBonusProportionalInSurface;      //2.1.7 水面擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
+        public double diffusionBonusProportionalInBottom;       //2.1.8 底床擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
+        //2.2 物理參數
+        public double kinematicViscosityCoefficient;    //2.2.1 動力黏滯係數單一數值 秒 1.12e-6 實數(>=0) 實數16 格
+        public double sedimentPoreRatio;                //2.2.2 泥砂孔隙比單一數值 -- 0.4 實數(>=0) 實數8 格
+        public double sedimentDensity;                  //2.2.3 泥砂密度單一數值 Kg/m3 2700 實數(>=0) 實數8 格
+        public Int32 sedimentParticlesNumber;           //2.2.4 泥砂顆粒數目單一數值K 3 整數(>2) 最優先設定
+        public double[,] sedimentParticleSize;          //2.2.4.1 泥砂粒徑矩陣(K) m 實數(>0) 實數16 格矩陣(K)為泥砂顆粒數目
+
+        //2.3 底床組成
+        public Int32 bottomLevelNumber;                 //2.3.1 底床分層數目單一數值 整數(>0) a. 使用者輸入底床分層數目後
+        public double[] bottomLevelArray;               //2.3.1.1 底床分層厚度矩陣(L) m 實數(>0) 矩陣(L)為底床分層數目
+        public double[,] sedimentCompositionArray;      //2.3.1.2 泥砂組成比例矩陣(K,L) 實數(>0) 矩陣(K,L)為(泥砂顆粒數目, 底床分層數目)
+
+        //2.3.2 凝聚性沉滓option
+                            //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+
+
         //功能檢查
         #region Fuction Check
         public bool Is3DMode() { return dimensionType == DimensionType.Type3D; }

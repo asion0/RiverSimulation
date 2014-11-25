@@ -17,47 +17,16 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
-        private SliderPanel sp = new SliderPanel();
         RiverSimulationProfile p = RiverSimulationProfile.profile;
-
-        private void SettingButton_Click(object sender, EventArgs e)
+        private SliderPanel sp = new SliderPanel();
+        public void SetForm(RiverSimulationProfile profile)
         {
-            Button orgBtn = sender as Button;
-            if (orgBtn == valueParamBtn)
-            {
-                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight, this.Size);
-            }
-            else if (orgBtn == physicalParamBtn)
-            {
-                sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToRight, this.Size);
-            }
-            else if (orgBtn == transSandMethodBtn)
-            {
-                ControllerUtility.SetHtmlUrl(comment, "D2-4.html");
-                sp.SlidePanel(transSandMethodPanel, SliderPanel.Direction.ToRight, this.Size);
-            }
-            else if (orgBtn == seabedCompositionBtn)
-            {
-                sp.SlidePanel(seabedCompositionPanel, SliderPanel.Direction.ToRight, this.Size);
-            }
-            else if (orgBtn == rockbedBtn)
-            {
-                sp.SlidePanel(rockbedPanel, SliderPanel.Direction.ToRight, this.Size);
-            }
-            else if (orgBtn == rockStableBtn)
-            {
-                sp.SlidePanel(rockStablePanel, SliderPanel.Direction.ToRight, this.Size);
-            }
-            //else if (orgBtn == immersionBtn)
-            //{
-            //    sp.SlidePanel(immersionPanel, SliderPanel.Direction.ToRight);
-            //}
-
+            p = profile;
         }
 
         private void MovableBedForm_Load(object sender, EventArgs e)
         {
-            valueParamPanel.Visible = false;
+            valueParamPanel.Visible = false;            
             physicalParamPanel.Visible = false;
             seabedCompositionPanel.Visible = false;
             rockStablePanel.Visible = false;
@@ -66,14 +35,111 @@ namespace RiverSimulationApplication
 
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
 
-            this.CenterToParent();
-
-            //this.highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentEffectFunction;
-            //highSandMethodPanel.Enabled = RiverSimulationProfile.profile.highSandContentFlowFunction;
             previewPicBox.Width = previewPanel.Width;
             previewPicBox.Height = previewPanel.Height;
-            UpdateStatus();
 
+            LoadStatus();
+            UpdateStatus();
+        }
+
+        private void LoadStatus()
+        {
+
+            //1.1 數值參數 =========================================
+            //1.1.1 時間
+            totalSimulationTimeTxt.Text = p.totalSimulationTime.ToString();
+            timeSpan2dTxt.Text = p.timeSpan2d.ToString();
+            outputFrequencyTxt.Text = p.outputFrequency.ToString();
+            steppingTimesInVertVslcTimeTxt.Text = p.steppingTimesInVertVslcTime.ToString();
+
+            //1.1.2 收斂條件
+            waterModelingConvergenceCriteria2dTxt.Text = p.waterModelingConvergenceCriteria2d.ToString();
+            waterModelingConvergenceCriteria3dTxt.Text = p.waterModelingConvergenceCriteria3d.ToString();
+
+            //1.1.3 輸出控制
+            minWaterDeothTxt.Text = p.minWaterDeoth.ToString();
+            viscosityFactorAdditionInMainstreamTxt.Text = p.viscosityFactorAdditionInMainstream.ToString();
+            viscosityFactorAdditionInSideDirectionTxt.Text = p.viscosityFactorAdditionInSideDirection.ToString();
+
+            //1.2 物理參數 =========================================
+
+            switch (p.roughnessType)
+            {
+                case RiverSimulationProfile.RoughnessType.ManningN:
+                    manningNRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.RoughnessType.Chezy:
+                    chezyRdo.Checked = true;
+                    break;
+                default:
+                    manningNRdo.Checked = false;
+                    chezyRdo.Checked = false;
+                    break;
+            }
+
+            //1.2.2 紊流黏滯係數
+            switch (p.turbulenceViscosityType)
+            {
+                case RiverSimulationProfile.TurbulenceViscosityType.UserDefine:
+                    userDefineRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation:
+                    zeroEquationRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TurbulenceViscosityType.SingleEquation:
+                    singleEquationRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TurbulenceViscosityType.TwinEquation:
+                    twinEquationRdo.Checked = true;
+                    break;
+                default:
+                    userDefineRdo.Checked = false;
+                    zeroEquationRdo.Checked = false;
+                    singleEquationRdo.Checked = false;
+                    twinEquationRdo.Checked = false;
+                    break;
+            }
+            zeroEquationTypeCombo.SelectedIndex = (int)p.zeroEquationType;
+
+            //1.2.3 其他
+            gravityConstantTxt.Text = p.gravityConstant.ToString();
+            waterDensityTxt.Text = p.waterDensity.ToString();
+
+            //1.3 二次流效應 二維 only
+            switch (p.curvatureRadiusType)
+            {
+                case RiverSimulationProfile.CurvatureRadiusType.AutoCurvatureRadius:
+                    autoCurvatureRadiusRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.CurvatureRadiusType.InputCurvatureRadius:
+                    inputCurvatureRadiusRdo.Checked = true;
+                    break;
+                default:
+                    autoCurvatureRadiusRdo.Checked = false;
+                    inputCurvatureRadiusRdo.Checked = false;
+                    break;
+            }
+
+            //結構物設置
+            tBarSetChk.Checked = p.tBarSet;
+            tBarNumberTxt.Text = p.tBarNumber.ToString();
+
+            bridgePierSetChk.Checked = p.bridgePierSet;
+            bridgePierNumberTxt.Text = p.bridgePierNumber.ToString();
+
+            groundsillWorkSetChk.Checked = p.groundsillWorkSet;
+            groundsillWorkNumberTxt.Text = p.groundsillWorkNumber.ToString();
+
+            sedimentationWeirSetChk.Checked = p.sedimentationWeirSet;
+            sedimentationWeirNumberTxt.Text = p.sedimentationWeirNumber.ToString();
+
+            //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
+            highSandEffectAlpha1Txt.Text = p.highSandEffectAlpha1.ToString();
+            highSandEffectBeta1Txt.Text = p.highSandEffectBeta1.ToString();
+            highSandEffectC1Txt.Text = p.highSandEffectC1.ToString();
+            highSandEffectAlpha2Txt.Text = p.highSandEffectAlpha1.ToString();
+            highSandEffectBeta2Txt.Text = p.highSandEffectBeta2.ToString();
+            highSandEffectC2Txt.Text = p.highSandEffectC2.ToString();
         }
 
         private void UpdateStatus()
@@ -111,6 +177,42 @@ namespace RiverSimulationApplication
             }
         }
 
+        private void SettingButton_Click(object sender, EventArgs e)
+        {
+            Button orgBtn = sender as Button;
+            if (orgBtn == valueParamBtn)
+            {
+                sp.SlidePanel(valueParamPanel, SliderPanel.Direction.ToRight, this.Size);
+            }
+            else if (orgBtn == physicalParamBtn)
+            {
+                sp.SlidePanel(physicalParamPanel, SliderPanel.Direction.ToRight, this.Size);
+            }
+            else if (orgBtn == transSandMethodBtn)
+            {
+                ControllerUtility.SetHtmlUrl(comment, "D2-4.html");
+                sp.SlidePanel(transSandMethodPanel, SliderPanel.Direction.ToRight, this.Size);
+            }
+            else if (orgBtn == seabedCompositionBtn)
+            {
+                sp.SlidePanel(seabedCompositionPanel, SliderPanel.Direction.ToRight, this.Size);
+            }
+            else if (orgBtn == rockbedBtn)
+            {
+                sp.SlidePanel(rockbedPanel, SliderPanel.Direction.ToRight, this.Size);
+            }
+            else if (orgBtn == rockStableBtn)
+            {
+                sp.SlidePanel(rockStablePanel, SliderPanel.Direction.ToRight, this.Size);
+            }
+            //else if (orgBtn == immersionBtn)
+            //{
+            //    sp.SlidePanel(immersionPanel, SliderPanel.Direction.ToRight);
+            //}
+
+        }
+
+ 
         private bool DoConvert()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;

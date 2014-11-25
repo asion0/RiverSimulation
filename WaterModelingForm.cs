@@ -169,19 +169,17 @@ namespace RiverSimulationApplication
             timeSpan2dTxt.Enabled = !p.IsConstantFlowType();
             outputFrequencyTxt.Enabled = !p.IsConstantFlowType(); //模擬功能如果為定量流，則輸出頻率為1，使用者不輸入。
 
-            outputControl3dGrp.Enabled = p.Is3DMode();
-
             manningNBtn.Enabled = (p.roughnessType == RiverSimulationProfile.RoughnessType.ManningN);
             chezyBtn.Enabled = (p.roughnessType == RiverSimulationProfile.RoughnessType.Chezy);
             roughnessHeightKsBtn.Enabled = p.Is3DMode();
             roughnessHeightKsHelpBtn.Enabled = p.Is3DMode();
-
 
             tvInMainstreamDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
             tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
             zeroEquationTypeCombo.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation);
             twinEquationRdo.Enabled = p.Is3DMode();
             zeroEquationTypeCombo.Enabled = p.Is3DMode();
+
             if (p.Is2DMode())
             {   //二維只有 1 種選項：constant，其他則灰掉
                 zeroEquationTypeCombo.SelectedIndex = 0;
@@ -205,7 +203,8 @@ namespace RiverSimulationApplication
                 minWaterDepthPanel.Visible = false;
                 turbulenceViscosityPanel.Visible = false;
             }
-          
+            outputControl3dGrp.Enabled = p.Is3DMode();
+         
         }
 
         private bool DoConvert()

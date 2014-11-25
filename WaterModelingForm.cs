@@ -187,7 +187,7 @@ namespace RiverSimulationApplication
                 zeroEquationTypeCombo.SelectedIndex = 0;
             }
 
-            secFlowEffectGrp.Enabled = p.Is2DMode();    //二維 only。
+            secFlowEffectGrp.Enabled = p.Is2DMode() && p.secondFlowEffectFunction;    //二維 only。
             highSandContentEffectGrp.Enabled = p.IsWaterModelingMode();     //水理 only 
 
             tBarNumberTxt.Enabled = p.tBarSet;

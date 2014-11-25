@@ -1615,7 +1615,7 @@
             // 
             this.transSandMethodPanel.Controls.Add(this.groupBox5);
             this.transSandMethodPanel.Controls.Add(this.button1);
-            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 638);
+            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 243);
             this.transSandMethodPanel.Name = "transSandMethodPanel";
             this.transSandMethodPanel.Size = new System.Drawing.Size(500, 670);
             this.transSandMethodPanel.TabIndex = 12;
@@ -1752,10 +1752,10 @@
             this.radioButton8.AutoSize = true;
             this.radioButton8.Location = new System.Drawing.Point(18, 20);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(77, 16);
+            this.radioButton8.Size = new System.Drawing.Size(97, 16);
             this.radioButton8.TabIndex = 1;
             this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "輸砂公式1";
+            this.radioButton8.Text = "Van Rijn(1984)";
             this.radioButton8.UseVisualStyleBackColor = true;
             // 
             // radioButton6
@@ -1763,10 +1763,10 @@
             this.radioButton6.AutoSize = true;
             this.radioButton6.Location = new System.Drawing.Point(284, 20);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(77, 16);
+            this.radioButton6.Size = new System.Drawing.Size(114, 16);
             this.radioButton6.TabIndex = 1;
             this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "輸砂公式3";
+            this.radioButton6.Text = "Rickenmann(1991)";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
             // radioButton7
@@ -1774,10 +1774,10 @@
             this.radioButton7.AutoSize = true;
             this.radioButton7.Location = new System.Drawing.Point(147, 20);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(77, 16);
+            this.radioButton7.Size = new System.Drawing.Size(111, 16);
             this.radioButton7.TabIndex = 1;
             this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "輸砂公式2";
+            this.radioButton7.Text = "Gary Parker(1990)";
             this.radioButton7.UseVisualStyleBackColor = true;
             // 
             // button1

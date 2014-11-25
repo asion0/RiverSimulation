@@ -259,7 +259,8 @@ namespace RiverSimulationApplication
             Formula2,
             Formula3,
         }
-        DiffusionFormulaType diffusionFormula;      //2.1.4 擴散公式
+        public bool diffusionFormulaUse;                //2.1.4 擴散公式
+        public DiffusionFormulaType diffusionFormula;   //2.1.4 擴散公式
 
         public double diffusionBonusProportionalInMainstream;   //2.1.5 主流方向擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
         public double diffusionBonusProportionalInSideflow;     //2.1.6 側方向擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
@@ -271,15 +272,56 @@ namespace RiverSimulationApplication
         public double sedimentDensity;                  //2.2.3 泥砂密度單一數值 Kg/m3 2700 實數(>=0) 實數8 格
         public Int32 sedimentParticlesNumber;           //2.2.4 泥砂顆粒數目單一數值K 3 整數(>2) 最優先設定
         public double[,] sedimentParticleSize;          //2.2.4.1 泥砂粒徑矩陣(K) m 實數(>0) 實數16 格矩陣(K)為泥砂顆粒數目
-
         //2.3 底床組成
         public Int32 bottomLevelNumber;                 //2.3.1 底床分層數目單一數值 整數(>0) a. 使用者輸入底床分層數目後
         public double[] bottomLevelArray;               //2.3.1.1 底床分層厚度矩陣(L) m 實數(>0) 矩陣(L)為底床分層數目
         public double[,] sedimentCompositionArray;      //2.3.1.2 泥砂組成比例矩陣(K,L) 實數(>0) 矩陣(K,L)為(泥砂顆粒數目, 底床分層數目)
 
-        //2.3.2 凝聚性沉滓option
-                            //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        public bool shenCohesiveSediment { get; set; }  //2.3.2 凝聚性沉滓option
 
+        public bool surfaceErosion;                         //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        public double surfaceErosionCoefficient;            //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        public double surfaceErosionCriticalShearStress;    //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        
+        public bool massiveErosion;                         //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
+        public double massiveErosionCriticalShearStress;    //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
+        public bool noErosionElevation;                     //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
+        public bool noErosionElevationValue;                //b. 0：均一值，逐點給：-1
+        public bool noErosionElevationArray;                //若為逐點給，則參數形式為矩陣(I,J)
+
+        //2.4 輸砂公式 當特殊功能動床有勾選高含砂效應時，為6選1，否則僅一般輸砂公式中 3 選 1。
+        public enum SandTransportEquationType
+        {
+            None,
+            SandTransportEquation1,
+            SandTransportEquation2,
+            SandTransportEquation3,
+            HighSandTransportEquation1,
+            HighSandTransportEquation2,
+            HighSandTransportEquation3,
+
+        }
+        //2.4.1 一般輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
+        //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
+        public SandTransportEquationType sandTransportEquation; 
+
+        //2.5 岩床
+        public bool waterJetting;           //2.5.1 水力沖刷
+        public double waterJettingAlpha;    //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
+        public double waterJettingBeta;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
+       
+        public bool sedimentErosion;                            //2.5.2 泥砂磨蝕
+        public double sedimentErosionElasticModulusValue;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
+        public double[,] sedimentErosionElasticModulusArray;    //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
+        public double sedimentErosionTensileStrengthValue;      //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
+        public double[,] sedimentErosionTensileStrengthArray;   //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
+
+        public bool bedrockElevation;           //2.5.3 岩床高程
+        public double bedrockElevationValue;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1。
+        public double[,] bedrockElevationArray; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
+
+        //2.6 岸壁穩定分析 option
+        //public bool quayStabilityAnalysis;      //2.6 岸壁穩定分析 option
 
         //功能檢查
         #region Fuction Check
@@ -290,35 +332,6 @@ namespace RiverSimulationApplication
         public bool IsConstantFlowType() { return flowType == FlowType.ConstantFlow; }
         public bool IsVariableFlowType() { return flowType == FlowType.VariableFlow; }
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public bool IsImportFinished() 
         {
@@ -591,6 +604,87 @@ namespace RiverSimulationApplication
             highSandEffectBeta2 = 0;          
             highSandEffectC2 = 0;
 
+            //動床參數
+            //2.1 數值參數 =========================================
+            waterTimeSpan = 0;                //2.1.1 時間間距
+            waterOutputFrequency = 0;          //2.1.2 輸出頻率
+
+            //2.1.3 輸出控制
+            //2D
+            outputControlBottomElevation = false;       //2.1.3 輸出控制 初始底床高程
+            outputControlAverageDepthDensity = false;   //2.1.3 輸出控制 水深平均流速
+            outputControlErosionDepth = false;          //2.1.3 沖淤深度
+
+            //3D
+            outputControlDensityInformation3D = false;   //2.1.3 輸出控制 三維流速資訊
+
+            //2.1.4 選擇擴散公式
+            diffusionFormulaUse = false;;                //2.1.4 擴散公式
+            diffusionFormula = DiffusionFormulaType.None;   //2.1.4 擴散公式
+
+            diffusionBonusProportionalInMainstream = 1.0;   //2.1.5 主流方向擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
+            diffusionBonusProportionalInSideflow = 1.0;     //2.1.6 側方向擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
+            diffusionBonusProportionalInSurface = 1.0;      //2.1.7 水面擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
+            diffusionBonusProportionalInBottom = 1.0;       //2.1.8 底床擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
+
+
+        //2.2 物理參數
+        kinematicViscosityCoefficient = 1.12e-6;    //2.2.1 動力黏滯係數單一數值 秒 1.12e-6 實數(>=0) 實數16 格
+        sedimentPoreRatio = 0.4;                //2.2.2 泥砂孔隙比單一數值 -- 0.4 實數(>=0) 實數8 格
+        sedimentDensity = 2700;                  //2.2.3 泥砂密度單一數值 Kg/m3 2700 實數(>=0) 實數8 格
+        sedimentParticlesNumber = 3;           //2.2.4 泥砂顆粒數目單一數值K 3 整數(>2) 最優先設定
+        sedimentParticleSize = null;          //2.2.4.1 泥砂粒徑矩陣(K) m 實數(>0) 實數16 格矩陣(K)為泥砂顆粒數目
+        //2.3 底床組成
+        bottomLevelNumber = 6;                 //2.3.1 底床分層數目單一數值 整數(>0) a. 使用者輸入底床分層數目後
+        bottomLevelArray = null;               //2.3.1.1 底床分層厚度矩陣(L) m 實數(>0) 矩陣(L)為底床分層數目
+        sedimentCompositionArray = null;      //2.3.1.2 泥砂組成比例矩陣(K,L) 實數(>0) 矩陣(K,L)為(泥砂顆粒數目, 底床分層數目)
+
+        shenCohesiveSediment = false;  //2.3.2 凝聚性沉滓option
+/*
+        surfaceErosion;                         //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        surfaceErosionCoefficient;            //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        surfaceErosionCriticalShearStress;    //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        
+        massiveErosion;                         //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
+        massiveErosionCriticalShearStress;    //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
+        noErosionElevation;                     //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
+        noErosionElevationValue;                //b. 0：均一值，逐點給：-1
+        noErosionElevationArray;                //若為逐點給，則參數形式為矩陣(I,J)
+
+        //2.4 輸砂公式 當特殊功能動床有勾選高含砂效應時，為6選1，否則僅一般輸砂公式中 3 選 1。
+        public enum SandTransportEquationType
+        {
+            None,
+            SandTransportEquation1,
+            SandTransportEquation2,
+            SandTransportEquation3,
+            HighSandTransportEquation1,
+            HighSandTransportEquation2,
+            HighSandTransportEquation3,
+
+        }
+        //2.4.1 一般輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
+        //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
+        public SandTransportEquationType sandTransportEquation; 
+
+        //2.5 岩床
+        waterJetting;           //2.5.1 水力沖刷
+        waterJettingAlpha;    //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
+        waterJettingBeta;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
+       
+        sedimentErosion;                            //2.5.2 泥砂磨蝕
+        sedimentErosionElasticModulusValue;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
+        public double[,] sedimentErosionElasticModulusArray;    //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
+        sedimentErosionTensileStrengthValue;      //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
+        public double[,] sedimentErosionTensileStrengthArray;   //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
+
+        bedrockElevation;           //2.5.3 岩床高程
+        bedrockElevationValue;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1。
+        public double[,] bedrockElevationArray; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
+
+        //2.6 岸壁穩定分析 option
+        //quayStabilityAnalysis;      //2.6 岸壁穩定分析 option
+*/
         }
 
         public bool ReadInputGridGeo(string s)
@@ -767,10 +861,10 @@ namespace RiverSimulationApplication
         }
 
         //動床參數 - 物理參數頁面
-        public int sedimentParticlesNum = 3;            //2.2.4 泥砂顆粒數目
-        public int seabedLevelNum = 6;
-        public double[] seabedLevelArray = null;
-        public double[,] sedimentCompositionRatioArray = null;
+        //public int sedimentParticlesNum = 3;            //2.2.4 泥砂顆粒數目
+        //public int seabedLevelNum = 6;
+        //public double[] seabedLevelArray = null;
+        //public double[,] sedimentCompositionRatioArray = null;
 
 
         public bool GenerateInputFile(string file)
@@ -780,7 +874,7 @@ namespace RiverSimulationApplication
 
             sb.AppendFormat("{0,8}", inputGrid.GetI.ToString());
             sb.AppendFormat("{0,8}", inputGrid.GetJ.ToString());
-            sb.AppendFormat("{0,8}", sedimentParticlesNum.ToString());
+            sb.AppendFormat("{0,8}", sedimentParticlesNumber.ToString());
             sb.AppendFormat("{0,8}", 10.ToString());    //模式預設值
             sb.AppendFormat("{0,8}", 5.ToString());     //模式預設值
             sb.AppendFormat("{0,8}", 0.ToString());     //模式預設值

@@ -120,6 +120,9 @@ namespace RiverSimulationApplication
 #elif _DEMO_VERSION_
             _LiteVersion = false;
             _DemoVersion = true;
+#elif _FULL_VERSION_
+            _LiteVersion = false;
+            _DemoVersion = false;
 #else
             _LiteVersion = false;
             _DemoVersion = false;

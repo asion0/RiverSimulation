@@ -42,37 +42,37 @@
             this.physicalParamBtn = new System.Windows.Forms.Button();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
             this.valueParamBtn = new System.Windows.Forms.Button();
-            this.diffusionEquationChk = new System.Windows.Forms.CheckBox();
-            this.diffusionEquationCombo = new System.Windows.Forms.ComboBox();
+            this.diffusionFormulaUseChk = new System.Windows.Forms.CheckBox();
+            this.diffusionFormulaCombo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.sedimentDensityTxt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.sedimentPoreRatioTxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.kinematicViscosityCoefficientTxt = new System.Windows.Forms.TextBox();
             this.comment = new System.Windows.Forms.WebBrowser();
             this.ok = new System.Windows.Forms.Button();
             this.valueParamPanel = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.outputCtrl2DGrp = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.outputControlBottomElevationChk = new System.Windows.Forms.CheckBox();
+            this.outputControlErosionDepthChk = new System.Windows.Forms.CheckBox();
+            this.outputControlAverageDepthDensityChk = new System.Windows.Forms.CheckBox();
             this.outputCtrl3DGrp = new System.Windows.Forms.GroupBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.outputControlDensityInformation3DChk = new System.Windows.Forms.CheckBox();
             this.fullPanel = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.diffusionBonusProportionalInSideflowTxt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.diffusionBonusProportionalInMainstreamTxt = new System.Windows.Forms.TextBox();
+            this.diffusionBonusProportionalInSurfaceTxt = new System.Windows.Forms.TextBox();
+            this.diffusionBonusProportionalInBottomTxt = new System.Windows.Forms.TextBox();
+            this.waterOutputFrequencyTxt = new System.Windows.Forms.TextBox();
+            this.waterTimeSpanTxt = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -80,28 +80,28 @@
             this.valueParamBackBtn = new System.Windows.Forms.Button();
             this.physicalParamPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.sedimentParticleSizeBtn = new System.Windows.Forms.Button();
-            this.sedimentParticlesNumTxt = new System.Windows.Forms.TextBox();
+            this.sedimentParticlesNumberBtn = new System.Windows.Forms.Button();
+            this.sedimentParticlesNumberTxt = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.fluidTypeBackBtn = new System.Windows.Forms.Button();
             this.seabedCompositionPanel = new System.Windows.Forms.Panel();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.noScourElevationBtn = new System.Windows.Forms.Button();
-            this.cohesiveSedimentPanel = new System.Windows.Forms.Panel();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.noErosionElevationBtn = new System.Windows.Forms.Button();
+            this.shenCohesiveSedimentPanel = new System.Windows.Forms.Panel();
+            this.massiveErosionChk = new System.Windows.Forms.CheckBox();
+            this.surfaceErosionChk = new System.Windows.Forms.CheckBox();
+            this.massiveErosionCriticalShearStressTxt = new System.Windows.Forms.TextBox();
+            this.surfaceErosionCriticalShearStressTxt = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.amTxt = new System.Windows.Forms.TextBox();
+            this.surfaceErosionCoefficientTxt = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.seabedLevelNumTxt = new System.Windows.Forms.TextBox();
-            this.noScourElevationChk = new System.Windows.Forms.CheckBox();
-            this.cohesiveSedimentChk = new System.Windows.Forms.CheckBox();
-            this.seabedThicknessBtn = new System.Windows.Forms.Button();
-            this.sedimentCompositionRatioBtn = new System.Windows.Forms.Button();
+            this.bottomLevelNumberTxt = new System.Windows.Forms.TextBox();
+            this.noErosionElevationChk = new System.Windows.Forms.CheckBox();
+            this.shenCohesiveSedimentChk = new System.Windows.Forms.CheckBox();
+            this.bottomLevelBtn = new System.Windows.Forms.Button();
+            this.sedimentCompositionBtn = new System.Windows.Forms.Button();
             this.seabedCompositionBackBtn = new System.Windows.Forms.Button();
             this.rockStablePanel = new System.Windows.Forms.Panel();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -193,7 +193,7 @@
             this.groupBox1.SuspendLayout();
             this.seabedCompositionPanel.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            this.cohesiveSedimentPanel.SuspendLayout();
+            this.shenCohesiveSedimentPanel.SuspendLayout();
             this.rockStablePanel.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.quayGeometryPanel.SuspendLayout();
@@ -363,30 +363,31 @@
             this.valueParamBtn.UseVisualStyleBackColor = true;
             this.valueParamBtn.Click += new System.EventHandler(this.SettingButton_Click);
             // 
-            // diffusionEquationChk
+            // diffusionFormulaUseChk
             // 
-            this.diffusionEquationChk.AutoSize = true;
-            this.diffusionEquationChk.Location = new System.Drawing.Point(64, 251);
-            this.diffusionEquationChk.Name = "diffusionEquationChk";
-            this.diffusionEquationChk.Size = new System.Drawing.Size(96, 16);
-            this.diffusionEquationChk.TabIndex = 1;
-            this.diffusionEquationChk.Text = "選擇擴散公式";
-            this.diffusionEquationChk.UseVisualStyleBackColor = true;
-            this.diffusionEquationChk.CheckedChanged += new System.EventHandler(this.diffusionEquationChk_CheckedChanged);
+            this.diffusionFormulaUseChk.AutoSize = true;
+            this.diffusionFormulaUseChk.Location = new System.Drawing.Point(64, 251);
+            this.diffusionFormulaUseChk.Name = "diffusionFormulaUseChk";
+            this.diffusionFormulaUseChk.Size = new System.Drawing.Size(96, 16);
+            this.diffusionFormulaUseChk.TabIndex = 1;
+            this.diffusionFormulaUseChk.Text = "選擇擴散公式";
+            this.diffusionFormulaUseChk.UseVisualStyleBackColor = true;
+            this.diffusionFormulaUseChk.CheckedChanged += new System.EventHandler(this.diffusionFormulaChk_CheckedChanged);
             // 
-            // diffusionEquationCombo
+            // diffusionFormulaCombo
             // 
-            this.diffusionEquationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.diffusionEquationCombo.Enabled = false;
-            this.diffusionEquationCombo.FormattingEnabled = true;
-            this.diffusionEquationCombo.Items.AddRange(new object[] {
+            this.diffusionFormulaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.diffusionFormulaCombo.Enabled = false;
+            this.diffusionFormulaCombo.FormattingEnabled = true;
+            this.diffusionFormulaCombo.Items.AddRange(new object[] {
             "擴散公式1",
             "擴散公式2",
             "擴散公式3"});
-            this.diffusionEquationCombo.Location = new System.Drawing.Point(166, 247);
-            this.diffusionEquationCombo.Name = "diffusionEquationCombo";
-            this.diffusionEquationCombo.Size = new System.Drawing.Size(121, 20);
-            this.diffusionEquationCombo.TabIndex = 0;
+            this.diffusionFormulaCombo.Location = new System.Drawing.Point(166, 247);
+            this.diffusionFormulaCombo.Name = "diffusionFormulaCombo";
+            this.diffusionFormulaCombo.Size = new System.Drawing.Size(121, 20);
+            this.diffusionFormulaCombo.TabIndex = 0;
+            this.diffusionFormulaCombo.SelectedIndexChanged += new System.EventHandler(this.diffusionFormulaCombo_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -418,12 +419,12 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "sec";
             // 
-            // textBox3
+            // sedimentDensityTxt
             // 
-            this.textBox3.Location = new System.Drawing.Point(118, 115);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 22);
-            this.textBox3.TabIndex = 1;
+            this.sedimentDensityTxt.Location = new System.Drawing.Point(118, 115);
+            this.sedimentDensityTxt.Name = "sedimentDensityTxt";
+            this.sedimentDensityTxt.Size = new System.Drawing.Size(160, 22);
+            this.sedimentDensityTxt.TabIndex = 1;
             // 
             // label2
             // 
@@ -435,12 +436,12 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "泥砂孔隙比";
             // 
-            // textBox2
+            // sedimentPoreRatioTxt
             // 
-            this.textBox2.Location = new System.Drawing.Point(118, 78);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 22);
-            this.textBox2.TabIndex = 1;
+            this.sedimentPoreRatioTxt.Location = new System.Drawing.Point(118, 78);
+            this.sedimentPoreRatioTxt.Name = "sedimentPoreRatioTxt";
+            this.sedimentPoreRatioTxt.Size = new System.Drawing.Size(160, 22);
+            this.sedimentPoreRatioTxt.TabIndex = 1;
             // 
             // label1
             // 
@@ -452,12 +453,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "動力黏滯係數";
             // 
-            // textBox1
+            // kinematicViscosityCoefficientTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(118, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 22);
-            this.textBox1.TabIndex = 1;
+            this.kinematicViscosityCoefficientTxt.Location = new System.Drawing.Point(118, 41);
+            this.kinematicViscosityCoefficientTxt.Name = "kinematicViscosityCoefficientTxt";
+            this.kinematicViscosityCoefficientTxt.Size = new System.Drawing.Size(160, 22);
+            this.kinematicViscosityCoefficientTxt.TabIndex = 1;
             // 
             // comment
             // 
@@ -485,7 +486,7 @@
             // 
             this.valueParamPanel.Controls.Add(this.groupBox10);
             this.valueParamPanel.Controls.Add(this.valueParamBackBtn);
-            this.valueParamPanel.Location = new System.Drawing.Point(144, 184);
+            this.valueParamPanel.Location = new System.Drawing.Point(144, 660);
             this.valueParamPanel.Name = "valueParamPanel";
             this.valueParamPanel.Size = new System.Drawing.Size(500, 670);
             this.valueParamPanel.TabIndex = 12;
@@ -495,10 +496,10 @@
             this.groupBox10.Controls.Add(this.outputCtrl2DGrp);
             this.groupBox10.Controls.Add(this.outputCtrl3DGrp);
             this.groupBox10.Controls.Add(this.fullPanel);
-            this.groupBox10.Controls.Add(this.diffusionEquationChk);
-            this.groupBox10.Controls.Add(this.diffusionEquationCombo);
-            this.groupBox10.Controls.Add(this.textBox9);
-            this.groupBox10.Controls.Add(this.textBox10);
+            this.groupBox10.Controls.Add(this.diffusionFormulaUseChk);
+            this.groupBox10.Controls.Add(this.diffusionFormulaCombo);
+            this.groupBox10.Controls.Add(this.waterOutputFrequencyTxt);
+            this.groupBox10.Controls.Add(this.waterTimeSpanTxt);
             this.groupBox10.Controls.Add(this.label23);
             this.groupBox10.Controls.Add(this.label6);
             this.groupBox10.Controls.Add(this.label15);
@@ -512,9 +513,9 @@
             // 
             // outputCtrl2DGrp
             // 
-            this.outputCtrl2DGrp.Controls.Add(this.checkBox1);
-            this.outputCtrl2DGrp.Controls.Add(this.checkBox3);
-            this.outputCtrl2DGrp.Controls.Add(this.checkBox2);
+            this.outputCtrl2DGrp.Controls.Add(this.outputControlBottomElevationChk);
+            this.outputCtrl2DGrp.Controls.Add(this.outputControlErosionDepthChk);
+            this.outputCtrl2DGrp.Controls.Add(this.outputControlAverageDepthDensityChk);
             this.outputCtrl2DGrp.Location = new System.Drawing.Point(44, 134);
             this.outputCtrl2DGrp.Name = "outputCtrl2DGrp";
             this.outputCtrl2DGrp.Size = new System.Drawing.Size(160, 94);
@@ -522,39 +523,42 @@
             this.outputCtrl2DGrp.TabStop = false;
             this.outputCtrl2DGrp.Text = "2D";
             // 
-            // checkBox1
+            // outputControlBottomElevationChk
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(13, 21);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
-            this.checkBox1.TabIndex = 25;
-            this.checkBox1.Text = "底床高程";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.outputControlBottomElevationChk.AutoSize = true;
+            this.outputControlBottomElevationChk.Location = new System.Drawing.Point(13, 21);
+            this.outputControlBottomElevationChk.Name = "outputControlBottomElevationChk";
+            this.outputControlBottomElevationChk.Size = new System.Drawing.Size(72, 16);
+            this.outputControlBottomElevationChk.TabIndex = 25;
+            this.outputControlBottomElevationChk.Text = "底床高程";
+            this.outputControlBottomElevationChk.UseVisualStyleBackColor = true;
+            this.outputControlBottomElevationChk.CheckedChanged += new System.EventHandler(this.outputControlBottomElevationChk_CheckedChanged);
             // 
-            // checkBox3
+            // outputControlErosionDepthChk
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(13, 65);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(72, 16);
-            this.checkBox3.TabIndex = 25;
-            this.checkBox3.Text = "沖淤深度";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.outputControlErosionDepthChk.AutoSize = true;
+            this.outputControlErosionDepthChk.Location = new System.Drawing.Point(13, 65);
+            this.outputControlErosionDepthChk.Name = "outputControlErosionDepthChk";
+            this.outputControlErosionDepthChk.Size = new System.Drawing.Size(72, 16);
+            this.outputControlErosionDepthChk.TabIndex = 25;
+            this.outputControlErosionDepthChk.Text = "沖淤深度";
+            this.outputControlErosionDepthChk.UseVisualStyleBackColor = true;
+            this.outputControlErosionDepthChk.CheckedChanged += new System.EventHandler(this.outputControlErosionDepthChk_CheckedChanged);
             // 
-            // checkBox2
+            // outputControlAverageDepthDensityChk
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(13, 43);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(96, 16);
-            this.checkBox2.TabIndex = 25;
-            this.checkBox2.Text = "水深平均濃度";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.outputControlAverageDepthDensityChk.AutoSize = true;
+            this.outputControlAverageDepthDensityChk.Location = new System.Drawing.Point(13, 43);
+            this.outputControlAverageDepthDensityChk.Name = "outputControlAverageDepthDensityChk";
+            this.outputControlAverageDepthDensityChk.Size = new System.Drawing.Size(96, 16);
+            this.outputControlAverageDepthDensityChk.TabIndex = 25;
+            this.outputControlAverageDepthDensityChk.Text = "水深平均濃度";
+            this.outputControlAverageDepthDensityChk.UseVisualStyleBackColor = true;
+            this.outputControlAverageDepthDensityChk.CheckedChanged += new System.EventHandler(this.outputControlAverageDepthDensityChk_CheckedChanged);
             // 
             // outputCtrl3DGrp
             // 
-            this.outputCtrl3DGrp.Controls.Add(this.checkBox8);
+            this.outputCtrl3DGrp.Controls.Add(this.outputControlDensityInformation3DChk);
             this.outputCtrl3DGrp.Enabled = false;
             this.outputCtrl3DGrp.Location = new System.Drawing.Point(216, 134);
             this.outputCtrl3DGrp.Name = "outputCtrl3DGrp";
@@ -563,27 +567,28 @@
             this.outputCtrl3DGrp.TabStop = false;
             this.outputCtrl3DGrp.Text = "3D";
             // 
-            // checkBox8
+            // outputControlDensityInformation3DChk
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.checkBox8.Location = new System.Drawing.Point(12, 18);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(96, 16);
-            this.checkBox8.TabIndex = 0;
-            this.checkBox8.Text = "三維濃度資訊";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.outputControlDensityInformation3DChk.AutoSize = true;
+            this.outputControlDensityInformation3DChk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.outputControlDensityInformation3DChk.Location = new System.Drawing.Point(12, 18);
+            this.outputControlDensityInformation3DChk.Name = "outputControlDensityInformation3DChk";
+            this.outputControlDensityInformation3DChk.Size = new System.Drawing.Size(96, 16);
+            this.outputControlDensityInformation3DChk.TabIndex = 0;
+            this.outputControlDensityInformation3DChk.Text = "三維濃度資訊";
+            this.outputControlDensityInformation3DChk.UseVisualStyleBackColor = true;
+            this.outputControlDensityInformation3DChk.CheckedChanged += new System.EventHandler(this.outputControlDensityInformation3DChk_CheckedChanged);
             // 
             // fullPanel
             // 
             this.fullPanel.Controls.Add(this.label13);
             this.fullPanel.Controls.Add(this.label9);
-            this.fullPanel.Controls.Add(this.textBox11);
+            this.fullPanel.Controls.Add(this.diffusionBonusProportionalInSideflowTxt);
             this.fullPanel.Controls.Add(this.label8);
             this.fullPanel.Controls.Add(this.label7);
-            this.fullPanel.Controls.Add(this.textBox7);
-            this.fullPanel.Controls.Add(this.textBox4);
-            this.fullPanel.Controls.Add(this.textBox12);
+            this.fullPanel.Controls.Add(this.diffusionBonusProportionalInMainstreamTxt);
+            this.fullPanel.Controls.Add(this.diffusionBonusProportionalInSurfaceTxt);
+            this.fullPanel.Controls.Add(this.diffusionBonusProportionalInBottomTxt);
             this.fullPanel.Location = new System.Drawing.Point(6, 283);
             this.fullPanel.Name = "fullPanel";
             this.fullPanel.Size = new System.Drawing.Size(404, 206);
@@ -609,15 +614,15 @@
             this.label9.Text = "水面擴散係數加成比例";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBox11
+            // diffusionBonusProportionalInSideflowTxt
             // 
-            this.textBox11.Location = new System.Drawing.Point(159, 53);
-            this.textBox11.MaxLength = 8;
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(121, 22);
-            this.textBox11.TabIndex = 23;
-            this.textBox11.Text = "1";
-            this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.diffusionBonusProportionalInSideflowTxt.Location = new System.Drawing.Point(159, 53);
+            this.diffusionBonusProportionalInSideflowTxt.MaxLength = 8;
+            this.diffusionBonusProportionalInSideflowTxt.Name = "diffusionBonusProportionalInSideflowTxt";
+            this.diffusionBonusProportionalInSideflowTxt.Size = new System.Drawing.Size(121, 22);
+            this.diffusionBonusProportionalInSideflowTxt.TabIndex = 23;
+            this.diffusionBonusProportionalInSideflowTxt.Text = "1";
+            this.diffusionBonusProportionalInSideflowTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
             // 
@@ -639,52 +644,52 @@
             this.label7.Text = "側方向擴散係數加成比例";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBox7
+            // diffusionBonusProportionalInMainstreamTxt
             // 
-            this.textBox7.Location = new System.Drawing.Point(159, 13);
-            this.textBox7.MaxLength = 8;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(121, 22);
-            this.textBox7.TabIndex = 23;
-            this.textBox7.Text = "1";
-            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.diffusionBonusProportionalInMainstreamTxt.Location = new System.Drawing.Point(159, 13);
+            this.diffusionBonusProportionalInMainstreamTxt.MaxLength = 8;
+            this.diffusionBonusProportionalInMainstreamTxt.Name = "diffusionBonusProportionalInMainstreamTxt";
+            this.diffusionBonusProportionalInMainstreamTxt.Size = new System.Drawing.Size(121, 22);
+            this.diffusionBonusProportionalInMainstreamTxt.TabIndex = 23;
+            this.diffusionBonusProportionalInMainstreamTxt.Text = "1";
+            this.diffusionBonusProportionalInMainstreamTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox4
+            // diffusionBonusProportionalInSurfaceTxt
             // 
-            this.textBox4.Location = new System.Drawing.Point(159, 93);
-            this.textBox4.MaxLength = 8;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(121, 22);
-            this.textBox4.TabIndex = 19;
-            this.textBox4.Text = "1";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.diffusionBonusProportionalInSurfaceTxt.Location = new System.Drawing.Point(159, 93);
+            this.diffusionBonusProportionalInSurfaceTxt.MaxLength = 8;
+            this.diffusionBonusProportionalInSurfaceTxt.Name = "diffusionBonusProportionalInSurfaceTxt";
+            this.diffusionBonusProportionalInSurfaceTxt.Size = new System.Drawing.Size(121, 22);
+            this.diffusionBonusProportionalInSurfaceTxt.TabIndex = 19;
+            this.diffusionBonusProportionalInSurfaceTxt.Text = "1";
+            this.diffusionBonusProportionalInSurfaceTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox12
+            // diffusionBonusProportionalInBottomTxt
             // 
-            this.textBox12.Location = new System.Drawing.Point(159, 133);
-            this.textBox12.MaxLength = 8;
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(121, 22);
-            this.textBox12.TabIndex = 19;
-            this.textBox12.Text = "1";
-            this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.diffusionBonusProportionalInBottomTxt.Location = new System.Drawing.Point(159, 133);
+            this.diffusionBonusProportionalInBottomTxt.MaxLength = 8;
+            this.diffusionBonusProportionalInBottomTxt.Name = "diffusionBonusProportionalInBottomTxt";
+            this.diffusionBonusProportionalInBottomTxt.Size = new System.Drawing.Size(121, 22);
+            this.diffusionBonusProportionalInBottomTxt.TabIndex = 19;
+            this.diffusionBonusProportionalInBottomTxt.Text = "1";
+            this.diffusionBonusProportionalInBottomTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox9
+            // waterOutputFrequencyTxt
             // 
-            this.textBox9.Location = new System.Drawing.Point(166, 80);
-            this.textBox9.MaxLength = 8;
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(121, 22);
-            this.textBox9.TabIndex = 18;
-            this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.waterOutputFrequencyTxt.Location = new System.Drawing.Point(166, 80);
+            this.waterOutputFrequencyTxt.MaxLength = 8;
+            this.waterOutputFrequencyTxt.Name = "waterOutputFrequencyTxt";
+            this.waterOutputFrequencyTxt.Size = new System.Drawing.Size(121, 22);
+            this.waterOutputFrequencyTxt.TabIndex = 18;
+            this.waterOutputFrequencyTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox10
+            // waterTimeSpanTxt
             // 
-            this.textBox10.Location = new System.Drawing.Point(166, 40);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(121, 22);
-            this.textBox10.TabIndex = 17;
-            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.waterTimeSpanTxt.Location = new System.Drawing.Point(166, 40);
+            this.waterTimeSpanTxt.Name = "waterTimeSpanTxt";
+            this.waterTimeSpanTxt.Size = new System.Drawing.Size(121, 22);
+            this.waterTimeSpanTxt.TabIndex = 17;
+            this.waterTimeSpanTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label23
             // 
@@ -745,24 +750,24 @@
             // 
             this.physicalParamPanel.Controls.Add(this.groupBox1);
             this.physicalParamPanel.Controls.Add(this.fluidTypeBackBtn);
-            this.physicalParamPanel.Location = new System.Drawing.Point(55, 696);
+            this.physicalParamPanel.Location = new System.Drawing.Point(55, 705);
             this.physicalParamPanel.Name = "physicalParamPanel";
             this.physicalParamPanel.Size = new System.Drawing.Size(500, 670);
             this.physicalParamPanel.TabIndex = 12;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.sedimentParticleSizeBtn);
-            this.groupBox1.Controls.Add(this.sedimentParticlesNumTxt);
+            this.groupBox1.Controls.Add(this.sedimentParticlesNumberBtn);
+            this.groupBox1.Controls.Add(this.sedimentParticlesNumberTxt);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.sedimentDensityTxt);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.sedimentPoreRatioTxt);
+            this.groupBox1.Controls.Add(this.kinematicViscosityCoefficientTxt);
             this.groupBox1.Location = new System.Drawing.Point(12, 11);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(472, 607);
@@ -771,22 +776,23 @@
             this.groupBox1.Text = "物理參數";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // sedimentParticleSizeBtn
+            // sedimentParticlesNumberBtn
             // 
-            this.sedimentParticleSizeBtn.Location = new System.Drawing.Point(286, 151);
-            this.sedimentParticleSizeBtn.Name = "sedimentParticleSizeBtn";
-            this.sedimentParticleSizeBtn.Size = new System.Drawing.Size(96, 26);
-            this.sedimentParticleSizeBtn.TabIndex = 6;
-            this.sedimentParticleSizeBtn.Text = "設定泥砂粒徑";
-            this.sedimentParticleSizeBtn.UseVisualStyleBackColor = true;
+            this.sedimentParticlesNumberBtn.Location = new System.Drawing.Point(286, 151);
+            this.sedimentParticlesNumberBtn.Name = "sedimentParticlesNumberBtn";
+            this.sedimentParticlesNumberBtn.Size = new System.Drawing.Size(96, 26);
+            this.sedimentParticlesNumberBtn.TabIndex = 6;
+            this.sedimentParticlesNumberBtn.Text = "設定泥砂粒徑";
+            this.sedimentParticlesNumberBtn.UseVisualStyleBackColor = true;
+            this.sedimentParticlesNumberBtn.Click += new System.EventHandler(this.sedimentParticlesNumberBtn_Click);
             // 
-            // sedimentParticlesNumTxt
+            // sedimentParticlesNumberTxt
             // 
-            this.sedimentParticlesNumTxt.Location = new System.Drawing.Point(118, 152);
-            this.sedimentParticlesNumTxt.Name = "sedimentParticlesNumTxt";
-            this.sedimentParticlesNumTxt.Size = new System.Drawing.Size(162, 22);
-            this.sedimentParticlesNumTxt.TabIndex = 5;
-            this.sedimentParticlesNumTxt.MouseHover += new System.EventHandler(this.sedimentParticlesNumTxt_MouseHover);
+            this.sedimentParticlesNumberTxt.Location = new System.Drawing.Point(118, 152);
+            this.sedimentParticlesNumberTxt.Name = "sedimentParticlesNumberTxt";
+            this.sedimentParticlesNumberTxt.Size = new System.Drawing.Size(162, 22);
+            this.sedimentParticlesNumberTxt.TabIndex = 5;
+            this.sedimentParticlesNumberTxt.MouseHover += new System.EventHandler(this.sedimentParticlesNumTxt_MouseHover);
             // 
             // label14
             // 
@@ -814,21 +820,21 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(243, 615);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(243, 192);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
             this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.noScourElevationBtn);
-            this.groupBox7.Controls.Add(this.cohesiveSedimentPanel);
+            this.groupBox7.Controls.Add(this.noErosionElevationBtn);
+            this.groupBox7.Controls.Add(this.shenCohesiveSedimentPanel);
             this.groupBox7.Controls.Add(this.label10);
-            this.groupBox7.Controls.Add(this.seabedLevelNumTxt);
-            this.groupBox7.Controls.Add(this.noScourElevationChk);
-            this.groupBox7.Controls.Add(this.cohesiveSedimentChk);
-            this.groupBox7.Controls.Add(this.seabedThicknessBtn);
-            this.groupBox7.Controls.Add(this.sedimentCompositionRatioBtn);
+            this.groupBox7.Controls.Add(this.bottomLevelNumberTxt);
+            this.groupBox7.Controls.Add(this.noErosionElevationChk);
+            this.groupBox7.Controls.Add(this.shenCohesiveSedimentChk);
+            this.groupBox7.Controls.Add(this.bottomLevelBtn);
+            this.groupBox7.Controls.Add(this.sedimentCompositionBtn);
             this.groupBox7.Location = new System.Drawing.Point(12, 11);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(472, 607);
@@ -836,71 +842,71 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "底床組成";
             // 
-            // noScourElevationBtn
+            // noErosionElevationBtn
             // 
-            this.noScourElevationBtn.Enabled = false;
-            this.noScourElevationBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.noScourElevationBtn.Location = new System.Drawing.Point(123, 250);
-            this.noScourElevationBtn.Name = "noScourElevationBtn";
-            this.noScourElevationBtn.Size = new System.Drawing.Size(111, 26);
-            this.noScourElevationBtn.TabIndex = 6;
-            this.noScourElevationBtn.Text = "設定";
-            this.noScourElevationBtn.UseVisualStyleBackColor = true;
-            this.noScourElevationBtn.Click += new System.EventHandler(this.noScourElevationBtn_Click);
+            this.noErosionElevationBtn.Enabled = false;
+            this.noErosionElevationBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.noErosionElevationBtn.Location = new System.Drawing.Point(123, 250);
+            this.noErosionElevationBtn.Name = "noErosionElevationBtn";
+            this.noErosionElevationBtn.Size = new System.Drawing.Size(111, 26);
+            this.noErosionElevationBtn.TabIndex = 6;
+            this.noErosionElevationBtn.Text = "設定";
+            this.noErosionElevationBtn.UseVisualStyleBackColor = true;
+            this.noErosionElevationBtn.Click += new System.EventHandler(this.noScourElevationBtn_Click);
             // 
-            // cohesiveSedimentPanel
+            // shenCohesiveSedimentPanel
             // 
-            this.cohesiveSedimentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.cohesiveSedimentPanel.Controls.Add(this.checkBox5);
-            this.cohesiveSedimentPanel.Controls.Add(this.checkBox4);
-            this.cohesiveSedimentPanel.Controls.Add(this.textBox16);
-            this.cohesiveSedimentPanel.Controls.Add(this.textBox13);
-            this.cohesiveSedimentPanel.Controls.Add(this.label12);
-            this.cohesiveSedimentPanel.Controls.Add(this.amTxt);
-            this.cohesiveSedimentPanel.Controls.Add(this.label26);
-            this.cohesiveSedimentPanel.Controls.Add(this.label11);
-            this.cohesiveSedimentPanel.Enabled = false;
-            this.cohesiveSedimentPanel.Location = new System.Drawing.Point(21, 129);
-            this.cohesiveSedimentPanel.Name = "cohesiveSedimentPanel";
-            this.cohesiveSedimentPanel.Size = new System.Drawing.Size(435, 90);
-            this.cohesiveSedimentPanel.TabIndex = 10;
-            this.cohesiveSedimentPanel.EnabledChanged += new System.EventHandler(this.alluviumPanel_EnabledChanged);
+            this.shenCohesiveSedimentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.shenCohesiveSedimentPanel.Controls.Add(this.massiveErosionChk);
+            this.shenCohesiveSedimentPanel.Controls.Add(this.surfaceErosionChk);
+            this.shenCohesiveSedimentPanel.Controls.Add(this.massiveErosionCriticalShearStressTxt);
+            this.shenCohesiveSedimentPanel.Controls.Add(this.surfaceErosionCriticalShearStressTxt);
+            this.shenCohesiveSedimentPanel.Controls.Add(this.label12);
+            this.shenCohesiveSedimentPanel.Controls.Add(this.surfaceErosionCoefficientTxt);
+            this.shenCohesiveSedimentPanel.Controls.Add(this.label26);
+            this.shenCohesiveSedimentPanel.Controls.Add(this.label11);
+            this.shenCohesiveSedimentPanel.Enabled = false;
+            this.shenCohesiveSedimentPanel.Location = new System.Drawing.Point(21, 129);
+            this.shenCohesiveSedimentPanel.Name = "shenCohesiveSedimentPanel";
+            this.shenCohesiveSedimentPanel.Size = new System.Drawing.Size(435, 90);
+            this.shenCohesiveSedimentPanel.TabIndex = 10;
+            this.shenCohesiveSedimentPanel.EnabledChanged += new System.EventHandler(this.alluviumPanel_EnabledChanged);
             // 
-            // checkBox5
+            // massiveErosionChk
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(12, 53);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(72, 16);
-            this.checkBox5.TabIndex = 0;
-            this.checkBox5.Text = "塊狀沖蝕";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
+            this.massiveErosionChk.AutoSize = true;
+            this.massiveErosionChk.Location = new System.Drawing.Point(12, 53);
+            this.massiveErosionChk.Name = "massiveErosionChk";
+            this.massiveErosionChk.Size = new System.Drawing.Size(72, 16);
+            this.massiveErosionChk.TabIndex = 0;
+            this.massiveErosionChk.Text = "塊狀沖蝕";
+            this.massiveErosionChk.UseVisualStyleBackColor = true;
+            this.massiveErosionChk.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
             // 
-            // checkBox4
+            // surfaceErosionChk
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(12, 23);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(72, 16);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = "表層沖刷";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
+            this.surfaceErosionChk.AutoSize = true;
+            this.surfaceErosionChk.Location = new System.Drawing.Point(12, 23);
+            this.surfaceErosionChk.Name = "surfaceErosionChk";
+            this.surfaceErosionChk.Size = new System.Drawing.Size(72, 16);
+            this.surfaceErosionChk.TabIndex = 0;
+            this.surfaceErosionChk.Text = "表層沖刷";
+            this.surfaceErosionChk.UseVisualStyleBackColor = true;
+            this.surfaceErosionChk.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
             // 
-            // textBox16
+            // massiveErosionCriticalShearStressTxt
             // 
-            this.textBox16.Location = new System.Drawing.Point(165, 49);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(76, 22);
-            this.textBox16.TabIndex = 8;
+            this.massiveErosionCriticalShearStressTxt.Location = new System.Drawing.Point(165, 49);
+            this.massiveErosionCriticalShearStressTxt.Name = "massiveErosionCriticalShearStressTxt";
+            this.massiveErosionCriticalShearStressTxt.Size = new System.Drawing.Size(76, 22);
+            this.massiveErosionCriticalShearStressTxt.TabIndex = 8;
             // 
-            // textBox13
+            // surfaceErosionCriticalShearStressTxt
             // 
-            this.textBox13.Location = new System.Drawing.Point(339, 19);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(76, 22);
-            this.textBox13.TabIndex = 8;
+            this.surfaceErosionCriticalShearStressTxt.Location = new System.Drawing.Point(339, 19);
+            this.surfaceErosionCriticalShearStressTxt.Name = "surfaceErosionCriticalShearStressTxt";
+            this.surfaceErosionCriticalShearStressTxt.Size = new System.Drawing.Size(76, 22);
+            this.surfaceErosionCriticalShearStressTxt.TabIndex = 8;
             // 
             // label12
             // 
@@ -911,12 +917,12 @@
             this.label12.Text = "臨界剪應力";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // amTxt
+            // surfaceErosionCoefficientTxt
             // 
-            this.amTxt.Location = new System.Drawing.Point(165, 19);
-            this.amTxt.Name = "amTxt";
-            this.amTxt.Size = new System.Drawing.Size(76, 22);
-            this.amTxt.TabIndex = 8;
+            this.surfaceErosionCoefficientTxt.Location = new System.Drawing.Point(165, 19);
+            this.surfaceErosionCoefficientTxt.Name = "surfaceErosionCoefficientTxt";
+            this.surfaceErosionCoefficientTxt.Size = new System.Drawing.Size(76, 22);
+            this.surfaceErosionCoefficientTxt.TabIndex = 8;
             // 
             // label26
             // 
@@ -946,56 +952,56 @@
             this.label10.TabIndex = 3;
             this.label10.Text = "底床分層數目";
             // 
-            // seabedLevelNumTxt
+            // bottomLevelNumberTxt
             // 
-            this.seabedLevelNumTxt.Location = new System.Drawing.Point(103, 24);
-            this.seabedLevelNumTxt.Name = "seabedLevelNumTxt";
-            this.seabedLevelNumTxt.Size = new System.Drawing.Size(146, 22);
-            this.seabedLevelNumTxt.TabIndex = 5;
+            this.bottomLevelNumberTxt.Location = new System.Drawing.Point(103, 24);
+            this.bottomLevelNumberTxt.Name = "bottomLevelNumberTxt";
+            this.bottomLevelNumberTxt.Size = new System.Drawing.Size(146, 22);
+            this.bottomLevelNumberTxt.TabIndex = 5;
             // 
-            // noScourElevationChk
+            // noErosionElevationChk
             // 
-            this.noScourElevationChk.AutoSize = true;
-            this.noScourElevationChk.Location = new System.Drawing.Point(21, 256);
-            this.noScourElevationChk.Name = "noScourElevationChk";
-            this.noScourElevationChk.Size = new System.Drawing.Size(96, 16);
-            this.noScourElevationChk.TabIndex = 0;
-            this.noScourElevationChk.Text = "不可沖刷高程";
-            this.noScourElevationChk.UseVisualStyleBackColor = true;
-            this.noScourElevationChk.CheckedChanged += new System.EventHandler(this.noScourElevationChk_CheckedChanged);
+            this.noErosionElevationChk.AutoSize = true;
+            this.noErosionElevationChk.Location = new System.Drawing.Point(21, 256);
+            this.noErosionElevationChk.Name = "noErosionElevationChk";
+            this.noErosionElevationChk.Size = new System.Drawing.Size(96, 16);
+            this.noErosionElevationChk.TabIndex = 0;
+            this.noErosionElevationChk.Text = "不可沖刷高程";
+            this.noErosionElevationChk.UseVisualStyleBackColor = true;
+            this.noErosionElevationChk.CheckedChanged += new System.EventHandler(this.noScourElevationChk_CheckedChanged);
             // 
-            // cohesiveSedimentChk
+            // shenCohesiveSedimentChk
             // 
-            this.cohesiveSedimentChk.AutoSize = true;
-            this.cohesiveSedimentChk.Location = new System.Drawing.Point(21, 107);
-            this.cohesiveSedimentChk.Name = "cohesiveSedimentChk";
-            this.cohesiveSedimentChk.Size = new System.Drawing.Size(84, 16);
-            this.cohesiveSedimentChk.TabIndex = 0;
-            this.cohesiveSedimentChk.Text = "凝聚性沉滓";
-            this.cohesiveSedimentChk.UseVisualStyleBackColor = true;
-            this.cohesiveSedimentChk.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
+            this.shenCohesiveSedimentChk.AutoSize = true;
+            this.shenCohesiveSedimentChk.Location = new System.Drawing.Point(21, 107);
+            this.shenCohesiveSedimentChk.Name = "shenCohesiveSedimentChk";
+            this.shenCohesiveSedimentChk.Size = new System.Drawing.Size(84, 16);
+            this.shenCohesiveSedimentChk.TabIndex = 0;
+            this.shenCohesiveSedimentChk.Text = "凝聚性沉滓";
+            this.shenCohesiveSedimentChk.UseVisualStyleBackColor = true;
+            this.shenCohesiveSedimentChk.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
             // 
-            // seabedThicknessBtn
+            // bottomLevelBtn
             // 
-            this.seabedThicknessBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.seabedThicknessBtn.Location = new System.Drawing.Point(24, 52);
-            this.seabedThicknessBtn.Name = "seabedThicknessBtn";
-            this.seabedThicknessBtn.Size = new System.Drawing.Size(111, 26);
-            this.seabedThicknessBtn.TabIndex = 6;
-            this.seabedThicknessBtn.Text = "底床分層厚度";
-            this.seabedThicknessBtn.UseVisualStyleBackColor = true;
-            this.seabedThicknessBtn.Click += new System.EventHandler(this.seabedThicknessBtn_Click);
+            this.bottomLevelBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.bottomLevelBtn.Location = new System.Drawing.Point(24, 52);
+            this.bottomLevelBtn.Name = "bottomLevelBtn";
+            this.bottomLevelBtn.Size = new System.Drawing.Size(111, 26);
+            this.bottomLevelBtn.TabIndex = 6;
+            this.bottomLevelBtn.Text = "底床分層厚度";
+            this.bottomLevelBtn.UseVisualStyleBackColor = true;
+            this.bottomLevelBtn.Click += new System.EventHandler(this.seabedThicknessBtn_Click);
             // 
-            // sedimentCompositionRatioBtn
+            // sedimentCompositionBtn
             // 
-            this.sedimentCompositionRatioBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.sedimentCompositionRatioBtn.Location = new System.Drawing.Point(141, 52);
-            this.sedimentCompositionRatioBtn.Name = "sedimentCompositionRatioBtn";
-            this.sedimentCompositionRatioBtn.Size = new System.Drawing.Size(111, 26);
-            this.sedimentCompositionRatioBtn.TabIndex = 6;
-            this.sedimentCompositionRatioBtn.Text = "泥砂組成比例";
-            this.sedimentCompositionRatioBtn.UseVisualStyleBackColor = true;
-            this.sedimentCompositionRatioBtn.Click += new System.EventHandler(this.sedimentCompositionRatioBtn_Click);
+            this.sedimentCompositionBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.sedimentCompositionBtn.Location = new System.Drawing.Point(141, 52);
+            this.sedimentCompositionBtn.Name = "sedimentCompositionBtn";
+            this.sedimentCompositionBtn.Size = new System.Drawing.Size(111, 26);
+            this.sedimentCompositionBtn.TabIndex = 6;
+            this.sedimentCompositionBtn.Text = "泥砂組成比例";
+            this.sedimentCompositionBtn.UseVisualStyleBackColor = true;
+            this.sedimentCompositionBtn.Click += new System.EventHandler(this.sedimentCompositionRatioBtn_Click);
             // 
             // seabedCompositionBackBtn
             // 
@@ -1413,7 +1419,7 @@
             // 
             this.rockbedPanel.Controls.Add(this.groupBox9);
             this.rockbedPanel.Controls.Add(this.button9);
-            this.rockbedPanel.Location = new System.Drawing.Point(12, 718);
+            this.rockbedPanel.Location = new System.Drawing.Point(12, 711);
             this.rockbedPanel.Name = "rockbedPanel";
             this.rockbedPanel.Size = new System.Drawing.Size(500, 682);
             this.rockbedPanel.TabIndex = 12;
@@ -1865,8 +1871,8 @@
             this.seabedCompositionPanel.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
-            this.cohesiveSedimentPanel.ResumeLayout(false);
-            this.cohesiveSedimentPanel.PerformLayout();
+            this.shenCohesiveSedimentPanel.ResumeLayout(false);
+            this.shenCohesiveSedimentPanel.PerformLayout();
             this.rockStablePanel.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
@@ -1914,22 +1920,22 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox sedimentDensityTxt;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox sedimentPoreRatioTxt;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox kinematicViscosityCoefficientTxt;
         private System.Windows.Forms.Button ok;
-        private System.Windows.Forms.ComboBox diffusionEquationCombo;
+        private System.Windows.Forms.ComboBox diffusionFormulaCombo;
         private System.Windows.Forms.Panel valueParamPanel;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button valueParamBackBtn;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox diffusionBonusProportionalInSideflowTxt;
+        private System.Windows.Forms.TextBox diffusionBonusProportionalInMainstreamTxt;
+        private System.Windows.Forms.TextBox diffusionBonusProportionalInBottomTxt;
+        private System.Windows.Forms.TextBox diffusionBonusProportionalInSurfaceTxt;
+        private System.Windows.Forms.TextBox waterOutputFrequencyTxt;
+        private System.Windows.Forms.TextBox waterTimeSpanTxt;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label13;
@@ -1946,16 +1952,16 @@
         private System.Windows.Forms.Panel rockStablePanel;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button rockStableBackBtn;
-        private System.Windows.Forms.Panel cohesiveSedimentPanel;
-        private System.Windows.Forms.CheckBox diffusionEquationChk;
-        private System.Windows.Forms.TextBox amTxt;
+        private System.Windows.Forms.Panel shenCohesiveSedimentPanel;
+        private System.Windows.Forms.CheckBox diffusionFormulaUseChk;
+        private System.Windows.Forms.TextBox surfaceErosionCoefficientTxt;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox seabedLevelNumTxt;
+        private System.Windows.Forms.TextBox bottomLevelNumberTxt;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button sedimentCompositionRatioBtn;
-        private System.Windows.Forms.Button seabedThicknessBtn;
-        private System.Windows.Forms.CheckBox cohesiveSedimentChk;
-        private System.Windows.Forms.Button noScourElevationBtn;
+        private System.Windows.Forms.Button sedimentCompositionBtn;
+        private System.Windows.Forms.Button bottomLevelBtn;
+        private System.Windows.Forms.CheckBox shenCohesiveSedimentChk;
+        private System.Windows.Forms.Button noErosionElevationBtn;
         private System.Windows.Forms.CheckBox quayGeometryChk;
         private System.Windows.Forms.Panel quayGeometryPanel;
         private System.Windows.Forms.Button button14;
@@ -1985,8 +1991,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button physicalParamBtn;
-        private System.Windows.Forms.Button sedimentParticleSizeBtn;
-        private System.Windows.Forms.TextBox sedimentParticlesNumTxt;
+        private System.Windows.Forms.Button sedimentParticlesNumberBtn;
+        private System.Windows.Forms.TextBox sedimentParticlesNumberTxt;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel rockbedPanel;
         private System.Windows.Forms.GroupBox groupBox9;
@@ -2002,7 +2008,7 @@
         private System.Windows.Forms.CheckBox bedrockChk;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.GroupBox highSandContentFlowGrp;
-        private System.Windows.Forms.CheckBox noScourElevationChk;
+        private System.Windows.Forms.CheckBox noErosionElevationChk;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBox6;
@@ -2012,9 +2018,9 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox dryBedNumTxt;
         private System.Windows.Forms.Panel fullPanel;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox outputControlErosionDepthChk;
+        private System.Windows.Forms.CheckBox outputControlAverageDepthDensityChk;
+        private System.Windows.Forms.CheckBox outputControlBottomElevationChk;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Button transSandMethodBtn;
         private System.Windows.Forms.Panel transSandMethodPanel;
@@ -2030,10 +2036,10 @@
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.CheckBox massiveErosionChk;
+        private System.Windows.Forms.CheckBox surfaceErosionChk;
+        private System.Windows.Forms.TextBox massiveErosionCriticalShearStressTxt;
+        private System.Windows.Forms.TextBox surfaceErosionCriticalShearStressTxt;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
@@ -2047,6 +2053,6 @@
         private System.Windows.Forms.Panel previewPanel;
         private System.Windows.Forms.GroupBox outputCtrl2DGrp;
         private System.Windows.Forms.GroupBox outputCtrl3DGrp;
-        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox outputControlDensityInformation3DChk;
     }
 }

@@ -15,24 +15,31 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Full|Any CPU = Full|Any CPU
 		Release_Lite|Any CPU = Release_Lite|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{91684D66-7410-451A-9C18-0A0FEB7BFFB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91684D66-7410-451A-9C18-0A0FEB7BFFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91684D66-7410-451A-9C18-0A0FEB7BFFB3}.Full|Any CPU.ActiveCfg = Full|Any CPU
+		{91684D66-7410-451A-9C18-0A0FEB7BFFB3}.Full|Any CPU.Build.0 = Full|Any CPU
 		{91684D66-7410-451A-9C18-0A0FEB7BFFB3}.Release_Lite|Any CPU.ActiveCfg = Release_Lite|Any CPU
 		{91684D66-7410-451A-9C18-0A0FEB7BFFB3}.Release_Lite|Any CPU.Build.0 = Release_Lite|Any CPU
 		{91684D66-7410-451A-9C18-0A0FEB7BFFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91684D66-7410-451A-9C18-0A0FEB7BFFB3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}.Full|Any CPU.ActiveCfg = Release|Any CPU
+		{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}.Full|Any CPU.Build.0 = Release|Any CPU
 		{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}.Release_Lite|Any CPU.ActiveCfg = Release|Any CPU
 		{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}.Release_Lite|Any CPU.Build.0 = Release|Any CPU
 		{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D8A7D52-5B1F-407A-904F-FACF68D25DF2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A96B3B89-66ED-466C-8703-F44E86433097}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A96B3B89-66ED-466C-8703-F44E86433097}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A96B3B89-66ED-466C-8703-F44E86433097}.Full|Any CPU.ActiveCfg = Release|Any CPU
+		{A96B3B89-66ED-466C-8703-F44E86433097}.Full|Any CPU.Build.0 = Release|Any CPU
 		{A96B3B89-66ED-466C-8703-F44E86433097}.Release_Lite|Any CPU.ActiveCfg = Release|Any CPU
 		{A96B3B89-66ED-466C-8703-F44E86433097}.Release_Lite|Any CPU.Build.0 = Release|Any CPU
 		{A96B3B89-66ED-466C-8703-F44E86433097}.Release|Any CPU.ActiveCfg = Release|Any CPU

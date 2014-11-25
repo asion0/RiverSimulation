@@ -44,25 +44,54 @@ namespace RiverSimulationApplication
 
         private void LoadStatus()
         {
+            
+            //動床參數
+            //2.1 數值參數 =========================================
+            waterTimeSpanTxt.Text = p.waterTimeSpan.ToString();
+            waterOutputFrequencyTxt.Text = p.waterOutputFrequency.ToString();
 
-            //1.1 數值參數 =========================================
-            //1.1.1 時間
-            totalSimulationTimeTxt.Text = p.totalSimulationTime.ToString();
-            timeSpan2dTxt.Text = p.timeSpan2d.ToString();
-            outputFrequencyTxt.Text = p.outputFrequency.ToString();
-            steppingTimesInVertVslcTimeTxt.Text = p.steppingTimesInVertVslcTime.ToString();
+            //2.1.3 輸出控制
+            //2D
+            outputControlBottomElevationChk.Checked = p.outputControlBottomElevation;
+            outputControlAverageDepthDensityChk.Checked = p.outputControlAverageDepthDensity;
+            outputControlErosionDepthChk.Checked = p.outputControlErosionDepth;
 
-            //1.1.2 收斂條件
-            waterModelingConvergenceCriteria2dTxt.Text = p.waterModelingConvergenceCriteria2d.ToString();
-            waterModelingConvergenceCriteria3dTxt.Text = p.waterModelingConvergenceCriteria3d.ToString();
+            //3D
+            outputControlDensityInformation3DChk.Checked = p.outputControlDensityInformation3D;
 
-            //1.1.3 輸出控制
-            minWaterDeothTxt.Text = p.minWaterDeoth.ToString();
-            viscosityFactorAdditionInMainstreamTxt.Text = p.viscosityFactorAdditionInMainstream.ToString();
-            viscosityFactorAdditionInSideDirectionTxt.Text = p.viscosityFactorAdditionInSideDirection.ToString();
+            //2.1.4 選擇擴散公式
+            diffusionFormulaUseChk.Checked = p.diffusionFormulaUse;
+            diffusionFormulaCombo.SelectedIndex = (int)p.diffusionFormula - 1;
 
-            //1.2 物理參數 =========================================
+            diffusionBonusProportionalInMainstreamTxt.Text = p.diffusionBonusProportionalInMainstream.ToString();
+            diffusionBonusProportionalInSideflowTxt.Text = p.diffusionBonusProportionalInSideflow.ToString();
+            diffusionBonusProportionalInSurfaceTxt.Text = p.diffusionBonusProportionalInSurface.ToString();
+            diffusionBonusProportionalInBottomTxt.Text = p.diffusionBonusProportionalInBottom.ToString();
+            
+            //2.2 物理參數
+            kinematicViscosityCoefficientTxt.Text = p.kinematicViscosityCoefficient.ToString();
+            sedimentPoreRatioTxt.Text = p.sedimentPoreRatio.ToString();
+            sedimentDensityTxt.Text = p.sedimentDensity.ToString();
+            sedimentParticlesNumberTxt.Text = p.sedimentParticlesNumber.ToString();
 
+            //2.3 底床組成
+            bottomLevelNumberTxt.Text = p.bottomLevelNumber.ToString();                 //2.3.1 底床分層數目單一數值 整數(>0) a. 使用者輸入底床分層數目後
+            //public double[] bottomLevelArray;               //2.3.1.1 底床分層厚度矩陣(L) m 實數(>0) 矩陣(L)為底床分層數目
+            //public double[,] sedimentCompositionArray;      //2.3.1.2 泥砂組成比例矩陣(K,L) 實數(>0) 矩陣(K,L)為(泥砂顆粒數目, 底床分層數目)
+
+        //public bool shenCohesiveSediment { get; set; }  //2.3.2 凝聚性沉滓option
+
+        //public bool surfaceErosion;                         //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        //public double surfaceErosionCoefficient;            //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        //public double surfaceErosionCriticalShearStress;    //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+        
+        //public bool massiveErosion;                         //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
+        //public double massiveErosionCriticalShearStress;    //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
+        //public bool noErosionElevation;                     //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
+        //public bool noErosionElevationValue;                //b. 0：均一值，逐點給：-1
+        //public bool noErosionElevationArray;                //若為逐點給，則參數形式為矩陣(I,J)
+
+            /*
             switch (p.roughnessType)
             {
                 case RiverSimulationProfile.RoughnessType.ManningN:
@@ -140,23 +169,28 @@ namespace RiverSimulationApplication
             highSandEffectAlpha2Txt.Text = p.highSandEffectAlpha1.ToString();
             highSandEffectBeta2Txt.Text = p.highSandEffectBeta2.ToString();
             highSandEffectC2Txt.Text = p.highSandEffectC2.ToString();
+             // */
         }
 
         private void UpdateStatus()
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            sedimentParticlesNumTxt.Text = p.sedimentParticlesNum.ToString();
-            seabedLevelNumTxt.Text = p.seabedLevelNum.ToString();
-            outputCtrl3DGrp.Enabled = p.Is3DMode();
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
+            //sedimentParticlesNumTxt.Text = p.sedimentParticlesNum.ToString();
+            //seabedLevelNumTxt.Text = p.seabedLevelNum.ToString();
+            diffusionFormulaCombo.Enabled = p.diffusionFormulaUse;
 
-            DrawPreview();
-            if (Program.programVersion.LiteVersion)
-            {
-                fullPanel.Visible = false;
-            }
-            this.bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
-            this.quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
-            this.highSandContentFlowGrp.Enabled = p.waterHighSandContentEffectFunction;
+
+            //DrawPreview();
+            UpdateActiveFunctions();
+        }
+
+        private void UpdateActiveFunctions()
+        {
+            //數值參數 輸出控制3D 面板
+            outputCtrl3DGrp.Enabled = p.Is3DMode();
+            bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
+            quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
+            highSandContentFlowGrp.Enabled = p.waterHighSandContentEffectFunction;
 
             if (p.waterHighSandContentEffectFunction)
             {
@@ -175,8 +209,154 @@ namespace RiverSimulationApplication
                 this.highSandMethodText.Visible = false;
                 this.highSandMethodPanel.Visible = false;
             }
+
+            if (Program.programVersion.LiteVersion)
+            {
+                fullPanel.Visible = false;
+            }
         }
 
+        private void ok_Click(object sender, EventArgs e)
+        {
+            if (!DoConvert())
+            {
+                return;
+            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private bool DoConvert()
+        {
+            if(!ConvertValueParam())
+            {
+                return false;
+            }
+
+            if (!ConvertPhysicalParam())
+            {
+                return false;
+            }
+
+            if(!ConvertBottomLevelNumber())
+            {
+                return false;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            /*
+            int n = 0;
+            if (!ControllerUtility.CheckConvertInt32(ref n, seabedLevelNumTxt, "請輸入正確的底床分層數目！", ControllerUtility.CheckType.GreaterThanThree))
+            {
+                return false;
+            }
+
+            if (p.seabedLevelNum != n)
+            {
+                MessageBox.Show("變更底床分層數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.seabedLevelArray = null;
+                p.sedimentCompositionRatioArray = null;
+            }
+            p.seabedLevelNum = n;
+
+            if (!ControllerUtility.CheckConvertInt32(ref n, sedimentParticlesNumTxt, "請輸入正確的泥砂顆粒數目！", ControllerUtility.CheckType.GreaterThanTwo))
+            {
+                return false;
+            }
+            if (p.sedimentParticlesNum != n)
+            {
+                MessageBox.Show("變更泥砂顆粒數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.sedimentCompositionRatioArray = null;
+            }
+            p.sedimentParticlesNum = n;
+            */
+
+            return true;
+        }
+
+        private bool ConvertValueParam()
+        {
+            if (!ControllerUtility.CheckConvertDouble(ref p.waterTimeSpan, waterTimeSpanTxt, "請輸入正確的時間間距！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertInt32(ref p.waterOutputFrequency, waterOutputFrequencyTxt, "請輸入正確的輸出頻率！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.diffusionBonusProportionalInMainstream, diffusionBonusProportionalInMainstreamTxt, "請輸入正確的主流方向擴散係數加成比例！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.diffusionBonusProportionalInSideflow, diffusionBonusProportionalInSideflowTxt, "請輸入正確的側方向擴散係數加成比例！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
+            if (!ControllerUtility.CheckConvertDouble(ref p.diffusionBonusProportionalInSurface, diffusionBonusProportionalInSurfaceTxt, "請輸入正確的水面擴散係數加成比例！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.diffusionBonusProportionalInBottom, diffusionBonusProportionalInBottomTxt, "請輸入正確的底床擴散係數加成比例！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ConvertPhysicalParam()
+        {
+            if (!ControllerUtility.CheckConvertDouble(ref p.kinematicViscosityCoefficient, kinematicViscosityCoefficientTxt, "請輸入正確的動力黏滯係數！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.sedimentPoreRatio, sedimentPoreRatioTxt, "請輸入正確的泥砂孔隙比！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
+
+            if (!ConvertSedimentParticlesNumber())
+            {
+                return false;
+            }
+            if (!ControllerUtility.CheckConvertInt32(ref p.sedimentParticlesNumber, sedimentParticlesNumberTxt, "請輸入正確的泥砂顆粒數目！", ControllerUtility.CheckType.GreaterThanTwo))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ConvertSedimentParticlesNumber()
+        {
+            if (!ControllerUtility.CheckConvertInt32(ref p.sedimentParticlesNumber, sedimentParticlesNumberTxt, "請輸入正確的泥砂顆粒數目！", ControllerUtility.CheckType.GreaterThanTwo))
+            {
+                return false;
+            }
+            return true;
+        }
+        private bool ConvertBottomLevelNumber()
+        {
+            if (!ControllerUtility.CheckConvertInt32(ref p.bottomLevelNumber, bottomLevelNumberTxt, "請輸入正確的底床分層數目！", ControllerUtility.CheckType.GreaterThanThree))
+            {
+                return false;
+            }
+            return true;
+        }
         private void SettingButton_Click(object sender, EventArgs e)
         {
             Button orgBtn = sender as Button;
@@ -213,57 +393,17 @@ namespace RiverSimulationApplication
         }
 
  
-        private bool DoConvert()
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            int n = 0;
-            if (!ControllerUtility.CheckConvertInt32(ref n, seabedLevelNumTxt, "請輸入正確的底床分層數目！", ControllerUtility.CheckType.GreaterThanThree))
-            {
-                return false;
-            }
-
-            if (p.seabedLevelNum != n)
-            {
-                MessageBox.Show("變更底床分層數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                p.seabedLevelArray = null;
-                p.sedimentCompositionRatioArray = null;
-            }
-            p.seabedLevelNum = n;
-
-            if (!ControllerUtility.CheckConvertInt32(ref n, sedimentParticlesNumTxt, "請輸入正確的泥砂顆粒數目！", ControllerUtility.CheckType.GreaterThanTwo))
-            {
-                return false;
-            }
-            if (p.sedimentParticlesNum != n)
-            {
-                MessageBox.Show("變更泥砂顆粒數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                p.sedimentCompositionRatioArray = null;
-            }
-            p.sedimentParticlesNum = n;
-
-
-            return true;
-        }
 
         private void Back_Click(object sender, EventArgs e)
         {
-            if (DoConvert())
-            {
+            //if (DoConvert())
+            //{
                 sp.SlidePanel(null, SliderPanel.Direction.Back, this.Size);
-            }
+            //}
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
 
         }
 
-        private void ok_Click(object sender, EventArgs e)
-        {
-            if (!DoConvert())
-            {
-                return;
-            }
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
 
         private void normalSandyFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
@@ -292,7 +432,7 @@ namespace RiverSimulationApplication
             int n = 0;
             try
             {
-                n = Convert.ToInt32(sedimentParticlesNumTxt.Text);
+                n = Convert.ToInt32(sedimentParticlesNumberTxt.Text);
             }
             catch
             {
@@ -305,7 +445,7 @@ namespace RiverSimulationApplication
                 return;
             }
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(sedimentParticleSizeBtn.Text, true, 1, n);
+            form.SetFormMode(sedimentParticlesNumberBtn.Text, true, 1, n);
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -396,13 +536,13 @@ namespace RiverSimulationApplication
         private void cohesiveSedimentChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            cohesiveSedimentPanel.Enabled = chk;
+            shenCohesiveSedimentPanel.Enabled = chk;
         }
 
         private void DrawPreview()
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            if(p.seabedLevelArray == null)
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
+            if (p.bottomLevelArray == null)
             {
                 return;
             }
@@ -419,11 +559,11 @@ namespace RiverSimulationApplication
             //Font leftFont = new Font("微軟正黑體", SeabedLevelLineHeight, FontStyle.Regular, GraphicsUnit.Point);
             //Font rightFont = new Font("微軟正黑體", SedimentParticlesLineHeight, FontStyle.Regular, GraphicsUnit.Point);
 
-            int cellH = (p.sedimentParticlesNum * SedimentParticlesLineHeight) + (p.sedimentParticlesNum + 1) * SedimentParticlesGap;
+            int cellH = (p.bottomLevelNumber * SedimentParticlesLineHeight) + (p.sedimentParticlesNumber + 1) * SedimentParticlesGap;
 
 
             int w = SedimentParticlesWidth + SeabedLevelWidth;
-            int h = cellH * p.seabedLevelNum;
+            int h = cellH * p.bottomLevelNumber;
             Bitmap picBoxBmp = new Bitmap(w, h);
             Graphics g = Graphics.FromImage(picBoxBmp);
 
@@ -436,7 +576,7 @@ namespace RiverSimulationApplication
 
 
             float startY = (cellH - SeabedLevelGap * 3 - SeabedLevelLineHeight * 2) / 2.0f;
-            for (int i = 0; i < p.seabedLevelArray.Length; ++i)
+            for (int i = 0; i < p.bottomLevelArray.Length; ++i)
             {
                 pt1 = new Point(0, cellH * (i + 1));
                  pt2 = new Point(w, cellH * (i + 1));
@@ -448,7 +588,7 @@ namespace RiverSimulationApplication
                 stringFormat.LineAlignment = StringAlignment.Center;
 
                 RectangleF rcLeftTxt1 = new RectangleF(0, startY, SeabedLevelWidth, SeabedLevelLineHeight + SeabedLevelGap);
-                string txt = "底床分層" + " " + (p.seabedLevelArray.Length - i).ToString();
+                string txt = "底床分層" + " " + (p.bottomLevelArray.Length - i).ToString();
                 if(i == 0)
                 {
                     txt = "作用層";
@@ -456,26 +596,26 @@ namespace RiverSimulationApplication
                 g.DrawString(txt, leftFont, leftBrush, rcLeftTxt1, stringFormat);
 
                 RectangleF rcLeftTxt2 = new RectangleF(0, startY + SeabedLevelGap + SeabedLevelLineHeight, SeabedLevelWidth, SeabedLevelLineHeight + SeabedLevelGap);
-                txt = "厚度 :" + " " + p.seabedLevelArray[p.seabedLevelArray.Length - i - 1].ToString() + "m";
+                txt = "厚度 :" + " " + p.bottomLevelArray[p.bottomLevelArray.Length - i - 1].ToString() + "m";
                 g.DrawString(txt, leftFont, leftBrush, rcLeftTxt2, stringFormat);
 
                 startY += cellH;
-                if (p.sedimentCompositionRatioArray == null)
+                if (p.sedimentCompositionArray == null)
                 {
                     continue;
                 }
                 //g.DrawRectangle(pen, rcLeftCell.X, rcLeftCell.Y, rcLeftCell.Width, SeabedLevelLineHeight);
-                int sedimentCount = p.sedimentCompositionRatioArray.GetLength(0);
+                int sedimentCount = p.sedimentCompositionArray.GetLength(0);
                 float startRY = cellH * i + SedimentParticlesGap / 2.0f;
                 StringFormat stringFormatR = new StringFormat();
                 stringFormatR.Alignment = StringAlignment.Near;
                 stringFormatR.LineAlignment = StringAlignment.Near;
 
-                for (int j = 0; j < p.sedimentCompositionRatioArray.GetLength(0); ++j)
+                for (int j = 0; j < p.sedimentCompositionArray.GetLength(0); ++j)
                 {
 
                     RectangleF rcRightText = new RectangleF(SeabedLevelWidth + 40, startRY, SedimentParticlesWidth, SeabedLevelLineHeight + SedimentParticlesGap);
-                    txt = "泥砂顆粒 " + (j + 1).ToString() + " : " + p.sedimentCompositionRatioArray[j, p.seabedLevelArray.Length - i - 1].ToString() + "%";
+                    txt = "泥砂顆粒 " + (j + 1).ToString() + " : " + p.sedimentCompositionArray[j, p.bottomLevelArray.Length - i - 1].ToString() + "%";
                     g.DrawString(txt, rightFont, rightBrush, rcRightText, stringFormatR);
 
                     startRY += SeabedLevelLineHeight + SedimentParticlesGap;
@@ -497,61 +637,19 @@ namespace RiverSimulationApplication
             previewPanel.AutoScrollMinSize = new Size(w, h); 
         }
 
-        private void seabedThicknessBtn_Click(object sender, EventArgs e)
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            if (!DoConvert())
-            {
-                return;
-            }
 
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(seabedThicknessBtn.Text, 1, p.seabedLevelNum, seabedThicknessBtn.Text, "底床分層厚度", "底床分層",
-                TableInputForm.InputFormType.SeabedThicknessForm, 90, 120, true, true, false, p.seabedLevelArray);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
-            {
-                p.seabedLevelArray = (double[])form.SeabedThicknessData().Clone();
-                DrawPreview();
-            }
-        }
-
-
-        private void sedimentCompositionRatioBtn_Click(object sender, EventArgs e)
-        {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            if (!DoConvert())
-            {
-                return;
-            }
-
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(sedimentCompositionRatioBtn.Text, p.sedimentParticlesNum, p.seabedLevelNum, sedimentCompositionRatioBtn.Text, "泥砂顆粒", "底床分層",
-                TableInputForm.InputFormType.SedimentCompositionRatioForm ,90, 120, true, false, false, p.sedimentCompositionRatioArray);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
-            {
-                p.sedimentCompositionRatioArray = (double[,])form.SedimentCompositionRatioData().Clone();
-                DrawPreview();
-            }
-        }
 
         private void noScourElevationBtn_Click(object sender, EventArgs e)
         {
 
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(sedimentParticleSizeBtn.Text, true, 26, 50);
+            form.SetFormMode(sedimentParticlesNumberBtn.Text, true, 26, 50);
             if (DialogResult.OK == form.ShowDialog())
             {
 
             }
         }
 
-        private void diffusionEquationChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            diffusionEquationCombo.Enabled = chk;
-        }
 
         //private void selTransSandMethodChk_CheckedChanged(object sender, EventArgs e)
         //{
@@ -635,7 +733,7 @@ namespace RiverSimulationApplication
         private void noScourElevationChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            noScourElevationBtn.Enabled = chk;
+            noErosionElevationBtn.Enabled = chk;
 
         }
 
@@ -653,8 +751,99 @@ namespace RiverSimulationApplication
         {
             ControllerUtility.SetHtmlUrl(comment, "D1-2-1-3.html");
         }
- 
+        //============================================================================================================================
+        private void outputControlBottomElevationChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.outputControlBottomElevation = chk;
+        }
 
+        private void outputControlAverageDepthDensityChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.outputControlAverageDepthDensity = chk;
+        }
+
+        private void outputControlErosionDepthChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.outputControlErosionDepth = chk;
+        }
+
+        private void outputControlDensityInformation3DChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.outputControlDensityInformation3D = chk;
+        }
+
+        private void diffusionFormulaChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.diffusionFormulaUse = chk;
+            UpdateStatus();
+        }
+
+        private void diffusionFormulaCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            p.diffusionFormula = (RiverSimulationProfile.DiffusionFormulaType)((sender as ComboBox).SelectedIndex + 1);
+        }
+
+        private void sedimentParticlesNumberBtn_Click(object sender, EventArgs e)
+        {
+            if (!ConvertSedimentParticlesNumber())
+            {
+                return;
+            }
+
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(sedimentParticlesNumberBtn.Text, true, 1, p.sedimentParticlesNumber);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void seabedThicknessBtn_Click(object sender, EventArgs e)
+        {
+            if (!ConvertBottomLevelNumber())
+            {
+                return;
+            }
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(bottomLevelBtn.Text, 1, p.bottomLevelNumber, bottomLevelBtn.Text, "底床分層厚度", "底床分層",
+                TableInputForm.InputFormType.SeabedThicknessForm, 90, 120, true, true, false, p.bottomLevelArray);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.bottomLevelArray = (double[])form.SeabedThicknessData().Clone();
+                DrawPreview();
+            }
+        }
+
+        private void sedimentCompositionRatioBtn_Click(object sender, EventArgs e)
+        {
+            if(!ConvertSedimentParticlesNumber())
+            {
+                return;
+            }
+
+            if (!ConvertBottomLevelNumber())
+            {
+                return;
+            }
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(sedimentCompositionBtn.Text, p.sedimentParticlesNumber, p.bottomLevelNumber, sedimentCompositionBtn.Text, "泥砂顆粒", "底床分層",
+                TableInputForm.InputFormType.SedimentCompositionRatioForm, 90, 120, true, false, false, p.sedimentCompositionArray);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.sedimentCompositionArray = (double[,])form.SedimentCompositionRatioData().Clone();
+                DrawPreview();
+            }
+        }
 
     }
 }

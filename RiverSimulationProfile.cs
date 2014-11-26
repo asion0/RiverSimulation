@@ -128,8 +128,8 @@ namespace RiverSimulationApplication
         //1.2.2.4 雙方程(k-ε) 三維 only，僅一項，不用下拉選單。
 
         //1.2.3 其他
-        public double gravityConstant { get; set; }             //1.2.3.1 重力常數 單一數值 m/s2 9.81 實數 Free
-        public double waterDensity { get; set; }                //1.2.3.2 水密度 單一數值 kg/m3 1000 實數(>0) Free
+        public double gravityConstant;             //1.2.3.1 重力常數 單一數值 m/s2 9.81 實數 Free
+        public double waterDensity;                //1.2.3.2 水密度 單一數值 kg/m3 1000 實數(>0) Free
         
         //1.3 二次流效應 二維 only
         public enum CurvatureRadiusType
@@ -296,10 +296,9 @@ namespace RiverSimulationApplication
             SandTransportEquation1,
             SandTransportEquation2,
             SandTransportEquation3,
-            HighSandTransportEquation1,
-            HighSandTransportEquation2,
-            HighSandTransportEquation3,
-
+            HighSandTransportEquation4,
+            HighSandTransportEquation5,
+            HighSandTransportEquation6,
         }
         //2.4.1 一般輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
         //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項

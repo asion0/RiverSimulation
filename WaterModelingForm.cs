@@ -32,8 +32,6 @@ namespace RiverSimulationApplication
 
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
 
-
-            
             LoadStatus();
             UpdateStatus();
         }
@@ -209,6 +207,31 @@ namespace RiverSimulationApplication
 
         private bool DoConvert()
         {
+            if (p.flowType == RiverSimulationProfile.FlowType.None)
+            {
+                MessageBox.Show("請選取定/變量流設定！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (!ConvertValueParam())
+            {
+                return false;
+            }
+
+            if(!ConvertPhysicalParam())
+            {
+                return false;
+            }
+
+            if (!ConvertStructureSetNumber())
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ConvertValueParam()
+        {
             if (!ControllerUtility.CheckConvertDouble(ref p.totalSimulationTime, totalSimulationTimeTxt, "請輸入正確的總模擬時間！", ControllerUtility.CheckType.GreaterThanZero))
             {
                 return false;
@@ -241,24 +264,37 @@ namespace RiverSimulationApplication
             if (!ControllerUtility.CheckConvertDouble(ref p.minWaterDeoth, minWaterDeothTxt, "請輸入正確的最小水深！", ControllerUtility.CheckType.GreaterThanZero))
             {
                 return false;
-            }            
+            }
             if (!ControllerUtility.CheckConvertDouble(ref p.viscosityFactorAdditionInMainstream, viscosityFactorAdditionInMainstreamTxt, "請輸入正確的主流方向黏滯係數加成比例！", ControllerUtility.CheckType.GreaterThanZero))
             {
                 return false;
-            }            
+            }
             if (!ControllerUtility.CheckConvertDouble(ref p.viscosityFactorAdditionInSideDirection, viscosityFactorAdditionInSideDirectionTxt, "請輸入正確的側方向黏滯係數加成比例！", ControllerUtility.CheckType.GreaterThanZero))
             {
                 return false;
             }
+            return true;
+        }
 
-            if (!ConvertStructureSetNumber())
+        private bool ConvertPhysicalParam()
+        {
+            //zeroEquationTypeCombo.SelectedIndex = (int)p.zeroEquationType;
+
+            ////1.2.3 其他
+            //gravityConstantTxt.Text = p.gravityConstant.ToString();
+            //waterDensityTxt.Text = p.waterDensity.ToString();
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.gravityConstant, gravityConstantTxt, "", ControllerUtility.CheckType.NoCheck))
             {
                 return false;
             }
 
+            if (!ControllerUtility.CheckConvertDouble(ref p.waterDensity, waterDensityTxt, "請輸入正確的水密度！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
             return true;
         }
-
         private bool ConvertStructureSetNumber()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;

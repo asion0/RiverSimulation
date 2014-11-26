@@ -164,16 +164,16 @@
             this.highSandMethodText = new System.Windows.Forms.Label();
             this.normalSandMethodText = new System.Windows.Forms.Label();
             this.highSandMethodPanel = new System.Windows.Forms.Panel();
-            this.radioButton13 = new System.Windows.Forms.RadioButton();
-            this.radioButton12 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.highSandTransportEquation1Rdo = new System.Windows.Forms.RadioButton();
+            this.highSandTransportEquation3Rdo = new System.Windows.Forms.RadioButton();
+            this.highSandTransportEquation6Rdo = new System.Windows.Forms.RadioButton();
+            this.highSandTransportEquation2Rdo = new System.Windows.Forms.RadioButton();
+            this.highSandTransportEquation5Rdo = new System.Windows.Forms.RadioButton();
+            this.highSandTransportEquation4Rdo = new System.Windows.Forms.RadioButton();
             this.normalSandMethodPanel = new System.Windows.Forms.Panel();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.sandTransportEquation1Rdo = new System.Windows.Forms.RadioButton();
+            this.sandTransportEquation3Rdo = new System.Windows.Forms.RadioButton();
+            this.sandTransportEquation2Rdo = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
             this.previewPicBox = new System.Windows.Forms.PictureBox();
             this.previewPanel = new System.Windows.Forms.Panel();
@@ -486,7 +486,7 @@
             // 
             this.valueParamPanel.Controls.Add(this.groupBox10);
             this.valueParamPanel.Controls.Add(this.valueParamBackBtn);
-            this.valueParamPanel.Location = new System.Drawing.Point(144, 660);
+            this.valueParamPanel.Location = new System.Drawing.Point(145, 243);
             this.valueParamPanel.Name = "valueParamPanel";
             this.valueParamPanel.Size = new System.Drawing.Size(500, 670);
             this.valueParamPanel.TabIndex = 12;
@@ -599,7 +599,7 @@
             this.label13.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label13.Location = new System.Drawing.Point(13, 16);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(140, 17);
+            this.label13.Size = new System.Drawing.Size(156, 19);
             this.label13.TabIndex = 14;
             this.label13.Text = "主流方向擴散係數加成比例";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -609,14 +609,14 @@
             this.label9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label9.Location = new System.Drawing.Point(13, 96);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(140, 17);
+            this.label9.Size = new System.Drawing.Size(156, 19);
             this.label9.TabIndex = 6;
             this.label9.Text = "水面擴散係數加成比例";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // diffusionBonusProportionalInSideflowTxt
             // 
-            this.diffusionBonusProportionalInSideflowTxt.Location = new System.Drawing.Point(159, 53);
+            this.diffusionBonusProportionalInSideflowTxt.Location = new System.Drawing.Point(175, 53);
             this.diffusionBonusProportionalInSideflowTxt.MaxLength = 8;
             this.diffusionBonusProportionalInSideflowTxt.Name = "diffusionBonusProportionalInSideflowTxt";
             this.diffusionBonusProportionalInSideflowTxt.Size = new System.Drawing.Size(121, 22);
@@ -629,7 +629,7 @@
             this.label8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label8.Location = new System.Drawing.Point(13, 136);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(140, 17);
+            this.label8.Size = new System.Drawing.Size(156, 19);
             this.label8.TabIndex = 6;
             this.label8.Text = "底床擴散係數加成比例";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -639,14 +639,14 @@
             this.label7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label7.Location = new System.Drawing.Point(13, 56);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(140, 17);
+            this.label7.Size = new System.Drawing.Size(156, 19);
             this.label7.TabIndex = 14;
             this.label7.Text = "側方向擴散係數加成比例";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // diffusionBonusProportionalInMainstreamTxt
             // 
-            this.diffusionBonusProportionalInMainstreamTxt.Location = new System.Drawing.Point(159, 13);
+            this.diffusionBonusProportionalInMainstreamTxt.Location = new System.Drawing.Point(175, 13);
             this.diffusionBonusProportionalInMainstreamTxt.MaxLength = 8;
             this.diffusionBonusProportionalInMainstreamTxt.Name = "diffusionBonusProportionalInMainstreamTxt";
             this.diffusionBonusProportionalInMainstreamTxt.Size = new System.Drawing.Size(121, 22);
@@ -656,7 +656,7 @@
             // 
             // diffusionBonusProportionalInSurfaceTxt
             // 
-            this.diffusionBonusProportionalInSurfaceTxt.Location = new System.Drawing.Point(159, 93);
+            this.diffusionBonusProportionalInSurfaceTxt.Location = new System.Drawing.Point(175, 93);
             this.diffusionBonusProportionalInSurfaceTxt.MaxLength = 8;
             this.diffusionBonusProportionalInSurfaceTxt.Name = "diffusionBonusProportionalInSurfaceTxt";
             this.diffusionBonusProportionalInSurfaceTxt.Size = new System.Drawing.Size(121, 22);
@@ -666,7 +666,7 @@
             // 
             // diffusionBonusProportionalInBottomTxt
             // 
-            this.diffusionBonusProportionalInBottomTxt.Location = new System.Drawing.Point(159, 133);
+            this.diffusionBonusProportionalInBottomTxt.Location = new System.Drawing.Point(175, 133);
             this.diffusionBonusProportionalInBottomTxt.MaxLength = 8;
             this.diffusionBonusProportionalInBottomTxt.Name = "diffusionBonusProportionalInBottomTxt";
             this.diffusionBonusProportionalInBottomTxt.Size = new System.Drawing.Size(121, 22);
@@ -820,7 +820,7 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(243, 192);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(243, 370);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
             this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
@@ -881,7 +881,7 @@
             this.massiveErosionChk.TabIndex = 0;
             this.massiveErosionChk.Text = "塊狀沖蝕";
             this.massiveErosionChk.UseVisualStyleBackColor = true;
-            this.massiveErosionChk.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
+            this.massiveErosionChk.CheckedChanged += new System.EventHandler(this.massiveErosionChk_CheckedChanged);
             // 
             // surfaceErosionChk
             // 
@@ -892,7 +892,7 @@
             this.surfaceErosionChk.TabIndex = 0;
             this.surfaceErosionChk.Text = "表層沖刷";
             this.surfaceErosionChk.UseVisualStyleBackColor = true;
-            this.surfaceErosionChk.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
+            this.surfaceErosionChk.CheckedChanged += new System.EventHandler(this.surfaceErosionChk_CheckedChanged);
             // 
             // massiveErosionCriticalShearStressTxt
             // 
@@ -968,7 +968,7 @@
             this.noErosionElevationChk.TabIndex = 0;
             this.noErosionElevationChk.Text = "不可沖刷高程";
             this.noErosionElevationChk.UseVisualStyleBackColor = true;
-            this.noErosionElevationChk.CheckedChanged += new System.EventHandler(this.noScourElevationChk_CheckedChanged);
+            this.noErosionElevationChk.CheckedChanged += new System.EventHandler(this.noErosionElevationChk_CheckedChanged);
             // 
             // shenCohesiveSedimentChk
             // 
@@ -979,7 +979,7 @@
             this.shenCohesiveSedimentChk.TabIndex = 0;
             this.shenCohesiveSedimentChk.Text = "凝聚性沉滓";
             this.shenCohesiveSedimentChk.UseVisualStyleBackColor = true;
-            this.shenCohesiveSedimentChk.CheckedChanged += new System.EventHandler(this.cohesiveSedimentChk_CheckedChanged);
+            this.shenCohesiveSedimentChk.CheckedChanged += new System.EventHandler(this.shenCohesiveSedimentChk_CheckedChanged);
             // 
             // bottomLevelBtn
             // 
@@ -1621,7 +1621,7 @@
             // 
             this.transSandMethodPanel.Controls.Add(this.groupBox5);
             this.transSandMethodPanel.Controls.Add(this.button1);
-            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 638);
+            this.transSandMethodPanel.Location = new System.Drawing.Point(200, 135);
             this.transSandMethodPanel.Name = "transSandMethodPanel";
             this.transSandMethodPanel.Size = new System.Drawing.Size(500, 670);
             this.transSandMethodPanel.TabIndex = 12;
@@ -1661,12 +1661,12 @@
             // highSandMethodPanel
             // 
             this.highSandMethodPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.highSandMethodPanel.Controls.Add(this.radioButton13);
-            this.highSandMethodPanel.Controls.Add(this.radioButton12);
-            this.highSandMethodPanel.Controls.Add(this.radioButton5);
-            this.highSandMethodPanel.Controls.Add(this.radioButton11);
-            this.highSandMethodPanel.Controls.Add(this.radioButton3);
-            this.highSandMethodPanel.Controls.Add(this.radioButton4);
+            this.highSandMethodPanel.Controls.Add(this.highSandTransportEquation1Rdo);
+            this.highSandMethodPanel.Controls.Add(this.highSandTransportEquation3Rdo);
+            this.highSandMethodPanel.Controls.Add(this.highSandTransportEquation6Rdo);
+            this.highSandMethodPanel.Controls.Add(this.highSandTransportEquation2Rdo);
+            this.highSandMethodPanel.Controls.Add(this.highSandTransportEquation5Rdo);
+            this.highSandMethodPanel.Controls.Add(this.highSandTransportEquation4Rdo);
             this.highSandMethodPanel.Enabled = false;
             this.highSandMethodPanel.Location = new System.Drawing.Point(13, 139);
             this.highSandMethodPanel.Name = "highSandMethodPanel";
@@ -1675,116 +1675,125 @@
             this.highSandMethodPanel.Visible = false;
             this.highSandMethodPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // radioButton13
+            // highSandTransportEquation1Rdo
             // 
-            this.radioButton13.AutoSize = true;
-            this.radioButton13.Location = new System.Drawing.Point(18, 20);
-            this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(97, 16);
-            this.radioButton13.TabIndex = 1;
-            this.radioButton13.TabStop = true;
-            this.radioButton13.Text = "Van Rijn(1984)";
-            this.radioButton13.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation1Rdo.AutoSize = true;
+            this.highSandTransportEquation1Rdo.Location = new System.Drawing.Point(18, 20);
+            this.highSandTransportEquation1Rdo.Name = "highSandTransportEquation1Rdo";
+            this.highSandTransportEquation1Rdo.Size = new System.Drawing.Size(97, 16);
+            this.highSandTransportEquation1Rdo.TabIndex = 1;
+            this.highSandTransportEquation1Rdo.TabStop = true;
+            this.highSandTransportEquation1Rdo.Text = "Van Rijn(1984)";
+            this.highSandTransportEquation1Rdo.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation1Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
-            // radioButton12
+            // highSandTransportEquation3Rdo
             // 
-            this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(284, 20);
-            this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(114, 16);
-            this.radioButton12.TabIndex = 1;
-            this.radioButton12.TabStop = true;
-            this.radioButton12.Text = "Rickenmann(1991)";
-            this.radioButton12.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation3Rdo.AutoSize = true;
+            this.highSandTransportEquation3Rdo.Location = new System.Drawing.Point(284, 20);
+            this.highSandTransportEquation3Rdo.Name = "highSandTransportEquation3Rdo";
+            this.highSandTransportEquation3Rdo.Size = new System.Drawing.Size(114, 16);
+            this.highSandTransportEquation3Rdo.TabIndex = 1;
+            this.highSandTransportEquation3Rdo.TabStop = true;
+            this.highSandTransportEquation3Rdo.Text = "Rickenmann(1991)";
+            this.highSandTransportEquation3Rdo.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation3Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
-            // radioButton5
+            // highSandTransportEquation6Rdo
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(284, 47);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(113, 16);
-            this.radioButton5.TabIndex = 1;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "高含砂輸砂公式3";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation6Rdo.AutoSize = true;
+            this.highSandTransportEquation6Rdo.Location = new System.Drawing.Point(284, 47);
+            this.highSandTransportEquation6Rdo.Name = "highSandTransportEquation6Rdo";
+            this.highSandTransportEquation6Rdo.Size = new System.Drawing.Size(113, 16);
+            this.highSandTransportEquation6Rdo.TabIndex = 1;
+            this.highSandTransportEquation6Rdo.TabStop = true;
+            this.highSandTransportEquation6Rdo.Text = "高含砂輸砂公式3";
+            this.highSandTransportEquation6Rdo.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation6Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
-            // radioButton11
+            // highSandTransportEquation2Rdo
             // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(147, 20);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(111, 16);
-            this.radioButton11.TabIndex = 1;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "Gary Parker(1990)";
-            this.radioButton11.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation2Rdo.AutoSize = true;
+            this.highSandTransportEquation2Rdo.Location = new System.Drawing.Point(147, 20);
+            this.highSandTransportEquation2Rdo.Name = "highSandTransportEquation2Rdo";
+            this.highSandTransportEquation2Rdo.Size = new System.Drawing.Size(111, 16);
+            this.highSandTransportEquation2Rdo.TabIndex = 1;
+            this.highSandTransportEquation2Rdo.TabStop = true;
+            this.highSandTransportEquation2Rdo.Text = "Gary Parker(1990)";
+            this.highSandTransportEquation2Rdo.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation2Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
-            // radioButton3
+            // highSandTransportEquation5Rdo
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(147, 47);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(113, 16);
-            this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "高含砂輸砂公式2";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation5Rdo.AutoSize = true;
+            this.highSandTransportEquation5Rdo.Location = new System.Drawing.Point(147, 47);
+            this.highSandTransportEquation5Rdo.Name = "highSandTransportEquation5Rdo";
+            this.highSandTransportEquation5Rdo.Size = new System.Drawing.Size(113, 16);
+            this.highSandTransportEquation5Rdo.TabIndex = 1;
+            this.highSandTransportEquation5Rdo.TabStop = true;
+            this.highSandTransportEquation5Rdo.Text = "高含砂輸砂公式2";
+            this.highSandTransportEquation5Rdo.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation5Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
-            // radioButton4
+            // highSandTransportEquation4Rdo
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(18, 47);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(113, 16);
-            this.radioButton4.TabIndex = 1;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "高含砂輸砂公式1";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation4Rdo.AutoSize = true;
+            this.highSandTransportEquation4Rdo.Location = new System.Drawing.Point(18, 47);
+            this.highSandTransportEquation4Rdo.Name = "highSandTransportEquation4Rdo";
+            this.highSandTransportEquation4Rdo.Size = new System.Drawing.Size(113, 16);
+            this.highSandTransportEquation4Rdo.TabIndex = 1;
+            this.highSandTransportEquation4Rdo.TabStop = true;
+            this.highSandTransportEquation4Rdo.Text = "高含砂輸砂公式1";
+            this.highSandTransportEquation4Rdo.UseVisualStyleBackColor = true;
+            this.highSandTransportEquation4Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
             // normalSandMethodPanel
             // 
             this.normalSandMethodPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.normalSandMethodPanel.Controls.Add(this.radioButton8);
-            this.normalSandMethodPanel.Controls.Add(this.radioButton6);
-            this.normalSandMethodPanel.Controls.Add(this.radioButton7);
+            this.normalSandMethodPanel.Controls.Add(this.sandTransportEquation1Rdo);
+            this.normalSandMethodPanel.Controls.Add(this.sandTransportEquation3Rdo);
+            this.normalSandMethodPanel.Controls.Add(this.sandTransportEquation2Rdo);
             this.normalSandMethodPanel.Location = new System.Drawing.Point(13, 37);
             this.normalSandMethodPanel.Name = "normalSandMethodPanel";
             this.normalSandMethodPanel.Size = new System.Drawing.Size(445, 59);
             this.normalSandMethodPanel.TabIndex = 12;
             this.normalSandMethodPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // radioButton8
+            // sandTransportEquation1Rdo
             // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(18, 20);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(97, 16);
-            this.radioButton8.TabIndex = 1;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "Van Rijn(1984)";
-            this.radioButton8.UseVisualStyleBackColor = true;
+            this.sandTransportEquation1Rdo.AutoSize = true;
+            this.sandTransportEquation1Rdo.Location = new System.Drawing.Point(18, 20);
+            this.sandTransportEquation1Rdo.Name = "sandTransportEquation1Rdo";
+            this.sandTransportEquation1Rdo.Size = new System.Drawing.Size(97, 16);
+            this.sandTransportEquation1Rdo.TabIndex = 1;
+            this.sandTransportEquation1Rdo.TabStop = true;
+            this.sandTransportEquation1Rdo.Text = "Van Rijn(1984)";
+            this.sandTransportEquation1Rdo.UseVisualStyleBackColor = true;
+            this.sandTransportEquation1Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
-            // radioButton6
+            // sandTransportEquation3Rdo
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(284, 20);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(114, 16);
-            this.radioButton6.TabIndex = 1;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Rickenmann(1991)";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.sandTransportEquation3Rdo.AutoSize = true;
+            this.sandTransportEquation3Rdo.Location = new System.Drawing.Point(284, 20);
+            this.sandTransportEquation3Rdo.Name = "sandTransportEquation3Rdo";
+            this.sandTransportEquation3Rdo.Size = new System.Drawing.Size(114, 16);
+            this.sandTransportEquation3Rdo.TabIndex = 1;
+            this.sandTransportEquation3Rdo.TabStop = true;
+            this.sandTransportEquation3Rdo.Text = "Rickenmann(1991)";
+            this.sandTransportEquation3Rdo.UseVisualStyleBackColor = true;
+            this.sandTransportEquation3Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
-            // radioButton7
+            // sandTransportEquation2Rdo
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(147, 20);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(111, 16);
-            this.radioButton7.TabIndex = 1;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "Gary Parker(1990)";
-            this.radioButton7.UseVisualStyleBackColor = true;
+            this.sandTransportEquation2Rdo.AutoSize = true;
+            this.sandTransportEquation2Rdo.Location = new System.Drawing.Point(147, 20);
+            this.sandTransportEquation2Rdo.Name = "sandTransportEquation2Rdo";
+            this.sandTransportEquation2Rdo.Size = new System.Drawing.Size(111, 16);
+            this.sandTransportEquation2Rdo.TabIndex = 1;
+            this.sandTransportEquation2Rdo.TabStop = true;
+            this.sandTransportEquation2Rdo.Text = "Gary Parker(1990)";
+            this.sandTransportEquation2Rdo.UseVisualStyleBackColor = true;
+            this.sandTransportEquation2Rdo.CheckedChanged += new System.EventHandler(this.sandTransportEquationRdo_CheckedChanged);
             // 
             // button1
             // 
@@ -1835,10 +1844,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 741);
             this.Controls.Add(this.valueParamPanel);
+            this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.rockStablePanel);
-            this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);
@@ -2028,14 +2037,14 @@
         private System.Windows.Forms.Label highSandMethodText;
         private System.Windows.Forms.Label normalSandMethodText;
         private System.Windows.Forms.Panel normalSandMethodPanel;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton highSandTransportEquation6Rdo;
+        private System.Windows.Forms.RadioButton highSandTransportEquation5Rdo;
+        private System.Windows.Forms.RadioButton highSandTransportEquation4Rdo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel highSandMethodPanel;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton sandTransportEquation3Rdo;
+        private System.Windows.Forms.RadioButton sandTransportEquation2Rdo;
+        private System.Windows.Forms.RadioButton sandTransportEquation1Rdo;
         private System.Windows.Forms.CheckBox massiveErosionChk;
         private System.Windows.Forms.CheckBox surfaceErosionChk;
         private System.Windows.Forms.TextBox massiveErosionCriticalShearStressTxt;
@@ -2046,9 +2055,9 @@
         private System.Windows.Forms.RadioButton minuteRdo;
         private System.Windows.Forms.RadioButton hourRdo;
         private System.Windows.Forms.Label timeLbl;
-        private System.Windows.Forms.RadioButton radioButton13;
-        private System.Windows.Forms.RadioButton radioButton12;
-        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.RadioButton highSandTransportEquation1Rdo;
+        private System.Windows.Forms.RadioButton highSandTransportEquation3Rdo;
+        private System.Windows.Forms.RadioButton highSandTransportEquation2Rdo;
         private System.Windows.Forms.PictureBox previewPicBox;
         private System.Windows.Forms.Panel previewPanel;
         private System.Windows.Forms.GroupBox outputCtrl2DGrp;

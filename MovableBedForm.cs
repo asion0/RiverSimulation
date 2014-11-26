@@ -76,100 +76,50 @@ namespace RiverSimulationApplication
 
             //2.3 底床組成
             bottomLevelNumberTxt.Text = p.bottomLevelNumber.ToString();                 //2.3.1 底床分層數目單一數值 整數(>0) a. 使用者輸入底床分層數目後
-            //public double[] bottomLevelArray;               //2.3.1.1 底床分層厚度矩陣(L) m 實數(>0) 矩陣(L)為底床分層數目
-            //public double[,] sedimentCompositionArray;      //2.3.1.2 泥砂組成比例矩陣(K,L) 實數(>0) 矩陣(K,L)為(泥砂顆粒數目, 底床分層數目)
+            shenCohesiveSedimentChk.Checked = p.shenCohesiveSediment;
+            surfaceErosionChk.Checked = p.surfaceErosion;
+            surfaceErosionCoefficientTxt.Text = p.surfaceErosionCoefficient.ToString();
+            surfaceErosionCriticalShearStressTxt.Text = p.surfaceErosionCriticalShearStress.ToString();
+            massiveErosionChk.Checked = p.massiveErosion;
+            massiveErosionCriticalShearStressTxt.Text = p.massiveErosionCriticalShearStress.ToString();
+            noErosionElevationChk.Checked = p.noErosionElevation;
 
-        //public bool shenCohesiveSediment { get; set; }  //2.3.2 凝聚性沉滓option
-
-        //public bool surfaceErosion;                         //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
-        //public double surfaceErosionCoefficient;            //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
-        //public double surfaceErosionCriticalShearStress;    //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
-        
-        //public bool massiveErosion;                         //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
-        //public double massiveErosionCriticalShearStress;    //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
-        //public bool noErosionElevation;                     //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
-        //public bool noErosionElevationValue;                //b. 0：均一值，逐點給：-1
-        //public bool noErosionElevationArray;                //若為逐點給，則參數形式為矩陣(I,J)
-
-            /*
-            switch (p.roughnessType)
+            //2.4 輸砂公式
+            switch(p.sandTransportEquation)
             {
-                case RiverSimulationProfile.RoughnessType.ManningN:
-                    manningNRdo.Checked = true;
+                case RiverSimulationProfile.SandTransportEquationType.SandTransportEquation1:
+                    sandTransportEquation1Rdo.Checked = true;
+                    highSandTransportEquation1Rdo.Checked = true;
                     break;
-                case RiverSimulationProfile.RoughnessType.Chezy:
-                    chezyRdo.Checked = true;
-                    break;
+                case RiverSimulationProfile.SandTransportEquationType.SandTransportEquation2:
+                    sandTransportEquation2Rdo.Checked = true;
+                     highSandTransportEquation2Rdo.Checked = true;
+                   break;
+                case RiverSimulationProfile.SandTransportEquationType.SandTransportEquation3:
+                   sandTransportEquation3Rdo.Checked = true;
+                   highSandTransportEquation3Rdo.Checked = true;
+                   break;
+                case RiverSimulationProfile.SandTransportEquationType.HighSandTransportEquation4:
+                   highSandTransportEquation4Rdo.Checked = true;
+                   break;
+                case RiverSimulationProfile.SandTransportEquationType.HighSandTransportEquation5:
+                   highSandTransportEquation5Rdo.Checked = true;
+                   break;
+                case RiverSimulationProfile.SandTransportEquationType.HighSandTransportEquation6:
+                   highSandTransportEquation6Rdo.Checked = true;
+                   break;
                 default:
-                    manningNRdo.Checked = false;
-                    chezyRdo.Checked = false;
-                    break;
+                   sandTransportEquation1Rdo.Checked = false;
+                   sandTransportEquation2Rdo.Checked = false;
+                   sandTransportEquation3Rdo.Checked = false;
+                   highSandTransportEquation1Rdo.Checked = false;
+                   highSandTransportEquation2Rdo.Checked = false;
+                   highSandTransportEquation3Rdo.Checked = false;
+                   highSandTransportEquation4Rdo.Checked = false;
+                   highSandTransportEquation5Rdo.Checked = false;
+                   highSandTransportEquation6Rdo.Checked = false;
+                   break;
             }
-
-            //1.2.2 紊流黏滯係數
-            switch (p.turbulenceViscosityType)
-            {
-                case RiverSimulationProfile.TurbulenceViscosityType.UserDefine:
-                    userDefineRdo.Checked = true;
-                    break;
-                case RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation:
-                    zeroEquationRdo.Checked = true;
-                    break;
-                case RiverSimulationProfile.TurbulenceViscosityType.SingleEquation:
-                    singleEquationRdo.Checked = true;
-                    break;
-                case RiverSimulationProfile.TurbulenceViscosityType.TwinEquation:
-                    twinEquationRdo.Checked = true;
-                    break;
-                default:
-                    userDefineRdo.Checked = false;
-                    zeroEquationRdo.Checked = false;
-                    singleEquationRdo.Checked = false;
-                    twinEquationRdo.Checked = false;
-                    break;
-            }
-            zeroEquationTypeCombo.SelectedIndex = (int)p.zeroEquationType;
-
-            //1.2.3 其他
-            gravityConstantTxt.Text = p.gravityConstant.ToString();
-            waterDensityTxt.Text = p.waterDensity.ToString();
-
-            //1.3 二次流效應 二維 only
-            switch (p.curvatureRadiusType)
-            {
-                case RiverSimulationProfile.CurvatureRadiusType.AutoCurvatureRadius:
-                    autoCurvatureRadiusRdo.Checked = true;
-                    break;
-                case RiverSimulationProfile.CurvatureRadiusType.InputCurvatureRadius:
-                    inputCurvatureRadiusRdo.Checked = true;
-                    break;
-                default:
-                    autoCurvatureRadiusRdo.Checked = false;
-                    inputCurvatureRadiusRdo.Checked = false;
-                    break;
-            }
-
-            //結構物設置
-            tBarSetChk.Checked = p.tBarSet;
-            tBarNumberTxt.Text = p.tBarNumber.ToString();
-
-            bridgePierSetChk.Checked = p.bridgePierSet;
-            bridgePierNumberTxt.Text = p.bridgePierNumber.ToString();
-
-            groundsillWorkSetChk.Checked = p.groundsillWorkSet;
-            groundsillWorkNumberTxt.Text = p.groundsillWorkNumber.ToString();
-
-            sedimentationWeirSetChk.Checked = p.sedimentationWeirSet;
-            sedimentationWeirNumberTxt.Text = p.sedimentationWeirNumber.ToString();
-
-            //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
-            highSandEffectAlpha1Txt.Text = p.highSandEffectAlpha1.ToString();
-            highSandEffectBeta1Txt.Text = p.highSandEffectBeta1.ToString();
-            highSandEffectC1Txt.Text = p.highSandEffectC1.ToString();
-            highSandEffectAlpha2Txt.Text = p.highSandEffectAlpha1.ToString();
-            highSandEffectBeta2Txt.Text = p.highSandEffectBeta2.ToString();
-            highSandEffectC2Txt.Text = p.highSandEffectC2.ToString();
-             // */
         }
 
         private void UpdateStatus()
@@ -238,11 +188,14 @@ namespace RiverSimulationApplication
                 return false;
             }
 
-            if(!ConvertBottomLevelNumber())
+            if (!ConvertSeabedComposition())
             {
                 return false;
             }
-
+            if(!ConvertTransSandMethod())
+            {
+                return false;
+            }
 
 
 
@@ -296,6 +249,15 @@ namespace RiverSimulationApplication
                 return false;
             }
 
+            if(p.diffusionFormulaUse)
+            {
+                if(p.diffusionFormula == RiverSimulationProfile.DiffusionFormulaType.None)
+                {
+                    MessageBox.Show("請選擇擴散公式 ！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+            }
+
             if (!ControllerUtility.CheckConvertDouble(ref p.diffusionBonusProportionalInMainstream, diffusionBonusProportionalInMainstreamTxt, "請輸入正確的主流方向擴散係數加成比例！", ControllerUtility.CheckType.NotNegative))
             {
                 return false;
@@ -330,12 +292,13 @@ namespace RiverSimulationApplication
                 return false;
             }
 
-            if (!ConvertSedimentParticlesNumber())
+            if (!ControllerUtility.CheckConvertDouble(ref p.sedimentDensity, sedimentDensityTxt, "請輸入正確的泥砂密度！", ControllerUtility.CheckType.NotNegative))
             {
                 return false;
             }
-            if (!ControllerUtility.CheckConvertInt32(ref p.sedimentParticlesNumber, sedimentParticlesNumberTxt, "請輸入正確的泥砂顆粒數目！", ControllerUtility.CheckType.GreaterThanTwo))
-            {
+
+            if (!ConvertSedimentParticlesNumber())  //讀取泥砂顆粒數目
+            {   
                 return false;
             }
             return true;
@@ -349,6 +312,7 @@ namespace RiverSimulationApplication
             }
             return true;
         }
+
         private bool ConvertBottomLevelNumber()
         {
             if (!ControllerUtility.CheckConvertInt32(ref p.bottomLevelNumber, bottomLevelNumberTxt, "請輸入正確的底床分層數目！", ControllerUtility.CheckType.GreaterThanThree))
@@ -357,6 +321,52 @@ namespace RiverSimulationApplication
             }
             return true;
         }
+
+        private bool ConvertSeabedComposition()
+        {
+            if (!ConvertBottomLevelNumber())
+            {
+                return false;
+            }
+
+            if (p.shenCohesiveSediment)
+            {   //凝聚性沉滓
+                if (p.surfaceErosion)
+                {   //表層沖刷
+                    if (!ControllerUtility.CheckConvertDouble(ref p.surfaceErosionCoefficient, surfaceErosionCoefficientTxt, "請輸入正確的表層沖刷係數！", ControllerUtility.CheckType.GreaterThanZero))
+                    {
+                        return false;
+                    }
+                    if (!ControllerUtility.CheckConvertDouble(ref p.surfaceErosionCriticalShearStress, surfaceErosionCriticalShearStressTxt, "請輸入正確的表層沖刷臨界剪應力！", ControllerUtility.CheckType.GreaterThanZero))
+                    {
+                        return false;
+                    }
+                }
+                if (p.massiveErosion)
+                {   //塊狀沖蝕
+                    if (!ControllerUtility.CheckConvertDouble(ref p.massiveErosionCriticalShearStress, massiveErosionCriticalShearStressTxt, "請輸入正確的塊狀沖蝕臨界剪應力！", ControllerUtility.CheckType.GreaterThanZero))
+                    {
+                        return false;
+                    }
+                }
+                if(p.noErosionElevation)
+                {
+                    //Check p.noErosionElevationArray
+                }
+            }
+            return true;
+        }
+
+        private bool ConvertTransSandMethod()
+        {
+            if (transSandMethodBtn.Enabled && p.sandTransportEquation == RiverSimulationProfile.SandTransportEquationType.None)
+            {
+                MessageBox.Show("請輸入正確的輸砂公式 ！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            return true;
+        }
+
         private void SettingButton_Click(object sender, EventArgs e)
         {
             Button orgBtn = sender as Button;
@@ -533,11 +543,6 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void cohesiveSedimentChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            shenCohesiveSedimentPanel.Enabled = chk;
-        }
 
         private void DrawPreview()
         {
@@ -730,12 +735,6 @@ namespace RiverSimulationApplication
 
         }
 
-        private void noScourElevationChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            noErosionElevationBtn.Enabled = chk;
-
-        }
 
         private void hourRdo_CheckedChanged(object sender, EventArgs e)
         {
@@ -845,5 +844,76 @@ namespace RiverSimulationApplication
             }
         }
 
+        private void shenCohesiveSedimentChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.shenCohesiveSediment = chk;
+            shenCohesiveSedimentPanel.Enabled = chk;
+        }
+
+        private void surfaceErosionChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.surfaceErosion = chk;
+            surfaceErosionCoefficientTxt.Enabled = chk;
+            surfaceErosionCriticalShearStressTxt.Enabled = chk;
+        }
+
+        private void massiveErosionChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.massiveErosion = chk;
+            massiveErosionCriticalShearStressTxt.Enabled = chk;
+        }
+
+        private void noErosionElevationChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.noErosionElevation = chk;
+            noErosionElevationBtn.Enabled = chk;
+
+        }
+
+        private void sandTransportEquationRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rdo = sender as RadioButton;
+
+            if(rdo == sandTransportEquation1Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.SandTransportEquation1;
+            }
+            else if (rdo == sandTransportEquation2Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.SandTransportEquation2;
+            }
+            else if (rdo == sandTransportEquation3Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.SandTransportEquation3;
+            }
+            else if (rdo == highSandTransportEquation1Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.SandTransportEquation1;
+            }
+            else if (rdo == highSandTransportEquation2Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.SandTransportEquation2;
+            }
+            else if (rdo == highSandTransportEquation3Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.SandTransportEquation3;
+            }
+            else if (rdo == highSandTransportEquation4Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.HighSandTransportEquation4;
+            }
+            else if (rdo == highSandTransportEquation5Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.HighSandTransportEquation5;
+            }
+            else if (rdo == highSandTransportEquation6Rdo)
+            {
+                p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.HighSandTransportEquation6;
+            }
+        }
     }
 }

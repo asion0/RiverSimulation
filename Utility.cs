@@ -198,6 +198,12 @@ namespace RiverSimulationApplication
             return OSType;
         }
 
+        public static void ShellExecute(string file)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo(file);
+            psi.UseShellExecute = true;
+            Process.Start(psi);
+        }
     }
 
     public static class ControllerUtility

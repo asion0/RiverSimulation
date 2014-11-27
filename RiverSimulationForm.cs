@@ -354,6 +354,11 @@ namespace RiverSimulationApplication
 
         }
 
+        private void userManualMenuItem_Click(object sender, EventArgs e)
+        {
+            Utility.ShellExecute(Environment.CurrentDirectory + "\\Manual.pdf");
+        }
+
 
 
     }

@@ -31,6 +31,11 @@ namespace RiverSimulationApplication
             physicalParamPanel.Visible = false;     //隱藏物理參數面板
 
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
+            if (p.inputGrid != null)
+            {
+                mapPicBox.Grid = p.inputGrid;
+            }
+            mapPicBox.Visible = true;
 
             LoadStatus();
             UpdateStatus();

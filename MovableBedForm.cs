@@ -34,9 +34,18 @@ namespace RiverSimulationApplication
             transSandMethodPanel.Visible = false;
 
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
+            if (p.inputGrid != null)
+            {
+                mapPicBox.Grid = p.inputGrid;
+            }
+            mapPicBox.Visible = true;
+            previewPanel.Size = mapPicBox.Size;
+            previewPanel.Top = mapPicBox.Top;
+            previewPanel.Left = mapPicBox.Left;
 
-            previewPicBox.Width = previewPanel.Width;
-            previewPicBox.Height = previewPanel.Height;
+            previewPicBox.Size = previewPanel.Size;
+            previewPicBox.Top = previewPanel.Top;
+            previewPicBox.Left = previewPanel.Left;
 
             LoadStatus();
             UpdateStatus();

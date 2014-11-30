@@ -39,6 +39,9 @@
             this.selectBgRdo = new System.Windows.Forms.RadioButton();
             this.useGoogleBgRdo = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.runCcheMeshBtn = new System.Windows.Forms.Button();
@@ -47,6 +50,7 @@
             this.verticalLevelNumberTxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.inputFileBtn = new System.Windows.Forms.Button();
+            this.reverseGridBtn = new System.Windows.Forms.Button();
             this.inputGridBtn = new System.Windows.Forms.Button();
             this.inputGridRdo = new System.Windows.Forms.RadioButton();
             this.inputFileRdo = new System.Windows.Forms.RadioButton();
@@ -54,12 +58,10 @@
             this.runCcheMeshBtn2 = new System.Windows.Forms.Button();
             this.inputFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.selectBgDlg = new System.Windows.Forms.OpenFileDialog();
-            this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
             this.previewSpratePanel = new System.Windows.Forms.Panel();
             this.previewSpratePicBox = new System.Windows.Forms.PictureBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.previewCombo = new System.Windows.Forms.ComboBox();
+            this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
             this.mainPanel.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -70,19 +72,21 @@
             // 
             // comment
             // 
+            this.comment.AllowWebBrowserDrop = false;
             this.comment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comment.Location = new System.Drawing.Point(516, 12);
-            this.comment.MinimumSize = new System.Drawing.Size(20, 20);
+            this.comment.IsWebBrowserContextMenuEnabled = false;
+            this.comment.Location = new System.Drawing.Point(506, 12);
             this.comment.Name = "comment";
             this.comment.ScrollBarsEnabled = false;
-            this.comment.Size = new System.Drawing.Size(452, 224);
+            this.comment.Size = new System.Drawing.Size(438, 224);
             this.comment.TabIndex = 9;
+            this.comment.WebBrowserShortcutsEnabled = false;
             // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ok.Location = new System.Drawing.Point(872, 701);
+            this.ok.Location = new System.Drawing.Point(848, 652);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 8;
@@ -99,7 +103,7 @@
             this.mainPanel.Controls.Add(this.runCcheMeshBtn2);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(500, 692);
+            this.mainPanel.Size = new System.Drawing.Size(500, 680);
             this.mainPanel.TabIndex = 10;
             // 
             // bitmapGrp
@@ -202,6 +206,35 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "格網產生程式";
             // 
+            // button5
+            // 
+            this.button5.Enabled = false;
+            this.button5.Location = new System.Drawing.Point(168, 102);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(104, 26);
+            this.button5.TabIndex = 2;
+            this.button5.Text = "操作方法";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Enabled = false;
+            this.button4.Location = new System.Drawing.Point(168, 61);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(104, 26);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "操作方法";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(168, 21);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(104, 26);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "操作方法";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // button2
             // 
             this.button2.Enabled = false;
@@ -238,6 +271,7 @@
             this.flowTypeGroup.Controls.Add(this.verticalLevelNumberTxt);
             this.flowTypeGroup.Controls.Add(this.label1);
             this.flowTypeGroup.Controls.Add(this.inputFileBtn);
+            this.flowTypeGroup.Controls.Add(this.reverseGridBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridRdo);
             this.flowTypeGroup.Controls.Add(this.inputFileRdo);
@@ -288,6 +322,16 @@
             this.inputFileBtn.UseVisualStyleBackColor = true;
             this.inputFileBtn.Click += new System.EventHandler(this.inputFileBtn_Click);
             this.inputFileBtn.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
+            // 
+            // reverseGridBtn
+            // 
+            this.reverseGridBtn.Location = new System.Drawing.Point(232, 62);
+            this.reverseGridBtn.Name = "reverseGridBtn";
+            this.reverseGridBtn.Size = new System.Drawing.Size(75, 26);
+            this.reverseGridBtn.TabIndex = 1;
+            this.reverseGridBtn.Text = "反轉格網";
+            this.reverseGridBtn.UseVisualStyleBackColor = true;
+            this.reverseGridBtn.Click += new System.EventHandler(this.reverseGridBtn_Click);
             // 
             // inputGridBtn
             // 
@@ -358,30 +402,15 @@
             // 
             this.selectBgDlg.Filter = "所有檔案|*.*|Bmp檔案|*.bmp|PNG檔案|*.png|JPG檔案|*jpg";
             // 
-            // mapPicBox
-            // 
-            this.mapPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mapPicBox.Border = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mapPicBox.Grid = null;
-            this.mapPicBox.Location = new System.Drawing.Point(516, 252);
-            this.mapPicBox.Name = "mapPicBox";
-            this.mapPicBox.SelectedI = -1;
-            this.mapPicBox.SelectGroup = false;
-            this.mapPicBox.SelectRow = false;
-            this.mapPicBox.Size = new System.Drawing.Size(452, 439);
-            this.mapPicBox.TabIndex = 11;
-            // 
             // previewSpratePanel
             // 
             this.previewSpratePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.previewSpratePanel.Controls.Add(this.previewSpratePicBox);
-            this.previewSpratePanel.Location = new System.Drawing.Point(516, 252);
+            this.previewSpratePanel.Location = new System.Drawing.Point(796, 649);
             this.previewSpratePanel.Name = "previewSpratePanel";
-            this.previewSpratePanel.Size = new System.Drawing.Size(452, 439);
+            this.previewSpratePanel.Size = new System.Drawing.Size(43, 40);
             this.previewSpratePanel.TabIndex = 12;
             this.previewSpratePanel.Visible = false;
             // 
@@ -390,53 +419,51 @@
             this.previewSpratePicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.previewSpratePicBox.Location = new System.Drawing.Point(0, 0);
+            this.previewSpratePicBox.Location = new System.Drawing.Point(3, 3);
             this.previewSpratePicBox.Name = "previewSpratePicBox";
-            this.previewSpratePicBox.Size = new System.Drawing.Size(452, 439);
+            this.previewSpratePicBox.Size = new System.Drawing.Size(0, 0);
             this.previewSpratePicBox.TabIndex = 13;
             this.previewSpratePicBox.TabStop = false;
             // 
-            // button3
+            // previewCombo
             // 
-            this.button3.Location = new System.Drawing.Point(168, 21);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 26);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "操作方法";
-            this.button3.UseVisualStyleBackColor = true;
+            this.previewCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.previewCombo.DropDownWidth = 168;
+            this.previewCombo.FormattingEnabled = true;
+            this.previewCombo.Location = new System.Drawing.Point(507, 652);
+            this.previewCombo.Name = "previewCombo";
+            this.previewCombo.Size = new System.Drawing.Size(193, 20);
+            this.previewCombo.TabIndex = 13;
+            this.previewCombo.SelectedIndexChanged += new System.EventHandler(this.previewCombo_SelectedIndexChanged);
             // 
-            // button4
+            // mapPicBox
             // 
-            this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(168, 61);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(104, 26);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "操作方法";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(168, 102);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 26);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "操作方法";
-            this.button5.UseVisualStyleBackColor = true;
+            this.mapPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapPicBox.Border = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mapPicBox.Grid = null;
+            this.mapPicBox.Location = new System.Drawing.Point(506, 252);
+            this.mapPicBox.Name = "mapPicBox";
+            this.mapPicBox.SelectedI = -1;
+            this.mapPicBox.SelectGroup = false;
+            this.mapPicBox.SelectRow = false;
+            this.mapPicBox.Size = new System.Drawing.Size(438, 392);
+            this.mapPicBox.TabIndex = 11;
             // 
             // ImportForm
             // 
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 741);
+            this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.previewCombo);
             this.Controls.Add(this.previewSpratePanel);
             this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.ok);
-            this.MinimumSize = new System.Drawing.Size(912, 720);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "ImportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "計算格網";
@@ -487,6 +514,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox previewCombo;
+        private System.Windows.Forms.Button reverseGridBtn;
 
     }
 }

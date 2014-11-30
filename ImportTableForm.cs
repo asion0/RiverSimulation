@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PictureBoxCtrl;
 
 namespace RiverSimulationApplication
 {
@@ -17,11 +18,70 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+
+        RiverGrid gridData = null;
+
+        bool hideGenerate = false;
+        int colCount = 0;
+        int rowCount = 0;
+        public void SetFormMode(bool onlyTable, int colCount, int rowCount, RiverGrid data = null)
+        {
+            hideGenerate = onlyTable;
+            this.colCount = colCount;
+            this.rowCount = rowCount;
+
+            if(data != null)
+            {
+                gridData = new RiverGrid(data);
+            }
+            //CreateData(null);
+        }
+
         private void ImportTableForm_Load(object sender, EventArgs e)
         {
-            //InitializeDataGridView(dataGridViewX);
-            //InitializeDataGridView(dataGridViewY);
-            //InitializeDataGridView(dataGridViewZ);
+            if(hideGenerate)
+            {
+                yGridNum.Text = gridData.GetI.ToString();
+                xGridNum.Text = gridData.GetJ.ToString();
+                yGridNum.Enabled = false;
+                xGridNum.Enabled = false;
+                generateGridBtn.Enabled = false;
+
+                DataGridViewUtility.InitializeDataGridView(dataGridViewX, colCount, rowCount, 96);
+                DataGridViewUtility.InitializeDataGridView(dataGridViewY, colCount, rowCount, 96);
+                DataGridViewUtility.InitializeDataGridView(dataGridViewZ, colCount, rowCount, 96);
+                tabControl.Enabled = true;
+
+                foreach (DataGridViewColumn column in dataGridViewX.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                foreach (DataGridViewColumn column in dataGridViewY.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                foreach (DataGridViewColumn column in dataGridViewZ.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                FillDataGridView();
+            }
+
+
+        }
+
+        private void FillDataGridView()
+        {
+            for (int i = 0; i < rowCount; ++i)
+            {
+                for (int j = 0; j < colCount; ++j)
+                {
+                    dataGridViewX[j, i].Value = gridData.inputCoor[i, j].x.ToString();
+                    dataGridViewY[j, i].Value = gridData.inputCoor[i, j].y.ToString();
+                    dataGridViewZ[j, i].Value = gridData.inputCoor[i, j].z.ToString();
+                        
+                }
+            }         
         }
 
         /*

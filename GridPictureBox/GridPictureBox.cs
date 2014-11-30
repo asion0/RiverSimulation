@@ -992,6 +992,13 @@ namespace PictureBoxCtrl
         {
 
         }
+
+        public RiverGrid(RiverGrid g)
+        {
+            this.inputCoor = (CoorPoint[,])g.inputCoor.Clone();
+            ConvertGrid(inputCoor);
+        }
+
         public CoorPoint[,] inputCoor;
         private int _i = 0, _j = 0;
 
@@ -1066,20 +1073,8 @@ namespace PictureBoxCtrl
                         break;
                     }
                 }
-                //Finished read
-                CoordinateTransform coorConv = new CoordinateTransform();
-                //CoorPoint topLeft = coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY);
-                //CoorPoint bottomRight = coorConv.CalTwd97ToLatLonCoorRad(minX, minY);
-                zoomScale = CalZoomScale(coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY), coorConv.CalTwd97ToLatLonCoorRad(minX, minY));
-                if(zoomScale ==0)
-                {
-                    return false;
-                }
 
-                CoorPoint center = coorConv.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
-                bottomRight = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
-                topLeft = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
-                centerPoint = center.RadToDegree();
+                ConvertGrid(inputCoor);
             }
             catch (Exception e)
             {
@@ -1089,6 +1084,46 @@ namespace PictureBoxCtrl
             return true;
         }
         
+        private bool ConvertGrid(CoorPoint[,] grid)
+        {
+            _j = grid.GetLength(1);
+            _i = grid.GetLength(0);
+            maxX = double.MinValue;
+            minX = double.MaxValue;
+            maxY = double.MinValue;
+            minY = double.MaxValue;
+
+            foreach(CoorPoint pt in grid)
+            {
+                if (pt.x > maxX)
+                    maxX = pt.x;
+                if (pt.x < minX)
+                    minX = pt.x;
+                if (pt.y > maxY)
+                    maxY = pt.y;
+                if (pt.y < minY)
+                    minY = pt.y;
+            }
+
+
+            //Finished read
+            CoordinateTransform coorConv = new CoordinateTransform();
+            //CoorPoint topLeft = coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY);
+            //CoorPoint bottomRight = coorConv.CalTwd97ToLatLonCoorRad(minX, minY);
+            zoomScale = CalZoomScale(coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY), coorConv.CalTwd97ToLatLonCoorRad(minX, minY));
+            if (zoomScale == 0)
+            {
+                return false;
+            }
+
+            CoorPoint center = coorConv.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
+            bottomRight = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
+            topLeft = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
+            centerPoint = center.RadToDegree();
+
+            return true;
+        }
+
         public bool DownloadGridMap(string tl, string tr, string bl, string br)
         {
             bool b = false;

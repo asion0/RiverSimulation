@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Microsoft.Win32; //Registry
 using System.Diagnostics;
 using System.IO;
+using PictureBoxCtrl;
 
 namespace RiverSimulationApplication
 {
@@ -34,9 +35,21 @@ namespace RiverSimulationApplication
             {
                 mapPicBox.Grid = p.inputGrid;
             }
+            mapPicBox.Visible = true;
+            previewSpratePanel.Size = mapPicBox.Size;
+            previewSpratePanel.Top = mapPicBox.Top;
+            previewSpratePanel.Left = mapPicBox.Left;
+            InitreviewCombo();
+            previewCombo.SelectedIndex = (int)(PreviewType.GridMap) - 1;
 
             LoadStatus();
             UpdateStatus();
+        }
+
+        private void InitreviewCombo()
+        {
+            previewCombo.Items.Add("格網預覽圖");
+            previewCombo.Items.Add("垂向格網分布圖");
         }
 
         private void LoadStatus()
@@ -56,6 +69,18 @@ namespace RiverSimulationApplication
             levelProportionBtn.Enabled = p.Is3DMode();
         }
 
+        private enum PreviewType
+        {
+            None,
+            GridMap,    //格網地圖
+            Sprate,     //垂向格網分布圖
+        }
+
+        private void SwitchPreivewCombo(PreviewType n)
+        {
+            previewCombo.SelectedIndex = (int)(n) - 1;
+        }
+ 
         private void ok_Click(object sender, EventArgs e)
         {
             if (!DoConvert())
@@ -112,7 +137,7 @@ namespace RiverSimulationApplication
                     return;
                 }
                 mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
-                ShowGridMap(PicBoxType.GridMap);
+                SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
             }
         }
@@ -137,6 +162,14 @@ namespace RiverSimulationApplication
         private void inputGridBtn_Click(object sender, EventArgs e)
         {
             ImportTableForm form = new ImportTableForm();
+            if (p.inputGrid != null)
+            {
+                form.SetFormMode(true, p.inputGrid.GetJ, p.inputGrid.GetI, p.inputGrid);
+            }
+            else
+            {
+                form.SetFormMode(false, 0, 0);
+            }
 
             if (DialogResult.OK == form.ShowDialog())
             {
@@ -152,32 +185,8 @@ namespace RiverSimulationApplication
             if (chk)
             {
                 mapPicBox.ClearMapBackground();
-                ShowGridMap(PicBoxType.GridMap);
+                SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
-            }
-        }
-
-        enum PicBoxType
-        {
-            None,
-            GridMap,    //格網地圖
-            Sprate,     //3D垂向分層圖
-        }
-
-        private void ShowGridMap(PicBoxType t)
-        {
-            switch(t)
-            {
-                case PicBoxType.GridMap:
-                mapPicBox.Visible = true;
-                previewSpratePanel.Visible = false;
-                break;
-                case PicBoxType.Sprate:
-                mapPicBox.Visible = false;
-                previewSpratePanel.Visible = true;
-                break;
-                default:
-                break;
             }
         }
 
@@ -189,7 +198,7 @@ namespace RiverSimulationApplication
             {
                 RiverSimulationProfile.profile.DownloadGoogleStaticMap();
                 mapPicBox.SetMapBackground(p.tl, p.tr, p.bl, p.br);
-                ShowGridMap(PicBoxType.GridMap);
+                SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
             }
 
@@ -204,7 +213,7 @@ namespace RiverSimulationApplication
             {
                 RiverSimulationProfile.profile.SetImportImageMode();
                 mapPicBox.SetMapBackground(p.imagePath, p.sourceE, p.sourceN, p.sourceW, p.sourceH);
-                ShowGridMap(PicBoxType.GridMap);
+                SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
             }
         }
@@ -222,7 +231,7 @@ namespace RiverSimulationApplication
                     imgInfoBtn.Enabled = true;
                     RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                     mapPicBox.SetMapBackground(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
-                    ShowGridMap(PicBoxType.GridMap);
+                    SwitchPreivewCombo(PreviewType.GridMap);
                     UpdateStatus();
                 }
                 else
@@ -247,7 +256,7 @@ namespace RiverSimulationApplication
                 imgInfoBtn.Enabled = true;
                 RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
                 mapPicBox.SetMapBackground(selectBgDlg.FileName, form.e, form.n, form.w, form.h);
-                ShowGridMap(PicBoxType.GridMap);
+                SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
             }
 
@@ -378,7 +387,7 @@ namespace RiverSimulationApplication
             if (DialogResult.OK == r)
             {
                 p.levelProportion = (double[])form.SeparateData().Clone();
-                ShowGridMap(PicBoxType.Sprate);
+                SwitchPreivewCombo(PreviewType.Sprate);
                 DrawPreview();
             }
         }
@@ -482,14 +491,48 @@ namespace RiverSimulationApplication
 
         private void showGridMapCtrls_MouseHover(object sender, EventArgs e)
         {
-            ShowGridMap(PicBoxType.GridMap);
+            //ShowGridMap(PicBoxType.GridMap);
 
         }
 
         private void showSeparateCtrls_MouseHover(object sender, EventArgs e)
         {
-            ShowGridMap(PicBoxType.Sprate);
+            //ShowGridMap(PicBoxType.Sprate);
+        }
 
+        private void previewCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PreviewType n = (PreviewType)(previewCombo.SelectedIndex + 1);
+            //SwitchPreivewCombo(n);
+            switch (n)
+            {
+                case PreviewType.GridMap:
+                    mapPicBox.Visible = true;
+                    previewSpratePanel.Visible = false;
+                    break;
+                case PreviewType.Sprate:
+                    mapPicBox.Visible = false;
+                    previewSpratePanel.Visible = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void reverseGridBtn_Click(object sender, EventArgs e)
+        {
+            RiverGrid grid = new RiverGrid(p.inputGrid);
+            for(int i = 0; i < grid.GetI; ++i)
+            {
+                for(int j = 0; j < grid.GetJ; ++j)
+                {
+                    grid.inputCoor[i, j] = p.inputGrid.inputCoor[grid.GetI - i - 1, grid.GetJ - j - 1];
+                }
+            }
+            p.inputGrid = new RiverGrid(grid);
+            mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
+            SwitchPreivewCombo(PreviewType.GridMap);
+            //UpdateStatus();
 
         }
 

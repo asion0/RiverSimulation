@@ -54,7 +54,7 @@
             this.dataGridView.Location = new System.Drawing.Point(-1, 91);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 24;
-            this.dataGridView.Size = new System.Drawing.Size(781, 366);
+            this.dataGridView.Size = new System.Drawing.Size(957, 554);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
@@ -116,7 +116,7 @@
             // averageBtn
             // 
             this.averageBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.averageBtn.Location = new System.Drawing.Point(12, 466);
+            this.averageBtn.Location = new System.Drawing.Point(12, 654);
             this.averageBtn.Name = "averageBtn";
             this.averageBtn.Size = new System.Drawing.Size(120, 26);
             this.averageBtn.TabIndex = 3;
@@ -128,7 +128,7 @@
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ok.Location = new System.Drawing.Point(648, 466);
+            this.ok.Location = new System.Drawing.Point(824, 654);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(120, 26);
             this.ok.TabIndex = 4;
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 501);
+            this.ClientSize = new System.Drawing.Size(956, 689);
             this.ContextMenuStrip = this.copyPasteMenuStrip;
             this.Controls.Add(this.ok);
             this.Controls.Add(this.averageBtn);
@@ -148,6 +148,7 @@
             this.Controls.Add(this.singleValueRdo);
             this.Controls.Add(this.tableValueRdo);
             this.Controls.Add(this.dataGridView);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "TableInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TableInputForm";

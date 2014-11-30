@@ -52,7 +52,7 @@
             this.dataGv.Name = "dataGv";
             this.dataGv.ReadOnly = true;
             this.dataGv.RowTemplate.Height = 24;
-            this.dataGv.Size = new System.Drawing.Size(970, 536);
+            this.dataGv.Size = new System.Drawing.Size(958, 622);
             this.dataGv.TabIndex = 0;
             this.dataGv.SelectionChanged += new System.EventHandler(this.dataGv_SelectionChanged);
             // 
@@ -86,7 +86,7 @@
             this.label1.ForeColor = System.Drawing.Color.Navy;
             this.label1.Location = new System.Drawing.Point(486, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(477, 51);
+            this.label1.Size = new System.Drawing.Size(465, 51);
             this.label1.TabIndex = 2;
             this.label1.Text = "按住Ctrl或是Shift再點擊可以多重選取，選取空白區域可以加入，選取藍色區域可以刪除。";
             // 
@@ -124,7 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(968, 603);
+            this.ClientSize = new System.Drawing.Size(956, 689);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.selCombo);
             this.Controls.Add(this.label1);

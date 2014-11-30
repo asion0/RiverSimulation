@@ -35,7 +35,6 @@
             this.waterModelingBtn = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
             this.ok = new System.Windows.Forms.Button();
-            this.setting = new System.Windows.Forms.Label();
             this.waterModelingPanel = new System.Windows.Forms.Panel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -130,6 +129,7 @@
             this.label29 = new System.Windows.Forms.Label();
             this.radioButton16 = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
+            this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -159,7 +159,7 @@
             this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(500, 670);
+            this.mainPanel.Size = new System.Drawing.Size(500, 680);
             this.mainPanel.TabIndex = 13;
             // 
             // groupBox1
@@ -210,18 +210,17 @@
             this.comment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comment.IsWebBrowserContextMenuEnabled = false;
-            this.comment.Location = new System.Drawing.Point(522, 13);
-            this.comment.MinimumSize = new System.Drawing.Size(20, 20);
+            this.comment.Location = new System.Drawing.Point(506, 12);
             this.comment.Name = "comment";
             this.comment.ScrollBarsEnabled = false;
-            this.comment.Size = new System.Drawing.Size(450, 225);
+            this.comment.Size = new System.Drawing.Size(438, 224);
             this.comment.TabIndex = 12;
             // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ok.Location = new System.Drawing.Point(878, 696);
+            this.ok.Location = new System.Drawing.Point(848, 652);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 11;
@@ -229,24 +228,11 @@
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
-            // setting
-            // 
-            this.setting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.setting.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.setting.Location = new System.Drawing.Point(522, 264);
-            this.setting.Name = "setting";
-            this.setting.Size = new System.Drawing.Size(450, 419);
-            this.setting.TabIndex = 10;
-            this.setting.Text = "設定內容";
-            // 
             // waterModelingPanel
             // 
             this.waterModelingPanel.Controls.Add(this.groupBox10);
             this.waterModelingPanel.Controls.Add(this.waterModelingBackBtn);
-            this.waterModelingPanel.Location = new System.Drawing.Point(4, 13);
+            this.waterModelingPanel.Location = new System.Drawing.Point(4, 569);
             this.waterModelingPanel.Name = "waterModelingPanel";
             this.waterModelingPanel.Size = new System.Drawing.Size(500, 670);
             this.waterModelingPanel.TabIndex = 14;
@@ -763,7 +749,7 @@
             // 
             this.moveableBedPanel.Controls.Add(this.groupBox3);
             this.moveableBedPanel.Controls.Add(this.moveableBedBackBtn);
-            this.moveableBedPanel.Location = new System.Drawing.Point(485, 42);
+            this.moveableBedPanel.Location = new System.Drawing.Point(49, 545);
             this.moveableBedPanel.Name = "moveableBedPanel";
             this.moveableBedPanel.Size = new System.Drawing.Size(500, 670);
             this.moveableBedPanel.TabIndex = 15;
@@ -1250,19 +1236,36 @@
             this.moveableBedBackBtn.UseVisualStyleBackColor = true;
             this.moveableBedBackBtn.Click += new System.EventHandler(this.Back_Click);
             // 
+            // mapPicBox
+            // 
+            this.mapPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapPicBox.Border = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mapPicBox.Grid = null;
+            this.mapPicBox.Location = new System.Drawing.Point(506, 252);
+            this.mapPicBox.Name = "mapPicBox";
+            this.mapPicBox.SelectedI = -1;
+            this.mapPicBox.SelectGroup = false;
+            this.mapPicBox.SelectRow = false;
+            this.mapPicBox.Size = new System.Drawing.Size(438, 392);
+            this.mapPicBox.TabIndex = 16;
+            // 
             // BoundaryConditionsForm
             // 
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 741);
+            this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.waterModelingPanel);
             this.Controls.Add(this.moveableBedPanel);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.ok);
-            this.Controls.Add(this.setting);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "BoundaryConditionsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "邊界條件";
             this.Load += new System.EventHandler(this.BoundaryConditionsForm_Load);
             this.mainPanel.ResumeLayout(false);
@@ -1311,7 +1314,6 @@
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.WebBrowser comment;
         private System.Windows.Forms.Button ok;
-        private System.Windows.Forms.Label setting;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button waterModelingBtn;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1410,5 +1412,6 @@
         private System.Windows.Forms.Panel upSand3DPanel;
         private System.Windows.Forms.Panel waterUpVert3dPanel;
         private System.Windows.Forms.Panel downSand3DPanel;
+        private PictureBoxCtrl.GridPictureBox mapPicBox;
     }
 }

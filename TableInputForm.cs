@@ -44,9 +44,9 @@ namespace RiverSimulationApplication
         string rowName;
         bool nocolNum = false;
         bool noRowNum = false;
-         int colWidth = 48;
+        int colWidth = 48;
         int rowHeadersWidth = 64;
-       public void SetFormMode(string title, int colCount, int rowCount, string tableName = "", string colName = "", string rowName = "", 
+        public void SetFormMode(string title, int colCount, int rowCount, string tableName = "", string colName = "", string rowName = "", 
             InputFormType inputFormType = InputFormType.Generic, int colWidth = 48, int rowHeadersWidth = 64,
            bool onlyTable = true, bool nocolNum = false, bool noRowNum = false, object initData = null)
         {

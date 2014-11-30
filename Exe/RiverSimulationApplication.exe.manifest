@@ -43,30 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="45056">
-      <assemblyIdentity name="GridPictureBox" version="1.0.5448.2191" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="40960">
+      <assemblyIdentity name="GridPictureBox" version="1.0.5448.2316" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vD+FoMchbEGix1cAL21Ln/gHAzt9hbbA16JSKGEHDtU=</dsig:DigestValue>
+        <dsig:DigestValue>kkBgGpeeGOvK1n+9BEKFHGvMXdFCJD3ODvsjxzFglqY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1922048">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1908736">
       <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.18" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-<<<<<<< HEAD
-        <dsig:DigestValue>NzAwbSe6sBxb8WVo2K1/zy2HlCTFtJ22nlkWv1WBPSA=</dsig:DigestValue>
-=======
-        <dsig:DigestValue>qxsVd1O46B2c84pwpiJPKGQQu5OfdwnCzMjWQ7WgjBY=</dsig:DigestValue>
->>>>>>> origin/master
+        <dsig:DigestValue>1kGQ68LxFHZ99QvpyjLmZ5ehn4bvghiKbhdnX3rRuBE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

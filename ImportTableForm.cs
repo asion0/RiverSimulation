@@ -178,5 +178,11 @@ namespace RiverSimulationApplication
         {
             DataGridViewUtility.CopyToClipboard(GetCurrentDataGridView());
         }
+
+        private void valueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewUtility.FillSelectedValue(GetCurrentDataGridView());
+        }
+
     }
 }

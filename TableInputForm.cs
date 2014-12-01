@@ -167,6 +167,11 @@ namespace RiverSimulationApplication
             DataGridViewUtility.CopyToClipboard(dataGridView);
         }
 
+        private void valueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewUtility.FillSelectedValue(dataGridView);
+        }
+
         public enum InputFormType
         {
             Generic,                //初始一般用途
@@ -213,6 +218,7 @@ namespace RiverSimulationApplication
             return _data as double[,];
         }
 
+        private readonly string SeparateFormCellFormat = "F2";
         private void CreateData(object d)
         {
             switch(_inputFormType)
@@ -269,13 +275,16 @@ namespace RiverSimulationApplication
             {
                 case InputFormType.Generic:
                     break;
-                case InputFormType.SeabedThicknessForm:
+                case InputFormType.SeabedThicknessForm: 
+                //底床分層厚度輸入，直的一行，倒序
                     for (int i = 0; i < rowCount; ++i)
                     {
                         dataGridView[0, rowCount - i - 1].Value = (_data as double[])[i].ToString();
                     }
                     break;
-                case InputFormType.SedimentCompositionRatioForm:
+                case InputFormType.SedimentCompositionRatioForm:    
+                //泥砂組成比例輸入，每列最後一欄(橫列最右一格)要累加成100，不能編輯。
+                //垂直倒序
                     for (int i = 0; i < colCount; ++i)
                     {
                         for (int j = 0; j < rowCount; ++j)
@@ -290,6 +299,8 @@ namespace RiverSimulationApplication
                     AutoFinishConvertSedimentCompositionRatioCell();
                     break;
                 case InputFormType.SeparateForm:
+                    //垂直向隔網分層比例輸入，直的一行，倒序
+                    //垂直遞增不能相同或是減少
                     for (int i = 0; i < rowCount; ++i)
                     {
                         dataGridView[0, rowCount - i - 1].Value = (_data as double[])[i].ToString();
@@ -302,10 +313,11 @@ namespace RiverSimulationApplication
                     dataGridView[0, rowCount - 1].Style.ForeColor = Color.Red;
                     dataGridView[0, 0].Selected = false;
                     dataGridView[0, 1].Selected = true;
-                    dataGridView[0, 0].Value = 1.ToString("F6");
-                    dataGridView[0, rowCount - 1].Value = 0.ToString("F6");
+                    dataGridView[0, 0].Value = 1.ToString(SeparateFormCellFormat);
+                    dataGridView[0, rowCount - 1].Value = 0.ToString(SeparateFormCellFormat);
                     break;
                 case InputFormType.BottomElevationForm:
+                    //編輯底床高程，與輸入格網相同大小I * J
                     for (int i = 0; i < colCount; ++i)
                     {
                         for (int j = 0; j < rowCount; ++j)
@@ -505,7 +517,7 @@ namespace RiverSimulationApplication
             double v = 1.0 - step;
             for (int i = 1; i < rowCount - 1; ++i)
             {
-                dataGridView[0, i].Value = v.ToString("F6");
+                dataGridView[0, i].Value = v.ToString(SeparateFormCellFormat);
                 v -= step;
             }
         }

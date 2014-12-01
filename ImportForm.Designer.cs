@@ -325,6 +325,7 @@
             // 
             // reverseGridBtn
             // 
+            this.reverseGridBtn.Enabled = false;
             this.reverseGridBtn.Location = new System.Drawing.Point(232, 62);
             this.reverseGridBtn.Name = "reverseGridBtn";
             this.reverseGridBtn.Size = new System.Drawing.Size(75, 26);

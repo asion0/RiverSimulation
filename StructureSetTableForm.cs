@@ -196,10 +196,20 @@ namespace RiverSimulationApplication
             addBtn.Enabled = StructureSetUtility.IsAllInEmpty(p, pl, type, count);
 
             List<Point> pts = StructureSetUtility.GetStructureSet(p, type, count);
-            removeBtn.Enabled = (pts == null) ? false : StructureSetUtility.IsAllInclude(pts, pl);
+            removeBtn.Enabled = CheclRemoveBtnEnabled(pts, pl);
 
-            editBtn.Enabled = (null != StructureSetUtility.GetStructureSet(p, type, count)) && 
+            editBtn.Enabled = CheclEditBtnEnabled(type, count);
+        }
+
+        private bool CheclEditBtnEnabled(int type, int count)
+        {
+            return (null != StructureSetUtility.GetStructureSet(p, type, count)) &&
                 (type == (int)RiverSimulationProfile.StructureType.GroundSillWork || type == (int)RiverSimulationProfile.StructureType.SedimentationWeir);
+        }
+
+        private bool CheclRemoveBtnEnabled(List<Point> pts, List<Point> pl)
+        {
+            return (pts == null) ? false : StructureSetUtility.IsAllInclude(pts, pl);
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -279,9 +289,7 @@ namespace RiverSimulationApplication
             selIndex = selCombo.SelectedIndex;
             int type = 0, count = 0;
             StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
-            editBtn.Enabled = (null != StructureSetUtility.GetStructureSet(p, type, count)) &&
-                 (type == (int)RiverSimulationProfile.StructureType.GroundSillWork || type == (int)RiverSimulationProfile.StructureType.SedimentationWeir);
-
+            editBtn.Enabled = CheclEditBtnEnabled(type, count); 
             FillDataGrid();
         }
 

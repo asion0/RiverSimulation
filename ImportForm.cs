@@ -59,7 +59,8 @@ namespace RiverSimulationApplication
 
         private void UpdateStatus()
         {
-            bitmapGrp.Enabled = RiverSimulationProfile.profile.IsMapPosition();
+            bitmapGrp.Enabled = p.IsMapPosition();
+            reverseGridBtn.Enabled = (p.inputGrid != null);
             UpdateActiveFunctions();
         }
 

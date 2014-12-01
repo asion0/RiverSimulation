@@ -114,7 +114,7 @@
             this.progTxt.Name = "progTxt";
             this.progTxt.Size = new System.Drawing.Size(100, 23);
             this.progTxt.TabIndex = 7;
-            this.progTxt.Text = "%0";
+            this.progTxt.Text = "0%";
             this.progTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // maxIterationsNumTxt

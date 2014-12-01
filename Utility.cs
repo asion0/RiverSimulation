@@ -626,15 +626,15 @@ namespace RiverSimulationApplication
 
         //檢查pl2群組所有格網點是否完全包含在pl1群組中
         public static bool IsAllInclude(List<Point> pl1, List<Point> pl2)
-        {
+        {   //pl2 - 被選取的, pl1 - 原群組
             foreach (Point p in pl2)
             {
-                if (!pl1.Contains(p))
+                if (pl1.Contains(p))
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
         //移除在pl1群組中所有pl2群組包含的格網點
@@ -854,6 +854,25 @@ namespace RiverSimulationApplication
             Clipboard.SetDataObject(v.GetClipboardContent());
         }
 
+        public static void FillSelectedValue(DataGridView v)
+        {
+            InputForm dlg = new InputForm();
+            dlg.Text = "填入數值";
+            dlg.desc.Text = "請輸入數值";
+            dlg.inputTxt.Text = "";
+            if (DialogResult.OK != dlg.ShowDialog())
+            {
+                return;
+            }
+            if (dlg.inputTxt.Text.Length > 0)
+            {
+                foreach (DataGridViewCell c in v.SelectedCells)
+                {   
+                    c.Value = dlg.inputTxt.Text;
+                }
+            }
+        }
+        
         public static void InitializeDataGridView(DataGridView v, 
             int colCount, int rowCount, 
             int columnWidth = 48, int rowHeadersWidth = 64,

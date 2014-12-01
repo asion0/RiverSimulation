@@ -48,9 +48,9 @@
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(11, 528);
+            this.progressBar.Location = new System.Drawing.Point(11, 620);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(800, 32);
+            this.progressBar.Size = new System.Drawing.Size(828, 32);
             this.progressBar.TabIndex = 0;
             // 
             // stopFlagChk
@@ -100,7 +100,7 @@
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(11, 102);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(905, 420);
+            this.chart1.Size = new System.Drawing.Size(933, 512);
             this.chart1.TabIndex = 6;
             this.chart1.Text = "chart1";
             // 
@@ -110,7 +110,7 @@
             this.progTxt.BackColor = System.Drawing.SystemColors.Control;
             this.progTxt.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.progTxt.ForeColor = System.Drawing.Color.Black;
-            this.progTxt.Location = new System.Drawing.Point(816, 534);
+            this.progTxt.Location = new System.Drawing.Point(844, 626);
             this.progTxt.Name = "progTxt";
             this.progTxt.Size = new System.Drawing.Size(100, 23);
             this.progTxt.TabIndex = 7;
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 598);
+            this.ClientSize = new System.Drawing.Size(956, 690);
             this.Controls.Add(this.maxIterationsNumTxt);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.progTxt);
@@ -150,6 +150,7 @@
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.stopFlagChk);
             this.Controls.Add(this.progressBar);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "RunSimulationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "模擬作業";

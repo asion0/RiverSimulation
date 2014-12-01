@@ -143,19 +143,14 @@
             this.rockStableBackBtn = new System.Windows.Forms.Button();
             this.rockbedPanel = new System.Windows.Forms.Panel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.waterJettingBetaTxt = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.waterJettingAlphaTxt = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.tensileStrengthBtn = new System.Windows.Forms.Button();
-            this.bedrockElevationBtn = new System.Windows.Forms.Button();
-            this.rockbedPanel2 = new System.Windows.Forms.Panel();
-            this.bedrockErosionMechanismPanel = new System.Windows.Forms.Panel();
-            this.criticalShearStressBtn = new System.Windows.Forms.Button();
-            this.bedrockErosionMechanismChk = new System.Windows.Forms.CheckBox();
-            this.elasticityBtn = new System.Windows.Forms.Button();
-            this.bedrockChk = new System.Windows.Forms.CheckBox();
-            this.waterErosionChk = new System.Windows.Forms.CheckBox();
+            this.sedimentErosionTensileStrengthValueBtn = new System.Windows.Forms.Button();
+            this.bedrockElevationValueBtn = new System.Windows.Forms.Button();
+            this.sedimentErosionElasticModulusValueBtn = new System.Windows.Forms.Button();
+            this.waterJettingChk = new System.Windows.Forms.CheckBox();
             this.bedrockElevationChk = new System.Windows.Forms.CheckBox();
             this.sedimentErosionChk = new System.Windows.Forms.CheckBox();
             this.button9 = new System.Windows.Forms.Button();
@@ -203,8 +198,6 @@
             this.analysisPositionPanel.SuspendLayout();
             this.rockbedPanel.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.rockbedPanel2.SuspendLayout();
-            this.bedrockErosionMechanismPanel.SuspendLayout();
             this.transSandMethodPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.highSandMethodPanel.SuspendLayout();
@@ -1419,23 +1412,21 @@
             // 
             this.rockbedPanel.Controls.Add(this.groupBox9);
             this.rockbedPanel.Controls.Add(this.button9);
-            this.rockbedPanel.Location = new System.Drawing.Point(184, 565);
+            this.rockbedPanel.Location = new System.Drawing.Point(184, 564);
             this.rockbedPanel.Name = "rockbedPanel";
             this.rockbedPanel.Size = new System.Drawing.Size(500, 682);
             this.rockbedPanel.TabIndex = 12;
             // 
             // groupBox9
             // 
-            this.groupBox9.Controls.Add(this.textBox8);
+            this.groupBox9.Controls.Add(this.waterJettingBetaTxt);
             this.groupBox9.Controls.Add(this.label21);
-            this.groupBox9.Controls.Add(this.textBox6);
+            this.groupBox9.Controls.Add(this.waterJettingAlphaTxt);
             this.groupBox9.Controls.Add(this.label20);
-            this.groupBox9.Controls.Add(this.tensileStrengthBtn);
-            this.groupBox9.Controls.Add(this.bedrockElevationBtn);
-            this.groupBox9.Controls.Add(this.rockbedPanel2);
-            this.groupBox9.Controls.Add(this.elasticityBtn);
-            this.groupBox9.Controls.Add(this.bedrockChk);
-            this.groupBox9.Controls.Add(this.waterErosionChk);
+            this.groupBox9.Controls.Add(this.sedimentErosionTensileStrengthValueBtn);
+            this.groupBox9.Controls.Add(this.bedrockElevationValueBtn);
+            this.groupBox9.Controls.Add(this.sedimentErosionElasticModulusValueBtn);
+            this.groupBox9.Controls.Add(this.waterJettingChk);
             this.groupBox9.Controls.Add(this.bedrockElevationChk);
             this.groupBox9.Controls.Add(this.sedimentErosionChk);
             this.groupBox9.Location = new System.Drawing.Point(12, 11);
@@ -1445,12 +1436,12 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "岩床";
             // 
-            // textBox8
+            // waterJettingBetaTxt
             // 
-            this.textBox8.Location = new System.Drawing.Point(209, 39);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 22);
-            this.textBox8.TabIndex = 15;
+            this.waterJettingBetaTxt.Location = new System.Drawing.Point(209, 39);
+            this.waterJettingBetaTxt.Name = "waterJettingBetaTxt";
+            this.waterJettingBetaTxt.Size = new System.Drawing.Size(100, 22);
+            this.waterJettingBetaTxt.TabIndex = 15;
             // 
             // label21
             // 
@@ -1461,12 +1452,12 @@
             this.label21.TabIndex = 14;
             this.label21.Text = "β";
             // 
-            // textBox6
+            // waterJettingAlphaTxt
             // 
-            this.textBox6.Location = new System.Drawing.Point(59, 39);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 22);
-            this.textBox6.TabIndex = 15;
+            this.waterJettingAlphaTxt.Location = new System.Drawing.Point(59, 39);
+            this.waterJettingAlphaTxt.Name = "waterJettingAlphaTxt";
+            this.waterJettingAlphaTxt.Size = new System.Drawing.Size(100, 22);
+            this.waterJettingAlphaTxt.TabIndex = 15;
             // 
             // label20
             // 
@@ -1477,112 +1468,53 @@
             this.label20.TabIndex = 14;
             this.label20.Text = "α";
             // 
-            // tensileStrengthBtn
+            // sedimentErosionTensileStrengthValueBtn
             // 
-            this.tensileStrengthBtn.Enabled = false;
-            this.tensileStrengthBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.tensileStrengthBtn.Location = new System.Drawing.Point(32, 136);
-            this.tensileStrengthBtn.Name = "tensileStrengthBtn";
-            this.tensileStrengthBtn.Size = new System.Drawing.Size(111, 26);
-            this.tensileStrengthBtn.TabIndex = 6;
-            this.tensileStrengthBtn.Text = "張力強度";
-            this.tensileStrengthBtn.UseVisualStyleBackColor = true;
-            this.tensileStrengthBtn.Click += new System.EventHandler(this.tensileStrengthBtn_Click);
+            this.sedimentErosionTensileStrengthValueBtn.Enabled = false;
+            this.sedimentErosionTensileStrengthValueBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.sedimentErosionTensileStrengthValueBtn.Location = new System.Drawing.Point(32, 136);
+            this.sedimentErosionTensileStrengthValueBtn.Name = "sedimentErosionTensileStrengthValueBtn";
+            this.sedimentErosionTensileStrengthValueBtn.Size = new System.Drawing.Size(111, 26);
+            this.sedimentErosionTensileStrengthValueBtn.TabIndex = 6;
+            this.sedimentErosionTensileStrengthValueBtn.Text = "張力強度";
+            this.sedimentErosionTensileStrengthValueBtn.UseVisualStyleBackColor = true;
+            this.sedimentErosionTensileStrengthValueBtn.Click += new System.EventHandler(this.tensileStrengthBtn_Click);
             // 
-            // bedrockElevationBtn
+            // bedrockElevationValueBtn
             // 
-            this.bedrockElevationBtn.AccessibleDescription = "";
-            this.bedrockElevationBtn.Enabled = false;
-            this.bedrockElevationBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bedrockElevationBtn.Location = new System.Drawing.Point(93, 176);
-            this.bedrockElevationBtn.Name = "bedrockElevationBtn";
-            this.bedrockElevationBtn.Size = new System.Drawing.Size(111, 26);
-            this.bedrockElevationBtn.TabIndex = 6;
-            this.bedrockElevationBtn.Text = "岩床高程";
-            this.bedrockElevationBtn.UseVisualStyleBackColor = true;
-            this.bedrockElevationBtn.Click += new System.EventHandler(this.bedrockElevationBtn_Click);
+            this.bedrockElevationValueBtn.AccessibleDescription = "";
+            this.bedrockElevationValueBtn.Enabled = false;
+            this.bedrockElevationValueBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.bedrockElevationValueBtn.Location = new System.Drawing.Point(93, 176);
+            this.bedrockElevationValueBtn.Name = "bedrockElevationValueBtn";
+            this.bedrockElevationValueBtn.Size = new System.Drawing.Size(111, 26);
+            this.bedrockElevationValueBtn.TabIndex = 6;
+            this.bedrockElevationValueBtn.Text = "岩床高程";
+            this.bedrockElevationValueBtn.UseVisualStyleBackColor = true;
+            this.bedrockElevationValueBtn.Click += new System.EventHandler(this.bedrockElevationBtn_Click);
             // 
-            // rockbedPanel2
+            // sedimentErosionElasticModulusValueBtn
             // 
-            this.rockbedPanel2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.rockbedPanel2.Controls.Add(this.bedrockErosionMechanismPanel);
-            this.rockbedPanel2.Controls.Add(this.bedrockErosionMechanismChk);
-            this.rockbedPanel2.Enabled = false;
-            this.rockbedPanel2.Location = new System.Drawing.Point(7, 368);
-            this.rockbedPanel2.Name = "rockbedPanel2";
-            this.rockbedPanel2.Size = new System.Drawing.Size(435, 259);
-            this.rockbedPanel2.TabIndex = 11;
-            this.rockbedPanel2.Visible = false;
-            this.rockbedPanel2.EnabledChanged += new System.EventHandler(this.rockbedPanel2_EnabledChanged);
+            this.sedimentErosionElasticModulusValueBtn.Enabled = false;
+            this.sedimentErosionElasticModulusValueBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.sedimentErosionElasticModulusValueBtn.Location = new System.Drawing.Point(31, 106);
+            this.sedimentErosionElasticModulusValueBtn.Name = "sedimentErosionElasticModulusValueBtn";
+            this.sedimentErosionElasticModulusValueBtn.Size = new System.Drawing.Size(111, 26);
+            this.sedimentErosionElasticModulusValueBtn.TabIndex = 6;
+            this.sedimentErosionElasticModulusValueBtn.Text = "彈性係數";
+            this.sedimentErosionElasticModulusValueBtn.UseVisualStyleBackColor = true;
+            this.sedimentErosionElasticModulusValueBtn.Click += new System.EventHandler(this.elasticityBtn_Click);
             // 
-            // bedrockErosionMechanismPanel
+            // waterJettingChk
             // 
-            this.bedrockErosionMechanismPanel.BackColor = System.Drawing.Color.LightGray;
-            this.bedrockErosionMechanismPanel.Controls.Add(this.criticalShearStressBtn);
-            this.bedrockErosionMechanismPanel.Location = new System.Drawing.Point(12, 32);
-            this.bedrockErosionMechanismPanel.Name = "bedrockErosionMechanismPanel";
-            this.bedrockErosionMechanismPanel.Size = new System.Drawing.Size(406, 168);
-            this.bedrockErosionMechanismPanel.TabIndex = 14;
-            // 
-            // criticalShearStressBtn
-            // 
-            this.criticalShearStressBtn.Enabled = false;
-            this.criticalShearStressBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.criticalShearStressBtn.Location = new System.Drawing.Point(13, 34);
-            this.criticalShearStressBtn.Name = "criticalShearStressBtn";
-            this.criticalShearStressBtn.Size = new System.Drawing.Size(111, 26);
-            this.criticalShearStressBtn.TabIndex = 6;
-            this.criticalShearStressBtn.Text = "岩床臨界剪應力";
-            this.criticalShearStressBtn.UseVisualStyleBackColor = true;
-            this.criticalShearStressBtn.Visible = false;
-            this.criticalShearStressBtn.Click += new System.EventHandler(this.criticalShearStressBtn_Click);
-            // 
-            // bedrockErosionMechanismChk
-            // 
-            this.bedrockErosionMechanismChk.AutoSize = true;
-            this.bedrockErosionMechanismChk.Enabled = false;
-            this.bedrockErosionMechanismChk.Location = new System.Drawing.Point(14, 13);
-            this.bedrockErosionMechanismChk.Name = "bedrockErosionMechanismChk";
-            this.bedrockErosionMechanismChk.Size = new System.Drawing.Size(96, 16);
-            this.bedrockErosionMechanismChk.TabIndex = 13;
-            this.bedrockErosionMechanismChk.Text = "岩床沖刷機制";
-            this.bedrockErosionMechanismChk.UseVisualStyleBackColor = true;
-            this.bedrockErosionMechanismChk.CheckedChanged += new System.EventHandler(this.erosionMechanismsChk_CheckedChanged);
-            // 
-            // elasticityBtn
-            // 
-            this.elasticityBtn.Enabled = false;
-            this.elasticityBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.elasticityBtn.Location = new System.Drawing.Point(31, 106);
-            this.elasticityBtn.Name = "elasticityBtn";
-            this.elasticityBtn.Size = new System.Drawing.Size(111, 26);
-            this.elasticityBtn.TabIndex = 6;
-            this.elasticityBtn.Text = "彈性係數";
-            this.elasticityBtn.UseVisualStyleBackColor = true;
-            this.elasticityBtn.Click += new System.EventHandler(this.elasticityBtn_Click);
-            // 
-            // bedrockChk
-            // 
-            this.bedrockChk.AutoSize = true;
-            this.bedrockChk.Location = new System.Drawing.Point(6, 346);
-            this.bedrockChk.Name = "bedrockChk";
-            this.bedrockChk.Size = new System.Drawing.Size(48, 16);
-            this.bedrockChk.TabIndex = 13;
-            this.bedrockChk.Text = "岩床";
-            this.bedrockChk.UseVisualStyleBackColor = true;
-            this.bedrockChk.Visible = false;
-            this.bedrockChk.CheckedChanged += new System.EventHandler(this.bedrockChk_CheckedChanged);
-            // 
-            // waterErosionChk
-            // 
-            this.waterErosionChk.AutoSize = true;
-            this.waterErosionChk.Location = new System.Drawing.Point(19, 21);
-            this.waterErosionChk.Name = "waterErosionChk";
-            this.waterErosionChk.Size = new System.Drawing.Size(72, 16);
-            this.waterErosionChk.TabIndex = 0;
-            this.waterErosionChk.Text = "水力沖刷";
-            this.waterErosionChk.UseVisualStyleBackColor = true;
-            this.waterErosionChk.CheckedChanged += new System.EventHandler(this.waterErosionChk_CheckedChanged);
+            this.waterJettingChk.AutoSize = true;
+            this.waterJettingChk.Location = new System.Drawing.Point(19, 21);
+            this.waterJettingChk.Name = "waterJettingChk";
+            this.waterJettingChk.Size = new System.Drawing.Size(72, 16);
+            this.waterJettingChk.TabIndex = 0;
+            this.waterJettingChk.Text = "水力沖刷";
+            this.waterJettingChk.UseVisualStyleBackColor = true;
+            this.waterJettingChk.CheckedChanged += new System.EventHandler(this.waterJettingChk_CheckedChanged);
             // 
             // bedrockElevationChk
             // 
@@ -1593,6 +1525,7 @@
             this.bedrockElevationChk.TabIndex = 0;
             this.bedrockElevationChk.Text = "岩床高程";
             this.bedrockElevationChk.UseVisualStyleBackColor = true;
+            this.bedrockElevationChk.CheckedChanged += new System.EventHandler(this.bedrockElevationChk_CheckedChanged);
             // 
             // sedimentErosionChk
             // 
@@ -1859,12 +1792,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.rockStablePanel);
-            this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
@@ -1912,9 +1845,6 @@
             this.rockbedPanel.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            this.rockbedPanel2.ResumeLayout(false);
-            this.rockbedPanel2.PerformLayout();
-            this.bedrockErosionMechanismPanel.ResumeLayout(false);
             this.transSandMethodPanel.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -2022,22 +1952,17 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel rockbedPanel;
         private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.Panel rockbedPanel2;
-        private System.Windows.Forms.Panel bedrockErosionMechanismPanel;
-        private System.Windows.Forms.Button tensileStrengthBtn;
-        private System.Windows.Forms.Button elasticityBtn;
-        private System.Windows.Forms.Button criticalShearStressBtn;
+        private System.Windows.Forms.Button sedimentErosionTensileStrengthValueBtn;
+        private System.Windows.Forms.Button sedimentErosionElasticModulusValueBtn;
         private System.Windows.Forms.CheckBox sedimentErosionChk;
-        private System.Windows.Forms.CheckBox waterErosionChk;
-        private System.Windows.Forms.Button bedrockElevationBtn;
-        private System.Windows.Forms.CheckBox bedrockErosionMechanismChk;
-        private System.Windows.Forms.CheckBox bedrockChk;
+        private System.Windows.Forms.CheckBox waterJettingChk;
+        private System.Windows.Forms.Button bedrockElevationValueBtn;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.GroupBox highSandContentFlowGrp;
         private System.Windows.Forms.CheckBox noErosionElevationChk;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox waterJettingBetaTxt;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox waterJettingAlphaTxt;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.CheckBox bedrockElevationChk;
         private System.Windows.Forms.Button dryBedBtn;

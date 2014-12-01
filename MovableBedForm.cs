@@ -201,12 +201,17 @@ namespace RiverSimulationApplication
             {
                 return false;
             }
+
             if(!ConvertTransSandMethod())
             {
                 return false;
             }
 
-
+            if (!ConvertBedrock())
+            {
+                return false;
+            }
+            
 
 
 
@@ -285,6 +290,7 @@ namespace RiverSimulationApplication
             {
                 return false;
             }
+
 
             return true;
         }
@@ -376,6 +382,18 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        private bool ConvertBedrock()
+        {
+            if (!ControllerUtility.CheckConvertDouble(ref p.waterJettingAlpha, waterJettingAlphaTxt, "", ControllerUtility.CheckType.NoCheck))
+            {
+                return false;
+            }
+            if (!ControllerUtility.CheckConvertDouble(ref p.waterJettingBeta, waterJettingBetaTxt, "", ControllerUtility.CheckType.NoCheck))
+            {
+                return false;
+            }
+            return true;
+        }
         private void SettingButton_Click(object sender, EventArgs e)
         {
             Button orgBtn = sender as Button;
@@ -471,87 +489,6 @@ namespace RiverSimulationApplication
             }
 
         }
-
-        private void erosionMechanismsChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-
-            if (chk)
-            {
-                if (waterErosionChk.Checked)
-                {
-                    waterErosionChk.Checked = false;
-                    waterErosionChk.Checked = true;
-                }
-                if (sedimentErosionChk.Checked)
-                {
-                    sedimentErosionChk.Checked = false;
-                    sedimentErosionChk.Checked = true;
-                }
-            }
-            else
-            {
-                criticalShearStressBtn.Enabled = false;
-                elasticityBtn.Enabled = false;
-                tensileStrengthBtn.Enabled = false;
-            }
-            waterErosionChk.Enabled = chk;
-            sedimentErosionChk.Enabled = chk;
-        }
-
-        private void sedimentErosionChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            elasticityBtn.Enabled = chk;
-            tensileStrengthBtn.Enabled = chk;
-        }
-
-        private void waterErosionChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            criticalShearStressBtn.Enabled = chk;
-        }
-
-        private void criticalShearStressBtn_Click(object sender, EventArgs e)
-        {
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(criticalShearStressBtn.Text, false, 26, 50);   //二選一
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-        }
-
-        private void elasticityBtn_Click(object sender, EventArgs e)
-        {
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(elasticityBtn.Text, false, 26, 50);   //二選一
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-        }
-
-        private void tensileStrengthBtn_Click(object sender, EventArgs e)
-        {
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(tensileStrengthBtn.Text, false, 26, 50);   //二選一
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-        }
-
-        private void bedrockElevationBtn_Click(object sender, EventArgs e)
-        {
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(bedrockElevationBtn.Text, false, 26, 50);   //二選一
-            if (DialogResult.OK == form.ShowDialog())
-            {
-
-            }
-        }
-
 
         private void DrawPreview()
         {
@@ -687,19 +624,6 @@ namespace RiverSimulationApplication
         //    bool eab = (sender as Panel).Enabled;
         //    seabedCompositionChk.Enabled = eab;
         //    noScourElevationBtn.Enabled = eab;
-        }
-
-        private void bedrockChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            rockbedPanel2.Enabled = chk;
-        }
-
-        private void rockbedPanel2_EnabledChanged(object sender, EventArgs e)
-        {
-            bool eab = (sender as Panel).Enabled;
-            bedrockErosionMechanismChk.Enabled = eab;
-            bedrockElevationBtn.Enabled = eab;
         }
 
         private void analysisPositionChk_CheckedChanged(object sender, EventArgs e)
@@ -924,5 +848,59 @@ namespace RiverSimulationApplication
                 p.sandTransportEquation = RiverSimulationProfile.SandTransportEquationType.HighSandTransportEquation6;
             }
         }
+        //岩床===========================================================================================================
+        private void waterJettingChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.waterJetting = chk;
+            waterJettingAlphaTxt.Enabled = chk;
+            waterJettingBetaTxt.Enabled = chk;
+        }
+        
+        private void sedimentErosionChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.sedimentErosion = chk;
+            sedimentErosionElasticModulusValueBtn.Enabled = chk;
+            sedimentErosionTensileStrengthValueBtn.Enabled = chk;
+        }
+
+        private void bedrockElevationChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.bedrockElevation = chk;
+            bedrockElevationValueBtn.Enabled = chk;
+        }
+
+        private void elasticityBtn_Click(object sender, EventArgs e)
+        {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(sedimentErosionElasticModulusValueBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void tensileStrengthBtn_Click(object sender, EventArgs e)
+        {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(sedimentErosionTensileStrengthValueBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
+        private void bedrockElevationBtn_Click(object sender, EventArgs e)
+        {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(bedrockElevationValueBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+        }
+
     }
 }

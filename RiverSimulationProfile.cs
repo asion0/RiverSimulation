@@ -286,8 +286,8 @@ namespace RiverSimulationApplication
         public bool massiveErosion;                         //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
         public double massiveErosionCriticalShearStress;    //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
         public bool noErosionElevation;                     //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
-        public bool noErosionElevationValue;                //b. 0：均一值，逐點給：-1
-        public bool noErosionElevationArray;                //若為逐點給，則參數形式為矩陣(I,J)
+        public double noErosionElevationValue;                //b. 0：均一值，逐點給：-1
+        public double[,] noErosionElevationArray;                //若為逐點給，則參數形式為矩陣(I,J)
 
         //2.4 輸砂公式 當特殊功能動床有勾選高含砂效應時，為6選1，否則僅一般輸砂公式中 3 選 1。
         public enum SandTransportEquationType
@@ -320,7 +320,58 @@ namespace RiverSimulationApplication
         public double[,] bedrockElevationArray; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
 
         //2.6 岸壁穩定分析 option
-        //public bool quayStabilityAnalysis;      //2.6 岸壁穩定分析 option
+        //2.6.1 分析位置
+        public bool positionAnalysis { get; set; }   //2.6.1 分析位置
+        public enum PositionAnalysisType
+        {
+            None,
+            GlobalSimulation,
+            LocalSimulation,
+        }
+        public PositionAnalysisType positionAnalysisType;   //2.6.1 分析位置二選一 -- a. 僅供介面用，不用輸入到input 檔。此選項為提供全部模擬與局部模擬兩個選項
+        public int localBlockNumber;                        //2.6.1.1 數值格網數目的表格供使用者填入欲分析位置數目IB，其中IB 的數目不可超過格網數目I。
+        public int[,] localBlockArray;                         //2.6.1.1 局部區塊數目矩陣(2, IB) -- a. 矩陣(2, IB)，1 代表左岸，2 代表右岸。僅為0、1 兩個數目字可供選擇，若1 為計算，若0 為不計算。
+
+        //2.6.2 入滲效應
+        public bool infiltrationEffect { get; set; }         //2.6.2 入滲效應 option
+        public enum InfiltrationEffectTimeFormat
+        {
+            Minute,
+            Hour,
+        }
+        public InfiltrationEffectTimeFormat infiltrationEffectTimeFormat;   //2.6.2.1 時間格式二選一 小時/分鐘，二選一。
+        public double infiltrationEffectTimeSpacing;                        //2.6.2.2 間距單一數值 實數(>0) 使用者自行輸入數值ex：1.5 小時or 90 分鐘
+        public double[] rainfall;                                           //2.6.2.2.1 降雨量矩陣 mm 實數(>0) Free a. 矩陣大小需計算：首先將間距換為秒，然後“總模擬時間” (秒)除於間距(秒)，即為矩陣大小
+
+        //2.6.3 岸壁幾何條件
+        public bool quayGeometry { get; set; }      //2.6.3 岸壁幾何條件
+        public int soilStratificationNumber;        //2.6.3.1 岸壁土壤分層數目單一數值 整數(>0) option
+        public double[,] layerThicknessArray;       //2.6.3.1.1 分層厚度矩陣(LBK)m 實數(>0) 矩陣(LBK)為岸壁土壤分層數目
+        public double[,] quayHeightArray;           //2.6.3.2 岸壁高度矩陣(2, IB) m 實數
+        public double[,] dikeToWharfLengthArray;    //2.6.3.3 堤防到岸壁的長度矩陣(2, IB)m 實數(>0)
+
+        //2.6.4 岸壁土壤性質
+        public bool quaySoilProperties { get; set; }    //2.6.4 岸壁土壤性質
+        public double cohesion;                         //2.6.4.1 凝聚力 二選一 pa 實數(>0) a. 0：均一值，逐點給：-1
+        public double[,,] cohesionArray;                //2.6.4.1 凝聚力 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+        public double reposeAngle;                      //2.6.4.2 安息角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
+        public double[,,] reposeAngleArray;             //2.6.4.2 安息角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+        public double frictionAngle;                    //2.6.4.3 內摩擦角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
+        public double[,,] frictionAngleArray;           //2.6.4.3 內摩擦角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+        public double flowRateRatio;                    //2.6.4.3 比流率 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
+        public double[, ,] flowRateRatioArray;          //2.6.4.3 比流率 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+        public double porosityRatio;                    //2.6.4.5 孔隙率二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
+        public double[,,] porosityRatioArray;           //若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+         public double soilProportion;                  //2.6.4.6 土壤比重二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
+         public double[,,] soilProportionArray;         //若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+         public double ShearStrengthAngle;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
+         public double[, ,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         //功能檢查
         #region Fuction Check
@@ -627,63 +678,86 @@ namespace RiverSimulationApplication
             diffusionBonusProportionalInBottom = 1.0;       //2.1.8 底床擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
 
 
-        //2.2 物理參數
-        kinematicViscosityCoefficient = 1.12e-6;    //2.2.1 動力黏滯係數單一數值 秒 1.12e-6 實數(>=0) 實數16 格
-        sedimentPoreRatio = 0.4;                //2.2.2 泥砂孔隙比單一數值 -- 0.4 實數(>=0) 實數8 格
-        sedimentDensity = 2700;                  //2.2.3 泥砂密度單一數值 Kg/m3 2700 實數(>=0) 實數8 格
-        sedimentParticlesNumber = 3;           //2.2.4 泥砂顆粒數目單一數值K 3 整數(>2) 最優先設定
-        sedimentParticleSize = null;          //2.2.4.1 泥砂粒徑矩陣(K) m 實數(>0) 實數16 格矩陣(K)為泥砂顆粒數目
-        //2.3 底床組成
-        bottomLevelNumber = 6;                 //2.3.1 底床分層數目單一數值 整數(>0) a. 使用者輸入底床分層數目後
-        bottomLevelArray = null;               //2.3.1.1 底床分層厚度矩陣(L) m 實數(>0) 矩陣(L)為底床分層數目
-        sedimentCompositionArray = null;      //2.3.1.2 泥砂組成比例矩陣(K,L) 實數(>0) 矩陣(K,L)為(泥砂顆粒數目, 底床分層數目)
+            //2.2 物理參數
+            kinematicViscosityCoefficient = 1.12e-6;    //2.2.1 動力黏滯係數單一數值 秒 1.12e-6 實數(>=0) 實數16 格
+            sedimentPoreRatio = 0.4;                //2.2.2 泥砂孔隙比單一數值 -- 0.4 實數(>=0) 實數8 格
+            sedimentDensity = 2700;                  //2.2.3 泥砂密度單一數值 Kg/m3 2700 實數(>=0) 實數8 格
+            sedimentParticlesNumber = 3;           //2.2.4 泥砂顆粒數目單一數值K 3 整數(>2) 最優先設定
+            sedimentParticleSize = null;          //2.2.4.1 泥砂粒徑矩陣(K) m 實數(>0) 實數16 格矩陣(K)為泥砂顆粒數目
+            //2.3 底床組成
+            bottomLevelNumber = 6;                 //2.3.1 底床分層數目單一數值 整數(>0) a. 使用者輸入底床分層數目後
+            bottomLevelArray = null;               //2.3.1.1 底床分層厚度矩陣(L) m 實數(>0) 矩陣(L)為底床分層數目
+            sedimentCompositionArray = null;      //2.3.1.2 泥砂組成比例矩陣(K,L) 實數(>0) 矩陣(K,L)為(泥砂顆粒數目, 底床分層數目)
 
-        shenCohesiveSediment = false;  //2.3.2 凝聚性沉滓option
-/*
-        surfaceErosion;                         //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
-        surfaceErosionCoefficient;            //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
-        surfaceErosionCriticalShearStress;    //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+            shenCohesiveSediment = false;  //2.3.2 凝聚性沉滓option
+
+            surfaceErosion = false;                 //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+            surfaceErosionCoefficient = 0;          //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
+            surfaceErosionCriticalShearStress = 0;  //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
         
-        massiveErosion;                         //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
-        massiveErosionCriticalShearStress;    //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
-        noErosionElevation;                     //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
-        noErosionElevationValue;                //b. 0：均一值，逐點給：-1
-        noErosionElevationArray;                //若為逐點給，則參數形式為矩陣(I,J)
+            massiveErosion = false;                 //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
+            massiveErosionCriticalShearStress = 0;  //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
+            noErosionElevation = false;             //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
+            noErosionElevationValue = 0;            //b. 0：均一值，逐點給：-1
+            noErosionElevationArray = null;         //若為逐點給，則參數形式為矩陣(I,J)
 
-        //2.4 輸砂公式 當特殊功能動床有勾選高含砂效應時，為6選1，否則僅一般輸砂公式中 3 選 1。
-        public enum SandTransportEquationType
-        {
-            None,
-            SandTransportEquation1,
-            SandTransportEquation2,
-            SandTransportEquation3,
-            HighSandTransportEquation1,
-            HighSandTransportEquation2,
-            HighSandTransportEquation3,
-
-        }
-        //2.4.1 一般輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
-        //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
-        public SandTransportEquationType sandTransportEquation; 
-
-        //2.5 岩床
-        waterJetting;           //2.5.1 水力沖刷
-        waterJettingAlpha;    //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
-        waterJettingBeta;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
+            //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
+            sandTransportEquation = SandTransportEquationType.None; 
+            waterJettingAlpha = 0;    //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
+            waterJettingBeta = 0;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
        
-        sedimentErosion;                            //2.5.2 泥砂磨蝕
-        sedimentErosionElasticModulusValue;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
-        public double[,] sedimentErosionElasticModulusArray;    //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
-        sedimentErosionTensileStrengthValue;      //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
-        public double[,] sedimentErosionTensileStrengthArray;   //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
+            sedimentErosion = false;                            //2.5.2 泥砂磨蝕
+            sedimentErosionElasticModulusValue = 0;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
+            sedimentErosionElasticModulusArray = null;    //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
+            sedimentErosionTensileStrengthValue = 0;      //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
+            sedimentErosionTensileStrengthArray = null;   //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
 
-        bedrockElevation;           //2.5.3 岩床高程
-        bedrockElevationValue;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1。
-        public double[,] bedrockElevationArray; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
+            bedrockElevation = false;           //2.5.3 岩床高程
+            bedrockElevationValue = 0;;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1。
+            bedrockElevationArray = null; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
 
-        //2.6 岸壁穩定分析 option
-        //quayStabilityAnalysis;      //2.6 岸壁穩定分析 option
-*/
+            //2.6 岸壁穩定分析 option
+            //2.6.1 分析位置
+            positionAnalysis = false;   //2.6.1 分析位置
+            positionAnalysisType = PositionAnalysisType.None;   //2.6.1 分析位置二選一 -- a. 僅供介面用，不用輸入到input 檔。此選項為提供全部模擬與局部模擬兩個選項
+            localBlockNumber = 0;                        //2.6.1.1 數值格網數目的表格供使用者填入欲分析位置數目IB，其中IB 的數目不可超過格網數目I。
+            localBlockArray = null;                         //2.6.1.1 局部區塊數目矩陣(2, IB) -- a. 矩陣(2, IB)，1 代表左岸，2 代表右岸。僅為0、1 兩個數目字可供選擇，若1 為計算，若0 為不計算。
+
+            //2.6.2 入滲效應
+            infiltrationEffect = false;        //2.6.2 入滲效應 option
+            infiltrationEffectTimeFormat = InfiltrationEffectTimeFormat.Minute;   //2.6.2.1 時間格式二選一 小時/分鐘，二選一。
+            infiltrationEffectTimeSpacing = 0;                        //2.6.2.2 間距單一數值 實數(>0) 使用者自行輸入數值ex：1.5 小時or 90 分鐘
+            rainfall = null;                                           //2.6.2.2.1 降雨量矩陣 mm 實數(>0) Free a. 矩陣大小需計算：首先將間距換為秒，然後“總模擬時間” (秒)除於間距(秒)，即為矩陣大小
+
+            //2.6.3 岸壁幾何條件
+            quayGeometry = false;      //2.6.3 岸壁幾何條件
+            soilStratificationNumber = 0;        //2.6.3.1 岸壁土壤分層數目單一數值 整數(>0) option
+            layerThicknessArray = null;       //2.6.3.1.1 分層厚度矩陣(LBK)m 實數(>0) 矩陣(LBK)為岸壁土壤分層數目
+            quayHeightArray = null;           //2.6.3.2 岸壁高度矩陣(2, IB) m 實數
+            dikeToWharfLengthArray = null;    //2.6.3.3 堤防到岸壁的長度矩陣(2, IB)m 實數(>0)
+
+            //2.6.4 岸壁土壤性質
+            quaySoilProperties = false;   //2.6.4 岸壁土壤性質
+            cohesion = 0;                         //2.6.4.1 凝聚力 二選一 pa 實數(>0) a. 0：均一值，逐點給：-1
+            cohesionArray = null;                //2.6.4.1 凝聚力 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+            reposeAngle = 0;                      //2.6.4.2 安息角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
+            reposeAngleArray = null;             //2.6.4.2 安息角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+            frictionAngle = 0;                    //2.6.4.3 內摩擦角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
+            frictionAngleArray = null;           //2.6.4.3 內摩擦角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+            flowRateRatio = 0;                    //2.6.4.3 比流率 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
+            flowRateRatioArray = null;          //2.6.4.3 比流率 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+            porosityRatio = 0;                    //2.6.4.5 孔隙率二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
+            porosityRatioArray = null;           //若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+            soilProportion = 0;                  //2.6.4.6 土壤比重二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
+            soilProportionArray = null;         //若為逐點給，則參數形式為矩陣(2,IB,LBK)
+
+            ShearStrengthAngle = 0;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
+            ShearStrengthAngleArray = null;      //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
         }
 
         public bool ReadInputGridGeo(string s)

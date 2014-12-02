@@ -107,15 +107,15 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.quayGeometryChk = new System.Windows.Forms.CheckBox();
             this.quayGeometryPanel = new System.Windows.Forms.Panel();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
+            this.dikeToWharfLengthBtn = new System.Windows.Forms.Button();
+            this.quayHeightBtn = new System.Windows.Forms.Button();
+            this.layerThicknessBtn = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.soilStratificationNumberTxt = new System.Windows.Forms.TextBox();
             this.infiltrationEffectChk = new System.Windows.Forms.CheckBox();
             this.infiltrationEffectPanel = new System.Windows.Forms.Panel();
-            this.button10 = new System.Windows.Forms.Button();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.rainfallBtn = new System.Windows.Forms.Button();
+            this.infiltrationEffectTimeSpacingTxt = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.minuteRdo = new System.Windows.Forms.RadioButton();
             this.hourRdo = new System.Windows.Forms.RadioButton();
@@ -123,23 +123,20 @@
             this.label17 = new System.Windows.Forms.Label();
             this.quaySoilPropertiesChk = new System.Windows.Forms.CheckBox();
             this.quaySoilPropertiesPanel = new System.Windows.Forms.Panel();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.analysisPositionChk = new System.Windows.Forms.CheckBox();
-            this.analysisPositionPanel = new System.Windows.Forms.Panel();
-            this.dryBedBtn = new System.Windows.Forms.Button();
+            this.flowRateRatioBtn = new System.Windows.Forms.Button();
+            this.porosityRatioBtn = new System.Windows.Forms.Button();
+            this.soilProportionBtn = new System.Windows.Forms.Button();
+            this.frictionAngleBtn = new System.Windows.Forms.Button();
+            this.reposeAngleBtn = new System.Windows.Forms.Button();
+            this.cohesionBtn = new System.Windows.Forms.Button();
+            this.ShearStrengthAngleBtn = new System.Windows.Forms.Button();
+            this.positionAnalysisChk = new System.Windows.Forms.CheckBox();
+            this.positionAnalysisPanel = new System.Windows.Forms.Panel();
+            this.localBlockBtn = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
-            this.dryBedNumTxt = new System.Windows.Forms.TextBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.localBlockNumberTxt = new System.Windows.Forms.TextBox();
+            this.localSimulationRdo = new System.Windows.Forms.RadioButton();
+            this.globalSimulationRdo = new System.Windows.Forms.RadioButton();
             this.rockStableBackBtn = new System.Windows.Forms.Button();
             this.rockbedPanel = new System.Windows.Forms.Panel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -195,7 +192,7 @@
             this.quayGeometryPanel.SuspendLayout();
             this.infiltrationEffectPanel.SuspendLayout();
             this.quaySoilPropertiesPanel.SuspendLayout();
-            this.analysisPositionPanel.SuspendLayout();
+            this.positionAnalysisPanel.SuspendLayout();
             this.rockbedPanel.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.transSandMethodPanel.SuspendLayout();
@@ -1012,7 +1009,7 @@
             // 
             this.rockStablePanel.Controls.Add(this.groupBox8);
             this.rockStablePanel.Controls.Add(this.rockStableBackBtn);
-            this.rockStablePanel.Location = new System.Drawing.Point(229, 540);
+            this.rockStablePanel.Location = new System.Drawing.Point(230, 538);
             this.rockStablePanel.Name = "rockStablePanel";
             this.rockStablePanel.Size = new System.Drawing.Size(500, 670);
             this.rockStablePanel.TabIndex = 12;
@@ -1025,8 +1022,8 @@
             this.groupBox8.Controls.Add(this.infiltrationEffectPanel);
             this.groupBox8.Controls.Add(this.quaySoilPropertiesChk);
             this.groupBox8.Controls.Add(this.quaySoilPropertiesPanel);
-            this.groupBox8.Controls.Add(this.analysisPositionChk);
-            this.groupBox8.Controls.Add(this.analysisPositionPanel);
+            this.groupBox8.Controls.Add(this.positionAnalysisChk);
+            this.groupBox8.Controls.Add(this.positionAnalysisPanel);
             this.groupBox8.Location = new System.Drawing.Point(12, 11);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(472, 607);
@@ -1048,43 +1045,43 @@
             // quayGeometryPanel
             // 
             this.quayGeometryPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.quayGeometryPanel.Controls.Add(this.button14);
-            this.quayGeometryPanel.Controls.Add(this.button13);
-            this.quayGeometryPanel.Controls.Add(this.button11);
+            this.quayGeometryPanel.Controls.Add(this.dikeToWharfLengthBtn);
+            this.quayGeometryPanel.Controls.Add(this.quayHeightBtn);
+            this.quayGeometryPanel.Controls.Add(this.layerThicknessBtn);
             this.quayGeometryPanel.Controls.Add(this.label18);
-            this.quayGeometryPanel.Controls.Add(this.textBox15);
+            this.quayGeometryPanel.Controls.Add(this.soilStratificationNumberTxt);
             this.quayGeometryPanel.Enabled = false;
             this.quayGeometryPanel.Location = new System.Drawing.Point(19, 315);
             this.quayGeometryPanel.Name = "quayGeometryPanel";
             this.quayGeometryPanel.Size = new System.Drawing.Size(435, 105);
             this.quayGeometryPanel.TabIndex = 12;
             // 
-            // button14
+            // dikeToWharfLengthBtn
             // 
-            this.button14.Location = new System.Drawing.Point(13, 68);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(130, 26);
-            this.button14.TabIndex = 6;
-            this.button14.Text = "堤防到岸壁的長度";
-            this.button14.UseVisualStyleBackColor = true;
+            this.dikeToWharfLengthBtn.Location = new System.Drawing.Point(13, 68);
+            this.dikeToWharfLengthBtn.Name = "dikeToWharfLengthBtn";
+            this.dikeToWharfLengthBtn.Size = new System.Drawing.Size(130, 26);
+            this.dikeToWharfLengthBtn.TabIndex = 6;
+            this.dikeToWharfLengthBtn.Text = "堤防到岸壁的長度";
+            this.dikeToWharfLengthBtn.UseVisualStyleBackColor = true;
             // 
-            // button13
+            // quayHeightBtn
             // 
-            this.button13.Location = new System.Drawing.Point(13, 38);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(130, 26);
-            this.button13.TabIndex = 6;
-            this.button13.Text = "岸壁高度";
-            this.button13.UseVisualStyleBackColor = true;
+            this.quayHeightBtn.Location = new System.Drawing.Point(13, 38);
+            this.quayHeightBtn.Name = "quayHeightBtn";
+            this.quayHeightBtn.Size = new System.Drawing.Size(130, 26);
+            this.quayHeightBtn.TabIndex = 6;
+            this.quayHeightBtn.Text = "岸壁高度";
+            this.quayHeightBtn.UseVisualStyleBackColor = true;
             // 
-            // button11
+            // layerThicknessBtn
             // 
-            this.button11.Location = new System.Drawing.Point(198, 6);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(104, 26);
-            this.button11.TabIndex = 6;
-            this.button11.Text = "分層厚度";
-            this.button11.UseVisualStyleBackColor = true;
+            this.layerThicknessBtn.Location = new System.Drawing.Point(198, 6);
+            this.layerThicknessBtn.Name = "layerThicknessBtn";
+            this.layerThicknessBtn.Size = new System.Drawing.Size(104, 26);
+            this.layerThicknessBtn.TabIndex = 6;
+            this.layerThicknessBtn.Text = "分層厚度";
+            this.layerThicknessBtn.UseVisualStyleBackColor = true;
             // 
             // label18
             // 
@@ -1096,12 +1093,12 @@
             this.label18.TabIndex = 3;
             this.label18.Text = "岸壁土壤分層數目";
             // 
-            // textBox15
+            // soilStratificationNumberTxt
             // 
-            this.textBox15.Location = new System.Drawing.Point(119, 8);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(66, 22);
-            this.textBox15.TabIndex = 5;
+            this.soilStratificationNumberTxt.Location = new System.Drawing.Point(119, 8);
+            this.soilStratificationNumberTxt.Name = "soilStratificationNumberTxt";
+            this.soilStratificationNumberTxt.Size = new System.Drawing.Size(66, 22);
+            this.soilStratificationNumberTxt.TabIndex = 5;
             // 
             // infiltrationEffectChk
             // 
@@ -1117,8 +1114,8 @@
             // infiltrationEffectPanel
             // 
             this.infiltrationEffectPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.infiltrationEffectPanel.Controls.Add(this.button10);
-            this.infiltrationEffectPanel.Controls.Add(this.textBox14);
+            this.infiltrationEffectPanel.Controls.Add(this.rainfallBtn);
+            this.infiltrationEffectPanel.Controls.Add(this.infiltrationEffectTimeSpacingTxt);
             this.infiltrationEffectPanel.Controls.Add(this.label27);
             this.infiltrationEffectPanel.Controls.Add(this.minuteRdo);
             this.infiltrationEffectPanel.Controls.Add(this.hourRdo);
@@ -1130,21 +1127,21 @@
             this.infiltrationEffectPanel.Size = new System.Drawing.Size(435, 110);
             this.infiltrationEffectPanel.TabIndex = 12;
             // 
-            // button10
+            // rainfallBtn
             // 
-            this.button10.Location = new System.Drawing.Point(14, 73);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(104, 26);
-            this.button10.TabIndex = 2;
-            this.button10.Text = "降雨強度";
-            this.button10.UseVisualStyleBackColor = true;
+            this.rainfallBtn.Location = new System.Drawing.Point(14, 73);
+            this.rainfallBtn.Name = "rainfallBtn";
+            this.rainfallBtn.Size = new System.Drawing.Size(104, 26);
+            this.rainfallBtn.TabIndex = 2;
+            this.rainfallBtn.Text = "降雨強度";
+            this.rainfallBtn.UseVisualStyleBackColor = true;
             // 
-            // textBox14
+            // infiltrationEffectTimeSpacingTxt
             // 
-            this.textBox14.Location = new System.Drawing.Point(69, 34);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(100, 22);
-            this.textBox14.TabIndex = 1;
+            this.infiltrationEffectTimeSpacingTxt.Location = new System.Drawing.Point(69, 34);
+            this.infiltrationEffectTimeSpacingTxt.Name = "infiltrationEffectTimeSpacingTxt";
+            this.infiltrationEffectTimeSpacingTxt.Size = new System.Drawing.Size(100, 22);
+            this.infiltrationEffectTimeSpacingTxt.TabIndex = 1;
             // 
             // label27
             // 
@@ -1214,119 +1211,115 @@
             // quaySoilPropertiesPanel
             // 
             this.quaySoilPropertiesPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.quaySoilPropertiesPanel.Controls.Add(this.button22);
-            this.quaySoilPropertiesPanel.Controls.Add(this.button21);
-            this.quaySoilPropertiesPanel.Controls.Add(this.button19);
-            this.quaySoilPropertiesPanel.Controls.Add(this.button17);
-            this.quaySoilPropertiesPanel.Controls.Add(this.button16);
-            this.quaySoilPropertiesPanel.Controls.Add(this.button15);
-            this.quaySoilPropertiesPanel.Controls.Add(this.button12);
+            this.quaySoilPropertiesPanel.Controls.Add(this.flowRateRatioBtn);
+            this.quaySoilPropertiesPanel.Controls.Add(this.porosityRatioBtn);
+            this.quaySoilPropertiesPanel.Controls.Add(this.soilProportionBtn);
+            this.quaySoilPropertiesPanel.Controls.Add(this.frictionAngleBtn);
+            this.quaySoilPropertiesPanel.Controls.Add(this.reposeAngleBtn);
+            this.quaySoilPropertiesPanel.Controls.Add(this.cohesionBtn);
+            this.quaySoilPropertiesPanel.Controls.Add(this.ShearStrengthAngleBtn);
             this.quaySoilPropertiesPanel.Enabled = false;
             this.quaySoilPropertiesPanel.Location = new System.Drawing.Point(19, 450);
             this.quaySoilPropertiesPanel.Name = "quaySoilPropertiesPanel";
             this.quaySoilPropertiesPanel.Size = new System.Drawing.Size(435, 144);
             this.quaySoilPropertiesPanel.TabIndex = 12;
             // 
-            // button22
+            // flowRateRatioBtn
             // 
-            this.button22.Location = new System.Drawing.Point(124, 8);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(104, 26);
-            this.button22.TabIndex = 0;
-            this.button22.Text = "比流率";
-            this.button22.UseVisualStyleBackColor = true;
+            this.flowRateRatioBtn.Location = new System.Drawing.Point(124, 8);
+            this.flowRateRatioBtn.Name = "flowRateRatioBtn";
+            this.flowRateRatioBtn.Size = new System.Drawing.Size(104, 26);
+            this.flowRateRatioBtn.TabIndex = 0;
+            this.flowRateRatioBtn.Text = "比流率";
+            this.flowRateRatioBtn.UseVisualStyleBackColor = true;
             // 
-            // button21
+            // porosityRatioBtn
             // 
-            this.button21.Location = new System.Drawing.Point(124, 38);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(104, 26);
-            this.button21.TabIndex = 0;
-            this.button21.Text = "孔隙率";
-            this.button21.UseVisualStyleBackColor = true;
+            this.porosityRatioBtn.Location = new System.Drawing.Point(124, 38);
+            this.porosityRatioBtn.Name = "porosityRatioBtn";
+            this.porosityRatioBtn.Size = new System.Drawing.Size(104, 26);
+            this.porosityRatioBtn.TabIndex = 0;
+            this.porosityRatioBtn.Text = "孔隙率";
+            this.porosityRatioBtn.UseVisualStyleBackColor = true;
             // 
-            // button19
+            // soilProportionBtn
             // 
-            this.button19.Location = new System.Drawing.Point(124, 68);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(104, 26);
-            this.button19.TabIndex = 0;
-            this.button19.Text = "土壤比重";
-            this.button19.UseVisualStyleBackColor = true;
+            this.soilProportionBtn.Location = new System.Drawing.Point(124, 68);
+            this.soilProportionBtn.Name = "soilProportionBtn";
+            this.soilProportionBtn.Size = new System.Drawing.Size(104, 26);
+            this.soilProportionBtn.TabIndex = 0;
+            this.soilProportionBtn.Text = "土壤比重";
+            this.soilProportionBtn.UseVisualStyleBackColor = true;
             // 
-            // button17
+            // frictionAngleBtn
             // 
-            this.button17.Location = new System.Drawing.Point(14, 68);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(104, 26);
-            this.button17.TabIndex = 0;
-            this.button17.Text = "內摩擦角";
-            this.button17.UseVisualStyleBackColor = true;
+            this.frictionAngleBtn.Location = new System.Drawing.Point(14, 68);
+            this.frictionAngleBtn.Name = "frictionAngleBtn";
+            this.frictionAngleBtn.Size = new System.Drawing.Size(104, 26);
+            this.frictionAngleBtn.TabIndex = 0;
+            this.frictionAngleBtn.Text = "內摩擦角";
+            this.frictionAngleBtn.UseVisualStyleBackColor = true;
             // 
-            // button16
+            // reposeAngleBtn
             // 
-            this.button16.Location = new System.Drawing.Point(14, 38);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(104, 26);
-            this.button16.TabIndex = 0;
-            this.button16.Text = "安息角";
-            this.button16.UseVisualStyleBackColor = true;
+            this.reposeAngleBtn.Location = new System.Drawing.Point(14, 38);
+            this.reposeAngleBtn.Name = "reposeAngleBtn";
+            this.reposeAngleBtn.Size = new System.Drawing.Size(104, 26);
+            this.reposeAngleBtn.TabIndex = 0;
+            this.reposeAngleBtn.Text = "安息角";
+            this.reposeAngleBtn.UseVisualStyleBackColor = true;
             // 
-            // button15
+            // cohesionBtn
             // 
-            this.button15.Location = new System.Drawing.Point(14, 8);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(104, 26);
-            this.button15.TabIndex = 0;
-            this.button15.Text = "凝聚力";
-            this.button15.UseVisualStyleBackColor = true;
+            this.cohesionBtn.Location = new System.Drawing.Point(14, 8);
+            this.cohesionBtn.Name = "cohesionBtn";
+            this.cohesionBtn.Size = new System.Drawing.Size(104, 26);
+            this.cohesionBtn.TabIndex = 0;
+            this.cohesionBtn.Text = "凝聚力";
+            this.cohesionBtn.UseVisualStyleBackColor = true;
             // 
-            // button12
+            // ShearStrengthAngleBtn
             // 
-            this.button12.Location = new System.Drawing.Point(15, 98);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(280, 26);
-            this.button12.TabIndex = 0;
-            this.button12.Text = "岸壁未飽和基質吸力造成剪力強度增加所對應角度";
-            this.button12.UseVisualStyleBackColor = true;
+            this.ShearStrengthAngleBtn.Location = new System.Drawing.Point(15, 98);
+            this.ShearStrengthAngleBtn.Name = "ShearStrengthAngleBtn";
+            this.ShearStrengthAngleBtn.Size = new System.Drawing.Size(280, 26);
+            this.ShearStrengthAngleBtn.TabIndex = 0;
+            this.ShearStrengthAngleBtn.Text = "岸壁未飽和基質吸力造成剪力強度增加所對應角度";
+            this.ShearStrengthAngleBtn.UseVisualStyleBackColor = true;
             // 
-            // analysisPositionChk
+            // positionAnalysisChk
             // 
-            this.analysisPositionChk.AutoSize = true;
-            this.analysisPositionChk.Location = new System.Drawing.Point(19, 18);
-            this.analysisPositionChk.Name = "analysisPositionChk";
-            this.analysisPositionChk.Size = new System.Drawing.Size(72, 16);
-            this.analysisPositionChk.TabIndex = 13;
-            this.analysisPositionChk.Text = "分析位置";
-            this.analysisPositionChk.UseVisualStyleBackColor = true;
-            this.analysisPositionChk.CheckedChanged += new System.EventHandler(this.analysisPositionChk_CheckedChanged);
+            this.positionAnalysisChk.AutoSize = true;
+            this.positionAnalysisChk.Location = new System.Drawing.Point(19, 18);
+            this.positionAnalysisChk.Name = "positionAnalysisChk";
+            this.positionAnalysisChk.Size = new System.Drawing.Size(72, 16);
+            this.positionAnalysisChk.TabIndex = 13;
+            this.positionAnalysisChk.Text = "分析位置";
+            this.positionAnalysisChk.UseVisualStyleBackColor = true;
             // 
-            // analysisPositionPanel
+            // positionAnalysisPanel
             // 
-            this.analysisPositionPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.analysisPositionPanel.Controls.Add(this.dryBedBtn);
-            this.analysisPositionPanel.Controls.Add(this.label22);
-            this.analysisPositionPanel.Controls.Add(this.dryBedNumTxt);
-            this.analysisPositionPanel.Controls.Add(this.radioButton2);
-            this.analysisPositionPanel.Controls.Add(this.radioButton1);
-            this.analysisPositionPanel.Controls.Add(this.button6);
-            this.analysisPositionPanel.Controls.Add(this.label19);
-            this.analysisPositionPanel.Controls.Add(this.textBox5);
-            this.analysisPositionPanel.Enabled = false;
-            this.analysisPositionPanel.Location = new System.Drawing.Point(19, 40);
-            this.analysisPositionPanel.Name = "analysisPositionPanel";
-            this.analysisPositionPanel.Size = new System.Drawing.Size(435, 99);
-            this.analysisPositionPanel.TabIndex = 12;
+            this.positionAnalysisPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.positionAnalysisPanel.Controls.Add(this.localBlockBtn);
+            this.positionAnalysisPanel.Controls.Add(this.label22);
+            this.positionAnalysisPanel.Controls.Add(this.localBlockNumberTxt);
+            this.positionAnalysisPanel.Controls.Add(this.localSimulationRdo);
+            this.positionAnalysisPanel.Controls.Add(this.globalSimulationRdo);
+            this.positionAnalysisPanel.Enabled = false;
+            this.positionAnalysisPanel.Location = new System.Drawing.Point(19, 40);
+            this.positionAnalysisPanel.Name = "positionAnalysisPanel";
+            this.positionAnalysisPanel.Size = new System.Drawing.Size(435, 99);
+            this.positionAnalysisPanel.TabIndex = 12;
             // 
-            // dryBedBtn
+            // localBlockBtn
             // 
-            this.dryBedBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dryBedBtn.Location = new System.Drawing.Point(164, 63);
-            this.dryBedBtn.Name = "dryBedBtn";
-            this.dryBedBtn.Size = new System.Drawing.Size(104, 26);
-            this.dryBedBtn.TabIndex = 8;
-            this.dryBedBtn.Text = "設定";
-            this.dryBedBtn.UseVisualStyleBackColor = true;
+            this.localBlockBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.localBlockBtn.Location = new System.Drawing.Point(164, 63);
+            this.localBlockBtn.Name = "localBlockBtn";
+            this.localBlockBtn.Size = new System.Drawing.Size(104, 26);
+            this.localBlockBtn.TabIndex = 8;
+            this.localBlockBtn.Text = "設定";
+            this.localBlockBtn.UseVisualStyleBackColor = true;
             // 
             // label22
             // 
@@ -1338,63 +1331,34 @@
             this.label22.Text = "局部區塊數目";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // dryBedNumTxt
+            // localBlockNumberTxt
             // 
-            this.dryBedNumTxt.Location = new System.Drawing.Point(82, 65);
-            this.dryBedNumTxt.Name = "dryBedNumTxt";
-            this.dryBedNumTxt.Size = new System.Drawing.Size(76, 22);
-            this.dryBedNumTxt.TabIndex = 7;
+            this.localBlockNumberTxt.Location = new System.Drawing.Point(82, 65);
+            this.localBlockNumberTxt.Name = "localBlockNumberTxt";
+            this.localBlockNumberTxt.Size = new System.Drawing.Size(76, 22);
+            this.localBlockNumberTxt.TabIndex = 7;
             // 
-            // radioButton2
+            // localSimulationRdo
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(14, 43);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(71, 16);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "局部模擬";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.localSimulationRdo.AutoSize = true;
+            this.localSimulationRdo.Location = new System.Drawing.Point(14, 43);
+            this.localSimulationRdo.Name = "localSimulationRdo";
+            this.localSimulationRdo.Size = new System.Drawing.Size(71, 16);
+            this.localSimulationRdo.TabIndex = 1;
+            this.localSimulationRdo.TabStop = true;
+            this.localSimulationRdo.Text = "局部模擬";
+            this.localSimulationRdo.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // globalSimulationRdo
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(13, 13);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(71, 16);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "全部模擬";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(331, 9);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(104, 26);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "局部模擬格網";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Visible = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label19.Location = new System.Drawing.Point(200, 17);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(53, 12);
-            this.label19.TabIndex = 3;
-            this.label19.Text = "格網數目";
-            this.label19.Visible = false;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(259, 11);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(66, 22);
-            this.textBox5.TabIndex = 5;
-            this.textBox5.Visible = false;
+            this.globalSimulationRdo.AutoSize = true;
+            this.globalSimulationRdo.Location = new System.Drawing.Point(13, 13);
+            this.globalSimulationRdo.Name = "globalSimulationRdo";
+            this.globalSimulationRdo.Size = new System.Drawing.Size(71, 16);
+            this.globalSimulationRdo.TabIndex = 1;
+            this.globalSimulationRdo.TabStop = true;
+            this.globalSimulationRdo.Text = "全部模擬";
+            this.globalSimulationRdo.UseVisualStyleBackColor = true;
             // 
             // rockStableBackBtn
             // 
@@ -1792,12 +1756,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.rockStablePanel);
             this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.transSandMethodPanel);
-            this.Controls.Add(this.rockStablePanel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
@@ -1840,8 +1804,8 @@
             this.infiltrationEffectPanel.ResumeLayout(false);
             this.infiltrationEffectPanel.PerformLayout();
             this.quaySoilPropertiesPanel.ResumeLayout(false);
-            this.analysisPositionPanel.ResumeLayout(false);
-            this.analysisPositionPanel.PerformLayout();
+            this.positionAnalysisPanel.ResumeLayout(false);
+            this.positionAnalysisPanel.PerformLayout();
             this.rockbedPanel.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
@@ -1920,32 +1884,29 @@
         private System.Windows.Forms.Button noErosionElevationBtn;
         private System.Windows.Forms.CheckBox quayGeometryChk;
         private System.Windows.Forms.Panel quayGeometryPanel;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button dikeToWharfLengthBtn;
+        private System.Windows.Forms.Button quayHeightBtn;
+        private System.Windows.Forms.Button layerThicknessBtn;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox soilStratificationNumberTxt;
         private System.Windows.Forms.CheckBox infiltrationEffectChk;
         private System.Windows.Forms.Panel infiltrationEffectPanel;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.Button rainfallBtn;
+        private System.Windows.Forms.TextBox infiltrationEffectTimeSpacingTxt;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox quaySoilPropertiesChk;
         private System.Windows.Forms.Panel quaySoilPropertiesPanel;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.CheckBox analysisPositionChk;
-        private System.Windows.Forms.Panel analysisPositionPanel;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Button flowRateRatioBtn;
+        private System.Windows.Forms.Button porosityRatioBtn;
+        private System.Windows.Forms.Button soilProportionBtn;
+        private System.Windows.Forms.Button frictionAngleBtn;
+        private System.Windows.Forms.Button reposeAngleBtn;
+        private System.Windows.Forms.Button cohesionBtn;
+        private System.Windows.Forms.Button ShearStrengthAngleBtn;
+        private System.Windows.Forms.CheckBox positionAnalysisChk;
+        private System.Windows.Forms.Panel positionAnalysisPanel;
+        private System.Windows.Forms.RadioButton localSimulationRdo;
+        private System.Windows.Forms.RadioButton globalSimulationRdo;
         private System.Windows.Forms.Button physicalParamBtn;
         private System.Windows.Forms.Button sedimentParticlesNumberBtn;
         private System.Windows.Forms.TextBox sedimentParticlesNumberTxt;
@@ -1965,9 +1926,9 @@
         private System.Windows.Forms.TextBox waterJettingAlphaTxt;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.CheckBox bedrockElevationChk;
-        private System.Windows.Forms.Button dryBedBtn;
+        private System.Windows.Forms.Button localBlockBtn;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox dryBedNumTxt;
+        private System.Windows.Forms.TextBox localBlockNumberTxt;
         private System.Windows.Forms.Panel fullPanel;
         private System.Windows.Forms.CheckBox outputControlErosionDepthChk;
         private System.Windows.Forms.CheckBox outputControlAverageDepthDensityChk;

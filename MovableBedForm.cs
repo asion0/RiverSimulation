@@ -628,8 +628,7 @@ namespace RiverSimulationApplication
 
         private void analysisPositionChk_CheckedChanged(object sender, EventArgs e)
         {
-            bool chk = (sender as CheckBox).Checked;
-            analysisPositionPanel.Enabled = chk;
+
         }
 
         private void infiltrationEffectChk_CheckedChanged(object sender, EventArgs e)

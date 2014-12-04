@@ -33,18 +33,22 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.initialMovableBed3DPanel = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.verticalConcentrationSliceCloseRdo = new System.Windows.Forms.RadioButton();
+            this.verticalConcentrationSliceOpenRdo = new System.Windows.Forms.RadioButton();
             this.initialMovableBed2DPanel = new System.Windows.Forms.Panel();
-            this.initialConcentrationBtn = new System.Windows.Forms.Button();
+            this.depthAverageConcentrationBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
             this.initialWater3DPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.verticalVelocitySliceCloseRdo = new System.Windows.Forms.RadioButton();
+            this.verticalVelocitySliceOpenRdo = new System.Windows.Forms.RadioButton();
             this.initialWater2DPanel = new System.Windows.Forms.Panel();
-            this.uFlowSpeedBtn = new System.Windows.Forms.Button();
-            this.vFlowSpeedBtn = new System.Windows.Forms.Button();
-            this.initialWaterLevelBtn = new System.Windows.Forms.Button();
+            this.depthAverageFlowSpeedUBtn = new System.Windows.Forms.Button();
+            this.depthAverageFlowSpeedVBtn = new System.Windows.Forms.Button();
+            this.waterLevelBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
@@ -106,43 +110,67 @@
             // initialMovableBed3DPanel
             // 
             this.initialMovableBed3DPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.initialMovableBed3DPanel.Controls.Add(this.button2);
+            this.initialMovableBed3DPanel.Controls.Add(this.label6);
+            this.initialMovableBed3DPanel.Controls.Add(this.verticalConcentrationSliceCloseRdo);
+            this.initialMovableBed3DPanel.Controls.Add(this.verticalConcentrationSliceOpenRdo);
             this.initialMovableBed3DPanel.Enabled = false;
             this.initialMovableBed3DPanel.Location = new System.Drawing.Point(21, 130);
             this.initialMovableBed3DPanel.Name = "initialMovableBed3DPanel";
             this.initialMovableBed3DPanel.Size = new System.Drawing.Size(432, 55);
             this.initialMovableBed3DPanel.TabIndex = 13;
             // 
-            // button2
+            // label6
             // 
-            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button2.Location = new System.Drawing.Point(11, 16);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(148, 26);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "垂向濃度剖面";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.initialConcentrationBtn_Click);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 12);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "垂向濃度剖面";
+            // 
+            // verticalConcentrationSliceCloseRdo
+            // 
+            this.verticalConcentrationSliceCloseRdo.AutoSize = true;
+            this.verticalConcentrationSliceCloseRdo.Location = new System.Drawing.Point(182, 19);
+            this.verticalConcentrationSliceCloseRdo.Name = "verticalConcentrationSliceCloseRdo";
+            this.verticalConcentrationSliceCloseRdo.Size = new System.Drawing.Size(35, 16);
+            this.verticalConcentrationSliceCloseRdo.TabIndex = 2;
+            this.verticalConcentrationSliceCloseRdo.TabStop = true;
+            this.verticalConcentrationSliceCloseRdo.Text = "關";
+            this.verticalConcentrationSliceCloseRdo.UseVisualStyleBackColor = true;
+            this.verticalConcentrationSliceCloseRdo.CheckedChanged += new System.EventHandler(this.verticalConcentrationSliceRdo_CheckedChanged);
+            // 
+            // verticalConcentrationSliceOpenRdo
+            // 
+            this.verticalConcentrationSliceOpenRdo.AutoSize = true;
+            this.verticalConcentrationSliceOpenRdo.Location = new System.Drawing.Point(127, 19);
+            this.verticalConcentrationSliceOpenRdo.Name = "verticalConcentrationSliceOpenRdo";
+            this.verticalConcentrationSliceOpenRdo.Size = new System.Drawing.Size(35, 16);
+            this.verticalConcentrationSliceOpenRdo.TabIndex = 3;
+            this.verticalConcentrationSliceOpenRdo.TabStop = true;
+            this.verticalConcentrationSliceOpenRdo.Text = "開";
+            this.verticalConcentrationSliceOpenRdo.UseVisualStyleBackColor = true;
+            this.verticalConcentrationSliceOpenRdo.CheckedChanged += new System.EventHandler(this.verticalConcentrationSliceRdo_CheckedChanged);
             // 
             // initialMovableBed2DPanel
             // 
             this.initialMovableBed2DPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.initialMovableBed2DPanel.Controls.Add(this.initialConcentrationBtn);
+            this.initialMovableBed2DPanel.Controls.Add(this.depthAverageConcentrationBtn);
             this.initialMovableBed2DPanel.Location = new System.Drawing.Point(21, 38);
             this.initialMovableBed2DPanel.Name = "initialMovableBed2DPanel";
             this.initialMovableBed2DPanel.Size = new System.Drawing.Size(432, 55);
             this.initialMovableBed2DPanel.TabIndex = 13;
             // 
-            // initialConcentrationBtn
+            // depthAverageConcentrationBtn
             // 
-            this.initialConcentrationBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.initialConcentrationBtn.Location = new System.Drawing.Point(11, 16);
-            this.initialConcentrationBtn.Name = "initialConcentrationBtn";
-            this.initialConcentrationBtn.Size = new System.Drawing.Size(148, 26);
-            this.initialConcentrationBtn.TabIndex = 2;
-            this.initialConcentrationBtn.Text = "水深平均濃度";
-            this.initialConcentrationBtn.UseVisualStyleBackColor = true;
-            this.initialConcentrationBtn.Click += new System.EventHandler(this.initialConcentrationBtn_Click);
+            this.depthAverageConcentrationBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.depthAverageConcentrationBtn.Location = new System.Drawing.Point(11, 16);
+            this.depthAverageConcentrationBtn.Name = "depthAverageConcentrationBtn";
+            this.depthAverageConcentrationBtn.Size = new System.Drawing.Size(148, 26);
+            this.depthAverageConcentrationBtn.TabIndex = 2;
+            this.depthAverageConcentrationBtn.Text = "水深平均濃度";
+            this.depthAverageConcentrationBtn.UseVisualStyleBackColor = true;
+            this.depthAverageConcentrationBtn.Click += new System.EventHandler(this.depthAverageConcentrationBtn_Click);
             // 
             // label4
             // 
@@ -178,67 +206,91 @@
             // initialWater3DPanel
             // 
             this.initialWater3DPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.initialWater3DPanel.Controls.Add(this.button1);
+            this.initialWater3DPanel.Controls.Add(this.label5);
+            this.initialWater3DPanel.Controls.Add(this.verticalVelocitySliceCloseRdo);
+            this.initialWater3DPanel.Controls.Add(this.verticalVelocitySliceOpenRdo);
             this.initialWater3DPanel.Enabled = false;
             this.initialWater3DPanel.Location = new System.Drawing.Point(24, 151);
             this.initialWater3DPanel.Name = "initialWater3DPanel";
             this.initialWater3DPanel.Size = new System.Drawing.Size(432, 55);
             this.initialWater3DPanel.TabIndex = 13;
             // 
-            // button1
+            // label5
             // 
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(11, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(148, 26);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "垂向流速剖面";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.uFlowSpeedBtn_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 12);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "垂向流速剖面";
+            // 
+            // verticalVelocitySliceCloseRdo
+            // 
+            this.verticalVelocitySliceCloseRdo.AutoSize = true;
+            this.verticalVelocitySliceCloseRdo.Location = new System.Drawing.Point(179, 19);
+            this.verticalVelocitySliceCloseRdo.Name = "verticalVelocitySliceCloseRdo";
+            this.verticalVelocitySliceCloseRdo.Size = new System.Drawing.Size(35, 16);
+            this.verticalVelocitySliceCloseRdo.TabIndex = 0;
+            this.verticalVelocitySliceCloseRdo.TabStop = true;
+            this.verticalVelocitySliceCloseRdo.Text = "關";
+            this.verticalVelocitySliceCloseRdo.UseVisualStyleBackColor = true;
+            this.verticalVelocitySliceCloseRdo.CheckedChanged += new System.EventHandler(this.verticalVelocitySliceRdo_CheckedChanged);
+            // 
+            // verticalVelocitySliceOpenRdo
+            // 
+            this.verticalVelocitySliceOpenRdo.AutoSize = true;
+            this.verticalVelocitySliceOpenRdo.Location = new System.Drawing.Point(124, 19);
+            this.verticalVelocitySliceOpenRdo.Name = "verticalVelocitySliceOpenRdo";
+            this.verticalVelocitySliceOpenRdo.Size = new System.Drawing.Size(35, 16);
+            this.verticalVelocitySliceOpenRdo.TabIndex = 0;
+            this.verticalVelocitySliceOpenRdo.TabStop = true;
+            this.verticalVelocitySliceOpenRdo.Text = "開";
+            this.verticalVelocitySliceOpenRdo.UseVisualStyleBackColor = true;
+            this.verticalVelocitySliceOpenRdo.CheckedChanged += new System.EventHandler(this.verticalVelocitySliceRdo_CheckedChanged);
             // 
             // initialWater2DPanel
             // 
             this.initialWater2DPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.initialWater2DPanel.Controls.Add(this.uFlowSpeedBtn);
-            this.initialWater2DPanel.Controls.Add(this.vFlowSpeedBtn);
-            this.initialWater2DPanel.Controls.Add(this.initialWaterLevelBtn);
+            this.initialWater2DPanel.Controls.Add(this.depthAverageFlowSpeedUBtn);
+            this.initialWater2DPanel.Controls.Add(this.depthAverageFlowSpeedVBtn);
+            this.initialWater2DPanel.Controls.Add(this.waterLevelBtn);
             this.initialWater2DPanel.Location = new System.Drawing.Point(21, 38);
             this.initialWater2DPanel.Name = "initialWater2DPanel";
             this.initialWater2DPanel.Size = new System.Drawing.Size(435, 82);
             this.initialWater2DPanel.TabIndex = 13;
             // 
-            // uFlowSpeedBtn
+            // depthAverageFlowSpeedUBtn
             // 
-            this.uFlowSpeedBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.uFlowSpeedBtn.Location = new System.Drawing.Point(14, 12);
-            this.uFlowSpeedBtn.Name = "uFlowSpeedBtn";
-            this.uFlowSpeedBtn.Size = new System.Drawing.Size(148, 26);
-            this.uFlowSpeedBtn.TabIndex = 2;
-            this.uFlowSpeedBtn.Text = "水深平均流速-U";
-            this.uFlowSpeedBtn.UseVisualStyleBackColor = true;
-            this.uFlowSpeedBtn.Click += new System.EventHandler(this.uFlowSpeedBtn_Click);
+            this.depthAverageFlowSpeedUBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.depthAverageFlowSpeedUBtn.Location = new System.Drawing.Point(14, 12);
+            this.depthAverageFlowSpeedUBtn.Name = "depthAverageFlowSpeedUBtn";
+            this.depthAverageFlowSpeedUBtn.Size = new System.Drawing.Size(148, 26);
+            this.depthAverageFlowSpeedUBtn.TabIndex = 2;
+            this.depthAverageFlowSpeedUBtn.Text = "水深平均流速-U";
+            this.depthAverageFlowSpeedUBtn.UseVisualStyleBackColor = true;
+            this.depthAverageFlowSpeedUBtn.Click += new System.EventHandler(this.depthAverageFlowSpeedUBtn_Click);
             // 
-            // vFlowSpeedBtn
+            // depthAverageFlowSpeedVBtn
             // 
-            this.vFlowSpeedBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.vFlowSpeedBtn.Location = new System.Drawing.Point(182, 12);
-            this.vFlowSpeedBtn.Name = "vFlowSpeedBtn";
-            this.vFlowSpeedBtn.Size = new System.Drawing.Size(148, 26);
-            this.vFlowSpeedBtn.TabIndex = 2;
-            this.vFlowSpeedBtn.Text = "水深平均流速-V";
-            this.vFlowSpeedBtn.UseVisualStyleBackColor = true;
-            this.vFlowSpeedBtn.Click += new System.EventHandler(this.vFlowSpeedBtn_Click);
+            this.depthAverageFlowSpeedVBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.depthAverageFlowSpeedVBtn.Location = new System.Drawing.Point(182, 12);
+            this.depthAverageFlowSpeedVBtn.Name = "depthAverageFlowSpeedVBtn";
+            this.depthAverageFlowSpeedVBtn.Size = new System.Drawing.Size(148, 26);
+            this.depthAverageFlowSpeedVBtn.TabIndex = 2;
+            this.depthAverageFlowSpeedVBtn.Text = "水深平均流速-V";
+            this.depthAverageFlowSpeedVBtn.UseVisualStyleBackColor = true;
+            this.depthAverageFlowSpeedVBtn.Click += new System.EventHandler(this.depthAverageFlowSpeedVBtn_Click);
             // 
-            // initialWaterLevelBtn
+            // waterLevelBtn
             // 
-            this.initialWaterLevelBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.initialWaterLevelBtn.Location = new System.Drawing.Point(14, 44);
-            this.initialWaterLevelBtn.Name = "initialWaterLevelBtn";
-            this.initialWaterLevelBtn.Size = new System.Drawing.Size(148, 26);
-            this.initialWaterLevelBtn.TabIndex = 2;
-            this.initialWaterLevelBtn.Text = "水位";
-            this.initialWaterLevelBtn.UseVisualStyleBackColor = true;
-            this.initialWaterLevelBtn.Click += new System.EventHandler(this.initialWaterLevelBtn_Click);
+            this.waterLevelBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.waterLevelBtn.Location = new System.Drawing.Point(14, 44);
+            this.waterLevelBtn.Name = "waterLevelBtn";
+            this.waterLevelBtn.Size = new System.Drawing.Size(148, 26);
+            this.waterLevelBtn.TabIndex = 2;
+            this.waterLevelBtn.Text = "水位";
+            this.waterLevelBtn.UseVisualStyleBackColor = true;
+            this.waterLevelBtn.Click += new System.EventHandler(this.waterLevelBtn_Click);
             // 
             // label2
             // 
@@ -292,10 +344,12 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.initialMovableBed3DPanel.ResumeLayout(false);
+            this.initialMovableBed3DPanel.PerformLayout();
             this.initialMovableBed2DPanel.ResumeLayout(false);
             this.flowTypeGroup.ResumeLayout(false);
             this.flowTypeGroup.PerformLayout();
             this.initialWater3DPanel.ResumeLayout(false);
+            this.initialWater3DPanel.PerformLayout();
             this.initialWater2DPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -307,22 +361,26 @@
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button initialConcentrationBtn;
+        private System.Windows.Forms.Button depthAverageConcentrationBtn;
         private System.Windows.Forms.GroupBox flowTypeGroup;
-        private System.Windows.Forms.Button initialWaterLevelBtn;
-        private System.Windows.Forms.Button vFlowSpeedBtn;
-        private System.Windows.Forms.Button uFlowSpeedBtn;
+        private System.Windows.Forms.Button waterLevelBtn;
+        private System.Windows.Forms.Button depthAverageFlowSpeedVBtn;
+        private System.Windows.Forms.Button depthAverageFlowSpeedUBtn;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel initialWater2DPanel;
         private System.Windows.Forms.Panel initialMovableBed3DPanel;
         private System.Windows.Forms.Panel initialMovableBed2DPanel;
         private System.Windows.Forms.Panel initialWater3DPanel;
         private PictureBoxCtrl.GridPictureBox mapPicBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton verticalVelocitySliceCloseRdo;
+        private System.Windows.Forms.RadioButton verticalVelocitySliceOpenRdo;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton verticalConcentrationSliceCloseRdo;
+        private System.Windows.Forms.RadioButton verticalConcentrationSliceOpenRdo;
 
     }
 }

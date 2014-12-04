@@ -40,49 +40,57 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void uFlowSpeedBtn_Click(object sender, EventArgs e)
+
+        //===============================================================================
+        private void depthAverageFlowSpeedUBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(uFlowSpeedBtn.Text, false, 26, 50);
+            form.SetFormMode(depthAverageFlowSpeedUBtn.Text, false, 26, 50);
             if (DialogResult.OK == form.ShowDialog())
             {
 
             }
         }
 
-        private void vFlowSpeedBtn_Click(object sender, EventArgs e)
+        private void depthAverageFlowSpeedVBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(vFlowSpeedBtn.Text, false, 26, 50);
+            form.SetFormMode(depthAverageFlowSpeedVBtn.Text, false, 26, 50);
             if (DialogResult.OK == form.ShowDialog())
             {
 
             }
         }
 
-        private void initialWaterLevelBtn_Click(object sender, EventArgs e)
+        private void waterLevelBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(initialWaterLevelBtn.Text, false, 26, 50);
+            form.SetFormMode(waterLevelBtn.Text, false, 26, 50);
             if (DialogResult.OK == form.ShowDialog())
             {
 
             }
         }
 
-        private void assumingSectionChk_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void initialConcentrationBtn_Click(object sender, EventArgs e)
+        private void depthAverageConcentrationBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(initialConcentrationBtn.Text, false, 26, 50);
+            form.SetFormMode(depthAverageConcentrationBtn.Text, false, 26, 50);
             if (DialogResult.OK == form.ShowDialog())
             {
 
             }
         }
+
+        private void verticalVelocitySliceRdo_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void verticalConcentrationSliceRdo_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

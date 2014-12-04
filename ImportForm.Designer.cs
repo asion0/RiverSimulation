@@ -411,7 +411,7 @@
             this.previewSpratePanel.Controls.Add(this.previewSpratePicBox);
             this.previewSpratePanel.Location = new System.Drawing.Point(796, 649);
             this.previewSpratePanel.Name = "previewSpratePanel";
-            this.previewSpratePanel.Size = new System.Drawing.Size(43, 40);
+            this.previewSpratePanel.Size = new System.Drawing.Size(43, 35);
             this.previewSpratePanel.TabIndex = 12;
             this.previewSpratePanel.Visible = false;
             // 

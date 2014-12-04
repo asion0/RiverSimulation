@@ -45,8 +45,9 @@ namespace RiverSimulationApplication
         {
             if(p.IsMovableBedMode())
             {   //使用者選動床模組，則此處一定為變量流。
-                p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
+                //p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
             }
+
             switch (p.flowType)
             {
                 case RiverSimulationProfile.FlowType.ConstantFlow:

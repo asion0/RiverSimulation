@@ -28,18 +28,47 @@ namespace RiverSimulationApplication
         {
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
 
-            if(p.Is3DMode())
+            LoadStatus();
+            UpdateStatus();
+
+        }
+
+        private void LoadStatus()
+        {
+            switch (p.verticalVelocitySlice)
             {
-                initialWater3DPanel.Enabled = true;
-                initialMovableBed3DPanel.Enabled = true;
+                case RiverSimulationProfile.VerticalVelocitySliceType.Open:
+                    verticalVelocitySliceOpenRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.VerticalVelocitySliceType.Close:
+                    verticalVelocitySliceCloseRdo.Checked = true;
+                    break;
+                default:
+                    verticalVelocitySliceOpenRdo.Checked = false;
+                    verticalVelocitySliceCloseRdo.Checked = false;
+                    break;
             }
-            else
+
+            switch (p.verticalConcentrationSlice)
             {
-                initialWater3DPanel.Enabled = false;
-                initialMovableBed3DPanel.Enabled = false;
+                case RiverSimulationProfile.VerticalConcentrationSliceType.Open:
+                    verticalConcentrationSliceOpenRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.VerticalConcentrationSliceType.Close:
+                    verticalConcentrationSliceCloseRdo.Checked = true;
+                    break;
+                default:
+                    verticalConcentrationSliceOpenRdo.Checked = false;
+                    verticalConcentrationSliceCloseRdo.Checked = false;
+                    break;
             }
         }
 
+        private void UpdateStatus()
+        {
+            initialWater3DPanel.Enabled = p.Is3DMode();
+            initialMovableBed3DPanel.Enabled = p.Is3DMode();
+        }
 
         //===============================================================================
         private void depthAverageFlowSpeedUBtn_Click(object sender, EventArgs e)

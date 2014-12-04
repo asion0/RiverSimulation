@@ -7,14 +7,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="RiverSimulationApplication.exe.manifest" size="4706">
+    <dependentAssembly dependencyType="install" codebase="RiverSimulationApplication.exe.manifest" size="4704">
       <assemblyIdentity name="RiverSimulationApplication.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>8HhUWO8jl9L8cXp64ma1Om7VEpg6EDPyRMtk97TEW00=</dsig:DigestValue>
+        <dsig:DigestValue>pxrk/072t13y5/SGCZ9nVscWe9NA9cYhCSDap2aEr3s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

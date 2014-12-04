@@ -390,7 +390,7 @@ namespace RiverSimulationApplication
             Open,
             Close,
         }
-        public VerticalVelocitySliceType verticalVelocitySliceType;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
+        public VerticalVelocitySliceType verticalVelocitySlice;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
         //3.2 動床模組
         public List<double> depthAverageConcentration;              //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入
@@ -402,7 +402,7 @@ namespace RiverSimulationApplication
             Open,
             Close,
         }
-        public VerticalConcentrationSliceType verticalConcentrationSliceType;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
+        public VerticalConcentrationSliceType verticalConcentrationSlice;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
  
          //功能檢查
@@ -802,13 +802,13 @@ namespace RiverSimulationApplication
         waterLevel = -1;             //3.1.3 水位 二選一 m 實數 實數 8 格a. 0：均一值，逐點給：-1
         waterLevelArray = null;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
 
-        verticalVelocitySliceType = VerticalVelocitySliceType.None;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
+        verticalVelocitySlice = VerticalVelocitySliceType.None;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
         //3.2 動床模組
         depthAverageConcentration = null;              //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入
         depthAverageConcentrationList = null;           //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
 
-        verticalConcentrationSliceType = VerticalConcentrationSliceType.None;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
+        verticalConcentrationSlice = VerticalConcentrationSliceType.None;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
  
 

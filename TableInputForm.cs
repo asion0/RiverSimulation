@@ -105,6 +105,7 @@ namespace RiverSimulationApplication
                             tableValueRdo.Checked = false;
                             break;
                     }
+                    singleValueTxt.Text = o.dataValue.ToString();
                 }
 
             }
@@ -129,27 +130,18 @@ namespace RiverSimulationApplication
             FillDataGridView();
          }
 
-        //public enum Type
-        //{
-        //    General,
-        //    UpVerticalDistribution,
-        //}
-
         private void TableInputForm_Load(object sender, EventArgs e)
         {
             if(hideSingle)
             {
                 singleValueRdo.Visible = false;
-                singleValueText.Visible = false;
+                singleValueTxt.Visible = false;
                 tableValueRdo.Visible = false;
                 dataGridView.Height += dataGridView.Top;
                 dataGridView.Top = 0;
                 dataGridView.Enabled = true;
             }
-            else
-            {
-                singleValueRdo.Checked = true;
-            }            
+         
             this.Text = title;
             InitializeDataGridView();
 
@@ -167,7 +159,7 @@ namespace RiverSimulationApplication
 
         private void singleValue_CheckedChanged(object sender, EventArgs e)
         {
-            singleValueText.Enabled = true;
+            singleValueTxt.Enabled = true;
             dataGridView.Enabled = false;
 
             bool chk = (sender as RadioButton).Checked;
@@ -180,7 +172,7 @@ namespace RiverSimulationApplication
 
         private void tableValue_CheckedChanged(object sender, EventArgs e)
         {
-            singleValueText.Enabled = false;
+            singleValueTxt.Enabled = false;
             dataGridView.Enabled = true;
 
             bool chk = (sender as RadioButton).Checked;
@@ -486,12 +478,16 @@ namespace RiverSimulationApplication
             try
             {
                 DataGridView v = dataGridView;
+                RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 for (int i = 0; i < colCount; ++i)
                 {
                     for (int j = 0; j < rowCount; ++j)
                     {
-                        (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
-                       // (_data as double[,])[i, j] = Convert.ToDouble(v[i, j].Value);
+                        o.dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
+                        if (singleValueTxt.Enabled)
+                        {
+                            o.dataValue = Convert.ToDouble(singleValueTxt.Text);
+                        }
                     }
                 }
             }

@@ -44,7 +44,7 @@ namespace RiverSimulationApplication
         private void LoadStatus()
         {
             if(p.IsMovableBedMode())
-            {   //使用者選動床模組，則此處一定為變量流。
+            {   //使用者選動床模組，則此處一定為變量流。PS: 後來取消此規格
                 //p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
             }
 

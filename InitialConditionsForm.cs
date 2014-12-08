@@ -30,7 +30,6 @@ namespace RiverSimulationApplication
 
             LoadStatus();
             UpdateStatus();
-
         }
 
         private void LoadStatus()
@@ -74,7 +73,7 @@ namespace RiverSimulationApplication
         private void depthAverageFlowSpeedUBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(depthAverageFlowSpeedUBtn.Text, false, 26, 50);
+            form.SetFormMode(depthAverageFlowSpeedUBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -84,17 +83,19 @@ namespace RiverSimulationApplication
         private void depthAverageFlowSpeedVBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(depthAverageFlowSpeedVBtn.Text, false, 26, 50);
-            if (DialogResult.OK == form.ShowDialog())
+            form.SetFormMode(depthAverageFlowSpeedVBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, depthAverageFlowSpeedVBtn.Text, "", "",
+                TableInputForm.InputFormType.GenericDouble, 90, 120, false, false, false, p.depthAverageFlowSpeedV);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
             {
-
+                p.depthAverageFlowSpeedV = new RiverSimulationProfile.TwoInOne(form.GenericDoubleData());
             }
         }
 
         private void waterLevelBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(waterLevelBtn.Text, false, 26, 50);
+            form.SetFormMode(waterLevelBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -104,7 +105,7 @@ namespace RiverSimulationApplication
         private void depthAverageConcentrationBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(depthAverageConcentrationBtn.Text, false, 26, 50);
+            form.SetFormMode(depthAverageConcentrationBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
             if (DialogResult.OK == form.ShowDialog())
             {
 
@@ -113,12 +114,34 @@ namespace RiverSimulationApplication
 
         private void verticalVelocitySliceRdo_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (verticalVelocitySliceOpenRdo.Checked)
+            {
+                p.verticalVelocitySlice = RiverSimulationProfile.VerticalVelocitySliceType.Open;
+            }
+            else if (verticalVelocitySliceCloseRdo.Checked)
+            {
+                p.verticalVelocitySlice = RiverSimulationProfile.VerticalVelocitySliceType.Close;
+            }
+            else
+            {
+                p.verticalVelocitySlice = RiverSimulationProfile.VerticalVelocitySliceType.None;
+            }
         }
 
         private void verticalConcentrationSliceRdo_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (verticalConcentrationSliceOpenRdo.Checked)
+            {
+                p.verticalConcentrationSlice = RiverSimulationProfile.VerticalConcentrationSliceType.Open;
+            }
+            else if (verticalConcentrationSliceCloseRdo.Checked)
+            {
+                p.verticalConcentrationSlice = RiverSimulationProfile.VerticalConcentrationSliceType.Close;
+            }
+            else
+            {
+                p.verticalConcentrationSlice = RiverSimulationProfile.VerticalConcentrationSliceType.None;
+            }
         }
 
     }

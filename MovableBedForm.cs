@@ -207,7 +207,7 @@ namespace RiverSimulationApplication
                 return false;
             }
 
-            if (!ConvertBedrock())
+            if (rockbedBtn.Enabled && !ConvertBedrock())
             {
                 return false;
             }
@@ -384,11 +384,11 @@ namespace RiverSimulationApplication
 
         private bool ConvertBedrock()
         {
-            if (!ControllerUtility.CheckConvertDouble(ref p.waterJettingAlpha, waterJettingAlphaTxt, "", ControllerUtility.CheckType.NoCheck))
+            if (!ControllerUtility.CheckConvertDouble(ref p.waterJettingAlpha, waterJettingAlphaTxt, "請輸入正確的水力沖刷常數α", ControllerUtility.CheckType.NoCheck))
             {
                 return false;
             }
-            if (!ControllerUtility.CheckConvertDouble(ref p.waterJettingBeta, waterJettingBetaTxt, "", ControllerUtility.CheckType.NoCheck))
+            if (!ControllerUtility.CheckConvertDouble(ref p.waterJettingBeta, waterJettingBetaTxt, "請輸入正確的水力沖刷常數β", ControllerUtility.CheckType.NoCheck))
             {
                 return false;
             }

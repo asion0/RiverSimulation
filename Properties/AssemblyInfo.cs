@@ -32,10 +32,11 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.19")]
-[assembly: AssemblyFileVersion("1.0.19")]
+[assembly: AssemblyVersion("1.0.0.20")]
+[assembly: AssemblyFileVersion("1.0.20")]
 
-//1.0.0.19 - 20141203 Weekly build version
+//1.0.0.20 - 20141208 Weekly build version
+//1.0.0.19 - 20141201 Weekly build version
 //1.0.0.18 - Process some parameters in Movablebed
 //1.0.0.17 - Demo version on 20141125
 //1.0.0.16 - 修正20141124回報問題，關於結構物高程編輯

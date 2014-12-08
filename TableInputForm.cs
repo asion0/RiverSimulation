@@ -18,13 +18,13 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
-        public TableInputForm(Type t)
-        {
-            InitializeComponent();
-            type = t;
-        }
+        //public TableInputForm(Type t)
+        //{
+        //    InitializeComponent();
+        //    type = t;
+        //}
 
-        Type type = Type.General;
+//        Type type = Type.General;
         bool hideSingle = false;
         int colCount = 26;
         int rowCount = 50;
@@ -47,7 +47,7 @@ namespace RiverSimulationApplication
         int colWidth = 48;
         int rowHeadersWidth = 64;
         public void SetFormMode(string title, int colCount, int rowCount, string tableName = "", string colName = "", string rowName = "", 
-            InputFormType inputFormType = InputFormType.Generic, int colWidth = 48, int rowHeadersWidth = 64,
+            InputFormType inputFormType = InputFormType.GenericDouble, int colWidth = 48, int rowHeadersWidth = 64,
            bool onlyTable = true, bool nocolNum = false, bool noRowNum = false, object initData = null)
         {
             hideSingle = onlyTable;
@@ -82,10 +82,31 @@ namespace RiverSimulationApplication
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum, false, true);
             }
-            else if(inputFormType == InputFormType.Generic)
+            else if(inputFormType == InputFormType.GenericDouble ||
+                    inputFormType == InputFormType.GenericDoubleGreaterThanZero ||
+                    inputFormType == InputFormType.GenericDoubleGreaterThanOrEqualZero)
             {
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum);
+
+                RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+                if (o != null)
+                {
+                    switch(o.type)
+                    {
+                        case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                            singleValueRdo.Checked = true;
+                            break;
+                        case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                            tableValueRdo.Checked = true;
+                            break;
+                        case RiverSimulationProfile.TwoInOne.Type.None:
+                            singleValueRdo.Checked = false;
+                            tableValueRdo.Checked = false;
+                            break;
+                    }
+                }
+
             }
             else if (inputFormType == InputFormType.SeabedThicknessForm)
             {
@@ -108,11 +129,11 @@ namespace RiverSimulationApplication
             FillDataGridView();
          }
 
-        public enum Type
-        {
-            General,
-            UpVerticalDistribution,
-        }
+        //public enum Type
+        //{
+        //    General,
+        //    UpVerticalDistribution,
+        //}
 
         private void TableInputForm_Load(object sender, EventArgs e)
         {
@@ -148,12 +169,26 @@ namespace RiverSimulationApplication
         {
             singleValueText.Enabled = true;
             dataGridView.Enabled = false;
+
+            bool chk = (sender as RadioButton).Checked;
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (o != null && chk)
+            {
+                o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
+            }
         }
 
         private void tableValue_CheckedChanged(object sender, EventArgs e)
         {
             singleValueText.Enabled = false;
             dataGridView.Enabled = true;
+
+            bool chk = (sender as RadioButton).Checked;
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (o != null && chk)
+            {
+                o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
+            }
         }
 
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -174,14 +209,16 @@ namespace RiverSimulationApplication
 
         public enum InputFormType
         {
-            Generic,                //初始一般用途
-            SeabedThicknessForm,    //底床分層厚度輸入
+            GenericDouble,                          //初始一般用途，所有實數
+            GenericDoubleGreaterThanZero,           //初始一般用途，大於零
+            GenericDoubleGreaterThanOrEqualZero,    //初始一般用途，大於等於零
+            SeabedThicknessForm,            //底床分層厚度輸入
             SedimentCompositionRatioForm,   //泥砂組成比例輸入
-            SeparateForm,       //垂直向隔網分層比例輸入
-            BottomElevationForm,    //編輯底床高程
+            SeparateForm,                   //垂直向隔網分層比例輸入
+            BottomElevationForm,            //編輯底床高程
         }
 
-        private InputFormType _inputFormType = InputFormType.Generic;
+        private InputFormType _inputFormType = InputFormType.GenericDouble;
         public InputFormType inputFormType
         {
             get { return _inputFormType; }
@@ -218,13 +255,31 @@ namespace RiverSimulationApplication
             return _data as double[,];
         }
 
+        public RiverSimulationProfile.TwoInOne GenericDoubleData()
+        {
+            if (_data == null)
+                return null;
+
+            return _data as RiverSimulationProfile.TwoInOne;
+        }
+
         private readonly string SeparateFormCellFormat = "F2";
         private void CreateData(object d)
         {
             switch(_inputFormType)
             {
-                case InputFormType.Generic:
-                    _data = new double[colCount, rowCount];
+                case InputFormType.GenericDouble:
+                case InputFormType.GenericDoubleGreaterThanZero:
+                case InputFormType.GenericDoubleGreaterThanOrEqualZero:
+                    RiverSimulationProfile.TwoInOne o = d as  RiverSimulationProfile.TwoInOne;
+                    if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount || o.dataArray.GetLength(1) != rowCount)
+                    {
+                        _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
+                    }
+                    else
+                    {
+                        _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                    }
                     break;
                 case InputFormType.SeabedThicknessForm:
                     if (d == null)
@@ -273,7 +328,17 @@ namespace RiverSimulationApplication
         {
             switch (_inputFormType)
             {
-                case InputFormType.Generic:
+                case InputFormType.GenericDouble:
+                case InputFormType.GenericDoubleGreaterThanZero:
+                case InputFormType.GenericDoubleGreaterThanOrEqualZero:
+                    //編輯陣列I * J
+                    for (int i = 0; i < colCount; ++i)
+                    {
+                        for (int j = 0; j < rowCount; ++j)
+                        {
+                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j].ToString();
+                        }
+                    }
                     break;
                 case InputFormType.SeabedThicknessForm: 
                 //底床分層厚度輸入，直的一行，倒序
@@ -416,6 +481,27 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        private bool ConvertGenericDouble()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                for (int i = 0; i < colCount; ++i)
+                {
+                    for (int j = 0; j < rowCount; ++j)
+                    {
+                        (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
+                       // (_data as double[,])[i, j] = Convert.ToDouble(v[i, j].Value);
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         private void TableInputForm_FormClosed(object sender, FormClosedEventArgs e)
         {
 
@@ -486,7 +572,9 @@ namespace RiverSimulationApplication
         {
             switch (_inputFormType)
             {
-                case InputFormType.Generic:
+                case InputFormType.GenericDouble:
+                case InputFormType.GenericDoubleGreaterThanZero:
+                case InputFormType.GenericDoubleGreaterThanOrEqualZero:
                     //_data = null;
                     break;
                 case InputFormType.SeabedThicknessForm:
@@ -527,8 +615,10 @@ namespace RiverSimulationApplication
             bool isSuccess = false;
             switch (_inputFormType)
             {
-                case InputFormType.Generic:
-                    isSuccess = true;
+                case InputFormType.GenericDouble:
+                case InputFormType.GenericDoubleGreaterThanZero:
+                case InputFormType.GenericDoubleGreaterThanOrEqualZero:
+                    isSuccess = ConvertGenericDouble();
                     break;
                 case InputFormType.SeabedThicknessForm:
                     isSuccess = ConvertSeabedThicknessData();

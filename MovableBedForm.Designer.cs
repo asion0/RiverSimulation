@@ -1402,6 +1402,7 @@
             // 
             // waterJettingBetaTxt
             // 
+            this.waterJettingBetaTxt.Enabled = false;
             this.waterJettingBetaTxt.Location = new System.Drawing.Point(209, 39);
             this.waterJettingBetaTxt.Name = "waterJettingBetaTxt";
             this.waterJettingBetaTxt.Size = new System.Drawing.Size(100, 22);
@@ -1418,6 +1419,7 @@
             // 
             // waterJettingAlphaTxt
             // 
+            this.waterJettingAlphaTxt.Enabled = false;
             this.waterJettingAlphaTxt.Location = new System.Drawing.Point(59, 39);
             this.waterJettingAlphaTxt.Name = "waterJettingAlphaTxt";
             this.waterJettingAlphaTxt.Size = new System.Drawing.Size(100, 22);
@@ -1756,8 +1758,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
-            this.Controls.Add(this.rockStablePanel);
             this.Controls.Add(this.rockbedPanel);
+            this.Controls.Add(this.rockStablePanel);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.physicalParamPanel);

@@ -50,6 +50,54 @@ namespace RiverSimulationApplication
 
         public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
         public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
+
+        public class TwoInOne                //二選一資料類別
+        {
+            public TwoInOne()
+            {
+                type = Type.None;
+                dataValue = -1;
+                dataArray = null;
+            }
+
+            public TwoInOne(int i, int j, double v = -1.0, Type t = Type.None)
+            {
+                type = t;
+                dataValue = v;
+                dataArray = new double[i, j];
+            }
+
+            public TwoInOne(double v, double[,] a, Type t)
+            {
+                type = t;
+                dataValue = v;
+                dataArray = (double[,])a.Clone();
+            }
+
+            public TwoInOne(TwoInOne o)
+            {
+                type = o.type;
+                dataValue = o.dataValue;
+                if (o.dataArray == null)
+                {
+                    dataArray = null;
+                }
+                else
+                {
+                    dataArray = (double[,])o.dataArray.Clone();
+                }
+            }
+
+            public enum Type
+            {
+                None,
+                UseValue,
+                UseArray,
+            };
+            public Type type;
+            public double dataValue;
+            public double[,] dataArray;
+        }
         #endregion
 
         //水理參數
@@ -375,11 +423,11 @@ namespace RiverSimulationApplication
 
         //3. 初始條件
         //3.1 水理模組 =========================================
-        public double depthAverageFlowSpeedU;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        public double[,] depthAverageFlowSpeedUArray;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+        public TwoInOne depthAverageFlowSpeedU;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
+        //public double[,] depthAverageFlowSpeedUArray;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
 
-        public double depthAverageFlowSpeedV;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        public double[,] depthAverageFlowSpeedVArray;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+        public TwoInOne depthAverageFlowSpeedV;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
+        //public double[,] depthAverageFlowSpeedVArray;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
 
         public double waterLevel;           //3.1.3 水位 二選一 m 實數 實數 8 格a. 0：均一值，逐點給：-1
         public double[,] waterLevelArray;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
@@ -793,11 +841,13 @@ namespace RiverSimulationApplication
 
         //3. 初始條件
         //3.1 水理模組 =========================================
-        depthAverageFlowSpeedU = -1;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        depthAverageFlowSpeedUArray = null;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+        //depthAverageFlowSpeedU = -1;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
+        //depthAverageFlowSpeedUArray = null;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+        depthAverageFlowSpeedU = new TwoInOne();
 
-        depthAverageFlowSpeedV = -1;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        depthAverageFlowSpeedVArray = null;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+        //depthAverageFlowSpeedV = -1;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
+        //depthAverageFlowSpeedVArray = null;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+        depthAverageFlowSpeedV = new TwoInOne();
 
         waterLevel = -1;             //3.1.3 水位 二選一 m 實數 實數 8 格a. 0：均一值，逐點給：-1
         waterLevelArray = null;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)

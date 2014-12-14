@@ -452,7 +452,51 @@ namespace RiverSimulationApplication
         }
         public VerticalConcentrationSliceType verticalConcentrationSlice;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
- 
+        //4. 邊界條件
+        //4.1 水理模組
+        //4.1.1 上游
+        public enum FlowConditionType
+        {
+            None,
+            SuperCriticalFlow,
+            SubCriticalFlow,
+        }
+        public FlowConditionType upFlowCondition;         //4.1.1.1 流況設定 二選一
+        //4.1.1.1.1 超臨界流
+        public int superBoundaryConditionNumber;        //4.1.1.1.1.0 邊界條件數目 T 整數(>1) 定量流不輸入
+        public TwoInOne superFlowQuantity;              //4.1.1.1.1.1 流量 m3/s 實數(>=0) a. 圖 5，“即時互動處”呈現流量歷線圖，根
+        public TwoInOne superWaterLevel;                //4.1.1.1.1.2 水位 m 實數
+        
+        //4.1.1.1.2 亞臨界流
+        public int subBoundaryConditionNumber;        //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+        public TwoInOne subFlowQuantity;              //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
+
+        public bool verticalVelocityDistribution;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
+        public double[,] verticalVelocityDistributionArray;     //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0) 
+        
+        //4.1.2 下游 二選一
+        public FlowConditionType downFlowCondition;         //4.1.2 下游 二選一
+        public TwoInOne downSuperWaterLevel;                //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
+        
+        //4.1.3 側壁
+        public bool sidewallBoundarySlip;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
+
+        //4.1.4 水面 三維 only。(”即時互動處”不放圖示)
+        public double mainstreamWindShear;              //4.1.4.1 主流方向風剪 單一數值 N/m2 0 實數 實數 8 格
+        public double sideWindShear;                    //4.1.4.2 側方向風剪 單一數值 N/m2 0 實數 實數 8 格
+        public double coriolisForce;                    //4.1.4.3 科氏力 單一數值 N/m2 0 實數 實數 8 格
+
+        //4.1.5 底床 實數 三維 only。(”即時互動處”不放圖示)
+        public int boundaryLayerThickness;              //4.1.5.1 邊界層厚度 三選一 3 整數(>0) 整數 8 格 1、2、3，三維 only，下拉選單。
+        public enum SeabedBoundarySlipType
+        {
+            NonSlip,
+            Slip,
+            WallFunction,
+        }
+        public SeabedBoundarySlipType seabedBoundarySlip;   //4.1.5.2 底床邊界滑移 三選一 -- 0 整數(>0) 整數 8 格 a. 三維 only，下拉選單 b. 0：非滑移、1：滑移、2：壁函數
+
+        
          //功能檢查
         #region Fuction Check
         public bool Is3DMode() { return dimensionType == DimensionType.Type3D; }
@@ -609,30 +653,10 @@ namespace RiverSimulationApplication
 
         //浸沒邊界資訊
         //private int _immersedBoundaryNum = 0;
-        private List<Point>[] _immersedBoundaryPts = null;
-        public bool sidewallBoundarySlip = false;      //4.1.3.1
+        //private List<Point>[] _immersedBoundaryPts = null;
+        //public bool sidewallBoundarySlip = false;      //4.1.3.1
 
-        public void ResizeImmersedBoundary(int n)
-        {
-            if (n <= 0)
-                return;
-
-            if (_immersedBoundaryPts == null)
-            {
-                _immersedBoundaryPts = new List<Point>[n];
-            }
-            else if (n > _immersedBoundaryPts.Length)
-            {
-                Array.Resize(ref _immersedBoundaryPts, n);
-            }
-        }
-
-        public List<Point>[] ImmersedBoundaryPts
-        {
-            get { return _immersedBoundaryPts; }
-            set { _immersedBoundaryPts = (List<Point>[])value.Clone(); }
-        }
-
+  
         private void Initialization()
         {
             //模組特殊功能高程
@@ -839,29 +863,59 @@ namespace RiverSimulationApplication
             ShearStrengthAngle = 0;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
             ShearStrengthAngleArray = null;      //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
-        //3. 初始條件
-        //3.1 水理模組 =========================================
-        //depthAverageFlowSpeedU = -1;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        //depthAverageFlowSpeedUArray = null;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
-        depthAverageFlowSpeedU = new TwoInOne();
+            //3. 初始條件
+            //3.1 水理模組 =========================================
+            //depthAverageFlowSpeedU = -1;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
+            //depthAverageFlowSpeedUArray = null;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+            depthAverageFlowSpeedU = new TwoInOne();
 
-        //depthAverageFlowSpeedV = -1;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        //depthAverageFlowSpeedVArray = null;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
-        depthAverageFlowSpeedV = new TwoInOne();
+            //depthAverageFlowSpeedV = -1;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
+            //depthAverageFlowSpeedVArray = null;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+            depthAverageFlowSpeedV = new TwoInOne();
 
-        waterLevel = -1;             //3.1.3 水位 二選一 m 實數 實數 8 格a. 0：均一值，逐點給：-1
-        waterLevelArray = null;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
+            waterLevel = -1;             //3.1.3 水位 二選一 m 實數 實數 8 格a. 0：均一值，逐點給：-1
+            waterLevelArray = null;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
 
-        verticalVelocitySlice = VerticalVelocitySliceType.None;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
+            verticalVelocitySlice = VerticalVelocitySliceType.None;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
-        //3.2 動床模組
-        depthAverageConcentration = null;              //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入
-        depthAverageConcentrationList = null;           //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
+            //3.2 動床模組
+            depthAverageConcentration = null;              //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入
+            depthAverageConcentrationList = null;           //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
 
-        verticalConcentrationSlice = VerticalConcentrationSliceType.None;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
+            verticalConcentrationSlice = VerticalConcentrationSliceType.None;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
- 
+            //4. 邊界條件
+            //4.1 水理模組
+            //4.1.1 上游
+            upFlowCondition = FlowConditionType.None;         //4.1.1.1 流況設定 二選一
+            
+            //4.1.1.1.1 超臨界流
+            superBoundaryConditionNumber = 0;                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            superFlowQuantity = new TwoInOne();                 //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
+            superWaterLevel = new TwoInOne();                   //4.1.1.1.1.2 水位 m 實數
+        
+            //4.1.1.1.2 亞臨界流
+            subBoundaryConditionNumber = 0;                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            subFlowQuantity = new TwoInOne();               //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
 
+            verticalVelocityDistribution = false;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
+            verticalVelocityDistributionArray = null;     //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0) 
+        
+            //4.1.2 下游 二選一
+            downFlowCondition = FlowConditionType.None;         //4.1.2 下游 二選一
+            downSuperWaterLevel = new TwoInOne();                   //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
+        
+            //4.1.3 側壁
+            sidewallBoundarySlip = false;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
+
+            //4.1.4 水面 三維 only。(”即時互動處”不放圖示)
+            mainstreamWindShear = 0;              //4.1.4.1 主流方向風剪 單一數值 N/m2 0 實數 實數 8 格
+            sideWindShear = 0;                    //4.1.4.2 側方向風剪 單一數值 N/m2 0 實數 實數 8 格
+            coriolisForce = 0;                    //4.1.4.3 科氏力 單一數值 N/m2 0 實數 實數 8 格
+
+            //4.1.5 底床 實數 三維 only。(”即時互動處”不放圖示)
+            boundaryLayerThickness = 3;              //4.1.5.1 邊界層厚度 三選一 3 整數(>0) 整數 8 格 1、2、3，三維 only，下拉選單。
+            seabedBoundarySlip = SeabedBoundarySlipType.NonSlip;   //4.1.5.2 底床邊界滑移 三選一 -- 0 整數(>0) 整數 8 格 a. 三維 only，下拉選單 b. 0：非滑移、1：滑移、2：壁函數
         }
 
         public bool ReadInputGridGeo(string s)

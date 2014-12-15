@@ -82,17 +82,14 @@ namespace RiverSimulationApplication
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum, false, true);
             }
-            else if(inputFormType == InputFormType.GenericDouble ||
-                    inputFormType == InputFormType.GenericDoubleGreaterThanZero ||
-                    inputFormType == InputFormType.GenericDoubleGreaterThanOrEqualZero)
+            else if (inputFormType == InputFormType.TwoInOneDouble ||
+                    inputFormType == InputFormType.TwoInOneDoubleGreaterThanZero ||
+                    inputFormType == InputFormType.TwoInOneDoubleGreaterThanOrEqualZero)
             {
-                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
-                    tableName, colName, rowName, nocolNum, noRowNum);
-
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 if (o != null)
                 {
-                    switch(o.type)
+                    switch (o.type)
                     {
                         case RiverSimulationProfile.TwoInOne.Type.UseValue:
                             singleValueRdo.Checked = true;
@@ -106,7 +103,38 @@ namespace RiverSimulationApplication
                             break;
                     }
                     singleValueTxt.Text = o.dataValue.ToString();
+                    DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                        tableName, colName, rowName, nocolNum, noRowNum);
                 }
+
+            }
+            else if (inputFormType == InputFormType.GenericDouble ||
+                    inputFormType == InputFormType.GenericDoubleGreaterThanZero ||
+                    inputFormType == InputFormType.GenericDoubleGreaterThanOrEqualZero)
+            {
+                  DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                      tableName, colName, rowName, nocolNum, noRowNum);
+            }
+            else if (inputFormType == InputFormType.FlowQuantity)
+            {
+                RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+                if (o != null)
+                {
+                    switch (o.type)
+                    {
+                        case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                            singleValueRdo.Checked = true;
+                            break;
+                        case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                            tableValueRdo.Checked = true;
+                            break;
+                        case RiverSimulationProfile.TwoInOne.Type.None:
+                            singleValueRdo.Checked = false;
+                            tableValueRdo.Checked = false;
+                            break;
+                    }
+                }
+                singleValueTxt.Visible = false;
 
             }
             else if (inputFormType == InputFormType.SeabedThicknessForm)
@@ -157,32 +185,6 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void singleValue_CheckedChanged(object sender, EventArgs e)
-        {
-            singleValueTxt.Enabled = true;
-            dataGridView.Enabled = false;
-
-            bool chk = (sender as RadioButton).Checked;
-            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if (o != null && chk)
-            {
-                o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
-            }
-        }
-
-        private void tableValue_CheckedChanged(object sender, EventArgs e)
-        {
-            singleValueTxt.Enabled = false;
-            dataGridView.Enabled = true;
-
-            bool chk = (sender as RadioButton).Checked;
-            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if (o != null && chk)
-            {
-                o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
-            }
-        }
-
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -204,10 +206,14 @@ namespace RiverSimulationApplication
             GenericDouble,                          //初始一般用途，所有實數
             GenericDoubleGreaterThanZero,           //初始一般用途，大於零
             GenericDoubleGreaterThanOrEqualZero,    //初始一般用途，大於等於零
+            TwoInOneDouble,                          //TwoInOne一般用途，所有實數
+            TwoInOneDoubleGreaterThanZero,           //TwoInOne一般用途，大於零
+            TwoInOneDoubleGreaterThanOrEqualZero,    //TwoInOne一般用途，大於等於零
             SeabedThicknessForm,            //底床分層厚度輸入
             SedimentCompositionRatioForm,   //泥砂組成比例輸入
             SeparateForm,                   //垂直向隔網分層比例輸入
             BottomElevationForm,            //編輯底床高程
+            FlowQuantity,                   //流量設定
         }
 
         private InputFormType _inputFormType = InputFormType.GenericDouble;
@@ -247,7 +253,23 @@ namespace RiverSimulationApplication
             return _data as double[,];
         }
 
-        public RiverSimulationProfile.TwoInOne GenericDoubleData()
+        public RiverSimulationProfile.TwoInOne GenericTwoInOneData()
+        {
+            if (_data == null)
+                return null;
+
+            return _data as RiverSimulationProfile.TwoInOne;
+        }
+
+        public double[,] GenericDoubleData()
+        {
+            if (_data == null)
+                return null;
+
+            return _data as double[,];
+        }
+
+        public RiverSimulationProfile.TwoInOne FlowQuantityData()
         {
             if (_data == null)
                 return null;
@@ -258,12 +280,12 @@ namespace RiverSimulationApplication
         private readonly string SeparateFormCellFormat = "F2";
         private void CreateData(object d)
         {
-            switch(_inputFormType)
+            RiverSimulationProfile.TwoInOne o = d as RiverSimulationProfile.TwoInOne;
+            switch (_inputFormType)
             {
-                case InputFormType.GenericDouble:
-                case InputFormType.GenericDoubleGreaterThanZero:
-                case InputFormType.GenericDoubleGreaterThanOrEqualZero:
-                    RiverSimulationProfile.TwoInOne o = d as  RiverSimulationProfile.TwoInOne;
+                case InputFormType.TwoInOneDouble:
+                case InputFormType.TwoInOneDoubleGreaterThanZero:
+                case InputFormType.TwoInOneDoubleGreaterThanOrEqualZero:
                     if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount || o.dataArray.GetLength(1) != rowCount)
                     {
                         _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
@@ -273,6 +295,18 @@ namespace RiverSimulationApplication
                         _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
                     }
                     break;
+                case InputFormType.GenericDouble:
+                case InputFormType.GenericDoubleGreaterThanZero:
+                case InputFormType.GenericDoubleGreaterThanOrEqualZero:
+                    if (d == null)
+                    {
+                        _data = new double[colCount, rowCount];
+                    }
+                    else
+                    {
+                        _data = (double [,])(d as double[,]).Clone();
+                    }
+                    break;                
                 case InputFormType.SeabedThicknessForm:
                     if (d == null)
                     {
@@ -312,7 +346,17 @@ namespace RiverSimulationApplication
                     {
                         _data = (CoorPoint[,])(d as CoorPoint[,]).Clone();
                     }
-                    break;               
+                    break;
+                case InputFormType.FlowQuantity:
+                    if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount || o.dataArray.GetLength(1) != rowCount)
+                    {
+                        _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
+                    }
+                    else
+                    {
+                        _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                    }
+                    break;
             }
         }
 
@@ -328,10 +372,42 @@ namespace RiverSimulationApplication
                     {
                         for (int j = 0; j < rowCount; ++j)
                         {
+                            dataGridView[i, j].Value = (_data as double[,])[i, j].ToString();
+                        }
+                    }
+                    break;
+                case InputFormType.TwoInOneDouble:
+                case InputFormType.TwoInOneDoubleGreaterThanZero:
+                case InputFormType.TwoInOneDoubleGreaterThanOrEqualZero:
+                    //編輯陣列I * J
+                    for (int i = 0; i < colCount; ++i)
+                    {
+                        for (int j = 0; j < rowCount; ++j)
+                        {
+                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j].ToString();
+                        }
+                    }
+                    break;                
+                case InputFormType.FlowQuantity:
+                    //編輯陣列I * J
+                    int maxI = 0;
+                    if (singleValueRdo.Checked)
+                    {
+                        maxI = 1;
+                    }
+                    if (tableValueRdo.Checked)
+                    {
+                        maxI = colCount;
+                    }
+                    for (int i = 0; i < dataGridView.ColumnCount; ++i)
+                    {
+                        for (int j = 0; j < dataGridView.RowCount; ++j)
+                        {
                             dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j].ToString();
                         }
                     }
                     break;
+
                 case InputFormType.SeabedThicknessForm: 
                 //底床分層厚度輸入，直的一行，倒序
                     for (int i = 0; i < rowCount; ++i)
@@ -473,7 +549,7 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        private bool ConvertGenericDouble()
+        private bool ConvertTwoInOneDouble()
         {
             try
             {
@@ -488,6 +564,51 @@ namespace RiverSimulationApplication
                         {
                             o.dataValue = Convert.ToDouble(singleValueTxt.Text);
                         }
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ConvertGenericDouble()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                for (int i = 0; i < colCount; ++i)
+                {
+                    for (int j = 0; j < rowCount; ++j)
+                    {
+                        (_data as double[,])[i, j] = Convert.ToDouble(v[i, j].Value);
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ConvertFlowQuantity()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+                for (int i = 0; i < v.ColumnCount; ++i)
+                {
+                    for (int j = 0; j < rowCount; ++j)
+                    {
+                        o.dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
+                        //if (singleValueTxt.Enabled)
+                        //{
+                        //    o.dataValue = Convert.ToDouble(singleValueTxt.Text);
+                        //}
                     }
                 }
             }
@@ -585,6 +706,7 @@ namespace RiverSimulationApplication
                     break;
             }
         }
+
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             AutoFunction();
@@ -615,6 +737,14 @@ namespace RiverSimulationApplication
                 case InputFormType.GenericDoubleGreaterThanZero:
                 case InputFormType.GenericDoubleGreaterThanOrEqualZero:
                     isSuccess = ConvertGenericDouble();
+                    break;
+                case InputFormType.TwoInOneDouble:
+                case InputFormType.TwoInOneDoubleGreaterThanZero:
+                case InputFormType.TwoInOneDoubleGreaterThanOrEqualZero:
+                    isSuccess = ConvertTwoInOneDouble();
+                    break;                
+                case InputFormType.FlowQuantity:
+                    isSuccess = ConvertFlowQuantity();
                     break;
                 case InputFormType.SeabedThicknessForm:
                     isSuccess = ConvertSeabedThicknessData();
@@ -649,5 +779,54 @@ namespace RiverSimulationApplication
         {
             AutoFunction();
         }
+
+        private void singleValueRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (inputFormType != InputFormType.FlowQuantity)
+            {
+                singleValueTxt.Enabled = true;
+                dataGridView.Enabled = false;
+            }
+            else
+            {
+                dataGridView.Enabled = true;
+                dataGridView.Rows.Clear();
+                DataGridViewUtility.InitializeDataGridView(dataGridView, 1, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum);
+                FillDataGridView();
+            }
+
+            bool chk = (sender as RadioButton).Checked;
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (o != null && chk)
+            {
+                o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
+            }
+        }
+
+        private void tableValueRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (inputFormType != InputFormType.FlowQuantity)
+            {
+                singleValueTxt.Enabled = false;
+                dataGridView.Enabled = true;
+            }
+            else
+            {
+                dataGridView.Enabled = true;
+                dataGridView.Rows.Clear();
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum);
+                FillDataGridView();
+            }
+
+            bool chk = (sender as RadioButton).Checked;
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (o != null && chk)
+            {
+                o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
+            }
+        }
+
     }
 }

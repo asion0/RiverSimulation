@@ -429,8 +429,7 @@ namespace RiverSimulationApplication
         public TwoInOne depthAverageFlowSpeedV;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
         //public double[,] depthAverageFlowSpeedVArray;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
 
-        public double waterLevel;           //3.1.3 水位 二選一 m 實數 實數 8 格a. 0：均一值，逐點給：-1
-        public double[,] waterLevelArray;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
+        public TwoInOne waterLevel;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
 
         public enum VerticalVelocitySliceType
         {
@@ -476,7 +475,7 @@ namespace RiverSimulationApplication
         
         //4.1.2 下游 二選一
         public FlowConditionType downFlowCondition;         //4.1.2 下游 二選一
-        public TwoInOne downSuperWaterLevel;                //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
+        public TwoInOne downSubWaterLevel;                //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
         
         //4.1.3 側壁
         public bool sidewallBoundarySlip;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
@@ -496,6 +495,48 @@ namespace RiverSimulationApplication
         }
         public SeabedBoundarySlipType seabedBoundarySlip;   //4.1.5.2 底床邊界滑移 三選一 -- 0 整數(>0) 整數 8 格 a. 三維 only，下拉選單 b. 0：非滑移、1：滑移、2：壁函數
 
+        //4.2 動床模組
+        //4.2.1 上游
+        //4.2.1.1 入流泥砂設定
+        public enum BottomBedLoadFluxType
+        {
+            Auto,
+            Input,
+        }
+        public BottomBedLoadFluxType bottomBedLoadFluxType; //4.2.1.1.1 底床載通量 實數(>=0)“模式自動計算”
+        public double[,] bottomBedLoadFluxArray;            //4.2.1.1.1 底床載通量 實數(>=0)“自行輸入”，如果為“自行輸入”，則如圖4.2.1.1.1 所示
+        public double[,] suspendedLoadDepthAvgConcentration;            //4.2.1.1.2 懸浮載水深平均濃度實數(>=0) 如圖 4.2.1.1.1 所示
+        
+        public TwoInOne movableBedVerticalConcentrationDistribution;    //4.2.1.1.3 垂向濃度分布(3D) 矩陣(2,PP) 均一值 實數(>=0) a. 可為均一值或自行輸入。
+
+        //4.2.1.2 上游邊界底床
+        public BottomBedLoadFluxType upBoundaryElevationType;   //4.2.1.2.1 可採用初始上游邊界底床高程或自行輸入
+        public double[,] upBoundaryElevationArray;              //4.2.1.2.1 高程矩陣(T,J) m 初始實數 可採用初始上游邊界底床高程或自行輸入，
+        public double[,] bottomBedParticleSizeRatio;            //4.2.1.2.2 底床粒徑比例實數(>=0) 如圖 4.2.1.1.3 所示
+
+        //4.2.2 下游 圖5，“即時互動處”不放圖示
+        public BottomBedLoadFluxType movableBedDownType;        //4.2.2.1 通量實數(>=0) 如圖 2.2.2.1 所示
+        public double[,] movableBedDownConcentration;           //4.2.2.2 濃度 實數(>=0) 如圖 2.2.2.1 所示
+
+        public TwoInOne movableBedDownVerticalConcentrationDistribution;    //4.2.2.3 垂向濃度分布(3D) 矩陣(2,PP) 實數(>=0) 同 4.2.1.2
+
+        public enum NearBedBoundaryType
+        {
+            None,
+            ConcentrationCalculation,
+            Input,
+        }
+        public NearBedBoundaryType nearBedBoundaryType;         //4.2.3 近底床濃度邊界二選一 實數 a. 三維only
+
+        public enum ConcentrationCalculationType
+        {
+            None,
+            Type1,
+            Type2,
+            Type3,
+        }
+        public ConcentrationCalculationType concentrationCalculation;   //4.2.3.1 濃度計算公式多選一 整數 8 格下拉式選單(總共2~3 種選項)
+        public TwoInOne inputConcentration;                             //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
         
          //功能檢查
         #region Fuction Check
@@ -873,8 +914,7 @@ namespace RiverSimulationApplication
             //depthAverageFlowSpeedVArray = null;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
             depthAverageFlowSpeedV = new TwoInOne();
 
-            waterLevel = -1;             //3.1.3 水位 二選一 m 實數 實數 8 格a. 0：均一值，逐點給：-1
-            waterLevelArray = null;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
+            waterLevel = new TwoInOne(); ;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
 
             verticalVelocitySlice = VerticalVelocitySliceType.None;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
@@ -903,7 +943,7 @@ namespace RiverSimulationApplication
         
             //4.1.2 下游 二選一
             downFlowCondition = FlowConditionType.None;         //4.1.2 下游 二選一
-            downSuperWaterLevel = new TwoInOne();                   //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
+            downSubWaterLevel = new TwoInOne();                   //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
         
             //4.1.3 側壁
             sidewallBoundarySlip = false;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
@@ -916,6 +956,29 @@ namespace RiverSimulationApplication
             //4.1.5 底床 實數 三維 only。(”即時互動處”不放圖示)
             boundaryLayerThickness = 3;              //4.1.5.1 邊界層厚度 三選一 3 整數(>0) 整數 8 格 1、2、3，三維 only，下拉選單。
             seabedBoundarySlip = SeabedBoundarySlipType.NonSlip;   //4.1.5.2 底床邊界滑移 三選一 -- 0 整數(>0) 整數 8 格 a. 三維 only，下拉選單 b. 0：非滑移、1：滑移、2：壁函數
+
+            //4.2 動床模組
+            //4.2.1 上游
+            //4.2.1.1 入流泥砂設定
+            bottomBedLoadFluxType = BottomBedLoadFluxType.Auto; //4.2.1.1.1 底床載通量 實數(>=0)“模式自動計算”
+            bottomBedLoadFluxArray = null;            //4.2.1.1.1 底床載通量 實數(>=0)“自行輸入”，如果為“自行輸入”，則如圖4.2.1.1.1 所示
+            suspendedLoadDepthAvgConcentration = null;            //4.2.1.1.2 懸浮載水深平均濃度實數(>=0) 如圖 4.2.1.1.1 所示
+        
+            movableBedVerticalConcentrationDistribution = new TwoInOne();    //4.2.1.1.3 垂向濃度分布(3D) 矩陣(2,PP) 均一值 實數(>=0) a. 可為均一值或自行輸入。
+
+            //4.2.1.2 上游邊界底床
+            upBoundaryElevationType = BottomBedLoadFluxType.Auto;   //4.2.1.2.1 可採用初始上游邊界底床高程或自行輸入
+            upBoundaryElevationArray = null;              //4.2.1.2.1 高程矩陣(T,J) m 初始實數 可採用初始上游邊界底床高程或自行輸入，
+            bottomBedParticleSizeRatio = null;            //4.2.1.2.2 底床粒徑比例實數(>=0) 如圖 4.2.1.1.3 所示
+
+            //4.2.2 下游 圖5，“即時互動處”不放圖示
+            movableBedDownType = BottomBedLoadFluxType.Auto;        //4.2.2.1 通量實數(>=0) 如圖 2.2.2.1 所示
+            movableBedDownConcentration = null;           //4.2.2.2 濃度 實數(>=0) 如圖 2.2.2.1 所示
+
+            movableBedDownVerticalConcentrationDistribution = new TwoInOne();    //4.2.2.3 垂向濃度分布(3D) 矩陣(2,PP) 實數(>=0) 同 4.2.1.2
+            nearBedBoundaryType = NearBedBoundaryType.None;         //4.2.3 近底床濃度邊界二選一 實數 a. 三維only
+            concentrationCalculation = ConcentrationCalculationType.None;   //4.2.3.1 濃度計算公式多選一 整數 8 格下拉式選單(總共2~3 種選項)
+            inputConcentration = new TwoInOne();                             //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
         }
 
         public bool ReadInputGridGeo(string s)

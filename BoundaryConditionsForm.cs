@@ -589,6 +589,14 @@ namespace RiverSimulationApplication
 
         private void bottomBedParticleSizeRatioBtn_Click(object sender, EventArgs e)
         {
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(bottomBedParticleSizeRatioBtn.Text, p.sedimentParticlesNumber, 1, bottomBedParticleSizeRatioBtn.Text, "粒徑 ", "泥砂比例",
+                TableInputForm.InputFormType.GenericDoubleGreaterThanOrEqualZero, 90, 120, true, false, true, p.bottomBedParticleSizeRatio);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.bottomBedParticleSizeRatio = (double[,])form.GenericDoubleData().Clone();
+            }
 
         }
 
@@ -648,6 +656,15 @@ namespace RiverSimulationApplication
 
         private void nearBedBoundaryInputBtn_Click(object sender, EventArgs e)
         {
+            //p.inputConcentration
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(nearBedBoundaryInputBtn.Text, p.sedimentParticlesNumber, 1, nearBedBoundaryInputBtn.Text, "粒徑 ", "底床濃度",
+                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, true, p.inputConcentration);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.inputConcentration = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
+            }
 
         }
 

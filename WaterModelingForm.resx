@@ -2488,7 +2488,7 @@
     <value>0</value>
   </data>
   <data name="valueParamPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 671</value>
+    <value>234, 675</value>
   </data>
   <data name="valueParamPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 670</value>
@@ -3277,7 +3277,7 @@
     <value>1</value>
   </data>
   <data name="physicalParamPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>379, 649</value>
+    <value>379, 518</value>
   </data>
   <data name="physicalParamPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 680</value>
@@ -3313,7 +3313,7 @@
     <value>mapPicBox</value>
   </data>
   <data name="&gt;&gt;mapPicBox.Type" xml:space="preserve">
-    <value>PictureBoxCtrl.GridPictureBox, GridPictureBox, Version=1.0.5443.16569, Culture=neutral, PublicKeyToken=null</value>
+    <value>PictureBoxCtrl.GridPictureBox, GridPictureBox, Version=1.0.5452.374, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;mapPicBox.Parent" xml:space="preserve">
     <value>$this</value>

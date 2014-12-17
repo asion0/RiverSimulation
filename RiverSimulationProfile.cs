@@ -141,13 +141,10 @@ namespace RiverSimulationApplication
             Chezy,
         }
         public RoughnessType roughnessType { get; set; }        //1.2.1 糙度係數 二選一 整數 8 格
-        public double manningN { get; set; }                    //1.2.1.1 Manning n 二選一 -- 均一值
-        public double[,] manningNArray { get; set; }             //1.2.1.1 Manning n 二選一 -- 矩陣[I,J]
-        public double chezy { get; set; }                       //1.2.1.2 Chezy 二選一 -- 均一值
-        public double[,] chezyArray { get; set; }               //1.2.1.2 Chezy 二選一 -- 矩陣[I,J]
-        public double roughnessHeightKs { get; set; }           //1.2.1.3 粗糙高度 ks mm -- 均一值
-        public double[,] roughnessHeightKsArray { get; set; }   //1.2.1.3 粗糙高度 ks mm -- 矩陣[I,J]
-
+        public TwoInOne manningN;                               //1.2.1.1 Manning n 二選一 -- 均一值 c矩陣[I,J]
+        public TwoInOne chezy;                               //1.2.1.2 Chezy 二選一 -- 均一值 矩陣[I,J]
+        public TwoInOne roughnessHeightKs { get; set; }           //1.2.1.3 粗糙高度 ks mm -- 均一值 矩陣[I,J]
+ 
         public enum TurbulenceViscosityType     
         {   //紊流黏滯係數 種類
             None,
@@ -334,8 +331,7 @@ namespace RiverSimulationApplication
         public bool massiveErosion;                         //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
         public double massiveErosionCriticalShearStress;    //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
         public bool noErosionElevation;                     //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
-        public double noErosionElevationValue;                //b. 0：均一值，逐點給：-1
-        public double[,] noErosionElevationArray;                //若為逐點給，則參數形式為矩陣(I,J)
+        public TwoInOne noErosionElevationValue;            //2.3.3 不可沖刷高程 二選一 m 實數 0：均一值，逐點給：-1 若為逐點給，則參數形式為矩陣(I,J)
 
         //2.4 輸砂公式 當特殊功能動床有勾選高含砂效應時，為6選1，否則僅一般輸砂公式中 3 選 1。
         public enum SandTransportEquationType
@@ -358,14 +354,11 @@ namespace RiverSimulationApplication
         public double waterJettingBeta;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
        
         public bool sedimentErosion;                            //2.5.2 泥砂磨蝕
-        public double sedimentErosionElasticModulusValue;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
-        public double[,] sedimentErosionElasticModulusArray;    //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
-        public double sedimentErosionTensileStrengthValue;      //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
-        public double[,] sedimentErosionTensileStrengthArray;   //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
+        public TwoInOne sedimentErosionElasticModulusValue;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1 若為逐點給，則參數形式為矩陣(I,J)
+        public TwoInOne sedimentErosionTensileStrengthValue;      //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1 若為逐點給，則參數形式為矩陣(I,J)
 
         public bool bedrockElevation;           //2.5.3 岩床高程
-        public double bedrockElevationValue;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1。
-        public double[,] bedrockElevationArray; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
+        public TwoInOne bedrockElevationValue;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1 為逐點給，則參數形式為矩陣(I,J)
 
         //2.6 岸壁穩定分析 option
         //2.6.1 分析位置
@@ -419,16 +412,12 @@ namespace RiverSimulationApplication
         public double[,,] soilProportionArray;         //若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double ShearStrengthAngle;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[,,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         //3. 初始條件
         //3.1 水理模組 =========================================
         public TwoInOne depthAverageFlowSpeedU;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        //public double[,] depthAverageFlowSpeedUArray;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
-
         public TwoInOne depthAverageFlowSpeedV;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        //public double[,] depthAverageFlowSpeedVArray;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
-
         public TwoInOne waterLevel;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
 
         public enum VerticalVelocitySliceType
@@ -751,12 +740,10 @@ namespace RiverSimulationApplication
             viscosityFactorAdditionInSideDirection = 1;      //1.1.6 側方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
             //1.2 物理參數 =========================================
             roughnessType = RoughnessType.None;        //1.2.1 糙度係數 二選一 整數 8 格
-            manningN = 0;                    //1.2.1.1 Manning n 二選一 -- 均一值
-            manningNArray = null;             //1.2.1.1 Manning n 二選一 -- 矩陣[I,J]
-            chezy = 0;                       //1.2.1.2 Chezy 二選一 -- 均一值
-            chezyArray = null;               //1.2.1.2 Chezy 二選一 -- 矩陣[I,J]
-            roughnessHeightKs = 0;           //1.2.1.3 粗糙高度 ks mm -- 均一值
-            roughnessHeightKsArray = null;   //1.2.1.3 粗糙高度 ks mm -- 矩陣[I,J]
+            manningN = new TwoInOne();                    //1.2.1.1 Manning n 二選一 -- 均一值
+            chezy = new TwoInOne();             //1.2.1.2 Chezy 二選一 -- 均一值 矩陣[I,J]
+            roughnessHeightKs = new TwoInOne();           //1.2.1.3 粗糙高度 ks mm -- 均一值 矩陣[I,J]
+
 
             turbulenceViscosityType = TurbulenceViscosityType.None;    //1.2.2 紊流黏滯係數 四選一 整數 8 格 
             //1.2.2.1 使用者輸入 模擬功能為二維或三維都可選擇此項輸入
@@ -843,8 +830,8 @@ namespace RiverSimulationApplication
             massiveErosion = false;                 //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
             massiveErosionCriticalShearStress = 0;  //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
             noErosionElevation = false;             //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
-            noErosionElevationValue = 0;            //b. 0：均一值，逐點給：-1
-            noErosionElevationArray = null;         //若為逐點給，則參數形式為矩陣(I,J)
+            noErosionElevationValue = new TwoInOne();            //2.3.3 不可沖刷高程 二選一 m 實 0：均一值，逐點給：-1 若為逐點給，則參數形式為矩陣(I,J)
+
 
             //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
             sandTransportEquation = SandTransportEquationType.None; 
@@ -852,14 +839,11 @@ namespace RiverSimulationApplication
             waterJettingBeta = 0;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
        
             sedimentErosion = false;                            //2.5.2 泥砂磨蝕
-            sedimentErosionElasticModulusValue = 0;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
-            sedimentErosionElasticModulusArray = null;    //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
-            sedimentErosionTensileStrengthValue = 0;      //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
-            sedimentErosionTensileStrengthArray = null;   //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
+            sedimentErosionElasticModulusValue = new TwoInOne(); ;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1  若為逐點給，則參數形式為矩陣(I,J)
+            sedimentErosionTensileStrengthValue = new TwoInOne(); ;      //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1  若為逐點給，則參數形式為矩陣(I,J)
 
             bedrockElevation = false;           //2.5.3 岩床高程
-            bedrockElevationValue = 0;;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1。
-            bedrockElevationArray = null; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
+            bedrockElevationValue = new TwoInOne(); ; ;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1  若為逐點給，則參數形式為矩陣(I,J)
 
             //2.6 岸壁穩定分析 option
             //2.6.1 分析位置

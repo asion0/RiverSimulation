@@ -20,37 +20,8 @@ namespace RiverSimulationApplication
         }
         #endregion
 
-        //模組特殊功能
-        #region SimulationFunction
-        public enum DimensionType { None, Type2D, Type3D }
-        public enum ModelingType { None, WaterModeling, MovableBed }
-
-        public DimensionType dimensionType { get; set; }   //維度選擇
-        public ModelingType modelingType { get; set; }      //模組選擇
-
-        //Special Functions
-        //水理
-        public bool closeDiffusionEffectFunction { get; set; }              //關閉移流擴散效應
-        public bool secondFlowEffectFunction { get; set; }                  //二次流效應
-        public bool structureSetFunction { get; set; }                      //結構物設置
-        public bool sideInOutFlowFunction { get; set; }                     //側出入流
-        public bool waterHighSandContentEffectFunction { get; set; }        //水理高含砂效應
-
-        //動床
-        public bool bedrockFunction { get; set; }                           //岩床
-        public bool quayStableAnalysisFunction { get; set; }                //岩壁穩定分析
-        public bool movableBedHighSandContentEffectFunction { get; set; }   //動床高含砂效應
-        #endregion
-
-        //全域參數
-        #region GlobalSetting
-        public RiverGrid inputGrid = null;
-        //public int separateNum = 0;             //垂向格網分層數目0.1.1
-        //public double[] separateArray = null;
-
-        public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
-        public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
-
+        //支援型別
+        #region SupportClasses
         public class TwoInOne                //二選一資料類別
         {
             public TwoInOne()
@@ -98,6 +69,35 @@ namespace RiverSimulationApplication
             public double dataValue;
             public double[,] dataArray;
         }
+        #endregion
+
+        //模組特殊功能
+        #region SimulationFunction
+        public enum DimensionType { None, Type2D, Type3D }
+        public enum ModelingType { None, WaterModeling, MovableBed }
+
+        public DimensionType dimensionType { get; set; }   //維度選擇
+        public ModelingType modelingType { get; set; }      //模組選擇
+
+        //Special Functions
+        //水理
+        public bool closeDiffusionEffectFunction { get; set; }              //關閉移流擴散效應
+        public bool secondFlowEffectFunction { get; set; }                  //二次流效應
+        public bool structureSetFunction { get; set; }                      //結構物設置
+        public bool sideInOutFlowFunction { get; set; }                     //側出入流
+        public bool waterHighSandContentEffectFunction { get; set; }        //水理高含砂效應
+
+        //動床
+        public bool bedrockFunction { get; set; }                           //岩床
+        public bool quayStableAnalysisFunction { get; set; }                //岩壁穩定分析
+        public bool movableBedHighSandContentEffectFunction { get; set; }   //動床高含砂效應
+        #endregion
+
+        //全域參數
+        #region GlobalSetting
+        public RiverGrid inputGrid = null;
+        public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
+        public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
         #endregion
 
         //水理參數
@@ -175,8 +175,9 @@ namespace RiverSimulationApplication
         //1.2.3 其他
         public double gravityConstant;             //1.2.3.1 重力常數 單一數值 m/s2 9.81 實數 Free
         public double waterDensity;                //1.2.3.2 水密度 單一數值 kg/m3 1000 實數(>0) Free
-        
-        //1.3 二次流效應 二維 only
+
+        //1.3 二次流效應 =========================================
+        //二維 only
         public enum CurvatureRadiusType
         {
             None,
@@ -186,7 +187,16 @@ namespace RiverSimulationApplication
         public CurvatureRadiusType curvatureRadiusType { get; set; }      //1.3.1 曲率半徑 是否自動計算
         public double[,] curvatureRadius { get; set; }      //1.3.1 曲率半徑 矩陣(I,J) m 0 實數 Free
 
-        //1.4 結構物設置 四種結構物：丁壩、橋墩、固床工、攔河堰。
+        //1.4 結構物設置 =========================================
+        //四種結構物：丁壩、橋墩、固床工、攔河堰。
+        public enum StructureType
+        {
+            TBar,
+            BridgePier,
+            GroundSillWork,
+            SedimentationWeir,
+            StructureTypeSize,
+        };
         public bool tBarSet { get; set; }                   //丁壩設置
         public bool bridgePierSet { get; set; }             //橋墩設置
         public bool groundsillWorkSet { get; set; }         //固床工設置
@@ -202,87 +212,18 @@ namespace RiverSimulationApplication
         public List<Point>[] groundsillWorkSets;       //固床工位置集合
         public List<Point>[] sedimentationWeirSets;    //攔河堰位置集合
 
-        public enum StructureType
-        {
-            TBar,
-            BridgePier,
-            GroundSillWork,
-            SedimentationWeir,
-            StructureTypeSize,
-        };
-
-        //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
+        //1.6 高含砂效應 =========================================
+        //供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
         public double highSandEffectAlpha1 { get; set; }
         public double highSandEffectBeta1 { get; set; }
         public double highSandEffectC1 { get; set; }
         public double highSandEffectAlpha2 { get; set; }
         public double highSandEffectBeta2 { get; set; }          
         public double highSandEffectC2 { get; set; }
-
-        //Support Functions
-        private void ResizeListPointArraySets(ref List<Point>[] pts, int n)
-        {
-            if (n <= 0)
-                return;
-
-            if (pts == null)
-            {
-                pts = new List<Point>[n];
-            }
-            else if (n > pts.Length)
-            {
-                Array.Resize(ref pts, n);
-            }
-        }
-
-        public void ResizeStructureSets(int n1, int n2, int n3, int n4)
-        {
-            ResizeListPointArraySets(ref tBarSets, n1);
-            ResizeListPointArraySets(ref bridgePierSets, n2);
-            ResizeListPointArraySets(ref groundsillWorkSets, n3);
-            ResizeListPointArraySets(ref sedimentationWeirSets, n4);
-        }
-
-        public List<Point>[] BridgePierSets
-        {
-            get { return bridgePierSets; }
-            set { bridgePierSets = (List<Point>[])value.Clone(); }
-        }
-        public List<Point>[] GroundsillWorkSets
-        {
-            get { return groundsillWorkSets; }
-            set { groundsillWorkSets = (List<Point>[])value.Clone(); }
-        }
-        public List<Point>[] SedimentationWeirSets
-        {
-            get { return sedimentationWeirSets; }
-            set { sedimentationWeirSets = (List<Point>[])value.Clone(); }
-        }
-
-        public void UpdateStructureSet(List<Point> pts, int type, int index)
-        {
-            switch (type)
-            {
-                case 0:
-                    tBarSets[index] = (pts == null) ? null : new List<Point>(pts);
-                    break;
-                case 1:
-                    bridgePierSets[index] = (pts == null) ? null : new List<Point>(pts);
-                    break;
-                case 2:
-                    groundsillWorkSets[index] = (pts == null) ? null : new List<Point>(pts);
-                    break;
-                case 3:
-                    sedimentationWeirSets[index] = (pts == null) ? null : new List<Point>(pts);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         #endregion
 
         //動床參數
+        #region MovableBed
         //2.1 數值參數 =========================================
         public double waterTimeSpan;                //2.1.1 時間間距
         public Int32 waterOutputFrequency;          //2.1.2 輸出頻率
@@ -311,13 +252,13 @@ namespace RiverSimulationApplication
         public double diffusionBonusProportionalInSideflow;     //2.1.6 側方向擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
         public double diffusionBonusProportionalInSurface;      //2.1.7 水面擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
         public double diffusionBonusProportionalInBottom;       //2.1.8 底床擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
-        //2.2 物理參數
+        //2.2 物理參數 =========================================
         public double kinematicViscosityCoefficient;    //2.2.1 動力黏滯係數單一數值 秒 1.12e-6 實數(>=0) 實數16 格
         public double sedimentPoreRatio;                //2.2.2 泥砂孔隙比單一數值 -- 0.4 實數(>=0) 實數8 格
         public double sedimentDensity;                  //2.2.3 泥砂密度單一數值 Kg/m3 2700 實數(>=0) 實數8 格
         public Int32 sedimentParticlesNumber;           //2.2.4 泥砂顆粒數目單一數值K 3 整數(>2) 最優先設定
         public double[,] sedimentParticleSize;          //2.2.4.1 泥砂粒徑矩陣(K) m 實數(>0) 實數16 格矩陣(K)為泥砂顆粒數目
-        //2.3 底床組成
+        //2.3 底床組成 =========================================
         public Int32 bottomLevelNumber;                 //2.3.1 底床分層數目單一數值 整數(>0) a. 使用者輸入底床分層數目後
         public double[] bottomLevelArray;               //2.3.1.1 底床分層厚度矩陣(L) m 實數(>0) 矩陣(L)為底床分層數目
         public double[,] sedimentCompositionArray;      //2.3.1.2 泥砂組成比例矩陣(K,L) 實數(>0) 矩陣(K,L)為(泥砂顆粒數目, 底床分層數目)
@@ -333,7 +274,8 @@ namespace RiverSimulationApplication
         public bool noErosionElevation;                     //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
         public TwoInOne noErosionElevationValue;            //2.3.3 不可沖刷高程 二選一 m 實數 0：均一值，逐點給：-1 若為逐點給，則參數形式為矩陣(I,J)
 
-        //2.4 輸砂公式 當特殊功能動床有勾選高含砂效應時，為6選1，否則僅一般輸砂公式中 3 選 1。
+        //2.4 輸砂公式 =========================================
+        //當特殊功能動床有勾選高含砂效應時，為6選1，否則僅一般輸砂公式中 3 選 1。
         public enum SandTransportEquationType
         {
             None,
@@ -346,9 +288,9 @@ namespace RiverSimulationApplication
         }
         //2.4.1 一般輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
         //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
-        public SandTransportEquationType sandTransportEquation; 
+        public SandTransportEquationType sandTransportEquation;
 
-        //2.5 岩床
+        //2.5 岩床 =========================================
         public bool waterJetting;           //2.5.1 水力沖刷
         public double waterJettingAlpha;    //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
         public double waterJettingBeta;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
@@ -360,8 +302,8 @@ namespace RiverSimulationApplication
         public bool bedrockElevation;           //2.5.3 岩床高程
         public TwoInOne bedrockElevationValue;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1 為逐點給，則參數形式為矩陣(I,J)
 
-        //2.6 岸壁穩定分析 option
-        //2.6.1 分析位置
+        //2.6 岸壁穩定分析  =========================================
+        //2.6.1 分析位置 option
         public bool positionAnalysis { get; set; }   //2.6.1 分析位置
         public enum PositionAnalysisType
         {
@@ -413,8 +355,10 @@ namespace RiverSimulationApplication
 
         public double ShearStrengthAngle;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
         public double[,,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        #endregion
 
         //3. 初始條件
+        #region InitialConditions
         //3.1 水理模組 =========================================
         public TwoInOne depthAverageFlowSpeedU;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
         public TwoInOne depthAverageFlowSpeedV;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
@@ -439,8 +383,10 @@ namespace RiverSimulationApplication
             Close,
         }
         public VerticalConcentrationSliceType verticalConcentrationSlice;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
+        #endregion
 
         //4. 邊界條件
+        #region BoundaryConiditions
         //4.1 水理模組
         //4.1.1 上游
         public enum FlowConditionType
@@ -526,9 +472,15 @@ namespace RiverSimulationApplication
         }
         public ConcentrationCalculationType concentrationCalculation;   //4.2.3.1 濃度計算公式多選一 整數 8 格下拉式選單(總共2~3 種選項)
         public TwoInOne inputConcentration;                             //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
-        
-         //功能檢查
-        #region Fuction Check
+        #endregion
+
+        //5. 模擬作業
+        #region RunSimulation
+        public int maxIterationsNum;        //水理最大疊代次數。1.1.2.3
+        #endregion
+
+        //功能檢查
+        #region FuctionCheck
         public bool Is3DMode() { return dimensionType == DimensionType.Type3D; }
         public bool Is2DMode() { return dimensionType == DimensionType.Type2D; }
         public bool IsWaterModelingMode() { return modelingType == ModelingType.WaterModeling; }
@@ -537,6 +489,71 @@ namespace RiverSimulationApplication
         public bool IsVariableFlowType() { return flowType == FlowType.VariableFlow; }
         #endregion
 
+        //Support Functions
+        #region SupportFuctions
+        private void ResizeListPointArraySets(ref List<Point>[] pts, int n)
+        {
+            if (n <= 0)
+                return;
+
+            if (pts == null)
+            {
+                pts = new List<Point>[n];
+            }
+            else if (n > pts.Length)
+            {
+                Array.Resize(ref pts, n);
+            }
+        }
+
+        public void ResizeStructureSets(int n1, int n2, int n3, int n4)
+        {
+            ResizeListPointArraySets(ref tBarSets, n1);
+            ResizeListPointArraySets(ref bridgePierSets, n2);
+            ResizeListPointArraySets(ref groundsillWorkSets, n3);
+            ResizeListPointArraySets(ref sedimentationWeirSets, n4);
+        }
+
+        public List<Point>[] BridgePierSets
+        {
+            get { return bridgePierSets; }
+            set { bridgePierSets = (List<Point>[])value.Clone(); }
+        }
+        public List<Point>[] GroundsillWorkSets
+        {
+            get { return groundsillWorkSets; }
+            set { groundsillWorkSets = (List<Point>[])value.Clone(); }
+        }
+        public List<Point>[] SedimentationWeirSets
+        {
+            get { return sedimentationWeirSets; }
+            set { sedimentationWeirSets = (List<Point>[])value.Clone(); }
+        }
+
+        public void UpdateStructureSet(List<Point> pts, int type, int index)
+        {
+            switch (type)
+            {
+                case 0:
+                    tBarSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 1:
+                    bridgePierSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 2:
+                    groundsillWorkSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 3:
+                    sedimentationWeirSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+
+        //流程判定檢查函式
+        #region FlowChartConidition
         public bool IsImportFinished() 
         {
             return importFinished;
@@ -622,7 +639,6 @@ namespace RiverSimulationApplication
         { 
             return IsRunSimulationFinished(); 
         }
-        
         //Temp variable for demo version
         public bool importFinished = false;
         public bool simulationModuleFinished = false;
@@ -632,59 +648,8 @@ namespace RiverSimulationApplication
         public bool boundaryConditionsFinished = false;
         public bool runSimulationFinished = false;
 
-        //public bool ModuleSelectUsability() { return importFinished; }
+        #endregion
 
-        //public void SetModuleType1(DimensionType t) { dimensionType = t; }
-        //public DimensionType GetModuleType1() { return dimensionType; }
-        //public void SetModuleType2(ModelingType t) { modelingType = t; }
-        //public ModelingType GetModuleType2() { return modelingType; }
-        
-        ////Setting for special functions
-        //public bool diffusionEffectFunction { get; set; }
-        //public bool secFlowEffectFunction { get; set; }
-        //public bool structureSetFunction { get; set; }
-        ////public bool dryBedEffectFunction { get; set; }
-        ////public bool immersedBoundaryFunction { get; set; }
-        //public bool sideInOutFlowFunction { get; set; }
-        //public bool highSandContentEffectFunction { get; set; }
-
-
-        //public bool HasMovableBedMode() { return modelingType == ModelingType.MovableBed; }
-
-
-        //WaterModeling 數值參數
-        //public double convergenceCriteria2d;    //二維水裡收斂標準 
-        //public double convergenceCriteria3d;    //三維水裡收斂標準
-        public int maxIterationsNum = 10000;        //水理最大疊代次數。1.1.2.3
-
-        //結構物設置
-        //public bool tBarCheck = false;
-        //public bool bridgePierCheck = false;
-        //public bool groundsillWorkCheck = false;
-        //public bool sedimentationWeirCheck = false;
-        //public int tBarNum = 0;
-        //public int bridgePierNum = 0;
-        //public int groundsillWorkNum = 0;
-        //public int sedimentationWeirNum = 0;
-
-        // private int _dryBedNum = 0;
-        //private List<Point>[] _tBarPts = null;
-        //private List<Point>[] _bridgePierPts = null;
-        //private List<Point>[] _groundsillWorkPts = null;
-        //private List<Point>[] _sedimentationWeirPts = null;
-
-
-        //public List<Point>[] TBarSets
-        //{
-        //    get { return _tBarSets; }
-        //    set { _tBarSets = (List<Point>[])value.Clone(); }
-        //}
-
-
-        //浸沒邊界資訊
-        //private int _immersedBoundaryNum = 0;
-        //private List<Point>[] _immersedBoundaryPts = null;
-        //public bool sidewallBoundarySlip = false;      //4.1.3.1
 
   
         private void Initialization()
@@ -963,6 +928,8 @@ namespace RiverSimulationApplication
             nearBedBoundaryType = NearBedBoundaryType.None;         //4.2.3 近底床濃度邊界二選一 實數 a. 三維only
             concentrationCalculation = ConcentrationCalculationType.None;   //4.2.3.1 濃度計算公式多選一 整數 8 格下拉式選單(總共2~3 種選項)
             inputConcentration = new TwoInOne();                             //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
+
+            maxIterationsNum = 10000;
         }
 
         public bool ReadInputGridGeo(string s)
@@ -1001,96 +968,7 @@ namespace RiverSimulationApplication
             //}
             return bkImgType; 
         }
-        //private Bitmap importBmp;
-        /*
-         private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
-         private Bitmap tlBmp, trBmp, blBmp, brBmp;
-         public Bitmap GetGridBitmap()  
-         {
-    
-             switch (bkImgType)
-             {
-                 case BackgroundMapType.None:
-                     return gridBmp;
-
-                 case BackgroundMapType.GoogleStaticMap:
-                     return gridBmp;
-
-                 case BackgroundMapType.ImportImage:
-                     return importBmp;
-
-             }
-             return null;
-         }
-        
-         private void FreeStaticMaps()
-         {
-             if (tlBmp != null)
-             {
-                 tlBmp.Dispose();
-                 tlBmp = null;
-             }
-             if (trBmp != null)
-             {
-                 trBmp.Dispose();
-                 trBmp = null;
-             }
-             if (blBmp != null)
-             {
-                 blBmp.Dispose();
-                 blBmp = null;
-             }
-             if (brBmp != null)
-             {
-                 brBmp.Dispose();
-                 brBmp = null;
-             }
-         }
-         
-        public void ClearBackgroundBitmap()
-        {
-            FreeStaticMaps();
-            bkImgType = BackgroundMapType.None;
-        }
-        
-        public CoorPoint GetTopLeft()
-        {
-            CoordinateTransform ct = new CoordinateTransform();
-            CoorPoint pt = new CoorPoint();
-            switch (bkImgType)
-            {
-                case BackgroundMapType.None:
-                    pt = ct.CalLonLatDegToTwd97(inputGrid.GetTopLeft.x, inputGrid.GetTopLeft.y);
-                    break;
-                case BackgroundMapType.GoogleStaticMap:
-                    pt = ct.CalLonLatDegToTwd97(inputGrid.GetTopLeft.x, inputGrid.GetTopLeft.y);
-                    break;
-                case BackgroundMapType.ImportImage:
-                    pt = topLeft;
-                    break;
-            }
-            return pt;
-        }
-
-        public CoorPoint GetBottomRight()
-        {
-            CoordinateTransform ct = new CoordinateTransform();
-            CoorPoint pt = new CoorPoint();
-            switch (bkImgType)
-            {
-                case BackgroundMapType.None:
-                    pt = ct.CalLonLatDegToTwd97(inputGrid.GetBottomRight.x, inputGrid.GetBottomRight.y);
-                    break;
-                case BackgroundMapType.GoogleStaticMap:
-                    pt = ct.CalLonLatDegToTwd97(inputGrid.GetBottomRight.x, inputGrid.GetBottomRight.y);
-                    break;
-                case BackgroundMapType.ImportImage:
-                    pt = bottomRight;
-                    break;
-            }
-            return pt;
-        }
-        */
+ 
         public string tl = Environment.CurrentDirectory + "\\tl.jpg";
         public string tr = Environment.CurrentDirectory + "\\tr.jpg";
         public string bl = Environment.CurrentDirectory + "\\bl.jpg";
@@ -1122,8 +1000,6 @@ namespace RiverSimulationApplication
             bkImgType = BackgroundMapType.ImportImage;
         }
 
-        //private CoorPoint bottomRight = new CoorPoint();
-        //private CoorPoint topLeft = new CoorPoint();
         public string imagePath;
         public double sourceE;
         public double sourceN;
@@ -1137,14 +1013,6 @@ namespace RiverSimulationApplication
             sourceW = w;
             sourceH = h;
         }
-
-        //動床參數 - 物理參數頁面
-        //public int sedimentParticlesNum = 3;            //2.2.4 泥砂顆粒數目
-        //public int seabedLevelNum = 6;
-        //public double[] seabedLevelArray = null;
-        //public double[,] sedimentCompositionRatioArray = null;
-
-
         public bool GenerateInputFile(string file)
         {
             StringBuilder sb = new StringBuilder();

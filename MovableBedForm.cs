@@ -590,16 +590,14 @@ namespace RiverSimulationApplication
 
 
 
-        private void noErosionElevationBtn_Click(object sender, EventArgs e)
+        private void noScourElevationBtn_Click(object sender, EventArgs e)
         {
 
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(noErosionElevationBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, noErosionElevationBtn.Text, "", "",
-                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.noErosionElevationValue);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
+            form.SetFormMode(sedimentParticlesNumberBtn.Text, true, 26, 50);
+            if (DialogResult.OK == form.ShowDialog())
             {
-                p.noErosionElevationValue = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
+
             }
         }
 
@@ -873,39 +871,33 @@ namespace RiverSimulationApplication
             bedrockElevationValueBtn.Enabled = chk;
         }
 
-        private void sedimentErosionElasticModulusValueBtn_Click(object sender, EventArgs e)
+        private void elasticityBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(sedimentErosionElasticModulusValueBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, sedimentErosionElasticModulusValueBtn.Text, "", "",
-                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.sedimentErosionElasticModulusValue);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
+            form.SetFormMode(sedimentErosionElasticModulusValueBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
+            if (DialogResult.OK == form.ShowDialog())
             {
-                p.sedimentErosionElasticModulusValue = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
+
             }
         }
 
-        private void sedimentErosionTensileStrengthValueBtn_Click(object sender, EventArgs e)
+        private void tensileStrengthBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(sedimentErosionTensileStrengthValueBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, sedimentErosionTensileStrengthValueBtn.Text, "", "",
-                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.sedimentErosionTensileStrengthValue);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
+            form.SetFormMode(sedimentErosionTensileStrengthValueBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
+            if (DialogResult.OK == form.ShowDialog())
             {
-                p.sedimentErosionTensileStrengthValue = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
+
             }
         }
 
-        private void bedrockElevationValueBtn_Click(object sender, EventArgs e)
+        private void bedrockElevationBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(bedrockElevationValueBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, bedrockElevationValueBtn.Text, "", "",
-                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.bedrockElevationValue);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
+            form.SetFormMode(bedrockElevationValueBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);   //二選一
+            if (DialogResult.OK == form.ShowDialog())
             {
-                p.bedrockElevationValue = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
+
             }
         }
 

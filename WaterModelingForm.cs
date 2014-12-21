@@ -79,6 +79,7 @@ namespace RiverSimulationApplication
             viscosityFactorAdditionInSideDirectionTxt.Text = p.viscosityFactorAdditionInSideDirection.ToString();
            
             //1.2 物理參數 =========================================
+
             switch (p.roughnessType)
             {
                 case RiverSimulationProfile.RoughnessType.ManningN:
@@ -483,36 +484,30 @@ namespace RiverSimulationApplication
         private void manningBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(manningNBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, manningNBtn.Text, "", "",
-                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.manningN);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
+            form.SetFormMode(manningNBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);
+            if (DialogResult.OK == form.ShowDialog())
             {
-                p.manningN = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
+
             }
         }
 
         private void chezyBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(chezyBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, chezyBtn.Text, "", "",
-                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.chezy);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
+            form.SetFormMode(chezyBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);
+            if (DialogResult.OK == form.ShowDialog())
             {
-                p.chezy = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
+
             }
         }
 
         private void roughnessHeightKsBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(roughnessHeightKsBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, roughnessHeightKsBtn.Text, "", "",
-                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.roughnessHeightKs);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
+            form.SetFormMode(roughnessHeightKsBtn.Text, false, p.inputGrid.GetJ, p.inputGrid.GetI);
+            if (DialogResult.OK == form.ShowDialog())
             {
-                p.roughnessHeightKs = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
+
             }
         }
 

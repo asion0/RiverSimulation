@@ -810,7 +810,7 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(95, 179);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(95, 612);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
             this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
@@ -842,7 +842,7 @@
             this.noErosionElevationBtn.TabIndex = 6;
             this.noErosionElevationBtn.Text = "設定";
             this.noErosionElevationBtn.UseVisualStyleBackColor = true;
-            this.noErosionElevationBtn.Click += new System.EventHandler(this.noErosionElevationBtn_Click);
+            this.noErosionElevationBtn.Click += new System.EventHandler(this.noScourElevationBtn_Click);
             // 
             // shenCohesiveSedimentPanel
             // 
@@ -1376,7 +1376,7 @@
             // 
             this.rockbedPanel.Controls.Add(this.groupBox9);
             this.rockbedPanel.Controls.Add(this.button9);
-            this.rockbedPanel.Location = new System.Drawing.Point(184, 563);
+            this.rockbedPanel.Location = new System.Drawing.Point(184, 564);
             this.rockbedPanel.Name = "rockbedPanel";
             this.rockbedPanel.Size = new System.Drawing.Size(500, 682);
             this.rockbedPanel.TabIndex = 12;
@@ -1444,7 +1444,7 @@
             this.sedimentErosionTensileStrengthValueBtn.TabIndex = 6;
             this.sedimentErosionTensileStrengthValueBtn.Text = "張力強度";
             this.sedimentErosionTensileStrengthValueBtn.UseVisualStyleBackColor = true;
-            this.sedimentErosionTensileStrengthValueBtn.Click += new System.EventHandler(this.sedimentErosionTensileStrengthValueBtn_Click);
+            this.sedimentErosionTensileStrengthValueBtn.Click += new System.EventHandler(this.tensileStrengthBtn_Click);
             // 
             // bedrockElevationValueBtn
             // 
@@ -1457,7 +1457,7 @@
             this.bedrockElevationValueBtn.TabIndex = 6;
             this.bedrockElevationValueBtn.Text = "岩床高程";
             this.bedrockElevationValueBtn.UseVisualStyleBackColor = true;
-            this.bedrockElevationValueBtn.Click += new System.EventHandler(this.bedrockElevationValueBtn_Click);
+            this.bedrockElevationValueBtn.Click += new System.EventHandler(this.bedrockElevationBtn_Click);
             // 
             // sedimentErosionElasticModulusValueBtn
             // 
@@ -1469,7 +1469,7 @@
             this.sedimentErosionElasticModulusValueBtn.TabIndex = 6;
             this.sedimentErosionElasticModulusValueBtn.Text = "彈性係數";
             this.sedimentErosionElasticModulusValueBtn.UseVisualStyleBackColor = true;
-            this.sedimentErosionElasticModulusValueBtn.Click += new System.EventHandler(this.sedimentErosionElasticModulusValueBtn_Click);
+            this.sedimentErosionElasticModulusValueBtn.Click += new System.EventHandler(this.elasticityBtn_Click);
             // 
             // waterJettingChk
             // 

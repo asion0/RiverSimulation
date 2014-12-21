@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
 using PictureBoxCtrl;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace RiverSimulationApplication
 {
+    [Serializable]
     public class RiverSimulationProfile
     {
-        public static RiverSimulationProfile profile = new RiverSimulationProfile();
+        //public static RiverSimulationProfile profile = new RiverSimulationProfile();
+        public static RiverSimulationProfile profile = null;
  
         #region Constructor
         public RiverSimulationProfile()
@@ -19,6 +22,26 @@ namespace RiverSimulationApplication
             Initialization();
         }
         #endregion
+        public static void SerializeBinary(RiverSimulationProfile p, string file)
+        {
+            FileStream oFileStream = new FileStream(file, FileMode.Create);
+            BinaryFormatter myBinaryFormatter = new BinaryFormatter();
+            myBinaryFormatter.Serialize(oFileStream, p);
+            oFileStream.Flush();
+            oFileStream.Close();
+            oFileStream.Dispose();
+        }
+
+        public static RiverSimulationProfile DeSerialize(string file)
+        {
+            RiverSimulationProfile o = null;
+            FileStream oFileStream = new FileStream(file, FileMode.Open);
+            BinaryFormatter myBinaryFormatter = new BinaryFormatter();
+            o = (RiverSimulationProfile)myBinaryFormatter.Deserialize(oFileStream);
+            oFileStream.Close();
+            oFileStream.Dispose();
+            return o;
+        }
 
         //模組特殊功能
         #region SimulationFunction
@@ -51,6 +74,7 @@ namespace RiverSimulationApplication
         public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
         public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
+        [Serializable]
         public class TwoInOne                //二選一資料類別
         {
             public TwoInOne()
@@ -1195,4 +1219,6 @@ namespace RiverSimulationApplication
             return true;
         }
     }
+
+
 }

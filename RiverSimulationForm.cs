@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace RiverSimulationApplication
 {
@@ -23,6 +24,16 @@ namespace RiverSimulationApplication
             if (DialogResult.OK != form.ShowDialog())
             {
                 this.Close();
+            }
+
+            string tempSave = Program.documentPath + @"\TempSave.txt";
+            if (File.Exists(tempSave))
+            {
+                RiverSimulationProfile.profile = RiverSimulationProfile.DeSerialize(tempSave);
+            }
+            else
+            {
+                RiverSimulationProfile.profile = new RiverSimulationProfile();
             }
             UpdateStatus();
         }
@@ -138,7 +149,9 @@ namespace RiverSimulationApplication
 
         private void UpdateStatus()
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            RiverSimulationProfile p = RiverSimulationProfile.profile;;
+               
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
             Color FinishedButton = Color.LimeGreen;
             Color ReadyButton = Color.Gold;
             Color DisableButton = Color.FromArgb(255, 174, 201);     //20141117 客製化
@@ -357,6 +370,13 @@ namespace RiverSimulationApplication
         private void userManualMenuItem_Click(object sender, EventArgs e)
         {
             Utility.ShellExecute(Environment.CurrentDirectory + "\\Manual.pdf");
+        }
+
+        private void RiverSimulationForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string tempSave = Program.documentPath + @"\TempSave.txt";
+            RiverSimulationProfile.SerializeBinary(RiverSimulationProfile.profile, tempSave);
+
         }
 
 

@@ -986,6 +986,7 @@ namespace PictureBoxCtrl
                 Color.Gold, Color.Tan, Color.PeachPuff, Color.LightSalmon };
     }
 
+    [Serializable]
     public class RiverGrid
     {
         public RiverGrid()
@@ -1266,7 +1267,8 @@ namespace PictureBoxCtrl
         }
 
     }
-
+    
+    [Serializable]
     public class CoorPoint
     {
         public CoorPoint()

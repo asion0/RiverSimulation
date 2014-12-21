@@ -23,8 +23,8 @@ namespace RiverSimulationApplication
 
             //Test function
 #if DEBUG
-            string f1 = Environment.CurrentDirectory + "\\cchemesh.geo";
-            RiverSimulationProfile.profile.ReadInputGridGeo(f1);
+//            string f1 = Environment.CurrentDirectory + "\\cchemesh.geo";
+//            RiverSimulationProfile.profile.ReadInputGridGeo(f1);
 #endif
             //string f2 = Environment.CurrentDirectory + "\\t.i";
             //RiverSimulationProfile.profile.GenerateInputFile(f2);

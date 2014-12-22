@@ -48,12 +48,10 @@
             this.subFlowQuantityBtn = new System.Windows.Forms.Button();
             this.superWaterLevelBtn = new System.Windows.Forms.Button();
             this.superFlowQuantityBtn = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.upSubCriticalFlowRdo = new System.Windows.Forms.RadioButton();
             this.upSuperCriticalFlowRdo = new System.Windows.Forms.RadioButton();
-            this.subBoundaryConditionNumberTxt = new System.Windows.Forms.TextBox();
-            this.superBoundaryConditionNumberTxt = new System.Windows.Forms.TextBox();
+            this.boundaryConditionNumberTxt = new System.Windows.Forms.TextBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
             this.sidewallBoundarySlipRdo = new System.Windows.Forms.RadioButton();
@@ -221,7 +219,7 @@
             // 
             this.waterModelingPanel.Controls.Add(this.groupBox10);
             this.waterModelingPanel.Controls.Add(this.waterModelingBackBtn);
-            this.waterModelingPanel.Location = new System.Drawing.Point(4, 578);
+            this.waterModelingPanel.Location = new System.Drawing.Point(12, 12);
             this.waterModelingPanel.Name = "waterModelingPanel";
             this.waterModelingPanel.Size = new System.Drawing.Size(500, 670);
             this.waterModelingPanel.TabIndex = 14;
@@ -235,9 +233,11 @@
             this.groupBox10.Controls.Add(this.panel6);
             this.groupBox10.Controls.Add(this.panel8);
             this.groupBox10.Controls.Add(this.panel7);
+            this.groupBox10.Controls.Add(this.label5);
             this.groupBox10.Controls.Add(this.waterSurfacePanel);
             this.groupBox10.Controls.Add(this.label2);
             this.groupBox10.Controls.Add(this.bottomBedPanel);
+            this.groupBox10.Controls.Add(this.boundaryConditionNumberTxt);
             this.groupBox10.Location = new System.Drawing.Point(12, 11);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(472, 607);
@@ -248,7 +248,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 20);
+            this.label4.Location = new System.Drawing.Point(16, 46);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 7;
@@ -290,21 +290,17 @@
             this.panel6.Controls.Add(this.subFlowQuantityBtn);
             this.panel6.Controls.Add(this.superWaterLevelBtn);
             this.panel6.Controls.Add(this.superFlowQuantityBtn);
-            this.panel6.Controls.Add(this.label15);
-            this.panel6.Controls.Add(this.label5);
             this.panel6.Controls.Add(this.upSubCriticalFlowRdo);
             this.panel6.Controls.Add(this.upSuperCriticalFlowRdo);
-            this.panel6.Controls.Add(this.subBoundaryConditionNumberTxt);
-            this.panel6.Controls.Add(this.superBoundaryConditionNumberTxt);
-            this.panel6.Location = new System.Drawing.Point(18, 35);
+            this.panel6.Location = new System.Drawing.Point(18, 61);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(437, 161);
+            this.panel6.Size = new System.Drawing.Size(437, 117);
             this.panel6.TabIndex = 5;
             // 
             // verticalVelocityDistributionChk
             // 
             this.verticalVelocityDistributionChk.AutoSize = true;
-            this.verticalVelocityDistributionChk.Location = new System.Drawing.Point(14, 133);
+            this.verticalVelocityDistributionChk.Location = new System.Drawing.Point(14, 89);
             this.verticalVelocityDistributionChk.Name = "verticalVelocityDistributionChk";
             this.verticalVelocityDistributionChk.Size = new System.Drawing.Size(118, 16);
             this.verticalVelocityDistributionChk.TabIndex = 12;
@@ -315,7 +311,7 @@
             // verticalVelocityDistributionBtn
             // 
             this.verticalVelocityDistributionBtn.Enabled = false;
-            this.verticalVelocityDistributionBtn.Location = new System.Drawing.Point(138, 127);
+            this.verticalVelocityDistributionBtn.Location = new System.Drawing.Point(138, 83);
             this.verticalVelocityDistributionBtn.Name = "verticalVelocityDistributionBtn";
             this.verticalVelocityDistributionBtn.Size = new System.Drawing.Size(96, 26);
             this.verticalVelocityDistributionBtn.TabIndex = 8;
@@ -335,7 +331,7 @@
             // subFlowQuantityBtn
             // 
             this.subFlowQuantityBtn.Enabled = false;
-            this.subFlowQuantityBtn.Location = new System.Drawing.Point(199, 92);
+            this.subFlowQuantityBtn.Location = new System.Drawing.Point(104, 52);
             this.subFlowQuantityBtn.Name = "subFlowQuantityBtn";
             this.subFlowQuantityBtn.Size = new System.Drawing.Size(96, 26);
             this.subFlowQuantityBtn.TabIndex = 5;
@@ -346,7 +342,7 @@
             // superWaterLevelBtn
             // 
             this.superWaterLevelBtn.Enabled = false;
-            this.superWaterLevelBtn.Location = new System.Drawing.Point(301, 42);
+            this.superWaterLevelBtn.Location = new System.Drawing.Point(206, 20);
             this.superWaterLevelBtn.Name = "superWaterLevelBtn";
             this.superWaterLevelBtn.Size = new System.Drawing.Size(96, 26);
             this.superWaterLevelBtn.TabIndex = 5;
@@ -357,7 +353,7 @@
             // superFlowQuantityBtn
             // 
             this.superFlowQuantityBtn.Enabled = false;
-            this.superFlowQuantityBtn.Location = new System.Drawing.Point(199, 42);
+            this.superFlowQuantityBtn.Location = new System.Drawing.Point(104, 20);
             this.superFlowQuantityBtn.Name = "superFlowQuantityBtn";
             this.superFlowQuantityBtn.Size = new System.Drawing.Size(96, 26);
             this.superFlowQuantityBtn.TabIndex = 5;
@@ -365,20 +361,10 @@
             this.superFlowQuantityBtn.UseVisualStyleBackColor = true;
             this.superFlowQuantityBtn.Click += new System.EventHandler(this.superFlowQuantityBtn_Click);
             // 
-            // label15
-            // 
-            this.label15.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label15.Location = new System.Drawing.Point(33, 96);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(80, 17);
-            this.label15.TabIndex = 5;
-            this.label15.Text = "邊界條件數目";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label5
             // 
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(33, 48);
+            this.label5.Location = new System.Drawing.Point(14, 20);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 17);
             this.label5.TabIndex = 5;
@@ -388,7 +374,7 @@
             // upSubCriticalFlowRdo
             // 
             this.upSubCriticalFlowRdo.AutoSize = true;
-            this.upSubCriticalFlowRdo.Location = new System.Drawing.Point(20, 75);
+            this.upSubCriticalFlowRdo.Location = new System.Drawing.Point(28, 57);
             this.upSubCriticalFlowRdo.Name = "upSubCriticalFlowRdo";
             this.upSubCriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.upSubCriticalFlowRdo.TabIndex = 3;
@@ -400,7 +386,7 @@
             // upSuperCriticalFlowRdo
             // 
             this.upSuperCriticalFlowRdo.AutoSize = true;
-            this.upSuperCriticalFlowRdo.Location = new System.Drawing.Point(20, 27);
+            this.upSuperCriticalFlowRdo.Location = new System.Drawing.Point(28, 25);
             this.upSuperCriticalFlowRdo.Name = "upSuperCriticalFlowRdo";
             this.upSuperCriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.upSuperCriticalFlowRdo.TabIndex = 3;
@@ -409,21 +395,13 @@
             this.upSuperCriticalFlowRdo.UseVisualStyleBackColor = true;
             this.upSuperCriticalFlowRdo.CheckedChanged += new System.EventHandler(this.upSuperCriticalFlowRdo_CheckedChanged);
             // 
-            // subBoundaryConditionNumberTxt
+            // boundaryConditionNumberTxt
             // 
-            this.subBoundaryConditionNumberTxt.Enabled = false;
-            this.subBoundaryConditionNumberTxt.Location = new System.Drawing.Point(114, 94);
-            this.subBoundaryConditionNumberTxt.Name = "subBoundaryConditionNumberTxt";
-            this.subBoundaryConditionNumberTxt.Size = new System.Drawing.Size(80, 22);
-            this.subBoundaryConditionNumberTxt.TabIndex = 4;
-            // 
-            // superBoundaryConditionNumberTxt
-            // 
-            this.superBoundaryConditionNumberTxt.Enabled = false;
-            this.superBoundaryConditionNumberTxt.Location = new System.Drawing.Point(114, 44);
-            this.superBoundaryConditionNumberTxt.Name = "superBoundaryConditionNumberTxt";
-            this.superBoundaryConditionNumberTxt.Size = new System.Drawing.Size(80, 22);
-            this.superBoundaryConditionNumberTxt.TabIndex = 4;
+            this.boundaryConditionNumberTxt.Enabled = false;
+            this.boundaryConditionNumberTxt.Location = new System.Drawing.Point(95, 16);
+            this.boundaryConditionNumberTxt.Name = "boundaryConditionNumberTxt";
+            this.boundaryConditionNumberTxt.Size = new System.Drawing.Size(96, 22);
+            this.boundaryConditionNumberTxt.TabIndex = 4;
             // 
             // panel8
             // 
@@ -510,6 +488,7 @@
             this.button9.TabIndex = 5;
             this.button9.Text = "設定";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // sideOutFlowChk
             // 
@@ -757,7 +736,7 @@
             // 
             this.moveableBedPanel.Controls.Add(this.groupBox3);
             this.moveableBedPanel.Controls.Add(this.moveableBedBackBtn);
-            this.moveableBedPanel.Location = new System.Drawing.Point(49, 12);
+            this.moveableBedPanel.Location = new System.Drawing.Point(342, 564);
             this.moveableBedPanel.Name = "moveableBedPanel";
             this.moveableBedPanel.Size = new System.Drawing.Size(500, 670);
             this.moveableBedPanel.TabIndex = 15;
@@ -1249,7 +1228,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox coriolisForceTxt;
-        private System.Windows.Forms.TextBox superBoundaryConditionNumberTxt;
+        private System.Windows.Forms.TextBox boundaryConditionNumberTxt;
         private System.Windows.Forms.TextBox mainstreamWindShearTxt;
         private System.Windows.Forms.ComboBox boundaryLayerThicknessCombo;
         private System.Windows.Forms.Label label16;
@@ -1301,8 +1280,6 @@
         private System.Windows.Forms.CheckBox verticalVelocityDistributionChk;
         private System.Windows.Forms.Button subFlowQuantityBtn;
         private System.Windows.Forms.Button superWaterLevelBtn;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox subBoundaryConditionNumberTxt;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox sideWindShearTxt;
         private System.Windows.Forms.Label label23;

@@ -26,7 +26,7 @@ namespace RiverSimulationApplication
                 this.Close();
             }
 
-            string tempSave = Program.documentPath + @"\TempSave.txt";
+            string tempSave = Program.documentPath + tempSaveName;
             if (File.Exists(tempSave))
             {
                 RiverSimulationProfile.profile = RiverSimulationProfile.DeSerialize(tempSave);
@@ -374,11 +374,14 @@ namespace RiverSimulationApplication
 
         private void RiverSimulationForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            string tempSave = Program.documentPath + @"\TempSave.txt";
-            RiverSimulationProfile.SerializeBinary(RiverSimulationProfile.profile, tempSave);
+            if (RiverSimulationProfile.profile != null)
+            {
+                string tempSave = Program.documentPath + tempSaveName;
+                RiverSimulationProfile.SerializeBinary(RiverSimulationProfile.profile, tempSave);
+            }
 
         }
-
+        private const string tempSaveName = @"\TempSave.txt";
 
 
     }

@@ -165,12 +165,16 @@ namespace RiverSimulationApplication
             Chezy,
         }
         public RoughnessType roughnessType { get; set; }        //1.2.1 糙度係數 二選一 整數 8 格
-        public double manningN { get; set; }                    //1.2.1.1 Manning n 二選一 -- 均一值
-        public double[,] manningNArray { get; set; }             //1.2.1.1 Manning n 二選一 -- 矩陣[I,J]
-        public double chezy { get; set; }                       //1.2.1.2 Chezy 二選一 -- 均一值
-        public double[,] chezyArray { get; set; }               //1.2.1.2 Chezy 二選一 -- 矩陣[I,J]
-        public double roughnessHeightKs { get; set; }           //1.2.1.3 粗糙高度 ks mm -- 均一值
-        public double[,] roughnessHeightKsArray { get; set; }   //1.2.1.3 粗糙高度 ks mm -- 矩陣[I,J]
+        public TwoInOne manningN;                               //1.2.1.1 Manning n 二選一 -- 均一值 矩陣[I,J]
+        public TwoInOne chezy;                                  //1.2.1.2 Chezy n 二選一 -- 均一值 矩陣[I,J]
+        public TwoInOne roughnessHeightKs;                      //1.2.1.3 粗糙高度 n 二選一 -- 均一值 矩陣[I,J]
+
+        //public double manningN { get; set; }                    //1.2.1.1 Manning n 二選一 -- 均一值
+        //public double[,] manningNArray { get; set; }             //1.2.1.1 Manning n 二選一 -- 
+        //public double chezy { get; set; }                       //1.2.1.2 Chezy 二選一 -- 均一值
+        //public double[,] chezyArray { get; set; }               //1.2.1.2 Chezy 二選一 -- 矩陣[I,J]
+        //public double roughnessHeightKs { get; set; }           //1.2.1.3 粗糙高度 ks mm -- 均一值
+        //public double[,] roughnessHeightKsArray { get; set; }   //1.2.1.3 粗糙高度 ks mm -- 矩陣[I,J]
 
         public enum TurbulenceViscosityType     
         {   //紊流黏滯係數 種類
@@ -453,7 +457,7 @@ namespace RiverSimulationApplication
         public TwoInOne depthAverageFlowSpeedV;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
         //public double[,] depthAverageFlowSpeedVArray;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
 
-        public TwoInOne waterLevel;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
+        public TwoInOne waterLevel;      //3.1.3 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
 
         public enum VerticalVelocitySliceType
         {
@@ -485,13 +489,14 @@ namespace RiverSimulationApplication
             SubCriticalFlow,
         }
         public FlowConditionType upFlowCondition;         //4.1.1.1 流況設定 二選一
+        public int boundaryConditionNumber;               //4.1.1.1.1.0 邊界條件數目 T 整數(>1) 定量流不輸入
         //4.1.1.1.1 超臨界流
-        public int superBoundaryConditionNumber;        //4.1.1.1.1.0 邊界條件數目 T 整數(>1) 定量流不輸入
+        //public int superBoundaryConditionNumber;        //4.1.1.1.1.0 邊界條件數目 T 整數(>1) 定量流不輸入
         public TwoInOne superFlowQuantity;              //4.1.1.1.1.1 流量 m3/s 實數(>=0) a. 圖 5，“即時互動處”呈現流量歷線圖，根
         public TwoInOne superWaterLevel;                //4.1.1.1.1.2 水位 m 實數
         
         //4.1.1.1.2 亞臨界流
-        public int subBoundaryConditionNumber;        //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+        //public int subBoundaryConditionNumber;        //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
         public TwoInOne subFlowQuantity;              //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
 
         public bool verticalVelocityDistribution;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
@@ -775,12 +780,9 @@ namespace RiverSimulationApplication
             viscosityFactorAdditionInSideDirection = 1;      //1.1.6 側方向黏滯係數加成比例 單一數值 1 實數(>=0) 實數 8 格 (隱藏版功能)
             //1.2 物理參數 =========================================
             roughnessType = RoughnessType.None;        //1.2.1 糙度係數 二選一 整數 8 格
-            manningN = 0;                    //1.2.1.1 Manning n 二選一 -- 均一值
-            manningNArray = null;             //1.2.1.1 Manning n 二選一 -- 矩陣[I,J]
-            chezy = 0;                       //1.2.1.2 Chezy 二選一 -- 均一值
-            chezyArray = null;               //1.2.1.2 Chezy 二選一 -- 矩陣[I,J]
-            roughnessHeightKs = 0;           //1.2.1.3 粗糙高度 ks mm -- 均一值
-            roughnessHeightKsArray = null;   //1.2.1.3 粗糙高度 ks mm -- 矩陣[I,J]
+            manningN = new TwoInOne();                    //1.2.1.1 Manning n 二選一 -- 均一值
+            chezy = new TwoInOne();                       //1.2.1.2 Chezy 二選一 -- 均一值
+            roughnessHeightKs = new TwoInOne();           //1.2.1.3 粗糙高度 ks mm -- 均一值
 
             turbulenceViscosityType = TurbulenceViscosityType.None;    //1.2.2 紊流黏滯係數 四選一 整數 8 格 
             //1.2.2.1 使用者輸入 模擬功能為二維或三維都可選擇此項輸入
@@ -954,12 +956,12 @@ namespace RiverSimulationApplication
             upFlowCondition = FlowConditionType.None;         //4.1.1.1 流況設定 二選一
             
             //4.1.1.1.1 超臨界流
-            superBoundaryConditionNumber = 0;                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            boundaryConditionNumber = 0;                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
             superFlowQuantity = new TwoInOne();                 //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
             superWaterLevel = new TwoInOne();                   //4.1.1.1.1.2 水位 m 實數
         
             //4.1.1.1.2 亞臨界流
-            subBoundaryConditionNumber = 0;                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            //subBoundaryConditionNumber = 0;                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
             subFlowQuantity = new TwoInOne();               //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
 
             verticalVelocityDistribution = false;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
@@ -1184,7 +1186,7 @@ namespace RiverSimulationApplication
         //public double[] seabedLevelArray = null;
         //public double[,] sedimentCompositionRatioArray = null;
 
-
+        const int LineMaxCount = 10;
         public bool GenerateInputFile(string file)
         {
             StringBuilder sb = new StringBuilder();
@@ -1194,7 +1196,7 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", inputGrid.GetJ.ToString());
             sb.AppendFormat("{0,8}", sedimentParticlesNumber.ToString());
             sb.AppendFormat("{0,8}", 10.ToString());    //模式預設值
-            sb.AppendFormat("{0,8}", 5.ToString());     //模式預設值
+            sb.AppendFormat("{0,8}", 50.ToString());     //模式預設值
             sb.AppendFormat("{0,8}", 0.ToString());     //模式預設值
             sb.AppendFormat("{0,8}", verticalLevelNumber.ToString());     //垂向格網分層數目0.1.1
             sb.Append("\n");
@@ -1213,6 +1215,23 @@ namespace RiverSimulationApplication
             sb.Append("       1       1       1       1       1       1       1       1       1       0\n");
             sb.Append("      20       0                                                                \n");
 
+            //註3-1(水理2D 輸出控制開關，1：開、0：關。)：
+            sb.AppendFormat("{0,8}", (outputControlInitialBottomElevation? 1 : 0).ToString());    //1.1.3 輸出控制 水深平均流速
+            sb.AppendFormat("{0,8}", (outputControlAverageDepthFlowRate ? 1 : 0).ToString());    //1.1.3 輸出控制 初始底床高程
+            sb.AppendFormat("{0,8}", (outputControlBottomShearingStress ? 1 : 0).ToString());    //1.1.3 輸出控制 底床剪應力
+            sb.AppendFormat("{0,8}", (outputControlLevel ? 1 : 0).ToString());    //1.1.3 輸出控制 水位
+            sb.AppendFormat("{0,8}", (outputControlDepth ? 1 : 0).ToString());    //1.1.3 輸出控制 水深
+            sb.AppendFormat("{0,8}", (outputControlFlow ? 1 : 0).ToString());    //1.1.3 輸出控制 流量
+            sb.AppendFormat("{0,8}", (outputControlVelocityInformation3D ? 1 : 0).ToString());    //1.1.3 輸出控制 三維流速資訊
+            sb.Append("\n");
+
+            //註3-2(動床2D 輸出控制開關，1：開、0：關。)：
+            sb.AppendFormat("{0,8}", (outputControlBottomElevation ? 1 : 0).ToString());    //2.1.3 輸出控制 初始底床高程
+            sb.AppendFormat("{0,8}", (outputControlAverageDepthDensity ? 1 : 0).ToString());    //2.1.3 輸出控制 水深平均流速
+            sb.AppendFormat("{0,8}", (outputControlErosionDepth ? 1 : 0).ToString());    //2.1.3 輸出控制 沖淤深度
+            sb.Append("\n");
+
+            //註4：
             sb.AppendFormat("{0,8}", (secondFlowEffectFunction ? 1 : 0).ToString());     //是否計算二次流效應
             sb.AppendFormat("{0,8}", (closeDiffusionEffectFunction ? 0 : 1).ToString());     //是否關閉移流擴散效應
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算傳輸(propogation)效應 不讓使用者更改。
@@ -1222,8 +1241,192 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
             sb.AppendFormat("{0,8}", (quayStableAnalysisFunction ? 1 : 0).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。
             sb.AppendFormat("{0,8}", maxIterationsNum.ToString());     //水理最大疊代次數。1.1.2.3
+            sb.Append("\n");
 
-            
+            //註5：
+            sb.AppendFormat("{0,8}", (9999999).ToString());     //模式預設值
+            sb.AppendFormat("{0,8}", (9999999).ToString());     //模式預設值
+            sb.AppendFormat("{0,8}", waterOutputFrequency.ToString());     //2.1.2 動床輸出頻率
+            sb.AppendFormat("{0,8}", outputFrequency.ToString());     //1.1.1.3 水理輸出頻率
+            sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
+            sb.AppendFormat("{0,8}", (1).ToString());     //是否計算泥砂懸浮載(suspending load)。1:是；0:否。預設值：1。不供使用者更改
+            sb.AppendFormat("{0,8}", (1).ToString());     //是否計算泥砂底床載(bedload)。1:是；0:否。預設值：1。不供使用者更改
+            sb.AppendFormat("{0,8}", (0).ToString());     //模式預設值
+            sb.Append("\n");
+
+            //註6：
+            sb.AppendFormat("{0,8}", (1).ToString());     //水理計算之權重(建議採預設值)
+            sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
+            sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
+            sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
+            sb.AppendFormat("{0,8}", (0.02).ToString());     //模式預設值
+            sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
+            sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
+            sb.Append("\n");
+
+            //註7：
+            sb.AppendFormat("{0,16}", "0.0");                               //初始計算時間(sec)。格式為實數16 格。值為0.0。
+            sb.AppendFormat("{0,16}", waterTimeSpan.ToString());            //2.1.1 時間間距
+            sb.AppendFormat("{0,16}", timeSpan2d.ToString());               //1.1.1.2 二維時間間距
+            sb.AppendFormat("{0,16}", totalSimulationTime.ToString());      //1.1.1.1 總模擬時間
+            sb.AppendFormat("{0,16}", waterModelingConvergenceCriteria2d.ToString());     //1.1.2.1 二維水理收斂標準
+            sb.Append("\n");
+
+            //註8：各點之X 座標值。由第一個斷面依序排列，側方向一行最多10 個值
+            int count = 0;
+            for (int i = 0; i < inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    sb.AppendFormat("{0,16}", inputGrid.inputCoor[i, j].x.ToString());     //各點之X 座標值。由第一個斷面依序排列，側方向一行最多10 個值
+                    if(++count == LineMaxCount)
+                    {
+                        sb.Append("\n");
+                        count = 0;
+                    }
+                }
+            }
+            if(count != 0)
+            {
+                sb.Append("\n");
+            }
+
+            //註9：各點之Y 座標值。由第一個斷面依序排列，側方向一行最多10 個值，若斷面超過10 個點則需跳行
+            count = 0;
+            for (int i = 0; i < inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    sb.AppendFormat("{0,16}", inputGrid.inputCoor[i, j].y.ToString());     
+                    if (++count == LineMaxCount)
+                    {
+                        sb.Append("\n");
+                        count = 0;
+                    }
+                }
+            }
+            if (count != 0)
+            {
+                sb.Append("\n");
+            }
+
+            //註10：各點之曲率半徑值RS。1.3.1
+            count = 0;
+            for (int i = 0; i < inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    if (curvatureRadius == null)
+                    {
+                        sb.AppendFormat("{0,8}", (0).ToString());
+                    }
+                    else
+                    {
+                        sb.AppendFormat("{0,8}", curvatureRadius[i, j].ToString());
+                    }
+                    if (++count == LineMaxCount)
+                    {
+                        sb.Append("\n");
+                        count = 0;
+                    }
+                }
+            }
+            if (count != 0)
+            {
+                sb.Append("\n");
+            }
+
+            //註11：
+            DumpTwoInOne(waterLevel, ref sb);
+
+            //註12：初始底床高程。對照介面“計算格網”-“計算網格來源”-“由檔案匯入水平格網”及“線上輸入水平格
+            sb.AppendFormat("{0,8}\n", (-1).ToString());
+            count = 0;
+            for (int i = 0; i < inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    sb.AppendFormat("{0,16}", inputGrid.inputCoor[i, j].z.ToString());
+                    if (++count == LineMaxCount)
+                    {
+                        sb.Append("\n");
+                        count = 0;
+                    }
+                }
+            }
+            if (count != 0)
+            {
+                sb.Append("\n");
+            }
+
+            //註13：
+            DumpTwoInOne(depthAverageFlowSpeedU, ref sb);       //3.1.1 水深平均流速-U
+            DumpTwoInOne(depthAverageFlowSpeedV, ref sb);       //3.1.2 水深平均流速-V
+
+            //註14：
+            if (roughnessType== RoughnessType.ManningN)
+            {
+                DumpTwoInOne(manningN, ref sb, DumpTwoInOneType.OnlyType, true);       //1.2.1.1 Manning n 二選一
+            }
+            else if (roughnessType == RoughnessType.Chezy)
+            {
+                DumpTwoInOne(manningN, ref sb, DumpTwoInOneType.OnlyType, true);       //1.2.1.2 Chezy 二選一 
+            }
+            else
+            {
+                DumpTwoInOne(null, ref sb, DumpTwoInOneType.OnlyType, true);       
+            }
+            sb.AppendFormat("{0,8}\n", ((int)roughnessType).ToString());      //糙度係數之類型。輸入1 為Manning 糙度係數(n)；輸入2 為Chezy 糙度係數(C)。1.2.1
+            if (roughnessType== RoughnessType.ManningN)
+            {
+                DumpTwoInOne(manningN, ref sb, DumpTwoInOneType.OnlyValueOrArray);       //1.2.1.1 Manning n 二選一
+            }
+            else if (roughnessType == RoughnessType.Chezy)
+            {
+                DumpTwoInOne(manningN, ref sb, DumpTwoInOneType.OnlyValueOrArray);       //1.2.1.2 Chezy 二選一 
+            }
+            else
+            {
+                DumpTwoInOne(null, ref sb, DumpTwoInOneType.OnlyValueOrArray);       
+            }
+
+            //註15：上游邊界條件設定
+            for (int j = 0; j < inputGrid.GetJ; ++j)
+            {
+                sb.AppendFormat("{0,8}", (1).ToString());
+                sb.AppendFormat("{0,8}", (j + 1).ToString());
+                sb.AppendFormat("{0,8}", (upFlowCondition == FlowConditionType.SubCriticalFlow ? 1 : 5).ToString());
+                sb.AppendFormat("{0,8}", (j + 1).ToString());
+                sb.AppendFormat("{0,8}", (j + 1).ToString());
+                sb.AppendFormat("{0,8}", (j + 1).ToString());
+                sb.Append("\n");
+            }
+
+            //註16：下游邊界條件設定
+            for (int j = 0; j < inputGrid.GetJ; ++j)
+            {
+                if (j == inputGrid.GetJ - 1)
+                {
+                    sb.AppendFormat("{0,8}", (inputGrid.GetI * -1).ToString());
+                }
+                else
+                {
+                    sb.AppendFormat("{0,8}", (inputGrid.GetI).ToString());
+                }
+                sb.AppendFormat("{0,8}", (j + 1).ToString());
+                sb.AppendFormat("{0,8}", (downFlowCondition == FlowConditionType.SubCriticalFlow ? 3 : 6).ToString());
+                sb.AppendFormat("{0,8}", (j + 1).ToString());
+                sb.AppendFormat("{0,8}", (j + 1).ToString());
+                sb.AppendFormat("{0,8}", (j + 1).ToString());
+                sb.Append("\n");
+            }
+
+            //註17：邊界條件設定值
+            //sb.AppendFormat("{0,16}", (j + 1).ToString());
+
+
+
+
             using (StreamWriter outfile = new StreamWriter(file))
             {
                 outfile.Write(sb.ToString());
@@ -1233,6 +1436,81 @@ namespace RiverSimulationApplication
             }
 
             return true;
+        }
+
+        public enum DumpTwoInOneType
+        {
+            Normal,
+            OnlyType,
+            OnlyValueOrArray,
+        }
+        void DumpTwoInOne(TwoInOne o, ref StringBuilder sb, DumpTwoInOneType t = DumpTwoInOneType.Normal, bool noNewLine = false)
+        {
+            if(o == null || o.type == TwoInOne.Type.None)
+            {
+                if (t != DumpTwoInOneType.OnlyValueOrArray)
+                {
+                    sb.AppendFormat("{0,8}", (0).ToString());
+                    if (!noNewLine)
+                    {
+                        sb.Append("\n");
+                    }
+                }
+                if (t != DumpTwoInOneType.OnlyType)
+                {
+                    sb.AppendFormat("{0,8}\n", (0).ToString());
+                }
+                return;
+            }
+            if(o.type == TwoInOne.Type.UseValue)
+            {
+                if (t != DumpTwoInOneType.OnlyValueOrArray)
+                {
+                    sb.AppendFormat("{0,8}", (0).ToString());
+                    if (!noNewLine)
+                    {
+                        sb.Append("\n");
+                    }
+                }
+
+                if (t != DumpTwoInOneType.OnlyType)
+                {
+                    sb.AppendFormat("{0,8}\n", o.dataValue.ToString());
+                }
+                return;
+            }
+            
+            if (t != DumpTwoInOneType.OnlyValueOrArray)
+            {
+                sb.AppendFormat("{0,8}", (-1).ToString());
+                if (!noNewLine)
+                {
+                    sb.Append("\n");
+                }
+            }
+            if (t == DumpTwoInOneType.OnlyType)
+            {
+                return;
+            }
+
+            int count = 0;
+            for (int i = 0; i < o.dataArray.GetLength(0); ++i)
+            {
+                for (int j = 0; j < o.dataArray.GetLength(1); ++j)
+                {
+
+                    sb.AppendFormat("{0,8}", o.dataArray[i, j].ToString());
+                    if (++count == LineMaxCount)
+                    {
+                        sb.Append("\n");
+                        count = 0;
+                    }
+                }
+            }
+            if (count != 0)
+            {
+                sb.Append("\n");
+            }
         }
     }
 

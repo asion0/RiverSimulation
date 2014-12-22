@@ -55,10 +55,10 @@ namespace RiverSimulationApplication
             }
 
             //4.1.1.1.1 超臨界流
-            superBoundaryConditionNumberTxt.Text = p.superBoundaryConditionNumber.ToString();                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            boundaryConditionNumberTxt.Text = p.boundaryConditionNumber.ToString();                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
 
             //4.1.1.1.2 亞臨界流
-            subBoundaryConditionNumberTxt.Text = p.subBoundaryConditionNumber.ToString();                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            //subBoundaryConditionNumberTxt.Text = p.subBoundaryConditionNumber.ToString();                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
 
             verticalVelocityDistributionChk.Checked = p.verticalVelocityDistribution;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
 
@@ -152,8 +152,8 @@ namespace RiverSimulationApplication
         {
             if (!p.IsVariableFlowType())
             {
-                superBoundaryConditionNumberTxt.Enabled = false;        //定量流不輸入
-                subBoundaryConditionNumberTxt.Enabled = false;          //定量流不輸入
+                boundaryConditionNumberTxt.Enabled = false;        //定量流不輸入
+                //subBoundaryConditionNumberTxt.Enabled = false;          //定量流不輸入
                 superFlowQuantityBtn.Enabled = false;
                 superWaterLevelBtn.Enabled = false;
                 subFlowQuantityBtn.Enabled = false;
@@ -209,15 +209,15 @@ namespace RiverSimulationApplication
 
         private bool ConvertWaterModeling()
         {
-            if (!ConvertupSuperBoundaryConditionNumber())
+            if (!ConvertupBoundaryConditionNumber())
             {
                 return false;
             }
 
-            if (!ConvertupSubBoundaryConditionNumber())
-            {
-                return false;
-            }
+            //if (!ConvertupSubBoundaryConditionNumber())
+            //{
+            //    return false;
+            //}
 
             if (!ControllerUtility.CheckConvertDouble(ref p.mainstreamWindShear, mainstreamWindShearTxt, "請輸入正確的主流方向風剪！", ControllerUtility.CheckType.NoCheck))
             {
@@ -245,23 +245,23 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        private bool ConvertupSuperBoundaryConditionNumber()
+        private bool ConvertupBoundaryConditionNumber()
         {
-            if (superBoundaryConditionNumberTxt.Enabled && !ControllerUtility.CheckConvertInt32(ref p.superBoundaryConditionNumber, superBoundaryConditionNumberTxt, "請輸入正確的邊界條件數目！", ControllerUtility.CheckType.GreaterThanZero))
+            if (boundaryConditionNumberTxt.Enabled && !ControllerUtility.CheckConvertInt32(ref p.boundaryConditionNumber, boundaryConditionNumberTxt, "請輸入正確的邊界條件數目！", ControllerUtility.CheckType.GreaterThanZero))
             {
                 return false;
             }
             return true;
         }
 
-        private bool ConvertupSubBoundaryConditionNumber()
-        {
-            if (subBoundaryConditionNumberTxt.Enabled && !ControllerUtility.CheckConvertInt32(ref p.subBoundaryConditionNumber, subBoundaryConditionNumberTxt, "請輸入正確的邊界條件數目！", ControllerUtility.CheckType.GreaterThanZero))
-            {
-                return false;
-            }
-            return true;
-        }
+        //private bool ConvertupSubBoundaryConditionNumber()
+        //{
+        //    if (subBoundaryConditionNumberTxt.Enabled && !ControllerUtility.CheckConvertInt32(ref p.subBoundaryConditionNumber, subBoundaryConditionNumberTxt, "請輸入正確的邊界條件數目！", ControllerUtility.CheckType.GreaterThanZero))
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
         private bool ConvertMoveableBed()
         {
@@ -381,7 +381,7 @@ namespace RiverSimulationApplication
         private void upSuperCriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            superBoundaryConditionNumberTxt.Enabled = chk;
+            boundaryConditionNumberTxt.Enabled = chk;
             superFlowQuantityBtn.Enabled = chk;
             superWaterLevelBtn.Enabled = chk;
             p.upFlowCondition = RiverSimulationProfile.FlowConditionType.SuperCriticalFlow;
@@ -391,7 +391,7 @@ namespace RiverSimulationApplication
         private void upSubCriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            subBoundaryConditionNumberTxt.Enabled = chk;
+            boundaryConditionNumberTxt.Enabled = chk;
             subFlowQuantityBtn.Enabled = chk;
             p.upFlowCondition = RiverSimulationProfile.FlowConditionType.SubCriticalFlow;
             UpdateStatus();
@@ -399,14 +399,31 @@ namespace RiverSimulationApplication
 
         private void superFlowQuantityBtn_Click(object sender, EventArgs e)
         {
-            if (!ConvertupSuperBoundaryConditionNumber())
+            if (!ConvertupBoundaryConditionNumber())
             {
                 return;
             }
+            if (p.superFlowQuantity != null && p.superFlowQuantity.dataArray != null && p.superFlowQuantity.dataArray.GetLength(1) != p.boundaryConditionNumber)
+            {
+                if (DialogResult.OK == MessageBox.Show("改變過邊界條件數目需要重新輸入流況資料！", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.None))
+                {
+                    RiverSimulationProfile.TwoInOne.Type tp = p.superFlowQuantity.type;
+                    p.superFlowQuantity = new RiverSimulationProfile.TwoInOne();
+                    p.superFlowQuantity.type = tp;
+                }
+                else
+                {
+                    p.boundaryConditionNumber = p.superFlowQuantity.dataArray.GetLength(1);
+                    boundaryConditionNumberTxt.Text = p.boundaryConditionNumber.ToString();
+                    return;
+                }
+            }
 
+            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
-            form.SetFormMode("上游超臨界流流量", p.inputGrid.GetJ, p.superBoundaryConditionNumber, "上游超臨界流流量", "Q", "T",
-                TableInputForm.InputFormType.FlowQuantity, 90, 120, false, false, false, p.superFlowQuantity);
+            form.columnNames = new string[] { "時間 T(Sec)", "主流方向流量(cms)", "側流方向流量(cms)" };
+            form.SetFormMode("上游超臨界流流量", p.inputGrid.GetJ, p.boundaryConditionNumber, "上游超臨界流流量", "Q", "T",
+                t, 90, 120, false, false, false, p.superFlowQuantity);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
@@ -416,14 +433,15 @@ namespace RiverSimulationApplication
 
         private void superWaterLevelBtn_Click(object sender, EventArgs e)
         {
-            if (!ConvertupSuperBoundaryConditionNumber())
+            if (!ConvertupBoundaryConditionNumber())
             {
                 return;
             }
 
+            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
-            form.SetFormMode("上游超臨界流水位", p.inputGrid.GetJ, p.superBoundaryConditionNumber, "上游超臨界流水位", "W", "T",
-                TableInputForm.InputFormType.FlowQuantity, 90, 120, false, false, false, p.superWaterLevel);
+            form.SetFormMode("上游超臨界流水位", p.inputGrid.GetJ, p.boundaryConditionNumber, "上游超臨界流水位", "W", "T",
+                t, 90, 120, false, false, false, p.superWaterLevel);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
@@ -433,14 +451,15 @@ namespace RiverSimulationApplication
 
         private void subFlowQuantityBtn_Click(object sender, EventArgs e)
         {
-            if (!ConvertupSubBoundaryConditionNumber())
+            if (!ConvertupBoundaryConditionNumber())
             {
                 return;
             }
 
+            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
-            form.SetFormMode("上游亞臨界流流量", p.inputGrid.GetJ, p.subBoundaryConditionNumber, "上游亞臨界流流量", "Q", "T",
-                TableInputForm.InputFormType.FlowQuantity, 90, 120, false, false, false, p.subFlowQuantity);
+            form.SetFormMode("上游亞臨界流流量", p.inputGrid.GetJ, p.boundaryConditionNumber, "上游亞臨界流流量", "Q", "T",
+                t, 90, 120, false, false, false, p.subFlowQuantity);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
@@ -486,14 +505,15 @@ namespace RiverSimulationApplication
 
         private void downSuperWaterLevelBtn_Click_1(object sender, EventArgs e)
         {
-            if (!ConvertupSuperBoundaryConditionNumber())
+            if (!ConvertupBoundaryConditionNumber())
             {
                 return;
             }
 
+            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
-            form.SetFormMode("下游亞臨界流水位", p.inputGrid.GetJ, p.subBoundaryConditionNumber, "下游亞臨界流水位", "W", "T",
-                TableInputForm.InputFormType.FlowQuantity, 90, 120, false, false, false, p.downSubWaterLevel);
+            form.SetFormMode("下游亞臨界流水位", p.inputGrid.GetJ, p.boundaryConditionNumber, "下游亞臨界流水位", "W", "T",
+                t, 90, 120, false, false, false, p.downSubWaterLevel);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
@@ -665,6 +685,11 @@ namespace RiverSimulationApplication
             {
                 p.inputConcentration = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
             }
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
 
         }
 

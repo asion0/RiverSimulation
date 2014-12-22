@@ -419,7 +419,7 @@ namespace RiverSimulationApplication
                 {
                     return;
                 }
-
+                p.GenerateInputFile(Program.documentPath + @"/resed.i");
                 ResetChart();
                 RunSimulationMain();
                 EnterSimUI(Status.Running);

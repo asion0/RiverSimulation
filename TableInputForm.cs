@@ -46,6 +46,7 @@ namespace RiverSimulationApplication
         bool noRowNum = false;
         int colWidth = 48;
         int rowHeadersWidth = 64;
+        public string[] columnNames = null;
         public void SetFormMode(string title, int colCount, int rowCount, string tableName = "", string colName = "", string rowName = "", 
             InputFormType inputFormType = InputFormType.GenericDouble, int colWidth = 48, int rowHeadersWidth = 64,
            bool onlyTable = true, bool nocolNum = false, bool noRowNum = false, object initData = null)
@@ -115,7 +116,7 @@ namespace RiverSimulationApplication
                   DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                       tableName, colName, rowName, nocolNum, noRowNum);
             }
-            else if (inputFormType == InputFormType.FlowQuantity)
+            else if (inputFormType == InputFormType.FlowConditionsSettingConstant || inputFormType == InputFormType.FlowConditionsSettingVariable)
             {
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 if (o != null)
@@ -135,7 +136,6 @@ namespace RiverSimulationApplication
                     }
                 }
                 singleValueTxt.Visible = false;
-
             }
             else if (inputFormType == InputFormType.SeabedThicknessForm)
             {
@@ -213,7 +213,9 @@ namespace RiverSimulationApplication
             SedimentCompositionRatioForm,   //泥砂組成比例輸入
             SeparateForm,                   //垂直向隔網分層比例輸入
             BottomElevationForm,            //編輯底床高程
-            FlowQuantity,                   //流量設定
+            //FlowQuantity,                   //流量設定
+            FlowConditionsSettingConstant,   //流況設定定量流
+            FlowConditionsSettingVariable,  //流況設定變量流
         }
 
         private InputFormType _inputFormType = InputFormType.GenericDouble;
@@ -347,10 +349,20 @@ namespace RiverSimulationApplication
                         _data = (CoorPoint[,])(d as CoorPoint[,]).Clone();
                     }
                     break;
-                case InputFormType.FlowQuantity:
+                case InputFormType.FlowConditionsSettingConstant:
                     if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount || o.dataArray.GetLength(1) != rowCount)
-                    {
+                    {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
                         _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
+                    }
+                    else
+                    {
+                        _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                    }
+                    break;
+                case InputFormType.FlowConditionsSettingVariable:
+                    if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount + 1 || o.dataArray.GetLength(1) != rowCount)
+                    {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
+                        _data = new RiverSimulationProfile.TwoInOne(colCount + 1, rowCount);
                     }
                     else
                     {
@@ -387,8 +399,9 @@ namespace RiverSimulationApplication
                             dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j].ToString();
                         }
                     }
-                    break;                
-                case InputFormType.FlowQuantity:
+                    break;
+                case InputFormType.FlowConditionsSettingConstant:
+                case InputFormType.FlowConditionsSettingVariable:
                     //編輯陣列I * J
                     int maxI = 0;
                     if (singleValueRdo.Checked)
@@ -407,7 +420,6 @@ namespace RiverSimulationApplication
                         }
                     }
                     break;
-
                 case InputFormType.SeabedThicknessForm: 
                 //底床分層厚度輸入，直的一行，倒序
                     for (int i = 0; i < rowCount; ++i)
@@ -594,7 +606,7 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        private bool ConvertFlowQuantity()
+        private bool ConvertFlowConditionsSettingConstant()
         {
             try
             {
@@ -602,13 +614,30 @@ namespace RiverSimulationApplication
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 for (int i = 0; i < v.ColumnCount; ++i)
                 {
-                    for (int j = 0; j < rowCount; ++j)
+                    for (int j = 0; j < v.RowCount; ++j)
                     {
                         o.dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
-                        //if (singleValueTxt.Enabled)
-                        //{
-                        //    o.dataValue = Convert.ToDouble(singleValueTxt.Text);
-                        //}
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ConvertFlowConditionsSettingVariable()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+                for (int i = 0; i < v.ColumnCount; ++i)
+                {
+                    for (int j = 0; j < v.RowCount; ++j)
+                    {
+                        o.dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
                     }
                 }
             }
@@ -742,10 +771,13 @@ namespace RiverSimulationApplication
                 case InputFormType.TwoInOneDoubleGreaterThanZero:
                 case InputFormType.TwoInOneDoubleGreaterThanOrEqualZero:
                     isSuccess = ConvertTwoInOneDouble();
-                    break;                
-                case InputFormType.FlowQuantity:
-                    isSuccess = ConvertFlowQuantity();
                     break;
+                case InputFormType.FlowConditionsSettingConstant:
+                    isSuccess = ConvertFlowConditionsSettingConstant();
+                    break;
+                case InputFormType.FlowConditionsSettingVariable:
+                    isSuccess = ConvertFlowConditionsSettingVariable();
+                    break;                
                 case InputFormType.SeabedThicknessForm:
                     isSuccess = ConvertSeabedThicknessData();
                     break;
@@ -782,20 +814,53 @@ namespace RiverSimulationApplication
 
         private void singleValueRdo_CheckedChanged(object sender, EventArgs e)
         {
-            if (inputFormType != InputFormType.FlowQuantity)
-            {
-                singleValueTxt.Enabled = true;
-                dataGridView.Enabled = false;
-            }
-            else
+            if (inputFormType == InputFormType.FlowConditionsSettingConstant)
             {
                 dataGridView.Enabled = true;
                 dataGridView.Rows.Clear();
-                DataGridViewUtility.InitializeDataGridView(dataGridView, 1, rowCount, colWidth, rowHeadersWidth,
+                /*
+                public static void InitializeDataGridView(DataGridView v, 
+                    int colCount, int rowCount, 
+                    int columnWidth = 48, int rowHeadersWidth = 64,
+                    string tableName = "", string colName = "", string rowName = "", 
+                    bool nocolNum = false, bool noRowNum = false,
+                    bool invertCol = false, bool invertRow = false)
+                */
+                DataGridViewUtility.InitializeDataGridView(dataGridView, 2, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum);
+                for(int i = 0; i < dataGridView.ColumnCount; ++i)
+                {
+                    dataGridView.Columns[i].Name = columnNames[i + 1];
+                }
+
                 FillDataGridView();
             }
-
+            else if (inputFormType == InputFormType.FlowConditionsSettingVariable)
+            {
+                dataGridView.Enabled = true;
+                dataGridView.Rows.Clear();
+                /*
+                public static void InitializeDataGridView(DataGridView v, 
+                    int colCount, int rowCount, 
+                    int columnWidth = 48, int rowHeadersWidth = 64,
+                    string tableName = "", string colName = "", string rowName = "", 
+                    bool nocolNum = false, bool noRowNum = false,
+                    bool invertCol = false, bool invertRow = false)
+                */
+                DataGridViewUtility.InitializeDataGridView(dataGridView, 3, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum);
+                for (int i = 0; i < dataGridView.ColumnCount; ++i)
+                {
+                    dataGridView.Columns[i].Name = columnNames[i];
+                }
+                FillDataGridView();
+            }
+            else
+            {
+                singleValueTxt.Enabled = true;
+                dataGridView.Enabled = false;
+            } 
+            
             bool chk = (sender as RadioButton).Checked;
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
             if (o != null && chk)
@@ -806,18 +871,35 @@ namespace RiverSimulationApplication
 
         private void tableValueRdo_CheckedChanged(object sender, EventArgs e)
         {
-            if (inputFormType != InputFormType.FlowQuantity)
-            {
-                singleValueTxt.Enabled = false;
-                dataGridView.Enabled = true;
-            }
-            else
+
+            if (inputFormType == InputFormType.FlowConditionsSettingConstant)
             {
                 dataGridView.Enabled = true;
                 dataGridView.Rows.Clear();
+                /*
+                public static void InitializeDataGridView(DataGridView v, 
+                    int colCount, int rowCount, 
+                    int columnWidth = 48, int rowHeadersWidth = 64,
+                    string tableName = "", string colName = "", string rowName = "", 
+                    bool nocolNum = false, bool noRowNum = false,
+                    bool invertCol = false, bool invertRow = false)
+                */
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum);
                 FillDataGridView();
+            }
+            else if (inputFormType == InputFormType.FlowConditionsSettingVariable)
+            {
+                dataGridView.Enabled = true;
+                dataGridView.Rows.Clear();
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount + 1, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum);
+                FillDataGridView();
+            }
+            else
+            {
+                singleValueTxt.Enabled = false;
+                dataGridView.Enabled = true;
             }
 
             bool chk = (sender as RadioButton).Checked;

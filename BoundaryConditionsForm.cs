@@ -55,7 +55,7 @@ namespace RiverSimulationApplication
             }
 
             //4.1.1.1.1 超臨界流
-            boundaryConditionNumberTxt.Text = p.boundaryConditionNumber.ToString();                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            boundaryTimeNumberTxt.Text = p.boundaryTimeNumber.ToString();                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
 
             //4.1.1.1.2 亞臨界流
             //subBoundaryConditionNumberTxt.Text = p.subBoundaryConditionNumber.ToString();                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
@@ -152,12 +152,12 @@ namespace RiverSimulationApplication
         {
             if (!p.IsVariableFlowType())
             {
-                boundaryConditionNumberTxt.Enabled = false;        //定量流不輸入
+                boundaryTimeNumberTxt.Enabled = false;        //定量流不輸入
                 //subBoundaryConditionNumberTxt.Enabled = false;          //定量流不輸入
-                superFlowQuantityBtn.Enabled = false;
-                superWaterLevelBtn.Enabled = false;
-                subFlowQuantityBtn.Enabled = false;
-                downSuperWaterLevelBtn.Enabled = false;
+                //superMainFlowQuantityBtn.Enabled = false;
+                //superWaterLevelBtn.Enabled = false;
+                //subMainFlowQuantityBtn.Enabled = false;
+                //downSuperWaterLevelBtn.Enabled = false;
             }
 
             if (!p.Is3DMode())
@@ -170,7 +170,14 @@ namespace RiverSimulationApplication
                 movableBedDownVerticalConcentrationDistributionInputBtn.Enabled = false;
                 nearBedBoundaryPanel.Enabled = false;
             }
-            sideInOutFlowPanel.Enabled = p.sideInOutFlowFunction;       //模擬功能之特殊功能中如有勾選側出/入流，則4.1.3.2 才會出現於介面中。
+
+            if (!p.sideInOutFlowFunction)   //模擬功能之特殊功能中如有勾選側出/入流，則4.1.3.2 才會出現於介面中。
+            {
+                sideInFlowChk.Enabled = p.sideInOutFlowFunction;
+                sideInFlowBtn.Enabled = p.sideInOutFlowFunction;
+                sideOutFlowChk.Enabled = p.sideInOutFlowFunction;
+                sideOutFlowBtn.Enabled = p.sideInOutFlowFunction;
+            }
 
             if(Program.programVersion.DemoVersion)
             {
@@ -209,7 +216,7 @@ namespace RiverSimulationApplication
 
         private bool ConvertWaterModeling()
         {
-            if (!ConvertupBoundaryConditionNumber())
+            if (!ConvertBoundaryTimeNumber())
             {
                 return false;
             }
@@ -245,9 +252,9 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        private bool ConvertupBoundaryConditionNumber()
+        private bool ConvertBoundaryTimeNumber()
         {
-            if (boundaryConditionNumberTxt.Enabled && !ControllerUtility.CheckConvertInt32(ref p.boundaryConditionNumber, boundaryConditionNumberTxt, "請輸入正確的邊界條件數目！", ControllerUtility.CheckType.GreaterThanZero))
+            if (boundaryTimeNumberTxt.Enabled && !ControllerUtility.CheckConvertInt32(ref p.boundaryTimeNumber, boundaryTimeNumberTxt, "邊界時間數目必須是大於1的整數！", ControllerUtility.CheckType.GreaterThanOne))
             {
                 return false;
             }
@@ -381,8 +388,9 @@ namespace RiverSimulationApplication
         private void upSuperCriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            boundaryConditionNumberTxt.Enabled = chk;
-            superFlowQuantityBtn.Enabled = chk;
+            boundaryTimeNumberTxt.Enabled = chk;
+            superMainFlowQuantityBtn.Enabled = chk;
+            superSideFlowQuantityBtn.Enabled = chk;
             superWaterLevelBtn.Enabled = chk;
             p.upFlowCondition = RiverSimulationProfile.FlowConditionType.SuperCriticalFlow;
             UpdateStatus();
@@ -391,56 +399,105 @@ namespace RiverSimulationApplication
         private void upSubCriticalFlowRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            boundaryConditionNumberTxt.Enabled = chk;
-            subFlowQuantityBtn.Enabled = chk;
+            boundaryTimeNumberTxt.Enabled = chk;
+            subMainFlowQuantityBtn.Enabled = chk;
+            subSideFlowQuantityBtn.Enabled = chk;
             p.upFlowCondition = RiverSimulationProfile.FlowConditionType.SubCriticalFlow;
             UpdateStatus();
         }
 
-        private void superFlowQuantityBtn_Click(object sender, EventArgs e)
+        private bool AlertBoundaryTimeChange(ref RiverSimulationProfile.TwoInOne o)
         {
-            if (!ConvertupBoundaryConditionNumber())
+            if (o == null)
             {
-                return;
+                return false;
             }
-            if (p.superFlowQuantity != null && p.superFlowQuantity.dataArray != null && p.superFlowQuantity.dataArray.GetLength(1) != p.boundaryConditionNumber)
+            if(p.IsConstantFlowType())
+            {   //定量流時不檢查
+                return true;
+            }
+            if (p.boundaryTime == null || p.boundaryTime.GetLength(0) != p.boundaryTimeNumber)
             {
-                if (DialogResult.OK == MessageBox.Show("改變過邊界條件數目需要重新輸入流況資料！", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.None))
-                {
-                    RiverSimulationProfile.TwoInOne.Type tp = p.superFlowQuantity.type;
-                    p.superFlowQuantity = new RiverSimulationProfile.TwoInOne();
-                    p.superFlowQuantity.type = tp;
+                MessageBox.Show("邊界時間尚未輸入完成", "確認", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (o.dataArray != null && o.dataArray.GetLength(1) != p.boundaryTimeNumber)
+            {   //邊界時間有輸入，但與邊界時間數目不符合
+                if (DialogResult.OK == MessageBox.Show("改變過邊界時間數目需要重新輸入所有流況資料，請確認？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation))
+                {   
+                    RiverSimulationProfile.TwoInOne.Type tp = o.type;
+                    o = new RiverSimulationProfile.TwoInOne();
+                    o.type = tp;
+                    return true;
                 }
                 else
                 {
-                    p.boundaryConditionNumber = p.superFlowQuantity.dataArray.GetLength(1);
-                    boundaryConditionNumberTxt.Text = p.boundaryConditionNumber.ToString();
-                    return;
+                    p.boundaryTimeNumber = o.dataArray.GetLength(1);
+                    boundaryTimeNumberTxt.Text = p.boundaryTimeNumber.ToString();
+                    return false;
                 }
+            }
+
+            return true;
+        }
+
+        private void superMainFlowQuantityBtn_Click(object sender, EventArgs e)
+        {
+            if (!ConvertBoundaryTimeNumber())
+            {
+                return;
+            }
+            if (!AlertBoundaryTimeChange(ref p.superMainFlowQuantity))
+            {
+                return;
             }
 
             TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
-            form.columnNames = new string[] { "時間 T(Sec)", "主流方向流量(cms)", "側流方向流量(cms)" };
-            form.SetFormMode("上游超臨界流流量", p.inputGrid.GetJ, p.boundaryConditionNumber, "上游超臨界流流量", "Q", "T",
-                t, 90, 120, false, false, false, p.superFlowQuantity);
+            form.p = p;
+            form.SetFormMode("上游超臨界流主流方向流量", p.inputGrid.GetJ, p.boundaryTimeNumber, "", "流量Q", "",
+                t, 90, 64, false, false, false, p.superMainFlowQuantity);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
-                p.superFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
+                p.superMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
+            }
+        }
+
+        private void superSideFlowQuantityBtn_Click(object sender, EventArgs e)
+        {
+            if (!ConvertBoundaryTimeNumber())
+            {
+                return;
+            }
+            if (!AlertBoundaryTimeChange(ref p.superSideFlowQuantity))
+            {
+                return;
+            }
+
+            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
+            TableInputForm form = new TableInputForm();
+            //form.columnNames = new string[] { "時間 T(Sec)", "主流方向流量(cms)", "側流方向流量(cms)" };
+            form.SetFormMode("上游超臨界流流量", p.inputGrid.GetJ, p.boundaryTimeNumber, "上游超臨界流流量", "Q", "T",
+                t, 90, 120, false, false, false, p.superSideFlowQuantity);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.superSideFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
             }
         }
 
         private void superWaterLevelBtn_Click(object sender, EventArgs e)
         {
-            if (!ConvertupBoundaryConditionNumber())
+            if (!ConvertBoundaryTimeNumber())
             {
                 return;
             }
 
             TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
-            form.SetFormMode("上游超臨界流水位", p.inputGrid.GetJ, p.boundaryConditionNumber, "上游超臨界流水位", "W", "T",
+            form.SetFormMode("上游超臨界流水位", p.inputGrid.GetJ, p.boundaryTimeNumber, "上游超臨界流水位", "W", "T",
                 t, 90, 120, false, false, false, p.superWaterLevel);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
@@ -449,21 +506,39 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void subFlowQuantityBtn_Click(object sender, EventArgs e)
+        private void subMainFlowQuantityBtn_Click(object sender, EventArgs e)
         {
-            if (!ConvertupBoundaryConditionNumber())
+            if (!ConvertBoundaryTimeNumber())
             {
                 return;
             }
 
             TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
-            form.SetFormMode("上游亞臨界流流量", p.inputGrid.GetJ, p.boundaryConditionNumber, "上游亞臨界流流量", "Q", "T",
-                t, 90, 120, false, false, false, p.subFlowQuantity);
+            form.SetFormMode("上游亞臨界流流量", p.inputGrid.GetJ, p.boundaryTimeNumber, "上游亞臨界流流量", "Q", "T",
+                t, 90, 120, false, false, false, p.subMainFlowQuantity);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
-                p.subFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
+                p.subMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
+            }
+        }
+
+        private void subSideFlowQuantityBtn_Click(object sender, EventArgs e)
+        {
+            if (!ConvertBoundaryTimeNumber())
+            {
+                return;
+            }
+
+            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode("上游亞臨界流流量", p.inputGrid.GetJ, p.boundaryTimeNumber, "上游亞臨界流流量", "Q", "T",
+                t, 90, 120, false, false, false, p.subMainFlowQuantity);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.subMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
             }
         }
 
@@ -505,14 +580,14 @@ namespace RiverSimulationApplication
 
         private void downSuperWaterLevelBtn_Click_1(object sender, EventArgs e)
         {
-            if (!ConvertupBoundaryConditionNumber())
+            if (!ConvertBoundaryTimeNumber())
             {
                 return;
             }
 
             TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
-            form.SetFormMode("下游亞臨界流水位", p.inputGrid.GetJ, p.boundaryConditionNumber, "下游亞臨界流水位", "W", "T",
+            form.SetFormMode("下游亞臨界流水位", p.inputGrid.GetJ, p.boundaryTimeNumber, "下游亞臨界流水位", "W", "T",
                 t, 90, 120, false, false, false, p.downSubWaterLevel);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
@@ -688,10 +763,36 @@ namespace RiverSimulationApplication
 
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void boundaryTimeBtn_Click(object sender, EventArgs e)
         {
+            if (!ConvertBoundaryTimeNumber())
+            {
+                return;
+            }
+            if(p.boundaryTime != null && p.boundaryTime.GetLength(0) != p.boundaryTimeNumber)
+            {   //邊界時間數目已被邊更
+                if (DialogResult.OK == MessageBox.Show("改變過邊界時間數目會清除已輸入的邊界時間，請確認？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation))
+                {
+                    p.boundaryTime = null;
+                }
+                else
+                {
+                    boundaryTimeNumberTxt.Text = p.boundaryTime.GetLength(0).ToString();
+                    return;
+                }
+            }
 
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(boundaryTimeBtn.Text, 1, p.boundaryTimeNumber, "邊界時間數目", "時間 T(sec)", "",
+                TableInputForm.InputFormType.BoundaryTime, 90, 90, true, true, false, p.boundaryTime);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.boundaryTime = (double[])form.BoundaryTimeData().Clone();
+            }
         }
+
 
     }
 

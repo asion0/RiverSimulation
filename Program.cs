@@ -36,6 +36,7 @@ namespace RiverSimulationApplication
         public static string documentPath;  //本專案預設文件目錄 My Documents\FlowSimulation
         public static string projectFolder;   //專案目錄
         public static ProgramVersion programVersion = new ProgramVersion(); //
+        public static string tempSaveName = @"\TempSave.txt";
 
         public static ProgramSetting programSetting = null;
         public class ProgramSetting

@@ -80,7 +80,7 @@ namespace RiverSimulationApplication
             public TwoInOne()
             {
                 type = Type.None;
-                dataValue = -1;
+                dataValue = 0;
                 dataArray = null;
             }
 
@@ -481,6 +481,9 @@ namespace RiverSimulationApplication
 
         //4. 邊界條件
         //4.1 水理模組
+        public int boundaryTimeNumber;                     //4.1.0 邊界時間數目
+        public double[] boundaryTime;                      //4.1.0 邊界時間
+
         //4.1.1 上游
         public enum FlowConditionType
         {
@@ -489,15 +492,17 @@ namespace RiverSimulationApplication
             SubCriticalFlow,
         }
         public FlowConditionType upFlowCondition;         //4.1.1.1 流況設定 二選一
-        public int boundaryConditionNumber;               //4.1.1.1.1.0 邊界條件數目 T 整數(>1) 定量流不輸入
+        //public int boundaryConditionNumber;               //4.1.1.1.1.0 邊界條件數目 T 整數(>1) 定量流不輸入
         //4.1.1.1.1 超臨界流
         //public int superBoundaryConditionNumber;        //4.1.1.1.1.0 邊界條件數目 T 整數(>1) 定量流不輸入
-        public TwoInOne superFlowQuantity;              //4.1.1.1.1.1 流量 m3/s 實數(>=0) a. 圖 5，“即時互動處”呈現流量歷線圖，根
+        public TwoInOne superMainFlowQuantity;              //4.1.1.1.1.1 流量 m3/s 實數(>=0) a. 圖 5，“即時互動處”呈現流量歷線圖，根
+        public TwoInOne superSideFlowQuantity;              //4.1.1.1.1.1 流量 m3/s 實數(>=0) a. 圖 5，“即時互動處”呈現流量歷線圖，根
         public TwoInOne superWaterLevel;                //4.1.1.1.1.2 水位 m 實數
         
         //4.1.1.1.2 亞臨界流
         //public int subBoundaryConditionNumber;        //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
-        public TwoInOne subFlowQuantity;              //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
+        public TwoInOne subMainFlowQuantity;              //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
+        public TwoInOne subSideFlowQuantity;              //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
 
         public bool verticalVelocityDistribution;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
         public double[,] verticalVelocityDistributionArray;     //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0) 
@@ -937,7 +942,7 @@ namespace RiverSimulationApplication
             depthAverageFlowSpeedU = new TwoInOne();
 
             //depthAverageFlowSpeedV = -1;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-            //depthAverageFlowSpeedVArray = null;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
+            //depthAverageFupFlowConditionlowSpeedVArray = null;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
             depthAverageFlowSpeedV = new TwoInOne();
 
             waterLevel = new TwoInOne(); ;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
@@ -952,17 +957,22 @@ namespace RiverSimulationApplication
 
             //4. 邊界條件
             //4.1 水理模組
+            boundaryTimeNumber = 0;         //4.1.0 邊界時間數目
+            boundaryTime = null;            //4.1.0 邊界時間    
+
             //4.1.1 上游
             upFlowCondition = FlowConditionType.None;         //4.1.1.1 流況設定 二選一
             
             //4.1.1.1.1 超臨界流
-            boundaryConditionNumber = 0;                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
-            superFlowQuantity = new TwoInOne();                 //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
+            //boundaryConditionNumber = 0;                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            superMainFlowQuantity = new TwoInOne();                 //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
+            superSideFlowQuantity = new TwoInOne();                 //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
             superWaterLevel = new TwoInOne();                   //4.1.1.1.1.2 水位 m 實數
         
             //4.1.1.1.2 亞臨界流
             //subBoundaryConditionNumber = 0;                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
-            subFlowQuantity = new TwoInOne();               //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
+            subMainFlowQuantity = new TwoInOne();               //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
+            subSideFlowQuantity = new TwoInOne();               //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
 
             verticalVelocityDistribution = false;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
             verticalVelocityDistributionArray = null;     //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0) 

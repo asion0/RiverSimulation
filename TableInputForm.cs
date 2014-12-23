@@ -18,17 +18,11 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
-        //public TableInputForm(Type t)
-        //{
-        //    InitializeComponent();
-        //    type = t;
-        //}
+        bool hideSingle = false;        //隱藏 均一值 選項
+        int colCount = 26;              //直行數目
+        int rowCount = 50;              //橫列數目
+        string title;                   //視窗標題
 
-//        Type type = Type.General;
-        bool hideSingle = false;
-        int colCount = 26;
-        int rowCount = 50;
-        string title;
         public void SetFormMode(string title, bool onlyTable, int colCount, int rowCount)
         {
             hideSingle = onlyTable;
@@ -46,7 +40,8 @@ namespace RiverSimulationApplication
         bool noRowNum = false;
         int colWidth = 48;
         int rowHeadersWidth = 64;
-        public string[] columnNames = null;
+        //public string[] columnNames = null;
+        public RiverSimulationProfile p = null;
         public void SetFormMode(string title, int colCount, int rowCount, string tableName = "", string colName = "", string rowName = "", 
             InputFormType inputFormType = InputFormType.GenericDouble, int colWidth = 48, int rowHeadersWidth = 64,
            bool onlyTable = true, bool nocolNum = false, bool noRowNum = false, object initData = null)
@@ -83,6 +78,11 @@ namespace RiverSimulationApplication
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum, false, true);
             }
+            else if (inputFormType == InputFormType.BoundaryTime)
+            {
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum, false, false);
+            }            
             else if (inputFormType == InputFormType.TwoInOneDouble ||
                     inputFormType == InputFormType.TwoInOneDoubleGreaterThanZero ||
                     inputFormType == InputFormType.TwoInOneDoubleGreaterThanOrEqualZero)
@@ -116,7 +116,8 @@ namespace RiverSimulationApplication
                   DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                       tableName, colName, rowName, nocolNum, noRowNum);
             }
-            else if (inputFormType == InputFormType.FlowConditionsSettingConstant || inputFormType == InputFormType.FlowConditionsSettingVariable)
+            else if (inputFormType == InputFormType.FlowConditionsSettingConstant || 
+                    inputFormType == InputFormType.FlowConditionsSettingVariable)
             {
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 if (o != null)
@@ -135,7 +136,7 @@ namespace RiverSimulationApplication
                             break;
                     }
                 }
-                singleValueTxt.Visible = false;
+                singleValueTxt.Visible = (inputFormType == InputFormType.FlowConditionsSettingConstant) ? true :false;
             }
             else if (inputFormType == InputFormType.SeabedThicknessForm)
             {
@@ -181,7 +182,6 @@ namespace RiverSimulationApplication
             if(inputFormType == InputFormType.SeparateForm)
             {
                 averageBtn.Visible = true;
-
             }
         }
 
@@ -216,6 +216,8 @@ namespace RiverSimulationApplication
             //FlowQuantity,                   //流量設定
             FlowConditionsSettingConstant,   //流況設定定量流
             FlowConditionsSettingVariable,  //流況設定變量流
+            BoundaryTime,                   //邊界時間輸入
+
         }
 
         private InputFormType _inputFormType = InputFormType.GenericDouble;
@@ -240,6 +242,14 @@ namespace RiverSimulationApplication
         }
 
         public double[] SeparateData()
+        {
+            if (_data == null)
+                return null;
+
+            return _data as double[];
+        }
+
+        public double[] BoundaryTimeData()
         {
             if (_data == null)
                 return null;
@@ -330,6 +340,7 @@ namespace RiverSimulationApplication
                     }
                    break;
                 case InputFormType.SeparateForm:
+                case InputFormType.BoundaryTime:
                     if (d == null)
                     {
                         _data = new double[rowCount];
@@ -350,19 +361,11 @@ namespace RiverSimulationApplication
                     }
                     break;
                 case InputFormType.FlowConditionsSettingConstant:
-                    if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount || o.dataArray.GetLength(1) != rowCount)
-                    {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
-                        _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
-                    }
-                    else
-                    {
-                        _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
-                    }
-                    break;
                 case InputFormType.FlowConditionsSettingVariable:
-                    if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount + 1 || o.dataArray.GetLength(1) != rowCount)
-                    {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
-                        _data = new RiverSimulationProfile.TwoInOne(colCount + 1, rowCount);
+                    //if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount + 1 || o.dataArray.GetLength(1) != rowCount)
+                   if (o == null || o.dataArray == null)
+                        {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
+                        _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
                     }
                     else
                     {
@@ -391,7 +394,6 @@ namespace RiverSimulationApplication
                 case InputFormType.TwoInOneDouble:
                 case InputFormType.TwoInOneDoubleGreaterThanZero:
                 case InputFormType.TwoInOneDoubleGreaterThanOrEqualZero:
-                    //編輯陣列I * J
                     for (int i = 0; i < colCount; ++i)
                     {
                         for (int j = 0; j < rowCount; ++j)
@@ -401,22 +403,40 @@ namespace RiverSimulationApplication
                     }
                     break;
                 case InputFormType.FlowConditionsSettingConstant:
-                case InputFormType.FlowConditionsSettingVariable:
-                    //編輯陣列I * J
-                    int maxI = 0;
-                    if (singleValueRdo.Checked)
-                    {
-                        maxI = 1;
-                    }
-                    if (tableValueRdo.Checked)
-                    {
-                        maxI = colCount;
-                    }
-                    for (int i = 0; i < dataGridView.ColumnCount; ++i)
+                    for (int i = 1; i < dataGridView.ColumnCount; ++i)
                     {
                         for (int j = 0; j < dataGridView.RowCount; ++j)
                         {
                             dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j].ToString();
+                        }
+                    }
+
+                    if (_inputFormType == InputFormType.FlowConditionsSettingVariable)
+                    {   //變量流要填入邊界時間，且不可編輯
+                        for (int i = 0; i < dataGridView.RowCount; ++i)
+                        {
+                            dataGridView[0, i].Value = p.boundaryTime[i].ToString();
+                            dataGridView[0, i].Style.BackColor = Color.LightGray;
+                            dataGridView[0, i].ReadOnly = true;
+                        }
+                    }
+                    break;
+                case InputFormType.FlowConditionsSettingVariable:
+                    for (int i = 1; i < dataGridView.ColumnCount; ++i)
+                    {
+                        for (int j = 0; j < dataGridView.RowCount; ++j)
+                        {
+                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i - 1, j].ToString();
+                        }
+                    }
+
+                    if (_inputFormType== InputFormType.FlowConditionsSettingVariable)
+                    {   //變量流要填入邊界時間，且不可編輯
+                        for (int i = 0; i < dataGridView.RowCount; ++i)
+                        {
+                            dataGridView[0, i].Value = p.boundaryTime[i].ToString();
+                            dataGridView[0, i].Style.BackColor = Color.LightGray;
+                            dataGridView[0, i].ReadOnly = true;
                         }
                     }
                     break;
@@ -461,6 +481,27 @@ namespace RiverSimulationApplication
                     dataGridView[0, 0].Value = 1.ToString(SeparateFormCellFormat);
                     dataGridView[0, rowCount - 1].Value = 0.ToString(SeparateFormCellFormat);
                     break;
+                case InputFormType.BoundaryTime:
+                    //垂直向隔網分層比例輸入，直的一行，倒序
+                    //垂直遞增不能相同或是減少
+                    for (int i = 0; i < rowCount; ++i)
+                    {
+                        dataGridView[0, i].Value = (_data as double[])[i].ToString();
+                    }
+                    //第一欄不能編輯，必須為0
+                    dataGridView[0, 0].ReadOnly = true;
+                    dataGridView[0, 0].Style.BackColor = Color.LightGray;
+                    dataGridView[0, 0].Style.ForeColor = Color.Red;
+                    dataGridView[0, 0].Value = 0.ToString();
+                    //最後一欄不能編輯，必須為 1.1.1 總模擬時間
+                    dataGridView[0, rowCount - 1].ReadOnly = true;
+                    dataGridView[0, rowCount - 1].Style.BackColor = Color.LightGray;
+                    dataGridView[0, rowCount - 1].Style.ForeColor = Color.Red;
+                    dataGridView[0, rowCount - 1].Value = RiverSimulationProfile.profile.totalSimulationTime.ToString();
+
+                    dataGridView[0, 0].Selected = false;
+                    dataGridView[0, 1].Selected = true;
+                    break;                
                 case InputFormType.BottomElevationForm:
                     //編輯底床高程，與輸入格網相同大小I * J
                     for (int i = 0; i < colCount; ++i)
@@ -508,6 +549,23 @@ namespace RiverSimulationApplication
                 for (int i = 0; i < rowCount; ++i)
                 {
                     (_data as double[])[rowCount - i - 1] = Convert.ToDouble(v[0, i].Value);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ConvertBoundaryTimeData()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                for (int i = 0; i < rowCount; ++i)
+                {
+                    (_data as double[])[i] = Convert.ToDouble(v[0, i].Value);
                 }
             }
             catch
@@ -633,11 +691,11 @@ namespace RiverSimulationApplication
             {
                 DataGridView v = dataGridView;
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-                for (int i = 0; i < v.ColumnCount; ++i)
+                for (int i = 1; i < v.ColumnCount; ++i)
                 {
                     for (int j = 0; j < v.RowCount; ++j)
                     {
-                        o.dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
+                        o.dataArray[i - 1, j] = Convert.ToDouble(v[i, j].Value);
                     }
                 }
             }
@@ -714,6 +772,31 @@ namespace RiverSimulationApplication
             return allPass;
         }
 
+        private bool AutoFinishConvertBoundaryTimeCell()
+        {
+            bool allPass = true;
+            try
+            {
+                double last = 0;
+                double max = RiverSimulationProfile.profile.totalSimulationTime;
+
+                for (int i = 1; i < rowCount - 1; ++i)
+                {
+                    double v = Convert.ToDouble(dataGridView[0, i].Value);
+                    if (last >= v || v >= max)
+                    {
+                        return false;
+                    }
+                    last = v;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return allPass;
+        }
+
         private void AutoFunction()
         {
             switch (_inputFormType)
@@ -730,6 +813,9 @@ namespace RiverSimulationApplication
                     break;
                 case InputFormType.SeparateForm:
                     AutoFinishConvertSeparateCell();
+                    break;
+                case InputFormType.BoundaryTime:
+                    AutoFinishConvertBoundaryTimeCell();
                     break;
                 case InputFormType.BottomElevationForm:
                     break;
@@ -790,6 +876,12 @@ namespace RiverSimulationApplication
                         isSuccess = ConvertSeparateData();
                     }
                     break;
+                case InputFormType.BoundaryTime:
+                    if (AutoFinishConvertBoundaryTimeCell())
+                    {
+                        isSuccess = ConvertBoundaryTimeData();
+                    }
+                    break;                
                 case InputFormType.BottomElevationForm:
                     isSuccess = ConvertBottomElevationData();
                     break;
@@ -814,6 +906,13 @@ namespace RiverSimulationApplication
 
         private void singleValueRdo_CheckedChanged(object sender, EventArgs e)
         {
+            bool chk = (sender as RadioButton).Checked;
+            if(!chk)
+            { 
+                return;
+            }
+
+            
             if (inputFormType == InputFormType.FlowConditionsSettingConstant)
             {
                 dataGridView.Enabled = true;
@@ -828,10 +927,11 @@ namespace RiverSimulationApplication
                 */
                 DataGridViewUtility.InitializeDataGridView(dataGridView, 2, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum);
-                for(int i = 0; i < dataGridView.ColumnCount; ++i)
-                {
-                    dataGridView.Columns[i].Name = columnNames[i + 1];
-                }
+                //string[] columnNames = new string[] { "邊界時間", colName };
+                //for (int i = 0; i < dataGridView.ColumnCount; ++i)
+                //{
+                //    dataGridView.Columns[i].Name = columnNames[i];
+                //}
 
                 FillDataGridView();
             }
@@ -839,20 +939,12 @@ namespace RiverSimulationApplication
             {
                 dataGridView.Enabled = true;
                 dataGridView.Rows.Clear();
-                /*
-                public static void InitializeDataGridView(DataGridView v, 
-                    int colCount, int rowCount, 
-                    int columnWidth = 48, int rowHeadersWidth = 64,
-                    string tableName = "", string colName = "", string rowName = "", 
-                    bool nocolNum = false, bool noRowNum = false,
-                    bool invertCol = false, bool invertRow = false)
-                */
-                DataGridViewUtility.InitializeDataGridView(dataGridView, 3, rowCount, colWidth, rowHeadersWidth,
-                    tableName, colName, rowName, nocolNum, noRowNum);
-                for (int i = 0; i < dataGridView.ColumnCount; ++i)
-                {
-                    dataGridView.Columns[i].Name = columnNames[i];
-                }
+
+                DataGridViewUtility.InitializeDataGridView(dataGridView, 2, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, true, noRowNum);
+                dataGridView.Columns[0].Name = "邊界時間";
+                dataGridView.Columns[1].Name = colName;
+
                 FillDataGridView();
             }
             else
@@ -861,9 +953,8 @@ namespace RiverSimulationApplication
                 dataGridView.Enabled = false;
             } 
             
-            bool chk = (sender as RadioButton).Checked;
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if (o != null && chk)
+            if (o != null)
             {
                 o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
             }
@@ -871,6 +962,11 @@ namespace RiverSimulationApplication
 
         private void tableValueRdo_CheckedChanged(object sender, EventArgs e)
         {
+            bool chk = (sender as RadioButton).Checked;
+            if (!chk)
+            {
+                return;
+            }
 
             if (inputFormType == InputFormType.FlowConditionsSettingConstant)
             {
@@ -892,8 +988,15 @@ namespace RiverSimulationApplication
             {
                 dataGridView.Enabled = true;
                 dataGridView.Rows.Clear();
+
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount + 1, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum);
+                dataGridView.Columns[0].Name = "邊界時間";
+                for (int i = 1; i < dataGridView.ColumnCount; ++i )
+                {
+                    dataGridView.Columns[i].Name = colName + i.ToString();
+                }
+
                 FillDataGridView();
             }
             else
@@ -902,13 +1005,11 @@ namespace RiverSimulationApplication
                 dataGridView.Enabled = true;
             }
 
-            bool chk = (sender as RadioButton).Checked;
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if (o != null && chk)
+            if (o != null)
             {
                 o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
             }
         }
-
     }
 }

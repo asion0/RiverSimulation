@@ -796,9 +796,6 @@ namespace RiverSimulationApplication
                 //ShowGridMap(PicBoxType.Sprate);
                 //DrawPreview();
             }
-       //public void SetFormMode(string title, int colCount, int rowCount, string tableName = "", string colName = "", string rowName = "", 
-       //     InputFormType inputFormType = InputFormType.Generic, int colWidth = 48, int rowHeadersWidth = 64,
-       //    bool onlyTable = true, bool nocolNum = false, bool noRowNum = false, object initData = null)
         }
     }
 
@@ -867,7 +864,11 @@ namespace RiverSimulationApplication
             if (dlg.inputTxt.Text.Length > 0)
             {
                 foreach (DataGridViewCell c in v.SelectedCells)
-                {   
+                {
+                    if (c == null || c.ReadOnly)
+                    {
+                        continue;
+                    }
                     c.Value = dlg.inputTxt.Text;
                 }
             }
@@ -913,7 +914,7 @@ namespace RiverSimulationApplication
                 v.Columns[i].Width = columnWidth;
             }
             v.RowHeadersWidth = rowHeadersWidth;
-
+            v.TopLeftHeaderCell.Value = tableName;
             for (int i = 0; i < rowCount; i++)
             {
                 v.Rows.Add(row);

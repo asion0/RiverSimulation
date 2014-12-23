@@ -63,6 +63,7 @@ namespace RiverSimulationApplication
                 return;
             }
 
+            RiverSimulationProfile.profile = new RiverSimulationProfile();
             Program.projectFolder = dlg.inputTxt.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -70,11 +71,24 @@ namespace RiverSimulationApplication
 
         private void openBtn_Click(object sender, EventArgs e)
         {
-            folderOpen.RootFolder = Environment.SpecialFolder.MyDocuments;
-            if (folderOpen.ShowDialog() == DialogResult.OK) 
+            string tempSave = Program.documentPath + Program.tempSaveName;
+            if (File.Exists(tempSave))
             {
-                Program.projectFolder = folderOpen.SelectedPath;
+                RiverSimulationProfile.profile = RiverSimulationProfile.DeSerialize(tempSave);
             }
+            else
+            {
+                RiverSimulationProfile.profile = new RiverSimulationProfile();
+            }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+            
+            //folderOpen.RootFolder = Environment.SpecialFolder.MyDocuments;
+            //if (folderOpen.ShowDialog() == DialogResult.OK) 
+            //{
+            //    Program.projectFolder = folderOpen.SelectedPath;
+            //}
         }
 
         private void delBtn_Click(object sender, EventArgs e)

@@ -141,7 +141,10 @@ namespace RiverSimulationApplication
         private void UpdateStatus()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;;
-               
+            if(p == null)
+            {
+                return;
+            }
             //RiverSimulationProfile p = RiverSimulationProfile.profile;
             Color FinishedButton = Color.LimeGreen;
             Color ReadyButton = Color.Gold;

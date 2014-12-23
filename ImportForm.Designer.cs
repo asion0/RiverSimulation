@@ -132,9 +132,9 @@
             // imgInfoBtn
             // 
             this.imgInfoBtn.Enabled = false;
-            this.imgInfoBtn.Location = new System.Drawing.Point(202, 85);
+            this.imgInfoBtn.Location = new System.Drawing.Point(208, 85);
             this.imgInfoBtn.Name = "imgInfoBtn";
-            this.imgInfoBtn.Size = new System.Drawing.Size(90, 26);
+            this.imgInfoBtn.Size = new System.Drawing.Size(96, 26);
             this.imgInfoBtn.TabIndex = 1;
             this.imgInfoBtn.Text = "輸入圖檔資訊";
             this.imgInfoBtn.UseVisualStyleBackColor = true;
@@ -146,7 +146,7 @@
             this.selectBgBtn.Enabled = false;
             this.selectBgBtn.Location = new System.Drawing.Point(106, 85);
             this.selectBgBtn.Name = "selectBgBtn";
-            this.selectBgBtn.Size = new System.Drawing.Size(90, 26);
+            this.selectBgBtn.Size = new System.Drawing.Size(96, 26);
             this.selectBgBtn.TabIndex = 1;
             this.selectBgBtn.Text = "選取";
             this.selectBgBtn.UseVisualStyleBackColor = true;
@@ -209,9 +209,9 @@
             // button5
             // 
             this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(168, 102);
+            this.button5.Location = new System.Drawing.Point(119, 102);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 26);
+            this.button5.Size = new System.Drawing.Size(96, 26);
             this.button5.TabIndex = 2;
             this.button5.Text = "操作方法";
             this.button5.UseVisualStyleBackColor = true;
@@ -219,18 +219,18 @@
             // button4
             // 
             this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(168, 61);
+            this.button4.Location = new System.Drawing.Point(119, 61);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(104, 26);
+            this.button4.Size = new System.Drawing.Size(96, 26);
             this.button4.TabIndex = 2;
             this.button4.Text = "操作方法";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(168, 21);
+            this.button3.Location = new System.Drawing.Point(119, 21);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 26);
+            this.button3.Size = new System.Drawing.Size(96, 26);
             this.button3.TabIndex = 2;
             this.button3.Text = "操作方法";
             this.button3.UseVisualStyleBackColor = true;
@@ -240,7 +240,7 @@
             this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(17, 102);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(130, 26);
+            this.button2.Size = new System.Drawing.Size(96, 26);
             this.button2.TabIndex = 1;
             this.button2.Text = "MeshLab";
             this.button2.UseVisualStyleBackColor = true;
@@ -250,7 +250,7 @@
             this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(17, 61);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 26);
+            this.button1.Size = new System.Drawing.Size(96, 26);
             this.button1.TabIndex = 1;
             this.button1.Text = "SMS";
             this.button1.UseVisualStyleBackColor = true;
@@ -259,7 +259,7 @@
             // 
             this.runCcheMeshBtn.Location = new System.Drawing.Point(17, 21);
             this.runCcheMeshBtn.Name = "runCcheMeshBtn";
-            this.runCcheMeshBtn.Size = new System.Drawing.Size(130, 26);
+            this.runCcheMeshBtn.Size = new System.Drawing.Size(96, 26);
             this.runCcheMeshBtn.TabIndex = 1;
             this.runCcheMeshBtn.Text = "CCHE-Mesh";
             this.runCcheMeshBtn.UseVisualStyleBackColor = true;
@@ -284,9 +284,9 @@
             // 
             // levelProportionBtn
             // 
-            this.levelProportionBtn.Location = new System.Drawing.Point(230, 99);
+            this.levelProportionBtn.Location = new System.Drawing.Point(253, 96);
             this.levelProportionBtn.Name = "levelProportionBtn";
-            this.levelProportionBtn.Size = new System.Drawing.Size(130, 26);
+            this.levelProportionBtn.Size = new System.Drawing.Size(96, 26);
             this.levelProportionBtn.TabIndex = 4;
             this.levelProportionBtn.Text = "分層比例";
             this.levelProportionBtn.UseVisualStyleBackColor = true;
@@ -295,16 +295,16 @@
             // 
             // verticalLevelNumberTxt
             // 
-            this.verticalLevelNumberTxt.Location = new System.Drawing.Point(124, 100);
+            this.verticalLevelNumberTxt.Location = new System.Drawing.Point(151, 100);
             this.verticalLevelNumberTxt.Name = "verticalLevelNumberTxt";
-            this.verticalLevelNumberTxt.Size = new System.Drawing.Size(100, 22);
+            this.verticalLevelNumberTxt.Size = new System.Drawing.Size(96, 22);
             this.verticalLevelNumberTxt.TabIndex = 3;
             this.verticalLevelNumberTxt.MouseHover += new System.EventHandler(this.showSeparateCtrls_MouseHover);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 106);
+            this.label1.Location = new System.Drawing.Point(44, 103);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 12);
             this.label1.TabIndex = 2;
@@ -316,7 +316,7 @@
             this.inputFileBtn.Enabled = false;
             this.inputFileBtn.Location = new System.Drawing.Point(151, 25);
             this.inputFileBtn.Name = "inputFileBtn";
-            this.inputFileBtn.Size = new System.Drawing.Size(75, 26);
+            this.inputFileBtn.Size = new System.Drawing.Size(96, 26);
             this.inputFileBtn.TabIndex = 1;
             this.inputFileBtn.Text = "選取檔案";
             this.inputFileBtn.UseVisualStyleBackColor = true;
@@ -326,9 +326,9 @@
             // reverseGridBtn
             // 
             this.reverseGridBtn.Enabled = false;
-            this.reverseGridBtn.Location = new System.Drawing.Point(232, 62);
+            this.reverseGridBtn.Location = new System.Drawing.Point(253, 62);
             this.reverseGridBtn.Name = "reverseGridBtn";
-            this.reverseGridBtn.Size = new System.Drawing.Size(75, 26);
+            this.reverseGridBtn.Size = new System.Drawing.Size(96, 26);
             this.reverseGridBtn.TabIndex = 1;
             this.reverseGridBtn.Text = "反轉格網";
             this.reverseGridBtn.UseVisualStyleBackColor = true;
@@ -339,7 +339,7 @@
             this.inputGridBtn.Enabled = false;
             this.inputGridBtn.Location = new System.Drawing.Point(151, 62);
             this.inputGridBtn.Name = "inputGridBtn";
-            this.inputGridBtn.Size = new System.Drawing.Size(75, 26);
+            this.inputGridBtn.Size = new System.Drawing.Size(96, 26);
             this.inputGridBtn.TabIndex = 1;
             this.inputGridBtn.Text = "輸入格網";
             this.inputGridBtn.UseVisualStyleBackColor = true;
@@ -373,7 +373,7 @@
             // runExcelBtn
             // 
             this.runExcelBtn.Enabled = false;
-            this.runExcelBtn.Location = new System.Drawing.Point(12, 501);
+            this.runExcelBtn.Location = new System.Drawing.Point(17, 520);
             this.runExcelBtn.Name = "runExcelBtn";
             this.runExcelBtn.Size = new System.Drawing.Size(130, 26);
             this.runExcelBtn.TabIndex = 1;
@@ -384,7 +384,7 @@
             // 
             // runCcheMeshBtn2
             // 
-            this.runCcheMeshBtn2.Location = new System.Drawing.Point(148, 501);
+            this.runCcheMeshBtn2.Location = new System.Drawing.Point(153, 520);
             this.runCcheMeshBtn2.Name = "runCcheMeshBtn2";
             this.runCcheMeshBtn2.Size = new System.Drawing.Size(130, 26);
             this.runCcheMeshBtn2.TabIndex = 1;

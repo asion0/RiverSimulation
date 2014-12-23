@@ -78,6 +78,13 @@ namespace RiverSimulationApplication
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum, false, true);
             }
+            else if (inputFormType == InputFormType.VerticalVelocityDistributionForm)
+            {
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum, false, true);
+                dataGridView.Columns[0].Name = "垂向分層位置";
+                dataGridView.Columns[1].Name = "比例係數";  
+            }
             else if (inputFormType == InputFormType.BoundaryTime)
             {
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
@@ -113,11 +120,34 @@ namespace RiverSimulationApplication
                     inputFormType == InputFormType.GenericDoubleGreaterThanZero ||
                     inputFormType == InputFormType.GenericDoubleGreaterThanOrEqualZero)
             {
-                  DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                       tableName, colName, rowName, nocolNum, noRowNum);
             }
-            else if (inputFormType == InputFormType.FlowConditionsSettingConstant || 
-                    inputFormType == InputFormType.FlowConditionsSettingVariable)
+            else if (inputFormType == InputFormType.FlowConditionsSettingConstant )
+            {
+                RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+                if (o != null)
+                {
+                    switch (o.type)
+                    {
+                        case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                            singleValueRdo.Checked = true;
+                            break;
+                        case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                            tableValueRdo.Checked = true;
+                            break;
+                        case RiverSimulationProfile.TwoInOne.Type.None:
+                            singleValueRdo.Checked = false;
+                            tableValueRdo.Checked = false;
+                            break;
+                    }
+                    singleValueTxt.Text = o.dataValue.ToString();
+                    DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                        "", colName, rowName, nocolNum, true);
+                    dataGridView.Rows[0].HeaderCell.Value = tableName;
+                }
+            } 
+            else if(inputFormType == InputFormType.FlowConditionsSettingVariable)
             {
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 if (o != null)
@@ -179,7 +209,7 @@ namespace RiverSimulationApplication
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            if(inputFormType == InputFormType.SeparateForm)
+            if (inputFormType == InputFormType.SeparateForm || inputFormType == InputFormType.VerticalVelocityDistributionForm)
             {
                 averageBtn.Visible = true;
             }
@@ -212,6 +242,7 @@ namespace RiverSimulationApplication
             SeabedThicknessForm,            //底床分層厚度輸入
             SedimentCompositionRatioForm,   //泥砂組成比例輸入
             SeparateForm,                   //垂直向隔網分層比例輸入
+            VerticalVelocityDistributionForm,   //垂直流速分布(3D)
             BottomElevationForm,            //編輯底床高程
             //FlowQuantity,                   //流量設定
             FlowConditionsSettingConstant,   //流況設定定量流
@@ -249,6 +280,13 @@ namespace RiverSimulationApplication
             return _data as double[];
         }
 
+        public double[,] VerticalVelocityDistributionData()
+        {
+            if (_data == null)
+                return null;
+
+            return _data as double[,];
+        }
         public double[] BoundaryTimeData()
         {
             if (_data == null)
@@ -350,6 +388,16 @@ namespace RiverSimulationApplication
                         _data = (double [])(d as double[]).Clone();
                     }
                     break;
+                case InputFormType.VerticalVelocityDistributionForm:
+                    if (d == null)
+                    {
+                        _data = new double[2, rowCount];
+                    }
+                    else
+                    {
+                        _data = (double [,])(d as double[,]).Clone();
+                    }
+                    break;
                 case InputFormType.BottomElevationForm:
                     if (d == null)
                     {
@@ -403,22 +451,9 @@ namespace RiverSimulationApplication
                     }
                     break;
                 case InputFormType.FlowConditionsSettingConstant:
-                    for (int i = 1; i < dataGridView.ColumnCount; ++i)
+                    for (int i = 0; i < dataGridView.ColumnCount; ++i)
                     {
-                        for (int j = 0; j < dataGridView.RowCount; ++j)
-                        {
-                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j].ToString();
-                        }
-                    }
-
-                    if (_inputFormType == InputFormType.FlowConditionsSettingVariable)
-                    {   //變量流要填入邊界時間，且不可編輯
-                        for (int i = 0; i < dataGridView.RowCount; ++i)
-                        {
-                            dataGridView[0, i].Value = p.boundaryTime[i].ToString();
-                            dataGridView[0, i].Style.BackColor = Color.LightGray;
-                            dataGridView[0, i].ReadOnly = true;
-                        }
+                        dataGridView[i, 0].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, 0].ToString();
                     }
                     break;
                 case InputFormType.FlowConditionsSettingVariable:
@@ -469,6 +504,25 @@ namespace RiverSimulationApplication
                     for (int i = 0; i < rowCount; ++i)
                     {
                         dataGridView[0, rowCount - i - 1].Value = (_data as double[])[i].ToString();
+                    }
+                    dataGridView[0, 0].ReadOnly = true;
+                    dataGridView[0, 0].Style.BackColor = Color.LightGray;
+                    dataGridView[0, 0].Style.ForeColor = Color.Red;
+                    dataGridView[0, rowCount - 1].ReadOnly = true;
+                    dataGridView[0, rowCount - 1].Style.BackColor = Color.LightGray;
+                    dataGridView[0, rowCount - 1].Style.ForeColor = Color.Red;
+                    dataGridView[0, 0].Selected = false;
+                    dataGridView[0, 1].Selected = true;
+                    dataGridView[0, 0].Value = 1.ToString(SeparateFormCellFormat);
+                    dataGridView[0, rowCount - 1].Value = 0.ToString(SeparateFormCellFormat);
+                    break;
+                case InputFormType.VerticalVelocityDistributionForm:
+                    //垂直向隔網分層比例輸入，直的一行，倒序
+                    //垂直遞增不能相同或是減少
+                    for (int i = 0; i < rowCount; ++i)
+                    {
+                        dataGridView[0, rowCount - i - 1].Value = (_data as double[,])[0, i].ToString();
+                        dataGridView[1, rowCount - i - 1].Value = (_data as double[,])[1, i].ToString();
                     }
                     dataGridView[0, 0].ReadOnly = true;
                     dataGridView[0, 0].Style.BackColor = Color.LightGray;
@@ -558,6 +612,24 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        private bool ConvertVerticalVelocityDistributionData()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                for (int i = 0; i < rowCount; ++i)
+                {
+                    (_data as double[,])[0, rowCount - i - 1] = Convert.ToDouble(v[0, i].Value);
+                    (_data as double[,])[1, rowCount - i - 1] = Convert.ToDouble(v[1, i].Value);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         private bool ConvertBoundaryTimeData()
         {
             try
@@ -630,11 +702,11 @@ namespace RiverSimulationApplication
                     for (int j = 0; j < rowCount; ++j)
                     {
                         o.dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
-                        if (singleValueTxt.Enabled)
-                        {
-                            o.dataValue = Convert.ToDouble(singleValueTxt.Text);
-                        }
                     }
+                }
+                if (singleValueTxt.Enabled)
+                {
+                    o.dataValue = Convert.ToDouble(singleValueTxt.Text);
                 }
             }
             catch
@@ -672,10 +744,11 @@ namespace RiverSimulationApplication
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 for (int i = 0; i < v.ColumnCount; ++i)
                 {
-                    for (int j = 0; j < v.RowCount; ++j)
-                    {
-                        o.dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
-                    }
+                    o.dataArray[i, 0] = Convert.ToDouble(v[i, 0].Value);
+                }
+                if (singleValueTxt.Enabled)
+                {
+                    o.dataValue = Convert.ToDouble(singleValueTxt.Text);
                 }
             }
             catch
@@ -772,6 +845,29 @@ namespace RiverSimulationApplication
             return allPass;
         }
 
+        private bool AutoFinishConvertVerticalVelocityDistributionCell()
+        {
+            double last = 1.0;
+            bool allPass = true;
+            for (int i = 1; i < rowCount - 1; ++i)
+            {
+                try
+                {
+                    double v = Convert.ToDouble(dataGridView[0, i].Value);
+                    if (last <= v || v >= 1.0)
+                    {
+                        return false;
+                    }
+                    last = v;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return allPass;
+        }
+
         private bool AutoFinishConvertBoundaryTimeCell()
         {
             bool allPass = true;
@@ -813,6 +909,9 @@ namespace RiverSimulationApplication
                     break;
                 case InputFormType.SeparateForm:
                     AutoFinishConvertSeparateCell();
+                    break;
+                case InputFormType.VerticalVelocityDistributionForm:
+                    AutoFinishConvertVerticalVelocityDistributionCell();
                     break;
                 case InputFormType.BoundaryTime:
                     AutoFinishConvertBoundaryTimeCell();
@@ -876,6 +975,12 @@ namespace RiverSimulationApplication
                         isSuccess = ConvertSeparateData();
                     }
                     break;
+                case InputFormType.VerticalVelocityDistributionForm:
+                    if (AutoFinishConvertVerticalVelocityDistributionCell())
+                    {
+                        isSuccess = ConvertVerticalVelocityDistributionData();
+                    }
+                    break;                
                 case InputFormType.BoundaryTime:
                     if (AutoFinishConvertBoundaryTimeCell())
                     {
@@ -907,35 +1012,19 @@ namespace RiverSimulationApplication
         private void singleValueRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            if(!chk)
-            { 
+            if (!chk)
+            {
                 return;
             }
 
-            
-            if (inputFormType == InputFormType.FlowConditionsSettingConstant)
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (o != null)
             {
-                dataGridView.Enabled = true;
-                dataGridView.Rows.Clear();
-                /*
-                public static void InitializeDataGridView(DataGridView v, 
-                    int colCount, int rowCount, 
-                    int columnWidth = 48, int rowHeadersWidth = 64,
-                    string tableName = "", string colName = "", string rowName = "", 
-                    bool nocolNum = false, bool noRowNum = false,
-                    bool invertCol = false, bool invertRow = false)
-                */
-                DataGridViewUtility.InitializeDataGridView(dataGridView, 2, rowCount, colWidth, rowHeadersWidth,
-                    tableName, colName, rowName, nocolNum, noRowNum);
-                //string[] columnNames = new string[] { "邊界時間", colName };
-                //for (int i = 0; i < dataGridView.ColumnCount; ++i)
-                //{
-                //    dataGridView.Columns[i].Name = columnNames[i];
-                //}
-
-                FillDataGridView();
+                o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
             }
-            else if (inputFormType == InputFormType.FlowConditionsSettingVariable)
+            
+
+            if (inputFormType == InputFormType.FlowConditionsSettingVariable)
             {
                 dataGridView.Enabled = true;
                 dataGridView.Rows.Clear();
@@ -947,17 +1036,18 @@ namespace RiverSimulationApplication
 
                 FillDataGridView();
             }
+            //else if (inputFormType == InputFormType.FlowConditionsSettingConstant)
+            //{
+            //    singleValueTxt.Enabled = true;
+            //    dataGridView.Enabled = false;
+            //    //FillDataGridView();
+            //}
             else
             {
                 singleValueTxt.Enabled = true;
                 dataGridView.Enabled = false;
             } 
             
-            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if (o != null)
-            {
-                o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
-            }
         }
 
         private void tableValueRdo_CheckedChanged(object sender, EventArgs e)
@@ -968,23 +1058,13 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            if (inputFormType == InputFormType.FlowConditionsSettingConstant)
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (o != null)
             {
-                dataGridView.Enabled = true;
-                dataGridView.Rows.Clear();
-                /*
-                public static void InitializeDataGridView(DataGridView v, 
-                    int colCount, int rowCount, 
-                    int columnWidth = 48, int rowHeadersWidth = 64,
-                    string tableName = "", string colName = "", string rowName = "", 
-                    bool nocolNum = false, bool noRowNum = false,
-                    bool invertCol = false, bool invertRow = false)
-                */
-                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
-                    tableName, colName, rowName, nocolNum, noRowNum);
-                FillDataGridView();
+                o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
             }
-            else if (inputFormType == InputFormType.FlowConditionsSettingVariable)
+
+            if (inputFormType == InputFormType.FlowConditionsSettingVariable)
             {
                 dataGridView.Enabled = true;
                 dataGridView.Rows.Clear();
@@ -999,16 +1079,20 @@ namespace RiverSimulationApplication
 
                 FillDataGridView();
             }
+            //else if (inputFormType == InputFormType.FlowConditionsSettingConstant)
+            //{
+            //    dataGridView.Enabled = true;
+            //    dataGridView.Rows.Clear();
+
+            //    DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+            //        "", colName, rowName, nocolNum, true);
+            //    dataGridView.Rows[0].HeaderCell.Value = tableName;
+            //    FillDataGridView();
+            //}
             else
             {
                 singleValueTxt.Enabled = false;
                 dataGridView.Enabled = true;
-            }
-
-            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if (o != null)
-            {
-                o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
             }
         }
     }

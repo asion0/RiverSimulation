@@ -122,6 +122,8 @@
             this.upBoundaryElevationInputRdo = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.verticalVelocityDistributionTxt = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -286,6 +288,8 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel6.Controls.Add(this.verticalVelocityDistributionTxt);
+            this.panel6.Controls.Add(this.label15);
             this.panel6.Controls.Add(this.verticalVelocityDistributionChk);
             this.panel6.Controls.Add(this.verticalVelocityDistributionBtn);
             this.panel6.Controls.Add(this.label14);
@@ -315,7 +319,7 @@
             // verticalVelocityDistributionBtn
             // 
             this.verticalVelocityDistributionBtn.Enabled = false;
-            this.verticalVelocityDistributionBtn.Location = new System.Drawing.Point(138, 83);
+            this.verticalVelocityDistributionBtn.Location = new System.Drawing.Point(307, 82);
             this.verticalVelocityDistributionBtn.Name = "verticalVelocityDistributionBtn";
             this.verticalVelocityDistributionBtn.Size = new System.Drawing.Size(96, 26);
             this.verticalVelocityDistributionBtn.TabIndex = 8;
@@ -367,6 +371,7 @@
             // 
             // superSideFlowQuantityBtn
             // 
+            this.superSideFlowQuantityBtn.Enabled = false;
             this.superSideFlowQuantityBtn.Location = new System.Drawing.Point(206, 20);
             this.superSideFlowQuantityBtn.Name = "superSideFlowQuantityBtn";
             this.superSideFlowQuantityBtn.Size = new System.Drawing.Size(96, 26);
@@ -1166,6 +1171,23 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 16;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(147, 90);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 12);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "分層數目";
+            // 
+            // verticalVelocityDistributionTxt
+            // 
+            this.verticalVelocityDistributionTxt.Enabled = false;
+            this.verticalVelocityDistributionTxt.Location = new System.Drawing.Point(206, 84);
+            this.verticalVelocityDistributionTxt.Name = "verticalVelocityDistributionTxt";
+            this.verticalVelocityDistributionTxt.Size = new System.Drawing.Size(96, 22);
+            this.verticalVelocityDistributionTxt.TabIndex = 14;
+            // 
             // BoundaryConditionsForm
             // 
             this.AcceptButton = this.ok;
@@ -1312,5 +1334,7 @@
         private System.Windows.Forms.Button sideInFlowBtn;
         private System.Windows.Forms.CheckBox sideOutFlowChk;
         private System.Windows.Forms.Button sideOutFlowBtn;
+        private System.Windows.Forms.TextBox verticalVelocityDistributionTxt;
+        private System.Windows.Forms.Label label15;
     }
 }

@@ -92,19 +92,21 @@ namespace RiverSimulationApplication
             this.Close();
         }
 
-        private bool DoConvert()
+        private bool ConvertVerticalLevelNumber()
         {
             if (!ControllerUtility.CheckConvertInt32(ref p.verticalLevelNumber, verticalLevelNumberTxt, "請輸入正確的垂向格網分層數目！", ControllerUtility.CheckType.GreaterThanTwo))
             {
                 return false;
             }
+            return true;
+        }
 
-            //if (p.verticalLevelNumber != n && p.verticalLevelNumber != 0)
-            //{
-            //    MessageBox.Show("變更垂向格網分層數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    p.levelProportion = null;
-            //}
-            //p.verticalLevelNumber = n;
+        private bool DoConvert()
+        {
+            if (!ConvertVerticalLevelNumber())
+            {
+                return false;
+            }
             return true;
         }
 
@@ -375,8 +377,7 @@ namespace RiverSimulationApplication
 
         private void separateProportionBtn_Click(object sender, EventArgs e)
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            if (!DoConvert())
+            if (!ConvertVerticalLevelNumber())
             {
                 return;
             }

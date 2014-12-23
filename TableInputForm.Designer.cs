@@ -84,6 +84,7 @@
             // 
             // singleValueTxt
             // 
+            this.singleValueTxt.Enabled = false;
             this.singleValueTxt.Location = new System.Drawing.Point(32, 36);
             this.singleValueTxt.MaxLength = 8;
             this.singleValueTxt.Name = "singleValueTxt";
@@ -97,13 +98,13 @@
             this.pasteToolStripMenuItem,
             this.ValueToolStripMenuItem});
             this.copyPasteMenuStrip.Name = "contextMenuStrip1";
-            this.copyPasteMenuStrip.Size = new System.Drawing.Size(184, 70);
+            this.copyPasteMenuStrip.Size = new System.Drawing.Size(181, 70);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.copyToolStripMenuItem.Text = "複製(C)";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -111,7 +112,7 @@
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pasteToolStripMenuItem.Text = "貼上(P)";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -119,7 +120,7 @@
             // 
             this.ValueToolStripMenuItem.Name = "ValueToolStripMenuItem";
             this.ValueToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.ValueToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ValueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ValueToolStripMenuItem.Text = "填入數值(V)";
             this.ValueToolStripMenuItem.Click += new System.EventHandler(this.valueToolStripMenuItem_Click);
             // 

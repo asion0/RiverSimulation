@@ -505,6 +505,7 @@ namespace RiverSimulationApplication
         public TwoInOne subSideFlowQuantity;              //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
 
         public bool verticalVelocityDistribution;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
+        public int verticalVelocityDistributionNumber;  ////4.1.1.2 垂向流速分布(3D) 分層數目P 整數(>=3) 
         public double[,] verticalVelocityDistributionArray;     //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0) 
         
         //4.1.2 下游 二選一

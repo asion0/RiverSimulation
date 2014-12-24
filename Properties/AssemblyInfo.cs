@@ -32,9 +32,10 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.21")]
-[assembly: AssemblyFileVersion("1.0.21")]
+[assembly: AssemblyVersion("1.0.0.22")]
+[assembly: AssemblyFileVersion("1.0.22")]
 
+//1.0.0.22 - 20141224 Weekly build version, export input file.
 //1.0.0.21 - 20141215 Weekly build version
 //1.0.0.20 - 20141208 Weekly build version
 //1.0.0.19 - 20141201 Weekly build version

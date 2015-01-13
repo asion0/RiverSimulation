@@ -23,20 +23,33 @@ namespace RiverSimulationApplication
             FlowQuantity,
         };
 
-        public void SetFormMode(FormType t, string title, int colCount, int rowCount,  RiverSimulationProfile profile, object initData = null)
+        public void SetFormMode(FormType t, string title, string colName, int colCount, int rowCount,  RiverSimulationProfile profile, object initData = null)
         {
-            if (t == FormType.FlowQuantity)
-            {
-                iStart = 1;
-                jStart = 2;
-                iTitle = "流量Q";
-            }
-            formType = t;
-            p = profile;
-            //hideSingle = onlyTable;
+            this.formType = t;
+            this.p = profile;
+
             this.title = title;
             this.colCount = colCount;
-            this.rowCount = rowCount;
+            this.iTitle = colName;
+            //this.rowCount = rowCount;
+
+            if (formType == FormType.FlowQuantity)
+            {
+                if (p.IsVariableFlowType())
+                {
+                    this.iStart = 1;
+                    this.jStart = 2;
+                    this.rowCount = rowCount;
+                    this.extraCol = 2;
+                }
+                else
+                {
+                    this.iStart = 0;
+                    this.jStart = 2;
+                    this.rowCount = 1;
+                    this.extraCol = 1;
+                }
+            } 
             CreateData(initData);
         }
 
@@ -91,13 +104,13 @@ namespace RiverSimulationApplication
                 {
                     case RiverSimulationProfile.TwoInOne.Type.None:
                     case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                        for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
+                        for (int jw = jStart; jw < jStart + rowCount; ++jw)
                         {
-                            o.dataArray[0, jw - jStart] = Convert.ToDouble(v[1, jw].Value);
+                            o.dataArray[0, jw - jStart] = Convert.ToDouble(v[iStart, jw].Value);
                         }
                         break;
                     case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                        for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
+                        for (int jw = jStart; jw < jStart + rowCount; ++jw)
                         {
                             for (int iw = iStart; iw < iStart + colCount; ++iw)
                             {
@@ -106,7 +119,6 @@ namespace RiverSimulationApplication
                         }
                         break;
                 }
-
             }
             catch
             {
@@ -118,8 +130,6 @@ namespace RiverSimulationApplication
         private void CreateData(object d)
         {
             RiverSimulationProfile.TwoInOne o = d as RiverSimulationProfile.TwoInOne;
-
-            //if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount + 1 || o.dataArray.GetLength(1) != rowCount)
             if (o == null || o.dataArray == null)
             {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
                 _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
@@ -137,19 +147,20 @@ namespace RiverSimulationApplication
         private string iTitle;
         private string timeTitle = "邊界時間";
         private string buttonText;
-
+        private int extraCol = 2;
+        private int extraRow = 4;
 
         private void InitializeDataGridView()
         {
             dataGridView.Rows.Clear();
 
-            DataGridViewUtility.InitializeDataGridView(dataGridView, colCount + 2, rowCount + 4, 120, 60,
+            DataGridViewUtility.InitializeDataGridView(dataGridView, colCount + extraCol, rowCount + extraRow, 120, 60,
                 "", "", "", false, false);
 
             dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流" : "定量流";
-            for (int jw = 0; jw < rowCount; ++jw)
+            for (int jw = 0; jw < rowCount + extraRow; ++jw)
             {
-                for (int iw = 0; iw < colCount; ++iw)
+                for (int iw = 0; iw < colCount + extraCol; ++iw)
                 {
                     dataGridView[iw, jw].ReadOnly = true;
                 }
@@ -162,43 +173,47 @@ namespace RiverSimulationApplication
         private void InitTable()
         {
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-
-            dataGridView[0, 1].Value = timeTitle;
-            dataGridView[0, 1].Style.BackColor = Color.LightGray;
-            for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
+            if (o == null)
             {
-                dataGridView[0, jw].Value = p.boundaryTime[jw - jStart].ToString();
-                dataGridView[0, jw].Style.BackColor = Color.LightGray;
+                return;
             }
 
-            if (o != null)
-            {
-                switch (o.type)
+            if (p.IsVariableFlowType())
+            {   //變量流需顯示邊界時間欄位
+                dataGridView[0, 1].Value = timeTitle;
+                dataGridView[0, 1].Style.BackColor = Color.LightGray;
+                for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
                 {
-                    case RiverSimulationProfile.TwoInOne.Type.None:
-                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                        buttonText = "進階 - 非均勻入流";
-                        for (int iw = iStart; iw < iStart + 1; ++iw)
-                        {
-                            dataGridView[iw, 1].Value = iTitle;
-                            dataGridView[iw, 1].Style.BackColor = Color.LightGray;
-                        }
-                        break;
-                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                        buttonText = "均勻入流";
-                        for (int iw = iStart; iw < iStart + colCount; ++iw)
-                        {
-                            dataGridView[iw, 1].Value = iTitle + (iw - iStart + 1).ToString();
-                            dataGridView[iw, 1].Style.BackColor = Color.LightGray;
-                        }
-                        break;
+                    dataGridView[0, jw].Value = p.boundaryTime[jw - jStart].ToString();
+                    dataGridView[0, jw].Style.BackColor = Color.LightGray;
                 }
+            }
+
+            switch (o.type)
+            {
+                case RiverSimulationProfile.TwoInOne.Type.None:
+                case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                    buttonText = "進階 - 非均勻入流";
+                    for (int iw = iStart; iw < iStart + 1; ++iw)
+                    {
+                        dataGridView[iw, 1].Value = iTitle;
+                        dataGridView[iw, 1].Style.BackColor = Color.LightGray;
+                    }
+                    break;
+                case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                    buttonText = "均勻入流";
+                    for (int iw = iStart; iw < iStart + colCount; ++iw)
+                    {
+                        dataGridView[iw, 1].Value = iTitle + (iw - iStart + 1).ToString();
+                        dataGridView[iw, 1].Style.BackColor = Color.LightGray;
+                    }
+                    break;
             }
 
             DataGridViewButtonCell b = new DataGridViewButtonCell();
             b.Value = buttonText;
             b.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView[0, jStart + p.boundaryTimeNumber + 1] = b;
+            dataGridView[0, jStart + rowCount + 1] = b;
         }
 
         private void FillDataGridView()
@@ -208,17 +223,17 @@ namespace RiverSimulationApplication
             {
                 case RiverSimulationProfile.TwoInOne.Type.None:
                 case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                    for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
+                    for (int jw = jStart; jw < jStart + rowCount; ++jw)
                     {
-                        dataGridView[1, jw].Value = o.dataArray[0, jw - jStart].ToString();
-                        dataGridView[1, jw].ReadOnly = false;
-                        dataGridView[1, jw].Style.BackColor = Color.LemonChiffon;
+                        dataGridView[iStart, jw].Value = o.dataArray[0, jw - jStart].ToString();
+                        dataGridView[iStart, jw].ReadOnly = false;
+                        dataGridView[iStart, jw].Style.BackColor = Color.LemonChiffon;
                     }
-                    dataGridView.CurrentCell = dataGridView[1, jStart];
+                    dataGridView.CurrentCell = dataGridView[iStart, jStart];
                     //dataGridView[1, jStart]. = true;
                     break;
                 case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                    for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
+                    for (int jw = jStart; jw < jStart + rowCount; ++jw)
                     {
                         for (int iw = iStart; iw < iStart + colCount; ++iw)
                         {
@@ -234,7 +249,7 @@ namespace RiverSimulationApplication
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0 && e.RowIndex == jStart + p.boundaryTimeNumber + 1)
+            if (e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
             {
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 switch (o.type)

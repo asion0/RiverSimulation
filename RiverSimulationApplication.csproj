@@ -250,6 +250,12 @@
     <Compile Include="TableInputForm.Designer.cs">
       <DependentUpon>TableInputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ThreeWayTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThreeWayTableForm.Designer.cs">
+      <DependentUpon>ThreeWayTableForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utility.cs" />
     <Compile Include="WaterModelingForm.cs">
       <SubType>Form</SubType>
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TableInputForm.resx">
       <DependentUpon>TableInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThreeWayTableForm.resx">
+      <DependentUpon>ThreeWayTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WaterModelingForm.resx">
       <DependentUpon>WaterModelingForm.cs</DependentUpon>

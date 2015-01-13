@@ -373,15 +373,15 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
-            TableInputForm form = new TableInputForm();
+            //TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
+            ThreeWayTableForm form = new ThreeWayTableForm();
             form.p = p;
-            form.SetFormMode("上游超臨界流主流方向流量", p.inputGrid.GetJ, (p.IsVariableFlowType()) ? p.boundaryTimeNumber : 1, "流量", "流量Q", "",
-                t, 90, 64, false, false, false, p.superMainFlowQuantity);
+            form.SetFormMode("上游超臨界流主流方向流量", p.inputGrid.GetJ, p.boundaryTimeNumber, p.superMainFlowQuantity);/* "流量", "流量Q", "",
+                t, 90, 64, false, false, false, p.superMainFlowQuantity);*/
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
-                p.superMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
+                //p.superMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
             }
         }
 

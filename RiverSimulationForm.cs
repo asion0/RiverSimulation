@@ -140,7 +140,7 @@ namespace RiverSimulationApplication
 
         private void UpdateStatus()
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;;
+           RiverSimulationProfile p = RiverSimulationProfile.profile;;
             if(p == null)
             {
                 return;

@@ -779,11 +779,6 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        private void TableInputForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-        }
-
         private bool CalSumOfOneRow(int index, ref double sum)
         {
             sum = 0.0;
@@ -924,11 +919,6 @@ namespace RiverSimulationApplication
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             AutoFunction();
-        }
-
-        private void TableInputForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
         }
 
         private void averageBtn_Click(object sender, EventArgs e)

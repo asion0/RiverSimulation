@@ -183,10 +183,10 @@ namespace RiverSimulationApplication
 
             if(Program.programVersion.DemoVersion)
             {
-                bottomBedLoadFluxInputRdo.Enabled = false;
-                bottomBedLoadFluxInputBtn.Enabled = false;
-                upBoundaryElevationInputRdo.Enabled = false;
-                upBoundaryElevationInputBtn.Enabled = false;
+                //bottomBedLoadFluxInputRdo.Enabled = false;
+                //bottomBedLoadFluxInputBtn.Enabled = false;
+                //upBoundaryElevationInputRdo.Enabled = false;
+                //upBoundaryElevationInputBtn.Enabled = false;
                 movableBedDownInputRdo.Enabled = false;
                 movableBedDownInputBtn.Enabled = false;
             }
@@ -337,7 +337,7 @@ namespace RiverSimulationApplication
                 return false;
             }
 
-            if (o.dataArray != null && o.dataArray.GetLength(1) != p.boundaryTimeNumber)
+            if (o.dataArray != null && o.dataArray2D().GetLength(1) != p.boundaryTimeNumber)
             {   //邊界時間有輸入，但與邊界時間數目不符合
                 if (DialogResult.OK == MessageBox.Show("改變過邊界時間數目需要重新輸入所有流況資料，請確認？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation))
                 {   
@@ -348,7 +348,7 @@ namespace RiverSimulationApplication
                 }
                 else
                 {
-                    p.boundaryTimeNumber = o.dataArray.GetLength(1);
+                    p.boundaryTimeNumber = o.dataArray2D().GetLength(1);
                     boundaryTimeNumberTxt.Text = p.boundaryTimeNumber.ToString();
                     return false;
                 }
@@ -472,6 +472,14 @@ namespace RiverSimulationApplication
                 return;
             }
 
+            ThreeWayTableForm form = new ThreeWayTableForm();
+            form.SetFormMode(ThreeWayTableForm.FormType.FlowQuantity, "上游亞臨界流主流方向流量", "流量Q", p.inputGrid.GetJ, p.boundaryTimeNumber, p, p.subMainFlowQuantity);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.subMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.GetData() as RiverSimulationProfile.TwoInOne);
+            }
+            /*
             TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
             form.p = p;
@@ -482,26 +490,11 @@ namespace RiverSimulationApplication
             {
                 p.subMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
             }
+             * */
         }
 
         private void subSideFlowQuantityBtn_Click(object sender, EventArgs e)
         {
-            /*
-            if (!ConvertBoundaryTimeNumber())
-            {
-                return;
-            }
-
-            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode("上游亞臨界流流量", p.inputGrid.GetJ, p.boundaryTimeNumber, "上游亞臨界流流量", "Q", "T",
-                t, 90, 120, false, false, false, p.subMainFlowQuantity);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
-            {
-                p.subMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
-            }
-             * */
             if (null == p.subSideFlowQuantity)
             {
                 p.subSideFlowQuantity = new RiverSimulationProfile.TwoInOne();
@@ -516,6 +509,14 @@ namespace RiverSimulationApplication
                 return;
             }
 
+            ThreeWayTableForm form = new ThreeWayTableForm();
+            form.SetFormMode(ThreeWayTableForm.FormType.FlowQuantity, "上游亞臨界流側方向流量", "流量Q", p.inputGrid.GetJ, p.boundaryTimeNumber, p, p.subSideFlowQuantity);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.subSideFlowQuantity = new RiverSimulationProfile.TwoInOne(form.GetData() as RiverSimulationProfile.TwoInOne);
+            }
+            /*
             TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
             form.p = p;
@@ -526,6 +527,7 @@ namespace RiverSimulationApplication
             {
                 p.subSideFlowQuantity = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
             }
+             * */
         }
 
         private void verticalVelocityDistributionChk_CheckedChanged(object sender, EventArgs e)
@@ -570,22 +572,6 @@ namespace RiverSimulationApplication
 
         private void downSuperWaterLevelBtn_Click_1(object sender, EventArgs e)
         {
-            /*
-            if (!ConvertBoundaryTimeNumber())
-            {
-                return;
-            }
-
-            TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode("下游亞臨界流水位", p.inputGrid.GetJ, p.boundaryTimeNumber, "下游亞臨界流水位", "W", "T",
-                t, 90, 120, false, false, false, p.downSubWaterLevel);
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
-            {
-                p.downSubWaterLevel = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
-            }
-            */
             if (null == p.downSubWaterLevel)
             {
                 p.downSubWaterLevel = new RiverSimulationProfile.TwoInOne();
@@ -600,6 +586,14 @@ namespace RiverSimulationApplication
                 return;
             }
 
+            ThreeWayTableForm form = new ThreeWayTableForm();
+            form.SetFormMode(ThreeWayTableForm.FormType.FlowQuantity, "下游亞臨界流水位", "水位", p.inputGrid.GetJ, p.boundaryTimeNumber, p, p.downSubWaterLevel);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.downSubWaterLevel = new RiverSimulationProfile.TwoInOne(form.GetData() as RiverSimulationProfile.TwoInOne);
+            }
+            /*
             TableInputForm.InputFormType t = (p.IsConstantFlowType() ? TableInputForm.InputFormType.FlowConditionsSettingConstant : TableInputForm.InputFormType.FlowConditionsSettingVariable);
             TableInputForm form = new TableInputForm();
             form.p = p;
@@ -610,6 +604,7 @@ namespace RiverSimulationApplication
             {
                 p.downSubWaterLevel = new RiverSimulationProfile.TwoInOne(form.FlowQuantityData());
             }
+             * */
         }
 
         private void nonSidewallBoundarySlipRdo_CheckedChanged(object sender, EventArgs e)
@@ -656,11 +651,26 @@ namespace RiverSimulationApplication
 
         private void bottomBedLoadFluxInputBtn_Click(object sender, EventArgs e)
         {
-
+            ThreeWayTableForm form = new ThreeWayTableForm();
+            form.SetFormMode(ThreeWayTableForm.FormType.BottomBedLoadFlux, "底床載通量", "粒徑", p.sedimentParticlesNumber, p.boundaryTimeNumber, p, p.bottomBedLoadFluxArray);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.bottomBedLoadFluxArray = new RiverSimulationProfile.TwoInOne(form.GetData() as RiverSimulationProfile.TwoInOne);
+            }
         }
 
         private void suspendedLoadDepthAvgConcentrationBtn_Click(object sender, EventArgs e)
         {
+            ThreeWayTableForm form = new ThreeWayTableForm();
+            form.SetFormMode(ThreeWayTableForm.FormType.BottomBedLoadFlux, "懸浮載水深平均濃度", "粒徑", p.sedimentParticlesNumber, p.boundaryTimeNumber, p, p.suspendedLoadDepthAvgConcentration);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.suspendedLoadDepthAvgConcentration = new RiverSimulationProfile.TwoInOne(form.GetData() as RiverSimulationProfile.TwoInOne);
+            }
+            
+/*
             TableInputForm form = new TableInputForm();
             form.SetFormMode("懸浮載水深平均濃度", p.sedimentParticlesNumber, p.inputGrid.GetI, "懸浮載水深平均濃度", "粒徑 ", "",
                 TableInputForm.InputFormType.GenericDoubleGreaterThanOrEqualZero, 90, 120, true, false, false, p.suspendedLoadDepthAvgConcentration);
@@ -669,6 +679,7 @@ namespace RiverSimulationApplication
             {
                 p.suspendedLoadDepthAvgConcentration = (double[,])form.GenericDoubleData().Clone();
             }
+ */
         }
 
         private void movableBedVerticalConcentrationDistributionBtn_Click(object sender, EventArgs e)

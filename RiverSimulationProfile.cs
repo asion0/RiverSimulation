@@ -80,27 +80,38 @@ namespace RiverSimulationApplication
             public TwoInOne()
             {
                 type = Type.None;
+                arrayType = ArrayType.TwoDim;
                 dataValue = 0;
                 dataArray = null;
             }
 
-            public TwoInOne(int i, int j, double v = -1.0, Type t = Type.None)
+            //public TwoInOne(int i, int j, double v = -1.0, Type t = Type.None)
+            public TwoInOne(int i, int j)
             {
-                type = t;
-                dataValue = v;
+                arrayType = ArrayType.TwoDim;
+                type = Type.None;
+                dataValue = -1.0;
                 dataArray = new double[i, j];
             }
-
+            public TwoInOne(int i, int j, int k)
+            {
+                arrayType = ArrayType.ThreeDim;
+                type = Type.None;
+                dataValue = -1.0;
+                dataArray = new double[i, j, k];
+            }            
+            /*
             public TwoInOne(double v, double[,] a, Type t)
             {
                 type = t;
                 dataValue = v;
                 dataArray = (double[,])a.Clone();
             }
-
+            */
             public TwoInOne(TwoInOne o)
             {
                 type = o.type;
+                arrayType = o.arrayType;
                 dataValue = o.dataValue;
                 if (o.dataArray == null)
                 {
@@ -108,8 +119,25 @@ namespace RiverSimulationApplication
                 }
                 else
                 {
-                    dataArray = (double[,])o.dataArray.Clone();
+                    if (arrayType == ArrayType.TwoDim)
+                    {
+                        dataArray = (double[,])(o.dataArray as double[,]).Clone();
+                    }
+                    else if(arrayType == ArrayType.ThreeDim)
+                    {
+                        dataArray = (double[, ,])(o.dataArray as double[, ,]).Clone();
+                    }
                 }
+            }
+
+            public double[,] dataArray2D()
+            {
+                return dataArray as double[,];
+            }
+
+            public double[,,] dataArray3D()
+            {
+                return dataArray as double[,,];
             }
 
             public enum Type
@@ -119,8 +147,15 @@ namespace RiverSimulationApplication
                 UseArray,
             };
             public Type type;
+
+            public enum ArrayType
+            {
+                TwoDim,
+                ThreeDim,
+            };
+            public ArrayType arrayType = ArrayType.TwoDim;
             public double dataValue;
-            public double[,] dataArray;
+            public object dataArray;
         }
         #endregion
 
@@ -539,8 +574,8 @@ namespace RiverSimulationApplication
             Input,
         }
         public BottomBedLoadFluxType bottomBedLoadFluxType; //4.2.1.1.1 底床載通量 實數(>=0)“模式自動計算”
-        public double[,] bottomBedLoadFluxArray;            //4.2.1.1.1 底床載通量 實數(>=0)“自行輸入”，如果為“自行輸入”，則如圖4.2.1.1.1 所示
-        public double[,] suspendedLoadDepthAvgConcentration;            //4.2.1.1.2 懸浮載水深平均濃度實數(>=0) 如圖 4.2.1.1.1 所示
+        public TwoInOne bottomBedLoadFluxArray;            //4.2.1.1.1 底床載通量 實數(>=0)“自行輸入”，如果為“自行輸入”，則如圖4.2.1.1.1 所示
+        public TwoInOne suspendedLoadDepthAvgConcentration;            //4.2.1.1.2 懸浮載水深平均濃度實數(>=0) 如圖 4.2.1.1.1 所示
         
         public TwoInOne movableBedVerticalConcentrationDistribution;    //4.2.1.1.3 垂向濃度分布(3D) 矩陣(2,PP) 均一值 實數(>=0) a. 可為均一值或自行輸入。
 
@@ -1150,7 +1185,6 @@ namespace RiverSimulationApplication
         public string br = Environment.CurrentDirectory + "\\br.jpg";
         public bool DownloadGoogleStaticMap()
         {
-
             if (File.Exists(tl))
             {
                 File.Delete(tl);
@@ -1505,12 +1539,12 @@ namespace RiverSimulationApplication
             }
 
             int count = 0;
-            for (int i = 0; i < o.dataArray.GetLength(0); ++i)
+            for (int i = 0; i < o.dataArray2D().GetLength(0); ++i)
             {
-                for (int j = 0; j < o.dataArray.GetLength(1); ++j)
+                for (int j = 0; j < o.dataArray2D().GetLength(1); ++j)
                 {
 
-                    sb.AppendFormat("{0,8}", o.dataArray[i, j].ToString());
+                    sb.AppendFormat("{0,8}", o.dataArray2D()[i, j].ToString());
                     if (++count == LineMaxCount)
                     {
                         sb.Append("\n");

@@ -336,7 +336,7 @@ namespace RiverSimulationApplication
                 case InputFormType.TwoInOneDouble:
                 case InputFormType.TwoInOneDoubleGreaterThanZero:
                 case InputFormType.TwoInOneDoubleGreaterThanOrEqualZero:
-                    if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount || o.dataArray.GetLength(1) != rowCount)
+                    if (o == null || o.dataArray == null || o.dataArray2D().GetLength(0) != colCount || o.dataArray2D().GetLength(1) != rowCount)
                     {
                         _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
                     }
@@ -446,14 +446,14 @@ namespace RiverSimulationApplication
                     {
                         for (int j = 0; j < rowCount; ++j)
                         {
-                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, j].ToString();
+                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray2D()[i, j].ToString();
                         }
                     }
                     break;
                 case InputFormType.FlowConditionsSettingConstant:
                     for (int i = 0; i < dataGridView.ColumnCount; ++i)
                     {
-                        dataGridView[i, 0].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i, 0].ToString();
+                        dataGridView[i, 0].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray2D()[i, 0].ToString();
                     }
                     break;
                 case InputFormType.FlowConditionsSettingVariable:
@@ -461,7 +461,7 @@ namespace RiverSimulationApplication
                     {
                         for (int j = 0; j < dataGridView.RowCount; ++j)
                         {
-                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray[i - 1, j].ToString();
+                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray2D()[i - 1, j].ToString();
                         }
                     }
 
@@ -701,7 +701,7 @@ namespace RiverSimulationApplication
                 {
                     for (int j = 0; j < rowCount; ++j)
                     {
-                        o.dataArray[i, j] = Convert.ToDouble(v[i, j].Value);
+                        o.dataArray2D()[i, j] = Convert.ToDouble(v[i, j].Value);
                     }
                 }
                 if (singleValueTxt.Enabled)
@@ -744,7 +744,7 @@ namespace RiverSimulationApplication
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 for (int i = 0; i < v.ColumnCount; ++i)
                 {
-                    o.dataArray[i, 0] = Convert.ToDouble(v[i, 0].Value);
+                    o.dataArray2D()[i, 0] = Convert.ToDouble(v[i, 0].Value);
                 }
                 if (singleValueTxt.Enabled)
                 {
@@ -768,7 +768,7 @@ namespace RiverSimulationApplication
                 {
                     for (int j = 0; j < v.RowCount; ++j)
                     {
-                        o.dataArray[i - 1, j] = Convert.ToDouble(v[i, j].Value);
+                        o.dataArray2D()[i - 1, j] = Convert.ToDouble(v[i, j].Value);
                     }
                 }
             }

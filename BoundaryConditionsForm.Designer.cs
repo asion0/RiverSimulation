@@ -42,6 +42,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.verticalVelocityDistributionTxt = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.verticalVelocityDistributionChk = new System.Windows.Forms.CheckBox();
             this.verticalVelocityDistributionBtn = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
@@ -122,8 +124,6 @@
             this.upBoundaryElevationInputRdo = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.verticalVelocityDistributionTxt = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -222,7 +222,7 @@
             // 
             this.waterModelingPanel.Controls.Add(this.groupBox10);
             this.waterModelingPanel.Controls.Add(this.waterModelingBackBtn);
-            this.waterModelingPanel.Location = new System.Drawing.Point(12, 12);
+            this.waterModelingPanel.Location = new System.Drawing.Point(12, 334);
             this.waterModelingPanel.Name = "waterModelingPanel";
             this.waterModelingPanel.Size = new System.Drawing.Size(500, 670);
             this.waterModelingPanel.TabIndex = 14;
@@ -304,6 +304,23 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(437, 117);
             this.panel6.TabIndex = 5;
+            // 
+            // verticalVelocityDistributionTxt
+            // 
+            this.verticalVelocityDistributionTxt.Enabled = false;
+            this.verticalVelocityDistributionTxt.Location = new System.Drawing.Point(206, 84);
+            this.verticalVelocityDistributionTxt.Name = "verticalVelocityDistributionTxt";
+            this.verticalVelocityDistributionTxt.Size = new System.Drawing.Size(96, 22);
+            this.verticalVelocityDistributionTxt.TabIndex = 14;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(147, 90);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 12);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "分層數目";
             // 
             // verticalVelocityDistributionChk
             // 
@@ -765,7 +782,7 @@
             // 
             this.moveableBedPanel.Controls.Add(this.groupBox3);
             this.moveableBedPanel.Controls.Add(this.moveableBedBackBtn);
-            this.moveableBedPanel.Location = new System.Drawing.Point(434, 564);
+            this.moveableBedPanel.Location = new System.Drawing.Point(434, 39);
             this.moveableBedPanel.Name = "moveableBedPanel";
             this.moveableBedPanel.Size = new System.Drawing.Size(500, 670);
             this.moveableBedPanel.TabIndex = 15;
@@ -1058,7 +1075,6 @@
             // bottomBedLoadFluxInputRdo
             // 
             this.bottomBedLoadFluxInputRdo.AutoSize = true;
-            this.bottomBedLoadFluxInputRdo.Enabled = false;
             this.bottomBedLoadFluxInputRdo.Location = new System.Drawing.Point(221, 11);
             this.bottomBedLoadFluxInputRdo.Name = "bottomBedLoadFluxInputRdo";
             this.bottomBedLoadFluxInputRdo.Size = new System.Drawing.Size(71, 16);
@@ -1170,23 +1186,6 @@
             this.mapPicBox.SelectRow = false;
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 16;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(147, 90);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(53, 12);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "分層數目";
-            // 
-            // verticalVelocityDistributionTxt
-            // 
-            this.verticalVelocityDistributionTxt.Enabled = false;
-            this.verticalVelocityDistributionTxt.Location = new System.Drawing.Point(206, 84);
-            this.verticalVelocityDistributionTxt.Name = "verticalVelocityDistributionTxt";
-            this.verticalVelocityDistributionTxt.Size = new System.Drawing.Size(96, 22);
-            this.verticalVelocityDistributionTxt.TabIndex = 14;
             // 
             // BoundaryConditionsForm
             // 

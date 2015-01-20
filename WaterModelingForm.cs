@@ -170,7 +170,7 @@ namespace RiverSimulationApplication
 
             //模擬功能如果為定量流，則總模擬時間與時間間距相同，使用者不輸入。
             totalSimulationTimeTxt.Enabled = !p.IsConstantFlowType();
-            timeSpan2dTxt.Enabled = !p.IsConstantFlowType();
+            //timeSpan2dTxt.Enabled = !p.IsConstantFlowType();
             outputFrequencyTxt.Enabled = !p.IsConstantFlowType(); //模擬功能如果為定量流，則輸出頻率為1，使用者不輸入。
 
             manningNBtn.Enabled = (p.roughnessType == RiverSimulationProfile.RoughnessType.ManningN);
@@ -208,7 +208,7 @@ namespace RiverSimulationApplication
                 turbulenceViscosityPanel.Visible = false;
             }
             outputControl3dGrp.Enabled = p.Is3DMode();
-         
+            steppingTimesInVertVslcTimeTxt.Enabled = p.Is3DMode();
         }
 
         private bool DoConvert()

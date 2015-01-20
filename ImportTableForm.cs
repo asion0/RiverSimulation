@@ -66,8 +66,6 @@ namespace RiverSimulationApplication
                 }
                 FillDataGridView();
             }
-
-
         }
 
         private void FillDataGridView()
@@ -79,7 +77,6 @@ namespace RiverSimulationApplication
                     dataGridViewX[j, i].Value = gridData.inputCoor[i, j].x.ToString();
                     dataGridViewY[j, i].Value = gridData.inputCoor[i, j].y.ToString();
                     dataGridViewZ[j, i].Value = gridData.inputCoor[i, j].z.ToString();
-                        
                 }
             }         
         }
@@ -139,6 +136,7 @@ namespace RiverSimulationApplication
             catch
             {
             }
+
             if (xNum <= 0 && yNum <= 0)
             {
                 MessageBox.Show("請輸入正確的數字", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -183,6 +181,5 @@ namespace RiverSimulationApplication
         {
             DataGridViewUtility.FillSelectedValue(GetCurrentDataGridView());
         }
-
     }
 }

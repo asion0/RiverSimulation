@@ -35,6 +35,7 @@
             this.copyPasteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.valueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageY = new System.Windows.Forms.TabPage();
             this.dataGridViewY = new System.Windows.Forms.DataGridView();
             this.tabPageZ = new System.Windows.Forms.TabPage();
@@ -46,7 +47,6 @@
             this.generateGridBtn = new System.Windows.Forms.Button();
             this.ok = new System.Windows.Forms.Button();
             this.clearAllBtn = new System.Windows.Forms.Button();
-            this.valueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPageX.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX)).BeginInit();
@@ -111,7 +111,7 @@
             this.pasteToolStripMenuItem,
             this.valueToolStripMenuItem});
             this.copyPasteMenuStrip.Name = "contextMenuStrip1";
-            this.copyPasteMenuStrip.Size = new System.Drawing.Size(184, 92);
+            this.copyPasteMenuStrip.Size = new System.Drawing.Size(184, 70);
             // 
             // copyToolStripMenuItem
             // 
@@ -128,6 +128,14 @@
             this.pasteToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.pasteToolStripMenuItem.Text = "貼上(P)";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
+            // valueToolStripMenuItem
+            // 
+            this.valueToolStripMenuItem.Name = "valueToolStripMenuItem";
+            this.valueToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.valueToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.valueToolStripMenuItem.Text = "填入數值(V)";
+            this.valueToolStripMenuItem.Click += new System.EventHandler(this.valueToolStripMenuItem_Click);
             // 
             // tabPageY
             // 
@@ -150,6 +158,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewY.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewY.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridViewY.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewY.Name = "dataGridViewY";
             this.dataGridViewY.RowTemplate.Height = 24;
@@ -181,6 +190,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewZ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewZ.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridViewZ.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewZ.Name = "dataGridViewZ";
             this.dataGridViewZ.RowTemplate.Height = 24;
@@ -255,14 +265,6 @@
             this.clearAllBtn.UseVisualStyleBackColor = true;
             this.clearAllBtn.Visible = false;
             this.clearAllBtn.Click += new System.EventHandler(this.generateGridBtn_Click);
-            // 
-            // valueToolStripMenuItem
-            // 
-            this.valueToolStripMenuItem.Name = "valueToolStripMenuItem";
-            this.valueToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.valueToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.valueToolStripMenuItem.Text = "填入數值(V)";
-            this.valueToolStripMenuItem.Click += new System.EventHandler(this.valueToolStripMenuItem_Click);
             // 
             // ImportTableForm
             // 

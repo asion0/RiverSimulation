@@ -49,7 +49,14 @@ namespace RiverSimulationApplication
         private void InitreviewCombo()
         {
             previewCombo.Items.Add("格網預覽圖");
-            previewCombo.Items.Add("垂向格網分布圖");
+            if (p.Is3DMode())
+            {   //3D Mode才有垂向格網分布圖
+                previewCombo.Items.Add("垂向格網分布圖");
+            }
+            else
+            {
+                previewCombo.Enabled = false;
+            }
         }
 
         private void LoadStatus()

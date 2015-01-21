@@ -232,7 +232,7 @@ namespace RiverSimulationApplication
         {
             dataGridView.Rows.Clear();
 
-            DataGridViewUtility.InitializeDataGridView(dataGridView, colCount + extraCol, rowCount + extraRow, 96, 60,
+            DataGridViewUtility.InitializeDataGridView(dataGridView, colCount + extraCol, rowCount + extraRow, 120, 60,
                 "", "", "", false, false);
 
             dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流" : "定量流";

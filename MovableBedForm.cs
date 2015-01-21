@@ -147,6 +147,10 @@ namespace RiverSimulationApplication
         {
             //數值參數 輸出控制3D 面板
             outputCtrl3DGrp.Enabled = p.Is3DMode();
+            //擴散公式是3D Only, 20150121
+            diffusionFormulaUseChk.Enabled = p.Is3DMode();
+            diffusionFormulaCombo.Enabled = p.Is3DMode();
+
             bedrockGrp.Enabled = RiverSimulationProfile.profile.bedrockFunction;
             quayStableAnalysisGrp.Enabled = RiverSimulationProfile.profile.quayStableAnalysisFunction;
             highSandContentFlowGrp.Enabled = p.waterHighSandContentEffectFunction;
@@ -325,6 +329,13 @@ namespace RiverSimulationApplication
             {
                 return false;
             }
+
+            if (p.sedimentCompositionArray != null && p.sedimentCompositionArray.Length != p.sedimentParticlesNumber)
+            {
+                MessageBox.Show("修改過泥砂顆粒數目，需重新輸入泥砂組成比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.sedimentCompositionArray = null;
+                p.suspendedLoadDepthAvgConcentration = null;
+            }
             return true;
         }
 
@@ -333,6 +344,14 @@ namespace RiverSimulationApplication
             if (!ControllerUtility.CheckConvertInt32(ref p.bottomLevelNumber, bottomLevelNumberTxt, "請輸入正確的底床分層數目！", ControllerUtility.CheckType.GreaterThanThree))
             {
                 return false;
+            }
+            
+            if ((p.bottomLevelArray != null && p.bottomLevelArray.Length != p.bottomLevelNumber) ||
+                (p.sedimentCompositionArray != null && p.sedimentCompositionArray.Length != p.bottomLevelNumber))
+            {
+                MessageBox.Show("修改過底床分層數目，需重新輸入底床分層厚度和泥砂組成比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.bottomLevelArray = null;
+                p.sedimentCompositionArray = null;
             }
             return true;
         }

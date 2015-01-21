@@ -190,7 +190,6 @@ namespace RiverSimulationApplication
             }
 
             secFlowEffectGrp.Enabled = p.Is2DMode() && p.secondFlowEffectFunction;    //二維 only。
-            highSandContentEffectGrp.Enabled = p.IsWaterModelingMode();     //水理 only 
 
             tBarNumberTxt.Enabled = p.tBarSet;
             bridgePierNumberTxt.Enabled = p.bridgePierSet;
@@ -209,6 +208,8 @@ namespace RiverSimulationApplication
             }
             outputControl3dGrp.Enabled = p.Is3DMode();
             steppingTimesInVertVslcTimeTxt.Enabled = p.Is3DMode();
+            highSandContentEffectGrp.Enabled = p.waterHighSandContentEffectFunction;
+
         }
 
         private bool DoConvert()
@@ -307,7 +308,7 @@ namespace RiverSimulationApplication
             int n = 0;
             if (p.tBarSet)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, tBarNumberTxt, "請輸入正確的丁壩數量！", ControllerUtility.CheckType.GreaterThanOne))
+                if (!ControllerUtility.CheckConvertInt32(ref n, tBarNumberTxt, "請輸入正確的丁壩數量！", ControllerUtility.CheckType.GreaterThanZero))
                 {
                     return false;
                 }
@@ -320,7 +321,7 @@ namespace RiverSimulationApplication
 
             if (p.bridgePierSet)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, bridgePierNumberTxt, "請輸入正確的橋墩數量！", ControllerUtility.CheckType.GreaterThanOne))
+                if (!ControllerUtility.CheckConvertInt32(ref n, bridgePierNumberTxt, "請輸入正確的橋墩數量！", ControllerUtility.CheckType.GreaterThanZero))
                 {
                     return false;
                 }
@@ -333,7 +334,7 @@ namespace RiverSimulationApplication
 
             if (p.groundsillWorkSet)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, groundsillWorkNumberTxt, "請輸入正確的固床工數量！", ControllerUtility.CheckType.GreaterThanOne))
+                if (!ControllerUtility.CheckConvertInt32(ref n, groundsillWorkNumberTxt, "請輸入正確的固床工數量！", ControllerUtility.CheckType.GreaterThanZero))
                 {
                     return false;
                 }
@@ -346,7 +347,7 @@ namespace RiverSimulationApplication
 
             if (p.sedimentationWeirSet)
             {
-                if (!ControllerUtility.CheckConvertInt32(ref n, sedimentationWeirNumberTxt, "請輸入正確的攔河堰數量！", ControllerUtility.CheckType.GreaterThanOne))
+                if (!ControllerUtility.CheckConvertInt32(ref n, sedimentationWeirNumberTxt, "請輸入正確的攔河堰數量！", ControllerUtility.CheckType.GreaterThanZero))
                 {
                     return false;
                 }
@@ -576,24 +577,32 @@ namespace RiverSimulationApplication
         private void curvatureRadiusRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            p.curvatureRadiusType = RiverSimulationProfile.CurvatureRadiusType.InputCurvatureRadius;
-            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+            if (chk)
+            {
+                p.curvatureRadiusType = RiverSimulationProfile.CurvatureRadiusType.InputCurvatureRadius;
+                curvatureRadiusBtn.Enabled = chk;
+            }
         }
 
         private void autoCurvatureRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            p.curvatureRadiusType = RiverSimulationProfile.CurvatureRadiusType.AutoCurvatureRadius;
-            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+            if (chk)
+            {
+                p.curvatureRadiusType = RiverSimulationProfile.CurvatureRadiusType.AutoCurvatureRadius;
+                curvatureRadiusBtn.Enabled = !chk;
+            }
         }
 
         private void curvatureRadiusBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(curvatureRadiusBtn.Text, true, 26, 50);
-            if (DialogResult.OK == form.ShowDialog())
+            form.SetFormMode(curvatureRadiusBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, "", "", "",
+                TableInputForm.InputFormType.GenericDouble, 90, 120, true, false, false, p.curvatureRadius);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
             {
-
+                p.curvatureRadius = (double[,])form.GenericDoubleData().Clone();
             }
         }
 

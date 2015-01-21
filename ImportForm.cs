@@ -105,6 +105,12 @@ namespace RiverSimulationApplication
             {
                 return false;
             }
+
+            if (p.levelProportion != null && p.levelProportion.Length != p.verticalLevelNumber)
+            {
+                MessageBox.Show("修改過垂向格網分層數目，需重新輸入分層比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.levelProportion = null;
+            }
             return true;
         }
 

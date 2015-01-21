@@ -151,10 +151,16 @@ namespace RiverSimulationApplication
 
         private void UpdateActiveFunctions()
         {
+            if (!p.IsMovableBedMode())
+            {   //水理模式不支援動床模組設定
+                movableTypeGroup.Enabled = false;
+            }
+
             if (!p.IsVariableFlowType())
             {
                 boundaryTimeNumberTxt.Enabled = false;        //定量流不輸入
                 boundaryTimeBtn.Enabled = false;
+                suspendedLoadDepthAvgConcentrationBtn.Enabled = false;  //定量流不支援 20150121
                 //subBoundaryConditionNumberTxt.Enabled = false;          //定量流不輸入
                 //superMainFlowQuantityBtn.Enabled = false;
                 //superWaterLevelBtn.Enabled = false;

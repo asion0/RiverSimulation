@@ -476,7 +476,7 @@
             // 
             this.valueParamPanel.Controls.Add(this.groupBox10);
             this.valueParamPanel.Controls.Add(this.valueParamBackBtn);
-            this.valueParamPanel.Location = new System.Drawing.Point(8, 258);
+            this.valueParamPanel.Location = new System.Drawing.Point(8, 663);
             this.valueParamPanel.Name = "valueParamPanel";
             this.valueParamPanel.Size = new System.Drawing.Size(500, 670);
             this.valueParamPanel.TabIndex = 12;
@@ -579,7 +579,7 @@
             this.fullPanel.Controls.Add(this.diffusionBonusProportionalInMainstreamTxt);
             this.fullPanel.Controls.Add(this.diffusionBonusProportionalInSurfaceTxt);
             this.fullPanel.Controls.Add(this.diffusionBonusProportionalInBottomTxt);
-            this.fullPanel.Location = new System.Drawing.Point(6, 283);
+            this.fullPanel.Location = new System.Drawing.Point(6, 371);
             this.fullPanel.Name = "fullPanel";
             this.fullPanel.Size = new System.Drawing.Size(404, 206);
             this.fullPanel.TabIndex = 24;
@@ -740,7 +740,7 @@
             // 
             this.physicalParamPanel.Controls.Add(this.groupBox1);
             this.physicalParamPanel.Controls.Add(this.fluidTypeBackBtn);
-            this.physicalParamPanel.Location = new System.Drawing.Point(52, 635);
+            this.physicalParamPanel.Location = new System.Drawing.Point(52, 639);
             this.physicalParamPanel.Name = "physicalParamPanel";
             this.physicalParamPanel.Size = new System.Drawing.Size(500, 670);
             this.physicalParamPanel.TabIndex = 12;
@@ -810,7 +810,7 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(95, 612);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(95, 318);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
             this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
@@ -1009,7 +1009,7 @@
             // 
             this.rockStablePanel.Controls.Add(this.groupBox8);
             this.rockStablePanel.Controls.Add(this.rockStableBackBtn);
-            this.rockStablePanel.Location = new System.Drawing.Point(230, 538);
+            this.rockStablePanel.Location = new System.Drawing.Point(230, 545);
             this.rockStablePanel.Name = "rockStablePanel";
             this.rockStablePanel.Size = new System.Drawing.Size(500, 670);
             this.rockStablePanel.TabIndex = 12;
@@ -1376,7 +1376,7 @@
             // 
             this.rockbedPanel.Controls.Add(this.groupBox9);
             this.rockbedPanel.Controls.Add(this.button9);
-            this.rockbedPanel.Location = new System.Drawing.Point(184, 564);
+            this.rockbedPanel.Location = new System.Drawing.Point(184, 567);
             this.rockbedPanel.Name = "rockbedPanel";
             this.rockbedPanel.Size = new System.Drawing.Size(500, 682);
             this.rockbedPanel.TabIndex = 12;
@@ -1520,7 +1520,7 @@
             // 
             this.transSandMethodPanel.Controls.Add(this.groupBox5);
             this.transSandMethodPanel.Controls.Add(this.button1);
-            this.transSandMethodPanel.Location = new System.Drawing.Point(138, 587);
+            this.transSandMethodPanel.Location = new System.Drawing.Point(138, 589);
             this.transSandMethodPanel.Name = "transSandMethodPanel";
             this.transSandMethodPanel.Size = new System.Drawing.Size(500, 670);
             this.transSandMethodPanel.TabIndex = 12;
@@ -1758,12 +1758,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.rockStablePanel);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.physicalParamPanel);
-            this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);

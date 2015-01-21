@@ -80,37 +80,33 @@ namespace RiverSimulationApplication
             public TwoInOne()
             {
                 type = Type.None;
+                valueType = ValueType.Double;
                 arrayType = ArrayType.TwoDim;
-                dataValue = 0;
+                dataValue = new double[1];
                 dataArray = null;
             }
 
             //public TwoInOne(int i, int j, double v = -1.0, Type t = Type.None)
             public TwoInOne(int i, int j)
             {
+                valueType = ValueType.TwoDim;
                 arrayType = ArrayType.TwoDim;
                 type = Type.None;
-                dataValue = -1.0;
+                dataValue = new double[i, j];
                 dataArray = new double[i, j];
             }
             public TwoInOne(int i, int j, int k)
             {
+                valueType = ValueType.ThreeDim;
                 arrayType = ArrayType.ThreeDim;
                 type = Type.None;
-                dataValue = -1.0;
+                dataValue = new double[i, j, k];
                 dataArray = new double[i, j, k];
             }            
-            /*
-            public TwoInOne(double v, double[,] a, Type t)
-            {
-                type = t;
-                dataValue = v;
-                dataArray = (double[,])a.Clone();
-            }
-            */
             public TwoInOne(TwoInOne o)
             {
                 type = o.type;
+                valueType = o.valueType;
                 arrayType = o.arrayType;
                 dataValue = o.dataValue;
                 if (o.dataArray == null)
@@ -125,7 +121,23 @@ namespace RiverSimulationApplication
                     }
                     else if(arrayType == ArrayType.ThreeDim)
                     {
-                        dataArray = (double[, ,])(o.dataArray as double[, ,]).Clone();
+                        dataArray = (double[,,])(o.dataArray as double[,,]).Clone();
+                    }
+                }
+
+                if (o.dataValue == null)
+                {
+                    dataValue = null;
+                }
+                else
+                {
+                    if (valueType == ValueType.TwoDim)
+                    {
+                        dataValue = (double[,])(o.dataValue as double[,]).Clone();
+                    }
+                    else if (valueType == ValueType.ThreeDim)
+                    {
+                        dataValue = (double[, ,])(o.dataValue as double[, ,]).Clone();
                     }
                 }
             }
@@ -140,6 +152,19 @@ namespace RiverSimulationApplication
                 return dataArray as double[,,];
             }
 
+            public double dataValueDouble()
+            {
+                return (dataValue as double[])[0];
+            }
+            public double[,] dataValue2D()
+            {
+                return dataValue as double[,];
+            }
+
+            public double[,,] dataValue3D()
+            {
+                return dataValue as double[,,];
+            }
             public enum Type
             {
                 None,
@@ -153,8 +178,16 @@ namespace RiverSimulationApplication
                 TwoDim,
                 ThreeDim,
             };
+
+            public enum ValueType
+            {
+                Double,
+                TwoDim,
+                ThreeDim,
+            };
             public ArrayType arrayType = ArrayType.TwoDim;
-            public double dataValue;
+            public ValueType valueType = ValueType.Double;
+            public object dataValue;
             public object dataArray;
         }
         #endregion

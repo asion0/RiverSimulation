@@ -67,6 +67,7 @@ namespace RiverSimulationApplication
         {
             initialWater3DPanel.Enabled = p.Is3DMode();
             initialMovableBed3DPanel.Enabled = p.Is3DMode();
+            movableTypeGroup.Enabled = p.IsMovableBedMode();
         }
 
         //===============================================================================

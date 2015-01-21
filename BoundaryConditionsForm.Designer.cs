@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.movableTypeGroup = new System.Windows.Forms.GroupBox();
             this.moveableBedBtn = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.waterTypeGroup = new System.Windows.Forms.GroupBox();
             this.waterModelingBtn = new System.Windows.Forms.Button();
             this.comment = new System.Windows.Forms.WebBrowser();
             this.ok = new System.Windows.Forms.Button();
@@ -125,8 +125,8 @@
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
             this.mainPanel.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.movableTypeGroup.SuspendLayout();
+            this.waterTypeGroup.SuspendLayout();
             this.waterModelingPanel.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -145,22 +145,22 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.groupBox1);
-            this.mainPanel.Controls.Add(this.groupBox2);
+            this.mainPanel.Controls.Add(this.movableTypeGroup);
+            this.mainPanel.Controls.Add(this.waterTypeGroup);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(500, 680);
             this.mainPanel.TabIndex = 13;
             // 
-            // groupBox1
+            // movableTypeGroup
             // 
-            this.groupBox1.Controls.Add(this.moveableBedBtn);
-            this.groupBox1.Location = new System.Drawing.Point(12, 103);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(472, 86);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "動床模組";
+            this.movableTypeGroup.Controls.Add(this.moveableBedBtn);
+            this.movableTypeGroup.Location = new System.Drawing.Point(12, 103);
+            this.movableTypeGroup.Name = "movableTypeGroup";
+            this.movableTypeGroup.Size = new System.Drawing.Size(472, 86);
+            this.movableTypeGroup.TabIndex = 1;
+            this.movableTypeGroup.TabStop = false;
+            this.movableTypeGroup.Text = "動床模組";
             // 
             // moveableBedBtn
             // 
@@ -173,15 +173,15 @@
             this.moveableBedBtn.UseVisualStyleBackColor = true;
             this.moveableBedBtn.Click += new System.EventHandler(this.SettingButton_Click);
             // 
-            // groupBox2
+            // waterTypeGroup
             // 
-            this.groupBox2.Controls.Add(this.waterModelingBtn);
-            this.groupBox2.Location = new System.Drawing.Point(12, 11);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(472, 86);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "水理模組";
+            this.waterTypeGroup.Controls.Add(this.waterModelingBtn);
+            this.waterTypeGroup.Location = new System.Drawing.Point(12, 11);
+            this.waterTypeGroup.Name = "waterTypeGroup";
+            this.waterTypeGroup.Size = new System.Drawing.Size(472, 86);
+            this.waterTypeGroup.TabIndex = 1;
+            this.waterTypeGroup.TabStop = false;
+            this.waterTypeGroup.Text = "水理模組";
             // 
             // waterModelingBtn
             // 
@@ -1205,8 +1205,8 @@
             this.Text = "邊界條件";
             this.Load += new System.EventHandler(this.BoundaryConditionsForm_Load);
             this.mainPanel.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.movableTypeGroup.ResumeLayout(false);
+            this.waterTypeGroup.ResumeLayout(false);
             this.waterModelingPanel.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
@@ -1242,9 +1242,9 @@
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.WebBrowser comment;
         private System.Windows.Forms.Button ok;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox waterTypeGroup;
         private System.Windows.Forms.Button waterModelingBtn;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox movableTypeGroup;
         private System.Windows.Forms.Button moveableBedBtn;
         private System.Windows.Forms.Panel waterModelingPanel;
         private System.Windows.Forms.GroupBox groupBox10;

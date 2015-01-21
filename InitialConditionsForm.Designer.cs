@@ -31,7 +31,7 @@
             this.comment = new System.Windows.Forms.WebBrowser();
             this.ok = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.movableTypeGroup = new System.Windows.Forms.GroupBox();
             this.initialMovableBed3DPanel = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.verticalConcentrationSliceCloseRdo = new System.Windows.Forms.RadioButton();
@@ -53,7 +53,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
             this.mainPanel.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.movableTypeGroup.SuspendLayout();
             this.initialMovableBed3DPanel.SuspendLayout();
             this.initialMovableBed2DPanel.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
@@ -87,25 +87,25 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.groupBox2);
+            this.mainPanel.Controls.Add(this.movableTypeGroup);
             this.mainPanel.Controls.Add(this.flowTypeGroup);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(500, 680);
             this.mainPanel.TabIndex = 9;
             // 
-            // groupBox2
+            // movableTypeGroup
             // 
-            this.groupBox2.Controls.Add(this.initialMovableBed3DPanel);
-            this.groupBox2.Controls.Add(this.initialMovableBed2DPanel);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(12, 256);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(472, 198);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "動床模組";
+            this.movableTypeGroup.Controls.Add(this.initialMovableBed3DPanel);
+            this.movableTypeGroup.Controls.Add(this.initialMovableBed2DPanel);
+            this.movableTypeGroup.Controls.Add(this.label4);
+            this.movableTypeGroup.Controls.Add(this.label3);
+            this.movableTypeGroup.Location = new System.Drawing.Point(12, 256);
+            this.movableTypeGroup.Name = "movableTypeGroup";
+            this.movableTypeGroup.Size = new System.Drawing.Size(472, 198);
+            this.movableTypeGroup.TabIndex = 0;
+            this.movableTypeGroup.TabStop = false;
+            this.movableTypeGroup.Text = "動床模組";
             // 
             // initialMovableBed3DPanel
             // 
@@ -341,8 +341,8 @@
             this.Text = "初始條件";
             this.Load += new System.EventHandler(this.InitialConditionsForm_Load);
             this.mainPanel.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.movableTypeGroup.ResumeLayout(false);
+            this.movableTypeGroup.PerformLayout();
             this.initialMovableBed3DPanel.ResumeLayout(false);
             this.initialMovableBed3DPanel.PerformLayout();
             this.initialMovableBed2DPanel.ResumeLayout(false);
@@ -360,7 +360,7 @@
         private System.Windows.Forms.WebBrowser comment;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox movableTypeGroup;
         private System.Windows.Forms.Button depthAverageConcentrationBtn;
         private System.Windows.Forms.GroupBox flowTypeGroup;
         private System.Windows.Forms.Button waterLevelBtn;

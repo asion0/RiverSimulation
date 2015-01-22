@@ -167,9 +167,10 @@
             this.sandTransportEquation3Rdo = new System.Windows.Forms.RadioButton();
             this.sandTransportEquation2Rdo = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.previewPicBox = new System.Windows.Forms.PictureBox();
-            this.previewPanel = new System.Windows.Forms.Panel();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
+            this.previewCombo = new System.Windows.Forms.ComboBox();
+            this.previewSedimentCompositionPanel = new System.Windows.Forms.Panel();
+            this.previewSedimentCompositionPicBox = new System.Windows.Forms.PictureBox();
             this.mainPanel.SuspendLayout();
             this.quayStableAnalysisGrp.SuspendLayout();
             this.bedrockGrp.SuspendLayout();
@@ -199,8 +200,8 @@
             this.groupBox5.SuspendLayout();
             this.highSandMethodPanel.SuspendLayout();
             this.normalSandMethodPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.previewPicBox)).BeginInit();
-            this.previewPanel.SuspendLayout();
+            this.previewSedimentCompositionPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewSedimentCompositionPicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -740,7 +741,7 @@
             // 
             this.physicalParamPanel.Controls.Add(this.groupBox1);
             this.physicalParamPanel.Controls.Add(this.fluidTypeBackBtn);
-            this.physicalParamPanel.Location = new System.Drawing.Point(52, 639);
+            this.physicalParamPanel.Location = new System.Drawing.Point(17, 639);
             this.physicalParamPanel.Name = "physicalParamPanel";
             this.physicalParamPanel.Size = new System.Drawing.Size(500, 670);
             this.physicalParamPanel.TabIndex = 12;
@@ -810,7 +811,7 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(95, 318);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(24, 249);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
             this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
@@ -1009,7 +1010,7 @@
             // 
             this.rockStablePanel.Controls.Add(this.groupBox8);
             this.rockStablePanel.Controls.Add(this.rockStableBackBtn);
-            this.rockStablePanel.Location = new System.Drawing.Point(230, 545);
+            this.rockStablePanel.Location = new System.Drawing.Point(86, 545);
             this.rockStablePanel.Name = "rockStablePanel";
             this.rockStablePanel.Size = new System.Drawing.Size(500, 670);
             this.rockStablePanel.TabIndex = 12;
@@ -1376,7 +1377,7 @@
             // 
             this.rockbedPanel.Controls.Add(this.groupBox9);
             this.rockbedPanel.Controls.Add(this.button9);
-            this.rockbedPanel.Location = new System.Drawing.Point(184, 567);
+            this.rockbedPanel.Location = new System.Drawing.Point(68, 575);
             this.rockbedPanel.Name = "rockbedPanel";
             this.rockbedPanel.Size = new System.Drawing.Size(500, 682);
             this.rockbedPanel.TabIndex = 12;
@@ -1520,7 +1521,7 @@
             // 
             this.transSandMethodPanel.Controls.Add(this.groupBox5);
             this.transSandMethodPanel.Controls.Add(this.button1);
-            this.transSandMethodPanel.Location = new System.Drawing.Point(138, 589);
+            this.transSandMethodPanel.Location = new System.Drawing.Point(55, 589);
             this.transSandMethodPanel.Name = "transSandMethodPanel";
             this.transSandMethodPanel.Size = new System.Drawing.Size(500, 670);
             this.transSandMethodPanel.TabIndex = 12;
@@ -1706,37 +1707,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Back_Click);
             // 
-            // previewPicBox
-            // 
-            this.previewPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.previewPicBox.BackColor = System.Drawing.SystemColors.Control;
-            this.previewPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.previewPicBox.Location = new System.Drawing.Point(0, 0);
-            this.previewPicBox.Margin = new System.Windows.Forms.Padding(0);
-            this.previewPicBox.Name = "previewPicBox";
-            this.previewPicBox.Size = new System.Drawing.Size(24, 24);
-            this.previewPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.previewPicBox.TabIndex = 13;
-            this.previewPicBox.TabStop = false;
-            // 
-            // previewPanel
-            // 
-            this.previewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.previewPanel.AutoScroll = true;
-            this.previewPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.previewPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.previewPanel.Controls.Add(this.previewPicBox);
-            this.previewPanel.Location = new System.Drawing.Point(763, 651);
-            this.previewPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.previewPanel.Name = "previewPanel";
-            this.previewPanel.Size = new System.Drawing.Size(35, 29);
-            this.previewPanel.TabIndex = 14;
-            this.previewPanel.Visible = false;
-            // 
             // mapPicBox
             // 
             this.mapPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1752,12 +1722,48 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 15;
             // 
+            // previewCombo
+            // 
+            this.previewCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.previewCombo.DropDownWidth = 168;
+            this.previewCombo.FormattingEnabled = true;
+            this.previewCombo.Location = new System.Drawing.Point(545, 653);
+            this.previewCombo.Name = "previewCombo";
+            this.previewCombo.Size = new System.Drawing.Size(193, 20);
+            this.previewCombo.TabIndex = 16;
+            this.previewCombo.SelectedIndexChanged += new System.EventHandler(this.previewCombo_SelectedIndexChanged);
+            // 
+            // previewSedimentCompositionPanel
+            // 
+            this.previewSedimentCompositionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewSedimentCompositionPanel.Controls.Add(this.previewSedimentCompositionPicBox);
+            this.previewSedimentCompositionPanel.Location = new System.Drawing.Point(744, 652);
+            this.previewSedimentCompositionPanel.Name = "previewSedimentCompositionPanel";
+            this.previewSedimentCompositionPanel.Size = new System.Drawing.Size(59, 37);
+            this.previewSedimentCompositionPanel.TabIndex = 17;
+            this.previewSedimentCompositionPanel.Visible = false;
+            // 
+            // previewSedimentCompositionPicBox
+            // 
+            this.previewSedimentCompositionPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewSedimentCompositionPicBox.Location = new System.Drawing.Point(3, 3);
+            this.previewSedimentCompositionPicBox.Name = "previewSedimentCompositionPicBox";
+            this.previewSedimentCompositionPicBox.Size = new System.Drawing.Size(53, 27);
+            this.previewSedimentCompositionPicBox.TabIndex = 13;
+            this.previewSedimentCompositionPicBox.TabStop = false;
+            // 
             // MovableBedForm
             // 
             this.AcceptButton = this.ok;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.previewSedimentCompositionPanel);
+            this.Controls.Add(this.previewCombo);
             this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.rockStablePanel);
@@ -1767,7 +1773,6 @@
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
-            this.Controls.Add(this.previewPanel);
             this.Controls.Add(this.mapPicBox);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MovableBedForm";
@@ -1818,9 +1823,8 @@
             this.highSandMethodPanel.PerformLayout();
             this.normalSandMethodPanel.ResumeLayout(false);
             this.normalSandMethodPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.previewPicBox)).EndInit();
-            this.previewPanel.ResumeLayout(false);
-            this.previewPanel.PerformLayout();
+            this.previewSedimentCompositionPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.previewSedimentCompositionPicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1963,11 +1967,12 @@
         private System.Windows.Forms.RadioButton highSandTransportEquation1Rdo;
         private System.Windows.Forms.RadioButton highSandTransportEquation3Rdo;
         private System.Windows.Forms.RadioButton highSandTransportEquation2Rdo;
-        private System.Windows.Forms.PictureBox previewPicBox;
-        private System.Windows.Forms.Panel previewPanel;
         private System.Windows.Forms.GroupBox outputCtrl2DGrp;
         private System.Windows.Forms.GroupBox outputCtrl3DGrp;
         private System.Windows.Forms.CheckBox outputControlDensityInformation3DChk;
         private PictureBoxCtrl.GridPictureBox mapPicBox;
+        private System.Windows.Forms.ComboBox previewCombo;
+        private System.Windows.Forms.Panel previewSedimentCompositionPanel;
+        private System.Windows.Forms.PictureBox previewSedimentCompositionPicBox;
     }
 }

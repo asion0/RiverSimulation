@@ -409,9 +409,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.previewSpratePanel.Controls.Add(this.previewSpratePicBox);
-            this.previewSpratePanel.Location = new System.Drawing.Point(796, 649);
+            this.previewSpratePanel.Location = new System.Drawing.Point(706, 650);
             this.previewSpratePanel.Name = "previewSpratePanel";
-            this.previewSpratePanel.Size = new System.Drawing.Size(43, 35);
+            this.previewSpratePanel.Size = new System.Drawing.Size(59, 37);
             this.previewSpratePanel.TabIndex = 12;
             this.previewSpratePanel.Visible = false;
             // 
@@ -422,7 +422,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.previewSpratePicBox.Location = new System.Drawing.Point(3, 3);
             this.previewSpratePicBox.Name = "previewSpratePicBox";
-            this.previewSpratePicBox.Size = new System.Drawing.Size(0, 0);
+            this.previewSpratePicBox.Size = new System.Drawing.Size(53, 27);
             this.previewSpratePicBox.TabIndex = 13;
             this.previewSpratePicBox.TabStop = false;
             // 

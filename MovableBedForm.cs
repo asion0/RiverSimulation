@@ -34,21 +34,32 @@ namespace RiverSimulationApplication
             transSandMethodPanel.Visible = false;
 
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
-            if (p.inputGrid != null)
-            {
-                mapPicBox.Grid = p.inputGrid;
-            }
-            mapPicBox.Visible = true;
-            previewPanel.Size = mapPicBox.Size;
-            previewPanel.Top = mapPicBox.Top;
-            previewPanel.Left = mapPicBox.Left;
+            ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, p);
 
-            previewPicBox.Size = previewPanel.Size;
-            previewPicBox.Top = previewPanel.Top;
-            previewPicBox.Left = previewPanel.Left;
+            mapPicBox.Visible = true;
+
+            previewSedimentCompositionPanel.Size = mapPicBox.Size;
+            previewSedimentCompositionPanel.Top = mapPicBox.Top;
+            previewSedimentCompositionPanel.Left = mapPicBox.Left;
+            InitPreviewCombo();
+            previewCombo.SelectedIndex = (int)(PreviewType.GridMap) - 1;
+
 
             LoadStatus();
             UpdateStatus();
+        }
+
+        private void InitPreviewCombo()
+        {
+            previewCombo.Items.Add("格網預覽圖");
+            if (p.Is3DMode())
+            {   //3D Mode才有垂向格網分布圖
+                previewCombo.Items.Add("泥砂組成比例圖");
+            }
+            else
+            {
+                previewCombo.Enabled = false;
+            }
         }
 
         private void LoadStatus()
@@ -91,7 +102,7 @@ namespace RiverSimulationApplication
             surfaceErosionCriticalShearStressTxt.Text = p.surfaceErosionCriticalShearStress.ToString();
             massiveErosionChk.Checked = p.massiveErosion;
             massiveErosionCriticalShearStressTxt.Text = p.massiveErosionCriticalShearStress.ToString();
-            noErosionElevationChk.Checked = p.noErosionElevation;
+            noErosionElevationChk.Checked = p.noErosionElevationUse;
 
             //2.4 輸砂公式
             switch(p.sandTransportEquation)
@@ -177,6 +188,18 @@ namespace RiverSimulationApplication
             {
                 fullPanel.Visible = false;
             }
+        }
+
+        private enum PreviewType
+        {
+            None,
+            GridMap,    //格網地圖
+            SedimentComposition,     //垂向格網分布圖
+        }
+
+        private void SwitchPreivewCombo(PreviewType n)
+        {
+            previewCombo.SelectedIndex = (int)(n) - 1;
         }
 
         private void ok_Click(object sender, EventArgs e)
@@ -330,12 +353,23 @@ namespace RiverSimulationApplication
                 return false;
             }
 
-            if (p.sedimentCompositionArray != null && p.sedimentCompositionArray.Length != p.sedimentParticlesNumber)
+            if (p.sedimentCompositionArray != null && p.sedimentCompositionArray.GetLength(0) != p.sedimentParticlesNumber)
             {
                 MessageBox.Show("修改過泥砂顆粒數目，需重新輸入泥砂組成比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 p.sedimentCompositionArray = null;
-                p.suspendedLoadDepthAvgConcentration = null;
             }
+
+            if (p.sedimentParticleSize != null && p.sedimentParticleSize.GetLength(1) != p.sedimentParticlesNumber)
+            {
+                MessageBox.Show("修改過泥砂顆粒數目，需重新輸入泥砂粒徑！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.sedimentParticleSize = null;
+            }
+
+            if (!p.suspendedLoadDepthAvgConcentration.ArrayNull() && p.suspendedLoadDepthAvgConcentration.Array3D().GetLength(0) != p.sedimentParticlesNumber)
+            {
+                MessageBox.Show("修改過泥砂顆粒數目，需重新輸入懸浮載水深平均濃度！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.suspendedLoadDepthAvgConcentration.Clear();
+            }            
             return true;
         }
 
@@ -347,7 +381,7 @@ namespace RiverSimulationApplication
             }
             
             if ((p.bottomLevelArray != null && p.bottomLevelArray.Length != p.bottomLevelNumber) ||
-                (p.sedimentCompositionArray != null && p.sedimentCompositionArray.Length != p.bottomLevelNumber))
+                (p.sedimentCompositionArray != null && p.sedimentCompositionArray.GetLength(1) != p.bottomLevelNumber))
             {
                 MessageBox.Show("修改過底床分層數目，需重新輸入底床分層厚度和泥砂組成比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 p.bottomLevelArray = null;
@@ -383,9 +417,9 @@ namespace RiverSimulationApplication
                         return false;
                     }
                 }
-                if(p.noErosionElevation)
+                if (p.noErosionElevationUse)
                 {
-                    //Check p.noErosionElevationArray
+                    //Check p.noErosionElevation
                 }
             }
             return true;
@@ -592,32 +626,30 @@ namespace RiverSimulationApplication
                     //g.DrawRectangle(pen, rcLeftCell.X, rcLeftCell.Y, rcLeftCell.Width, SeabedLevelLineHeight);
                 }
             }
-
-
-
-
             g.Dispose();
-            previewPicBox.Image = picBoxBmp;
+            this.previewSedimentCompositionPicBox.Image = picBoxBmp;
 
-            int picW = (previewPanel.Width > w) ? previewPanel.Width : w;
-            int picH = (previewPanel.Height > h) ? previewPanel.Height : h;
-            previewPicBox.Width = picW;
-            previewPicBox.Height = picH;
+            int picW = (previewSedimentCompositionPicBox.Width > w) ? previewSedimentCompositionPicBox.Width : w;
+            int picH = (previewSedimentCompositionPicBox.Height > h) ? previewSedimentCompositionPicBox.Height : h;
+            previewSedimentCompositionPicBox.Width = picW;
+            previewSedimentCompositionPicBox.Height = picH;
 
-            previewPanel.AutoScrollMinSize = new Size(w, h); 
+            previewSedimentCompositionPanel.AutoScrollMinSize = new Size(w, h);
         }
 
 
 
         private void noScourElevationBtn_Click(object sender, EventArgs e)
         {
-
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(sedimentParticlesNumberBtn.Text, true, 26, 50);
-            if (DialogResult.OK == form.ShowDialog())
+            form.SetFormMode(noErosionElevationChk.Text, p.inputGrid.GetJ, p.inputGrid.GetI, "", "", "",
+                TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.noErosionElevation);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
             {
-
+                p.noErosionElevation = new RiverSimulationProfile.TwoInOne(form.GenericTwoInOneData());
             }
+
         }
 
 
@@ -744,14 +776,24 @@ namespace RiverSimulationApplication
             {
                 return;
             }
-
-
+            
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(sedimentParticlesNumberBtn.Text, 1, p.sedimentParticlesNumber, "", "泥砂粒徑", "",
+                TableInputForm.InputFormType.GenericDouble, 90, 120, true, true, false, p.sedimentParticleSize);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.sedimentParticleSize = (double[,])form.GenericDoubleData().Clone();
+            }
+            // */
+            /*
             TableInputForm form = new TableInputForm();
             form.SetFormMode(sedimentParticlesNumberBtn.Text, true, 1, p.sedimentParticlesNumber);
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                p.sedimentParticleSize = (double[,])form.GenericDoubleData().Clone();
             }
+            // */
         }
 
         private void seabedThicknessBtn_Click(object sender, EventArgs e)
@@ -768,6 +810,7 @@ namespace RiverSimulationApplication
             if (DialogResult.OK == r)
             {
                 p.bottomLevelArray = (double[])form.SeabedThicknessData().Clone();
+                SwitchPreivewCombo(PreviewType.SedimentComposition);
                 DrawPreview();
             }
         }
@@ -820,7 +863,7 @@ namespace RiverSimulationApplication
         private void noErosionElevationChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            p.noErosionElevation = chk;
+            p.noErosionElevationUse = chk;
             noErosionElevationBtn.Enabled = chk;
 
         }
@@ -917,6 +960,25 @@ namespace RiverSimulationApplication
             if (DialogResult.OK == form.ShowDialog())
             {
 
+            }
+        }
+
+        private void previewCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PreviewType n = (PreviewType)(previewCombo.SelectedIndex + 1);
+            //SwitchPreivewCombo(n);
+            switch (n)
+            {
+                case PreviewType.GridMap:
+                    mapPicBox.Visible = true;
+                    previewSedimentCompositionPanel.Visible = false;
+                    break;
+                case PreviewType.SedimentComposition:
+                    mapPicBox.Visible = false;
+                    previewSedimentCompositionPanel.Visible = true;
+                    break;
+                default:
+                    break;
             }
         }
 

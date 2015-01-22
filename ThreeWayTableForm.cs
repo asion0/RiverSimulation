@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace RiverSimulationApplication
 {
@@ -21,6 +22,7 @@ namespace RiverSimulationApplication
         public enum FormType
         {
             FlowQuantity,
+            WaterLevel,
             BottomBedLoadFlux,
         };
 
@@ -34,7 +36,7 @@ namespace RiverSimulationApplication
             this.iTitle = colName;
             //this.rowCount = rowCount;
 
-            if (formType == FormType.FlowQuantity)
+            if (formType == FormType.FlowQuantity || formType == FormType.WaterLevel)
             {
                 if (p.IsVariableFlowType())
                 {
@@ -79,12 +81,23 @@ namespace RiverSimulationApplication
 
         private void ok_Click(object sender, EventArgs e)
         {
+            if (DoConvert())
+            {
+                DialogResult = DialogResult.OK;
+            }
+        }
+
+        private bool DoConvert()
+        {
             bool isSuccess = false;
             switch (formType)
             {
                 case FormType.FlowQuantity:
                     isSuccess = ConvertFlowQuantityData();
                     break;
+                case FormType.WaterLevel:
+                    isSuccess = ConvertWaterLevelData();
+                    break;                
                 case FormType.BottomBedLoadFlux:
                     isSuccess = ConvertBottomBedLoadFluxData();
                     break;
@@ -93,12 +106,8 @@ namespace RiverSimulationApplication
             if (!isSuccess)
             {
                 MessageBox.Show("輸入資料格式錯誤！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
             }
-            else
-            {
-                DialogResult = DialogResult.OK;
-            }
+            return isSuccess;
         }
 
         private string title;
@@ -123,6 +132,39 @@ namespace RiverSimulationApplication
             }
         }
 
+        private bool ConvertWaterLevelData()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        for (int jw = jStart; jw < jStart + rowCount; ++jw)
+                        {
+                            o.Value2D()[0, jw - jStart] = Convert.ToDouble(v[iStart, jw].Value);
+                        }
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        for (int jw = jStart; jw < jStart + rowCount; ++jw)
+                        {
+                            for (int iw = iStart; iw < iStart + colCount; ++iw)
+                            {
+                                o.Array2D()[iw - iStart, jw - jStart] = Convert.ToDouble(v[iw, jw].Value);
+                            }
+                        }
+                        break;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+       
         private bool ConvertFlowQuantityData()
         {
             try
@@ -135,15 +177,19 @@ namespace RiverSimulationApplication
                     case RiverSimulationProfile.TwoInOne.Type.UseValue:
                         for (int jw = jStart; jw < jStart + rowCount; ++jw)
                         {
-                            o.dataArray2D()[0, jw - jStart] = Convert.ToDouble(v[iStart, jw].Value);
+                            o.Value2D()[0, jw - jStart] = Convert.ToDouble(v[iStart, jw].Value);
                         }
                         break;
                     case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        if (!AutoFinishConvertFlowQualityCell())
+                        {
+                            return false;
+                        }
                         for (int jw = jStart; jw < jStart + rowCount; ++jw)
                         {
                             for (int iw = iStart; iw < iStart + colCount; ++iw)
                             {
-                                o.dataArray2D()[iw - iStart, jw - jStart] = Convert.ToDouble(v[iw, jw].Value);
+                                o.Array2D()[iw - iStart, jw - jStart] = Convert.ToDouble(v[iw, jw].Value);
                             }
                         }
                         break;
@@ -155,6 +201,7 @@ namespace RiverSimulationApplication
             }
             return true;
         }
+
         private bool ConvertBottomBedLoadFluxData()
         {
             try
@@ -169,7 +216,7 @@ namespace RiverSimulationApplication
                         {
                             for (int kw = iStart; kw < iStart + p.sedimentParticlesNumber; ++kw)
                             {
-                                o.dataArray3D()[kw - iStart, 0, tw - jStart] = Convert.ToDouble(v[kw, tw].Value);
+                                o.Value3D()[kw - iStart, 0, tw - jStart] = Convert.ToDouble(v[kw, tw].Value);
                              }
                         }
                         break;
@@ -178,7 +225,7 @@ namespace RiverSimulationApplication
                         {
                             for (int jw = iStart; jw < iStart + p.inputGrid.GetJ; ++jw)
                             {
-                                o.dataArray3D()[tabIndex, jw - iStart, tw - jStart] = Convert.ToDouble(v[jw, tw].Value);
+                                o.Array3D()[tabIndex, jw - iStart, tw - jStart] = Convert.ToDouble(v[jw, tw].Value);
                             }
                         }
                         break;
@@ -194,27 +241,30 @@ namespace RiverSimulationApplication
         private void CreateData(object d)
         {
             RiverSimulationProfile.TwoInOne o = d as RiverSimulationProfile.TwoInOne;
-            if (formType == FormType.FlowQuantity)
+            RiverSimulationProfile.TwoInOne _d = null;
+            Debug.Assert(o != null);
+
+            if (formType == FormType.FlowQuantity || formType == FormType.WaterLevel)
             {
-                if (o == null || o.dataArray == null)
+                _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                _d = _data as RiverSimulationProfile.TwoInOne;
+                Debug.Assert(_d != null);
+                if (o.ValueNull() || o.ArrayNull())
                 {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
-                    _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
-                }
-                else
-                {
-                    _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                    //_data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
+                   _d.Create2D(colCount, rowCount);
                 }
             }
-             else if (formType == FormType.BottomBedLoadFlux)
+            else if (formType == FormType.BottomBedLoadFlux)
             {
-                if (o == null)
+                _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                _d = _data as RiverSimulationProfile.TwoInOne;
+                Debug.Assert(_d != null);
+                if (o.ValueNull() || o.ArrayNull())
                 {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
-                   // _data = new RiverSimulationProfile.TwoInOne(p.boundaryTimeNumber, p.sedimentParticlesNumber, p.inputGrid.GetJ); //[T, K, J]
-                    _data = new RiverSimulationProfile.TwoInOne(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber); //[K, J, T]
-                }
-                else
-                {
-                    _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                    // _data = new RiverSimulationProfile.TwoInOne(p.boundaryTimeNumber, p.sedimentParticlesNumber, p.inputGrid.GetJ); //[T, K, J]
+                    //_data = new RiverSimulationProfile.TwoInOne(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber); //[K, J, T]
+                    _d.Create3D(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber);
                 }
             }
         }
@@ -225,6 +275,7 @@ namespace RiverSimulationApplication
         private string iTitle;
         private string timeTitle = "邊界時間";
         private string buttonText;
+        //private string checkText;
         private int extraCol = 2;
         private int extraRow = 4;
 
@@ -243,7 +294,7 @@ namespace RiverSimulationApplication
                     dataGridView[iw, jw].ReadOnly = true;
                 }
             }
-            if (formType == FormType.FlowQuantity)
+            if (formType == FormType.FlowQuantity || formType == FormType.WaterLevel)
             {
                 InitTableFlowQuantity();
             }
@@ -293,11 +344,18 @@ namespace RiverSimulationApplication
                     }
                     break;
             }
-
             DataGridViewButtonCell b = new DataGridViewButtonCell();
             b.Value = buttonText;
             b.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView[0, jStart + rowCount + 1] = b;
+
+            if (formType == FormType.FlowQuantity)
+            {
+                DataGridViewCheckBoxCell c = new DataGridViewCheckBoxCell();
+                c.Value = o.check;
+                c.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView[0, jStart + rowCount] = c;
+            }
         }
 
         private void InitTableBottomBedLoadFlux()
@@ -359,7 +417,7 @@ namespace RiverSimulationApplication
         private void FillDataGridView()
         {
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if (formType == FormType.FlowQuantity)
+            if (formType == FormType.FlowQuantity || formType == FormType.WaterLevel)
             {
                 switch (o.type)
                 {
@@ -367,7 +425,7 @@ namespace RiverSimulationApplication
                     case RiverSimulationProfile.TwoInOne.Type.UseValue:
                         for (int jw = jStart; jw < jStart + rowCount; ++jw)
                         {
-                            dataGridView[iStart, jw].Value = o.dataArray2D()[0, jw - jStart].ToString();
+                            dataGridView[iStart, jw].Value = o.Value2D()[0, jw - jStart].ToString();
                             dataGridView[iStart, jw].ReadOnly = false;
                             dataGridView[iStart, jw].Style.BackColor = Color.LemonChiffon;
                         }
@@ -379,11 +437,12 @@ namespace RiverSimulationApplication
                         {
                             for (int iw = iStart; iw < iStart + colCount; ++iw)
                             {
-                                dataGridView[iw, jw].Value = o.dataArray2D()[iw - iStart, jw - jStart].ToString();
+                                dataGridView[iw, jw].Value = o.Array2D()[iw - iStart, jw - jStart].ToString();
                                 dataGridView[iw, jw].ReadOnly = false;
                                 dataGridView[iw, jw].Style.BackColor = Color.LemonChiffon;
                             }
                         }
+                        AutoFinishConvertFlowQualityCell();
                         dataGridView.CurrentCell = dataGridView[iStart, jStart];
                         break;
                 }
@@ -398,7 +457,7 @@ namespace RiverSimulationApplication
                         {
                             for (int kw = iStart; kw < iStart + p.sedimentParticlesNumber; ++kw)
                             {
-                                dataGridView[kw, tw].Value = o.dataArray3D()[kw - iStart, 0, tw - jStart].ToString();
+                                dataGridView[kw, tw].Value = o.Value3D()[kw - iStart, 0, tw - jStart].ToString();
                                 dataGridView[kw, tw].ReadOnly = false;
                                 dataGridView[kw, tw].Style.BackColor = Color.LemonChiffon;
                             }
@@ -410,7 +469,7 @@ namespace RiverSimulationApplication
                         {
                             for (int jw = iStart; jw < iStart + p.inputGrid.GetJ; ++jw)
                             {
-                                dataGridView[jw, tw].Value = o.dataArray3D()[tabIndex, jw - iStart, tw - jStart].ToString();
+                                dataGridView[jw, tw].Value = o.Array3D()[tabIndex, jw - iStart, tw - jStart].ToString();
                                 dataGridView[jw, tw].ReadOnly = false;
                                 dataGridView[jw, tw].Style.BackColor = Color.LemonChiffon;
                             }
@@ -430,7 +489,7 @@ namespace RiverSimulationApplication
                 {
                     for (int jw = iStart; jw < iStart + p.inputGrid.GetJ; ++jw)
                     {
-                        o.dataArray3D()[kw, jw - iStart, tw - jStart] = o.dataArray3D()[0, jw - iStart, tw - jStart];
+                        o.Array3D()[kw, jw - iStart, tw - jStart] = o.Array3D()[0, jw - iStart, tw - jStart];
                     }
                 }
             }
@@ -439,8 +498,13 @@ namespace RiverSimulationApplication
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if (formType == FormType.FlowQuantity && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
+            if ((formType == FormType.FlowQuantity || formType == FormType.WaterLevel) && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
             {   //均一值 與 逐點輸入切換
+                if (!ConvertFlowQuantityData())
+                {
+                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
                 switch (o.type)
                 {
                     case RiverSimulationProfile.TwoInOne.Type.None:
@@ -496,7 +560,57 @@ namespace RiverSimulationApplication
                     InitializeDataGridView();
                 }
             }
+            else if(formType == FormType.FlowQuantity && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount)
+            {   //進階模式勾選
+                dataGridView[0, jStart + rowCount].Value = !(bool)dataGridView[0, jStart + rowCount].Value;
+                o.check = (bool)dataGridView[0, jStart + rowCount].Value;
+            }
+            else if (formType == FormType.FlowQuantity && o.type == RiverSimulationProfile.TwoInOne.Type.UseArray &&
+                e.ColumnIndex >= iStart && e.ColumnIndex < iStart + colCount - 1 && e.RowIndex >= jStart && e.RowIndex < jStart + rowCount)
+            {
+                AutoFinishConvertFlowQualityCell();
+            }
         }
 
+        private bool AutoFinishConvertFlowQualityCell()
+        {
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            double sum = 0.0;
+            bool allPass = true;
+
+            for (int jw = jStart; jw < jStart + rowCount; ++jw)
+            {
+                if (!CalSumOfOneRow(jw, ref sum))
+                {
+                    allPass = false;
+                    continue;
+                }
+                dataGridView[iStart + colCount - 1, jw].Value = (100.0 - sum).ToString();
+            }
+
+            return allPass;
+        }
+
+        private bool CalSumOfOneRow(int index, ref double sum)
+        {
+            sum = 0.0;
+            for (int iw = iStart; iw < iStart + colCount - 1; ++iw)
+            {
+                try
+                {
+                    sum += Convert.ToDouble(dataGridView[iw, index].Value);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            if (sum > 100.0)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

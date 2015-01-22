@@ -18,7 +18,6 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
-
         RiverGrid gridData = null;
 
         bool hideGenerate = false;
@@ -81,44 +80,36 @@ namespace RiverSimulationApplication
             }         
         }
 
-        /*
-        private void InitializeDataGridView(DataGridView g, int xNum, int yNum)
+        private bool DoConvert()
         {
-            int columnCount = xNum;
-            int rowCount = yNum;
-            // Create an unbound DataGridView by declaring a column count.
-            g.ColumnCount = columnCount;
-            g.ColumnHeadersVisible = true;
-
-            // Set the column header style.
-            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
-
-            columnHeaderStyle.BackColor = Color.Beige;
-            //columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
-            g.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
-
-            string[] row = new string[columnCount];
-            // Set the column header names.
-            int c = 1;
-            for (int i = 0; i < columnCount; ++i)
+            bool isSuccess = ConvertTableData();
+            if (!isSuccess)
             {
-                g.Columns[i].Name = c.ToString();
-                g.Columns[i].Width = 48;
-                //row[i] = "1";
-                c++;
+                MessageBox.Show("輸入資料格式錯誤！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            g.RowHeadersWidth = 64;
-            int n1 = g.Rows.Count;
-            g.Rows.Clear();
-            n1 = g.Rows.Count;
-
-            for (int i = 0; i < rowCount; i++)
-            {
-                g.Rows.Add(row);
-                g.Rows[i].HeaderCell.Value = (i + 1).ToString();
-            }
+            return isSuccess;
         }
-        */
+
+        private bool ConvertTableData()
+        {
+            try
+            {
+                for (int i = 0; i < rowCount; ++i)
+                {
+                    for (int j = 0; j < colCount; ++j)
+                    {
+                        gridData.inputCoor[i, j].x = Convert.ToDouble(dataGridViewX[j, i].Value);
+                        gridData.inputCoor[i, j].y = Convert.ToDouble(dataGridViewY[j, i].Value);
+                        gridData.inputCoor[i, j].z = Convert.ToDouble(dataGridViewZ[j, i].Value);
+                    }
+                }  
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
 
         private void GridNum_TextChanged(object sender, EventArgs e)
         {
@@ -180,6 +171,14 @@ namespace RiverSimulationApplication
         private void valueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridViewUtility.FillSelectedValue(GetCurrentDataGridView());
+        }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+            if (DoConvert())
+            {
+                DialogResult = DialogResult.OK;
+            }
         }
     }
 }

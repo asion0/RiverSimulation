@@ -254,6 +254,7 @@
             this.ok.TabIndex = 5;
             this.ok.Text = "完成";
             this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // clearAllBtn
             // 

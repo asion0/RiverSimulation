@@ -227,6 +227,7 @@ namespace RiverSimulationApplication
             {
                 gp.ClearMapBackground();
             }
+
         }
 
         public enum CheckType

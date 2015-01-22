@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PictureBoxCtrl;
+using System.Diagnostics;
 
 namespace RiverSimulationApplication
 {
@@ -95,26 +96,27 @@ namespace RiverSimulationApplication
                     inputFormType == InputFormType.TwoInOneDoubleGreaterThanOrEqualZero)
             {
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-                if (o != null)
-                {
-                    switch (o.type)
-                    {
-                        case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                            singleValueRdo.Checked = true;
-                            break;
-                        case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                            tableValueRdo.Checked = true;
-                            break;
-                        case RiverSimulationProfile.TwoInOne.Type.None:
-                            singleValueRdo.Checked = false;
-                            tableValueRdo.Checked = false;
-                            break;
-                    }
-                    singleValueTxt.Text = o.dataValue.ToString();
-                    DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
-                        tableName, colName, rowName, nocolNum, noRowNum);
-                }
+                Debug.Assert(o != null);
 
+                singleValueTxt.Text = o.ValueDouble()[0].ToString();
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    tableName, colName, rowName, nocolNum, noRowNum);
+
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        singleValueRdo.Checked = true;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        tableValueRdo.Checked = true;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                        singleValueRdo.Checked = false;
+                        tableValueRdo.Checked = false;
+                        singleValueTxt.Enabled = false;
+                        dataGridView.Enabled = false;
+                        break;
+                }
             }
             else if (inputFormType == InputFormType.GenericDouble ||
                     inputFormType == InputFormType.GenericDoubleGreaterThanZero ||
@@ -126,45 +128,48 @@ namespace RiverSimulationApplication
             else if (inputFormType == InputFormType.FlowConditionsSettingConstant )
             {
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-                if (o != null)
+                Debug.Assert(o != null);
+
+                singleValueTxt.Text = o.ValueDouble()[0].ToString();
+                DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+                    "", colName, rowName, nocolNum, true);
+                dataGridView.Rows[0].HeaderCell.Value = tableName;
+
+                switch (o.type)
                 {
-                    switch (o.type)
-                    {
-                        case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                            singleValueRdo.Checked = true;
-                            break;
-                        case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                            tableValueRdo.Checked = true;
-                            break;
-                        case RiverSimulationProfile.TwoInOne.Type.None:
-                            singleValueRdo.Checked = false;
-                            tableValueRdo.Checked = false;
-                            break;
-                    }
-                    singleValueTxt.Text = o.dataValue.ToString();
-                    DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
-                        "", colName, rowName, nocolNum, true);
-                    dataGridView.Rows[0].HeaderCell.Value = tableName;
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        singleValueRdo.Checked = true;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        tableValueRdo.Checked = true;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                        singleValueRdo.Checked = false;
+                        tableValueRdo.Checked = false;
+                        singleValueTxt.Enabled = false;
+                        dataGridView.Enabled = false;
+                        break;
                 }
             } 
             else if(inputFormType == InputFormType.FlowConditionsSettingVariable)
             {
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-                if (o != null)
+                Debug.Assert(o != null);
+
+                switch (o.type)
                 {
-                    switch (o.type)
-                    {
-                        case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                            singleValueRdo.Checked = true;
-                            break;
-                        case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                            tableValueRdo.Checked = true;
-                            break;
-                        case RiverSimulationProfile.TwoInOne.Type.None:
-                            singleValueRdo.Checked = false;
-                            tableValueRdo.Checked = false;
-                            break;
-                    }
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        singleValueRdo.Checked = true;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        tableValueRdo.Checked = true;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                        singleValueRdo.Checked = false;
+                        tableValueRdo.Checked = false;
+                        singleValueTxt.Enabled = false;
+                        dataGridView.Enabled = false;
+                        break;
                 }
                 singleValueTxt.Visible = (inputFormType == InputFormType.FlowConditionsSettingConstant) ? true :false;
             }
@@ -217,7 +222,6 @@ namespace RiverSimulationApplication
 
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             DataGridViewUtility.PasteFromeExcel(dataGridView);
         }
 
@@ -331,18 +335,23 @@ namespace RiverSimulationApplication
         private void CreateData(object d)
         {
             RiverSimulationProfile.TwoInOne o = d as RiverSimulationProfile.TwoInOne;
+            RiverSimulationProfile.TwoInOne _d = null;
+            Debug.Assert(o != null);
             switch (_inputFormType)
             {
                 case InputFormType.TwoInOneDouble:
                 case InputFormType.TwoInOneDoubleGreaterThanZero:
                 case InputFormType.TwoInOneDoubleGreaterThanOrEqualZero:
-                    if (o == null || o.dataArray == null || o.dataArray2D().GetLength(0) != colCount || o.dataArray2D().GetLength(1) != rowCount)
+                    _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                    _d = _data as RiverSimulationProfile.TwoInOne;
+                    Debug.Assert(_d != null);
+                    if(o.ValueNull() || o.ArrayNull())
                     {
-                        _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
+                        (_data as RiverSimulationProfile.TwoInOne).CreateDouble2D(colCount, rowCount);
                     }
-                    else
+                    if (_d.Array2D().GetLength(0) != colCount || _d.Array2D().GetLength(1) != rowCount)
                     {
-                        _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                        Debug.Assert(false);
                     }
                     break;
                 case InputFormType.GenericDouble:
@@ -410,14 +419,12 @@ namespace RiverSimulationApplication
                     break;
                 case InputFormType.FlowConditionsSettingConstant:
                 case InputFormType.FlowConditionsSettingVariable:
-                    //if (o == null || o.dataArray == null || o.dataArray.GetLength(0) != colCount + 1 || o.dataArray.GetLength(1) != rowCount)
-                   if (o == null || o.dataArray == null)
-                        {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
-                        _data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
-                    }
-                    else
-                    {
-                        _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                    _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                    _d = _data as RiverSimulationProfile.TwoInOne;
+                    if (o.ValueNull() || o.ArrayNull())
+                    {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
+                        _d.CreateDouble2D(colCount, rowCount);
+                       // (_data as RiverSimulationProfile.TwoInOne).dataValue = new double[colCount, rowCount];
                     }
                     break;
             }
@@ -446,14 +453,14 @@ namespace RiverSimulationApplication
                     {
                         for (int j = 0; j < rowCount; ++j)
                         {
-                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray2D()[i, j].ToString();
+                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).Array2D()[i, j].ToString();
                         }
                     }
                     break;
                 case InputFormType.FlowConditionsSettingConstant:
                     for (int i = 0; i < dataGridView.ColumnCount; ++i)
                     {
-                        dataGridView[i, 0].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray2D()[i, 0].ToString();
+                        dataGridView[i, 0].Value = (_data as RiverSimulationProfile.TwoInOne).Array2D()[i, 0].ToString();
                     }
                     break;
                 case InputFormType.FlowConditionsSettingVariable:
@@ -461,7 +468,7 @@ namespace RiverSimulationApplication
                     {
                         for (int j = 0; j < dataGridView.RowCount; ++j)
                         {
-                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).dataArray2D()[i - 1, j].ToString();
+                            dataGridView[i, j].Value = (_data as RiverSimulationProfile.TwoInOne).Array2D()[i - 1, j].ToString();
                         }
                     }
 
@@ -701,12 +708,12 @@ namespace RiverSimulationApplication
                 {
                     for (int j = 0; j < rowCount; ++j)
                     {
-                        o.dataArray2D()[i, j] = Convert.ToDouble(v[i, j].Value);
+                        o.Array2D()[i, j] = Convert.ToDouble(v[i, j].Value);
                     }
                 }
                 if (singleValueTxt.Enabled)
                 {
-                    o.dataValue = Convert.ToDouble(singleValueTxt.Text);
+                    o.ValueDouble()[0] = Convert.ToDouble(singleValueTxt.Text);
                 }
             }
             catch
@@ -744,11 +751,11 @@ namespace RiverSimulationApplication
                 RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
                 for (int i = 0; i < v.ColumnCount; ++i)
                 {
-                    o.dataArray2D()[i, 0] = Convert.ToDouble(v[i, 0].Value);
+                    o.Array2D()[i, 0] = Convert.ToDouble(v[i, 0].Value);
                 }
                 if (singleValueTxt.Enabled)
                 {
-                    o.dataValue = Convert.ToDouble(singleValueTxt.Text);
+                    o.ValueDouble()[0] = Convert.ToDouble(singleValueTxt.Text);
                 }
             }
             catch
@@ -768,7 +775,7 @@ namespace RiverSimulationApplication
                 {
                     for (int j = 0; j < v.RowCount; ++j)
                     {
-                        o.dataArray2D()[i - 1, j] = Convert.ToDouble(v[i, j].Value);
+                        o.Array2D()[i - 1, j] = Convert.ToDouble(v[i, j].Value);
                     }
                 }
             }
@@ -1004,6 +1011,7 @@ namespace RiverSimulationApplication
             bool chk = (sender as RadioButton).Checked;
             if (!chk)
             {
+                singleValueTxt.Enabled = false;
                 return;
             }
 
@@ -1045,6 +1053,7 @@ namespace RiverSimulationApplication
             bool chk = (sender as RadioButton).Checked;
             if (!chk)
             {
+                dataGridView.Enabled = false;
                 return;
             }
 
@@ -1069,16 +1078,6 @@ namespace RiverSimulationApplication
 
                 FillDataGridView();
             }
-            //else if (inputFormType == InputFormType.FlowConditionsSettingConstant)
-            //{
-            //    dataGridView.Enabled = true;
-            //    dataGridView.Rows.Clear();
-
-            //    DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
-            //        "", colName, rowName, nocolNum, true);
-            //    dataGridView.Rows[0].HeaderCell.Value = tableName;
-            //    FillDataGridView();
-            //}
             else
             {
                 singleValueTxt.Enabled = false;

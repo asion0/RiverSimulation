@@ -27,6 +27,7 @@ namespace RiverSimulationApplication
         private void InitialConditionsForm_Load(object sender, EventArgs e)
         {
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
+            ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, p);
 
             LoadStatus();
             UpdateStatus();

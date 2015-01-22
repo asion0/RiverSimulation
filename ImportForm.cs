@@ -39,14 +39,14 @@ namespace RiverSimulationApplication
             previewSpratePanel.Size = mapPicBox.Size;
             previewSpratePanel.Top = mapPicBox.Top;
             previewSpratePanel.Left = mapPicBox.Left;
-            InitreviewCombo();
+            InitPreviewCombo();
             previewCombo.SelectedIndex = (int)(PreviewType.GridMap) - 1;
 
             LoadStatus();
             UpdateStatus();
         }
 
-        private void InitreviewCombo()
+        private void InitPreviewCombo()
         {
             previewCombo.Items.Add("格網預覽圖");
             if (p.Is3DMode())
@@ -62,6 +62,19 @@ namespace RiverSimulationApplication
         private void LoadStatus()
         {
             verticalLevelNumberTxt.Text = p.verticalLevelNumber.ToString();
+            switch (p.GetBackgroundMapType())
+            {
+                case RiverSimulationProfile.BackgroundMapType.None:
+                    noBgRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.BackgroundMapType.GoogleStaticMap:
+                    useGoogleBgRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.BackgroundMapType.ImportImage:
+                    selectBgRdo.Checked = true;
+                    break;
+
+            }
         }
 
         private void UpdateStatus()
@@ -196,10 +209,9 @@ namespace RiverSimulationApplication
         private void noBgRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            //RiverSimulationProfile.profile.ClearBackgroundBitmap();
             if (chk)
             {
+                p.ClearBackgroundMapType();
                 mapPicBox.ClearMapBackground();
                 SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
@@ -209,10 +221,10 @@ namespace RiverSimulationApplication
         private void useGoogleBgRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
             if (chk)
             {
-                RiverSimulationProfile.profile.DownloadGoogleStaticMap();
+                p.DownloadGoogleStaticMap();
                 mapPicBox.SetMapBackground(p.tl, p.tr, p.bl, p.br);
                 SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
@@ -223,11 +235,11 @@ namespace RiverSimulationApplication
         private void selectBgRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
             selectBgBtn.Enabled = chk;
             if (chk)
             {
-                RiverSimulationProfile.profile.SetImportImageMode();
+                p.SetImportImageMode();
                 mapPicBox.SetMapBackground(p.imagePath, p.sourceE, p.sourceN, p.sourceW, p.sourceH);
                 SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
@@ -410,7 +422,7 @@ namespace RiverSimulationApplication
 
         private void DrawPreview()
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
             if (p.levelProportion == null)
             {
                 return;

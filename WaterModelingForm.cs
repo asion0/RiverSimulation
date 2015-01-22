@@ -31,15 +31,13 @@ namespace RiverSimulationApplication
             physicalParamPanel.Visible = false;     //隱藏物理參數面板
 
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
-            if (p.inputGrid != null)
-            {
-                mapPicBox.Grid = p.inputGrid;
-            }
+            ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, p);
             mapPicBox.Visible = true;
 
             LoadStatus();
             UpdateStatus();
         }
+
 
         private void LoadStatus()
         {
@@ -79,7 +77,6 @@ namespace RiverSimulationApplication
             viscosityFactorAdditionInSideDirectionTxt.Text = p.viscosityFactorAdditionInSideDirection.ToString();
            
             //1.2 物理參數 =========================================
-
             switch (p.roughnessType)
             {
                 case RiverSimulationProfile.RoughnessType.ManningN:
@@ -116,6 +113,9 @@ namespace RiverSimulationApplication
                     twinEquationRdo.Checked = false;
                     break;
             }
+            tvInMainstreamDirectionTxt.Text = p.tvInMainstreamDirection.ToString();
+            tvInSideDirectionTxt.Text = p.tvInSideDirection.ToString();
+
             zeroEquationTypeCombo.SelectedIndex = (int)p.zeroEquationType;
 
             //1.2.3 其他
@@ -288,8 +288,21 @@ namespace RiverSimulationApplication
             //zeroEquationTypeCombo.SelectedIndex = (int)p.zeroEquationType;
 
             ////1.2.3 其他
+            if (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine)
+            {
+                if (!ControllerUtility.CheckConvertDouble(ref p.tvInMainstreamDirection, tvInMainstreamDirectionTxt, "請輸入正確的主流方向紊流黏滯係數！", ControllerUtility.CheckType.NoCheck))
+                {
+                    return false;
+                }
+                if (!ControllerUtility.CheckConvertDouble(ref p.tvInSideDirection, tvInSideDirectionTxt, "請輸入正確的側方向紊流黏滯係數！", ControllerUtility.CheckType.NoCheck))
+                {
+                    return false;
+                }
+            }
             //gravityConstantTxt.Text = p.gravityConstant.ToString();
             //waterDensityTxt.Text = p.waterDensity.ToString();
+            //tvInMainstreamDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
+            //tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
 
             if (!ControllerUtility.CheckConvertDouble(ref p.gravityConstant, gravityConstantTxt, "", ControllerUtility.CheckType.NoCheck))
             {
@@ -302,6 +315,7 @@ namespace RiverSimulationApplication
             }
             return true;
         }
+
         private bool ConvertStructureSetNumber()
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;

@@ -24,6 +24,7 @@ namespace RiverSimulationApplication
             FlowQuantity,
             WaterLevel,
             BottomBedLoadFlux,
+            DepthAverageConcentration,
         };
 
         public void SetFormMode(FormType t, string title, string colName, int colCount, int rowCount,  RiverSimulationProfile profile, object initData = null)
@@ -70,7 +71,16 @@ namespace RiverSimulationApplication
                     this.extraCol = 1;
                 }
                 this.colCount = (p.sedimentParticlesNumber > p.inputGrid.GetJ) ? p.sedimentParticlesNumber : p.inputGrid.GetJ;
-            } 
+            }
+            else if (formType == FormType.DepthAverageConcentration)
+            {
+                this.iStart = 1;
+                this.jStart = 2;
+                this.rowCount = rowCount;
+                this.extraCol = 2;
+
+                this.colCount = (p.sedimentParticlesNumber > p.inputGrid.GetJ) ? p.sedimentParticlesNumber : p.inputGrid.GetJ;
+            }             
             CreateData(initData);
         }
 
@@ -101,6 +111,9 @@ namespace RiverSimulationApplication
                 case FormType.BottomBedLoadFlux:
                     isSuccess = ConvertBottomBedLoadFluxData();
                     break;
+                case FormType.DepthAverageConcentration:
+                    isSuccess = ConvertDepthAverageConcentrationData();
+                    break;            
             }
 
             if (!isSuccess)
@@ -238,6 +251,42 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        private bool ConvertDepthAverageConcentrationData()
+        {
+            try
+            {
+                DataGridView v = dataGridView;
+                RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        for (int tw = jStart; tw < jStart + 1; ++tw)
+                        {
+                            for (int kw = iStart; kw < iStart + p.sedimentParticlesNumber; ++kw)
+                            {
+                                o.Value3D()[kw - iStart, 0, 0] = Convert.ToDouble(v[kw, tw].Value);
+                            }
+                        }
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        for (int jw = jStart; jw < jStart + p.inputGrid.GetI; ++jw)
+                        {
+                            for (int iw = iStart; iw < iStart + p.inputGrid.GetJ; ++iw)
+                            {
+                                o.Array3D()[tabIndex, iw - iStart, jw - jStart] = Convert.ToDouble(v[iw, jw].Value);
+                            }
+                        }
+                        break;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         private void CreateData(object d)
         {
             RiverSimulationProfile.TwoInOne o = d as RiverSimulationProfile.TwoInOne;
@@ -267,6 +316,16 @@ namespace RiverSimulationApplication
                     _d.Create3D(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber);
                 }
             }
+            else if (formType == FormType.DepthAverageConcentration)
+            {
+                _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
+                _d = _data as RiverSimulationProfile.TwoInOne;
+                Debug.Assert(_d != null);
+                if (o.ValueNull() || o.ArrayNull())
+                {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
+                    _d.Create3D(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.inputGrid.GetI);
+                }
+            }        
         }
 
         private FormType formType = FormType.FlowQuantity;
@@ -302,7 +361,10 @@ namespace RiverSimulationApplication
             {
                 InitTableBottomBedLoadFlux();
             }
-
+            else if (formType == FormType.DepthAverageConcentration)
+            {
+                InitTableDepthAverageConcentration();
+            }
             FillDataGridView();
         }
 
@@ -414,6 +476,63 @@ namespace RiverSimulationApplication
             
         }
 
+        private void InitTableDepthAverageConcentration()
+        {
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (o == null)
+            {
+                return;
+            }
+
+
+
+            
+
+            DataGridViewButtonCell b = null;
+            switch (o.type)
+            {
+                case RiverSimulationProfile.TwoInOne.Type.None:
+                case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                    buttonText = "進階 - 逐點輸入";
+                    for (int iw = iStart; iw < iStart + p.sedimentParticlesNumber; ++iw)
+                    {   //填入橫排標題，泥砂數目(K)
+                        dataGridView[iw, 1].Value = iTitle + (iw - iStart + 1).ToString();
+                        dataGridView[iw, 1].Style.BackColor = colHeaderColor;
+                    }
+                    break;
+                case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                    //顯示I左方垂直索引
+                    dataGridView[0, 1].Value = "";
+                    dataGridView[0, 1].Style.BackColor = rowHeaderColor;
+                    for (int jw = jStart; jw < jStart + p.inputGrid.GetI; ++jw)
+                    {
+                        dataGridView[0, jw].Value = (jw - jStart).ToString();
+                        dataGridView[0, jw].Style.BackColor = rowHeaderColor;
+                    }
+                    buttonText = "均一值";
+                    for (int iw = iStart; iw < iStart + p.inputGrid.GetJ; ++iw)
+                    {   //填入橫排標題，I個
+                        dataGridView[iw, 1].Value = (iw - iStart + 1).ToString();
+                        dataGridView[iw, 1].Style.BackColor = colHeaderColor;
+                    }
+                    for (int iw = iStart; iw < iStart + p.sedimentParticlesNumber; ++iw)
+                    {   //填入標籤標題，K個
+                        dataGridView[iw, 0].Value = iTitle + (iw - iStart + 1).ToString();
+                        dataGridView[iw, 0].Style.BackColor = (tabIndex == (iw - iStart)) ? tabActiveColor : tabItemColor;
+                    }
+                    //b = new DataGridViewButtonCell();
+                    //b.Value = "套用到全部";
+                    //b.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //dataGridView[1, jStart + rowCount + 1] = b;
+                    break;
+            }
+            b = new DataGridViewButtonCell();
+            b.Value = buttonText;
+            b.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView[0, jStart + rowCount + 1] = b;
+            
+        }
+
         private void FillDataGridView()
         {
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
@@ -478,6 +597,37 @@ namespace RiverSimulationApplication
                         break;
                 }
             }
+            else if (formType == FormType.DepthAverageConcentration)
+            {
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        for (int jw = jStart; jw < jStart + 1; ++jw)
+                        {
+                            for (int iw = iStart; iw < iStart + p.sedimentParticlesNumber; ++iw)
+                            {
+                                dataGridView[iw, jw].Value = o.Value3D()[iw - iStart, 0, 0].ToString();
+                                dataGridView[iw, jw].ReadOnly = false;
+                                dataGridView[iw, jw].Style.BackColor = Color.LemonChiffon;
+                            }
+                        }
+                        dataGridView.CurrentCell = dataGridView[iStart, jStart];
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        for (int jw = jStart; jw < jStart + p.inputGrid.GetI; ++jw)
+                        {
+                            for (int iw = iStart; iw < iStart + p.inputGrid.GetJ; ++iw)
+                            {
+                                dataGridView[iw, jw].Value = o.Array3D()[tabIndex, iw - iStart, jw - jStart].ToString();
+                                dataGridView[iw, jw].ReadOnly = false;
+                                dataGridView[iw, jw].Style.BackColor = Color.LemonChiffon;
+                            }
+                        }
+                        dataGridView.CurrentCell = dataGridView[iStart, jStart];
+                        break;
+                }
+            }
         }
 
         private void BottomBedLoadFluxApplyAll()
@@ -536,6 +686,25 @@ namespace RiverSimulationApplication
                 }
                 InitializeDataGridView();
             }
+            else if (formType == FormType.DepthAverageConcentration && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
+            {   //均一值 與 逐點輸入切換
+                if (!ConvertDepthAverageConcentrationData())
+                {
+                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
+                        break;
+                }
+                InitializeDataGridView();
+            }
             else if (formType == FormType.BottomBedLoadFlux && e.ColumnIndex == 1 && e.RowIndex == jStart + rowCount + 1)
             {   //套用到全部
                 if (!ConvertBottomBedLoadFluxData())
@@ -560,7 +729,21 @@ namespace RiverSimulationApplication
                     InitializeDataGridView();
                 }
             }
-            else if(formType == FormType.FlowQuantity && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount)
+            else if (formType == FormType.DepthAverageConcentration && e.RowIndex == 0 && e.ColumnIndex >= iStart && e.ColumnIndex < iStart + p.sedimentParticlesNumber && o.type == RiverSimulationProfile.TwoInOne.Type.UseArray)
+            {   //三維陣列標籤列
+                int index = e.ColumnIndex - iStart;
+                if (tabIndex != index)
+                {
+                    if (!ConvertDepthAverageConcentrationData())
+                    {
+                        MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    tabIndex = index;
+                    InitializeDataGridView();
+                }
+            }
+            else if (formType == FormType.FlowQuantity && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount)
             {   //進階模式勾選
                 dataGridView[0, jStart + rowCount].Value = !(bool)dataGridView[0, jStart + rowCount].Value;
                 o.check = (bool)dataGridView[0, jStart + rowCount].Value;

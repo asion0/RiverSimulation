@@ -561,11 +561,7 @@ namespace RiverSimulationApplication
         //3. 初始條件
         //3.1 水理模組 =========================================
         public TwoInOne depthAverageFlowSpeedU;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        //public double[,] depthAverageFlowSpeedUArray;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
-
         public TwoInOne depthAverageFlowSpeedV;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-        //public double[,] depthAverageFlowSpeedVArray;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
-
         public TwoInOne waterLevel;      //3.1.3 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
 
         public enum VerticalVelocitySliceType
@@ -576,9 +572,10 @@ namespace RiverSimulationApplication
         }
         public VerticalVelocitySliceType verticalVelocitySlice;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
-        //3.2 動床模組
-        public List<double> depthAverageConcentration;              //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入
-        public List<double[,]> depthAverageConcentrationList;       //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
+        //3.2 動床模組 =========================================
+        //public List<double> depthAverageConcentration;              //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入
+        //public List<double[,]> depthAverageConcentrationList;       //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
+        public TwoInOne depthAverageConcentration;      //3.2.1 水深平均濃 二選一  總共有K 個粒徑種類，每種粒徑都要輸入。若為均一值，則每種粒徑分別輸入單一值；若為逐點給，則每種粒徑都要將矩陣(I,J)輸入完整，即有K 個矩陣(I,J)要輸入。
 
         public enum VerticalConcentrationSliceType
         {
@@ -1046,22 +1043,13 @@ namespace RiverSimulationApplication
 
             //3. 初始條件
             //3.1 水理模組 =========================================
-            //depthAverageFlowSpeedU = -1;           //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-            //depthAverageFlowSpeedUArray = null;      //3.1.1 水深平均流速-U 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
             depthAverageFlowSpeedU = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim);
-
-            //depthAverageFlowSpeedV = -1;           //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 0：均一值，逐點給：-1
-            //depthAverageFupFlowConditionlowSpeedVArray = null;      //3.1.2 水深平均流速-V 二選一m/s 實數 實數 8 格a. 逐點給，參數 形式為矩陣(I,J)
             depthAverageFlowSpeedV = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim);
-
             waterLevel = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim); ;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
-
             verticalVelocitySlice = VerticalVelocitySliceType.None;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
             //3.2 動床模組
-            depthAverageConcentration = null;              //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入
-            depthAverageConcentrationList = null;           //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
-
+            depthAverageConcentration = new TwoInOne(TwoInOne.ValueType.ThreeDim, TwoInOne.ArrayType.ThreeDim); ;      //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
             verticalConcentrationSlice = VerticalConcentrationSliceType.None;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
             //4. 邊界條件

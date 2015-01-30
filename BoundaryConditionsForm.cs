@@ -669,7 +669,14 @@ namespace RiverSimulationApplication
 
         private void upBoundaryElevationInputBtn_Click(object sender, EventArgs e)
         {
-
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode("上游邊界底床底床高程", p.inputGrid.GetJ, p.boundaryTimeNumber, "邊界時間", "", "邊界時間 ",
+                TableInputForm.InputFormType.GenericDoubleGreaterThanOrEqualZero, 90, 120, true, false, false, p.upBoundaryElevationArray);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.upBoundaryElevationArray = (double[,])form.GenericDoubleData().Clone();
+            }
         }
 
         private void bottomBedParticleSizeRatioBtn_Click(object sender, EventArgs e)

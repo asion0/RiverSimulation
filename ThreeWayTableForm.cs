@@ -795,5 +795,20 @@ namespace RiverSimulationApplication
 
             return true;
         }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewUtility.CopyToClipboard(dataGridView);
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewUtility.PasteFromeExcel(dataGridView);
+        }
+
+        private void ValueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewUtility.FillSelectedValue(dataGridView);
+        }
     }
 }

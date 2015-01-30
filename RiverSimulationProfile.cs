@@ -1340,7 +1340,7 @@ namespace RiverSimulationApplication
                     }
                     else
                     {
-                        sb.AppendFormat("{0,8}", curvatureRadius[i, j].ToString());
+                        sb.AppendFormat("{0,8}", curvatureRadius[j, i].ToString());
                     }
                     if (++count == LineMaxCount)
                     {
@@ -1440,8 +1440,87 @@ namespace RiverSimulationApplication
             }
 
             //註17：邊界條件設定值
-            //sb.AppendFormat("{0,16}", (j + 1).ToString());
+            count = 0;
+            for (int t = 0; t < boundaryTime.Length; ++t)
+            {
+                if (count == 8)
+                {
+                    sb.AppendFormat("\n");
+                }
+                sb.AppendFormat("{0,16}", (boundaryTime[t]).ToString());
+                count = 0;
+                for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+                {   //主流方向流量
+                    if (count == 8)
+                    {
+                        sb.AppendFormat("\n{0,16}", " ");
+                        count = 0;
+                    }
+                    double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subMainFlowQuantity : superMainFlowQuantity);
+                    sb.AppendFormat("{0,8}", flowQ);
+                    ++count;
+                }
+                count = 8;
 
+                for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+                {   //側流方向流量
+                    if (count == 8)
+                    {
+                        sb.AppendFormat("\n{0,16}", " ");
+                        count = 0;
+                    }
+                    double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
+                    sb.AppendFormat("{0,8}", flowQ);
+                    ++count;
+                }
+                count = 8;
+
+                for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+                {   //上游水位
+                    if (count == 8)
+                    {
+                        sb.AppendFormat("\n{0,16}", " ");
+                        count = 0;
+                    }
+                    double level = CalcWaterLevel(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
+                    sb.AppendFormat("{0,8}", level);
+                    ++count;
+                }
+                count = 8;
+
+                if (downFlowCondition == FlowConditionType.SubCriticalFlow)
+                {
+                    for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+                    {   //上游水位
+                        if (count == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            count = 0;
+                        }
+                        double level = CalcWaterLevel(t, jw, downSubWaterLevel);
+                        sb.AppendFormat("{0,8}", level);
+                        ++count;
+                    }
+                    count = 8;
+                }
+
+                //註18：上游底床高程
+                if (upBoundaryElevationType == BottomBedLoadFluxType.Input && this.IsMovableBedMode())
+                {
+                    for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+                    {   //上游水位
+                        if (count == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            count = 0;
+                        }
+                        double level = upBoundaryElevationArray[jw, t];
+                        sb.AppendFormat("{0,8}", level);
+                        ++count;
+                    }
+                    count = 8;
+                }
+            }
 
 
 
@@ -1456,12 +1535,43 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        public double CalcFlowQ(int t, int j, TwoInOne o)
+        {
+            double q = 0;
+            if(!o.check)
+            {   //均一流量，採用Value欄位直接回傳
+                q = o.Value2D()[0, t];
+            }
+            else
+            {   //逐點輸入，採用Value欄位 * Array欄位百分比，取前後位中位數。
+                double first = (j == 0) ? 0 : (o.Value2D()[0, t] * o.Array2D()[j - 1, t] / 100);
+                double second = o.Value2D()[0, t] * o.Array2D()[j, t] / 100;
+                q = (first + second) / 2;
+            }
+            return q;
+        }
+
+        public double CalcWaterLevel(int t, int j, TwoInOne o)
+        {
+            double l = 0;
+            if(!o.check)
+            {   //均一水位，採用Value欄位直接回傳
+                l = o.Value2D()[0, t];
+            }
+            else
+            {   //逐點輸入，採用Value欄位 
+                l = o.Array2D()[j, t];
+            }
+            return l;
+        }
+
         public enum DumpTwoInOneType
         {
             Normal,
             OnlyType,
             OnlyValueOrArray,
         }
+
         void DumpTwoInOne(TwoInOne o, ref StringBuilder sb, DumpTwoInOneType t = DumpTwoInOneType.Normal, bool noNewLine = false)
         {
             if(o == null || o.type == TwoInOne.Type.None)

@@ -1520,7 +1520,20 @@ namespace RiverSimulationApplication
                     }
                     count = 8;
                 }
+
+                //註19：邊界條件設定值
+                if (count == 8)
+                {
+                    sb.AppendFormat("\n");
+                    count = 0;
+                } 
+                sb.AppendFormat("{0,16}", 1);
+
+
+
             }
+
+
 
 
 

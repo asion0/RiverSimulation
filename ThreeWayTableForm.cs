@@ -649,7 +649,7 @@ namespace RiverSimulationApplication
         {
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
             if ((formType == FormType.FlowQuantity || formType == FormType.WaterLevel) && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
-            {   //均一值 與 逐點輸入切換
+            {   //流量 - 均一值 與 逐點輸入切換
                 if (!ConvertFlowQuantityData())
                 {
                     MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -668,7 +668,7 @@ namespace RiverSimulationApplication
                 InitializeDataGridView();
             }
             else if (formType == FormType.BottomBedLoadFlux && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
-            {   //均一值 與 逐點輸入切換
+            {   //底床載 - 均一值 與 逐點輸入切換
                 if (!ConvertBottomBedLoadFluxData())
                 {
                     MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

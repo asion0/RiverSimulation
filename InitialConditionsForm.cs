@@ -111,6 +111,7 @@ namespace RiverSimulationApplication
         private void depthAverageConcentrationBtn_Click(object sender, EventArgs e)
         {
             ThreeWayTableForm form = new ThreeWayTableForm();
+//            p.depthAverageConcentration = new RiverSimulationProfile.TwoInOne(RiverSimulationProfile.TwoInOne.ValueType.ThreeDim, RiverSimulationProfile.TwoInOne.ArrayType.ThreeDim);
             form.SetFormMode(ThreeWayTableForm.FormType.DepthAverageConcentration, "水深平均濃度", "粒徑", p.inputGrid.GetJ, p.inputGrid.GetI, p, p.depthAverageConcentration);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)

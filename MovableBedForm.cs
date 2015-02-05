@@ -785,15 +785,6 @@ namespace RiverSimulationApplication
             {
                 p.sedimentParticleSize = (double[,])form.GenericDoubleData().Clone();
             }
-            // */
-            /*
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(sedimentParticlesNumberBtn.Text, true, 1, p.sedimentParticlesNumber);
-            if (DialogResult.OK == form.ShowDialog())
-            {
-                p.sedimentParticleSize = (double[,])form.GenericDoubleData().Clone();
-            }
-            // */
         }
 
         private void seabedThicknessBtn_Click(object sender, EventArgs e)

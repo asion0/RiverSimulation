@@ -38,12 +38,13 @@
             this.tbResult = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.fileCombo = new System.Windows.Forms.ComboBox();
-            this.importDurationTxt = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.exeTxt = new System.Windows.Forms.TextBox();
             this.paramTxt = new System.Windows.Forms.TextBox();
+            this.exeTxt = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.importDurationTxt = new System.Windows.Forms.TextBox();
+            this.fileCombo = new System.Windows.Forms.ComboBox();
+            this.useProfileRdo = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -167,6 +168,7 @@
             this.groupBox1.Controls.Add(this.case03Rdo);
             this.groupBox1.Controls.Add(this.importTextRdo);
             this.groupBox1.Controls.Add(this.case04Rdo);
+            this.groupBox1.Controls.Add(this.useProfileRdo);
             this.groupBox1.Controls.Add(this.externalCaseRdo);
             this.groupBox1.Controls.Add(this.case05Rdo);
             this.groupBox1.Location = new System.Drawing.Point(12, 63);
@@ -175,6 +177,52 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "資料來源";
+            // 
+            // paramTxt
+            // 
+            this.paramTxt.Location = new System.Drawing.Point(247, 115);
+            this.paramTxt.Name = "paramTxt";
+            this.paramTxt.Size = new System.Drawing.Size(209, 22);
+            this.paramTxt.TabIndex = 5;
+            this.paramTxt.Text = "ul101.i 123 3D ul101.dat out";
+            this.paramTxt.TextChanged += new System.EventHandler(this.paramTxt_TextChanged);
+            // 
+            // exeTxt
+            // 
+            this.exeTxt.Location = new System.Drawing.Point(247, 87);
+            this.exeTxt.Name = "exeTxt";
+            this.exeTxt.Size = new System.Drawing.Size(209, 22);
+            this.exeTxt.TabIndex = 4;
+            this.exeTxt.Text = "10062.exe";
+            this.exeTxt.TextChanged += new System.EventHandler(this.exeTxt_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(211, 118);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "參數";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(200, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "執行檔";
+            // 
+            // importDurationTxt
+            // 
+            this.importDurationTxt.Location = new System.Drawing.Point(324, 42);
+            this.importDurationTxt.MaxLength = 5;
+            this.importDurationTxt.Name = "importDurationTxt";
+            this.importDurationTxt.Size = new System.Drawing.Size(54, 22);
+            this.importDurationTxt.TabIndex = 2;
+            this.importDurationTxt.Text = "5";
+            this.importDurationTxt.TextChanged += new System.EventHandler(this.importDurationTxt_TextChanged);
             // 
             // fileCombo
             // 
@@ -192,51 +240,17 @@
             this.fileCombo.TabIndex = 1;
             this.fileCombo.SelectedIndexChanged += new System.EventHandler(this.fileCombo_SelectedIndexChanged);
             // 
-            // importDurationTxt
+            // useProfileRdo
             // 
-            this.importDurationTxt.Location = new System.Drawing.Point(324, 42);
-            this.importDurationTxt.MaxLength = 5;
-            this.importDurationTxt.Name = "importDurationTxt";
-            this.importDurationTxt.Size = new System.Drawing.Size(54, 22);
-            this.importDurationTxt.TabIndex = 2;
-            this.importDurationTxt.Text = "5";
-            this.importDurationTxt.TextChanged += new System.EventHandler(this.importDurationTxt_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(200, 90);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "執行檔";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(211, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "參數";
-            // 
-            // exeTxt
-            // 
-            this.exeTxt.Location = new System.Drawing.Point(247, 87);
-            this.exeTxt.Name = "exeTxt";
-            this.exeTxt.Size = new System.Drawing.Size(209, 22);
-            this.exeTxt.TabIndex = 4;
-            this.exeTxt.Text = "10062.exe";
-            this.exeTxt.TextChanged += new System.EventHandler(this.exeTxt_TextChanged);
-            // 
-            // paramTxt
-            // 
-            this.paramTxt.Location = new System.Drawing.Point(247, 115);
-            this.paramTxt.Name = "paramTxt";
-            this.paramTxt.Size = new System.Drawing.Size(209, 22);
-            this.paramTxt.TabIndex = 5;
-            this.paramTxt.Text = "ul101.i 123 3D ul101.dat out";
-            this.paramTxt.TextChanged += new System.EventHandler(this.paramTxt_TextChanged);
+            this.useProfileRdo.AutoSize = true;
+            this.useProfileRdo.Location = new System.Drawing.Point(181, 143);
+            this.useProfileRdo.Name = "useProfileRdo";
+            this.useProfileRdo.Size = new System.Drawing.Size(83, 16);
+            this.useProfileRdo.TabIndex = 0;
+            this.useProfileRdo.TabStop = true;
+            this.useProfileRdo.Text = "使用UI資料";
+            this.useProfileRdo.UseVisualStyleBackColor = true;
+            this.useProfileRdo.CheckedChanged += new System.EventHandler(this.source_CheckedChanged);
             // 
             // SimDebugForm
             // 
@@ -274,5 +288,6 @@
         private System.Windows.Forms.TextBox exeTxt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton useProfileRdo;
     }
 }

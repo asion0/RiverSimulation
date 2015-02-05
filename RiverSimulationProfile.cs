@@ -1049,7 +1049,7 @@ namespace RiverSimulationApplication
             verticalVelocitySlice = VerticalVelocitySliceType.None;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
             //3.2 動床模組
-            depthAverageConcentration = new TwoInOne(TwoInOne.ValueType.ThreeDim, TwoInOne.ArrayType.ThreeDim); ;      //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
+            depthAverageConcentration = new TwoInOne(TwoInOne.ValueType.ThreeDim, TwoInOne.ArrayType.ThreeDim);      //3.2.1 水深平均濃度二選一 ppm -- 實數(>=0) 實數8 格a. 總共有K 個粒徑種類，每種粒徑都要輸入。
             verticalConcentrationSlice = VerticalConcentrationSliceType.None;         //3.2.2 垂向濃度剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開
 
             //4. 邊界條件
@@ -1296,7 +1296,7 @@ namespace RiverSimulationApplication
             {
                 for (int j = 0; j < inputGrid.GetJ; ++j)
                 {
-                    sb.AppendFormat("{0,16}", inputGrid.inputCoor[i, j].x.ToString());     //各點之X 座標值。由第一個斷面依序排列，側方向一行最多10 個值
+                    sb.AppendFormat(" {0,15}", inputGrid.inputCoor[i, j].x.ToString());     //各點之X 座標值。由第一個斷面依序排列，側方向一行最多10 個值
                     if(++count == LineMaxCount)
                     {
                         sb.Append("\n");
@@ -1315,7 +1315,7 @@ namespace RiverSimulationApplication
             {
                 for (int j = 0; j < inputGrid.GetJ; ++j)
                 {
-                    sb.AppendFormat("{0,16}", inputGrid.inputCoor[i, j].y.ToString());     
+                    sb.AppendFormat(" {0,15}", inputGrid.inputCoor[i, j].y.ToString());     
                     if (++count == LineMaxCount)
                     {
                         sb.Append("\n");
@@ -1443,38 +1443,76 @@ namespace RiverSimulationApplication
             count = 0;
             for (int t = 0; t < boundaryTime.Length; ++t)
             {
+                GenerateBoundaryConditions(t, ref sb, count);
+            }
+            GenerateBoundaryConditions(boundaryTime.Length - 1, ref sb, count, true);
+            sb.Append("\n");
+
+            using (StreamWriter outfile = new StreamWriter(file))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+            return true;
+        }
+
+        private void GenerateBoundaryConditions(int t, ref StringBuilder sb, int count, bool external = false)
+        {
+            if (count == 8)
+            {
+                sb.AppendFormat("\n");
+            }
+
+            if (external)
+            {
+                sb.AppendFormat("{0,16}", (boundaryTime[t] + 1).ToString());
+            }
+            else
+            {
+                sb.AppendFormat("{0,16}", (boundaryTime[t]).ToString());
+            }
+            count = 0;
+            for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+            {   //主流方向流量
                 if (count == 8)
                 {
-                    sb.AppendFormat("\n");
+                    sb.AppendFormat("\n{0,16}", " ");
+                    count = 0;
                 }
-                sb.AppendFormat("{0,16}", (boundaryTime[t]).ToString());
-                count = 0;
-                for (int jw = 0; jw < inputGrid.GetJ; ++jw)
-                {   //主流方向流量
-                    if (count == 8)
-                    {
-                        sb.AppendFormat("\n{0,16}", " ");
-                        count = 0;
-                    }
-                    double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subMainFlowQuantity : superMainFlowQuantity);
-                    sb.AppendFormat("{0,8}", flowQ);
-                    ++count;
-                }
-                count = 8;
+                double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subMainFlowQuantity : superMainFlowQuantity);
+                sb.AppendFormat("{0,8}", flowQ);
+                ++count;
+            }
+            count = 8;
 
-                for (int jw = 0; jw < inputGrid.GetJ; ++jw)
-                {   //側流方向流量
-                    if (count == 8)
-                    {
-                        sb.AppendFormat("\n{0,16}", " ");
-                        count = 0;
-                    }
-                    double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
-                    sb.AppendFormat("{0,8}", flowQ);
-                    ++count;
+            for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+            {   //側流方向流量
+                if (count == 8)
+                {
+                    sb.AppendFormat("\n{0,16}", " ");
+                    count = 0;
                 }
-                count = 8;
+                double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
+                sb.AppendFormat("{0,8}", flowQ);
+                ++count;
+            }
+            count = 8;
 
+            for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+            {   //上游水位
+                if (count == 8)
+                {
+                    sb.AppendFormat("\n{0,16}", " ");
+                    count = 0;
+                }
+                double level = CalcWaterLevel(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
+                sb.AppendFormat("{0,8}", level);
+                ++count;
+            }
+            count = 8;
+
+            if (downFlowCondition == FlowConditionType.SubCriticalFlow)
+            {
                 for (int jw = 0; jw < inputGrid.GetJ; ++jw)
                 {   //上游水位
                     if (count == 8)
@@ -1482,70 +1520,60 @@ namespace RiverSimulationApplication
                         sb.AppendFormat("\n{0,16}", " ");
                         count = 0;
                     }
-                    double level = CalcWaterLevel(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
+                    double level = CalcWaterLevel(t, jw, downSubWaterLevel);
                     sb.AppendFormat("{0,8}", level);
                     ++count;
                 }
                 count = 8;
-
-                if (downFlowCondition == FlowConditionType.SubCriticalFlow)
-                {
-                    for (int jw = 0; jw < inputGrid.GetJ; ++jw)
-                    {   //上游水位
-                        if (count == 8)
-                        {
-                            sb.AppendFormat("\n{0,16}", " ");
-                            count = 0;
-                        }
-                        double level = CalcWaterLevel(t, jw, downSubWaterLevel);
-                        sb.AppendFormat("{0,8}", level);
-                        ++count;
-                    }
-                    count = 8;
-                }
-
-                //註18：上游底床高程
-                if (upBoundaryElevationType == BottomBedLoadFluxType.Input && this.IsMovableBedMode())
-                {
-                    for (int jw = 0; jw < inputGrid.GetJ; ++jw)
-                    {   //上游水位
-                        if (count == 8)
-                        {
-                            sb.AppendFormat("\n{0,16}", " ");
-                            count = 0;
-                        }
-                        double level = upBoundaryElevationArray[jw, t];
-                        sb.AppendFormat("{0,8}", level);
-                        ++count;
-                    }
-                    count = 8;
-                }
-
-                //註19：邊界條件設定值
-                if (count == 8)
-                {
-                    sb.AppendFormat("\n");
-                    count = 0;
-                } 
-                sb.AppendFormat("{0,16}", 1);
-
-
-
             }
 
-
-
-
-
-            using (StreamWriter outfile = new StreamWriter(file))
+            //註18：上游底床高程
+            if (upBoundaryElevationType == BottomBedLoadFluxType.Input && this.IsMovableBedMode())
             {
-                outfile.Write(sb.ToString());
-
-
-                outfile.Close();
+                for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+                {   //上游水位
+                    if (count == 8)
+                    {
+                        sb.AppendFormat("\n{0,16}", " ");
+                        count = 0;
+                    }
+                    double level = upBoundaryElevationArray[jw, t];
+                    sb.AppendFormat("{0,8}", level);
+                    ++count;
+                }
+                count = 8;
             }
 
-            return true;
+            //註19：邊界條件設定值
+            if (count == 8)
+            {
+                sb.AppendFormat("\n");
+                count = 0;
+            }
+            sb.AppendFormat("{0,16}", 1);
+            for (int k = 0; k < sedimentParticlesNumber; ++k)
+            {
+                sb.AppendFormat("{0,8}", bottomBedParticleSizeRatio[k, t]);
+            }
+            sb.AppendFormat("\n");
+
+            for (int j = 0; j < inputGrid.GetJ; ++j)
+            {
+                sb.AppendFormat("{0,16}", j + 1);
+                for (int k = 0; k < sedimentParticlesNumber; ++k)
+                {
+                    if (suspendedLoadDepthAvgConcentration.type == TwoInOne.Type.UseArray)
+                    {
+                        sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Array3D()[k, j, t]);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Value3D()[k, 0, t]);
+                    }
+                }
+                sb.AppendFormat("\n");
+            }
+
         }
 
         public double CalcFlowQ(int t, int j, TwoInOne o)
@@ -1577,6 +1605,150 @@ namespace RiverSimulationApplication
             }
             return l;
         }
+
+        public bool GenerateSedFile(string file)
+        {
+            StringBuilder sb = new StringBuilder();
+            int count = 0;
+            //註22 2.2.4.1 sedimentParticleSize[1, k]
+            for (int k = 0; k < sedimentParticlesNumber; ++k)
+            {
+                if (count == 5)
+                {   
+                    sb.AppendFormat("\n");
+                    count = 0;
+                } 
+                sb.AppendFormat(" {0,15}", sedimentParticleSize[0, k]);
+                ++count;
+            }
+            sb.AppendFormat("\n");
+            count = 0;
+            //註23 2.2.4.1 kinematicViscosityCoefficient
+            sb.AppendFormat(" {0,15}\n", kinematicViscosityCoefficient.ToString("e"));
+
+            //註23 2.2.3 sedimentDensity, 2.2.2 sedimentPoreRatio
+            sb.AppendFormat(" {0,7} {1,7}\n", sedimentDensity, sedimentPoreRatio);
+
+            //註24：模式內部設定值
+            sb.AppendFormat("     0.4    10.0     0.1\n");
+            sb.AppendFormat("        .0000001        .0000001        .0000001\n");
+            sb.AppendFormat("     200       0       1\n");
+
+            //註25：初始水深平均濃度。3.2.1 depthAverageConcentration[k, j, i]
+            sb.AppendFormat(" {0,7}\n", 0);
+            for (int k = 0; k < sedimentParticlesNumber; ++k)
+            {
+                if (count == 10)
+                {
+                    sb.AppendFormat("\n");
+                    count = 0;
+                } 
+                sb.AppendFormat(" {0,7}", depthAverageConcentration.Value3D()[k, 0, 0]);
+                ++count;
+            }
+            sb.AppendFormat("\n");
+
+            //註26
+            sb.AppendFormat(" {0,7}\n", 0);
+            sb.AppendFormat(" {0,7}", bottomLevelNumber);   //作用層代號。目前當做底床分層數目2.3.1。
+            sb.AppendFormat(" {0,7}", bottomLevelNumber - 1);   //作用層下底床分層層數。目前當做底床分層數目扣1，即本案例是6-1=5。
+            count = 3;
+            for (int l = bottomLevelNumber - 1; l > 0; --l)
+            {
+                if (count == 10)
+                {
+                    sb.AppendFormat("\n");
+                    count = 0;
+                }
+                sb.AppendFormat(" {0,7}", l);   //作用層下底床分層層數。目前當做底床分層數目扣1，即本案例是6-1=5。
+                ++count;
+            }
+            sb.AppendFormat("\n");
+            count = 0;
+            for (int l = 0; l < bottomLevelNumber; ++l)
+            {
+                if (count == 10)
+                {
+                    sb.AppendFormat("\n");
+                    count = 0;
+                }
+                sb.AppendFormat(" {0,7}", bottomLevelArray[l]);   //底床分層厚度。2.3.1.1 bottomLevelArray[L]
+                ++count;
+            }
+            sb.AppendFormat("\n");
+            count = 0;
+
+            //註27：泥砂組成比例。2.3.1.2 sedimentCompositionArray[K, L]
+            for (int l = bottomLevelNumber - 1; l >= 0; --l)
+            {
+                if (count != 0)
+                {
+                    sb.AppendFormat("\n");
+                    count = 0;
+                }
+                if (l == 0)
+                {
+                    sb.AppendFormat(" {0,7}", -1);
+                }
+                else
+                {
+                    sb.AppendFormat(" {0,7}", l + 1);
+                }
+                count = 1;
+                for (int k = 0; k < sedimentParticlesNumber; ++k)
+                {
+                    if (count == 10)
+                    {
+                        sb.AppendFormat("\n");
+                        count = 0;
+                    }
+                    sb.AppendFormat(" {0,7}", sedimentCompositionArray[k, l] / 100);   //泥砂組成比例。2.3.1.2 sedimentCompositionArray[K, L]
+                    ++count;
+                }
+            }
+            sb.AppendFormat("\n");
+
+            //註28：模式內部設定
+            for (int i = 0; i < inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    if (i != inputGrid.GetI - 1)
+                    {
+                        sb.AppendFormat(" {0,7}", i + 1);   //上游入流斷面編號I=1
+                        sb.AppendFormat(" {0,7}", j + 1);   //側方向斷面編號J=1~Jtotal
+                        sb.AppendFormat(" {0,7}", 1);       //上游輸砂邊界型態。預設值1
+                        sb.AppendFormat(" {0,7}", j + 1);   //模式內部設定值。
+                        sb.AppendFormat(" {0,7}", 1);       //模式內部設定值。預設值1
+                        sb.AppendFormat(" {0,7}\n", 1);       //模式內部設定值。預設值1
+                    }
+                    else
+                    {
+                        if (j == inputGrid.GetJ - 1)
+                        {
+                            sb.AppendFormat(" {0,7}", -(i + 1));   //下游入流斷面編號I=1
+                        }
+                        else
+                        {
+                            sb.AppendFormat(" {0,7}", i + 1);   //下游入流斷面編號I=1
+                        }
+                        sb.AppendFormat(" {0,7}", j + 1);   //側方向斷面編號J=1~Jtotal
+                        sb.AppendFormat(" {0,7}", -1);      //下游輸砂邊界型態。預設值-1。
+                        sb.AppendFormat(" {0,7}", 1);       //模式內部設定值。預設值1
+                        sb.AppendFormat(" {0,7}", 1);       //模式內部設定值。預設值1
+                        sb.AppendFormat(" {0,7}\n", 1);     //模式內部設定值。預設值1
+                    }
+                }
+            }
+           
+            using (StreamWriter outfile = new StreamWriter(file))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+            return true;
+        }
+
 
         public enum DumpTwoInOneType
         {

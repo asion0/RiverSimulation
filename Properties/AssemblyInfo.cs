@@ -32,9 +32,10 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.24")]
-[assembly: AssemblyFileVersion("1.0.24")]
+[assembly: AssemblyVersion("1.0.0.25")]
+[assembly: AssemblyFileVersion("1.0.25")]
 
+//1.0.0.25 - 20150205 Release version.
 //1.0.0.24 - 20150122 Release version.
 //1.0.0.23 - 20141224 Add ThreeWayTable class for BoundaryConditionsForm.
 //1.0.0.22 - 20141224 Weekly build version, export input file.

@@ -682,8 +682,8 @@ namespace RiverSimulationApplication
         private void bottomBedParticleSizeRatioBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode(bottomBedParticleSizeRatioBtn.Text, p.sedimentParticlesNumber, 1, bottomBedParticleSizeRatioBtn.Text, "粒徑 ", "泥砂比例",
-                TableInputForm.InputFormType.GenericDoubleGreaterThanOrEqualZero, 90, 120, true, false, true, p.bottomBedParticleSizeRatio);
+            form.SetFormMode(bottomBedParticleSizeRatioBtn.Text, p.sedimentParticlesNumber, p.boundaryTimeNumber, bottomBedParticleSizeRatioBtn.Text, "粒徑 ", "邊界時間",
+                TableInputForm.InputFormType.GenericDoubleGreaterThanOrEqualZero, 90, 120, true, false, false, p.bottomBedParticleSizeRatio);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {

@@ -26,12 +26,15 @@ namespace RiverSimulationApplication
         private SimDebugForm simDebugForm = new SimDebugForm();
         private void RunSimulationForm_Load(object sender, EventArgs e)
         {
-            simDebugForm.Show();
-            if (Program.programVersion.DemoVersion)
+            if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+            {
+                simDebugForm.Show();
+                simDebugForm.Visible = true;
+            }
+            else
             {
                 simDebugForm.Visible = false;
             }
-
             bw.DoWork += new DoWorkEventHandler(BwDoWork);
             bw.ProgressChanged += new ProgressChangedEventHandler(BwProgressChanged);
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BwRunWorkerCompleted);
@@ -364,6 +367,28 @@ namespace RiverSimulationApplication
                 simProcess.StartInfo.CreateNoWindow = true;
                 simProcess.Start();
             }
+            else if (simDebugForm.runMode == SimDebugForm.RunMode.UseProfile)
+            {
+                string resedExe = Program.documentPath + @"\resed.exe";
+                if (!File.Exists(resedExe))
+                {
+                    File.Copy(Environment.CurrentDirectory + @"\10062.exe", resedExe);
+                }
+
+                simProcess.StartInfo.FileName = resedExe;
+                simProcess.StartInfo.WorkingDirectory = Program.documentPath;
+                simProcess.StartInfo.Arguments = simDebugForm.inputFile + " sed 3D " + simDebugForm.dataFile + " out";
+                simProcess.StartInfo.UseShellExecute = false;
+                simProcess.StartInfo.RedirectStandardOutput = true;
+                simProcess.StartInfo.CreateNoWindow = true;
+
+                using (StreamWriter outfile = new StreamWriter(Program.documentPath + @"\run.bat"))
+                {
+                    outfile.Write(resedExe + " " + simDebugForm.inputFile + " 123 3D " + simDebugForm.dataFile + " out" + "\r\n");
+                    outfile.Close();
+                }
+                simProcess.Start();
+            }
             else
             {
                 string strInputFile = "IamReadyNow.i";
@@ -420,6 +445,8 @@ namespace RiverSimulationApplication
                     return;
                 }
                 p.GenerateInputFile(Program.documentPath + @"/resed.i");
+                p.GenerateSedFile(Program.documentPath + @"/sed.dat");
+
                 ResetChart();
                 RunSimulationMain();
                 EnterSimUI(Status.Running);

@@ -26,14 +26,16 @@ namespace RiverSimulationApplication
            tbResult.AppendText(s);
         }
 
-        public string inputFile, dataFile;
+        public string inputFile = @"resed.i";
+        public string dataFile = @"sed.dat";
         public enum RunMode
         {
             InputData,
             OutputFile,
             ExternalFile,
+            UseProfile,
         };
-        public RunMode runMode = RunMode.InputData;
+        public RunMode runMode = RunMode.UseProfile;
         private void source_CheckedChanged(object sender, EventArgs e)
         {
             if(case01Rdo.Checked)
@@ -77,6 +79,12 @@ namespace RiverSimulationApplication
                 inputFile = exeTxt.Text;
                 dataFile = paramTxt.Text;
                 runMode = RunMode.ExternalFile;
+            }
+            else if(useProfileRdo.Checked)
+            {
+                inputFile = @"resed.i";
+                dataFile = @"sed.dat";
+                runMode = RunMode.UseProfile;
             }
         }
 

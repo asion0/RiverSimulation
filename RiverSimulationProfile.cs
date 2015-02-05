@@ -1550,28 +1550,31 @@ namespace RiverSimulationApplication
                 sb.AppendFormat("\n");
                 count = 0;
             }
-            sb.AppendFormat("{0,16}", 1);
-            for (int k = 0; k < sedimentParticlesNumber; ++k)
+            if (IsMovableBedMode())
             {
-                sb.AppendFormat("{0,8}", bottomBedParticleSizeRatio[k, t]);
-            }
-            sb.AppendFormat("\n");
-
-            for (int j = 0; j < inputGrid.GetJ; ++j)
-            {
-                sb.AppendFormat("{0,16}", j + 1);
+                sb.AppendFormat("{0,16}", 1);
                 for (int k = 0; k < sedimentParticlesNumber; ++k)
                 {
-                    if (suspendedLoadDepthAvgConcentration.type == TwoInOne.Type.UseArray)
-                    {
-                        sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Array3D()[k, j, t]);
-                    }
-                    else
-                    {
-                        sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Value3D()[k, 0, t]);
-                    }
+                    sb.AppendFormat("{0,8}", bottomBedParticleSizeRatio[k, t]);
                 }
                 sb.AppendFormat("\n");
+
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    sb.AppendFormat("{0,16}", j + 1);
+                    for (int k = 0; k < sedimentParticlesNumber; ++k)
+                    {
+                        if (suspendedLoadDepthAvgConcentration.type == TwoInOne.Type.UseArray)
+                        {
+                            sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Array3D()[k, j, t]);
+                        }
+                        else
+                        {
+                            sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Value3D()[k, 0, t]);
+                        }
+                    }
+                    sb.AppendFormat("\n");
+                }
             }
 
         }

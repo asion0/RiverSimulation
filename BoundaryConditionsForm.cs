@@ -28,7 +28,7 @@ namespace RiverSimulationApplication
         {
             waterModelingPanel.Visible = false;
             moveableBedPanel.Visible = false;
-
+            //p.ClearBackgroundMapType();
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, p);
 

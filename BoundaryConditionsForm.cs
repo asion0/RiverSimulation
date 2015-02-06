@@ -32,6 +32,25 @@ namespace RiverSimulationApplication
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, p);
 
+            //p.boundaryUpVerticalDistribution = null;
+            //p.boundaryDownVerticalDistribution = null;
+            if (p.boundaryUpVerticalDistribution == null)
+            {
+                p.boundaryUpVerticalDistribution = new RiverSimulationProfile.TwoInOne(RiverSimulationProfile.TwoInOne.ValueType.Double, RiverSimulationProfile.TwoInOne.ArrayType.TwoDim);
+            }
+            if (p.boundaryUpVerticalDistribution.ArrayNull() || p.boundaryUpVerticalDistribution.ValueNull())
+            {
+                p.boundaryUpVerticalDistribution.CreateDouble2D(0, 0);
+            }
+
+            if (p.boundaryDownVerticalDistribution == null)
+            {
+                p.boundaryDownVerticalDistribution = new RiverSimulationProfile.TwoInOne(RiverSimulationProfile.TwoInOne.ValueType.Double, RiverSimulationProfile.TwoInOne.ArrayType.TwoDim);
+            }
+            if (p.boundaryDownVerticalDistribution.ArrayNull() || p.boundaryDownVerticalDistribution.ValueNull())
+            {
+                p.boundaryDownVerticalDistribution.CreateDouble2D(0, 0);
+            } 
             LoadStatus();
             UpdateStatus();
         }
@@ -110,6 +129,23 @@ namespace RiverSimulationApplication
                 bottomBedLoadFluxInputRdo.Checked = true;
             }
 
+            //4.2.1.1.3 上游垂向濃度分布(3D)
+            switch (p.boundaryUpVerticalDistribution.type)
+            {   //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
+                case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                    upVdValueRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                    upVdArrayRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TwoInOne.Type.None:
+                    upVdValueRdo.Checked = false;
+                    upVdArrayRdo.Checked = false;
+                    break;
+            }
+            upVdValueTxt.Text = p.boundaryUpVerticalDistribution.ValueDouble()[0].ToString();
+            boundaryUpVerticalDistributionNumTxt.Text = p.boundaryUpVerticalDistributionNum.ToString();
+
             //4.2.1.2 上游邊界底床
             if(p.upBoundaryElevationType == RiverSimulationProfile.BottomBedLoadFluxType.Auto)
             {   //4.2.1.2.1 可採用初始上游邊界底床高程或自行輸入
@@ -119,6 +155,8 @@ namespace RiverSimulationApplication
             {
                 upBoundaryElevationInputRdo.Checked = true;
             }
+
+
             //4.2.2 下游 圖5，“即時互動處”不放圖示
             if (p.movableBedDownType == RiverSimulationProfile.BottomBedLoadFluxType.Auto)
             {   //4.2.2.2 濃度 實數(>=0) 如圖 2.2.2.1 所示
@@ -128,6 +166,23 @@ namespace RiverSimulationApplication
             {
                 movableBedDownInputRdo.Checked = true;
             }
+
+            //4.2.2.3 下游垂向濃度分布(3D)
+            switch (p.boundaryDownVerticalDistribution.type)
+            {   //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
+                case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                    downVdValueRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                    downVdArrayRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.TwoInOne.Type.None:
+                    downVdValueRdo.Checked = false;
+                    downVdArrayRdo.Checked = false;
+                    break;
+            }
+            downVdValueTxt.Text = p.boundaryDownVerticalDistribution.ValueDouble()[0].ToString();
+            boundaryDownVerticalDistributionNumTxt.Text = p.boundaryDownVerticalDistributionNum.ToString();
 
             switch(p.nearBedBoundaryType)
             {   //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
@@ -175,8 +230,10 @@ namespace RiverSimulationApplication
                 verticalVelocityDistributionBtn.Enabled = false;    //垂向流速分布(3D)
                 waterSurfacePanel.Enabled = false;                  //水面，三維only。(”即時互動處”不放圖示)
                 bottomBedPanel.Enabled = false;                     //底床，三維only。(”即時互動處”不放圖示)
-                movableBedVerticalConcentrationDistributionBtn.Enabled = false;
-                movableBedDownVerticalConcentrationDistributionInputBtn.Enabled = false;
+                //boundaryUpVerticalDistributionBtn.Enabled = false;
+                boundaryUpVerticalDistributionPanel.Enabled = false;
+                //boundaryDownVerticalDistributionBtn.Enabled = false;
+                boundaryDownVerticalDistributionPanel.Enabled = false;
                 nearBedBoundaryPanel.Enabled = false;
             }
 
@@ -281,6 +338,34 @@ namespace RiverSimulationApplication
 
         private bool ConvertMoveableBed()
         {
+            if(p.Is3DMode())
+            {
+                if (!ConvertUpVerticalDistributionNumber())
+                {
+                    return false;
+                }
+
+                if(p.boundaryUpVerticalDistribution.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                {
+                    if (!ConvertUpVerticalDistributionValue())
+                    {
+                        return false;
+                    }                
+                }
+
+                if (!ConvertDownVerticalDistributionNumber())
+                {
+                    return false;
+                }
+
+                if (p.boundaryDownVerticalDistribution.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                {
+                    if (!ConvertDownVerticalDistributionValue())
+                    {
+                        return false;
+                    }
+                }
+            }
             //if (!ControllerUtility.CheckConvertDouble(ref p.waterTimeSpan, waterTimeSpanTxt, "請輸入正確的時間間距！", ControllerUtility.CheckType.GreaterThanZero))
             //{
             //    return false;
@@ -645,9 +730,71 @@ namespace RiverSimulationApplication
             
         }
 
-        private void movableBedVerticalConcentrationDistributionBtn_Click(object sender, EventArgs e)
+        private void boundaryUpVerticalDistributionBtn_Click(object sender, EventArgs e)
         {
+            if (!ConvertUpVerticalDistributionNumber())
+            {
+                return;
+            }
 
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode("上游垂直濃度分布", 2, p.boundaryUpVerticalDistributionNum, "", "", "分層",
+                 TableInputForm.InputFormType.VerticalVelocityDistributionForm, 90, 80, true, true, false, p.boundaryUpVerticalDistribution.Array2D());
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.boundaryUpVerticalDistribution.SetArrayObject(form.VerticalVelocityDistributionData().Clone());
+            }
+        }
+
+        private bool ConvertUpVerticalDistributionNumber()
+        {
+            if (!ControllerUtility.CheckConvertInt32(ref p.boundaryUpVerticalDistributionNum, boundaryUpVerticalDistributionNumTxt, "請輸入正確的上游垂直濃度分布分層數目！", ControllerUtility.CheckType.GreaterThanTwo))
+            {
+                return false;
+            }
+
+            if ((p.boundaryUpVerticalDistribution.type == RiverSimulationProfile.TwoInOne.Type.UseArray) && !p.boundaryUpVerticalDistribution.ArrayNull() && p.boundaryUpVerticalDistribution.Array2D().GetLength(1) != p.boundaryUpVerticalDistributionNum)
+            {
+                MessageBox.Show("修改過上游垂直濃度分布分層數目，需重新輸入上游垂直濃度分布比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.boundaryUpVerticalDistribution.Clear();
+                p.boundaryUpVerticalDistribution.CreateDouble2D(0, 0);
+            } 
+            return true;
+        }
+
+        private bool ConvertDownVerticalDistributionNumber()
+        {
+            if (!ControllerUtility.CheckConvertInt32(ref p.boundaryDownVerticalDistributionNum, boundaryDownVerticalDistributionNumTxt, "請輸入正確的下游垂直濃度分布分層數目！", ControllerUtility.CheckType.GreaterThanTwo))
+            {
+                return false;
+            }
+
+            if ((p.boundaryDownVerticalDistribution.type == RiverSimulationProfile.TwoInOne.Type.UseArray) && !p.boundaryDownVerticalDistribution.ArrayNull() && p.boundaryDownVerticalDistribution.Array2D().GetLength(1) != p.boundaryDownVerticalDistributionNum)
+            {
+                MessageBox.Show("修改過上游垂直濃度分布分層數目，需重新輸入下游垂直濃度分布比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                p.boundaryDownVerticalDistribution.Clear();
+                p.boundaryDownVerticalDistribution.CreateDouble2D(0, 0);
+            }
+            return true;
+        }
+
+        private bool ConvertUpVerticalDistributionValue()
+        {
+            if (!ControllerUtility.CheckConvertDouble(ref p.boundaryUpVerticalDistribution.ValueDouble()[0], upVdValueTxt, "請輸入正確的上游垂直濃度分布值！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ConvertDownVerticalDistributionValue()
+        {
+            if (!ControllerUtility.CheckConvertDouble(ref p.boundaryDownVerticalDistribution.ValueDouble()[0], downVdValueTxt, "請輸入正確的下游垂直濃度分布值！", ControllerUtility.CheckType.NotNegative))
+            {
+                return false;
+            }
+            return true;
         }
 
         private void upBoundaryElevationAutoRdo_CheckedChanged(object sender, EventArgs e)
@@ -719,9 +866,21 @@ namespace RiverSimulationApplication
 
         }
 
-        private void movableBedDownVerticalConcentrationDistributionInputBtn_Click(object sender, EventArgs e)
+        private void boundaryDownVerticalDistributionBtn_Click(object sender, EventArgs e)
         {
+            if (!ConvertDownVerticalDistributionNumber())
+            {
+                return;
+            }
 
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode("下游垂直濃度分布", 2, p.boundaryDownVerticalDistributionNum, "", "", "分層",
+                 TableInputForm.InputFormType.VerticalVelocityDistributionForm, 90, 80, true, true, false, p.boundaryDownVerticalDistribution.Array2D());
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                p.boundaryDownVerticalDistribution.SetArrayObject(form.VerticalVelocityDistributionData().Clone());
+            }
         }
 
         private void nearBedBoundaryAutoRdo_CheckedChanged(object sender, EventArgs e)
@@ -786,6 +945,62 @@ namespace RiverSimulationApplication
             if (DialogResult.OK == r)
             {
                 p.boundaryTime = (double[])form.BoundaryTimeData().Clone();
+            }
+        }
+
+        private void upVdValueRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+
+            upVdValueTxt.Enabled = chk;
+            boundaryUpVerticalDistributionNumTxt.Enabled = !chk;
+            boundaryUpVerticalDistributionBtn.Enabled = !chk;
+
+            if(chk)
+            {
+                p.boundaryUpVerticalDistribution.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
+            }
+        }
+
+        private void upVdArrayRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+
+            upVdValueTxt.Enabled = !chk;
+            boundaryUpVerticalDistributionNumTxt.Enabled = chk;
+            boundaryUpVerticalDistributionBtn.Enabled = chk;
+
+            if (chk)
+            {
+                p.boundaryUpVerticalDistribution.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
+            }
+        }
+
+        private void downVdValueRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+
+            downVdValueTxt.Enabled = chk;
+            boundaryDownVerticalDistributionNumTxt.Enabled = !chk;
+            boundaryDownVerticalDistributionBtn.Enabled = !chk;
+        
+            if (chk)
+            {
+                p.boundaryDownVerticalDistribution.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
+            }
+        }
+
+        private void downVdArrayRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+
+            downVdValueTxt.Enabled = !chk;
+            boundaryDownVerticalDistributionNumTxt.Enabled = chk;
+            boundaryDownVerticalDistributionBtn.Enabled = chk;
+
+            if (chk)
+            {
+                p.boundaryDownVerticalDistribution.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
             }
         }
 

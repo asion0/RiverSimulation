@@ -568,11 +568,11 @@ namespace RiverSimulationApplication
             {
                 p.turbulenceViscosityType = RiverSimulationProfile.TurbulenceViscosityType.UserDefine;
             }
-            else if (chk && sender as RadioButton == chezyRdo)
+            else if (chk && sender as RadioButton == zeroEquationRdo)
             {
                 p.turbulenceViscosityType = RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation;
             }
-            else if (chk && sender as RadioButton == chezyRdo)
+            else if (chk && sender as RadioButton == twinEquationRdo)
             {
                 p.turbulenceViscosityType = RiverSimulationProfile.TurbulenceViscosityType.TwinEquation;
             }

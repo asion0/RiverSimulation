@@ -65,6 +65,43 @@ namespace RiverSimulationApplication
 
             RiverSimulationProfile.profile = new RiverSimulationProfile();
             Program.projectFolder = dlg.inputTxt.Text;
+
+            if(File.Exists(Program.documentPath + @"\resed.exe"))
+            {
+                File.Delete(Program.documentPath + @"\resed.exe");
+            }
+            if (File.Exists(Program.documentPath + @"\TempSave.txt"))
+            {
+                File.Delete(Program.documentPath + @"\TempSave.txt");
+            }
+            if (File.Exists(Program.documentPath + @"\resed.i"))
+            {
+                File.Delete(Program.documentPath + @"\resed.i");
+            }
+            if (File.Exists(Program.documentPath + @"\3Dinput.dat"))
+            {
+                File.Delete(Program.documentPath + @"\3Dinput.dat");
+            }
+            if (File.Exists(Program.documentPath + @"\sed.dat"))
+            {
+                File.Delete(Program.documentPath + @"\sed.dat");
+            }
+            if (File.Exists(Program.documentPath + @"\resed.O"))
+            {
+                File.Delete(Program.documentPath + @"\resed.o");
+            }
+            if (File.Exists(Program.documentPath + @"\out"))
+            {
+                File.Delete(Program.documentPath + @"\out");
+            }
+            if (File.Exists(Program.documentPath + @"\123"))
+            {
+                File.Delete(Program.documentPath + @"\123");
+            }
+            if (File.Exists(Program.documentPath + @"\resed.er"))
+            {
+                File.Delete(Program.documentPath + @"\resed.er");
+            } 
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

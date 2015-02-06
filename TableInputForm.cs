@@ -252,7 +252,7 @@ namespace RiverSimulationApplication
             FlowConditionsSettingConstant,   //流況設定定量流
             FlowConditionsSettingVariable,  //流況設定變量流
             BoundaryTime,                   //邊界時間輸入
-
+            VerticalDistribution,           //垂直濃度分布
         }
 
         private InputFormType _inputFormType = InputFormType.GenericDouble;
@@ -1020,7 +1020,6 @@ namespace RiverSimulationApplication
             {
                 o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
             }
-            
 
             if (inputFormType == InputFormType.FlowConditionsSettingVariable)
             {
@@ -1034,18 +1033,11 @@ namespace RiverSimulationApplication
 
                 FillDataGridView();
             }
-            //else if (inputFormType == InputFormType.FlowConditionsSettingConstant)
-            //{
-            //    singleValueTxt.Enabled = true;
-            //    dataGridView.Enabled = false;
-            //    //FillDataGridView();
-            //}
             else
             {
                 singleValueTxt.Enabled = true;
                 dataGridView.Enabled = false;
             } 
-            
         }
 
         private void tableValueRdo_CheckedChanged(object sender, EventArgs e)
@@ -1075,7 +1067,6 @@ namespace RiverSimulationApplication
                 {
                     dataGridView.Columns[i].Name = colName + i.ToString();
                 }
-
                 FillDataGridView();
             }
             else

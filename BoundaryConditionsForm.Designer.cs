@@ -97,7 +97,8 @@
             this.nearBedBoundaryAutoCombo = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.movableBedDownVerticalConcentrationDistributionInputBtn = new System.Windows.Forms.Button();
+            this.boundaryDownVerticalDistributionBtn = new System.Windows.Forms.Button();
+            this.boundaryDownVerticalDistributionNumTxt = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.movableBedDownInputRdo = new System.Windows.Forms.RadioButton();
             this.movableBedDownInputBtn = new System.Windows.Forms.Button();
@@ -107,8 +108,10 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label30 = new System.Windows.Forms.Label();
+            this.boundaryUpVerticalDistributionNumTxt = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.movableBedVerticalConcentrationDistributionBtn = new System.Windows.Forms.Button();
+            this.boundaryUpVerticalDistributionBtn = new System.Windows.Forms.Button();
             this.suspendedLoadDepthAvgConcentrationBtn = new System.Windows.Forms.Button();
             this.bottomBedLoadFluxInputBtn = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
@@ -124,6 +127,15 @@
             this.upBoundaryElevationInputRdo = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
+            this.boundaryUpVerticalDistributionPanel = new System.Windows.Forms.Panel();
+            this.upVdValueRdo = new System.Windows.Forms.RadioButton();
+            this.upVdArrayRdo = new System.Windows.Forms.RadioButton();
+            this.upVdValueTxt = new System.Windows.Forms.TextBox();
+            this.boundaryDownVerticalDistributionPanel = new System.Windows.Forms.Panel();
+            this.downVdArrayRdo = new System.Windows.Forms.RadioButton();
+            this.label32 = new System.Windows.Forms.Label();
+            this.downVdValueRdo = new System.Windows.Forms.RadioButton();
+            this.downVdValueTxt = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
             this.movableTypeGroup.SuspendLayout();
             this.waterTypeGroup.SuspendLayout();
@@ -141,6 +153,8 @@
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.boundaryUpVerticalDistributionPanel.SuspendLayout();
+            this.boundaryDownVerticalDistributionPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -805,7 +819,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 417);
+            this.label9.Location = new System.Drawing.Point(16, 493);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(89, 12);
             this.label9.TabIndex = 7;
@@ -818,7 +832,7 @@
             this.nearBedBoundaryPanel.Controls.Add(this.nearBedBoundaryAutoRdo);
             this.nearBedBoundaryPanel.Controls.Add(this.nearBedBoundaryInputBtn);
             this.nearBedBoundaryPanel.Controls.Add(this.nearBedBoundaryAutoCombo);
-            this.nearBedBoundaryPanel.Location = new System.Drawing.Point(18, 433);
+            this.nearBedBoundaryPanel.Location = new System.Drawing.Point(18, 509);
             this.nearBedBoundaryPanel.Name = "nearBedBoundaryPanel";
             this.nearBedBoundaryPanel.Size = new System.Drawing.Size(440, 70);
             this.nearBedBoundaryPanel.TabIndex = 5;
@@ -876,7 +890,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 307);
+            this.label6.Location = new System.Drawing.Point(16, 334);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 7;
@@ -885,30 +899,39 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.movableBedDownVerticalConcentrationDistributionInputBtn);
+            this.panel1.Controls.Add(this.boundaryDownVerticalDistributionPanel);
             this.panel1.Controls.Add(this.label20);
             this.panel1.Controls.Add(this.movableBedDownInputRdo);
             this.panel1.Controls.Add(this.movableBedDownInputBtn);
             this.panel1.Controls.Add(this.movableBedDownAutoRdo);
-            this.panel1.Location = new System.Drawing.Point(18, 322);
+            this.panel1.Location = new System.Drawing.Point(18, 349);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(440, 79);
+            this.panel1.Size = new System.Drawing.Size(440, 133);
             this.panel1.TabIndex = 5;
             // 
-            // movableBedDownVerticalConcentrationDistributionInputBtn
+            // boundaryDownVerticalDistributionBtn
             // 
-            this.movableBedDownVerticalConcentrationDistributionInputBtn.Location = new System.Drawing.Point(136, 42);
-            this.movableBedDownVerticalConcentrationDistributionInputBtn.Name = "movableBedDownVerticalConcentrationDistributionInputBtn";
-            this.movableBedDownVerticalConcentrationDistributionInputBtn.Size = new System.Drawing.Size(104, 26);
-            this.movableBedDownVerticalConcentrationDistributionInputBtn.TabIndex = 4;
-            this.movableBedDownVerticalConcentrationDistributionInputBtn.Text = "設定";
-            this.movableBedDownVerticalConcentrationDistributionInputBtn.UseVisualStyleBackColor = true;
-            this.movableBedDownVerticalConcentrationDistributionInputBtn.Click += new System.EventHandler(this.movableBedDownVerticalConcentrationDistributionInputBtn_Click);
+            this.boundaryDownVerticalDistributionBtn.Enabled = false;
+            this.boundaryDownVerticalDistributionBtn.Location = new System.Drawing.Point(288, 30);
+            this.boundaryDownVerticalDistributionBtn.Name = "boundaryDownVerticalDistributionBtn";
+            this.boundaryDownVerticalDistributionBtn.Size = new System.Drawing.Size(104, 26);
+            this.boundaryDownVerticalDistributionBtn.TabIndex = 4;
+            this.boundaryDownVerticalDistributionBtn.Text = "設定";
+            this.boundaryDownVerticalDistributionBtn.UseVisualStyleBackColor = true;
+            this.boundaryDownVerticalDistributionBtn.Click += new System.EventHandler(this.boundaryDownVerticalDistributionBtn_Click);
+            // 
+            // boundaryDownVerticalDistributionNumTxt
+            // 
+            this.boundaryDownVerticalDistributionNumTxt.Enabled = false;
+            this.boundaryDownVerticalDistributionNumTxt.Location = new System.Drawing.Point(175, 32);
+            this.boundaryDownVerticalDistributionNumTxt.Name = "boundaryDownVerticalDistributionNumTxt";
+            this.boundaryDownVerticalDistributionNumTxt.Size = new System.Drawing.Size(92, 22);
+            this.boundaryDownVerticalDistributionNumTxt.TabIndex = 9;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(24, 49);
+            this.label20.Location = new System.Drawing.Point(26, 51);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(99, 12);
             this.label20.TabIndex = 5;
@@ -966,7 +989,7 @@
             this.panel2.Controls.Add(this.panel5);
             this.panel2.Location = new System.Drawing.Point(18, 35);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(440, 255);
+            this.panel2.Size = new System.Drawing.Size(440, 289);
             this.panel2.TabIndex = 5;
             // 
             // label27
@@ -980,7 +1003,7 @@
             // 
             // label24
             // 
-            this.label24.Location = new System.Drawing.Point(10, 148);
+            this.label24.Location = new System.Drawing.Point(10, 187);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(110, 17);
             this.label24.TabIndex = 3;
@@ -990,8 +1013,8 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.LightGray;
+            this.panel4.Controls.Add(this.boundaryUpVerticalDistributionPanel);
             this.panel4.Controls.Add(this.label23);
-            this.panel4.Controls.Add(this.movableBedVerticalConcentrationDistributionBtn);
             this.panel4.Controls.Add(this.suspendedLoadDepthAvgConcentrationBtn);
             this.panel4.Controls.Add(this.bottomBedLoadFluxInputBtn);
             this.panel4.Controls.Add(this.label21);
@@ -1000,27 +1023,45 @@
             this.panel4.Controls.Add(this.bottomBedLoadFluxInputRdo);
             this.panel4.Location = new System.Drawing.Point(12, 25);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(407, 108);
+            this.panel4.Size = new System.Drawing.Size(407, 156);
             this.panel4.TabIndex = 15;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(118, 37);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(53, 12);
+            this.label30.TabIndex = 8;
+            this.label30.Text = "分層數目";
+            // 
+            // boundaryUpVerticalDistributionNumTxt
+            // 
+            this.boundaryUpVerticalDistributionNumTxt.Enabled = false;
+            this.boundaryUpVerticalDistributionNumTxt.Location = new System.Drawing.Point(174, 32);
+            this.boundaryUpVerticalDistributionNumTxt.Name = "boundaryUpVerticalDistributionNumTxt";
+            this.boundaryUpVerticalDistributionNumTxt.Size = new System.Drawing.Size(92, 22);
+            this.boundaryUpVerticalDistributionNumTxt.TabIndex = 9;
             // 
             // label23
             // 
-            this.label23.Location = new System.Drawing.Point(24, 77);
+            this.label23.Location = new System.Drawing.Point(13, 77);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(104, 14);
             this.label23.TabIndex = 5;
             this.label23.Text = "垂直濃度分布(3D)";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // movableBedVerticalConcentrationDistributionBtn
+            // boundaryUpVerticalDistributionBtn
             // 
-            this.movableBedVerticalConcentrationDistributionBtn.Location = new System.Drawing.Point(136, 71);
-            this.movableBedVerticalConcentrationDistributionBtn.Name = "movableBedVerticalConcentrationDistributionBtn";
-            this.movableBedVerticalConcentrationDistributionBtn.Size = new System.Drawing.Size(104, 26);
-            this.movableBedVerticalConcentrationDistributionBtn.TabIndex = 4;
-            this.movableBedVerticalConcentrationDistributionBtn.Text = "設定";
-            this.movableBedVerticalConcentrationDistributionBtn.UseVisualStyleBackColor = true;
-            this.movableBedVerticalConcentrationDistributionBtn.Click += new System.EventHandler(this.movableBedVerticalConcentrationDistributionBtn_Click);
+            this.boundaryUpVerticalDistributionBtn.Enabled = false;
+            this.boundaryUpVerticalDistributionBtn.Location = new System.Drawing.Point(283, 32);
+            this.boundaryUpVerticalDistributionBtn.Name = "boundaryUpVerticalDistributionBtn";
+            this.boundaryUpVerticalDistributionBtn.Size = new System.Drawing.Size(104, 26);
+            this.boundaryUpVerticalDistributionBtn.TabIndex = 4;
+            this.boundaryUpVerticalDistributionBtn.Text = "設定";
+            this.boundaryUpVerticalDistributionBtn.UseVisualStyleBackColor = true;
+            this.boundaryUpVerticalDistributionBtn.Click += new System.EventHandler(this.boundaryUpVerticalDistributionBtn_Click);
             // 
             // suspendedLoadDepthAvgConcentrationBtn
             // 
@@ -1092,7 +1133,7 @@
             this.panel5.Controls.Add(this.upBoundaryElevationInputBtn);
             this.panel5.Controls.Add(this.label29);
             this.panel5.Controls.Add(this.upBoundaryElevationInputRdo);
-            this.panel5.Location = new System.Drawing.Point(12, 168);
+            this.panel5.Location = new System.Drawing.Point(12, 207);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(407, 73);
             this.panel5.TabIndex = 15;
@@ -1187,6 +1228,105 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 16;
             // 
+            // boundaryUpVerticalDistributionPanel
+            // 
+            this.boundaryUpVerticalDistributionPanel.Controls.Add(this.upVdArrayRdo);
+            this.boundaryUpVerticalDistributionPanel.Controls.Add(this.label30);
+            this.boundaryUpVerticalDistributionPanel.Controls.Add(this.upVdValueRdo);
+            this.boundaryUpVerticalDistributionPanel.Controls.Add(this.upVdValueTxt);
+            this.boundaryUpVerticalDistributionPanel.Controls.Add(this.boundaryUpVerticalDistributionNumTxt);
+            this.boundaryUpVerticalDistributionPanel.Controls.Add(this.boundaryUpVerticalDistributionBtn);
+            this.boundaryUpVerticalDistributionPanel.Location = new System.Drawing.Point(9, 94);
+            this.boundaryUpVerticalDistributionPanel.Name = "boundaryUpVerticalDistributionPanel";
+            this.boundaryUpVerticalDistributionPanel.Size = new System.Drawing.Size(395, 59);
+            this.boundaryUpVerticalDistributionPanel.TabIndex = 10;
+            // 
+            // upVdValueRdo
+            // 
+            this.upVdValueRdo.AutoSize = true;
+            this.upVdValueRdo.Location = new System.Drawing.Point(33, 5);
+            this.upVdValueRdo.Name = "upVdValueRdo";
+            this.upVdValueRdo.Size = new System.Drawing.Size(59, 16);
+            this.upVdValueRdo.TabIndex = 0;
+            this.upVdValueRdo.TabStop = true;
+            this.upVdValueRdo.Text = "均一值";
+            this.upVdValueRdo.UseVisualStyleBackColor = true;
+            this.upVdValueRdo.CheckedChanged += new System.EventHandler(this.upVdValueRdo_CheckedChanged);
+            // 
+            // upVdArrayRdo
+            // 
+            this.upVdArrayRdo.AutoSize = true;
+            this.upVdArrayRdo.Location = new System.Drawing.Point(33, 35);
+            this.upVdArrayRdo.Name = "upVdArrayRdo";
+            this.upVdArrayRdo.Size = new System.Drawing.Size(71, 16);
+            this.upVdArrayRdo.TabIndex = 0;
+            this.upVdArrayRdo.TabStop = true;
+            this.upVdArrayRdo.Text = "自行輸入";
+            this.upVdArrayRdo.UseVisualStyleBackColor = true;
+            this.upVdArrayRdo.CheckedChanged += new System.EventHandler(this.upVdArrayRdo_CheckedChanged);
+            // 
+            // upVdValueTxt
+            // 
+            this.upVdValueTxt.Enabled = false;
+            this.upVdValueTxt.Location = new System.Drawing.Point(174, 3);
+            this.upVdValueTxt.Name = "upVdValueTxt";
+            this.upVdValueTxt.Size = new System.Drawing.Size(92, 22);
+            this.upVdValueTxt.TabIndex = 9;
+            // 
+            // boundaryDownVerticalDistributionPanel
+            // 
+            this.boundaryDownVerticalDistributionPanel.Controls.Add(this.downVdArrayRdo);
+            this.boundaryDownVerticalDistributionPanel.Controls.Add(this.label32);
+            this.boundaryDownVerticalDistributionPanel.Controls.Add(this.boundaryDownVerticalDistributionBtn);
+            this.boundaryDownVerticalDistributionPanel.Controls.Add(this.boundaryDownVerticalDistributionNumTxt);
+            this.boundaryDownVerticalDistributionPanel.Controls.Add(this.downVdValueRdo);
+            this.boundaryDownVerticalDistributionPanel.Controls.Add(this.downVdValueTxt);
+            this.boundaryDownVerticalDistributionPanel.Location = new System.Drawing.Point(9, 68);
+            this.boundaryDownVerticalDistributionPanel.Name = "boundaryDownVerticalDistributionPanel";
+            this.boundaryDownVerticalDistributionPanel.Size = new System.Drawing.Size(395, 59);
+            this.boundaryDownVerticalDistributionPanel.TabIndex = 10;
+            // 
+            // downVdArrayRdo
+            // 
+            this.downVdArrayRdo.AutoSize = true;
+            this.downVdArrayRdo.Location = new System.Drawing.Point(33, 35);
+            this.downVdArrayRdo.Name = "downVdArrayRdo";
+            this.downVdArrayRdo.Size = new System.Drawing.Size(71, 16);
+            this.downVdArrayRdo.TabIndex = 0;
+            this.downVdArrayRdo.TabStop = true;
+            this.downVdArrayRdo.Text = "自行輸入";
+            this.downVdArrayRdo.UseVisualStyleBackColor = true;
+            this.downVdArrayRdo.CheckedChanged += new System.EventHandler(this.downVdArrayRdo_CheckedChanged);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(118, 37);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(53, 12);
+            this.label32.TabIndex = 8;
+            this.label32.Text = "分層數目";
+            // 
+            // downVdValueRdo
+            // 
+            this.downVdValueRdo.AutoSize = true;
+            this.downVdValueRdo.Location = new System.Drawing.Point(33, 5);
+            this.downVdValueRdo.Name = "downVdValueRdo";
+            this.downVdValueRdo.Size = new System.Drawing.Size(59, 16);
+            this.downVdValueRdo.TabIndex = 0;
+            this.downVdValueRdo.TabStop = true;
+            this.downVdValueRdo.Text = "均一值";
+            this.downVdValueRdo.UseVisualStyleBackColor = true;
+            this.downVdValueRdo.CheckedChanged += new System.EventHandler(this.downVdValueRdo_CheckedChanged);
+            // 
+            // downVdValueTxt
+            // 
+            this.downVdValueTxt.Enabled = false;
+            this.downVdValueTxt.Location = new System.Drawing.Point(174, 3);
+            this.downVdValueTxt.Name = "downVdValueTxt";
+            this.downVdValueTxt.Size = new System.Drawing.Size(92, 22);
+            this.downVdValueTxt.TabIndex = 9;
+            // 
             // BoundaryConditionsForm
             // 
             this.AcceptButton = this.ok;
@@ -1233,6 +1373,10 @@
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.boundaryUpVerticalDistributionPanel.ResumeLayout(false);
+            this.boundaryUpVerticalDistributionPanel.PerformLayout();
+            this.boundaryDownVerticalDistributionPanel.ResumeLayout(false);
+            this.boundaryDownVerticalDistributionPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1321,10 +1465,10 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox sideWindShearTxt;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Button movableBedVerticalConcentrationDistributionBtn;
+        private System.Windows.Forms.Button boundaryUpVerticalDistributionBtn;
         private System.Windows.Forms.RadioButton nearBedBoundaryInputRdo;
         private System.Windows.Forms.RadioButton nearBedBoundaryAutoRdo;
-        private System.Windows.Forms.Button movableBedDownVerticalConcentrationDistributionInputBtn;
+        private System.Windows.Forms.Button boundaryDownVerticalDistributionBtn;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button subSideFlowQuantityBtn;
         private System.Windows.Forms.Button superSideFlowQuantityBtn;
@@ -1335,5 +1479,17 @@
         private System.Windows.Forms.Button sideOutFlowBtn;
         private System.Windows.Forms.TextBox verticalVelocityDistributionTxt;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox boundaryDownVerticalDistributionNumTxt;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox boundaryUpVerticalDistributionNumTxt;
+        private System.Windows.Forms.Panel boundaryDownVerticalDistributionPanel;
+        private System.Windows.Forms.RadioButton downVdArrayRdo;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.RadioButton downVdValueRdo;
+        private System.Windows.Forms.TextBox downVdValueTxt;
+        private System.Windows.Forms.Panel boundaryUpVerticalDistributionPanel;
+        private System.Windows.Forms.RadioButton upVdArrayRdo;
+        private System.Windows.Forms.RadioButton upVdValueRdo;
+        private System.Windows.Forms.TextBox upVdValueTxt;
     }
 }

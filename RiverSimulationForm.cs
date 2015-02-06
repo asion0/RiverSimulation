@@ -373,7 +373,6 @@ namespace RiverSimulationApplication
                 string tempSave = Program.documentPath + Program.tempSaveName;
                 RiverSimulationProfile.SerializeBinary(RiverSimulationProfile.profile, tempSave);
             }
-
         }
 
 

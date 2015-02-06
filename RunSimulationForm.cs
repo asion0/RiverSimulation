@@ -371,36 +371,57 @@ namespace RiverSimulationApplication
             {
                 string resedExe = Program.documentPath + @"\resed.exe";
                 if (!File.Exists(resedExe))
-                {
+                {   //如果沒有主程式則複製一個。
                     File.Copy(Environment.CurrentDirectory + @"\10062.exe", resedExe);
                 }
 
                 simProcess.StartInfo.FileName = resedExe;
                 simProcess.StartInfo.WorkingDirectory = Program.documentPath;
-                simProcess.StartInfo.Arguments = simDebugForm.inputFile + " sed 3D " + simDebugForm.dataFile + " out";
+
+                //二維水理：resed.exe resed.i 123 
+                //三維水理：resed.exe resed.i 123 3D 3Dinput.dat out
+                //二維動床：resed.exe resed.i 123 SED sed.dat
+                //三維動床：resed.exe resed.i 123 3DSED 3Dinput.dat out sed.dat
+                if(p.Is2DMode() && p.IsWaterModelingMode())
+                {
+                    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123";
+                }
+                else if (p.Is3DMode() && p.IsWaterModelingMode())
+                {
+                    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3Dinput.dat out";
+                }
+                else if (p.Is2DMode() && p.IsMovableBedMode())
+                {
+                    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 SED sed.dat";
+                }
+                else if (p.Is3DMode() && p.IsMovableBedMode())
+                {
+                    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3DSED 3Dinput.dat out sed.dat";
+                } 
+                //simProcess.StartInfo.Arguments = simDebugForm.inputFile + " sed 3D " + simDebugForm.dataFile + " out";
                 simProcess.StartInfo.UseShellExecute = false;
                 simProcess.StartInfo.RedirectStandardOutput = true;
                 simProcess.StartInfo.CreateNoWindow = true;
 
                 using (StreamWriter outfile = new StreamWriter(Program.documentPath + @"\run.bat"))
                 {
-                    outfile.Write(resedExe + " " + simDebugForm.inputFile + " 123 3D " + simDebugForm.dataFile + " out" + "\r\n");
+                    outfile.Write(resedExe + " " + simProcess.StartInfo.Arguments + "\r\n");
                     outfile.Close();
                 }
                 simProcess.Start();
             }
-            else
-            {
-                string strInputFile = "IamReadyNow.i";
-                RiverSimulationProfile.profile.GenerateInputFile(Environment.CurrentDirectory + "\\" + strInputFile);
-                simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\10062.exe";
-                simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-                simProcess.StartInfo.Arguments = strInputFile + " 123 3D " + simDebugForm.dataFile + " out";
-                simProcess.StartInfo.UseShellExecute = false;
-                simProcess.StartInfo.RedirectStandardOutput = true;
-                simProcess.StartInfo.CreateNoWindow = true;
-                simProcess.Start();
-            }
+            //else
+            //{
+            //    string strInputFile = "IamReadyNow.i";
+            //    RiverSimulationProfile.profile.GenerateInputFile(Environment.CurrentDirectory + "\\" + strInputFile);
+            //    simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\10062.exe";
+            //    simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+            //    simProcess.StartInfo.Arguments = strInputFile + " 123 3D " + simDebugForm.dataFile + " out";
+            //    simProcess.StartInfo.UseShellExecute = false;
+            //    simProcess.StartInfo.RedirectStandardOutput = true;
+            //    simProcess.StartInfo.CreateNoWindow = true;
+            //    simProcess.Start();
+            //}
             inRunning = false;
             StreamReader reader = simProcess.StandardOutput;//截取輸出流
             string line = reader.ReadLine();//每次讀取一行
@@ -444,8 +465,24 @@ namespace RiverSimulationApplication
                 {
                     return;
                 }
+
+                if (p != null)
+                {
+                    string tempSave = Program.documentPath + Program.tempSaveName;
+                    RiverSimulationProfile.SerializeBinary(p, tempSave);
+                }
+
                 p.GenerateInputFile(Program.documentPath + @"/resed.i");
-                p.GenerateSedFile(Program.documentPath + @"/sed.dat");
+
+                if (p.IsMovableBedMode())
+                {
+                    p.GenerateSedFile(Program.documentPath + @"/sed.dat");
+                }
+
+                if(p.Is3DMode())
+                {
+                    p.Generate3dFile(Program.documentPath + @"/3Dinput.dat");
+                }
 
                 ResetChart();
                 RunSimulationMain();

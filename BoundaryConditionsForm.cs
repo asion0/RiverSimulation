@@ -719,7 +719,7 @@ namespace RiverSimulationApplication
             {
                 return;
             }
-
+            //p.suspendedLoadDepthAvgConcentration = new RiverSimulationProfile.TwoInOne(RiverSimulationProfile.TwoInOne.ValueType.ThreeDim, RiverSimulationProfile.TwoInOne.ArrayType.ThreeDim);
             ThreeWayTableForm form = new ThreeWayTableForm();
             form.SetFormMode(ThreeWayTableForm.FormType.BottomBedLoadFlux, "懸浮載水深平均濃度", "粒徑", p.sedimentParticlesNumber, p.boundaryTimeNumber, p, p.suspendedLoadDepthAvgConcentration);
             DialogResult r = form.ShowDialog();

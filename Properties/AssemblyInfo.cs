@@ -32,9 +32,10 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.27")]
-[assembly: AssemblyFileVersion("1.0.27")]
+[assembly: AssemblyVersion("1.0.0.28")]
+[assembly: AssemblyFileVersion("1.0.28")]
 
+//1.0.0.28 - 20150217 Release version.
 //1.0.0.27 - 20150207 Release version.
 //1.0.0.26 - 20150206 Release version.
 //1.0.0.25 - 20150205 Release version.

@@ -349,7 +349,7 @@ namespace RiverSimulationApplication
             }
             else if (simDebugForm.runMode == SimDebugForm.RunMode.InputData)
             {
-                simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\10062.exe";
+                simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\resed.exe";
                 simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
                 simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3D " + simDebugForm.dataFile + " out";
                 simProcess.StartInfo.UseShellExecute = false;
@@ -372,7 +372,7 @@ namespace RiverSimulationApplication
                 string resedExe = Program.documentPath + @"\resed.exe";
                 if (!File.Exists(resedExe))
                 {   //如果沒有主程式則複製一個。
-                    File.Copy(Environment.CurrentDirectory + @"\10062.exe", resedExe);
+                    File.Copy(Environment.CurrentDirectory + @"\resed.exe", resedExe);
                 }
 
                 simProcess.StartInfo.FileName = resedExe;
@@ -414,7 +414,7 @@ namespace RiverSimulationApplication
             //{
             //    string strInputFile = "IamReadyNow.i";
             //    RiverSimulationProfile.profile.GenerateInputFile(Environment.CurrentDirectory + "\\" + strInputFile);
-            //    simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\10062.exe";
+            //    simProcess.StartInfo.FileName = Environment.CurrentDirectory + "\\resed.exe";
             //    simProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
             //    simProcess.StartInfo.Arguments = strInputFile + " 123 3D " + simDebugForm.dataFile + " out";
             //    simProcess.StartInfo.UseShellExecute = false;

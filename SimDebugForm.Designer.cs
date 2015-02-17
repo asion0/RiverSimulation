@@ -193,7 +193,7 @@
             this.exeTxt.Name = "exeTxt";
             this.exeTxt.Size = new System.Drawing.Size(209, 22);
             this.exeTxt.TabIndex = 4;
-            this.exeTxt.Text = "10062.exe";
+            this.exeTxt.Text = "resed.exe";
             this.exeTxt.TextChanged += new System.EventHandler(this.exeTxt_TextChanged);
             // 
             // label3

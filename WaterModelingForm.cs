@@ -116,7 +116,7 @@ namespace RiverSimulationApplication
             tvInMainstreamDirectionTxt.Text = p.tvInMainstreamDirection.ToString();
             tvInSideDirectionTxt.Text = p.tvInSideDirection.ToString();
 
-            zeroEquationTypeCombo.SelectedIndex = (int)p.zeroEquationType;
+            zeroEquationTypeCombo.SelectedIndex = (int)(p.zeroEquationType - 1);
 
             //1.2.3 其他
             gravityConstantTxt.Text = p.gravityConstant.ToString();
@@ -303,6 +303,11 @@ namespace RiverSimulationApplication
             //waterDensityTxt.Text = p.waterDensity.ToString();
             //tvInMainstreamDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
             //tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
+            if(p.roughnessHeightKs.type == RiverSimulationProfile.TwoInOne.Type.None)
+            {
+                MessageBox.Show("請輸入粗糙高度Ks！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
 
             if (!ControllerUtility.CheckConvertDouble(ref p.gravityConstant, gravityConstantTxt, "", ControllerUtility.CheckType.NoCheck))
             {
@@ -585,7 +590,7 @@ namespace RiverSimulationApplication
 
         private void zeroEquationTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            p.zeroEquationType = (RiverSimulationProfile.ZeroEquationType)zeroEquationTypeCombo.SelectedIndex;
+            p.zeroEquationType = (RiverSimulationProfile.ZeroEquationType)(zeroEquationTypeCombo.SelectedIndex + 1);
         }
 
         private void curvatureRadiusRdo_CheckedChanged(object sender, EventArgs e)

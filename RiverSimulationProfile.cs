@@ -1396,7 +1396,7 @@ namespace RiverSimulationApplication
             }
             else if (roughnessType == RoughnessType.Chezy)
             {
-                DumpTwoInOne(manningN, ref sb, DumpTwoInOneType.OnlyType, true);       //1.2.1.2 Chezy 二選一 
+                DumpTwoInOne(chezy, ref sb, DumpTwoInOneType.OnlyType, true);       //1.2.1.2 Chezy 二選一 
             }
             else
             {
@@ -1409,7 +1409,7 @@ namespace RiverSimulationApplication
             }
             else if (roughnessType == RoughnessType.Chezy)
             {
-                DumpTwoInOne(manningN, ref sb, DumpTwoInOneType.OnlyValueOrArray);       //1.2.1.2 Chezy 二選一 
+                DumpTwoInOne(chezy, ref sb, DumpTwoInOneType.OnlyValueOrArray);       //1.2.1.2 Chezy 二選一 
             }
             else
             {
@@ -1595,15 +1595,28 @@ namespace RiverSimulationApplication
         public double CalcFlowQ(int t, int j, TwoInOne o)
         {
             double q = 0;
+
+            //inputGrid.inputCoor[0, j].x
+
+            double d0 = (j==0) ? 0 : Math.Sqrt(
+                Math.Pow(inputGrid.inputCoor[0, j].x - inputGrid.inputCoor[0, j - 1].x, 2) +
+                Math.Pow(inputGrid.inputCoor[0, j].y - inputGrid.inputCoor[0, j - 1].y, 2));
+            
+            double d1 = (j==inputGrid.GetJ - 1) ? 0 : Math.Sqrt(
+                Math.Pow(inputGrid.inputCoor[0, j].x - inputGrid.inputCoor[0, j + 1].x, 2) +
+                Math.Pow(inputGrid.inputCoor[0, j].y - inputGrid.inputCoor[0, j + 1].y, 2));
+
+            double d = d0 / 2 + d1 / 2;
             if(!o.check)
             {   //均一流量，採用Value欄位直接回傳
-                q = o.Value2D()[0, t];
+                q = o.Value2D()[0, t] / d;
             }
             else
             {   //逐點輸入，採用Value欄位 * Array欄位百分比，取前後位中位數。
-                double first = (j == 0) ? 0 : (o.Value2D()[0, t] * o.Array2D()[j - 1, t] / 100);
-                double second = o.Value2D()[0, t] * o.Array2D()[j, t] / 100;
-                q = (first + second) / 2;
+                //double first = (j == 0) ? 0 : (o.Value2D()[0, t] * o.Array2D()[j - 1, t] / 100);
+                //double second = o.Value2D()[0, t] * o.Array2D()[j, t] / 100;
+                //q = (first + second) / 2;
+                q = (o.Value2D()[0, t] * o.Array2D()[j, t] / 100) / d;
             }
             return q;
         }

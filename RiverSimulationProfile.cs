@@ -1168,6 +1168,19 @@ namespace RiverSimulationApplication
         public string tr = Environment.CurrentDirectory + "\\tr.jpg";
         public string bl = Environment.CurrentDirectory + "\\bl.jpg";
         public string br = Environment.CurrentDirectory + "\\br.jpg";
+        public void ResetGoogleStaticMap()
+        {
+            if(bkImgType == BackgroundMapType.GoogleStaticMap && 
+                (!File.Exists(tl) || !File.Exists(tr) || !File.Exists(bl) || !File.Exists(br)))
+            {
+                tl = Environment.CurrentDirectory + "\\tl.jpg";
+                tr = Environment.CurrentDirectory + "\\tr.jpg";
+                bl = Environment.CurrentDirectory + "\\bl.jpg";
+                br = Environment.CurrentDirectory + "\\br.jpg";
+                DownloadGoogleStaticMap();
+            }
+        }
+
         public bool DownloadGoogleStaticMap()
         {
             if (File.Exists(tl))
@@ -1491,7 +1504,7 @@ namespace RiverSimulationApplication
                     count = 0;
                 }
                 double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subMainFlowQuantity : superMainFlowQuantity);
-                sb.AppendFormat("{0,8}", flowQ);
+                sb.AppendFormat(" {0,7}", flowQ.ToString("###.###"));
                 ++count;
             }
             count = 8;
@@ -1595,27 +1608,23 @@ namespace RiverSimulationApplication
         public double CalcFlowQ(int t, int j, TwoInOne o)
         {
             double q = 0;
-
-            //inputGrid.inputCoor[0, j].x
-
-            double d0 = (j==0) ? 0 : Math.Sqrt(
-                Math.Pow(inputGrid.inputCoor[0, j].x - inputGrid.inputCoor[0, j - 1].x, 2) +
-                Math.Pow(inputGrid.inputCoor[0, j].y - inputGrid.inputCoor[0, j - 1].y, 2));
-            
-            double d1 = (j==inputGrid.GetJ - 1) ? 0 : Math.Sqrt(
-                Math.Pow(inputGrid.inputCoor[0, j].x - inputGrid.inputCoor[0, j + 1].x, 2) +
-                Math.Pow(inputGrid.inputCoor[0, j].y - inputGrid.inputCoor[0, j + 1].y, 2));
-
-            double d = d0 / 2 + d1 / 2;
+            double d0, d1, d;
             if(!o.check)
             {   //均一流量，採用Value欄位直接回傳
+                d = Math.Sqrt(
+                    Math.Pow(inputGrid.inputCoor[0, 0].x - inputGrid.inputCoor[0, inputGrid.GetJ - 1].x, 2) +
+                    Math.Pow(inputGrid.inputCoor[0, 0].y - inputGrid.inputCoor[0, inputGrid.GetJ - 1].y, 2));
                 q = o.Value2D()[0, t] / d;
             }
             else
             {   //逐點輸入，採用Value欄位 * Array欄位百分比，取前後位中位數。
-                //double first = (j == 0) ? 0 : (o.Value2D()[0, t] * o.Array2D()[j - 1, t] / 100);
-                //double second = o.Value2D()[0, t] * o.Array2D()[j, t] / 100;
-                //q = (first + second) / 2;
+                d0 = (j == 0) ? 0 : Math.Sqrt(
+                    Math.Pow(inputGrid.inputCoor[0, j].x - inputGrid.inputCoor[0, j - 1].x, 2) +
+                    Math.Pow(inputGrid.inputCoor[0, j].y - inputGrid.inputCoor[0, j - 1].y, 2));
+                d1 = (j == inputGrid.GetJ - 1) ? 0 : Math.Sqrt(
+                    Math.Pow(inputGrid.inputCoor[0, j].x - inputGrid.inputCoor[0, j + 1].x, 2) +
+                    Math.Pow(inputGrid.inputCoor[0, j].y - inputGrid.inputCoor[0, j + 1].y, 2));
+                d = d0 / 2 + d1 / 2;
                 q = (o.Value2D()[0, t] * o.Array2D()[j, t] / 100) / d;
             }
             return q;

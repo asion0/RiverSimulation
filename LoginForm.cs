@@ -112,6 +112,7 @@ namespace RiverSimulationApplication
             if (File.Exists(tempSave))
             {
                 RiverSimulationProfile.profile = RiverSimulationProfile.DeSerialize(tempSave);
+                RiverSimulationProfile.profile.ResetGoogleStaticMap();
             }
             else
             {

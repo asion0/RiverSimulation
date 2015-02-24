@@ -18,7 +18,7 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
-        RiverGrid gridData = null;
+        public RiverGrid gridData = null;
 
         bool hideGenerate = false;
         int colCount = 0;
@@ -92,23 +92,13 @@ namespace RiverSimulationApplication
 
         private bool ConvertTableData()
         {
-            try
+            if(gridData == null)
             {
-                for (int i = 0; i < rowCount; ++i)
-                {
-                    for (int j = 0; j < colCount; ++j)
-                    {
-                        gridData.inputCoor[i, j].x = Convert.ToDouble(dataGridViewX[j, i].Value);
-                        gridData.inputCoor[i, j].y = Convert.ToDouble(dataGridViewY[j, i].Value);
-                        gridData.inputCoor[i, j].z = Convert.ToDouble(dataGridViewZ[j, i].Value);
-                    }
-                }  
+                rowCount = Convert.ToInt32(yGridNum.Text); 
+                colCount = Convert.ToInt32(xGridNum.Text);
+                gridData = new RiverGrid();
             }
-            catch
-            {
-                return false;
-            }
-            return true;
+            return gridData.ReadInputGridData(dataGridViewX, dataGridViewY, dataGridViewZ, rowCount, colCount);
         }
 
         private void GridNum_TextChanged(object sender, EventArgs e)

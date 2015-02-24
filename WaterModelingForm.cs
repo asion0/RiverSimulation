@@ -303,7 +303,7 @@ namespace RiverSimulationApplication
             //waterDensityTxt.Text = p.waterDensity.ToString();
             //tvInMainstreamDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
             //tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
-            if(p.roughnessHeightKs.type == RiverSimulationProfile.TwoInOne.Type.None)
+            if(roughnessHeightKsBtn.Enabled && p.roughnessHeightKs.type == RiverSimulationProfile.TwoInOne.Type.None)
             {
                 MessageBox.Show("請輸入粗糙高度Ks！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;

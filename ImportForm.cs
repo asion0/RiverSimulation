@@ -73,7 +73,6 @@ namespace RiverSimulationApplication
                 case RiverSimulationProfile.BackgroundMapType.ImportImage:
                     selectBgRdo.Checked = true;
                     break;
-
             }
         }
 
@@ -199,10 +198,12 @@ namespace RiverSimulationApplication
             {
                 form.SetFormMode(false, 0, 0);
             }
-
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                mapPicBox.Grid = form.gridData;
+                RiverSimulationProfile.profile.inputGrid = form.gridData;
+                SwitchPreivewCombo(PreviewType.GridMap);
+                UpdateStatus();
             }
         }
 

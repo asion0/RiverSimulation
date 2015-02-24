@@ -32,9 +32,11 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.29")]
-[assembly: AssemblyFileVersion("1.0.29")]
+[assembly: AssemblyVersion("1.0.0.31")]
+[assembly: AssemblyFileVersion("1.0.31")]
 
+//1.0.0.31 - 20150223 Release version, Fixed input grid manual issue.
+//1.0.0.30 - 20150221 Release version.
 //1.0.0.29 - 20150218 Release version.
 //1.0.0.28 - 20150217 Release version.
 //1.0.0.27 - 20150207 Release version.

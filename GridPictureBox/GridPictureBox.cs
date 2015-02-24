@@ -1084,7 +1084,41 @@ namespace PictureBoxCtrl
             }
             return true;
         }
-        
+
+        public bool ReadInputGridData(DataGridView dx, DataGridView dy, DataGridView dz, int x, int y)
+        {
+            try
+            {
+                _j = y;
+                _i = x;
+                if (inputCoor == null || (inputCoor.GetLength(0) != _i && inputCoor.GetLength(1) != _j))
+                {
+                    inputCoor = new CoorPoint[_i, _j];
+                }
+                for (int i = 0; i < _i; ++i)
+                {
+                    for (int j = 0; j < _j; ++j)
+                    {
+                        inputCoor[i, j] = new CoorPoint(Convert.ToDouble(dx[j, i].Value), Convert.ToDouble(dy[j, i].Value), Convert.ToDouble(dz[j, i].Value ?? 0));
+                        if (inputCoor[i, j].x > maxX)
+                            maxX = inputCoor[i, j].x;
+                        if (inputCoor[i, j].x < minX)
+                            minX = inputCoor[i, j].x;
+                        if (inputCoor[i, j].y > maxY)
+                            maxY = inputCoor[i, j].y;
+                        if (inputCoor[i, j].y < minY)
+                            minY = inputCoor[i, j].y;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }            
+            ConvertGrid(inputCoor);
+            return true;
+        }
+       
         private bool ConvertGrid(CoorPoint[,] grid)
         {
             _j = grid.GetLength(1);

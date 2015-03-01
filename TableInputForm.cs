@@ -336,12 +336,12 @@ namespace RiverSimulationApplication
         {
             RiverSimulationProfile.TwoInOne o = d as RiverSimulationProfile.TwoInOne;
             RiverSimulationProfile.TwoInOne _d = null;
-            Debug.Assert(o != null);
             switch (_inputFormType)
             {
                 case InputFormType.TwoInOneDouble:
                 case InputFormType.TwoInOneDoubleGreaterThanZero:
                 case InputFormType.TwoInOneDoubleGreaterThanOrEqualZero:
+                    Debug.Assert(o != null);
                     _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
                     _d = _data as RiverSimulationProfile.TwoInOne;
                     Debug.Assert(_d != null);
@@ -419,6 +419,7 @@ namespace RiverSimulationApplication
                     break;
                 case InputFormType.FlowConditionsSettingConstant:
                 case InputFormType.FlowConditionsSettingVariable:
+                    Debug.Assert(o != null);
                     _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
                     _d = _data as RiverSimulationProfile.TwoInOne;
                     if (o.ValueNull() || o.ArrayNull())

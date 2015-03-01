@@ -169,7 +169,15 @@ namespace RiverSimulationApplication
             //}
 
             //模擬功能如果為定量流，則總模擬時間與時間間距相同，使用者不輸入。
-            totalSimulationTimeTxt.Enabled = !p.IsConstantFlowType();
+            //20150224修改規格為僅定量流且水理模式時不輸入
+            if(p.IsConstantFlowType() && p.IsWaterModelingMode())
+            {
+                totalSimulationTimeTxt.Enabled = false;
+            }
+            else
+            {
+                totalSimulationTimeTxt.Enabled = true;
+            }
             //timeSpan2dTxt.Enabled = !p.IsConstantFlowType();
             outputFrequencyTxt.Enabled = !p.IsConstantFlowType(); //模擬功能如果為定量流，則輸出頻率為1，使用者不輸入。
 

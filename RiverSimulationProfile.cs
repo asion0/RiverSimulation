@@ -1241,7 +1241,7 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", 10.ToString());    //模式預設值
             sb.AppendFormat("{0,8}", 50.ToString());     //模式預設值
             sb.AppendFormat("{0,8}", 0.ToString());     //模式預設值
-            sb.AppendFormat("{0,8}", verticalLevelNumber.ToString());     //垂向格網分層數目0.1.1
+            sb.AppendFormat("{0,8}", Is2DMode() ? "0" : verticalLevelNumber.ToString());     //垂向格網分層數目0.1.1
             sb.Append("\n");
             //**模式列印輸出格式，建議採預設值
             sb.Append("       0       1       0       0       0       0               0                \n");
@@ -1282,7 +1282,9 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", (modelingType == ModelingType.MovableBed ? 1 : 0).ToString());     //對照“模擬功能”-“模組選擇”。若執行動床計算需產生SED.dat檔案。
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
-            sb.AppendFormat("{0,8}", (quayStableAnalysisFunction ? 1 : 0).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。
+            //sb.AppendFormat("{0,8}", (quayStableAnalysisFunction ? 1 : 0).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。
+            //20150224要求改為0
+            sb.AppendFormat("{0,8}", (1).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。
             sb.AppendFormat("{0,8}", maxIterationsNum.ToString());     //水理最大疊代次數。1.1.2.3
             sb.Append("\n");
 
@@ -1295,6 +1297,8 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算泥砂懸浮載(suspending load)。1:是；0:否。預設值：1。不供使用者更改
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算泥砂底床載(bedload)。1:是；0:否。預設值：1。不供使用者更改
             sb.AppendFormat("{0,8}", (0).ToString());     //模式預設值
+            sb.AppendFormat("{0,8}", (bedrockFunction ? 1 : 0).ToString());     //20150224新增 1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岩床
+            sb.AppendFormat("{0,8}", (quayStableAnalysisFunction ? 1 : 0).ToString());     //20150224 1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”
             sb.Append("\n");
 
             //註6：
@@ -1311,7 +1315,16 @@ namespace RiverSimulationApplication
             sb.AppendFormat(" {0,15}", "0.0");                               //初始計算時間(sec)。格式為實數16 格。值為0.0。
             sb.AppendFormat(" {0,15}", waterTimeSpan.ToString());            //2.1.1 時間間距
             sb.AppendFormat(" {0,15}", timeSpan2d.ToString());               //1.1.1.2 二維時間間距
-            sb.AppendFormat(" {0,15}", totalSimulationTime.ToString());      //1.1.1.1 總模擬時間
+            //定量流且模組為水理時，使用者不於UI 輸入，請取二維時間間距1.1.1.2 值為總模
+            //擬時間；定量流且模組為動床時，讓使用者輸入總模擬時間。變量流則都要讓使用者輸入。
+            if (IsConstantFlowType() && IsWaterModelingMode())
+            {
+                sb.AppendFormat(" {0,15}", timeSpan2d.ToString());      //1.1.1.1 總模擬時間
+            }
+            else
+            {
+                sb.AppendFormat(" {0,15}", totalSimulationTime.ToString());      //1.1.1.1 總模擬時間
+            }
             sb.AppendFormat(" {0,15}", waterModelingConvergenceCriteria2d.ToString());     //1.1.2.1 二維水理收斂標準
             sb.Append("\n");
 
@@ -1462,12 +1475,20 @@ namespace RiverSimulationApplication
 
             //註17~20：邊界條件設定值
             count = 0;
-            for (int t = 0; t < boundaryTime.Length; ++t)
+            for (int t = 0; t < (IsConstantFlowType() ? 1 : boundaryTime.Length); ++t)
             {
                 GenerateBoundaryConditions(t, ref sb, count);
             }
             //註21：邊界條件設定值
-            GenerateBoundaryConditions(boundaryTime.Length - 1, ref sb, count, true);
+            if (IsConstantFlowType())
+            {
+                GenerateBoundaryConditions(100, ref sb, count, true);
+                GenerateBoundaryConditions(101, ref sb, count, true);
+            }
+            else
+            {
+                GenerateBoundaryConditions(boundaryTime.Length - 1, ref sb, count, true);
+            }
             sb.Append("\n");
 
             using (StreamWriter outfile = new StreamWriter(file))
@@ -1488,11 +1509,26 @@ namespace RiverSimulationApplication
             //模擬時間(sec)。實數16 格
             if (external)
             {
-                sb.AppendFormat("{0,16}", (boundaryTime[t] + 1).ToString());    
+                if (IsConstantFlowType())
+                {
+                    sb.AppendFormat("{0,16}", t.ToString());
+                    t = 0;
+                }
+                else
+                {
+                    sb.AppendFormat("{0,16}", (boundaryTime[t] + 1).ToString());
+                }
             }
             else
             {
-                sb.AppendFormat("{0,16}", (boundaryTime[t]).ToString());        
+                if (IsConstantFlowType())
+                {
+                    sb.AppendFormat("{0,16}", 0.ToString());
+                }
+                else
+                {
+                    sb.AppendFormat("{0,16}", (boundaryTime[t]).ToString());
+                }
             }
             count = 0;
 
@@ -1517,7 +1553,7 @@ namespace RiverSimulationApplication
                     count = 0;
                 }
                 double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
-                sb.AppendFormat("{0,8}", flowQ);
+                sb.AppendFormat(" {0,7}", flowQ.ToString("###.###"));
                 ++count;
             }
             count = 8;
@@ -1548,7 +1584,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = CalcWaterLevel(t, jw, downSubWaterLevel);
-                    sb.AppendFormat("{0,8}", level);
+                    sb.AppendFormat(" {0,7}", level.ToString("###.###"));
                     ++count;
                 }
                 count = 8;
@@ -1565,7 +1601,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = upBoundaryElevationArray[jw, t];
-                    sb.AppendFormat("{0,8}", level);
+                    sb.AppendFormat(" {0,7}", level.ToString("###.###"));
                     ++count;
                 }
                 count = 8;

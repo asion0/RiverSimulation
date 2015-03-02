@@ -32,9 +32,10 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.32")]
-[assembly: AssemblyFileVersion("1.0.32")]
+[assembly: AssemblyVersion("1.0.0.33")]
+[assembly: AssemblyFileVersion("1.0.33")]
 
+//1.0.0.33 - 20150302 Release version, Fixed 1.1.1.3 in constance flow type bug.
 //1.0.0.32 - 20150301 Release version, Support constance flow type.
 //1.0.0.31 - 20150223 Release version, Fixed input grid manual issue.
 //1.0.0.30 - 20150221 Release version.

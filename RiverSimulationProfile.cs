@@ -1190,10 +1190,12 @@ namespace RiverSimulationApplication
             if (File.Exists(tr))
             {
                 File.Delete(tr);
-            } if (File.Exists(bl))
+            } 
+            if (File.Exists(bl))
             {
                 File.Delete(bl);
-            } if (File.Exists(br))
+            } 
+            if (File.Exists(br))
             {
                 File.Delete(br);
             }
@@ -1291,8 +1293,24 @@ namespace RiverSimulationApplication
             //註5：
             sb.AppendFormat("{0,8}", (9999999).ToString());     //模式預設值
             sb.AppendFormat("{0,8}", (9999999).ToString());     //模式預設值
-            sb.AppendFormat("{0,8}", waterOutputFrequency.ToString());     //2.1.2 動床輸出頻率
-            sb.AppendFormat("{0,8}", outputFrequency.ToString());     //1.1.1.3 水理輸出頻率
+            if (IsMovableBedMode())
+            {
+                if (waterOutputFrequency == 0)
+                {
+                    //預設為「公式：(1.1.1.3)x(1.1.1.2)/(2.1.1)」，不可留空白。
+                    sb.AppendFormat("{0,8}", (outputFrequency * timeSpan2d / waterTimeSpan).ToString());     //2.1.2 動床輸出頻率
+                }
+                else
+                {
+                    sb.AppendFormat("{0,8}", (waterOutputFrequency).ToString());     //2.1.2 動床輸出頻率
+                }
+            }
+            else
+            {
+                sb.AppendFormat("{0,8}", "1");     //2.1.2 動床輸出頻率
+            }
+            //模擬功能如果為定量流，則輸出頻率為1，使用者不輸入。
+            sb.AppendFormat("{0,8}", IsConstantFlowType() ? "1" : outputFrequency.ToString());     //1.1.1.3 水理輸出頻率
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算泥砂懸浮載(suspending load)。1:是；0:否。預設值：1。不供使用者更改
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算泥砂底床載(bedload)。1:是；0:否。預設值：1。不供使用者更改

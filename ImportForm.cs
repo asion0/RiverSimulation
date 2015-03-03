@@ -61,6 +61,20 @@ namespace RiverSimulationApplication
 
         private void LoadStatus()
         {
+            switch(p.importSource)
+            {
+                case RiverSimulationProfile.ImportSource.ImportFile:
+                    inputFileRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.ImportSource.UserInput:
+                    inputGridRdo.Checked = true;
+                    break;
+                default:
+                    inputFileRdo.Checked = false;
+                    inputGridRdo.Checked = false;
+                    break;
+            }
+
             verticalLevelNumberTxt.Text = p.verticalLevelNumber.ToString();
             switch (p.GetBackgroundMapType())
             {
@@ -140,18 +154,19 @@ namespace RiverSimulationApplication
             bool chk = (sender as RadioButton).Checked;
             inputFileBtn.Enabled = chk;
             //inputFilePath.Enabled = chk;
-            /*
+
             if(chk)
             {
-                //Auto select file.
+                p.importSource = RiverSimulationProfile.ImportSource.ImportFile;
+             /*               //Auto select file.
                 DialogResult result = inputFileDlg.ShowDialog(); // Show the dialog.
                 if (result == DialogResult.OK) // Test result.
                 {
                     inputFilePath.Text = inputFileDlg.FileName;
                 }
-            }
             */
-        }
+             }
+       }
 
         private void inputFileBtn_Click(object sender, EventArgs e)
         {
@@ -174,17 +189,18 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as RadioButton).Checked;
             inputGridBtn.Enabled = chk;
-            /*
             if(chk)
-            { 
-                //Auto show input form
+            {
+                p.importSource = RiverSimulationProfile.ImportSource.UserInput;
+             /*
+               //Auto show input form
                 ImportTableForm form = new ImportTableForm();
                 if (DialogResult.OK == form.ShowDialog())
                 {
 
                 }
-            }
             */
+            }
         }
 
         private void inputGridBtn_Click(object sender, EventArgs e)

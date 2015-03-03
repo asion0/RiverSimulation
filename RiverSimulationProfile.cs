@@ -69,9 +69,13 @@ namespace RiverSimulationApplication
         //全域參數
         #region GlobalSetting
         public RiverGrid inputGrid = null;
-        //public int separateNum = 0;             //垂向格網分層數目0.1.1
-        //public double[] separateArray = null;
-
+        public enum ImportSource
+        {
+            None,
+            ImportFile,
+            UserInput
+        }
+        public ImportSource importSource;
         public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
         public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
@@ -870,6 +874,7 @@ namespace RiverSimulationApplication
 
             //全域參數
             inputGrid = null;
+            importSource = ImportSource.None;
             verticalLevelNumber = 19;      //0.1.1 垂向格網分層數目
             levelProportion = null;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 

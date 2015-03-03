@@ -225,7 +225,7 @@ namespace RiverSimulationApplication
                 {
                     case RiverSimulationProfile.TwoInOne.Type.None:
                     case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                        for (int tw = jStart; tw < jStart + p.boundaryTimeNumber; ++tw)
+                        for (int tw = jStart; tw < jStart + (p.IsConstantFlowType() ? 1 : p.boundaryTimeNumber); ++tw)
                         {
                             for (int kw = iStart; kw < iStart + p.sedimentParticlesNumber; ++kw)
                             {
@@ -234,7 +234,7 @@ namespace RiverSimulationApplication
                         }
                         break;
                     case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                        for (int tw = jStart; tw < jStart + p.boundaryTimeNumber; ++tw)
+                        for (int tw = jStart; tw < jStart + (p.IsConstantFlowType() ? 1 : p.boundaryTimeNumber); ++tw)
                         {
                             for (int jw = iStart; jw < iStart + p.inputGrid.GetJ; ++jw)
                             {
@@ -313,8 +313,9 @@ namespace RiverSimulationApplication
                 {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
                     // _data = new RiverSimulationProfile.TwoInOne(p.boundaryTimeNumber, p.sedimentParticlesNumber, p.inputGrid.GetJ); //[T, K, J]
                     //_data = new RiverSimulationProfile.TwoInOne(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber); //[K, J, T]
-                    _d.Create3D(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber);
-                }
+                    //_d.Create3D(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber);
+                    _d.Create3D(p.sedimentParticlesNumber, p.inputGrid.GetJ, rowCount);
+               }
             }
             else if (formType == FormType.DepthAverageConcentration)
             {
@@ -572,7 +573,7 @@ namespace RiverSimulationApplication
                 {
                     case RiverSimulationProfile.TwoInOne.Type.None:
                     case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                        for (int tw = jStart; tw < jStart + p.boundaryTimeNumber; ++tw)
+                        for (int tw = jStart; tw < jStart + (p.IsConstantFlowType() ? 1 : p.boundaryTimeNumber); ++tw)
                         {
                             for (int kw = iStart; kw < iStart + p.sedimentParticlesNumber; ++kw)
                             {
@@ -584,7 +585,7 @@ namespace RiverSimulationApplication
                         dataGridView.CurrentCell = dataGridView[iStart, jStart];
                         break;
                     case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                        for (int tw = jStart; tw < jStart + p.boundaryTimeNumber; ++tw)
+                        for (int tw = jStart; tw < jStart + (p.IsConstantFlowType() ? 1 : p.boundaryTimeNumber); ++tw)
                         {
                             for (int jw = iStart; jw < iStart + p.inputGrid.GetJ; ++jw)
                             {
@@ -635,7 +636,7 @@ namespace RiverSimulationApplication
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
             for (int kw = 1; kw < p.sedimentParticlesNumber; ++kw)
             {
-                for (int tw = jStart; tw < jStart + p.boundaryTimeNumber; ++tw)
+                for (int tw = jStart; tw < jStart + (p.IsConstantFlowType() ? 1 : p.boundaryTimeNumber); ++tw)
                 {
                     for (int jw = iStart; jw < iStart + p.inputGrid.GetJ; ++jw)
                     {

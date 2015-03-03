@@ -216,7 +216,7 @@ namespace RiverSimulationApplication
             {
                 boundaryTimeNumberTxt.Enabled = false;        //定量流不輸入
                 boundaryTimeBtn.Enabled = false;
-                suspendedLoadDepthAvgConcentrationBtn.Enabled = false;  //定量流不支援 20150121
+                //suspendedLoadDepthAvgConcentrationBtn.Enabled = false;  //定量流不支援 20150121, 20150303 改為要輸入
                 //subBoundaryConditionNumberTxt.Enabled = false;          //定量流不輸入
                 //superMainFlowQuantityBtn.Enabled = false;
                 //superWaterLevelBtn.Enabled = false;
@@ -720,8 +720,9 @@ namespace RiverSimulationApplication
                 return;
             }
             //p.suspendedLoadDepthAvgConcentration = new RiverSimulationProfile.TwoInOne(RiverSimulationProfile.TwoInOne.ValueType.ThreeDim, RiverSimulationProfile.TwoInOne.ArrayType.ThreeDim);
+            //p.suspendedLoadDepthAvgConcentration.Clear();
             ThreeWayTableForm form = new ThreeWayTableForm();
-            form.SetFormMode(ThreeWayTableForm.FormType.BottomBedLoadFlux, "懸浮載水深平均濃度", "粒徑", p.sedimentParticlesNumber, p.boundaryTimeNumber, p, p.suspendedLoadDepthAvgConcentration);
+            form.SetFormMode(ThreeWayTableForm.FormType.BottomBedLoadFlux, "懸浮載水深平均濃度", "粒徑", p.sedimentParticlesNumber, (p.IsConstantFlowType() ? 1 : p.boundaryTimeNumber), p, p.suspendedLoadDepthAvgConcentration);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
@@ -829,7 +830,7 @@ namespace RiverSimulationApplication
         private void bottomBedParticleSizeRatioBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            if(p.bottomBedParticleSizeRatio.GetLongLength(1) == 0)
+            if (p.bottomBedParticleSizeRatio != null && p.bottomBedParticleSizeRatio.GetLongLength(1) == 0)
             {
                 p.bottomBedParticleSizeRatio = null;
             }

@@ -388,7 +388,7 @@ namespace RiverSimulationApplication
                 }
                 else if (p.Is3DMode() && p.IsWaterModelingMode())
                 {
-                    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3Dinput.dat out";
+                    simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3D 3Dinput.dat out";
                 }
                 else if (p.Is2DMode() && p.IsMovableBedMode())
                 {

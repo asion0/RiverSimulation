@@ -1380,7 +1380,7 @@ namespace RiverSimulationApplication
                         sb.Append("\n");
                         count = 0;
                     }
-                    sb.AppendFormat(" {0,15}", inputGrid.inputCoor[i, j].y.ToString("#######.#######"));
+                    sb.AppendFormat(" {0,15}", inputGrid.inputCoor[i, j].y.ToString("F7"));
                     ++count;
                 }
                 sb.Append("\n");
@@ -1563,7 +1563,7 @@ namespace RiverSimulationApplication
                     count = 0;
                 }
                 double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subMainFlowQuantity : superMainFlowQuantity);
-                sb.AppendFormat(" {0,7}", flowQ.ToString("###.###"));
+                sb.AppendFormat(" {0,7}", flowQ.ToString("F3"));
                 ++count;
             }
             count = 8;
@@ -1576,7 +1576,7 @@ namespace RiverSimulationApplication
                     count = 0;
                 }
                 double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
-                sb.AppendFormat(" {0,7}", flowQ.ToString("###.###"));
+                sb.AppendFormat(" {0,7}", flowQ.ToString());
                 ++count;
             }
             count = 8;
@@ -1591,7 +1591,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = CalcWaterLevel(t, jw, superWaterLevel);
-                    sb.AppendFormat(" {0,7}", level.ToString("####.###"));
+                    sb.AppendFormat(" {0,7}", level.ToString("F3"));
                     ++count;
                 }
                 count = 8;
@@ -1607,7 +1607,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = CalcWaterLevel(t, jw, downSubWaterLevel);
-                    sb.AppendFormat(" {0,7}", level.ToString("###.###"));
+                    sb.AppendFormat(" {0,7}", level.ToString("F3"));
                     ++count;
                 }
                 count = 8;
@@ -1624,7 +1624,22 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = upBoundaryElevationArray[jw, t];
-                    sb.AppendFormat(" {0,7}", level.ToString("###.###"));
+                    sb.AppendFormat(" {0,7}", level.ToString("F3"));
+                    ++count;
+                }
+                count = 8;
+            }
+            else if (upBoundaryElevationType == BottomBedLoadFluxType.Auto && this.IsMovableBedMode())
+            {
+                for (int jw = 0; jw < inputGrid.GetJ; ++jw)
+                {   //上游水位
+                    if (count == 8)
+                    {
+                        sb.AppendFormat("\n{0,16}", " ");
+                        count = 0;
+                    }
+                    double level = inputGrid.inputCoor[0, jw].z;
+                    sb.AppendFormat(" {0,7}", level.ToString("F3"));
                     ++count;
                 }
                 count = 8;
@@ -1641,7 +1656,7 @@ namespace RiverSimulationApplication
                 sb.AppendFormat("{0,16}", 1);
                 for (int k = 0; k < sedimentParticlesNumber; ++k)
                 {
-                    sb.AppendFormat("{0,8}", bottomBedParticleSizeRatio[k, t]);
+                    sb.AppendFormat(" {0,7}", (bottomBedParticleSizeRatio[k, t] / 100).ToString("F3"));
                 }
                 sb.AppendFormat("\n");
 

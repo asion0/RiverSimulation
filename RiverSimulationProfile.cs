@@ -1563,7 +1563,7 @@ namespace RiverSimulationApplication
                     count = 0;
                 }
                 double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subMainFlowQuantity : superMainFlowQuantity);
-                sb.AppendFormat(" {0,7}", flowQ.ToString("F3"));
+                sb.AppendFormat("{0,8}", flowQ.ToString("F4"));
                 ++count;
             }
             count = 8;
@@ -1576,7 +1576,7 @@ namespace RiverSimulationApplication
                     count = 0;
                 }
                 double flowQ = CalcFlowQ(t, jw, (upFlowCondition == FlowConditionType.SubCriticalFlow) ? subSideFlowQuantity : superSideFlowQuantity);
-                sb.AppendFormat(" {0,7}", flowQ.ToString());
+                sb.AppendFormat("{0,8}", flowQ.ToString("F4"));
                 ++count;
             }
             count = 8;
@@ -1591,7 +1591,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = CalcWaterLevel(t, jw, superWaterLevel);
-                    sb.AppendFormat(" {0,7}", level.ToString("F3"));
+                    sb.AppendFormat("{0,8}", level.ToString("F4"));
                     ++count;
                 }
                 count = 8;
@@ -1607,7 +1607,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = CalcWaterLevel(t, jw, downSubWaterLevel);
-                    sb.AppendFormat(" {0,7}", level.ToString("F3"));
+                    sb.AppendFormat(" {0,8}", level.ToString("F4"));
                     ++count;
                 }
                 count = 8;
@@ -1624,7 +1624,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = upBoundaryElevationArray[jw, t];
-                    sb.AppendFormat(" {0,7}", level.ToString("F3"));
+                    sb.AppendFormat("{0,8}", level.ToString("F4"));
                     ++count;
                 }
                 count = 8;
@@ -1639,7 +1639,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = inputGrid.inputCoor[0, jw].z;
-                    sb.AppendFormat(" {0,7}", level.ToString("F3"));
+                    sb.AppendFormat("{0,8}", level.ToString("F4"));
                     ++count;
                 }
                 count = 8;
@@ -1656,7 +1656,7 @@ namespace RiverSimulationApplication
                 sb.AppendFormat("{0,16}", 1);
                 for (int k = 0; k < sedimentParticlesNumber; ++k)
                 {
-                    sb.AppendFormat(" {0,7}", (bottomBedParticleSizeRatio[k, t] / 100).ToString("F3"));
+                    sb.AppendFormat("{0,8}", (bottomBedParticleSizeRatio[k, t] / 100).ToString("F4"));
                 }
                 sb.AppendFormat("\n");
 
@@ -1664,15 +1664,21 @@ namespace RiverSimulationApplication
                 {
                     sb.AppendFormat("{0,16}", j + 1);
                     for (int k = 0; k < sedimentParticlesNumber; ++k)
-                    {
+                    {   //懸浮載水深平均濃度
+                        string s;
+                        double v;
                         if (suspendedLoadDepthAvgConcentration.type == TwoInOne.Type.UseArray)
-                        {
-                            sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Array3D()[k, j, t]);
+                        {   //20150306 - 改用科學符號1.36-E04，統一小數點後2位，這裡只有3位精度沒關係。
+                            v = suspendedLoadDepthAvgConcentration.Array3D()[k, j, t];
+                            //sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Array3D()[k, j, t]);
                         }
                         else
                         {
-                            sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Value3D()[k, 0, t]);
+                            v = suspendedLoadDepthAvgConcentration.Value3D()[k, 0, t];
+                            //sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Value3D()[k, 0, t]);
                         }
+                        s = String.Format("{0:000E+00}", v);
+                        sb.AppendFormat("{0,8}", s);
                     }
                     sb.AppendFormat("\n");
                 }
@@ -1833,12 +1839,12 @@ namespace RiverSimulationApplication
                 {
                     if (i != inputGrid.GetI - 1)
                     {
-                        sb.AppendFormat(" {0,7}", i + 1);   //上游入流斷面編號I=1
-                        sb.AppendFormat(" {0,7}", j + 1);   //側方向斷面編號J=1~Jtotal
-                        sb.AppendFormat(" {0,7}", 1);       //上游輸砂邊界型態。預設值1
-                        sb.AppendFormat(" {0,7}", j + 1);   //模式內部設定值。
-                        sb.AppendFormat(" {0,7}", 1);       //模式內部設定值。預設值1
-                        sb.AppendFormat(" {0,7}\n", 1);       //模式內部設定值。預設值1
+                        sb.AppendFormat(" {0,7}", i + 1);   //欄 1 - 上游入流斷面編號I=1   
+                        sb.AppendFormat(" {0,7}", j + 1);   //欄 2 - 側方向斷面編號J=1~Jtotal
+                        sb.AppendFormat(" {0,7}", 1);       //欄 3 - 上游輸砂邊界型態。預設值1
+                        sb.AppendFormat(" {0,7}", j + 1);   //欄 4 - 模式內部設定值。
+                        sb.AppendFormat(" {0,7}", 1);       //欄 5 - 模式內部設定值。預設值1
+                        sb.AppendFormat(" {0,7}\n", j + 1);     //欄 6 - 模式內部設定值。預設值1, 20150306修改為- 模式內部設定值。J=1~Jtotal
                     }
                     else
                     {

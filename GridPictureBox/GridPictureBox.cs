@@ -56,8 +56,7 @@ namespace PictureBoxCtrl
         private PictureBoxCtrl.RiverGrid rg = null;
         private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
         private Bitmap tlBmp, trBmp, blBmp, brBmp;
-        //private float lineWidth = 2.0F;
-private float lineWidth = 0.01F;
+        private float lineWidth = 2.0F;
         //private int fontSize = 20;
         private int selectedI = -1;
         //private int selectedJ = -1;
@@ -361,7 +360,7 @@ private float lineWidth = 0.01F;
             PicBox.Refresh(); 
         }
 
-        public Matrix GetMatrix()
+        private Matrix GetMatrix()
         {
             if (rg==null || !rg.IsReadFinished())
             {
@@ -388,11 +387,34 @@ private float lineWidth = 0.01F;
                 w = 640 * 2;
                 h = 640 * 2;
             }
+            if(!rg.IsInMap())
+            {
+                double coorW = rb.x - lt.x;
+                double coorH = lt.y - rb.y;
+                if (coorW > coorH)
+                {   //寬大於高
+                    lt.y += (coorW - coorH) / 2;
+                    rb.y -= (coorW - coorH) / 2;
+                }
+                else if (coorH < coorW)
+                {   //高大於寬
+                    lt.x -= (coorH - coorW) / 2;
+                    rb.x += (coorH - coorW) / 2;
+                }
+                coorW = rb.x - lt.x;
+                coorH = lt.y - rb.y;
+
+                lt.x -= coorW * 0.1;
+                rb.x += coorW * 0.1;
+                lt.y += coorH * 0.1;
+                rb.y -= coorH * 0.1;
+            }
 
             Matrix m = new Matrix(1f, 0, 0, -1f, 0, 0);
             float xScale = w / (float)(rb.x - lt.x);
             float yScale = h / (float)(lt.y - rb.y);
 
+            
             m.Scale(xScale, yScale);
             m.Translate((float)-lt.x, (float)-lt.y);
             return m;
@@ -403,12 +425,30 @@ private float lineWidth = 0.01F;
             PointF[] pts = new PointF[2]; 
             PointF p1 = new PointF((float)p1x, (float)p1y);
             PointF p2 = new PointF((float)p2x, (float)p2y);
+
             float dx = p2.X - p1.X;
             float dy = p2.Y - p1.Y;
             float dd12 = (float)Math.Sqrt(dx * dx + dy * dy);
             float ddAll = (float)Math.Sqrt(w * w + h * h);
             float m1 = ddAll / (300 * dd12);
             float m2 = ddAll / (40 * dd12);
+            if (!rg.IsInMap())
+            {
+                PointF[] linePt = new PointF[] 
+                { 
+                    new PointF { X = 0, Y = 0 }, 
+                    new PointF { X = 300, Y = 0 }, 
+                };
+
+                Matrix lm = GetMatrix();
+                lm.Invert();
+                lm.TransformPoints(linePt);
+                m1 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
+                linePt[1].X = 40;
+                lm.TransformPoints(linePt);
+                m2 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
+            }
+
             pts[1] = new PointF(p1.X + m1 * (p1.X - p2.X), p1.Y + m1 * (p1.Y - p2.Y));
             pts[0] = new PointF(p1.X + m2 * (p1.X - p2.X), p1.Y + m2 * (p1.Y - p2.Y));
 
@@ -455,11 +495,31 @@ private float lineWidth = 0.01F;
             Pen pen = new Pen(lineColor, lineWidth);
             Pen selPen = new Pen(Color.Red, lineWidth);
             g.Transform = m;
+
+            if(rg.IsInMap())
+            {
+                pen.Width = lineWidth;
+                selPen.Width = lineWidth;
+            }
+            else
+            {
+
+                PointF[] linePt = new PointF[] 
+                { 
+                    new PointF { X = 0, Y = 0 }, 
+                    new PointF { X = lineWidth, Y = lineWidth }, 
+                }; 
+
+                Matrix lm = m.Clone();
+                lm.Invert();
+                lm.TransformPoints(linePt);
+                pen.Width = linePt[1].X - linePt[0].X;
+                selPen.Width = linePt[1].X - linePt[0].X;
+            }
+
             for (int i = 0; i < rg.GetI; ++i)
-//for (int i = 0; i < 1; ++i)
             {
                 for (int j = 0; j < rg.GetJ; ++j)
-//for (int j = 0; j < 3; ++j)
                 {
                     float x1 = (float)rg.inputCoor[i, j].x;
                     float y1 = (float)rg.inputCoor[i, j].y;
@@ -478,19 +538,18 @@ private float lineWidth = 0.01F;
                     {
                         x2 = (float)rg.inputCoor[i + 1, j].x;
                         y2 = (float)rg.inputCoor[i + 1, j].y;
-                        //g.DrawLine(pen, x1, y1, x2, y2);
-g.DrawLine(selPen, x1, y1, x2, y2);
+                        g.DrawLine(pen, x1, y1, x2, y2);
                     }
                 }
             }   //for (int i = 0; i < rg.GetI; ++i)
 
-/*
+            /*
             //Draw input arrow
             pen.StartCap = LineCap.Flat;
             pen.EndCap = LineCap.Custom;
-            pen.CustomEndCap = new AdjustableArrowCap(4.0f, 4.0f);
+            pen.CustomEndCap = new AdjustableArrowCap(pen.Width * 2, pen.Width * 2);
             //pen.SetLineCap
-            pen.Width = 3.5f;
+            pen.Width *= 1.5f;
 
             const int arrowCount = 4;
             PointF p0 = new PointF();
@@ -563,7 +622,7 @@ g.DrawLine(selPen, x1, y1, x2, y2);
                     
                 }
             }
-*/
+            //*/
             g.Dispose();
             PicBox.Image = picBoxBmp;
         }
@@ -946,37 +1005,6 @@ g.DrawLine(selPen, x1, y1, x2, y2);
                // g.Transform = null;
                 g.DrawLines(groupPen, groupPath.ToArray());
             }
-/*            
-            Matrix m = GetMatrix();
-            if (m == null)
-            {
-                return;
-            }
-
-            Pen pen = new Pen(lineColor, lineWidth);
-            Pen selPen = new Pen(Color.Red, lineWidth);
-            //g.Transform = m;
- 
-            float x1 = (float)(rg.inputCoor[0, 0].x + rg.inputCoor[0, rg.inputCoor.GetLength(1) - 1].x) / 2.0f;
-            float y1 = (float)(rg.inputCoor[0, 0].y + rg.inputCoor[0, rg.inputCoor.GetLength(1) - 1].y) / 2.0f;
-            PointF[] p = new PointF[3] { new PointF(x1, y1), new PointF((float)rg.inputCoor[0, 0].x, (float)rg.inputCoor[0, 0].y),
-                new PointF((float)rg.inputCoor[0, rg.inputCoor.GetLength(1) - 1].x, (float)rg.inputCoor[0, rg.inputCoor.GetLength(1) - 1].y)};
-           
-            StringFormat stringFormat = new StringFormat();
-            stringFormat.Alignment = StringAlignment.Near;
-            stringFormat.LineAlignment = StringAlignment.Near;
-            //Pen pen = new Pen(Color.Black, 1.0f);
-            SolidBrush brush = new SolidBrush(Color.Black);
-            string txt = "入流方向";
-            Font leftFont = new Font("微軟正黑體", 12, FontStyle.Regular, GraphicsUnit.Point);
-            m.TransformPoints(p);
-            RectangleF rcText = new RectangleF(p[0].X, p[0].Y, 120, 16); ;
-
-            g.DrawString(txt, leftFont, brush, rcText, stringFormat);
-            g.DrawLine(selPen, p[1], p[2]);
-            g.DrawLine(selPen, 0, 0, 400f, 400f);
-            //g.Dispose();
- */
         }
 
         private Color bkColor = Color.White;
@@ -1129,8 +1157,9 @@ g.DrawLine(selPen, x1, y1, x2, y2);
         }
         
         public bool IsInMap()
-        {
-            return !(minX < 2325773);
+        {   //119,21 - 42048.392, 2324145.604
+            //123,26 - 450240.618, 2878079.346
+            return (minX > 42048.392 && minY > 2324145.604 && maxX < 450240.618 && maxY < 2878079.346);
         }
 
         private bool ConvertGrid(CoorPoint[,] grid)

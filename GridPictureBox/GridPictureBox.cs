@@ -56,7 +56,8 @@ namespace PictureBoxCtrl
         private PictureBoxCtrl.RiverGrid rg = null;
         private Bitmap gridBmp = new Bitmap(640 * 2, 640 * 2);
         private Bitmap tlBmp, trBmp, blBmp, brBmp;
-        private float lineWidth = 2.0F;
+        //private float lineWidth = 2.0F;
+private float lineWidth = 0.01F;
         //private int fontSize = 20;
         private int selectedI = -1;
         //private int selectedJ = -1;
@@ -184,6 +185,11 @@ namespace PictureBoxCtrl
 
         private CoorPoint GetTopLeft()
         {
+            if(!rg.IsInMap())
+            {
+                return new CoorPoint(rg.GetTopLeft.x, rg.GetTopLeft.y);
+            }
+
             CoordinateTransform ct = new CoordinateTransform();
             CoorPoint pt = new CoorPoint();
             switch (bkImgType)
@@ -203,6 +209,11 @@ namespace PictureBoxCtrl
 
         private CoorPoint GetBottomRight()
         {
+            if (!rg.IsInMap())
+            {
+                return new CoorPoint(rg.GetBottomRight.x, rg.GetBottomRight.y);
+            }
+
             CoordinateTransform ct = new CoordinateTransform();
             CoorPoint pt = new CoorPoint();
             switch (bkImgType)
@@ -378,8 +389,6 @@ namespace PictureBoxCtrl
                 h = 640 * 2;
             }
 
-
-
             Matrix m = new Matrix(1f, 0, 0, -1f, 0, 0);
             float xScale = w / (float)(rb.x - lt.x);
             float yScale = h / (float)(lt.y - rb.y);
@@ -447,8 +456,10 @@ namespace PictureBoxCtrl
             Pen selPen = new Pen(Color.Red, lineWidth);
             g.Transform = m;
             for (int i = 0; i < rg.GetI; ++i)
+//for (int i = 0; i < 1; ++i)
             {
                 for (int j = 0; j < rg.GetJ; ++j)
+//for (int j = 0; j < 3; ++j)
                 {
                     float x1 = (float)rg.inputCoor[i, j].x;
                     float y1 = (float)rg.inputCoor[i, j].y;
@@ -460,23 +471,20 @@ namespace PictureBoxCtrl
                     {
                         x2 = (float)rg.inputCoor[i, j + 1].x;
                         y2 = (float)rg.inputCoor[i, j + 1].y;
-                        if (i == selectedI)
-                        {
-                            g.DrawLine(selPen, x1, y1, x2, y2);
-                        }
-                        else
-                        {
-                            g.DrawLine(pen, x1, y1, x2, y2);
-                        }
+                        g.DrawLine((i == selectedI) ? selPen : pen, x1, y1, x2, y2);
                     }
+
                     if (i != rg.GetI - 1)
                     {
                         x2 = (float)rg.inputCoor[i + 1, j].x;
                         y2 = (float)rg.inputCoor[i + 1, j].y;
-                        g.DrawLine(pen, x1, y1, x2, y2);
+                        //g.DrawLine(pen, x1, y1, x2, y2);
+g.DrawLine(selPen, x1, y1, x2, y2);
                     }
                 }
-            }
+            }   //for (int i = 0; i < rg.GetI; ++i)
+
+/*
             //Draw input arrow
             pen.StartCap = LineCap.Flat;
             pen.EndCap = LineCap.Custom;
@@ -555,6 +563,7 @@ namespace PictureBoxCtrl
                     
                 }
             }
+*/
             g.Dispose();
             PicBox.Image = picBoxBmp;
         }
@@ -1118,7 +1127,12 @@ namespace PictureBoxCtrl
             ConvertGrid(inputCoor);
             return true;
         }
-       
+        
+        public bool IsInMap()
+        {
+            return !(minX < 2325773);
+        }
+
         private bool ConvertGrid(CoorPoint[,] grid)
         {
             _j = grid.GetLength(1);
@@ -1140,22 +1154,35 @@ namespace PictureBoxCtrl
                     minY = pt.y;
             }
 
-
             //Finished read
             CoordinateTransform coorConv = new CoordinateTransform();
-            //CoorPoint topLeft = coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY);
-            //CoorPoint bottomRight = coorConv.CalTwd97ToLatLonCoorRad(minX, minY);
-            zoomScale = CalZoomScale(coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY), coorConv.CalTwd97ToLatLonCoorRad(minX, minY));
+            if (IsInMap())
+            {
+                zoomScale = CalZoomScale(coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY), coorConv.CalTwd97ToLatLonCoorRad(minX, minY));
+            }
+            else
+            {
+                zoomScale = 1;
+            }
+
             if (zoomScale == 0)
             {
                 return false;
             }
 
-            CoorPoint center = coorConv.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
-            bottomRight = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
-            topLeft = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
-            centerPoint = center.RadToDegree();
-
+            if (IsInMap())
+            {
+                CoorPoint center = coorConv.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
+                bottomRight = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
+                topLeft = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
+                centerPoint = center.RadToDegree();
+            }
+            else
+            {
+                centerPoint = new CoorPoint((maxX + minX) / 2, (maxY + minY) / 2);
+                bottomRight = new CoorPoint(maxX, minY);
+                topLeft = new CoorPoint(minX, maxY);
+            }
             return true;
         }
 

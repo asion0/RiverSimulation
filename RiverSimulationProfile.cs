@@ -1150,7 +1150,6 @@ namespace RiverSimulationApplication
             return true;
         }
 
-
         public enum BackgroundMapType
         {
             None,

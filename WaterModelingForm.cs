@@ -584,6 +584,10 @@ namespace RiverSimulationApplication
             else if (chk && sender as RadioButton == zeroEquationRdo)
             {
                 p.turbulenceViscosityType = RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation;
+                if(p.zeroEquationType == RiverSimulationProfile.ZeroEquationType.None)
+                {
+                    p.zeroEquationType = RiverSimulationProfile.ZeroEquationType.Constant;
+                }
             }
             else if (chk && sender as RadioButton == twinEquationRdo)
             {

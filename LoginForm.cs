@@ -64,51 +64,38 @@ namespace RiverSimulationApplication
             }
 
             RiverSimulationProfile.profile = new RiverSimulationProfile();
-            Program.projectFolder = dlg.inputTxt.Text;
+            Program.projectFolder = Program.documentPath + "\\" + dlg.inputTxt.Text;
+            Program.SaveDefaultProjectFolder();
 
-            if(File.Exists(Program.documentPath + @"\resed.exe"))
-            {
-                File.Delete(Program.documentPath + @"\resed.exe");
-            }
-            if (File.Exists(Program.documentPath + @"\TempSave.txt"))
-            {
-                File.Delete(Program.documentPath + @"\TempSave.txt");
-            }
-            if (File.Exists(Program.documentPath + @"\resed.i"))
-            {
-                File.Delete(Program.documentPath + @"\resed.i");
-            }
-            if (File.Exists(Program.documentPath + @"\3Dinput.dat"))
-            {
-                File.Delete(Program.documentPath + @"\3Dinput.dat");
-            }
-            if (File.Exists(Program.documentPath + @"\sed.dat"))
-            {
-                File.Delete(Program.documentPath + @"\sed.dat");
-            }
-            if (File.Exists(Program.documentPath + @"\resed.O"))
-            {
-                File.Delete(Program.documentPath + @"\resed.o");
-            }
-            if (File.Exists(Program.documentPath + @"\out"))
-            {
-                File.Delete(Program.documentPath + @"\out");
-            }
-            if (File.Exists(Program.documentPath + @"\123"))
-            {
-                File.Delete(Program.documentPath + @"\123");
-            }
-            if (File.Exists(Program.documentPath + @"\resed.er"))
-            {
-                File.Delete(Program.documentPath + @"\resed.er");
-            } 
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void openBtn_Click(object sender, EventArgs e)
         {
-            string tempSave = Program.documentPath + Program.tempSaveName;
+            RiverSimulationApplication.Properties.Settings s = RiverSimulationApplication.Properties.Settings.Default;
+            folderOpen.ShowNewFolderButton = false;
+            if (s.DefaultOpenProjectFolder != null && s.DefaultOpenProjectFolder.Length > 0)
+            {
+                folderOpen.SelectedPath = s.DefaultOpenProjectFolder;
+            }
+            else
+            {
+                folderOpen.SelectedPath = Program.documentPath;
+            }
+
+            //string tempSave = Program.documentPath + Program.tempSaveName;
+            string tempSave;
+            if (folderOpen.ShowDialog(this) == DialogResult.OK)
+            {
+                tempSave = folderOpen.SelectedPath + Program.tempSaveName;
+                Program.projectFolder = folderOpen.SelectedPath;
+            }
+            else
+            {
+                return;
+            }
+
             if (File.Exists(tempSave))
             {
                 RiverSimulationProfile.profile = RiverSimulationProfile.DeSerialize(tempSave);
@@ -116,8 +103,46 @@ namespace RiverSimulationApplication
             }
             else
             {
-                RiverSimulationProfile.profile = new RiverSimulationProfile();
+                //RiverSimulationProfile.profile = new RiverSimulationProfile();
+                //MessageBox.Show("此目錄無存檔，將建立新檔案。\r\n", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("此目錄無存檔！\r\n", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
+          
+            //if(File.Exists(Program.projectFolder + @"\resed.exe"))
+            //{
+            //    File.Delete(Program.projectFolder + @"\resed.exe");
+            //}
+            if (File.Exists(Program.projectFolder + @"\resed.i"))
+            {
+                File.Delete(Program.projectFolder + @"\resed.i");
+            }
+            if (File.Exists(Program.projectFolder + @"\3Dinput.dat"))
+            {
+                File.Delete(Program.projectFolder + @"\3Dinput.dat");
+            }
+            if (File.Exists(Program.projectFolder + @"\sed.dat"))
+            {
+                File.Delete(Program.projectFolder + @"\sed.dat");
+            }
+            if (File.Exists(Program.projectFolder + @"\resed.O"))
+            {
+                File.Delete(Program.projectFolder + @"\resed.o");
+            }
+            if (File.Exists(Program.projectFolder + @"\out"))
+            {
+                File.Delete(Program.projectFolder + @"\out");
+            }
+            if (File.Exists(Program.projectFolder + @"\123"))
+            {
+                File.Delete(Program.projectFolder + @"\123");
+            }
+            if (File.Exists(Program.projectFolder + @"\resed.er"))
+            {
+                File.Delete(Program.projectFolder + @"\resed.er");
+            }
+
+            Program.SaveDefaultProjectFolder();
 
             this.DialogResult = DialogResult.OK;
             this.Close();

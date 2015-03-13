@@ -916,7 +916,7 @@ namespace RiverSimulationApplication
             //1.2.2.1.1 紊流黏滯係數 Ns/m2 實數(>0) 實數 8 格
             tvInMainstreamDirection = 0;     //需確認
             tvInSideDirection = 0;           //需確認
-            zeroEquationType = ZeroEquationType.None;  //1.2.2.2 零方程 五選一 總共 5 種選項
+            zeroEquationType = ZeroEquationType.Constant;  //1.2.2.2 零方程 五選一 總共 5 種選項
             //1.2.2.3 單方程 --
             //1.2.2.4 雙方程(k-ε) 三維 only，僅一項，不用下拉選單。
 
@@ -1599,14 +1599,14 @@ namespace RiverSimulationApplication
             if (downFlowCondition == FlowConditionType.SubCriticalFlow)
             {
                 for (int jw = 0; jw < inputGrid.GetJ; ++jw)
-                {   //上游水位
+                {   //下游水位
                     if (count == 8)
                     {
                         sb.AppendFormat("\n{0,16}", " ");
                         count = 0;
                     }
                     double level = CalcWaterLevel(t, jw, downSubWaterLevel);
-                    sb.AppendFormat(" {0,8}", level.ToString("F4"));
+                    sb.AppendFormat("{0,8}", level.ToString("F4"));
                     ++count;
                 }
                 count = 8;

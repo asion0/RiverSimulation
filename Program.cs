@@ -32,7 +32,7 @@ namespace RiverSimulationApplication
             Application.Run(new RiverSimulationForm());
         }
 
-        public static string currentPath;   //執行檔所在目錄, 會判對是否RAR包裝檔案
+        public static string currentPath;   //執行檔所在目錄, 會判斷是否RAR包裝檔案
         public static string documentPath;  //本專案預設文件目錄 My Documents\FlowSimulation
         public static string projectFolder;   //專案目錄
         public static ProgramVersion programVersion = new ProgramVersion(); //
@@ -179,6 +179,16 @@ namespace RiverSimulationApplication
             if (!Directory.Exists(documentPath))
             {
                 Directory.CreateDirectory(documentPath);
+            }
+        }
+
+        public static void SaveDefaultProjectFolder()
+        {
+            RiverSimulationApplication.Properties.Settings s = RiverSimulationApplication.Properties.Settings.Default;
+            if (Directory.Exists(Program.projectFolder))
+            {
+                s.DefaultOpenProjectFolder = Program.projectFolder;
+                s.Save();
             }
         }
     }

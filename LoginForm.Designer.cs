@@ -35,6 +35,7 @@
             this.newBtn = new System.Windows.Forms.Button();
             this.folderOpen = new System.Windows.Forms.FolderBrowserDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.fileOpen = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,6 +88,10 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // fileOpen
+            // 
+            this.fileOpen.FileName = "fileOpen";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -117,5 +122,6 @@
         private System.Windows.Forms.Button newBtn;
         private System.Windows.Forms.FolderBrowserDialog folderOpen;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.OpenFileDialog fileOpen;
     }
 }

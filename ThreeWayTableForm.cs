@@ -298,7 +298,9 @@ namespace RiverSimulationApplication
                 _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
                 _d = _data as RiverSimulationProfile.TwoInOne;
                 Debug.Assert(_d != null);
-                if (o.ValueNull() || o.ArrayNull())
+                if (o.ValueNull() || o.ArrayNull() || 
+                    o.Value2D().GetLength(0) != colCount || o.Value2D().GetLength(1) != rowCount ||
+                    o.Value3D().GetLength(0) != colCount || o.Value3D().GetLength(1) != rowCount)
                 {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
                     //_data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
                    _d.Create2D(colCount, rowCount);

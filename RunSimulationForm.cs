@@ -369,14 +369,14 @@ namespace RiverSimulationApplication
             }
             else if (simDebugForm.runMode == SimDebugForm.RunMode.UseProfile)
             {
-                string resedExe = Program.documentPath + @"\resed.exe";
+                string resedExe = Program.projectFolder + @"\resed.exe";
                 if (!File.Exists(resedExe))
                 {   //如果沒有主程式則複製一個。
                     File.Copy(Environment.CurrentDirectory + @"\resed.exe", resedExe);
                 }
 
                 simProcess.StartInfo.FileName = resedExe;
-                simProcess.StartInfo.WorkingDirectory = Program.documentPath;
+                simProcess.StartInfo.WorkingDirectory = Program.projectFolder;
 
                 //二維水理：resed.exe resed.i 123 
                 //三維水理：resed.exe resed.i 123 3D 3Dinput.dat out
@@ -403,7 +403,7 @@ namespace RiverSimulationApplication
                 simProcess.StartInfo.RedirectStandardOutput = true;
                 simProcess.StartInfo.CreateNoWindow = true;
 
-                using (StreamWriter outfile = new StreamWriter(Program.documentPath + @"\run.bat"))
+                using (StreamWriter outfile = new StreamWriter(Program.projectFolder + @"\run.bat"))
                 {
                     outfile.Write(resedExe + " " + simProcess.StartInfo.Arguments + "\r\n");
                     outfile.Close();
@@ -468,20 +468,20 @@ namespace RiverSimulationApplication
 
                 if (p != null)
                 {
-                    string tempSave = Program.documentPath + Program.tempSaveName;
+                    string tempSave = Program.projectFolder + Program.tempSaveName;
                     RiverSimulationProfile.SerializeBinary(p, tempSave);
                 }
 
-                p.GenerateInputFile(Program.documentPath + @"/resed.i");
+                p.GenerateInputFile(Program.projectFolder + @"/resed.i");
 
                 if (p.IsMovableBedMode())
                 {
-                    p.GenerateSedFile(Program.documentPath + @"/sed.dat");
+                    p.GenerateSedFile(Program.projectFolder + @"/sed.dat");
                 }
 
                 if(p.Is3DMode())
                 {
-                    p.Generate3dFile(Program.documentPath + @"/3Dinput.dat");
+                    p.Generate3dFile(Program.projectFolder + @"/3Dinput.dat");
                 }
 
                 ResetChart();

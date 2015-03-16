@@ -396,7 +396,7 @@ namespace PictureBoxCtrl
                     lt.y += (coorW - coorH) / 2;
                     rb.y -= (coorW - coorH) / 2;
                 }
-                else if (coorH < coorW)
+                else if (coorW < coorH)
                 {   //高大於寬
                     lt.x -= (coorH - coorW) / 2;
                     rb.x += (coorH - coorW) / 2;
@@ -420,7 +420,8 @@ namespace PictureBoxCtrl
             return m;
         }
 
-        PointF[] GetArrowPoint(int w, int h, double p1x, double p1y, double p2x, double p2y)
+        //PointF[] GetArrowPoint(int w, int h, double p1x, double p1y, double p2x, double p2y)
+        PointF[] GetArrowPoint(float scale, int w, int h, double p1x, double p1y, double p2x, double p2y)
         {
             PointF[] pts = new PointF[2]; 
             PointF p1 = new PointF((float)p1x, (float)p1y);
@@ -428,29 +429,32 @@ namespace PictureBoxCtrl
 
             float dx = p2.X - p1.X;
             float dy = p2.Y - p1.Y;
-            float dd12 = (float)Math.Sqrt(dx * dx + dy * dy);
-            float ddAll = (float)Math.Sqrt(w * w + h * h);
-            float m1 = ddAll / (300 * dd12);
-            float m2 = ddAll / (40 * dd12);
-            if (!rg.IsInMap())
-            {
-                PointF[] linePt = new PointF[] 
-                { 
-                    new PointF { X = 0, Y = 0 }, 
-                    new PointF { X = 300, Y = 0 }, 
-                };
+            float dd12 = (float)Math.Sqrt(dx * dx + dy * dy);   //主流方向一格網長度
+            float ddAll = (float)Math.Sqrt(w * w + h * h);      //對角線長度
+            //float ddAll = scale;      //對角線長度
+            float m1 = 0.01f * ddAll / scale;
+            float m2 = 0.06f * ddAll / scale;
+            //float m1 = 1.0f * dd12;
+            //float m2 = 0.004f * ddAll;
+            //if (!rg.IsInMap())
+            //{
+            //    PointF[] linePt = new PointF[] 
+            //    { 
+            //        new PointF { X = 0, Y = 0 }, 
+            //        new PointF { X = 300, Y = 0 }, 
+            //    };
 
-                Matrix lm = GetMatrix();
-                lm.Invert();
-                lm.TransformPoints(linePt);
-                m1 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
-                linePt[1].X = 40;
-                lm.TransformPoints(linePt);
-                m2 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
-            }
+            //    Matrix lm = GetMatrix();
+            //    lm.Invert();
+            //    lm.TransformPoints(linePt);
+            //    m1 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
+            //    linePt[1].X = 40;
+            //    lm.TransformPoints(linePt);
+            //    m2 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
+            //}
 
-            pts[1] = new PointF(p1.X + m1 * (p1.X - p2.X), p1.Y + m1 * (p1.Y - p2.Y));
             pts[0] = new PointF(p1.X + m2 * (p1.X - p2.X), p1.Y + m2 * (p1.Y - p2.Y));
+            pts[1] = new PointF(p1.X + m1 * (p1.X - p2.X), p1.Y + m1 * (p1.Y - p2.Y));
 
             return pts;
         }
@@ -493,7 +497,9 @@ namespace PictureBoxCtrl
             }
 
             Pen pen = new Pen(lineColor, lineWidth);
+            Pen arrowPen = new Pen(lineColor, lineWidth);
             Pen selPen = new Pen(Color.Red, lineWidth);
+            Pen grpPen = new Pen((showAlert) ? alertColor : selectedColor, lineWidth);
             g.Transform = m;
 
             if(rg.IsInMap())
@@ -514,7 +520,9 @@ namespace PictureBoxCtrl
                 lm.Invert();
                 lm.TransformPoints(linePt);
                 pen.Width = linePt[1].X - linePt[0].X;
+                arrowPen.Width = pen.Width * 1.5f;
                 selPen.Width = linePt[1].X - linePt[0].X;
+                grpPen.Width = linePt[1].X - linePt[0].X;
             }
 
             for (int i = 0; i < rg.GetI; ++i)
@@ -543,20 +551,21 @@ namespace PictureBoxCtrl
                 }
             }   //for (int i = 0; i < rg.GetI; ++i)
 
-            /*
+            
             //Draw input arrow
-            pen.StartCap = LineCap.Flat;
-            pen.EndCap = LineCap.Custom;
-            pen.CustomEndCap = new AdjustableArrowCap(pen.Width * 2, pen.Width * 2);
-            //pen.SetLineCap
-            pen.Width *= 1.5f;
+            arrowPen.StartCap = LineCap.Flat;
+            arrowPen.EndCap = LineCap.Custom;
+            arrowPen.CustomEndCap = new AdjustableArrowCap(lineWidth * 3, lineWidth * 3);
 
             const int arrowCount = 4;
             PointF p0 = new PointF();
             PointF p1 = new PointF(); 
-
-            PointF[] ptStart = GetArrowPoint(w, h, rg.inputCoor[0, 0].x, rg.inputCoor[0, 0].y, rg.inputCoor[1, 0].x, rg.inputCoor[1, 0].y);
-            PointF[] ptEnd = GetArrowPoint(w, h, rg.inputCoor[0, rg.GetJ - 1].x, rg.inputCoor[0, rg.GetJ - 1].y, rg.inputCoor[1, rg.GetJ - 1].x, rg.inputCoor[1, rg.GetJ - 1].y);
+            
+            //畫入流箭頭
+            //PointF[] ptStart = GetArrowPoint(w, h, rg.inputCoor[0, 0].x, rg.inputCoor[0, 0].y, rg.inputCoor[1, 0].x, rg.inputCoor[1, 0].y);
+            PointF[] ptStart = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[0, 0].x, rg.inputCoor[0, 0].y, rg.inputCoor[1, 0].x, rg.inputCoor[1, 0].y);
+            //PointF[] ptEnd = GetArrowPoint(w, h, rg.inputCoor[0, rg.GetJ - 1].x, rg.inputCoor[0, rg.GetJ - 1].y, rg.inputCoor[1, rg.GetJ - 1].x, rg.inputCoor[1, rg.GetJ - 1].y);
+            PointF[] ptEnd = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[0, rg.GetJ - 1].x, rg.inputCoor[0, rg.GetJ - 1].y, rg.inputCoor[1, rg.GetJ - 1].x, rg.inputCoor[1, rg.GetJ - 1].y);
             for (int i = 0; i <= arrowCount; ++i)
             {
                 p0.X = ptStart[0].X + i * (ptEnd[0].X - ptStart[0].X) / arrowCount;
@@ -564,11 +573,14 @@ namespace PictureBoxCtrl
                 p1.X = ptStart[1].X + i * (ptEnd[1].X - ptStart[1].X) / arrowCount;
                 p1.Y = ptStart[1].Y + i * (ptEnd[1].Y - ptStart[1].Y) / arrowCount;
 
-                g.DrawLine(pen, p0, p1);
+                //g.DrawLine(arrowPen, p0, p1);
             }
 
-            ptStart = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, 0].x, rg.inputCoor[rg.GetI - 1, 0].y, rg.inputCoor[rg.GetI - 2, 0].x, rg.inputCoor[rg.GetI - 2, 0].y);
-            ptEnd = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].y, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].y);
+            //劃出流箭頭
+            //ptStart = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, 0].x, rg.inputCoor[rg.GetI - 1, 0].y, rg.inputCoor[rg.GetI - 2, 0].x, rg.inputCoor[rg.GetI - 2, 0].y);
+            ptStart = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[rg.GetI - 1, 0].x, rg.inputCoor[rg.GetI - 1, 0].y, rg.inputCoor[rg.GetI - 2, 0].x, rg.inputCoor[rg.GetI - 2, 0].y);
+            //ptEnd = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].y, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].y);
+            ptEnd = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].y, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].y);
             for (int i = 0; i <= arrowCount; ++i)
             {
                 p0.X = ptStart[0].X + i * (ptEnd[0].X - ptStart[0].X) / arrowCount;
@@ -576,9 +588,9 @@ namespace PictureBoxCtrl
                 p1.X = ptStart[1].X + i * (ptEnd[1].X - ptStart[1].X) / arrowCount;
                 p1.Y = ptStart[1].Y + i * (ptEnd[1].Y - ptStart[1].Y) / arrowCount;
 
-                g.DrawLine(pen, p1, p0);
+                //g.DrawLine(arrowPen, p1, p0);
             }
-
+            //*/
             if(hilightIndexType == -1)
             {
                 g.Dispose();
@@ -598,31 +610,32 @@ namespace PictureBoxCtrl
                     {
                         continue;
                     }
-
                     
-                    Pen grpPen = null;
                     if (tp == hilightIndexType && i == hilightIndexCount)
                     {   //被選取的點集合標示不同顏色
-                        grpPen = new Pen((showAlert) ? alertColor : selectedColor, selectedPenW - 2);
+                        
+                        //grpPen = new Pen((showAlert) ? alertColor : selectedColor, pen.Width * 1.5f);
+                        grpPen.Color = (showAlert) ? alertColor : selectedColor;
                     }
                     else
                     {   //否則各自有所屬的顏色
                         int colorIndex = tp;
-                        grpPen = new Pen(colorTable[colorIndex], selectedPenW - 2);
+                        //grpPen = new Pen(colorTable[colorIndex], pen.Width * 2);
+                        grpPen.Color = colorTable[colorIndex];
+
                     }
 
                     foreach (Point p in pl)
                     {
                         float x1 = (float)rg.inputCoor[p.X, p.Y].x;
                         float y1 = (float)rg.inputCoor[p.X, p.Y].y;
-                        float ew = selectedPenW;
+                        float ew = grpPen.Width * 1.5f;
 
                         g.DrawEllipse(grpPen, x1 - ew / 2, y1 - ew / 2, ew, ew);
                     }
                     
                 }
             }
-            //*/
             g.Dispose();
             PicBox.Image = picBoxBmp;
         }
@@ -997,6 +1010,7 @@ namespace PictureBoxCtrl
             }
         }
 
+        private Pen groupPen = new Pen(Color.Blue, 2.0f);
         private void PicBox_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -1010,7 +1024,6 @@ namespace PictureBoxCtrl
         private Color bkColor = Color.White;
         ColorConverter cc = new ColorConverter();
         private Color lineColor = Color.FromArgb(0xF9A00F | -16777216);
-        Pen groupPen = new Pen(Color.Blue, 2.0f);
         private const float selectedPenW = 4.0f;
         private Color selectedColor = Color.Blue;
         private Color alertColor = Color.Red;

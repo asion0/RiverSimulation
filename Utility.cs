@@ -807,6 +807,14 @@ namespace RiverSimulationApplication
             try
             {
                 string[] lines = Clipboard.GetText().Split('\n');
+                if(v.IsCurrentCellInEditMode && lines.Length == 1)
+                {
+                    string[] cells = lines[0].Split('\t');
+                    DataGridViewTextBoxEditingControl tb = v.EditingControl as DataGridViewTextBoxEditingControl;
+                    tb.SelectedText = cells[0];
+                    return;
+                }
+
                 int row = v.CurrentCell.RowIndex;
                 int col = v.CurrentCell.ColumnIndex;
                 foreach (string line in lines)
@@ -849,7 +857,17 @@ namespace RiverSimulationApplication
 
         public static void CopyToClipboard(DataGridView v)
         {
-            Clipboard.SetDataObject(v.GetClipboardContent());
+            object o = v.GetClipboardContent();
+            if (o != null)
+            {   //Select in cell
+                Clipboard.SetDataObject(o);
+            }
+            else if (v.IsCurrentCellInEditMode && v.CurrentCell.EditType.Name == "DataGridViewTextBoxEditingControl")
+            {   //Select in text
+                DataGridViewTextBoxEditingControl tb = v.EditingControl as DataGridViewTextBoxEditingControl;
+                string s = tb.SelectedText;
+                Clipboard.SetText(s);
+            }
         }
 
         public static void FillSelectedValue(DataGridView v)

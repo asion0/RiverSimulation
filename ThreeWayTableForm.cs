@@ -299,8 +299,8 @@ namespace RiverSimulationApplication
                 _d = _data as RiverSimulationProfile.TwoInOne;
                 Debug.Assert(_d != null);
                 if (o.ValueNull() || o.ArrayNull() || 
-                    o.Value2D().GetLength(0) != colCount || o.Value2D().GetLength(1) != rowCount ||
-                    o.Value3D().GetLength(0) != colCount || o.Value3D().GetLength(1) != rowCount)
+                   (o.valueType == RiverSimulationProfile.TwoInOne.ValueType.TwoDim && (o.Value2D().GetLength(0) != colCount || o.Value2D().GetLength(1) != rowCount)) ||
+                   (o.valueType == RiverSimulationProfile.TwoInOne.ValueType.ThreeDim && (o.Value3D().GetLength(0) != colCount || o.Value3D().GetLength(1) != rowCount)))
                 {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
                     //_data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
                    _d.Create2D(colCount, rowCount);
@@ -631,6 +631,7 @@ namespace RiverSimulationApplication
                         break;
                 }
             }
+            dataGridView.PerformLayout();
         }
 
         private void BottomBedLoadFluxApplyAll()

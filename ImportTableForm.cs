@@ -49,6 +49,7 @@ namespace RiverSimulationApplication
                 DataGridViewUtility.InitializeDataGridView(dataGridViewX, colCount, rowCount, 96);
                 DataGridViewUtility.InitializeDataGridView(dataGridViewY, colCount, rowCount, 96);
                 DataGridViewUtility.InitializeDataGridView(dataGridViewZ, colCount, rowCount, 96);
+
                 tabControl.Enabled = true;
 
                 foreach (DataGridViewColumn column in dataGridViewX.Columns)
@@ -77,7 +78,10 @@ namespace RiverSimulationApplication
                     dataGridViewY[j, i].Value = gridData.inputCoor[i, j].y.ToString();
                     dataGridViewZ[j, i].Value = gridData.inputCoor[i, j].z.ToString();
                 }
-            }         
+            }
+            dataGridViewX.PerformLayout();
+            dataGridViewY.PerformLayout();
+            dataGridViewZ.PerformLayout();
         }
 
         private bool DoConvert()

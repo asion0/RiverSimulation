@@ -584,6 +584,8 @@ namespace RiverSimulationApplication
                     }
                     break;            
             }
+            dataGridView.PerformLayout();
+
         }
 
         private bool ConvertSeabedThicknessData()

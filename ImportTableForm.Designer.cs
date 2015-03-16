@@ -87,7 +87,6 @@
             // 
             this.dataGridViewX.AllowUserToAddRows = false;
             this.dataGridViewX.AllowUserToDeleteRows = false;
-            this.dataGridViewX.AllowUserToResizeColumns = false;
             this.dataGridViewX.AllowUserToResizeRows = false;
             this.dataGridViewX.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -97,10 +96,6 @@
             this.dataGridViewX.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewX.Name = "dataGridViewX";
             this.dataGridViewX.RowTemplate.Height = 24;
-            this.dataGridViewX.ShowCellErrors = false;
-            this.dataGridViewX.ShowCellToolTips = false;
-            this.dataGridViewX.ShowEditingIcon = false;
-            this.dataGridViewX.ShowRowErrors = false;
             this.dataGridViewX.Size = new System.Drawing.Size(946, 534);
             this.dataGridViewX.TabIndex = 0;
             // 
@@ -152,21 +147,15 @@
             // 
             this.dataGridViewY.AllowUserToAddRows = false;
             this.dataGridViewY.AllowUserToDeleteRows = false;
-            this.dataGridViewY.AllowUserToResizeColumns = false;
             this.dataGridViewY.AllowUserToResizeRows = false;
             this.dataGridViewY.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewY.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewY.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridViewY.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewY.Name = "dataGridViewY";
             this.dataGridViewY.RowTemplate.Height = 24;
-            this.dataGridViewY.ShowCellErrors = false;
-            this.dataGridViewY.ShowCellToolTips = false;
-            this.dataGridViewY.ShowEditingIcon = false;
-            this.dataGridViewY.ShowRowErrors = false;
-            this.dataGridViewY.Size = new System.Drawing.Size(965, 650);
+            this.dataGridViewY.Size = new System.Drawing.Size(946, 534);
             this.dataGridViewY.TabIndex = 0;
             // 
             // tabPageZ
@@ -184,21 +173,15 @@
             // 
             this.dataGridViewZ.AllowUserToAddRows = false;
             this.dataGridViewZ.AllowUserToDeleteRows = false;
-            this.dataGridViewZ.AllowUserToResizeColumns = false;
             this.dataGridViewZ.AllowUserToResizeRows = false;
             this.dataGridViewZ.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewZ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewZ.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridViewZ.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewZ.Name = "dataGridViewZ";
             this.dataGridViewZ.RowTemplate.Height = 24;
-            this.dataGridViewZ.ShowCellErrors = false;
-            this.dataGridViewZ.ShowCellToolTips = false;
-            this.dataGridViewZ.ShowEditingIcon = false;
-            this.dataGridViewZ.ShowRowErrors = false;
-            this.dataGridViewZ.Size = new System.Drawing.Size(965, 650);
+            this.dataGridViewZ.Size = new System.Drawing.Size(946, 534);
             this.dataGridViewZ.TabIndex = 0;
             // 
             // label1

@@ -1426,7 +1426,7 @@ namespace RiverSimulationApplication
                         sb.Append("\n");
                         count = 0;
                     }
-                    sb.AppendFormat(" {0,7}", inputGrid.inputCoor[i, j].z.ToString());
+                    sb.AppendFormat("{0,8}", inputGrid.inputCoor[i, j].z.ToString("F3"));
                     ++count;
                 }
                 sb.Append("\n");
@@ -1638,7 +1638,7 @@ namespace RiverSimulationApplication
                         count = 0;
                     }
                     double level = inputGrid.inputCoor[0, jw].z;
-                    sb.AppendFormat("{0,8}", level.ToString("F4"));
+                    sb.AppendFormat("{0,8}", level.ToString("F3"));
                     ++count;
                 }
                 count = 8;

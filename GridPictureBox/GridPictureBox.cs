@@ -420,20 +420,33 @@ namespace PictureBoxCtrl
             return m;
         }
 
+        PointF CalcArrowPoint(double xa, double ya, double xb, double yb, double rs)
+        {
+            PointF pf = new PointF(0, 0);
+            double th = Math.Atan2(xb - xa, yb - ya);
+            pf.X = (float)(Math.Sin(th) * rs + xb);
+            pf.Y = (float)(Math.Cos(th) * rs + yb);
+            return pf;
+        }
+
         //PointF[] GetArrowPoint(int w, int h, double p1x, double p1y, double p2x, double p2y)
         PointF[] GetArrowPoint(float scale, int w, int h, double p1x, double p1y, double p2x, double p2y)
         {
             PointF[] pts = new PointF[2]; 
-            PointF p1 = new PointF((float)p1x, (float)p1y);
-            PointF p2 = new PointF((float)p2x, (float)p2y);
+            //PointF p1 = new PointF((float)p1x, (float)p1y);
+            //PointF p2 = new PointF((float)p2x, (float)p2y);
 
-            float dx = p2.X - p1.X;
-            float dy = p2.Y - p1.Y;
-            float dd12 = (float)Math.Sqrt(dx * dx + dy * dy);   //主流方向一格網長度
-            float ddAll = (float)Math.Sqrt(w * w + h * h);      //對角線長度
+            //PointF pp = CalcArrowPoint(2, 1, 5, 3, 1.80277564f);
+
+            //float dx = p2.X - p1.X;
+            //float dy = p2.Y - p1.Y;
+            //float dd12 = (float)Math.Sqrt(dx * dx + dy * dy);   //主流方向一格網長度
+            float diagonal = (float)Math.Sqrt(w * w + h * h) / scale;      //對角線長度
+            pts[1] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.01);
+            pts[0] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.08);
             //float ddAll = scale;      //對角線長度
-            float m1 = 0.01f * ddAll / scale;
-            float m2 = 0.06f * ddAll / scale;
+            //float m1 = 0.01f * ddAll / scale;
+            //float m2 = 0.06f * ddAll / scale;
             //float m1 = 1.0f * dd12;
             //float m2 = 0.004f * ddAll;
             //if (!rg.IsInMap())
@@ -453,8 +466,8 @@ namespace PictureBoxCtrl
             //    m2 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
             //}
 
-            pts[0] = new PointF(p1.X + m2 * (p1.X - p2.X), p1.Y + m2 * (p1.Y - p2.Y));
-            pts[1] = new PointF(p1.X + m1 * (p1.X - p2.X), p1.Y + m1 * (p1.Y - p2.Y));
+            //pts[0] = new PointF(p1.X + m2 * (p1.X - p2.X), p1.Y + m2 * (p1.Y - p2.Y));
+            //pts[1] = new PointF(p1.X + m1 * (p1.X - p2.X), p1.Y + m1 * (p1.Y - p2.Y));
 
             return pts;
         }
@@ -573,10 +586,11 @@ namespace PictureBoxCtrl
                 p1.X = ptStart[1].X + i * (ptEnd[1].X - ptStart[1].X) / arrowCount;
                 p1.Y = ptStart[1].Y + i * (ptEnd[1].Y - ptStart[1].Y) / arrowCount;
 
-                //g.DrawLine(arrowPen, p0, p1);
+                double mm = (p1.Y - p0.Y) / (p1.X / p0.X);
+                g.DrawLine(arrowPen, p0, p1);
             }
 
-            //劃出流箭頭
+            //畫出流箭頭
             //ptStart = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, 0].x, rg.inputCoor[rg.GetI - 1, 0].y, rg.inputCoor[rg.GetI - 2, 0].x, rg.inputCoor[rg.GetI - 2, 0].y);
             ptStart = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[rg.GetI - 1, 0].x, rg.inputCoor[rg.GetI - 1, 0].y, rg.inputCoor[rg.GetI - 2, 0].x, rg.inputCoor[rg.GetI - 2, 0].y);
             //ptEnd = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].y, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].y);
@@ -588,7 +602,7 @@ namespace PictureBoxCtrl
                 p1.X = ptStart[1].X + i * (ptEnd[1].X - ptStart[1].X) / arrowCount;
                 p1.Y = ptStart[1].Y + i * (ptEnd[1].Y - ptStart[1].Y) / arrowCount;
 
-                //g.DrawLine(arrowPen, p1, p0);
+                g.DrawLine(arrowPen, p1, p0);
             }
             //*/
             if(hilightIndexType == -1)
@@ -1145,11 +1159,25 @@ namespace PictureBoxCtrl
                 {
                     inputCoor = new CoorPoint[_i, _j];
                 }
+
+                int xyZeroCount = 0;
                 for (int i = 0; i < _i; ++i)
                 {
                     for (int j = 0; j < _j; ++j)
                     {
-                        inputCoor[i, j] = new CoorPoint(Convert.ToDouble(dx[j, i].Value), Convert.ToDouble(dy[j, i].Value), Convert.ToDouble(dz[j, i].Value ?? 0));
+
+                        string s1 = dx[j, i].Value as string;
+                        string s2 = dy[j, i].Value as string;
+                        string s3 = dz[j, i].Value as string;
+                        if ((s1 == null && s2 == null) || (s1.Length == 0 && s2.Length == 0))
+                        {
+                            if(++xyZeroCount > 1)
+                            {
+                                return false;
+                            }
+                        }
+
+                        inputCoor[i, j] = new CoorPoint(Convert.ToDouble(s1), Convert.ToDouble(s2), Convert.ToDouble(dz[j, i].Value ?? 0));
                         if (inputCoor[i, j].x > maxX)
                             maxX = inputCoor[i, j].x;
                         if (inputCoor[i, j].x < minX)
@@ -1164,7 +1192,8 @@ namespace PictureBoxCtrl
             catch
             {
                 return false;
-            }            
+            }
+
             ConvertGrid(inputCoor);
             return true;
         }

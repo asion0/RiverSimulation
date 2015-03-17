@@ -152,11 +152,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewY.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewY.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridViewY.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewY.Name = "dataGridViewY";
             this.dataGridViewY.RowTemplate.Height = 24;
             this.dataGridViewY.Size = new System.Drawing.Size(946, 534);
             this.dataGridViewY.TabIndex = 0;
+            this.dataGridViewY.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewY_CellContentClick);
             // 
             // tabPageZ
             // 
@@ -178,6 +180,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewZ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewZ.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridViewZ.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewZ.Name = "dataGridViewZ";
             this.dataGridViewZ.RowTemplate.Height = 24;

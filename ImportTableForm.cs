@@ -79,9 +79,6 @@ namespace RiverSimulationApplication
                     dataGridViewZ[j, i].Value = gridData.inputCoor[i, j].z.ToString();
                 }
             }
-            dataGridViewX.PerformLayout();
-            dataGridViewY.PerformLayout();
-            dataGridViewZ.PerformLayout();
         }
 
         private bool DoConvert()
@@ -128,10 +125,23 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            DataGridViewUtility.InitializeDataGridView(dataGridViewX, xNum, yNum);
-            DataGridViewUtility.InitializeDataGridView(dataGridViewY, xNum, yNum);
-            DataGridViewUtility.InitializeDataGridView(dataGridViewZ, xNum, yNum);
             tabControl.Enabled = true;
+            DataGridViewUtility.InitializeDataGridView(dataGridViewX, xNum, yNum, 96);
+            DataGridViewUtility.InitializeDataGridView(dataGridViewY, xNum, yNum, 96);
+            DataGridViewUtility.InitializeDataGridView(dataGridViewZ, xNum, yNum, 96);
+
+            foreach (DataGridViewColumn column in dataGridViewX.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            foreach (DataGridViewColumn column in dataGridViewY.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            foreach (DataGridViewColumn column in dataGridViewZ.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         private DataGridView GetCurrentDataGridView()
@@ -173,6 +183,11 @@ namespace RiverSimulationApplication
             {
                 DialogResult = DialogResult.OK;
             }
+        }
+
+        private void dataGridViewY_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

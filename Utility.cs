@@ -951,6 +951,7 @@ namespace RiverSimulationApplication
                 }
                 v.Rows[i].HeaderCell.Value = name;
             }
+            v.PerformLayout();
         }
 
         public static void FillDataByRiverGrid(CoorPoint[,] inputCoor, DataGridView xv, DataGridView yv, DataGridView zv)

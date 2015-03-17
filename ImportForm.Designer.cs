@@ -428,6 +428,7 @@
             // 
             // previewCombo
             // 
+            this.previewCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.previewCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.previewCombo.DropDownWidth = 168;
             this.previewCombo.FormattingEnabled = true;

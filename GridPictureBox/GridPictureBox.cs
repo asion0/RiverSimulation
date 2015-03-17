@@ -429,46 +429,12 @@ namespace PictureBoxCtrl
             return pf;
         }
 
-        //PointF[] GetArrowPoint(int w, int h, double p1x, double p1y, double p2x, double p2y)
         PointF[] GetArrowPoint(float scale, int w, int h, double p1x, double p1y, double p2x, double p2y)
         {
             PointF[] pts = new PointF[2]; 
-            //PointF p1 = new PointF((float)p1x, (float)p1y);
-            //PointF p2 = new PointF((float)p2x, (float)p2y);
-
-            //PointF pp = CalcArrowPoint(2, 1, 5, 3, 1.80277564f);
-
-            //float dx = p2.X - p1.X;
-            //float dy = p2.Y - p1.Y;
-            //float dd12 = (float)Math.Sqrt(dx * dx + dy * dy);   //主流方向一格網長度
             float diagonal = (float)Math.Sqrt(w * w + h * h) / scale;      //對角線長度
-            pts[1] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.01);
-            pts[0] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.08);
-            //float ddAll = scale;      //對角線長度
-            //float m1 = 0.01f * ddAll / scale;
-            //float m2 = 0.06f * ddAll / scale;
-            //float m1 = 1.0f * dd12;
-            //float m2 = 0.004f * ddAll;
-            //if (!rg.IsInMap())
-            //{
-            //    PointF[] linePt = new PointF[] 
-            //    { 
-            //        new PointF { X = 0, Y = 0 }, 
-            //        new PointF { X = 300, Y = 0 }, 
-            //    };
-
-            //    Matrix lm = GetMatrix();
-            //    lm.Invert();
-            //    lm.TransformPoints(linePt);
-            //    m1 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
-            //    linePt[1].X = 40;
-            //    lm.TransformPoints(linePt);
-            //    m2 = ddAll / ((linePt[1].X - linePt[0].X) * dd12);
-            //}
-
-            //pts[0] = new PointF(p1.X + m2 * (p1.X - p2.X), p1.Y + m2 * (p1.Y - p2.Y));
-            //pts[1] = new PointF(p1.X + m1 * (p1.X - p2.X), p1.Y + m1 * (p1.Y - p2.Y));
-
+            pts[1] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.005);
+            pts[0] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.045);
             return pts;
         }
 
@@ -575,9 +541,7 @@ namespace PictureBoxCtrl
             PointF p1 = new PointF(); 
             
             //畫入流箭頭
-            //PointF[] ptStart = GetArrowPoint(w, h, rg.inputCoor[0, 0].x, rg.inputCoor[0, 0].y, rg.inputCoor[1, 0].x, rg.inputCoor[1, 0].y);
             PointF[] ptStart = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[0, 0].x, rg.inputCoor[0, 0].y, rg.inputCoor[1, 0].x, rg.inputCoor[1, 0].y);
-            //PointF[] ptEnd = GetArrowPoint(w, h, rg.inputCoor[0, rg.GetJ - 1].x, rg.inputCoor[0, rg.GetJ - 1].y, rg.inputCoor[1, rg.GetJ - 1].x, rg.inputCoor[1, rg.GetJ - 1].y);
             PointF[] ptEnd = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[0, rg.GetJ - 1].x, rg.inputCoor[0, rg.GetJ - 1].y, rg.inputCoor[1, rg.GetJ - 1].x, rg.inputCoor[1, rg.GetJ - 1].y);
             for (int i = 0; i <= arrowCount; ++i)
             {
@@ -591,9 +555,7 @@ namespace PictureBoxCtrl
             }
 
             //畫出流箭頭
-            //ptStart = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, 0].x, rg.inputCoor[rg.GetI - 1, 0].y, rg.inputCoor[rg.GetI - 2, 0].x, rg.inputCoor[rg.GetI - 2, 0].y);
             ptStart = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[rg.GetI - 1, 0].x, rg.inputCoor[rg.GetI - 1, 0].y, rg.inputCoor[rg.GetI - 2, 0].x, rg.inputCoor[rg.GetI - 2, 0].y);
-            //ptEnd = GetArrowPoint(w, h, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].y, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].y);
             ptEnd = GetArrowPoint(m.Elements[0], w, h, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 1, rg.GetJ - 1].y, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].x, rg.inputCoor[rg.GetI - 2, rg.GetJ - 1].y);
             for (int i = 0; i <= arrowCount; ++i)
             {

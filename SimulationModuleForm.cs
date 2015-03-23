@@ -86,7 +86,6 @@ namespace RiverSimulationApplication
 
         private void UpdateActiveFunctions()
         {
-
             if (Program.programVersion.DemoVersion)
             {
                 movableBedPanel.Enabled = false;
@@ -132,7 +131,16 @@ namespace RiverSimulationApplication
         private void ok_Click(object sender, EventArgs e)
         {
             //本畫面無被動控件，不須呼叫DoConvert
-
+            if(p.dimensionType == RiverSimulationProfile.DimensionType.None)
+            {
+                MessageBox.Show("請選擇維度！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if(p.modelingType == RiverSimulationProfile.ModelingType.None)
+            {
+                MessageBox.Show("請選擇模組！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

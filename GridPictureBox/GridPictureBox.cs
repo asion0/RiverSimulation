@@ -1064,7 +1064,7 @@ namespace PictureBoxCtrl
 
         public bool ReadInputFile(string path)
         {
-            const int MaxLineWord = 3;
+            const int MaxLineWord = 5;
             try
             {
                 System.IO.StreamReader file = new System.IO.StreamReader(path);
@@ -1081,6 +1081,11 @@ namespace PictureBoxCtrl
                 {
                     words = line.Split(charSeparators, MaxLineWord);
                     inputCoor[i, j] = new CoorPoint(Convert.ToDouble(words[0]), Convert.ToDouble(words[1]));
+                    if (words.Length > 3)
+                    {   //Have Z data
+                        inputCoor[i, j].z = Convert.ToDouble(words[3]);
+                    }
+
                     if (inputCoor[i, j].x > maxX)
                         maxX = inputCoor[i, j].x;
                     if (inputCoor[i, j].x < minX)

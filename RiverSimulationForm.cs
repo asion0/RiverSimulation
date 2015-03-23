@@ -46,27 +46,19 @@ namespace RiverSimulationApplication
             WaterModelingForm form = new WaterModelingForm();
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                RiverSimulationProfile.profile.waterModelingFinished = true;
             }
-            RiverSimulationProfile.profile.waterModelingFinished = true;
             UpdateStatus();
 
         }
 
         private void simulationModuleBtn_Click(object sender, EventArgs e)
         {
-            //if(!RiverSimulationProfile.profile.IsSimulationModuleReady())
-            //{
-            //    MessageBox.Show("請先完成前置設定", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    return;
-            //}
-
             SimulationModuleForm form = new SimulationModuleForm();
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                RiverSimulationProfile.profile.simulationModuleFinished = true;
             }
-            RiverSimulationProfile.profile.simulationModuleFinished = true;
             UpdateStatus();
         }
 
@@ -81,9 +73,8 @@ namespace RiverSimulationApplication
             ImportForm form = new ImportForm();
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                RiverSimulationProfile.profile.importFinished = true;
             }
-            RiverSimulationProfile.profile.importFinished = true;
             UpdateStatus();
         }
 
@@ -98,9 +89,8 @@ namespace RiverSimulationApplication
             MovableBedForm form = new MovableBedForm();
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                RiverSimulationProfile.profile.movableBedFinished = true;
             }
-            RiverSimulationProfile.profile.movableBedFinished = true;
             UpdateStatus();
         }
 
@@ -115,9 +105,8 @@ namespace RiverSimulationApplication
             InitialConditionsForm form = new InitialConditionsForm();
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                RiverSimulationProfile.profile.initialConditionsFinished = true;
             }
-            RiverSimulationProfile.profile.initialConditionsFinished = true;
             UpdateStatus();
         }
 
@@ -132,9 +121,8 @@ namespace RiverSimulationApplication
             BoundaryConditionsForm form = new BoundaryConditionsForm();
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                RiverSimulationProfile.profile.boundaryConditionsFinished = true;
             }
-            RiverSimulationProfile.profile.boundaryConditionsFinished = true;
             UpdateStatus();
         }
 

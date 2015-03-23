@@ -142,8 +142,18 @@ namespace RiverSimulationApplication
 
         private bool DoConvert()
         {
+            if(p.inputGrid == null)
+            {
+                MessageBox.Show("尚未輸入水平格網！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
             if (!ConvertVerticalLevelNumber())
             {
+                return false;
+            }
+            if (p.levelProportion == null)
+            {
+                MessageBox.Show("尚未輸入分層比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             return true;

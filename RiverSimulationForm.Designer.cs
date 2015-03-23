@@ -188,37 +188,40 @@
             // newMnuItem
             // 
             this.newMnuItem.Name = "newMnuItem";
-            this.newMnuItem.Size = new System.Drawing.Size(140, 22);
+            this.newMnuItem.Size = new System.Drawing.Size(152, 22);
             this.newMnuItem.Text = "開新檔案(N)";
+            this.newMnuItem.Click += new System.EventHandler(this.newMnuItem_Click);
             // 
             // openMnuItem
             // 
             this.openMnuItem.Name = "openMnuItem";
-            this.openMnuItem.Size = new System.Drawing.Size(140, 22);
+            this.openMnuItem.Size = new System.Drawing.Size(152, 22);
             this.openMnuItem.Text = "開啟舊檔(O)";
+            this.openMnuItem.Click += new System.EventHandler(this.openMnuItem_Click);
             // 
             // saveMnuItem
             // 
             this.saveMnuItem.Name = "saveMnuItem";
-            this.saveMnuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveMnuItem.Size = new System.Drawing.Size(152, 22);
             this.saveMnuItem.Text = "儲存檔案(S)";
+            this.saveMnuItem.Click += new System.EventHandler(this.saveMnuItem_Click);
             // 
             // descriptionMnuItem
             // 
             this.descriptionMnuItem.Name = "descriptionMnuItem";
-            this.descriptionMnuItem.Size = new System.Drawing.Size(140, 22);
+            this.descriptionMnuItem.Size = new System.Drawing.Size(152, 22);
             this.descriptionMnuItem.Text = "檔案敘述(D)";
             this.descriptionMnuItem.Click += new System.EventHandler(this.descriptionMnuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitMnuItem
             // 
             this.exitMnuItem.Name = "exitMnuItem";
-            this.exitMnuItem.Size = new System.Drawing.Size(140, 22);
+            this.exitMnuItem.Size = new System.Drawing.Size(152, 22);
             this.exitMnuItem.Text = "結束(X)";
             this.exitMnuItem.Click += new System.EventHandler(this.exitMnuItem_Click);
             // 
@@ -233,7 +236,7 @@
             // langEngMnuItem
             // 
             this.langEngMnuItem.Name = "langEngMnuItem";
-            this.langEngMnuItem.Size = new System.Drawing.Size(113, 22);
+            this.langEngMnuItem.Size = new System.Drawing.Size(152, 22);
             this.langEngMnuItem.Text = "英文(E)";
             // 
             // helpMnu

@@ -4,7 +4,7 @@
   <description asmv2:iconFile="RiverSimulation.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.20" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.38" language="neutral" processorArchitecture="msil" />
     <commandLine file="RiverSimulationApplication.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,26 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="45056">
-      <assemblyIdentity name="GridPictureBox" version="1.0.5452.374" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="40960">
+      <assemblyIdentity name="GridPictureBox" version="1.0.5560.41422" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vJx1l4r6UzFlTM2gpbdqIvvQGBVshO7l1D6OwkII5tY=</dsig:DigestValue>
+        <dsig:DigestValue>Z5dF7y7BLeeiD2XM+th01LmhaoNqmIPBX5bZLJpWbr8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1912832">
-      <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.20" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="1958912">
+      <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.38" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FABH5aVYmNPLBrHzyZlgBgiIxoSX3ee3GX+SaQvpyQQ=</dsig:DigestValue>
+        <dsig:DigestValue>kPTVEZ0FKQrFMbirpB8zvZdeuK0GeyXNgtY3cCcvASc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

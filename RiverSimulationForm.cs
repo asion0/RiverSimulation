@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+//using System.Data;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml;
 
 namespace RiverSimulationApplication
 {
@@ -323,6 +324,7 @@ namespace RiverSimulationApplication
 
         private void exitMnuItem_Click(object sender, EventArgs e)
         {
+            FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
             this.Close();
         }
 
@@ -340,13 +342,26 @@ namespace RiverSimulationApplication
             InputForm dlg = new InputForm();
             dlg.Text = "檔案敘述";
             dlg.desc.Text = "請輸入檔案敘述";
-            dlg.inputTxt.Text = "";
+            if (File.Exists(Program.projectFolder + Program.descriptionName))
+            {
+                XmlDocument desc = new XmlDocument();
+                desc.Load(Program.projectFolder + Program.descriptionName);
+                XmlElement element  = desc.SelectSingleNode("Description") as XmlElement;
+                dlg.inputTxt.Text = element.GetAttribute("Text");
+            }
+            else
+            {
+                dlg.inputTxt.Text = "";
+            }
             if (DialogResult.OK != dlg.ShowDialog())
             {
                 return;
             }
-
-
+            XmlDocument doc = new XmlDocument();
+            XmlElement description = doc.CreateElement("Description");
+            description.SetAttribute("Text", dlg.inputTxt.Text);    //設定屬性
+            doc.AppendChild(description);
+            doc.Save(Program.projectFolder + Program.descriptionName);
         }
 
         private void userManualMenuItem_Click(object sender, EventArgs e)
@@ -356,11 +371,33 @@ namespace RiverSimulationApplication
 
         private void RiverSimulationForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (RiverSimulationProfile.profile != null)
+            FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
+        }
+
+        private void newMnuItem_Click(object sender, EventArgs e)
+        {
+            FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
+            if (!FunctionlUtility.NewProject())
             {
-                string tempSave = Program.projectFolder + Program.tempSaveName;
-                RiverSimulationProfile.SerializeBinary(RiverSimulationProfile.profile, tempSave);
+                return;
             }
+            UpdateStatus();
+        }
+
+        private void openMnuItem_Click(object sender, EventArgs e)
+        {
+            FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
+            if (!FunctionlUtility.OpenProject(this))
+            {
+                return;
+            }
+            UpdateStatus();
+        }
+
+        private void saveMnuItem_Click(object sender, EventArgs e)
+        {
+            FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
+            MessageBox.Show("檔案儲存完成。", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 

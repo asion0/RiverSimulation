@@ -79,6 +79,10 @@
             this.newBtn.UseVisualStyleBackColor = true;
             this.newBtn.Click += new System.EventHandler(this.newBtn_Click);
             // 
+            // folderOpen
+            // 
+            this.folderOpen.HelpRequest += new System.EventHandler(this.folderOpen_HelpRequest);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));

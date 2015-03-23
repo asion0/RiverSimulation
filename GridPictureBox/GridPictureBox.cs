@@ -434,7 +434,7 @@ namespace PictureBoxCtrl
             PointF[] pts = new PointF[2]; 
             float diagonal = (float)Math.Sqrt(w * w + h * h) / scale;      //對角線長度
             pts[1] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.005);
-            pts[0] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.045);
+            pts[0] = CalcArrowPoint(p2x, p2y, p1x, p1y, diagonal * 0.032);
             return pts;
         }
 

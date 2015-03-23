@@ -37,6 +37,7 @@ namespace RiverSimulationApplication
         public static string projectFolder;   //專案目錄
         public static ProgramVersion programVersion = new ProgramVersion(); //
         public static string tempSaveName = @"\TempSave.txt";
+        public static string descriptionName = @"\Description.xml";
 
         public static ProgramSetting programSetting = null;
         public class ProgramSetting

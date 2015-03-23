@@ -1025,4 +1025,135 @@ namespace RiverSimulationApplication
 
 
     }
+
+    public static class FunctionlUtility
+    {
+        public static bool NewProject()
+        {
+            FindNewProjectName();
+            InputForm dlg = new InputForm();
+            dlg.Text = "建立專案";
+            dlg.desc.Text = "請輸入新專案名稱";
+            dlg.inputTxt.Text = FindNewProjectName();
+            if (DialogResult.OK != dlg.ShowDialog())
+            {
+                return false;
+            }
+
+            if (System.IO.Directory.Exists(Program.documentPath + "\\" + dlg.inputTxt.Text))
+            {
+                MessageBox.Show("此專案已存在！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            try
+            {
+                System.IO.Directory.CreateDirectory(Program.documentPath + "\\" + dlg.inputTxt.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("無法建立專案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            RiverSimulationProfile.profile = new RiverSimulationProfile();
+            Program.projectFolder = Program.documentPath + "\\" + dlg.inputTxt.Text;
+            Program.SaveDefaultProjectFolder();
+            return true;
+        }
+
+        public static bool SaveProject(RiverSimulationProfile p)
+        {
+            if (p == null)
+            {
+                return false;
+            }
+
+            string tempSave = Program.projectFolder + Program.tempSaveName;
+            RiverSimulationProfile.SerializeBinary(p, tempSave);
+            return true;
+        }
+
+        public static bool OpenProject(IWin32Window w)
+        {
+            FolderBrowserDialog folderOpen = new FolderBrowserDialog();
+            RiverSimulationApplication.Properties.Settings s = RiverSimulationApplication.Properties.Settings.Default;
+            folderOpen.ShowNewFolderButton = false;
+            if (s.DefaultOpenProjectFolder != null && s.DefaultOpenProjectFolder.Length > 0)
+            {
+                folderOpen.SelectedPath = s.DefaultOpenProjectFolder;
+            }
+            else
+            {
+                folderOpen.SelectedPath = Program.documentPath;
+            }
+
+            //string tempSave = Program.documentPath + Program.tempSaveName;
+            string tempSave;
+            if (folderOpen.ShowDialog(w) == DialogResult.OK)
+            {
+                tempSave = folderOpen.SelectedPath + Program.tempSaveName;
+                Program.projectFolder = folderOpen.SelectedPath;
+            }
+            else
+            {
+                return false;
+            }
+
+            if (File.Exists(tempSave))
+            {
+                RiverSimulationProfile.profile = RiverSimulationProfile.DeSerialize(tempSave);
+                RiverSimulationProfile.profile.ResetGoogleStaticMap();
+            }
+            else
+            {
+                MessageBox.Show("此目錄無存檔！\r\n", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (File.Exists(Program.projectFolder + @"\resed.i"))
+            {
+                File.Delete(Program.projectFolder + @"\resed.i");
+            }
+            if (File.Exists(Program.projectFolder + @"\3Dinput.dat"))
+            {
+                File.Delete(Program.projectFolder + @"\3Dinput.dat");
+            }
+            if (File.Exists(Program.projectFolder + @"\sed.dat"))
+            {
+                File.Delete(Program.projectFolder + @"\sed.dat");
+            }
+            if (File.Exists(Program.projectFolder + @"\resed.O"))
+            {
+                File.Delete(Program.projectFolder + @"\resed.o");
+            }
+            if (File.Exists(Program.projectFolder + @"\out"))
+            {
+                File.Delete(Program.projectFolder + @"\out");
+            }
+            if (File.Exists(Program.projectFolder + @"\123"))
+            {
+                File.Delete(Program.projectFolder + @"\123");
+            }
+            if (File.Exists(Program.projectFolder + @"\resed.er"))
+            {
+                File.Delete(Program.projectFolder + @"\resed.er");
+            }
+
+            Program.SaveDefaultProjectFolder();
+            return true;
+        }
+
+        private static string FindNewProjectName()
+        {
+            int index = 0;
+            string folder;
+            do
+            {
+                index++;
+                folder = "新專案" + index.ToString("D03");
+            } while (System.IO.Directory.Exists(Program.documentPath + "\\" + folder));
+            return folder;
+        }
+    }
 }

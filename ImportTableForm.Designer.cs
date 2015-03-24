@@ -71,6 +71,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(954, 560);
             this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPageX
             // 
@@ -106,13 +107,13 @@
             this.pasteToolStripMenuItem,
             this.valueToolStripMenuItem});
             this.copyPasteMenuStrip.Name = "contextMenuStrip1";
-            this.copyPasteMenuStrip.Size = new System.Drawing.Size(184, 70);
+            this.copyPasteMenuStrip.Size = new System.Drawing.Size(181, 70);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.copyToolStripMenuItem.Text = "複製(C)";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -120,7 +121,7 @@
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pasteToolStripMenuItem.Text = "貼上(P)";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -128,7 +129,7 @@
             // 
             this.valueToolStripMenuItem.Name = "valueToolStripMenuItem";
             this.valueToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.valueToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.valueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.valueToolStripMenuItem.Text = "填入數值(V)";
             this.valueToolStripMenuItem.Click += new System.EventHandler(this.valueToolStripMenuItem_Click);
             // 
@@ -148,9 +149,6 @@
             this.dataGridViewY.AllowUserToAddRows = false;
             this.dataGridViewY.AllowUserToDeleteRows = false;
             this.dataGridViewY.AllowUserToResizeRows = false;
-            this.dataGridViewY.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewY.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewY.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridViewY.Location = new System.Drawing.Point(0, 0);
@@ -211,7 +209,6 @@
             this.yGridNum.Name = "yGridNum";
             this.yGridNum.Size = new System.Drawing.Size(100, 22);
             this.yGridNum.TabIndex = 2;
-            this.yGridNum.TextChanged += new System.EventHandler(this.GridNum_TextChanged);
             // 
             // xGridNum
             // 
@@ -219,7 +216,6 @@
             this.xGridNum.Name = "xGridNum";
             this.xGridNum.Size = new System.Drawing.Size(100, 22);
             this.xGridNum.TabIndex = 3;
-            this.xGridNum.TextChanged += new System.EventHandler(this.GridNum_TextChanged);
             // 
             // generateGridBtn
             // 

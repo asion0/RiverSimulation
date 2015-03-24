@@ -303,14 +303,6 @@ namespace RiverSimulationApplication
                 MessageBox.Show("請先完成前置設定", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-
-            //RunSimulationForm form = new RunSimulationForm();
-            //if (DialogResult.OK == form.ShowDialog())
-            //{
-
-            //}
-            //RiverSimulationProfile.profile.runSimulationFinished = true;
-            //UpdateStatus();
         }
 
         private void aboutMnuItem_Click(object sender, EventArgs e)

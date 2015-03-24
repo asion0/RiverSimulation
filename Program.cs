@@ -38,6 +38,7 @@ namespace RiverSimulationApplication
         public static ProgramVersion programVersion = new ProgramVersion(); //
         public static string tempSaveName = @"\TempSave.txt";
         public static string descriptionName = @"\Description.xml";
+        public static string resedName = @"\resed.exe";
 
         public static ProgramSetting programSetting = null;
         public class ProgramSetting

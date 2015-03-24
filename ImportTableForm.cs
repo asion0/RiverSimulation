@@ -46,11 +46,11 @@ namespace RiverSimulationApplication
                 xGridNum.Enabled = false;
                 generateGridBtn.Enabled = false;
 
+                tabControl.Enabled = true;
+
                 DataGridViewUtility.InitializeDataGridView(dataGridViewX, colCount, rowCount, 96);
                 DataGridViewUtility.InitializeDataGridView(dataGridViewY, colCount, rowCount, 96);
                 DataGridViewUtility.InitializeDataGridView(dataGridViewZ, colCount, rowCount, 96);
-
-                tabControl.Enabled = true;
 
                 foreach (DataGridViewColumn column in dataGridViewX.Columns)
                 {
@@ -95,16 +95,20 @@ namespace RiverSimulationApplication
         {
             if(gridData == null)
             {
-                rowCount = Convert.ToInt32(yGridNum.Text); 
-                colCount = Convert.ToInt32(xGridNum.Text);
+                try
+                {
+                    rowCount = Convert.ToInt32(yGridNum.Text); 
+                    colCount = Convert.ToInt32(xGridNum.Text);
+                }
+                catch
+                {
+                    rowCount = 0;
+                    colCount = 0;
+                    return false;
+                }
                 gridData = new RiverGrid();
             }
-            return gridData.ReadInputGridData(dataGridViewX, dataGridViewY, dataGridViewZ, rowCount, colCount);
-        }
-
-        private void GridNum_TextChanged(object sender, EventArgs e)
-        {
-
+             return gridData.ReadInputGridData(dataGridViewX, dataGridViewY, dataGridViewZ, rowCount, colCount);
         }
 
         private void generateGridBtn_Click(object sender, EventArgs e)
@@ -186,6 +190,11 @@ namespace RiverSimulationApplication
         }
 
         private void dataGridViewY_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

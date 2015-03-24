@@ -369,7 +369,7 @@ namespace RiverSimulationApplication
             }
             else if (simDebugForm.runMode == SimDebugForm.RunMode.UseProfile)
             {
-                string resedExe = Program.projectFolder + @"\resed.exe";
+                string resedExe = Program.projectFolder + Program.resedName;
                 if (!File.Exists(resedExe))
                 {   //如果沒有主程式則複製一個。
                     File.Copy(Environment.CurrentDirectory + @"\resed.exe", resedExe);
@@ -398,7 +398,7 @@ namespace RiverSimulationApplication
                 {
                     simProcess.StartInfo.Arguments = simDebugForm.inputFile + " 123 3DSED 3Dinput.dat out sed.dat";
                 } 
-                //simProcess.StartInfo.Arguments = simDebugForm.inputFile + " sed 3D " + simDebugForm.dataFile + " out";
+
                 simProcess.StartInfo.UseShellExecute = false;
                 simProcess.StartInfo.RedirectStandardOutput = true;
                 simProcess.StartInfo.CreateNoWindow = true;
@@ -468,8 +468,9 @@ namespace RiverSimulationApplication
 
                 if (p != null)
                 {
-                    string tempSave = Program.projectFolder + Program.tempSaveName;
-                    RiverSimulationProfile.SerializeBinary(p, tempSave);
+                    //string tempSave = Program.projectFolder + Program.tempSaveName;
+                    //RiverSimulationProfile.SerializeBinary(p, tempSave);
+                    FunctionlUtility.SaveProject(p);
                 }
 
                 p.GenerateInputFile(Program.projectFolder + @"/resed.i");
@@ -550,10 +551,5 @@ namespace RiverSimulationApplication
         {
             simDebugForm.Hide();
         }
-    }
-
-    public static class ProcessExtension
-    {
-
     }
 }

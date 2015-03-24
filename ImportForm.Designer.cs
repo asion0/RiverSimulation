@@ -62,6 +62,7 @@
             this.previewSpratePicBox = new System.Windows.Forms.PictureBox();
             this.previewCombo = new System.Windows.Forms.ComboBox();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
+            this.gridDataBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -272,6 +273,7 @@
             this.flowTypeGroup.Controls.Add(this.label1);
             this.flowTypeGroup.Controls.Add(this.inputFileBtn);
             this.flowTypeGroup.Controls.Add(this.reverseGridBtn);
+            this.flowTypeGroup.Controls.Add(this.gridDataBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridBtn);
             this.flowTypeGroup.Controls.Add(this.inputGridRdo);
             this.flowTypeGroup.Controls.Add(this.inputFileRdo);
@@ -321,7 +323,6 @@
             this.inputFileBtn.Text = "選取檔案";
             this.inputFileBtn.UseVisualStyleBackColor = true;
             this.inputFileBtn.Click += new System.EventHandler(this.inputFileBtn_Click);
-            this.inputFileBtn.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // reverseGridBtn
             // 
@@ -344,7 +345,6 @@
             this.inputGridBtn.Text = "輸入格網";
             this.inputGridBtn.UseVisualStyleBackColor = true;
             this.inputGridBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
-            this.inputGridBtn.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // inputGridRdo
             // 
@@ -453,6 +453,17 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 11;
             // 
+            // gridDataBtn
+            // 
+            this.gridDataBtn.Enabled = false;
+            this.gridDataBtn.Location = new System.Drawing.Point(253, 25);
+            this.gridDataBtn.Name = "gridDataBtn";
+            this.gridDataBtn.Size = new System.Drawing.Size(96, 26);
+            this.gridDataBtn.TabIndex = 1;
+            this.gridDataBtn.Text = "格網資料";
+            this.gridDataBtn.UseVisualStyleBackColor = true;
+            this.gridDataBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
+            // 
             // ImportForm
             // 
             this.AcceptButton = this.ok;
@@ -518,6 +529,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox previewCombo;
         private System.Windows.Forms.Button reverseGridBtn;
+        private System.Windows.Forms.Button gridDataBtn;
 
     }
 }

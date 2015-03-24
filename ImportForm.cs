@@ -93,6 +93,7 @@ namespace RiverSimulationApplication
         private void UpdateStatus()
         {
             bitmapGrp.Enabled = p.IsMapPosition();
+            gridDataBtn.Enabled = (p.importSource == RiverSimulationProfile.ImportSource.ImportFile) && (p.inputGrid != null) && (p.inputGrid.GetI > 0) && (p.inputGrid.GetJ > 0);
             reverseGridBtn.Enabled = (p.inputGrid != null);
             UpdateActiveFunctions();
         }
@@ -163,7 +164,14 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as RadioButton).Checked;
             inputFileBtn.Enabled = chk;
-            //inputFilePath.Enabled = chk;
+            if (chk)
+            {
+                gridDataBtn.Enabled = (p.inputGrid != null) && (p.inputGrid.GetI > 0) && (p.inputGrid.GetJ > 0);
+            }
+            else
+            {
+                gridDataBtn.Enabled = chk;
+            }
 
             if(chk)
             {

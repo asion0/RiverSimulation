@@ -39,6 +39,7 @@
             this.ValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.averageBtn = new System.Windows.Forms.Button();
             this.ok = new System.Windows.Forms.Button();
+            this.unitLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.copyPasteMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -98,13 +99,13 @@
             this.pasteToolStripMenuItem,
             this.ValueToolStripMenuItem});
             this.copyPasteMenuStrip.Name = "contextMenuStrip1";
-            this.copyPasteMenuStrip.Size = new System.Drawing.Size(184, 70);
+            this.copyPasteMenuStrip.Size = new System.Drawing.Size(181, 70);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.copyToolStripMenuItem.Text = "複製(C)";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -112,7 +113,7 @@
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pasteToolStripMenuItem.Text = "貼上(P)";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -120,7 +121,7 @@
             // 
             this.ValueToolStripMenuItem.Name = "ValueToolStripMenuItem";
             this.ValueToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.ValueToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ValueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ValueToolStripMenuItem.Text = "填入數值(V)";
             this.ValueToolStripMenuItem.Click += new System.EventHandler(this.valueToolStripMenuItem_Click);
             // 
@@ -147,12 +148,21 @@
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
+            // unitLbl
+            // 
+            this.unitLbl.Location = new System.Drawing.Point(177, 41);
+            this.unitLbl.Name = "unitLbl";
+            this.unitLbl.Size = new System.Drawing.Size(33, 12);
+            this.unitLbl.TabIndex = 5;
+            this.unitLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // TableInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
             this.ContextMenuStrip = this.copyPasteMenuStrip;
+            this.Controls.Add(this.unitLbl);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.averageBtn);
             this.Controls.Add(this.singleValueTxt);
@@ -183,5 +193,6 @@
         private System.Windows.Forms.Button averageBtn;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.ToolStripMenuItem ValueToolStripMenuItem;
+        public System.Windows.Forms.Label unitLbl;
     }
 }

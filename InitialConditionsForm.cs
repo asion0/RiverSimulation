@@ -18,8 +18,56 @@ namespace RiverSimulationApplication
         }
 
         RiverSimulationProfile p = RiverSimulationProfile.profile;
+
+        private bool DoConvert()
+        {
+            if (!p.depthAverageFlowSpeedU.HasInputed())
+            {
+                MessageBox.Show("請輸入水深平均流速-U！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (!p.depthAverageFlowSpeedV.HasInputed())
+            {
+                MessageBox.Show("請輸入水深平均流速-V！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (!p.waterLevel.HasInputed())
+            {
+                MessageBox.Show("請輸入水位！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (p.Is3DMode() && p.verticalVelocitySlice == RiverSimulationProfile.VerticalVelocitySliceType.None)
+            {
+                MessageBox.Show("請選取垂向流速剖面！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if(p.IsMovableBedMode())
+            {
+                if (!p.depthAverageConcentration.HasInputed())
+                {
+                    MessageBox.Show("請輸入水深平均濃度！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+
+                if (p.Is3DMode() && p.verticalConcentrationSlice == RiverSimulationProfile.VerticalConcentrationSliceType.None)
+                {
+                    MessageBox.Show("請選取垂向濃度剖面！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void ok_Click(object sender, EventArgs e)
         {
+            if (!DoConvert())
+            {
+                return;
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -117,6 +165,7 @@ namespace RiverSimulationApplication
             if (DialogResult.OK == r)
             {
                 p.depthAverageConcentration = new RiverSimulationProfile.TwoInOne(form.GetData() as RiverSimulationProfile.TwoInOne);
+                p.depthAverageConcentration.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
             }
             //TableInputForm form = new TableInputForm();
             //form.SetFormMode(depthAverageConcentrationBtn.Text, p.inputGrid.GetJ, p.inputGrid.GetI, depthAverageConcentrationBtn.Text, "", "",

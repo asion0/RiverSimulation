@@ -218,6 +218,11 @@ namespace RiverSimulationApplication
             {
                 averageBtn.Visible = true;
             }
+
+            if(unitLbl.Text.Length == 0)
+            {
+                unitLbl.Visible = false;
+            }
         }
 
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)

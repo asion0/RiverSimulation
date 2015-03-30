@@ -208,12 +208,12 @@ namespace RiverSimulationApplication
 
             public bool ValueNull()
             {
-                return dataValue == null; ;
+                return dataValue == null;
             }
 
             public bool ArrayNull()
             {
-                return dataArray == null; ;
+                return dataArray == null;
             }
 
             public enum ArrayType
@@ -236,6 +236,10 @@ namespace RiverSimulationApplication
                 UseArray,
             };
 
+            public bool HasInputed()
+            {
+                return (type == Type.UseArray && dataArray != null) || (type == Type.UseValue && dataValue != null);
+            }
             public Type type;
             public ArrayType arrayType = ArrayType.TwoDim;
             public ValueType valueType = ValueType.Double;

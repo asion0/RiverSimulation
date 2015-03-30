@@ -1087,7 +1087,9 @@ namespace RiverSimulationApplication
             {
                 folderOpen.SelectedPath = Program.documentPath;
             }
-
+            folderOpen.RootFolder = Environment.SpecialFolder.MyComputer;
+            SendKeys.Send("{TAB}{TAB}{RIGHT}");
+ 
             //string tempSave = Program.documentPath + Program.tempSaveName;
             string tempSave;
             if (folderOpen.ShowDialog(w) == DialogResult.OK)

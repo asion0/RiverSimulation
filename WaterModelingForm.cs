@@ -178,6 +178,9 @@ namespace RiverSimulationApplication
             {
                 totalSimulationTimeTxt.Enabled = true;
             }
+
+            structureSetGrp.Enabled = p.structureSetFunction;
+
             //timeSpan2dTxt.Enabled = !p.IsConstantFlowType();
             outputFrequencyTxt.Enabled = !p.IsConstantFlowType(); //模擬功能如果為定量流，則輸出頻率為1，使用者不輸入。
 
@@ -307,6 +310,28 @@ namespace RiverSimulationApplication
                     return false;
                 }
             }
+            else if(p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.None)
+            {
+                MessageBox.Show("請選擇紊流黏滯係數！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (p.roughnessType == RiverSimulationProfile.RoughnessType.Chezy && !p.chezy.HasInputed())
+            {
+                MessageBox.Show("請輸入Chezy！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else if (p.roughnessType == RiverSimulationProfile.RoughnessType.ManningN && !p.manningN.HasInputed())
+            {
+                MessageBox.Show("請輸入Manning n！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else if (p.roughnessType == RiverSimulationProfile.RoughnessType.None)
+            {
+                MessageBox.Show("請選擇糙度係數！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
             //gravityConstantTxt.Text = p.gravityConstant.ToString();
             //waterDensityTxt.Text = p.waterDensity.ToString();
             //tvInMainstreamDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
@@ -536,8 +561,9 @@ namespace RiverSimulationApplication
         private void roughnessHeightKsBtn_Click(object sender, EventArgs e)
         {
             TableInputForm form = new TableInputForm();
-            form.SetFormMode("粗糙高度Ks", p.inputGrid.GetJ, p.inputGrid.GetI, "粗糙高度Ks", "", "",
+            form.SetFormMode("粗糙高度Ks(mm)", p.inputGrid.GetJ, p.inputGrid.GetI, "粗糙高度Ks(mm)", "", "",
                 TableInputForm.InputFormType.TwoInOneDouble, 90, 120, false, false, false, p.roughnessHeightKs);
+            form.unitLbl.Text = "mm";       //20150325新增規格
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {

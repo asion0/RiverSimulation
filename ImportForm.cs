@@ -148,12 +148,14 @@ namespace RiverSimulationApplication
                 MessageBox.Show("尚未輸入水平格網！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-            if (!ConvertVerticalLevelNumber())
-            {
+
+            if (p.Is3DMode() && !ConvertVerticalLevelNumber())
+            {   //3D模式要輸入分層比例
                 return false;
             }
-            if (p.levelProportion == null)
-            {
+
+            if (p.Is3DMode() && p.levelProportion == null)
+            {   ////3D模式要輸入分層比例
                 MessageBox.Show("尚未輸入分層比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }

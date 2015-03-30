@@ -3121,13 +3121,13 @@
     <value>14, 83</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>89, 12</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>粗糙高度Ks</value>
+    <value>粗糙高度ks(mm)</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
@@ -3148,7 +3148,7 @@
     <value>NoControl</value>
   </data>
   <data name="roughnessHeightKsHelpBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 76</value>
+    <value>230, 75</value>
   </data>
   <data name="roughnessHeightKsHelpBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 26</value>
@@ -3181,7 +3181,7 @@
     <value>NoControl</value>
   </data>
   <data name="roughnessHeightKsBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 76</value>
+    <value>104, 75</value>
   </data>
   <data name="roughnessHeightKsBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 26</value>
@@ -3313,7 +3313,7 @@
     <value>mapPicBox</value>
   </data>
   <data name="&gt;&gt;mapPicBox.Type" xml:space="preserve">
-    <value>PictureBoxCtrl.GridPictureBox, GridPictureBox, Version=1.0.5492.17511, Culture=neutral, PublicKeyToken=null</value>
+    <value>PictureBoxCtrl.GridPictureBox, GridPictureBox, Version=1.0.5561.40573, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;mapPicBox.Parent" xml:space="preserve">
     <value>$this</value>

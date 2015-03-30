@@ -304,10 +304,11 @@ namespace RiverSimulationApplication
                 {   //rowCount : Q1 ~ Q5, colCount : J1 ~ J15
                     //_data = new RiverSimulationProfile.TwoInOne(colCount, rowCount);
                    _d.Create2D(colCount, rowCount);
+                   _d.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
                 }
             }
             else if (formType == FormType.BottomBedLoadFlux)
-            {
+            {   
                 _data = new RiverSimulationProfile.TwoInOne(d as RiverSimulationProfile.TwoInOne);
                 _d = _data as RiverSimulationProfile.TwoInOne;
                 Debug.Assert(_d != null);
@@ -317,6 +318,7 @@ namespace RiverSimulationApplication
                     //_data = new RiverSimulationProfile.TwoInOne(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber); //[K, J, T]
                     //_d.Create3D(p.sedimentParticlesNumber, p.inputGrid.GetJ, p.boundaryTimeNumber);
                     _d.Create3D(p.sedimentParticlesNumber, p.inputGrid.GetJ, rowCount);
+                    _d.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
                }
             }
             else if (formType == FormType.DepthAverageConcentration)
@@ -348,7 +350,15 @@ namespace RiverSimulationApplication
             DataGridViewUtility.InitializeDataGridView(dataGridView, colCount + extraCol, rowCount + extraRow, 120, 60,
                 "", "", "", false, false);
 
-            dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流" : "定量流";
+            if(formType == FormType.FlowQuantity)
+            {
+                dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流(輸入百分比)" : "定量流(輸入百分比)";
+            }
+            else
+            {
+                dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流" : "定量流";
+            }
+
             for (int jw = 0; jw < rowCount + extraRow; ++jw)
             {   //全畫面設為唯讀
                 for (int iw = 0; iw < colCount + extraCol; ++iw)

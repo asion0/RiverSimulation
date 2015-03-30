@@ -80,7 +80,9 @@ namespace RiverSimulationApplication
             //4.1.1.1.2 亞臨界流
             //subBoundaryConditionNumberTxt.Text = p.subBoundaryConditionNumber.ToString();                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
 
-            verticalVelocityDistributionChk.Checked = p.verticalVelocityDistribution;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
+            verticalVelocityDistributionChk.Checked = true; //20150330 修改規格取消選取方塊
+            p.verticalVelocityDistribution = true;
+            //verticalVelocityDistributionChk.Checked = p.verticalVelocityDistribution;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
             verticalVelocityDistributionTxt.Text = p.verticalVelocityDistributionNumber.ToString();       //4.1.1.2 垂向流速分布(3D) 分層數目P 整數(>=2)
 
             //4.1.2 下游 二選一
@@ -273,7 +275,7 @@ namespace RiverSimulationApplication
                 return false;
             }
 
-            if (!ConvertMoveableBed())
+            if (p.IsMovableBedMode() && !ConvertMoveableBed())
             {
                 return false;
             }
@@ -286,6 +288,63 @@ namespace RiverSimulationApplication
             {
                 return false;
             }
+            
+            if (p.boundaryTime == null || p.boundaryTime.Length != p.boundaryTimeNumber)
+            {
+                MessageBox.Show("請輸入邊界時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (p.upFlowCondition == RiverSimulationProfile.FlowConditionType.None)
+            {
+                MessageBox.Show("請選擇上游流況設定！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else if(p.upFlowCondition == RiverSimulationProfile.FlowConditionType.SuperCriticalFlow)
+            {
+                if(!p.superMainFlowQuantity.HasInputed())
+                {
+                    MessageBox.Show("請輸入上游超臨界流主流方向流量！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+                if (!p.superSideFlowQuantity.HasInputed())
+                {
+                    MessageBox.Show("請輸入上游超臨界流側方向流量！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+                if (!p.superWaterLevel.HasInputed())
+                {
+                    MessageBox.Show("請輸入上游超臨界流水位！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+            }
+            else if (p.upFlowCondition == RiverSimulationProfile.FlowConditionType.SubCriticalFlow)
+            {
+                if (!p.subMainFlowQuantity.HasInputed())
+                {
+                    MessageBox.Show("請輸入上游亞臨界流主流方向流量！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+                if (!p.subSideFlowQuantity.HasInputed())
+                {
+                    MessageBox.Show("請輸入上游亞臨界流側方向流量！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+            }
+
+            if (p.downFlowCondition == RiverSimulationProfile.FlowConditionType.None)
+            {
+                MessageBox.Show("請選擇下游游流況設定！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else if(p.downFlowCondition == RiverSimulationProfile.FlowConditionType.SubCriticalFlow)
+            {
+                if (!p.downSubWaterLevel.HasInputed())
+                {
+                    MessageBox.Show("請輸入下游亞臨界流水位！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+            }
 
             if (!ConvertVerticalVelocityDistributionNumber())
             {
@@ -296,23 +355,14 @@ namespace RiverSimulationApplication
             {
                 return false;
             }
+
             if (!ControllerUtility.CheckConvertDouble(ref p.sideWindShear, sideWindShearTxt, "請輸入正確的側方向風剪！", ControllerUtility.CheckType.NoCheck))
             {
                 return false;
             }
+
             if (!ControllerUtility.CheckConvertDouble(ref p.coriolisForce, coriolisForceTxt, "請輸入正確的科氏力！", ControllerUtility.CheckType.NoCheck))
             {
-                return false;
-            }
-
-            if (p.upFlowCondition == RiverSimulationProfile.FlowConditionType.None)
-            {
-                MessageBox.Show("請選擇上游流況設定！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-            if (p.downFlowCondition == RiverSimulationProfile.FlowConditionType.None)
-            {
-                MessageBox.Show("請選擇下游游流況設定！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             return true;
@@ -338,6 +388,18 @@ namespace RiverSimulationApplication
 
         private bool ConvertMoveableBed()
         {
+            if (p.bottomBedLoadFluxType == RiverSimulationProfile.BottomBedLoadFluxType.Input && !p.bottomBedLoadFluxArray.HasInputed())
+            {
+                MessageBox.Show("請設定底床載通量！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (!p.suspendedLoadDepthAvgConcentration.HasInputed())
+            {
+                MessageBox.Show("請輸入懸浮載水深平均濃度！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
             if(p.Is3DMode())
             {
                 if (!ConvertUpVerticalDistributionNumber())
@@ -345,13 +407,45 @@ namespace RiverSimulationApplication
                     return false;
                 }
 
-                if(p.boundaryUpVerticalDistribution.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                if (p.boundaryUpVerticalDistribution.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
                 {
                     if (!ConvertUpVerticalDistributionValue())
                     {
                         return false;
-                    }                
+                    }
                 }
+                else if(p.boundaryUpVerticalDistribution.type == RiverSimulationProfile.TwoInOne.Type.UseArray)
+                {
+                    if (!p.boundaryUpVerticalDistribution.HasInputed())
+                    {
+                        MessageBox.Show("請設定上游垂直濃度分布(3D)！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return false;
+                    }
+                }
+
+            }
+
+            if (p.upBoundaryElevationType == RiverSimulationProfile.BottomBedLoadFluxType.Input && p.upBoundaryElevationArray == null)
+            {
+                MessageBox.Show("請設定上游邊界底床高程！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (p.bottomBedParticleSizeRatio == null)
+            {
+                MessageBox.Show("請設定底床粒徑比例！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (p.movableBedDownType == RiverSimulationProfile.BottomBedLoadFluxType.Input && p.movableBedDownConcentration == null)
+            {
+                MessageBox.Show("請設定下游給定濃度！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if(p.Is3DMode())
+            {
+
 
                 if (!ConvertDownVerticalDistributionNumber())
                 {
@@ -365,6 +459,31 @@ namespace RiverSimulationApplication
                         return false;
                     }
                 }
+                else if (p.boundaryDownVerticalDistribution.type == RiverSimulationProfile.TwoInOne.Type.UseArray)
+                {
+                    if (!p.boundaryDownVerticalDistribution.HasInputed())
+                    {
+                        MessageBox.Show("請設定下游垂直濃度分布(3D)！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return false;
+                    }
+                }
+
+            }
+
+            if (p.nearBedBoundaryType == RiverSimulationProfile.NearBedBoundaryType.None)
+            {
+                MessageBox.Show("請設定近底床濃度邊界！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else if (p.nearBedBoundaryType == RiverSimulationProfile.NearBedBoundaryType.Input && !p.inputConcentration.HasInputed())
+            {
+                MessageBox.Show("請設定近底床濃度邊界給定濃度！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else if (p.nearBedBoundaryType == RiverSimulationProfile.NearBedBoundaryType.ConcentrationCalculation && p.concentrationCalculation == RiverSimulationProfile.ConcentrationCalculationType.None)
+            {
+                MessageBox.Show("請選取近底床濃度邊界濃度計算公式！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
             }
             //if (!ControllerUtility.CheckConvertDouble(ref p.waterTimeSpan, waterTimeSpanTxt, "請輸入正確的時間間距！", ControllerUtility.CheckType.GreaterThanZero))
             //{

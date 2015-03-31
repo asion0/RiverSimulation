@@ -953,8 +953,9 @@ namespace RiverSimulationApplication
             {
                 p.bottomBedParticleSizeRatio = null;
             }
-            form.SetFormMode(bottomBedParticleSizeRatioBtn.Text, p.sedimentParticlesNumber, (p.IsConstantFlowType()) ? 1 : p.boundaryTimeNumber, bottomBedParticleSizeRatioBtn.Text, "粒徑 ", "邊界時間",
-                TableInputForm.InputFormType.GenericDoubleGreaterThanOrEqualZero, 90, 120, true, false, false, p.bottomBedParticleSizeRatio);
+            form.p = p;
+            form.SetFormMode("底床粒徑比例(百分比)", p.sedimentParticlesNumber, (p.IsConstantFlowType()) ? 1 : p.boundaryTimeNumber, "邊界時間", "粒徑 ", "邊界時間",
+                TableInputForm.InputFormType.BottomBedParticleSizeRatio, 90, 120, true, false, false, p.bottomBedParticleSizeRatio);
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {

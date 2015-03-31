@@ -866,7 +866,10 @@ namespace RiverSimulationApplication
             {   //Select in text
                 DataGridViewTextBoxEditingControl tb = v.EditingControl as DataGridViewTextBoxEditingControl;
                 string s = tb.SelectedText;
-                Clipboard.SetText(s);
+                if (s.Length > 0)
+                {
+                    Clipboard.SetText(s);
+                }
             }
         }
 
@@ -1087,7 +1090,7 @@ namespace RiverSimulationApplication
             {
                 folderOpen.SelectedPath = Program.documentPath;
             }
-            folderOpen.RootFolder = Environment.SpecialFolder.MyComputer;
+            //folderOpen.RootFolder = Environment.SpecialFolder.MyComputer;
             SendKeys.Send("{TAB}{TAB}{RIGHT}");
  
             //string tempSave = Program.documentPath + Program.tempSaveName;

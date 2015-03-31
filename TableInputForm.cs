@@ -185,6 +185,11 @@ namespace RiverSimulationApplication
                     tableName, colName, rowName, nocolNum, noRowNum, false, true);
                 dataGridView.Rows[0].HeaderCell.Value = "作用層";
             }
+            else if (inputFormType == InputFormType.BottomBedParticleSizeRatio)
+            {
+                InitTableBottomBedParticleSizeRatio();
+            }
+
             else
             {
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
@@ -192,7 +197,22 @@ namespace RiverSimulationApplication
             }
 
             FillDataGridView();
-         }
+        }
+
+        private void InitTableBottomBedParticleSizeRatio()
+        {
+            DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
+               tableName, colName, rowName, nocolNum, noRowNum);
+
+            if (p.IsVariableFlowType())
+            {   //變量流需顯示邊界時間欄位
+                for (int jw = 0; jw < p.boundaryTimeNumber; ++jw)
+                {
+                    dataGridView.Rows[jw].HeaderCell.Value = p.boundaryTime[jw].ToString();
+                }
+            }
+
+        }
 
         private void TableInputForm_Load(object sender, EventArgs e)
         {
@@ -258,6 +278,7 @@ namespace RiverSimulationApplication
             FlowConditionsSettingVariable,  //流況設定變量流
             BoundaryTime,                   //邊界時間輸入
             VerticalDistribution,           //垂直濃度分布
+            BottomBedParticleSizeRatio,     //底床粒徑比
         }
 
         private InputFormType _inputFormType = InputFormType.GenericDouble;
@@ -362,6 +383,7 @@ namespace RiverSimulationApplication
                 case InputFormType.GenericDouble:
                 case InputFormType.GenericDoubleGreaterThanZero:
                 case InputFormType.GenericDoubleGreaterThanOrEqualZero:
+                case InputFormType.BottomBedParticleSizeRatio:
                     if (d == null)
                     {
                         _data = new double[colCount, rowCount];
@@ -443,6 +465,7 @@ namespace RiverSimulationApplication
                 case InputFormType.GenericDouble:
                 case InputFormType.GenericDoubleGreaterThanZero:
                 case InputFormType.GenericDoubleGreaterThanOrEqualZero:
+                case InputFormType.BottomBedParticleSizeRatio:
                     //編輯陣列I * J
                     for (int i = 0; i < colCount; ++i)
                     {
@@ -878,6 +901,22 @@ namespace RiverSimulationApplication
             return allPass;
         }
 
+        private bool AutoFinishConvertBottomBedParticleSizeRatioCell()
+        {
+            double sum = 0.0;
+            bool allPass = true;
+            for (int j = 0; j < rowCount; ++j)
+            {
+                if (!CalSumOfOneRow(j, ref sum))
+                {
+                    allPass = false;
+                    continue;
+                }
+                dataGridView[colCount - 1, j].Value = (100.0 - sum).ToString();
+            }
+            return allPass;
+        }
+
         private bool AutoFinishConvertBoundaryTimeCell()
         {
             bool allPass = true;
@@ -928,6 +967,10 @@ namespace RiverSimulationApplication
                     break;
                 case InputFormType.BottomElevationForm:
                     break;
+                case InputFormType.BottomBedParticleSizeRatio:
+                    AutoFinishConvertBottomBedParticleSizeRatioCell();
+                    break;
+
             }
         }
 
@@ -955,6 +998,7 @@ namespace RiverSimulationApplication
                 case InputFormType.GenericDouble:
                 case InputFormType.GenericDoubleGreaterThanZero:
                 case InputFormType.GenericDoubleGreaterThanOrEqualZero:
+                case InputFormType.BottomBedParticleSizeRatio:
                     isSuccess = ConvertGenericDouble();
                     break;
                 case InputFormType.TwoInOneDouble:

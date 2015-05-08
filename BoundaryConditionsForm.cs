@@ -79,9 +79,19 @@ namespace RiverSimulationApplication
 
             //4.1.1.1.2 亞臨界流
             //subBoundaryConditionNumberTxt.Text = p.subBoundaryConditionNumber.ToString();                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
+            
+            //4.1.1.2 垂向流速分布(3D)
+            switch (p.verticalVelocityType)
+            {
+                case RiverSimulationProfile.VerticalVelocityType.Auto:
+                    up3dValue.Checked = true;
+                     break;
+               case RiverSimulationProfile.VerticalVelocityType.Input:
+                    up3dArray.Checked = true;
+                    break;
+            }
 
-            verticalVelocityDistributionChk.Checked = true; //20150330 修改規格取消選取方塊
-            p.verticalVelocityDistribution = true;
+            //verticalVelocityDistributionChk.Checked = true; //20150330 修改規格取消選取方塊
             //verticalVelocityDistributionChk.Checked = p.verticalVelocityDistribution;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
             verticalVelocityDistributionTxt.Text = p.verticalVelocityDistributionNumber.ToString();       //4.1.1.2 垂向流速分布(3D) 分層數目P 整數(>=2)
 
@@ -284,15 +294,18 @@ namespace RiverSimulationApplication
 
         private bool ConvertWaterModeling()
         {
-            if (!ConvertBoundaryTimeNumber())
+            if (boundaryTimeBtn.Enabled)
             {
-                return false;
-            }
-            
-            if (p.boundaryTime == null || p.boundaryTime.Length != p.boundaryTimeNumber)
-            {
-                MessageBox.Show("請輸入邊界時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                if (!ConvertBoundaryTimeNumber())
+                {
+                    return false;
+                }
+
+                if (p.boundaryTime == null || p.boundaryTime.Length != p.boundaryTimeNumber)
+                {
+                    MessageBox.Show("請輸入邊界時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
             }
 
             if (p.upFlowCondition == RiverSimulationProfile.FlowConditionType.None)
@@ -532,6 +545,26 @@ namespace RiverSimulationApplication
             UpdateStatus();
         }
 
+        private void up3dValue_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            if (chk)
+            {
+                p.verticalVelocityType = RiverSimulationProfile.VerticalVelocityType.Auto;
+            }
+        }
+
+        private void up3dArray_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            verticalVelocityDistributionTxt.Enabled = chk;
+            verticalVelocityDistributionBtn.Enabled = chk;
+            if (chk)
+            {
+                p.verticalVelocityType = RiverSimulationProfile.VerticalVelocityType.Input;
+            }
+        }
+
         private bool AlertBoundaryTimeChange(ref RiverSimulationProfile.TwoInOne o)
         {
             if (o == null)
@@ -698,14 +731,14 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void verticalVelocityDistributionChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            verticalVelocityDistributionTxt.Enabled = chk;
-            verticalVelocityDistributionBtn.Enabled = chk;
-            p.verticalVelocityDistribution = chk;
-            //UpdateStatus();
-        }
+        //private void verticalVelocityDistributionChk_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    bool chk = (sender as CheckBox).Checked;
+        //    verticalVelocityDistributionTxt.Enabled = chk;
+        //    verticalVelocityDistributionBtn.Enabled = chk;
+        //    p.verticalVelocityDistribution = chk;
+        //    //UpdateStatus();
+        //}
 
         private void verticalVelocityDistributionBtn_Click(object sender, EventArgs e)
         {
@@ -1128,8 +1161,6 @@ namespace RiverSimulationApplication
                 p.boundaryDownVerticalDistribution.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
             }
         }
-
-
     }
 
 }

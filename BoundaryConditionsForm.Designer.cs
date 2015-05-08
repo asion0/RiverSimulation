@@ -42,6 +42,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label31 = new System.Windows.Forms.Label();
             this.verticalVelocityDistributionTxt = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.verticalVelocityDistributionChk = new System.Windows.Forms.CheckBox();
@@ -52,7 +53,9 @@
             this.superWaterLevelBtn = new System.Windows.Forms.Button();
             this.superSideFlowQuantityBtn = new System.Windows.Forms.Button();
             this.superMainFlowQuantityBtn = new System.Windows.Forms.Button();
+            this.up3dArray = new System.Windows.Forms.RadioButton();
             this.upSubCriticalFlowRdo = new System.Windows.Forms.RadioButton();
+            this.up3dValue = new System.Windows.Forms.RadioButton();
             this.upSuperCriticalFlowRdo = new System.Windows.Forms.RadioButton();
             this.boundaryTimeBtn = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -136,7 +139,8 @@
             this.upBoundaryElevationInputRdo = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
-            this.label31 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.movableTypeGroup.SuspendLayout();
             this.waterTypeGroup.SuspendLayout();
@@ -156,6 +160,8 @@
             this.panel4.SuspendLayout();
             this.boundaryUpVerticalDistributionPanel.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -237,7 +243,7 @@
             // 
             this.waterModelingPanel.Controls.Add(this.groupBox10);
             this.waterModelingPanel.Controls.Add(this.waterModelingBackBtn);
-            this.waterModelingPanel.Location = new System.Drawing.Point(12, 334);
+            this.waterModelingPanel.Location = new System.Drawing.Point(12, 67);
             this.waterModelingPanel.Name = "waterModelingPanel";
             this.waterModelingPanel.Size = new System.Drawing.Size(500, 670);
             this.waterModelingPanel.TabIndex = 14;
@@ -267,7 +273,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 55);
+            this.label4.Location = new System.Drawing.Point(16, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 7;
@@ -276,7 +282,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 268);
+            this.label16.Location = new System.Drawing.Point(16, 304);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(29, 12);
             this.label16.TabIndex = 7;
@@ -285,7 +291,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 200);
+            this.label12.Location = new System.Drawing.Point(16, 240);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 7;
@@ -294,7 +300,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 421);
+            this.label1.Location = new System.Drawing.Point(16, 425);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 7;
@@ -303,28 +309,28 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel6.Controls.Add(this.panel9);
+            this.panel6.Controls.Add(this.panel3);
             this.panel6.Controls.Add(this.label31);
-            this.panel6.Controls.Add(this.verticalVelocityDistributionTxt);
-            this.panel6.Controls.Add(this.label15);
-            this.panel6.Controls.Add(this.verticalVelocityDistributionChk);
-            this.panel6.Controls.Add(this.verticalVelocityDistributionBtn);
             this.panel6.Controls.Add(this.label14);
-            this.panel6.Controls.Add(this.subSideFlowQuantityBtn);
-            this.panel6.Controls.Add(this.subMainFlowQuantityBtn);
-            this.panel6.Controls.Add(this.superWaterLevelBtn);
-            this.panel6.Controls.Add(this.superSideFlowQuantityBtn);
-            this.panel6.Controls.Add(this.superMainFlowQuantityBtn);
-            this.panel6.Controls.Add(this.upSubCriticalFlowRdo);
-            this.panel6.Controls.Add(this.upSuperCriticalFlowRdo);
-            this.panel6.Location = new System.Drawing.Point(18, 70);
+            this.panel6.Location = new System.Drawing.Point(18, 63);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(437, 117);
+            this.panel6.Size = new System.Drawing.Size(437, 168);
             this.panel6.TabIndex = 5;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(12, 89);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(99, 12);
+            this.label31.TabIndex = 15;
+            this.label31.Text = "垂直流速分布(3D)";
             // 
             // verticalVelocityDistributionTxt
             // 
             this.verticalVelocityDistributionTxt.Enabled = false;
-            this.verticalVelocityDistributionTxt.Location = new System.Drawing.Point(206, 84);
+            this.verticalVelocityDistributionTxt.Location = new System.Drawing.Point(151, 28);
             this.verticalVelocityDistributionTxt.Name = "verticalVelocityDistributionTxt";
             this.verticalVelocityDistributionTxt.Size = new System.Drawing.Size(96, 22);
             this.verticalVelocityDistributionTxt.TabIndex = 14;
@@ -332,7 +338,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(147, 90);
+            this.label15.Location = new System.Drawing.Point(92, 34);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 12);
             this.label15.TabIndex = 13;
@@ -341,19 +347,18 @@
             // verticalVelocityDistributionChk
             // 
             this.verticalVelocityDistributionChk.AutoSize = true;
-            this.verticalVelocityDistributionChk.Location = new System.Drawing.Point(14, 100);
+            this.verticalVelocityDistributionChk.Location = new System.Drawing.Point(154, 6);
             this.verticalVelocityDistributionChk.Name = "verticalVelocityDistributionChk";
             this.verticalVelocityDistributionChk.Size = new System.Drawing.Size(118, 16);
             this.verticalVelocityDistributionChk.TabIndex = 12;
             this.verticalVelocityDistributionChk.Text = "垂直流速分布(3D)";
             this.verticalVelocityDistributionChk.UseVisualStyleBackColor = true;
             this.verticalVelocityDistributionChk.Visible = false;
-            this.verticalVelocityDistributionChk.CheckedChanged += new System.EventHandler(this.verticalVelocityDistributionChk_CheckedChanged);
             // 
             // verticalVelocityDistributionBtn
             // 
             this.verticalVelocityDistributionBtn.Enabled = false;
-            this.verticalVelocityDistributionBtn.Location = new System.Drawing.Point(307, 82);
+            this.verticalVelocityDistributionBtn.Location = new System.Drawing.Point(252, 26);
             this.verticalVelocityDistributionBtn.Name = "verticalVelocityDistributionBtn";
             this.verticalVelocityDistributionBtn.Size = new System.Drawing.Size(96, 26);
             this.verticalVelocityDistributionBtn.TabIndex = 8;
@@ -373,7 +378,7 @@
             // subSideFlowQuantityBtn
             // 
             this.subSideFlowQuantityBtn.Enabled = false;
-            this.subSideFlowQuantityBtn.Location = new System.Drawing.Point(206, 50);
+            this.subSideFlowQuantityBtn.Location = new System.Drawing.Point(181, 30);
             this.subSideFlowQuantityBtn.Name = "subSideFlowQuantityBtn";
             this.subSideFlowQuantityBtn.Size = new System.Drawing.Size(96, 26);
             this.subSideFlowQuantityBtn.TabIndex = 5;
@@ -384,7 +389,7 @@
             // subMainFlowQuantityBtn
             // 
             this.subMainFlowQuantityBtn.Enabled = false;
-            this.subMainFlowQuantityBtn.Location = new System.Drawing.Point(104, 52);
+            this.subMainFlowQuantityBtn.Location = new System.Drawing.Point(79, 32);
             this.subMainFlowQuantityBtn.Name = "subMainFlowQuantityBtn";
             this.subMainFlowQuantityBtn.Size = new System.Drawing.Size(96, 26);
             this.subMainFlowQuantityBtn.TabIndex = 5;
@@ -395,7 +400,7 @@
             // superWaterLevelBtn
             // 
             this.superWaterLevelBtn.Enabled = false;
-            this.superWaterLevelBtn.Location = new System.Drawing.Point(307, 20);
+            this.superWaterLevelBtn.Location = new System.Drawing.Point(282, 0);
             this.superWaterLevelBtn.Name = "superWaterLevelBtn";
             this.superWaterLevelBtn.Size = new System.Drawing.Size(96, 26);
             this.superWaterLevelBtn.TabIndex = 5;
@@ -406,7 +411,7 @@
             // superSideFlowQuantityBtn
             // 
             this.superSideFlowQuantityBtn.Enabled = false;
-            this.superSideFlowQuantityBtn.Location = new System.Drawing.Point(206, 20);
+            this.superSideFlowQuantityBtn.Location = new System.Drawing.Point(181, 0);
             this.superSideFlowQuantityBtn.Name = "superSideFlowQuantityBtn";
             this.superSideFlowQuantityBtn.Size = new System.Drawing.Size(96, 26);
             this.superSideFlowQuantityBtn.TabIndex = 5;
@@ -417,7 +422,7 @@
             // superMainFlowQuantityBtn
             // 
             this.superMainFlowQuantityBtn.Enabled = false;
-            this.superMainFlowQuantityBtn.Location = new System.Drawing.Point(104, 20);
+            this.superMainFlowQuantityBtn.Location = new System.Drawing.Point(79, 0);
             this.superMainFlowQuantityBtn.Name = "superMainFlowQuantityBtn";
             this.superMainFlowQuantityBtn.Size = new System.Drawing.Size(96, 26);
             this.superMainFlowQuantityBtn.TabIndex = 5;
@@ -425,10 +430,22 @@
             this.superMainFlowQuantityBtn.UseVisualStyleBackColor = true;
             this.superMainFlowQuantityBtn.Click += new System.EventHandler(this.superMainFlowQuantityBtn_Click);
             // 
+            // up3dArray
+            // 
+            this.up3dArray.AutoSize = true;
+            this.up3dArray.Location = new System.Drawing.Point(3, 33);
+            this.up3dArray.Name = "up3dArray";
+            this.up3dArray.Size = new System.Drawing.Size(71, 16);
+            this.up3dArray.TabIndex = 3;
+            this.up3dArray.TabStop = true;
+            this.up3dArray.Text = "自行輸入";
+            this.up3dArray.UseVisualStyleBackColor = true;
+            this.up3dArray.CheckedChanged += new System.EventHandler(this.up3dArray_CheckedChanged);
+            // 
             // upSubCriticalFlowRdo
             // 
             this.upSubCriticalFlowRdo.AutoSize = true;
-            this.upSubCriticalFlowRdo.Location = new System.Drawing.Point(28, 57);
+            this.upSubCriticalFlowRdo.Location = new System.Drawing.Point(3, 37);
             this.upSubCriticalFlowRdo.Name = "upSubCriticalFlowRdo";
             this.upSubCriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.upSubCriticalFlowRdo.TabIndex = 3;
@@ -437,10 +454,22 @@
             this.upSubCriticalFlowRdo.UseVisualStyleBackColor = true;
             this.upSubCriticalFlowRdo.CheckedChanged += new System.EventHandler(this.upSubCriticalFlowRdo_CheckedChanged);
             // 
+            // up3dValue
+            // 
+            this.up3dValue.AutoSize = true;
+            this.up3dValue.Location = new System.Drawing.Point(3, 5);
+            this.up3dValue.Name = "up3dValue";
+            this.up3dValue.Size = new System.Drawing.Size(59, 16);
+            this.up3dValue.TabIndex = 3;
+            this.up3dValue.TabStop = true;
+            this.up3dValue.Text = "均一值";
+            this.up3dValue.UseVisualStyleBackColor = true;
+            this.up3dValue.CheckedChanged += new System.EventHandler(this.up3dValue_CheckedChanged);
+            // 
             // upSuperCriticalFlowRdo
             // 
             this.upSuperCriticalFlowRdo.AutoSize = true;
-            this.upSuperCriticalFlowRdo.Location = new System.Drawing.Point(28, 25);
+            this.upSuperCriticalFlowRdo.Location = new System.Drawing.Point(3, 5);
             this.upSuperCriticalFlowRdo.Name = "upSuperCriticalFlowRdo";
             this.upSuperCriticalFlowRdo.Size = new System.Drawing.Size(71, 16);
             this.upSuperCriticalFlowRdo.TabIndex = 3;
@@ -470,15 +499,15 @@
             this.panel8.Controls.Add(this.sidewallBoundarySlipRdo);
             this.panel8.Controls.Add(this.nonSidewallBoundarySlipRdo);
             this.panel8.Controls.Add(this.label18);
-            this.panel8.Location = new System.Drawing.Point(18, 283);
+            this.panel8.Location = new System.Drawing.Point(18, 319);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(437, 125);
+            this.panel8.Size = new System.Drawing.Size(437, 98);
             this.panel8.TabIndex = 5;
             // 
             // sideInFlowChk
             // 
             this.sideInFlowChk.AutoSize = true;
-            this.sideInFlowChk.Location = new System.Drawing.Point(17, 88);
+            this.sideInFlowChk.Location = new System.Drawing.Point(17, 69);
             this.sideInFlowChk.Name = "sideInFlowChk";
             this.sideInFlowChk.Size = new System.Drawing.Size(60, 16);
             this.sideInFlowChk.TabIndex = 17;
@@ -487,7 +516,7 @@
             // 
             // sideInFlowBtn
             // 
-            this.sideInFlowBtn.Location = new System.Drawing.Point(77, 83);
+            this.sideInFlowBtn.Location = new System.Drawing.Point(77, 64);
             this.sideInFlowBtn.Name = "sideInFlowBtn";
             this.sideInFlowBtn.Size = new System.Drawing.Size(96, 26);
             this.sideInFlowBtn.TabIndex = 19;
@@ -497,7 +526,7 @@
             // sideOutFlowChk
             // 
             this.sideOutFlowChk.AutoSize = true;
-            this.sideOutFlowChk.Location = new System.Drawing.Point(212, 88);
+            this.sideOutFlowChk.Location = new System.Drawing.Point(212, 69);
             this.sideOutFlowChk.Name = "sideOutFlowChk";
             this.sideOutFlowChk.Size = new System.Drawing.Size(60, 16);
             this.sideOutFlowChk.TabIndex = 18;
@@ -506,7 +535,7 @@
             // 
             // sideOutFlowBtn
             // 
-            this.sideOutFlowBtn.Location = new System.Drawing.Point(273, 83);
+            this.sideOutFlowBtn.Location = new System.Drawing.Point(273, 64);
             this.sideOutFlowBtn.Name = "sideOutFlowBtn";
             this.sideOutFlowBtn.Size = new System.Drawing.Size(96, 26);
             this.sideOutFlowBtn.TabIndex = 20;
@@ -516,7 +545,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(12, 10);
+            this.label25.Location = new System.Drawing.Point(10, 7);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(77, 12);
             this.label25.TabIndex = 16;
@@ -525,7 +554,7 @@
             // sidewallBoundarySlipRdo
             // 
             this.sidewallBoundarySlipRdo.AutoSize = true;
-            this.sidewallBoundarySlipRdo.Location = new System.Drawing.Point(153, 27);
+            this.sidewallBoundarySlipRdo.Location = new System.Drawing.Point(153, 24);
             this.sidewallBoundarySlipRdo.Name = "sidewallBoundarySlipRdo";
             this.sidewallBoundarySlipRdo.Size = new System.Drawing.Size(47, 16);
             this.sidewallBoundarySlipRdo.TabIndex = 3;
@@ -537,7 +566,7 @@
             // nonSidewallBoundarySlipRdo
             // 
             this.nonSidewallBoundarySlipRdo.AutoSize = true;
-            this.nonSidewallBoundarySlipRdo.Location = new System.Drawing.Point(20, 27);
+            this.nonSidewallBoundarySlipRdo.Location = new System.Drawing.Point(20, 24);
             this.nonSidewallBoundarySlipRdo.Name = "nonSidewallBoundarySlipRdo";
             this.nonSidewallBoundarySlipRdo.Size = new System.Drawing.Size(59, 16);
             this.nonSidewallBoundarySlipRdo.TabIndex = 3;
@@ -549,7 +578,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(9, 65);
+            this.label18.Location = new System.Drawing.Point(10, 51);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(56, 12);
             this.label18.TabIndex = 7;
@@ -561,7 +590,7 @@
             this.panel7.Controls.Add(this.downSuperCriticalFlowRdo);
             this.panel7.Controls.Add(this.downSubCriticalFlowRdo);
             this.panel7.Controls.Add(this.downSuperWaterLevelBtn);
-            this.panel7.Location = new System.Drawing.Point(18, 215);
+            this.panel7.Location = new System.Drawing.Point(18, 255);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(437, 40);
             this.panel7.TabIndex = 5;
@@ -623,7 +652,7 @@
             this.waterSurfacePanel.Controls.Add(this.coriolisForceTxt);
             this.waterSurfacePanel.Controls.Add(this.sideWindShearTxt);
             this.waterSurfacePanel.Controls.Add(this.mainstreamWindShearTxt);
-            this.waterSurfacePanel.Location = new System.Drawing.Point(18, 436);
+            this.waterSurfacePanel.Location = new System.Drawing.Point(18, 440);
             this.waterSurfacePanel.Name = "waterSurfacePanel";
             this.waterSurfacePanel.Size = new System.Drawing.Size(437, 70);
             this.waterSurfacePanel.TabIndex = 5;
@@ -1332,14 +1361,32 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 16;
             // 
-            // label31
+            // panel3
             // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(31, 90);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(99, 12);
-            this.label31.TabIndex = 15;
-            this.label31.Text = "垂直流速分布(3D)";
+            this.panel3.Controls.Add(this.upSuperCriticalFlowRdo);
+            this.panel3.Controls.Add(this.upSubCriticalFlowRdo);
+            this.panel3.Controls.Add(this.superMainFlowQuantityBtn);
+            this.panel3.Controls.Add(this.superSideFlowQuantityBtn);
+            this.panel3.Controls.Add(this.superWaterLevelBtn);
+            this.panel3.Controls.Add(this.subMainFlowQuantityBtn);
+            this.panel3.Controls.Add(this.subSideFlowQuantityBtn);
+            this.panel3.Location = new System.Drawing.Point(25, 22);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(398, 64);
+            this.panel3.TabIndex = 16;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.up3dValue);
+            this.panel9.Controls.Add(this.up3dArray);
+            this.panel9.Controls.Add(this.verticalVelocityDistributionTxt);
+            this.panel9.Controls.Add(this.verticalVelocityDistributionBtn);
+            this.panel9.Controls.Add(this.label15);
+            this.panel9.Controls.Add(this.verticalVelocityDistributionChk);
+            this.panel9.Location = new System.Drawing.Point(25, 104);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(398, 58);
+            this.panel9.TabIndex = 17;
             // 
             // BoundaryConditionsForm
             // 
@@ -1347,9 +1394,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.waterModelingPanel);
             this.Controls.Add(this.moveableBedPanel);
             this.Controls.Add(this.mapPicBox);
-            this.Controls.Add(this.waterModelingPanel);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
             this.Controls.Add(this.ok);
@@ -1391,6 +1438,10 @@
             this.boundaryUpVerticalDistributionPanel.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1506,5 +1557,9 @@
         private System.Windows.Forms.RadioButton upVdValueRdo;
         private System.Windows.Forms.TextBox upVdValueTxt;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.RadioButton up3dArray;
+        private System.Windows.Forms.RadioButton up3dValue;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel3;
     }
 }

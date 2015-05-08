@@ -774,6 +774,31 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        private bool ConvertBottomBedParticleSizeRatio()
+        {
+            if (rowCount != 1 && !AutoFinishConvertBottomBedParticleSizeRatioCell())
+            {
+                return false;
+            }
+
+            try
+            {
+                DataGridView v = dataGridView;
+                for (int i = 0; i < colCount; ++i)
+                {
+                    for (int j = 0; j < rowCount; ++j)
+                    {
+                        (_data as double[,])[i, j] = Convert.ToDouble(v[i, j].Value);
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         private bool ConvertFlowConditionsSettingConstant()
         {
             try
@@ -998,8 +1023,10 @@ namespace RiverSimulationApplication
                 case InputFormType.GenericDouble:
                 case InputFormType.GenericDoubleGreaterThanZero:
                 case InputFormType.GenericDoubleGreaterThanOrEqualZero:
-                case InputFormType.BottomBedParticleSizeRatio:
                     isSuccess = ConvertGenericDouble();
+                    break;
+                case InputFormType.BottomBedParticleSizeRatio:
+                    isSuccess = ConvertBottomBedParticleSizeRatio();
                     break;
                 case InputFormType.TwoInOneDouble:
                 case InputFormType.TwoInOneDoubleGreaterThanZero:

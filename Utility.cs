@@ -1184,7 +1184,7 @@ namespace RiverSimulationApplication
             }
             if (File.Exists(Program.GetProjectFullPath() + @"\resed.O"))
             {
-                File.Delete(Program.GetProjectFullPath() + @"\resed.o");
+                File.Delete(Program.GetProjectFullPath() + @"\resed.O");
             }
             if (File.Exists(Program.GetProjectFullPath() + @"\out"))
             {
@@ -1198,7 +1198,14 @@ namespace RiverSimulationApplication
             {
                 File.Delete(Program.GetProjectFullPath() + @"\resed.er");
             }
-
+            if (File.Exists(Program.GetProjectFullPath() + @"\run.bat"))
+            {
+                File.Delete(Program.GetProjectFullPath() + @"\run.bat");
+            }
+            if (File.Exists(Program.GetProjectFullPath() + @"\resed.exe"))
+            {
+                File.Delete(Program.GetProjectFullPath() + @"\resed.exe");
+            }
             Program.SaveDefaultProjectFolder();
             return true;
         }

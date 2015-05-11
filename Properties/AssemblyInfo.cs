@@ -35,6 +35,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.40")]
 [assembly: AssemblyFileVersion("1.0.40")]
 
+//1.0.0.40 - 20150511 Release version, Change some spec from 20150402.
 //1.0.0.39 - 20150323 Release version, Add button in import form.
 //1.0.0.38 - 20150323 Release version, Support Z data.
 //1.0.0.37 - 20150317 Release version, Fix some bugs.

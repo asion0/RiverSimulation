@@ -397,18 +397,18 @@ namespace RiverSimulationApplication
 
         private void newMnuItem_Click(object sender, EventArgs e)
         {
-            //FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
-            //if (!FunctionlUtility.NewProject())
-            //{
-            //    return;
-            //}
+            FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
+            if (!FunctionlUtility.NewProjectFile(this, Program.GetProjectFullPath()))
+            {
+                return;
+            }
             UpdateStatus();
         }
 
         private void openMnuItem_Click(object sender, EventArgs e)
         {
             FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
-            if (!FunctionlUtility.OpenProject(this))
+            if (!FunctionlUtility.OpenProjectFile(this, Program.GetProjectFileFullPath()))
             {
                 return;
             }

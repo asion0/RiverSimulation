@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml;
 
 namespace RiverSimulationApplication
 {
@@ -23,32 +24,7 @@ namespace RiverSimulationApplication
 
         }
 
-
-
-        private void newBtn_Click(object sender, EventArgs e)
-        {
-            if(!FunctionlUtility.NewProject())
-            {
-                return;
-            }
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        private void openBtn_Click(object sender, EventArgs e)
-        {
-            if(!FunctionlUtility.OpenProject(this))
-            {
-                return;
-            }
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-            
-
-        }
-
+        /*
         private void delBtn_Click(object sender, EventArgs e)
         {
             RiverSimulationApplication.Properties.Settings s = RiverSimulationApplication.Properties.Settings.Default;
@@ -69,6 +45,58 @@ namespace RiverSimulationApplication
                     Utility.DeleteFileOrFolder(folderOpen.SelectedPath);
                 }
             }
+        } 
+        */
+
+        private void SetProjectTitle(string t)
+        {
+            projectTitle.Text = "專案：" + t;
+        }
+
+        private void newProjectBtn_Click(object sender, EventArgs e)
+        {
+            if (!FunctionlUtility.NewProject(this))
+            {
+                return;
+            }
+            newFileBtn.Enabled = true;
+            openFileBtn.Enabled = false;
+            projectDescriptBtn.Enabled = true;
+            SetProjectTitle(Program.projectName);
+        }
+
+        private void selectProject_Click(object sender, EventArgs e)
+        {
+            if (!FunctionlUtility.OpenProject(this))
+            {
+                return;
+            }
+            newFileBtn.Enabled = true;
+            openFileBtn.Enabled = !FunctionlUtility.IsEmptyProject(Program.GetProjectFullPath());
+            projectDescriptBtn.Enabled = true;
+            SetProjectTitle(Program.projectName);
+        }
+
+        private void newFileBtn_Click(object sender, EventArgs e)
+        {
+            if (!FunctionlUtility.NewProjectFile(this, Program.GetProjectFullPath()))
+            {
+                return;
+            }
+            //RiverSimulationProfile.profile = new RiverSimulationProfile();
+            //Program.projectFolder = Program.documentPath + "\\" + dlg.inputTxt.Text;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void openFileBtn_Click(object sender, EventArgs e)
+        {
+            if (!FunctionlUtility.OpenProjectFile(this, Program.GetProjectFileFullPath()))
+            {
+                return;
+            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();       
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
@@ -77,9 +105,32 @@ namespace RiverSimulationApplication
             this.Close();
         }
 
-        private void folderOpen_HelpRequest(object sender, EventArgs e)
+        private void projectDescriptBtn_Click(object sender, EventArgs e)
         {
+            if(!File.Exists(Program.GetDescriptionFileFullPath()))
+            {
+                MessageBox.Show("尚未建立說明檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
+            XmlDocument XmlDoc = new XmlDocument();
+            XmlDoc.Load(Program.GetDescriptionFileFullPath());
+            XmlNode files = XmlDoc.SelectSingleNode("Files");
+
+            string tempTxtFile = Program.GetProjectFullPath() + @"\Description.txt";
+            StreamWriter fs = new StreamWriter(tempTxtFile);
+            fs.WriteLine("專案名稱：" + Program.projectName);
+            fs.WriteLine("\r\n\r\n");
+
+            foreach (XmlNode n in files.ChildNodes)
+            {
+                String fileName = (n as XmlElement).Name;
+                String fileDesc = (n as XmlElement).GetAttribute("Text");
+
+                fs.WriteLine(fileName + "\t\t" + fileDesc);
+            }
+            fs.Close();
+            System.Diagnostics.Process.Start(tempTxtFile);
         }
     }
 }

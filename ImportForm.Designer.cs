@@ -51,6 +51,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.inputFileBtn = new System.Windows.Forms.Button();
             this.reverseGridBtn = new System.Windows.Forms.Button();
+            this.gridDataBtn = new System.Windows.Forms.Button();
             this.inputGridBtn = new System.Windows.Forms.Button();
             this.inputGridRdo = new System.Windows.Forms.RadioButton();
             this.inputFileRdo = new System.Windows.Forms.RadioButton();
@@ -62,7 +63,7 @@
             this.previewSpratePicBox = new System.Windows.Forms.PictureBox();
             this.previewCombo = new System.Windows.Forms.ComboBox();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
-            this.gridDataBtn = new System.Windows.Forms.Button();
+            this.coorSelCombo = new System.Windows.Forms.ComboBox();
             this.mainPanel.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -109,6 +110,7 @@
             // 
             // bitmapGrp
             // 
+            this.bitmapGrp.Controls.Add(this.coorSelCombo);
             this.bitmapGrp.Controls.Add(this.selectBgFilePath);
             this.bitmapGrp.Controls.Add(this.imgInfoBtn);
             this.bitmapGrp.Controls.Add(this.selectBgBtn);
@@ -335,6 +337,17 @@
             this.reverseGridBtn.UseVisualStyleBackColor = true;
             this.reverseGridBtn.Click += new System.EventHandler(this.reverseGridBtn_Click);
             // 
+            // gridDataBtn
+            // 
+            this.gridDataBtn.Enabled = false;
+            this.gridDataBtn.Location = new System.Drawing.Point(253, 25);
+            this.gridDataBtn.Name = "gridDataBtn";
+            this.gridDataBtn.Size = new System.Drawing.Size(96, 26);
+            this.gridDataBtn.TabIndex = 1;
+            this.gridDataBtn.Text = "格網資料";
+            this.gridDataBtn.UseVisualStyleBackColor = true;
+            this.gridDataBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
+            // 
             // inputGridBtn
             // 
             this.inputGridBtn.Enabled = false;
@@ -453,16 +466,18 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 11;
             // 
-            // gridDataBtn
+            // coorSelCombo
             // 
-            this.gridDataBtn.Enabled = false;
-            this.gridDataBtn.Location = new System.Drawing.Point(253, 25);
-            this.gridDataBtn.Name = "gridDataBtn";
-            this.gridDataBtn.Size = new System.Drawing.Size(96, 26);
-            this.gridDataBtn.TabIndex = 1;
-            this.gridDataBtn.Text = "格網資料";
-            this.gridDataBtn.UseVisualStyleBackColor = true;
-            this.gridDataBtn.Click += new System.EventHandler(this.inputGridBtn_Click);
+            this.coorSelCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.coorSelCombo.FormattingEnabled = true;
+            this.coorSelCombo.Items.AddRange(new object[] {
+            "TWD97",
+            "TWD67"});
+            this.coorSelCombo.Location = new System.Drawing.Point(106, 56);
+            this.coorSelCombo.Name = "coorSelCombo";
+            this.coorSelCombo.Size = new System.Drawing.Size(121, 20);
+            this.coorSelCombo.TabIndex = 4;
+            this.coorSelCombo.SelectedIndexChanged += new System.EventHandler(this.coorSelCombo_SelectedIndexChanged);
             // 
             // ImportForm
             // 
@@ -530,6 +545,7 @@
         private System.Windows.Forms.ComboBox previewCombo;
         private System.Windows.Forms.Button reverseGridBtn;
         private System.Windows.Forms.Button gridDataBtn;
+        private System.Windows.Forms.ComboBox coorSelCombo;
 
     }
 }

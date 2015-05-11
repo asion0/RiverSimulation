@@ -75,6 +75,16 @@ namespace RiverSimulationApplication
                     break;
             }
 
+            switch (p.coorType)
+            {
+                case RiverSimulationProfile.CoorType.TWD97:
+                    coorSelCombo.SelectedIndex = 0;
+                    break;
+                case RiverSimulationProfile.CoorType.TWD64:
+                    coorSelCombo.SelectedIndex = 1;
+                    break;
+            }
+
             verticalLevelNumberTxt.Text = p.verticalLevelNumber.ToString();
             switch (p.GetBackgroundMapType())
             {
@@ -95,6 +105,7 @@ namespace RiverSimulationApplication
             bitmapGrp.Enabled = p.IsMapPosition();
             gridDataBtn.Enabled = (p.importSource == RiverSimulationProfile.ImportSource.ImportFile) && (p.inputGrid != null) && (p.inputGrid.GetI > 0) && (p.inputGrid.GetJ > 0);
             reverseGridBtn.Enabled = (p.inputGrid != null);
+            coorSelCombo.Enabled = (p.GetBackgroundMapType() == RiverSimulationProfile.BackgroundMapType.GoogleStaticMap);
             UpdateActiveFunctions();
         }
 
@@ -261,8 +272,10 @@ namespace RiverSimulationApplication
             //RiverSimulationProfile p = RiverSimulationProfile.profile;
             if (chk)
             {
-                p.DownloadGoogleStaticMap();
-                mapPicBox.SetMapBackground(p.tl, p.tr, p.bl, p.br);
+                if(p.DownloadGoogleStaticMap())
+                {
+                    mapPicBox.SetMapBackground(p.tl, p.tr, p.bl, p.br);
+                }
                 SwitchPreivewCombo(PreviewType.GridMap);
                 UpdateStatus();
             }
@@ -598,6 +611,11 @@ namespace RiverSimulationApplication
             SwitchPreivewCombo(PreviewType.GridMap);
             //UpdateStatus();
 
+        }
+
+        private void coorSelCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            p.coorType = (RiverSimulationProfile.CoorType)(coorSelCombo.SelectedIndex);
         }
 
     }

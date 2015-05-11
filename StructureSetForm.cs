@@ -27,25 +27,54 @@ namespace RiverSimulationApplication
         private string title;
         private string[] structureName = new string[StructureTypeNumber];
         private int[] structureNum = new int[StructureTypeNumber];
+        private bool onlySelectMode = false;
         private RiverSimulationProfile.StructureType[] typeIndex = null;
         public void SetFormMode(string title, int num1, string name1, int num2, string name2, int num3, string name3, int num4, string name4)
         {
-            structureName[0] = name1;
-            structureName[1] = name2;
-            structureName[2] = name3;
-            structureName[3] = name4;
-            structureNum[0] = num1;
-            structureNum[1] = num2;
-            structureNum[2] = num3;
-            structureNum[3] = num4;
-            typeIndex = new RiverSimulationProfile.StructureType[num1 + num2 + num3 + num4];
             this.title = title;
+            if (num1 == -1 && num2 == -1 && num3 == -1 && num4 == -1)
+            {
+                onlySelectMode = true;
+                structureName[0] = "圈選";
+                structureNum[0] = 1;
+                structureName[1] = "";
+                structureNum[1] = 0;
+                structureName[2] = "";
+                structureNum[2] = 0;
+                structureName[3] = "";
+                structureNum[3] = 0;
+            }
+            else
+            {
+                structureName[0] = name1;
+                structureName[1] = name2;
+                structureName[2] = name3;
+                structureName[3] = name4;
+                structureNum[0] = num1;
+                structureNum[1] = num2;
+                structureNum[2] = num3;
+                structureNum[3] = num4;
+            }
+            typeIndex = new RiverSimulationProfile.StructureType[structureNum[0] + structureNum[1] + structureNum[2] + structureNum[3]];
         }
 
         private void StructureSetForm_Load(object sender, EventArgs e)
         {
             this.Text = title;
             int typeCount = 0;
+
+            if (onlySelectMode)
+            {
+                listBox.Visible = false;
+                editBtn.Visible = false;
+                listBox.Items.Add(structureName[0]);
+                typeIndex[0] = RiverSimulationProfile.StructureType.StructureTypeSize;
+                listBox.SelectedIndex = 0;
+                ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
+
+                return;
+            }
+
             for (int n = 0; n < StructureTypeNumber; ++n)
             {
                 for (int i = 0; i < structureNum[n]; ++i)
@@ -62,6 +91,11 @@ namespace RiverSimulationApplication
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             mapPicBox.SelectGroup = true;
+
+            if(onlySelectMode)
+            {
+                return;
+            }
 
             int type = -1, count = 0;
             StructureSetUtility.CalcTypeCount(index, ref type, ref count, typeIndex);
@@ -126,10 +160,31 @@ namespace RiverSimulationApplication
             return true;
         }
 
+        public List<Point> selectedPl = null;
+        public string selectedValue = "";
         private void mapPicBox_SelectedGroupChangedEvent(List<Point> pl)
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             int index = listBox.SelectedIndex;
+
+            if(onlySelectMode)
+            {
+                InputForm dlg = new InputForm();
+                dlg.Text = "填入數值";
+                dlg.desc.Text = "請輸入數值";
+                dlg.inputTxt.Text = "";
+                if (DialogResult.OK != dlg.ShowDialog())
+                {
+                    return;
+                }
+                selectedPl = new List<Point>(pl);
+                selectedValue = dlg.inputTxt.Text;
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                return;
+            }
+
+
             int type = -1, count = 0;
             StructureSetUtility.CalcTypeCount(index, ref type, ref count, typeIndex);
 

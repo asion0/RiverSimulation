@@ -34,11 +34,16 @@ namespace RiverSimulationApplication
 
         public static string currentPath;   //執行檔所在目錄, 會判斷是否RAR包裝檔案
         public static string documentPath;  //本專案預設文件目錄 My Documents\FlowSimulation
-        public static string projectFolder;   //專案目錄
+        public static string projectBaseFolder;   //專案目錄
+        public static string projectName;   //專案名稱
         public static ProgramVersion programVersion = new ProgramVersion(); //
-        public static string tempSaveName = @"\TempSave.txt";
-        public static string descriptionName = @"\Description.xml";
+        public static string projectFileName = @"";     // Ex: "新檔案001"
+        public static string descriptionName = @"Description.xml";
         public static string resedName = @"\resed.exe";
+        public static string projectFileExt = @".t2d";
+        public static string projectFileFilter = @"*.t2d";
+
+
 
         public static ProgramSetting programSetting = null;
         public class ProgramSetting
@@ -187,11 +192,26 @@ namespace RiverSimulationApplication
         public static void SaveDefaultProjectFolder()
         {
             RiverSimulationApplication.Properties.Settings s = RiverSimulationApplication.Properties.Settings.Default;
-            if (Directory.Exists(Program.projectFolder))
+            if (Directory.Exists(Program.projectBaseFolder))
             {
-                s.DefaultOpenProjectFolder = Program.projectFolder;
+                s.DefaultOpenProjectFolder = Program.projectBaseFolder;
                 s.Save();
             }
+        }
+
+        public static string  GetProjectFullPath()
+        {
+            return projectBaseFolder + "\\" + projectName;
+        }
+
+        public static string GetProjectFileFullPath()
+        {
+            return GetProjectFullPath() + "\\" + projectFileName + projectFileExt;
+        }
+
+        public static string GetDescriptionFileFullPath()
+        {
+            return GetProjectFullPath() + "\\" + descriptionName;
         }
     }
 }

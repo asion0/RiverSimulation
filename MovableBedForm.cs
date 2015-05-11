@@ -239,42 +239,6 @@ namespace RiverSimulationApplication
                 return false;
             }
             
-
-
-
-
-
-
-
-
-
-            /*
-            int n = 0;
-            if (!ControllerUtility.CheckConvertInt32(ref n, seabedLevelNumTxt, "請輸入正確的底床分層數目！", ControllerUtility.CheckType.GreaterThanThree))
-            {
-                return false;
-            }
-
-            if (p.seabedLevelNum != n)
-            {
-                MessageBox.Show("變更底床分層數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                p.seabedLevelArray = null;
-                p.sedimentCompositionRatioArray = null;
-            }
-            p.seabedLevelNum = n;
-
-            if (!ControllerUtility.CheckConvertInt32(ref n, sedimentParticlesNumTxt, "請輸入正確的泥砂顆粒數目！", ControllerUtility.CheckType.GreaterThanTwo))
-            {
-                return false;
-            }
-            if (p.sedimentParticlesNum != n)
-            {
-                MessageBox.Show("變更泥砂顆粒數目將清除原先輸入之資料", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                p.sedimentCompositionRatioArray = null;
-            }
-            p.sedimentParticlesNum = n;
-            */
-
             return true;
         }
 
@@ -294,7 +258,7 @@ namespace RiverSimulationApplication
             {
                 if(p.diffusionFormula == RiverSimulationProfile.DiffusionFormulaType.None)
                 {
-                    MessageBox.Show("請選擇擴散公式 ！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("請選擇數值參數-擴散公式 ！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
             }
@@ -429,7 +393,7 @@ namespace RiverSimulationApplication
         {
             if (transSandMethodBtn.Enabled && p.sandTransportEquation == RiverSimulationProfile.SandTransportEquationType.None)
             {
-                MessageBox.Show("請輸入正確的輸砂公式 ！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("請輸入正確的輸砂公式-一般輸砂公式 ！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             return true;

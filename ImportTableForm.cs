@@ -65,6 +65,59 @@ namespace RiverSimulationApplication
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
                 FillDataGridView();
+
+                RiverSimulationProfile p = RiverSimulationProfile.profile;
+
+                if (null != p.tBarSets)
+                {
+                    foreach (List<Point> pl in p.tBarSets)
+                    {
+                        foreach (Point pt in pl)
+                        {
+                            dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
+                            dataGridViewZ[pt.Y, pt.X].Value = "99999999";
+                            dataGridViewZ[pt.Y, pt.X].Style.BackColor = Color.LightGray;
+                        }
+                    }
+                }
+
+                if (null != p.bridgePierSets)
+                {
+                    foreach (List<Point> pl in p.bridgePierSets)
+                    {
+                        foreach (Point pt in pl)
+                        {
+                            dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
+                            dataGridViewZ[pt.Y, pt.X].Value = "99999999";
+                            dataGridViewZ[pt.Y, pt.X].Style.BackColor = Color.LightGray;
+                        }
+                    }
+                }
+
+                if (null != p.groundsillWorkSets)
+                {
+                    foreach (List<Point> pl in p.groundsillWorkSets)
+                    {
+                        foreach (Point pt in pl)
+                        {
+                            dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
+                            dataGridViewZ[pt.Y, pt.X].Style.BackColor = Color.LightGray;
+                        }
+                    }
+                }
+
+                if (null != p.sedimentationWeirSets)
+                {
+                    foreach (List<Point> pl in p.sedimentationWeirSets)
+                    {
+                        foreach (Point pt in pl)
+                        {
+                            dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
+                            dataGridViewZ[pt.Y, pt.X].Style.BackColor = Color.LightGray;
+                        }
+                    }
+                }
+                //p.tBarSets, p.bridgePierSets, p.groundsillWorkSets, p.sedimentationWeirSets
             }
         }
 

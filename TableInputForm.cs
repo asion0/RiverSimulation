@@ -101,6 +101,7 @@ namespace RiverSimulationApplication
                 singleValueTxt.Text = o.ValueDouble()[0].ToString();
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum);
+                selInputBtn.Visible = true;
 
                 switch (o.type)
                 {
@@ -1122,6 +1123,7 @@ namespace RiverSimulationApplication
         private void tableValueRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
+            selInputBtn.Enabled = chk;
             if (!chk)
             {
                 dataGridView.Enabled = false;
@@ -1153,6 +1155,23 @@ namespace RiverSimulationApplication
                 singleValueTxt.Enabled = false;
                 dataGridView.Enabled = true;
             }
+        }
+
+        private void selInputBtn_Click(object sender, EventArgs e)
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            StructureSetForm form = new StructureSetForm();
+            form.SetFormMode(selInputBtn.Text, -1, "", -1, "", -1, "", -1, "");
+
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                foreach (Point pt in form.selectedPl)
+                {
+                    dataGridView[pt.Y, pt.X].Value = form.selectedValue;
+                }
+            }
+
         }
     }
 }

@@ -301,34 +301,34 @@ namespace RiverSimulationApplication
             ////1.2.3 其他
             if (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine)
             {
-                if (!ControllerUtility.CheckConvertDouble(ref p.tvInMainstreamDirection, tvInMainstreamDirectionTxt, "請輸入正確的主流方向紊流黏滯係數！", ControllerUtility.CheckType.NoCheck))
+                if (!ControllerUtility.CheckConvertDouble(ref p.tvInMainstreamDirection, tvInMainstreamDirectionTxt, "請輸入正確的物理參數-主流方向紊流黏滯係數！", ControllerUtility.CheckType.NoCheck))
                 {
                     return false;
                 }
-                if (!ControllerUtility.CheckConvertDouble(ref p.tvInSideDirection, tvInSideDirectionTxt, "請輸入正確的側方向紊流黏滯係數！", ControllerUtility.CheckType.NoCheck))
+                if (!ControllerUtility.CheckConvertDouble(ref p.tvInSideDirection, tvInSideDirectionTxt, "請輸入正確的物理參數-側方向紊流黏滯係數！", ControllerUtility.CheckType.NoCheck))
                 {
                     return false;
                 }
             }
             else if(p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.None)
             {
-                MessageBox.Show("請選擇紊流黏滯係數！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("請選擇物理參數-紊流黏滯係數！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
             if (p.roughnessType == RiverSimulationProfile.RoughnessType.Chezy && !p.chezy.HasInputed())
             {
-                MessageBox.Show("請輸入Chezy！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("請輸入物理參數-Chezy！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else if (p.roughnessType == RiverSimulationProfile.RoughnessType.ManningN && !p.manningN.HasInputed())
             {
-                MessageBox.Show("請輸入Manning n！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("請輸入物理參數-Manning n！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else if (p.roughnessType == RiverSimulationProfile.RoughnessType.None)
             {
-                MessageBox.Show("請選擇糙度係數！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("請選擇物理參數-糙度係數！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -338,7 +338,7 @@ namespace RiverSimulationApplication
             //tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
             if(roughnessHeightKsBtn.Enabled && p.roughnessHeightKs.type == RiverSimulationProfile.TwoInOne.Type.None)
             {
-                MessageBox.Show("請輸入粗糙高度Ks！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("請輸入物理參數-粗糙高度Ks！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 

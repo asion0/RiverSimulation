@@ -40,6 +40,7 @@
             this.averageBtn = new System.Windows.Forms.Button();
             this.ok = new System.Windows.Forms.Button();
             this.unitLbl = new System.Windows.Forms.Label();
+            this.selInputBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.copyPasteMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -156,12 +157,25 @@
             this.unitLbl.TabIndex = 5;
             this.unitLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // selInputBtn
+            // 
+            this.selInputBtn.Enabled = false;
+            this.selInputBtn.Location = new System.Drawing.Point(89, 64);
+            this.selInputBtn.Name = "selInputBtn";
+            this.selInputBtn.Size = new System.Drawing.Size(84, 23);
+            this.selInputBtn.TabIndex = 6;
+            this.selInputBtn.Text = "圈選填入";
+            this.selInputBtn.UseVisualStyleBackColor = true;
+            this.selInputBtn.Visible = false;
+            this.selInputBtn.Click += new System.EventHandler(this.selInputBtn_Click);
+            // 
             // TableInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
             this.ContextMenuStrip = this.copyPasteMenuStrip;
+            this.Controls.Add(this.selInputBtn);
             this.Controls.Add(this.unitLbl);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.averageBtn);
@@ -194,5 +208,6 @@
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.ToolStripMenuItem ValueToolStripMenuItem;
         public System.Windows.Forms.Label unitLbl;
+        private System.Windows.Forms.Button selInputBtn;
     }
 }

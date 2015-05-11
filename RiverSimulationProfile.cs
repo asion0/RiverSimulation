@@ -8,6 +8,7 @@ using System.Drawing;
 using PictureBoxCtrl;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace RiverSimulationApplication
 {
@@ -75,7 +76,15 @@ namespace RiverSimulationApplication
             ImportFile,
             UserInput
         }
+
+        public enum CoorType
+        {
+            TWD97,
+            TWD64
+        }
+
         public ImportSource importSource;
+        public CoorType coorType;
         public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
         public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
@@ -885,6 +894,7 @@ namespace RiverSimulationApplication
             //全域參數
             inputGrid = null;
             importSource = ImportSource.None;
+            coorType = CoorType.TWD97;
             verticalLevelNumber = 19;      //0.1.1 垂向格網分層數目
             levelProportion = null;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
@@ -1213,7 +1223,12 @@ namespace RiverSimulationApplication
             {
                 File.Delete(br);
             }
-            inputGrid.DownloadGridMap(tl, tr, bl, br);
+            if (!inputGrid.DownloadGridMap(tl, tr, bl, br))
+            {
+                MessageBox.Show("無法取得線上地圖！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //bkImgType = BackgroundMapType.None;
+                return false;
+            }
             bkImgType = BackgroundMapType.GoogleStaticMap;
             return true;
         }

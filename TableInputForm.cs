@@ -235,7 +235,7 @@ namespace RiverSimulationApplication
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            if (inputFormType == InputFormType.SeparateForm || inputFormType == InputFormType.VerticalVelocityDistributionForm)
+            if (inputFormType == InputFormType.SeparateForm || inputFormType == InputFormType.VerticalVelocityDistributionForm || inputFormType == TableInputForm.InputFormType.BoundaryTime)
             {
                 averageBtn.Visible = true;
             }
@@ -1007,12 +1007,25 @@ namespace RiverSimulationApplication
 
         private void averageBtn_Click(object sender, EventArgs e)
         {
-            double step = 1.0 / (rowCount - 1);
-            double v = 1.0 - step;
-            for (int i = 1; i < rowCount - 1; ++i)
+            if (inputFormType == TableInputForm.InputFormType.BoundaryTime)
             {
-                dataGridView[0, i].Value = v.ToString(SeparateFormCellFormat);
-                v -= step;
+                double step = Convert.ToDouble(dataGridView[0, rowCount - 1].Value) / (rowCount - 1);
+                double v = step;
+                for (int i = 1; i < rowCount - 1; ++i)
+                {
+                    dataGridView[0, i].Value = v.ToString(SeparateFormCellFormat);
+                    v += step;
+                }
+            }
+            else
+            {
+                double step = 1.0 / (rowCount - 1);
+                double v = 1.0 - step;
+                for (int i = 1; i < rowCount - 1; ++i)
+                {
+                    dataGridView[0, i].Value = v.ToString(SeparateFormCellFormat);
+                    v -= step;
+                }
             }
         }
 

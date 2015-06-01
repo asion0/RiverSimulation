@@ -255,7 +255,7 @@ namespace RiverSimulationApplication
             }
 
             if(p.diffusionFormulaUse)
-            {
+             {
                 if(p.diffusionFormula == RiverSimulationProfile.DiffusionFormulaType.None)
                 {
                     MessageBox.Show("請選擇數值參數-擴散公式 ！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

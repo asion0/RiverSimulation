@@ -42,33 +42,46 @@ namespace RiverSimulationApplication
                 if (p.IsVariableFlowType())
                 {
                     this.iStart = 1;
-                    this.jStart = 2;
+                    this.jStart = 1;
                     this.rowCount = rowCount;
-                    this.extraCol = 2;
+                    this.extraCol = (formType == FormType.FlowQuantity) ? 2 : 1;
                 }
                 else
                 {
                     this.iStart = 0;
-                    this.jStart = 2;
+                    this.jStart = 1;
                     this.rowCount = 1;
                     this.extraCol = 1;
                 }
+                if (formType == FormType.FlowQuantity)
+                {
+                    type1Btn.Text = "均勻入流";
+                    type2Btn.Text = "非均勻入流";
+                }
+                else
+                {
+                    type1Btn.Text = "均一值";
+                    type2Btn.Text = "逐點給";
+                }
+
             }
             else if (formType == FormType.BottomBedLoadFlux)
             {
                 if (p.IsVariableFlowType())
                 {
                     this.iStart = 1;
-                    this.jStart = 2;
+                    this.jStart = 1;
                     this.rowCount = rowCount;
                     this.extraCol = 2;
+                    this.extraRow = 2;
                 }
                 else
                 {
                     this.iStart = 0;
-                    this.jStart = 2;
+                    this.jStart = 1;
                     this.rowCount = 1;
-                    this.extraCol = 1;
+                    this.extraCol = 2;
+                    this.extraRow = 2;
                 }
                 this.colCount = (p.sedimentParticlesNumber > p.inputGrid.GetJ) ? p.sedimentParticlesNumber : p.inputGrid.GetJ;
             }
@@ -128,12 +141,14 @@ namespace RiverSimulationApplication
         private int rowCount = 0;
         private object _data = null;
         private int tabIndex = 0;
-        private Color colHeaderColor = Color.CornflowerBlue;        //橫向(上方)標題顏色
+        private Color colHeaderColor1 = Color.CornflowerBlue;        //橫向(上方)標題顏色
+        private Color colHeaderColor2 = Color.LightSkyBlue;        //橫向(上方)標題顏色
         private Color rowHeaderColor = Color.LightGray;            //直向(左方)標題顏色
         private Color tabActiveColor = Color.CornflowerBlue;         //被選取標籤顏色
         private Color tabItemColor = Color.DarkSlateBlue;            //未選取標籤顏色
-
-
+        private Color tabPageItemColor = Color.LemonChiffon;            //三維表單內文鵝黃色
+        private Color tabPageItemColor2 = Color.Gold;            //三維表單內文鵝黃色
+        
         private void ThreeWayTableForm_Load(object sender, EventArgs e)
         {
             this.Text = title;
@@ -202,7 +217,7 @@ namespace RiverSimulationApplication
                         {
                             for (int iw = iStart; iw < iStart + colCount; ++iw)
                             {
-                                o.Array2D()[iw - iStart, jw - jStart] = Convert.ToDouble(v[iw, jw].Value);
+                                o.Array2D()[iw - iStart, jw - jStart] = Convert.ToDouble(v[iw + 1, jw].Value);
                             }
                         }
                         break;
@@ -238,7 +253,7 @@ namespace RiverSimulationApplication
                         {
                             for (int jw = iStart; jw < iStart + p.inputGrid.GetJ; ++jw)
                             {
-                                o.Array3D()[tabIndex, jw - iStart, tw - jStart] = Convert.ToDouble(v[jw, tw].Value);
+                                o.Array3D()[tabIndex, jw - iStart, tw - jStart] = Convert.ToDouble(v[jw + 1, tw + 1].Value);
                             }
                         }
                         break;
@@ -341,7 +356,7 @@ namespace RiverSimulationApplication
         private string buttonText;
         //private string checkText;
         private int extraCol = 2;
-        private int extraRow = 4;
+        private int extraRow = 1;
 
         private void InitializeDataGridView()
         {
@@ -350,14 +365,15 @@ namespace RiverSimulationApplication
             DataGridViewUtility.InitializeDataGridView(dataGridView, colCount + extraCol, rowCount + extraRow, 120, 60,
                 "", "", "", false, false);
 
-            if(formType == FormType.FlowQuantity)
-            {
-                dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流(輸入百分比)" : "定量流(輸入百分比)";
-            }
-            else
-            {
-                dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流" : "定量流";
-            }
+            //if(formType == FormType.FlowQuantity)
+            //{
+            //    dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流(輸入百分比)" : "定量流(輸入百分比)";
+            //}
+            //else
+            //{
+            //    dataGridView[0, 0].Value = p.IsVariableFlowType() ? "變量流" : "定量流";
+            //}
+            flowTypeLbl.Text = p.IsVariableFlowType() ? "變量流" : "定量流";
 
             for (int jw = 0; jw < rowCount + extraRow; ++jw)
             {   //全畫面設為唯讀
@@ -366,9 +382,13 @@ namespace RiverSimulationApplication
                     dataGridView[iw, jw].ReadOnly = true;
                 }
             }
-            if (formType == FormType.FlowQuantity || formType == FormType.WaterLevel)
+            if (formType == FormType.FlowQuantity)
             {
                 InitTableFlowQuantity();
+            }
+            else if (formType == FormType.WaterLevel)
+            {
+                InitTableWaterLevel();
             }
             else if (formType == FormType.BottomBedLoadFlux)
             {
@@ -391,8 +411,8 @@ namespace RiverSimulationApplication
 
             if (p.IsVariableFlowType())
             {   //變量流需顯示邊界時間欄位
-                dataGridView[0, 1].Value = timeTitle;
-                dataGridView[0, 1].Style.BackColor = rowHeaderColor;
+                dataGridView[0, jStart - 1].Value = timeTitle;
+                dataGridView[0, jStart - 1].Style.BackColor = rowHeaderColor;
                 for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
                 {
                     dataGridView[0, jw].Value = p.boundaryTime[jw - jStart].ToString();
@@ -403,33 +423,99 @@ namespace RiverSimulationApplication
             {
                 case RiverSimulationProfile.TwoInOne.Type.None:
                 case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                    buttonText = "進階 - 非均勻入流";
                     for (int iw = iStart; iw < iStart + 1; ++iw)
                     {   //填入橫排標題, 只有一欄
-                        dataGridView[iw, 1].Value = iTitle;
-                        dataGridView[iw, 1].Style.BackColor = colHeaderColor;
+                        dataGridView[iw, jStart - 1].Value = iTitle;
+                        dataGridView[iw, jStart - 1].Style.BackColor = colHeaderColor1;
                     }
+                    type1Btn.Enabled = false;
+                    type2Btn.Enabled = true;
+
                     break;
                 case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                    buttonText = "均勻入流";
+                    dataGridView[iStart, jStart - 1].Value = iTitle;
+                    dataGridView[iStart, jStart - 1].Style.BackColor = colHeaderColor1;
+
                     for (int iw = iStart; iw < iStart + colCount; ++iw)
                     {   //填入橫排標題
-                        dataGridView[iw, 1].Value = iTitle + (iw - iStart + 1).ToString();
-                        dataGridView[iw, 1].Style.BackColor = colHeaderColor;
+                        dataGridView[iw + 1, jStart - 1].Value = iTitle + (iw - iStart + 1).ToString() + "比例";
+                        dataGridView[iw + 1, jStart - 1].Style.BackColor = colHeaderColor2;
                     }
+                    type1Btn.Enabled = true;
+                    type2Btn.Enabled = false;
+                   break;
+            }
+
+            if(o.check)
+            {
+                type2Rdo.Checked = true;
+            }
+            else
+            {
+                type1Rdo.Checked = true;
+            }
+            //DataGridViewButtonCell b = new DataGridViewButtonCell();
+            //b.Value = buttonText;
+            //b.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //dataGridView[0, jStart + rowCount + 1] = b;
+            
+            //if (formType == FormType.FlowQuantity)
+            //{
+            //    DataGridViewCheckBoxCell c = new DataGridViewCheckBoxCell();
+            //    c.Value = o.check;
+            //    c.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //    dataGridView[0, jStart + rowCount] = c;
+            //}
+        }
+
+        private void InitTableWaterLevel()
+        {
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (o == null)
+            {
+                return;
+            }
+
+            if (p.IsVariableFlowType())
+            {   //變量流需顯示邊界時間欄位
+                dataGridView[0, jStart - 1].Value = timeTitle;
+                dataGridView[0, jStart - 1].Style.BackColor = rowHeaderColor;
+                for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
+                {
+                    dataGridView[0, jw].Value = p.boundaryTime[jw - jStart].ToString();
+                    dataGridView[0, jw].Style.BackColor = rowHeaderColor;
+                }
+            }
+            switch (o.type)
+            {
+                case RiverSimulationProfile.TwoInOne.Type.None:
+                case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                    for (int iw = iStart; iw < iStart + 1; ++iw)
+                    {   //填入橫排標題, 只有一欄
+                        dataGridView[iw, jStart - 1].Value = iTitle;
+                        dataGridView[iw, jStart - 1].Style.BackColor = colHeaderColor1;
+                    }
+                    type1Btn.Enabled = false;
+                    type2Btn.Enabled = true;
+                    break;
+                case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                    for (int iw = iStart; iw < iStart + colCount; ++iw)
+                    {   //填入橫排標題
+                        dataGridView[iw, jStart - 1].Value = iTitle + (iw - iStart + 1).ToString();
+                        dataGridView[iw, jStart - 1].Style.BackColor = colHeaderColor1;
+                    }
+                    type1Btn.Enabled = true;
+                    type2Btn.Enabled = false;
                     break;
             }
-            DataGridViewButtonCell b = new DataGridViewButtonCell();
-            b.Value = buttonText;
-            b.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView[0, jStart + rowCount + 1] = b;
 
-            if (formType == FormType.FlowQuantity)
+            if(o.check)
             {
-                DataGridViewCheckBoxCell c = new DataGridViewCheckBoxCell();
-                c.Value = o.check;
-                c.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dataGridView[0, jStart + rowCount] = c;
+                type2Rdo.Checked = true;
+            }
+            else
+            {
+                type1Rdo.Checked = true;
             }
         }
 
@@ -441,51 +527,64 @@ namespace RiverSimulationApplication
                 return;
             }
 
+            int jShift = (o.type == RiverSimulationProfile.TwoInOne.Type.UseArray) ? 1 : 0;
+
             if (p.IsVariableFlowType())
             {   //變量流需顯示邊界時間欄位
-                dataGridView[0, 1].Value = timeTitle;
-                dataGridView[0, 1].Style.BackColor = rowHeaderColor;
+                dataGridView[0, jStart - 1 + jShift].Value = timeTitle;
+                dataGridView[0, jStart - 1 + jShift].Style.BackColor = rowHeaderColor;
+
                 for (int jw = jStart; jw < jStart + p.boundaryTimeNumber; ++jw)
                 {
-                    dataGridView[0, jw].Value = p.boundaryTime[jw - jStart].ToString();
-                    dataGridView[0, jw].Style.BackColor = rowHeaderColor;
+                    dataGridView[0, jw + jShift].Value = p.boundaryTime[jw - jStart].ToString();
+                    dataGridView[0, jw + jShift].Style.BackColor = rowHeaderColor;
                 }
             }
 
-            DataGridViewButtonCell b = null;
+            //DataGridViewButtonCell b = null;
             switch (o.type)
             {
                 case RiverSimulationProfile.TwoInOne.Type.None:
                 case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                    buttonText = "進階 - 逐點輸入";
                     for (int iw = iStart; iw < iStart + p.sedimentParticlesNumber; ++iw)
                     {   //填入橫排標題，泥砂數目(K)
-                        dataGridView[iw, 1].Value = iTitle + (iw - iStart + 1).ToString();
-                        dataGridView[iw, 1].Style.BackColor = colHeaderColor;
+                        dataGridView[iw, jStart - 1].Value = iTitle + (iw - iStart + 1).ToString();
+                        dataGridView[iw, jStart - 1].Style.BackColor = colHeaderColor1;
                     }
+                    type1Btn.Enabled = false;
+                    type2Btn.Enabled = true;
                     break;
                 case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                    buttonText = "均一值";
+                    dataGridView[iStart, jStart].Value = "粒徑" + (tabIndex + 1).ToString();
+                    dataGridView[iStart, jStart].Style.BackColor = colHeaderColor2;
                     for (int iw = iStart; iw < iStart + p.inputGrid.GetJ; ++iw)
                     {   //填入橫排標題，J個
-                        dataGridView[iw, 1].Value = (iw - iStart + 1).ToString();
-                        dataGridView[iw, 1].Style.BackColor = colHeaderColor;
+                        dataGridView[iw + 1, jStart].Value = (iw - iStart + 1).ToString() + "比例%";
+                        dataGridView[iw + 1, jStart].Style.BackColor = colHeaderColor1;
                     }
                     for (int iw = iStart; iw < iStart + p.sedimentParticlesNumber; ++iw)
                     {   //填入標籤標題，K個
-                        dataGridView[iw, 0].Value = iTitle + (iw - iStart + 1).ToString();
-                        dataGridView[iw, 0].Style.BackColor = (tabIndex == (iw - iStart)) ? tabActiveColor : tabItemColor;
+                        dataGridView[iw + 1, jStart - 1].Value = iTitle + (iw - iStart + 1).ToString();
+                        dataGridView[iw + 1, jStart - 1].Style.BackColor = (tabIndex == (iw - iStart)) ? tabActiveColor : tabItemColor;
                     }
-                    b = new DataGridViewButtonCell();
-                    b.Value = "套用到全部";
+                    DataGridViewButtonCell b = new DataGridViewButtonCell();
+                    b.Value = "比例套用到全部";
                     b.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    dataGridView[1, jStart + rowCount + 1] = b;
+                    dataGridView[iStart, jStart - 1] = b;
+
+                    type1Btn.Enabled = true;
+                    type2Btn.Enabled = false;
                     break;
             }
-            b = new DataGridViewButtonCell();
-            b.Value = buttonText;
-            b.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView[0, jStart + rowCount + 1] = b;
+
+            if (o.check)
+            {
+                type2Rdo.Checked = true;
+            }
+            else
+            {
+                type1Rdo.Checked = true;
+            }
             
         }
 
@@ -498,9 +597,6 @@ namespace RiverSimulationApplication
             }
 
 
-
-            
-
             DataGridViewButtonCell b = null;
             switch (o.type)
             {
@@ -510,7 +606,7 @@ namespace RiverSimulationApplication
                     for (int iw = iStart; iw < iStart + p.sedimentParticlesNumber; ++iw)
                     {   //填入橫排標題，泥砂數目(K)
                         dataGridView[iw, 1].Value = iTitle + (iw - iStart + 1).ToString();
-                        dataGridView[iw, 1].Style.BackColor = colHeaderColor;
+                        dataGridView[iw, 1].Style.BackColor = colHeaderColor1;
                     }
                     break;
                 case RiverSimulationProfile.TwoInOne.Type.UseArray:
@@ -526,7 +622,7 @@ namespace RiverSimulationApplication
                     for (int iw = iStart; iw < iStart + p.inputGrid.GetJ; ++iw)
                     {   //填入橫排標題，I個
                         dataGridView[iw, 1].Value = (iw - iStart + 1).ToString();
-                        dataGridView[iw, 1].Style.BackColor = colHeaderColor;
+                        dataGridView[iw, 1].Style.BackColor = colHeaderColor1;
                     }
                     for (int iw = iStart; iw < iStart + p.sedimentParticlesNumber; ++iw)
                     {   //填入標籤標題，K個
@@ -559,22 +655,46 @@ namespace RiverSimulationApplication
                         {
                             dataGridView[iStart, jw].Value = o.Value2D()[0, jw - jStart].ToString();
                             dataGridView[iStart, jw].ReadOnly = false;
-                            dataGridView[iStart, jw].Style.BackColor = Color.LemonChiffon;
+                            dataGridView[iStart, jw].Style.BackColor = tabPageItemColor;
                         }
                         dataGridView.CurrentCell = dataGridView[iStart, jStart];
                         //dataGridView[1, jStart]. = true;
                         break;
                     case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        if (formType == FormType.FlowQuantity)
+                        {
+                            for (int jw = jStart; jw < jStart + rowCount; ++jw)
+                            {
+                                dataGridView[iStart, jw].Value = o.Value2D()[0, jw - jStart].ToString();
+                                dataGridView[iStart, jw].ReadOnly = true;
+                                dataGridView[iStart, jw].Style.BackColor = tabPageItemColor2;
+                            }
+                        }
+
                         for (int jw = jStart; jw < jStart + rowCount; ++jw)
                         {
                             for (int iw = iStart; iw < iStart + colCount; ++iw)
                             {
-                                dataGridView[iw, jw].Value = o.Array2D()[iw - iStart, jw - jStart].ToString();
-                                dataGridView[iw, jw].ReadOnly = false;
-                                dataGridView[iw, jw].Style.BackColor = Color.LemonChiffon;
+                                if (formType == FormType.FlowQuantity)
+                                {
+
+                                    dataGridView[iw + 1, jw].Value = o.Array2D()[iw - iStart, jw - jStart].ToString();
+                                    dataGridView[iw + 1, jw].ReadOnly = false;
+                                    dataGridView[iw + 1, jw].Style.BackColor = tabPageItemColor;
+                                }
+                                else
+                                {
+
+                                    dataGridView[iw, jw].Value = o.Array2D()[iw - iStart, jw - jStart].ToString();
+                                    dataGridView[iw, jw].ReadOnly = false;
+                                    dataGridView[iw, jw].Style.BackColor = tabPageItemColor;
+                                }
                             }
                         }
-                        AutoFinishConvertFlowQualityCell();
+                        if (formType == FormType.FlowQuantity)
+                        {
+                            AutoFinishConvertFlowQualityCell();
+                        }
                         dataGridView.CurrentCell = dataGridView[iStart, jStart];
                         break;
                 }
@@ -591,7 +711,7 @@ namespace RiverSimulationApplication
                             {
                                 dataGridView[kw, tw].Value = o.Value3D()[kw - iStart, 0, tw - jStart].ToString();
                                 dataGridView[kw, tw].ReadOnly = false;
-                                dataGridView[kw, tw].Style.BackColor = Color.LemonChiffon;
+                                dataGridView[kw, tw].Style.BackColor = tabPageItemColor;
                             }
                         }
                         dataGridView.CurrentCell = dataGridView[iStart, jStart];
@@ -601,10 +721,13 @@ namespace RiverSimulationApplication
                         {
                             for (int jw = iStart; jw < iStart + p.inputGrid.GetJ; ++jw)
                             {
-                                dataGridView[jw, tw].Value = o.Array3D()[tabIndex, jw - iStart, tw - jStart].ToString();
-                                dataGridView[jw, tw].ReadOnly = false;
-                                dataGridView[jw, tw].Style.BackColor = Color.LemonChiffon;
+                                dataGridView[jw + 1, tw + 1].Value = o.Array3D()[tabIndex, jw - iStart, tw - jStart].ToString();
+                                dataGridView[jw + 1, tw + 1].ReadOnly = false;
+                                dataGridView[jw + 1, tw + 1].Style.BackColor = tabPageItemColor;
                             }
+                            dataGridView[iStart, tw + 1].Value = o.Value3D()[tabIndex, 0, tw - jStart].ToString();
+                            dataGridView[iStart, tw + 1].ReadOnly = true;
+                            dataGridView[iStart, tw + 1].Style.BackColor = tabPageItemColor2;
                         }
                         dataGridView.CurrentCell = dataGridView[iStart, jStart];
                         break;
@@ -622,7 +745,7 @@ namespace RiverSimulationApplication
                             {
                                 dataGridView[iw, jw].Value = o.Value3D()[iw - iStart, 0, 0].ToString();
                                 dataGridView[iw, jw].ReadOnly = false;
-                                dataGridView[iw, jw].Style.BackColor = Color.LemonChiffon;
+                                dataGridView[iw, jw].Style.BackColor = tabPageItemColor;
                             }
                         }
                         dataGridView.CurrentCell = dataGridView[iStart, jStart];
@@ -634,7 +757,7 @@ namespace RiverSimulationApplication
                             {
                                 dataGridView[iw, jw].Value = o.Array3D()[tabIndex, iw - iStart, jw - jStart].ToString();
                                 dataGridView[iw, jw].ReadOnly = false;
-                                dataGridView[iw, jw].Style.BackColor = Color.LemonChiffon;
+                                dataGridView[iw, jw].Style.BackColor = tabPageItemColor;
                             }
                         }
                         dataGridView.CurrentCell = dataGridView[iStart, jStart];
@@ -662,45 +785,8 @@ namespace RiverSimulationApplication
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
-            if ((formType == FormType.FlowQuantity || formType == FormType.WaterLevel) && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
-            {   //流量 - 均一值 與 逐點輸入切換
-                if (!ConvertFlowQuantityData())
-                {
-                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                switch (o.type)
-                {
-                    case RiverSimulationProfile.TwoInOne.Type.None:
-                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                        o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
-                        break;
-                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                        o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
-                        break;
-                }
-                InitializeDataGridView();
-            }
-            else if (formType == FormType.BottomBedLoadFlux && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
-            {   //底床載 - 均一值 與 逐點輸入切換
-                if (!ConvertBottomBedLoadFluxData())
-                {
-                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                switch (o.type)
-                {
-                    case RiverSimulationProfile.TwoInOne.Type.None:
-                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
-                        o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
-                        break;
-                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
-                        o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
-                        break;
-                }
-                InitializeDataGridView();
-            }
-            else if (formType == FormType.DepthAverageConcentration && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
+
+            if (formType == FormType.DepthAverageConcentration && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount + 1)
             {   //均一值 與 逐點輸入切換
                 if (!ConvertDepthAverageConcentrationData())
                 {
@@ -719,7 +805,7 @@ namespace RiverSimulationApplication
                 }
                 InitializeDataGridView();
             }
-            else if (formType == FormType.BottomBedLoadFlux && e.ColumnIndex == 1 && e.RowIndex == jStart + rowCount + 1)
+            else if (formType == FormType.BottomBedLoadFlux && e.ColumnIndex == iStart && e.RowIndex == jStart - 1)
             {   //套用到全部
                 if (!ConvertBottomBedLoadFluxData())
                 {
@@ -729,9 +815,9 @@ namespace RiverSimulationApplication
                 BottomBedLoadFluxApplyAll();
                 InitializeDataGridView();
             }
-            else if (formType == FormType.BottomBedLoadFlux && e.RowIndex == 0 && e.ColumnIndex >= iStart && e.ColumnIndex < iStart + p.sedimentParticlesNumber && o.type == RiverSimulationProfile.TwoInOne.Type.UseArray)
+            else if (formType == FormType.BottomBedLoadFlux && e.RowIndex == 0 && e.ColumnIndex >= iStart + 1 && e.ColumnIndex < iStart + p.sedimentParticlesNumber + 1 && o.type == RiverSimulationProfile.TwoInOne.Type.UseArray)
             {   //三維陣列標籤列
-                int index = e.ColumnIndex - iStart;
+                int index = e.ColumnIndex - iStart - 1;
                 if(tabIndex != index)
                 {
                     if(!ConvertBottomBedLoadFluxData())
@@ -757,16 +843,16 @@ namespace RiverSimulationApplication
                     InitializeDataGridView();
                 }
             }
-            else if (formType == FormType.FlowQuantity && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount)
-            {   //進階模式勾選
-                dataGridView[0, jStart + rowCount].Value = !(bool)dataGridView[0, jStart + rowCount].Value;
-                o.check = (bool)dataGridView[0, jStart + rowCount].Value;
-            }
-            else if (formType == FormType.FlowQuantity && o.type == RiverSimulationProfile.TwoInOne.Type.UseArray &&
-                e.ColumnIndex >= iStart && e.ColumnIndex < iStart + colCount - 1 && e.RowIndex >= jStart && e.RowIndex < jStart + rowCount)
-            {
-                AutoFinishConvertFlowQualityCell();
-            }
+            //else if (formType == FormType.FlowQuantity && e.ColumnIndex == 0 && e.RowIndex == jStart + rowCount)
+            //{   //進階模式勾選
+            //    dataGridView[0, jStart + rowCount].Value = !(bool)dataGridView[0, jStart + rowCount].Value;
+            //    o.check = (bool)dataGridView[0, jStart + rowCount].Value;
+            //}
+            //else if (formType == FormType.FlowQuantity && o.type == RiverSimulationProfile.TwoInOne.Type.UseArray &&
+            //    e.ColumnIndex >= iStart && e.ColumnIndex < iStart + colCount - 1 && e.RowIndex >= jStart && e.RowIndex < jStart + rowCount)
+            //{
+            //    AutoFinishConvertFlowQualityCell();
+            //}
         }
 
         private bool AutoFinishConvertFlowQualityCell()
@@ -777,25 +863,25 @@ namespace RiverSimulationApplication
 
             for (int jw = jStart; jw < jStart + rowCount; ++jw)
             {
-                if (!CalSumOfOneRow(jw, ref sum))
+                if (!CalFlowQualitySumOfOneRow(jw, ref sum))
                 {
                     allPass = false;
                     continue;
                 }
-                dataGridView[iStart + colCount - 1, jw].Value = (100.0 - sum).ToString();
+                dataGridView[iStart + colCount, jw].Value = (100.0 - sum).ToString();
             }
 
             return allPass;
         }
 
-        private bool CalSumOfOneRow(int index, ref double sum)
+        private bool CalFlowQualitySumOfOneRow(int index, ref double sum)
         {
             sum = 0.0;
             for (int iw = iStart; iw < iStart + colCount - 1; ++iw)
             {
                 try
                 {
-                    sum += Convert.ToDouble(dataGridView[iw, index].Value);
+                    sum += Convert.ToDouble(dataGridView[iw + 1, index].Value);
                 }
                 catch
                 {
@@ -823,6 +909,142 @@ namespace RiverSimulationApplication
         private void ValueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridViewUtility.FillSelectedValue(dataGridView);
+        }
+
+        private void type1Btn_Click(object sender, EventArgs e)
+        {
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (formType == FormType.FlowQuantity)
+            {   //流量 - 均一值 與 逐點輸入切換
+                if (!ConvertFlowQuantityData())
+                {
+                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        return;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
+                        break;
+                }
+                InitializeDataGridView();
+            }
+            else if (formType == FormType.WaterLevel)
+            {   //流量 - 均一值 與 逐點輸入切換
+                if (!ConvertWaterLevelData())
+                {
+                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        return;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
+                        break;
+                }
+                InitializeDataGridView();
+            }
+            else if (formType == FormType.BottomBedLoadFlux)
+            {   //底床載 - 均一值 與 逐點輸入切換
+                if (!ConvertBottomBedLoadFluxData())
+                {
+                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        return;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        o.type = RiverSimulationProfile.TwoInOne.Type.UseValue;
+                        break;
+                }
+                InitializeDataGridView();
+            }
+        }
+
+        private void type2Btn_Click(object sender, EventArgs e)
+        {
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if (formType == FormType.FlowQuantity)
+            {   //流量 - 均一值 與 逐點輸入切換
+                if (!ConvertFlowQuantityData())
+                {
+                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        return;;
+                }
+                InitializeDataGridView();
+            }
+            else if (formType == FormType.WaterLevel)
+            {   //流量 - 均一值 與 逐點輸入切換
+                if (!ConvertWaterLevelData())
+                {
+                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        return; ;
+                }
+                InitializeDataGridView();
+            }
+            if (formType == FormType.BottomBedLoadFlux)
+            {   //底床載 - 均一值 與 逐點輸入切換
+                if (!ConvertBottomBedLoadFluxData())
+                {
+                    MessageBox.Show("輸入資料格式錯誤，請先修正！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                switch (o.type)
+                {
+                    case RiverSimulationProfile.TwoInOne.Type.None:
+                    case RiverSimulationProfile.TwoInOne.Type.UseValue:
+                        o.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
+                        break;
+                    case RiverSimulationProfile.TwoInOne.Type.UseArray:
+                        return;
+                }
+                InitializeDataGridView();
+            }
+        }
+
+        private void type1Rdo_CheckedChanged(object sender, EventArgs e)
+        {
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if ((sender as RadioButton).Checked && o.check == true)
+            {
+                o.check = false;
+            }
+        }
+
+        private void type2Rdo_CheckedChanged(object sender, EventArgs e)
+        {
+            RiverSimulationProfile.TwoInOne o = _data as RiverSimulationProfile.TwoInOne;
+            if ((sender as RadioButton).Checked && o.check == false)
+            {
+                o.check = true;
+            }
         }
     }
 }

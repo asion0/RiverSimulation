@@ -1193,10 +1193,10 @@ namespace PictureBoxCtrl
             }
 
             //Finished read
-            CoordinateTransform coorConv = new CoordinateTransform();
+            CoordinateTransform ct = new CoordinateTransform();
             if (IsInMap())
             {
-                zoomScale = CalZoomScale(coorConv.CalTwd97ToLatLonCoorRad(maxX, maxY), coorConv.CalTwd97ToLatLonCoorRad(minX, minY));
+                zoomScale = CalZoomScale(ct.CalTwd97ToLatLonCoorRad(maxX, maxY), ct.CalTwd97ToLatLonCoorRad(minX, minY));
             }
             else
             {
@@ -1210,9 +1210,9 @@ namespace PictureBoxCtrl
 
             if (IsInMap())
             {
-                CoorPoint center = coorConv.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
-                bottomRight = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
-                topLeft = coorConv.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
+                CoorPoint center = ct.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
+                bottomRight = ct.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
+                topLeft = ct.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
                 centerPoint = center.RadToDegree();
             }
             else
@@ -1242,11 +1242,11 @@ namespace PictureBoxCtrl
 
         private int CalZoomScale(CoorPoint tl, CoorPoint br)
         {
-            CoordinateTransform coorConv = new CoordinateTransform();
+            CoordinateTransform ct = new CoordinateTransform();
             for (int i = 21; i > 1; --i)
             {
-                CoorPoint c2 = coorConv.CalLonLatRadToCoorPixel(tl.x, tl.y, i);
-                CoorPoint c1 = coorConv.CalLonLatRadToCoorPixel(br.x, br.y, i);
+                CoorPoint c2 = ct.CalLonLatRadToCoorPixel(tl.x, tl.y, i);
+                CoorPoint c1 = ct.CalLonLatRadToCoorPixel(br.x, br.y, i);
                 if ((c2.x - c1.x) < 1280 && c2.y - c1.y < 1280)
                 {
                     return i;
@@ -1427,6 +1427,8 @@ namespace PictureBoxCtrl
         //二度分帶座標 
         //座標系統 TWD97, 中央經線 台灣地區121以公尺為單位
         //轉為WGS84 for Google Map
+        //http://sask989.blogspot.tw/2012/05/wgs84totwd97.html
+
         private static double a = 6378137.0;
         private static double b = 6356752.3142451;
         private double lon0 = 121 * Math.PI / 180;
@@ -1435,10 +1437,27 @@ namespace PictureBoxCtrl
         private int dy = 0;
         private double e = 1 - Math.Pow(b, 2) / Math.Pow(a, 2);
         private double e2 = (1 - Math.Pow(b, 2) / Math.Pow(a, 2)) / (Math.Pow(b, 2) / Math.Pow(a, 2));
-
+        private double A = 0.00001549;
+        private double B = 0.000006521;
         public CoordinateTransform()
         {
 
+        }
+
+        public CoorPoint Twd97ToTwd67(CoorPoint coor97)
+        {
+            double x67 = coor97.x - 807.8 - A * coor97.x - B * coor97.y;
+            double y67 = coor97.y + 248.6 - A * coor97.y - B * coor97.x;
+
+            return new CoorPoint(x67, y67);
+        }
+
+        public CoorPoint Twd67ToTwd97(CoorPoint coor67)
+        {
+            double x97 = coor67.x + 807.8 + A * coor67.x + B * coor67.y;
+            double y97 = coor67.y - 248.6 + A * coor67.y + B * coor67.y;
+
+            return new CoorPoint(x97, x97);
         }
 
         public CoorPoint CalLonLatDegToTwd97(double lon, double lat)
@@ -1509,7 +1528,7 @@ namespace PictureBoxCtrl
             return CalTwd97ToLatLonCoorRad(x, y).RadToDegree();
         }
 
-        public double Atanh(double x) //in rad
+        private double Atanh(double x) //in rad
         {
             return Math.Log((1.0 + x) / (1.0 - x)) / 2.0 ;
         }

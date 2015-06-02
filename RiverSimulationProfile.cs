@@ -77,14 +77,10 @@ namespace RiverSimulationApplication
             UserInput
         }
 
-        public enum CoorType
-        {
-            TWD97,
-            TWD64
-        }
-
         public ImportSource importSource;
-        public CoorType coorType;
+        public int coorType;
+        public const int TWD97 = 0;
+        public const int TWD67 = 1;
         public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
         public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
@@ -894,7 +890,7 @@ namespace RiverSimulationApplication
             //全域參數
             inputGrid = null;
             importSource = ImportSource.None;
-            coorType = CoorType.TWD97;
+            coorType = TWD97;
             verticalLevelNumber = 19;      //0.1.1 垂向格網分層數目
             levelProportion = null;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
@@ -1223,8 +1219,8 @@ namespace RiverSimulationApplication
             {
                 File.Delete(br);
             }
-            if (!inputGrid.DownloadGridMap(tl, tr, bl, br))
-            {
+            if (!inputGrid.DownloadGridMap(coorType, tl, tr, bl, br))
+            {//coorType
                 MessageBox.Show("無法取得線上地圖！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 //bkImgType = BackgroundMapType.None;
                 return false;

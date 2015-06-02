@@ -145,6 +145,12 @@ namespace PictureBoxCtrl
 		/// <value>Complete filename of the picture, including path information</value>
 		/// <remarks>Supported fileformat: *.gif, *.tif, *.jpg, *.bmp</remarks>
 		[ Browsable ( false ) ]
+        public enum CoorType
+        {
+            TWD97,
+            TWD64
+        }
+
 		public RiverGrid Grid
 		{
 			get { return rg; }
@@ -1224,10 +1230,19 @@ namespace PictureBoxCtrl
             return true;
         }
 
-        public bool DownloadGridMap(string tl, string tr, string bl, string br)
+        public bool DownloadGridMap(int coorType, string tl, string tr, string bl, string br)
         {
             try
             {
+                CoorPoint tlp = topLeft, cp = centerPoint, brp = bottomRight;
+                if ((GridPictureBox.CoorType)coorType == GridPictureBox.CoorType.TWD64)
+                {
+                    CoordinateTransform ct = new CoordinateTransform();
+                    tlp = ct.Twd97ToTwd67(topLeft);
+                    cp = ct.Twd97ToTwd67(centerPoint);
+                    brp = ct.Twd97ToTwd67(bottomRight);
+                }
+
                 DownloadStaticMap((topLeft.x + centerPoint.x) / 2, (topLeft.y + centerPoint.y) / 2, zoomScale, br);
                 DownloadStaticMap((bottomRight.x + centerPoint.x) / 2, (topLeft.y + centerPoint.y) / 2, zoomScale, bl);
                 DownloadStaticMap((topLeft.x + centerPoint.x) / 2, (bottomRight.y + centerPoint.y) / 2, zoomScale, tr);

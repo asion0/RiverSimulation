@@ -86,7 +86,6 @@
   <ItemGroup>
     <Reference Include="GridPictureBox">
       <HintPath>.\GridPictureBox.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />

@@ -77,10 +77,10 @@ namespace RiverSimulationApplication
 
             switch (p.coorType)
             {
-                case RiverSimulationProfile.CoorType.TWD97:
+                case RiverSimulationProfile.TWD97:
                     coorSelCombo.SelectedIndex = 0;
                     break;
-                case RiverSimulationProfile.CoorType.TWD64:
+                case RiverSimulationProfile.TWD67:
                     coorSelCombo.SelectedIndex = 1;
                     break;
             }
@@ -615,7 +615,18 @@ namespace RiverSimulationApplication
 
         private void coorSelCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            p.coorType = (RiverSimulationProfile.CoorType)(coorSelCombo.SelectedIndex);
+            if (p.coorType !=(coorSelCombo.SelectedIndex))
+            {
+                p.coorType = (coorSelCombo.SelectedIndex);
+
+                if (p.DownloadGoogleStaticMap())
+                {
+                    mapPicBox.SetMapBackground(p.tl, p.tr, p.bl, p.br);
+                }
+                //SwitchPreivewCombo(PreviewType.GridMap);
+                UpdateStatus();
+
+            }
         }
 
     }

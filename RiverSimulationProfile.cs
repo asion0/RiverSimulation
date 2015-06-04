@@ -363,6 +363,95 @@ namespace RiverSimulationApplication
         public List<Point>[] groundsillWorkSets;       //固床工位置集合
         public List<Point>[] sedimentationWeirSets;    //攔河堰位置集合
 
+        public bool CheckStructureChanged(bool clear)
+        {   //return true if changed
+            bool changed = false;
+            if ((!tBarSet && tBarSets!= null) || (tBarSet && tBarSets == null) || (tBarSet && tBarSets.Length != tBarNumber))
+            {   //沒勾選此類結構物但有結構物資料 || 有勾選此類結構物但無結構物資料 || 有勾選此類結構物但結構物資料數量不符
+                changed = true;
+                if (clear)
+                {
+                    tBarSets = null;
+                }
+            }
+            if ((!bridgePierSet && bridgePierSets!= null) || (bridgePierSet && bridgePierSets == null) || (bridgePierSet && bridgePierSets.Length != bridgePierNumber))
+            {   //沒勾選此類結構物但有結構物資料 || 有勾選此類結構物但無結構物資料 || 有勾選此類結構物但結構物資料數量不符
+                changed = true;
+                if (clear)
+                {
+                    bridgePierSets = null;
+                }
+            }
+            if ((!groundsillWorkSet && groundsillWorkSets != null) || (groundsillWorkSet && groundsillWorkSets == null) || (groundsillWorkSet && groundsillWorkSets.Length != groundsillWorkNumber))
+            {   //沒勾選此類結構物但有結構物資料 || 有勾選此類結構物但無結構物資料 || 有勾選此類結構物但結構物資料數量不符
+                changed = true;
+                if (clear)
+                {
+                    groundsillWorkSets = null;
+                }
+            }
+            if ((!sedimentationWeirSet && sedimentationWeirSets != null) || (sedimentationWeirSet && sedimentationWeirSets == null) || (sedimentationWeirSet && sedimentationWeirSets.Length != sedimentationWeirNumber))
+            {   //沒勾選此類結構物但有結構物資料 || 有勾選此類結構物但無結構物資料 || 有勾選此類結構物但結構物資料數量不符
+                changed = true;
+                if (clear)
+                {
+                    sedimentationWeirSets = null;
+                }
+            }
+
+            if (changed)
+            {
+                return true;
+            }
+
+            //確認所有結構物資料串有被設定
+            if (tBarSet)
+            {
+                foreach (List<Point> pts in tBarSets)
+                {
+                    if (pts == null)
+                    {
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+            if (bridgePierSet)
+            {
+                foreach (List<Point> pts in bridgePierSets)
+                {
+                    if (pts == null)
+                    {
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+            if (groundsillWorkSet)
+            {
+                foreach (List<Point> pts in groundsillWorkSets)
+                {
+                    if (pts == null)
+                    {
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+            if (sedimentationWeirSet)
+            {
+                foreach (List<Point> pts in sedimentationWeirSets)
+                {
+                    if (pts == null)
+                    {
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+            return changed;
+        }
+
         public enum StructureType
         {
             TBar,

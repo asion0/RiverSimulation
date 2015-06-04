@@ -245,6 +245,12 @@ namespace RiverSimulationApplication
             {
                 return false;
             }
+
+            if(p.structureSetFunction && p.CheckStructureChanged(true))
+            {
+                MessageBox.Show("結構物設置已變更或未設定，請設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
             return true;
         }
 
@@ -705,6 +711,11 @@ namespace RiverSimulationApplication
                 return;
             }
 
+            if (p.CheckStructureChanged(true))
+            {
+                MessageBox.Show("結構物數量或設置已變更，請重新設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+ 
             p.ResizeStructureSets(p.tBarNumber, p.bridgePierNumber, p.groundsillWorkNumber, p.sedimentationWeirNumber);
             StructureSetForm form = new StructureSetForm();
             form.SetFormMode(structureSetGrp.Text,

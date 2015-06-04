@@ -483,7 +483,7 @@ namespace RiverSimulationApplication
 
             }
 
-            if (p.nearBedBoundaryType == RiverSimulationProfile.NearBedBoundaryType.None)
+            if (p.Is3DMode() && p.nearBedBoundaryType == RiverSimulationProfile.NearBedBoundaryType.None)
             {
                 MessageBox.Show("請設定動床模組-近底床濃度邊界！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;

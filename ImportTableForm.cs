@@ -72,6 +72,10 @@ namespace RiverSimulationApplication
                 {
                     foreach (List<Point> pl in p.tBarSets)
                     {
+                        if(pl == null)
+                        { 
+                            continue;
+                        }
                         foreach (Point pt in pl)
                         {
                             dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
@@ -85,6 +89,10 @@ namespace RiverSimulationApplication
                 {
                     foreach (List<Point> pl in p.bridgePierSets)
                     {
+                        if (pl == null)
+                        {
+                            continue;
+                        } 
                         foreach (Point pt in pl)
                         {
                             dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
@@ -98,6 +106,10 @@ namespace RiverSimulationApplication
                 {
                     foreach (List<Point> pl in p.groundsillWorkSets)
                     {
+                        if (pl == null)
+                        {
+                            continue;
+                        } 
                         foreach (Point pt in pl)
                         {
                             dataGridViewZ[pt.Y, pt.X].ReadOnly = true;

@@ -383,6 +383,11 @@ namespace RiverSimulationApplication
         //檢查一群組所有的格網點是否連續(上下左右視為連續，對角與間隔視為不連續))
         public static bool IsContinuous(List<Point> pl)
         {
+            if(pl.Count == 0)
+            {
+                return false;
+            }
+
             Point[] workQueue = new Point[pl.Count];
             workQueue[0] = pl[0];
             for (int i = 1; i < workQueue.Length; ++i)

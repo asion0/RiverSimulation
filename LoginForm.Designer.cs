@@ -109,11 +109,12 @@
             // 
             // projectDescriptBtn
             // 
+            this.projectDescriptBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("projectDescriptBtn.BackgroundImage")));
+            this.projectDescriptBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.projectDescriptBtn.Enabled = false;
-            this.projectDescriptBtn.Image = ((System.Drawing.Image)(resources.GetObject("projectDescriptBtn.Image")));
-            this.projectDescriptBtn.Location = new System.Drawing.Point(544, 319);
+            this.projectDescriptBtn.Location = new System.Drawing.Point(540, 319);
             this.projectDescriptBtn.Name = "projectDescriptBtn";
-            this.projectDescriptBtn.Size = new System.Drawing.Size(67, 48);
+            this.projectDescriptBtn.Size = new System.Drawing.Size(70, 48);
             this.projectDescriptBtn.TabIndex = 2;
             this.projectDescriptBtn.UseVisualStyleBackColor = true;
             this.projectDescriptBtn.Click += new System.EventHandler(this.projectDescriptBtn_Click);

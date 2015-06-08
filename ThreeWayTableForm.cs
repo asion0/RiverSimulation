@@ -354,7 +354,7 @@ namespace RiverSimulationApplication
         private int jStart = 2;
         private string iTitle;
         private string timeTitle = "邊界時間";
-        private string buttonText;
+        //private string buttonText;
         //private string checkText;
         private int extraCol = 2;
         private int extraRow = 1;

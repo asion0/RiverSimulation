@@ -110,7 +110,7 @@
             // projectDescriptBtn
             // 
             this.projectDescriptBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("projectDescriptBtn.BackgroundImage")));
-            this.projectDescriptBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.projectDescriptBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.projectDescriptBtn.Enabled = false;
             this.projectDescriptBtn.Location = new System.Drawing.Point(540, 319);
             this.projectDescriptBtn.Name = "projectDescriptBtn";

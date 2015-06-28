@@ -84,7 +84,7 @@ namespace RiverSimulationApplication
                 }
             }
             listBox.SelectedIndex = 0;
-            ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
+             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
         }
 
         private void SetPicBoxGrid(int index, bool alert)

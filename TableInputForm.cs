@@ -719,7 +719,12 @@ namespace RiverSimulationApplication
                 {
                     for (int j = 0; j < rowCount; ++j)
                     {
-                        (_data as CoorPoint[,])[j, i].z = Convert.ToDouble(v[i, j].Value);
+
+                        if (bottomElevationPts.Contains(new Point(j, i)))
+                        {
+                            (_data as CoorPoint[,])[j, i].z = Convert.ToDouble(v[i, j].Value);
+                        }
+
                     }
                 }
             }

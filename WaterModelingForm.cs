@@ -246,10 +246,46 @@ namespace RiverSimulationApplication
                 return false;
             }
 
-            if(p.structureSetFunction && p.CheckStructureChanged(true))
+            if(p.structureSetFunction)
             {
-                MessageBox.Show("結構物設置已變更或未設定，請設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                bool alreadyShow = false;
+                RiverSimulationProfile.StructureChangeType tp = p.CheckStructurerChanged(p.tBarSet, ref p.tBarSets, p.tBarNumber, true);
+                if (!alreadyShow && (tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch ||
+                    tp== RiverSimulationProfile.StructureChangeType.NotAllDataSet ||
+                    tp == RiverSimulationProfile.StructureChangeType.HasSelectButNoData))
+                {
+                    MessageBox.Show("結構物設置已變更或未設定，請設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    alreadyShow = true;
+                    return false;
+                }
+
+                tp = p.CheckStructurerChanged(p.bridgePierSet, ref p.bridgePierSets, p.bridgePierNumber, true);
+                if (!alreadyShow && (tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch ||
+                    tp== RiverSimulationProfile.StructureChangeType.NotAllDataSet ||
+                    tp == RiverSimulationProfile.StructureChangeType.HasSelectButNoData))
+                {
+                    MessageBox.Show("結構物設置已變更或未設定，請設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    alreadyShow = true;
+                    return false;
+                }
+                tp = p.CheckStructurerChanged(p.groundsillWorkSet, ref p.groundsillWorkSets, p.groundsillWorkNumber, true);
+                if (!alreadyShow && (tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch ||
+                    tp== RiverSimulationProfile.StructureChangeType.NotAllDataSet ||
+                    tp == RiverSimulationProfile.StructureChangeType.HasSelectButNoData))
+                {
+                    MessageBox.Show("結構物設置已變更或未設定，請設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    alreadyShow = true;
+                    return false;
+                }
+                tp = p.CheckStructurerChanged(p.sedimentationWeirSet, ref p.sedimentationWeirSets, p.sedimentationWeirNumber, true);
+                if (!alreadyShow && (tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch ||
+                    tp== RiverSimulationProfile.StructureChangeType.NotAllDataSet ||
+                    tp == RiverSimulationProfile.StructureChangeType.HasSelectButNoData))
+                {
+                    MessageBox.Show("結構物設置已變更或未設定，請設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    alreadyShow = true;
+                    return false;
+                }
             }
             return true;
         }
@@ -711,9 +747,31 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            if (p.CheckStructureChanged(true))
+            bool alreadyShow = false;
+            RiverSimulationProfile.StructureChangeType tp = p.CheckStructurerChanged(p.tBarSet, ref p.tBarSets, p.tBarNumber, true);
+            if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
             {
                 MessageBox.Show("結構物數量或設置已變更，請重新設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                alreadyShow = true;
+            }
+
+            tp = p.CheckStructurerChanged(p.bridgePierSet, ref p.bridgePierSets, p.bridgePierNumber, true);
+            if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
+            {
+                MessageBox.Show("結構物數量或設置已變更，請重新設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                alreadyShow = true;
+            }
+            tp = p.CheckStructurerChanged(p.groundsillWorkSet, ref p.groundsillWorkSets, p.groundsillWorkNumber, true);
+            if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
+            {
+                MessageBox.Show("結構物數量或設置已變更，請重新設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                alreadyShow = true;
+            }
+            tp = p.CheckStructurerChanged(p.sedimentationWeirSet, ref p.sedimentationWeirSets, p.sedimentationWeirNumber, true);
+            if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
+            {
+                MessageBox.Show("結構物數量或設置已變更，請重新設定結構物！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                alreadyShow = true;
             }
  
             p.ResizeStructureSets(p.tBarNumber, p.bridgePierNumber, p.groundsillWorkNumber, p.sedimentationWeirNumber);

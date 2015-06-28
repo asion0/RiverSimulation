@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.stopFlagChk = new System.Windows.Forms.CheckBox();
@@ -62,6 +62,7 @@
             this.stopFlagChk.TabIndex = 3;
             this.stopFlagChk.Text = "到達水理最大疊代次數後仍未收歛時，繼續模擬";
             this.stopFlagChk.UseVisualStyleBackColor = true;
+            this.stopFlagChk.CheckedChanged += new System.EventHandler(this.stopFlagChk_CheckedChanged);
             // 
             // startBtn
             // 
@@ -96,8 +97,8 @@
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(11, 102);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(933, 512);
@@ -124,6 +125,7 @@
             this.maxIterationsNumTxt.Name = "maxIterationsNumTxt";
             this.maxIterationsNumTxt.Size = new System.Drawing.Size(160, 22);
             this.maxIterationsNumTxt.TabIndex = 9;
+            this.maxIterationsNumTxt.TextChanged += new System.EventHandler(this.maxIterationsNumTxt_TextChanged);
             // 
             // label10
             // 

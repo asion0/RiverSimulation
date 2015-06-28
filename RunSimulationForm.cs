@@ -180,6 +180,12 @@ namespace RiverSimulationApplication
                 return;
             }
 
+            if(pi.t == ProgressItem.Type.ShowNotDivergence)
+            {
+                MessageBox.Show("到達水理最大疊代次數仍未收歛，停止模擬！");
+                return;
+            }
+
             if(pi.x <= 1)
             {
                 return;
@@ -255,7 +261,8 @@ namespace RiverSimulationApplication
                 ShowConsole,
                 ShowProgress,
                 ShowChart,
-                ShowDivergence
+                ShowDivergence,
+                ShowNotDivergence
             };
             public Type t;
             public ProgressItem()
@@ -327,6 +334,11 @@ namespace RiverSimulationApplication
                 pi.t = ProgressItem.Type.ShowDivergence;
                 bw.ReportProgress(0, new ProgressItem(pi));
             }
+            else if(s.Contains("NOT CONVERGED"))
+            {
+                pi.t = ProgressItem.Type.ShowNotDivergence;
+                bw.ReportProgress(0, new ProgressItem(pi));
+            }
             else
             {
                 pi.t = ProgressItem.Type.ShowConsole;
@@ -369,14 +381,15 @@ namespace RiverSimulationApplication
             }
             else if (simDebugForm.runMode == SimDebugForm.RunMode.UseProfile)
             {
-                string resedExe = Program.GetProjectFullPath() + Program.resedName;
+
+                string resedExe = Program.GetProjectFileWorkingPath() + Program.resedName;
                 if (!File.Exists(resedExe))
                 {   //如果沒有主程式則複製一個。
                     File.Copy(Environment.CurrentDirectory + @"\resed.exe", resedExe);
                 }
 
                 simProcess.StartInfo.FileName = resedExe;
-                simProcess.StartInfo.WorkingDirectory = Program.GetProjectFullPath();
+                simProcess.StartInfo.WorkingDirectory = Program.GetProjectFileWorkingPath();
 
                 //二維水理：resed.exe resed.i 123 
                 //三維水理：resed.exe resed.i 123 3D 3Dinput.dat out
@@ -403,7 +416,7 @@ namespace RiverSimulationApplication
                 simProcess.StartInfo.RedirectStandardOutput = true;
                 simProcess.StartInfo.CreateNoWindow = true;
 
-                using (StreamWriter outfile = new StreamWriter(Program.GetProjectFullPath() + @"\run.bat"))
+                using (StreamWriter outfile = new StreamWriter(Program.GetProjectFileWorkingPath() + @"\run.bat"))
                 {
                     outfile.Write(resedExe + " " + simProcess.StartInfo.Arguments + "\r\n");
                     outfile.Close();
@@ -473,17 +486,28 @@ namespace RiverSimulationApplication
                     FunctionlUtility.SaveProject(p);
                 }
 
-                p.GenerateInputFile(Program.GetProjectFullPath() + @"/resed.i");
+                p.GenerateInputFile(Program.GetProjectFileWorkingPath() + @"/resed.i");
 
                 if (p.IsMovableBedMode())
                 {
-                    p.GenerateSedFile(Program.GetProjectFullPath() + @"/sed.dat");
+                    p.GenerateSedFile(Program.GetProjectFileWorkingPath() + @"/sed.dat");
                 }
 
                 if(p.Is3DMode())
                 {
-                    p.Generate3dFile(Program.GetProjectFullPath() + @"/3Dinput.dat");
+                    p.Generate3dFile(Program.GetProjectFileWorkingPath() + @"/3Dinput.dat");
                 }
+
+                if (p.groundsillWorkSet)
+                {
+                    p.GenerateStructureFile(p.groundsillWorkSets, Program.GetProjectFileWorkingPath() + @"/3.txt");
+                }
+
+                if (p.sedimentationWeirSet)
+                {
+                    p.GenerateStructureFile(p.sedimentationWeirSets, Program.GetProjectFileWorkingPath() + @"/4.txt");
+                }
+
 
                 ResetChart();
                 RunSimulationMain();
@@ -550,6 +574,17 @@ namespace RiverSimulationApplication
         private void RunSimulationForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             simDebugForm.Hide();
+        }
+
+        private void stopFlagChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.stopFlah = chk;
+        }
+
+        private void maxIterationsNumTxt_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

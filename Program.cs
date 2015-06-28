@@ -213,5 +213,15 @@ namespace RiverSimulationApplication
         {
             return GetProjectFullPath() + "\\" + descriptionName;
         }
+
+        public static string GetProjectFileWorkingPath()
+        {
+            string workingDirectory = Program.GetProjectFileFullPath() + ".working";
+            if(!Directory.Exists(workingDirectory))
+            {
+                Directory.CreateDirectory(workingDirectory);
+            }
+            return workingDirectory;
+        }
     }
 }

@@ -363,88 +363,49 @@ namespace RiverSimulationApplication
         public List<Point>[] groundsillWorkSets;       //固床工位置集合
         public List<Point>[] sedimentationWeirSets;    //攔河堰位置集合
 
-        public bool CheckStructureChanged(bool clear)
+        public enum StructureChangeType
+        {
+            NoChange,
+            NoSelectButHasData,
+            HasSelectButNoData,
+            SelectionAndDataNoMatch,
+            NotAllDataSet,
+        }
+
+        public StructureChangeType CheckStructurerChanged(bool set, ref List<Point>[] sets, int num, bool clear)
         {   //return true if changed
-            bool changed = false;
-            if ((!tBarSet && tBarSets!= null) || (tBarSet && tBarSets == null) || (tBarSet && tBarSets.Length != tBarNumber))
-            {   //沒勾選此類結構物但有結構物資料 || 有勾選此類結構物但無結構物資料 || 有勾選此類結構物但結構物資料數量不符
-                changed = true;
-                if (clear)
-                {
-                    tBarSets = null;
-                }
+            StructureChangeType changed = StructureChangeType.NoChange;
+            if (!set && sets != null) 
+            {   //沒勾選此類結構物但有結構物資料
+                changed = StructureChangeType.NoSelectButHasData;
             }
-            if ((!bridgePierSet && bridgePierSets!= null) || (bridgePierSet && bridgePierSets == null) || (bridgePierSet && bridgePierSets.Length != bridgePierNumber))
-            {   //沒勾選此類結構物但有結構物資料 || 有勾選此類結構物但無結構物資料 || 有勾選此類結構物但結構物資料數量不符
-                changed = true;
-                if (clear)
-                {
-                    bridgePierSets = null;
-                }
+            else if (set && sets == null) 
+            {  //有勾選此類結構物但無結構物資料 
+                changed = StructureChangeType.HasSelectButNoData;
             }
-            if ((!groundsillWorkSet && groundsillWorkSets != null) || (groundsillWorkSet && groundsillWorkSets == null) || (groundsillWorkSet && groundsillWorkSets.Length != groundsillWorkNumber))
-            {   //沒勾選此類結構物但有結構物資料 || 有勾選此類結構物但無結構物資料 || 有勾選此類結構物但結構物資料數量不符
-                changed = true;
-                if (clear)
-                {
-                    groundsillWorkSets = null;
-                }
-            }
-            if ((!sedimentationWeirSet && sedimentationWeirSets != null) || (sedimentationWeirSet && sedimentationWeirSets == null) || (sedimentationWeirSet && sedimentationWeirSets.Length != sedimentationWeirNumber))
-            {   //沒勾選此類結構物但有結構物資料 || 有勾選此類結構物但無結構物資料 || 有勾選此類結構物但結構物資料數量不符
-                changed = true;
-                if (clear)
-                {
-                    sedimentationWeirSets = null;
-                }
+            else if (set && sets.Length != num)
+            {   //有勾選此類結構物但結構物資料數量不符
+                changed = StructureChangeType.SelectionAndDataNoMatch;
             }
 
-            if (changed)
+            if (clear && changed != StructureChangeType.NoChange)
             {
-                return true;
+                sets = null;
+            }
+
+            if (changed != StructureChangeType.NoChange)
+            {
+                return changed;
             }
 
             //確認所有結構物資料串有被設定
-            if (tBarSet)
+            if (set)
             {
-                foreach (List<Point> pts in tBarSets)
+                foreach (List<Point> pts in sets)
                 {
                     if (pts == null)
                     {
-                        changed = true;
-                        break;
-                    }
-                }
-            }
-            if (bridgePierSet)
-            {
-                foreach (List<Point> pts in bridgePierSets)
-                {
-                    if (pts == null)
-                    {
-                        changed = true;
-                        break;
-                    }
-                }
-            }
-            if (groundsillWorkSet)
-            {
-                foreach (List<Point> pts in groundsillWorkSets)
-                {
-                    if (pts == null)
-                    {
-                        changed = true;
-                        break;
-                    }
-                }
-            }
-            if (sedimentationWeirSet)
-            {
-                foreach (List<Point> pts in sedimentationWeirSets)
-                {
-                    if (pts == null)
-                    {
-                        changed = true;
+                        changed = StructureChangeType.NotAllDataSet;
                         break;
                     }
                 }
@@ -796,7 +757,8 @@ namespace RiverSimulationApplication
         }
         public ConcentrationCalculationType concentrationCalculation;   //4.2.3.1 濃度計算公式多選一 整數 8 格下拉式選單(總共2~3 種選項)
         public TwoInOne inputConcentration;                             //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
-        
+
+        public bool stopFlah;
          //功能檢查
         #region Fuction Check
         public bool Is3DMode() { return dimensionType == DimensionType.Type3D; }
@@ -1233,6 +1195,7 @@ namespace RiverSimulationApplication
             nearBedBoundaryType = NearBedBoundaryType.None;         //4.2.3 近底床濃度邊界二選一 實數 a. 三維only
             concentrationCalculation = ConcentrationCalculationType.None;   //4.2.3.1 濃度計算公式多選一 整數 8 格下拉式選單(總共2~3 種選項)
             inputConcentration = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim);    //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
+            stopFlah = false;
         }
 
         public bool ReadInputGridGeo(string s)
@@ -1388,6 +1351,11 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", (outputControlBottomElevation ? 1 : 0).ToString());    //2.1.3 輸出控制 初始底床高程
             sb.AppendFormat("{0,8}", (outputControlAverageDepthDensity ? 1 : 0).ToString());    //2.1.3 輸出控制 水深平均流速
             sb.AppendFormat("{0,8}", (outputControlErosionDepth ? 1 : 0).ToString());    //2.1.3 輸出控制 沖淤深度
+            sb.AppendFormat("{0,8}", (stopFlah ? 1 : 0).ToString());    //達停止條件未收斂是否繼續模擬
+            sb.AppendFormat("{0,8}", (groundsillWorkSet ? 1 : 0).ToString());    //結構物固床工是否勾選
+            sb.AppendFormat("{0,8}", (sedimentationWeirSet ? 1 : 0).ToString());    //結構物攔河堰是否勾選
+
+
             sb.Append("\n");
 
             //註4：
@@ -2167,6 +2135,36 @@ namespace RiverSimulationApplication
             //註38：模式預設值
             sb.AppendFormat("       0\n");
             sb.AppendFormat("     500\n"); 
+
+            using (StreamWriter outfile = new StreamWriter(file))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+            return true;
+        }
+
+        public bool GenerateStructureFile(List<Point> [] sets, string file)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            bool[,] setsTmp = new bool[inputGrid.GetI, inputGrid.GetJ];
+            foreach (List<Point> pts in sets)
+            {
+                foreach (Point pt in pts)
+                {
+                    setsTmp[pt.X, pt.Y] = true;
+                }
+            }
+
+            for (int i = 0; i < inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    sb.Append(setsTmp[i,j] ? "1 " : "0 "); 
+                }
+                sb.Append("\r\n");
+            }
 
             using (StreamWriter outfile = new StreamWriter(file))
             {

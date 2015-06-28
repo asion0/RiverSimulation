@@ -1175,6 +1175,7 @@ namespace RiverSimulationApplication
             {
                 return false;
             }
+            /*
             if (File.Exists(Program.GetProjectFullPath() + @"\resed.i"))
             {
                 File.Delete(Program.GetProjectFullPath() + @"\resed.i");
@@ -1211,6 +1212,7 @@ namespace RiverSimulationApplication
             {
                 File.Delete(Program.GetProjectFullPath() + @"\resed.exe");
             }
+             * */
             Program.SaveDefaultProjectFolder();
             return true;
         }

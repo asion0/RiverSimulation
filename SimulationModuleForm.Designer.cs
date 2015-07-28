@@ -32,7 +32,11 @@
             this.ok = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.movableBedRdo = new System.Windows.Forms.RadioButton();
+            this.waterModelingRdo = new System.Windows.Forms.RadioButton();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
+            this.dimension3dRdo = new System.Windows.Forms.RadioButton();
+            this.dimension2dRdo = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.movableBedPanel = new System.Windows.Forms.Panel();
             this.bedrockFunctionChk = new System.Windows.Forms.CheckBox();
@@ -47,10 +51,6 @@
             this.waterHighSandContentEffectFunctionChk = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dimension2dRdo = new System.Windows.Forms.RadioButton();
-            this.dimension3dRdo = new System.Windows.Forms.RadioButton();
-            this.waterModelingRdo = new System.Windows.Forms.RadioButton();
-            this.movableBedRdo = new System.Windows.Forms.RadioButton();
             this.mainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
@@ -91,6 +91,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模組選擇";
             // 
+            // movableBedRdo
+            // 
+            this.movableBedRdo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.movableBedRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.movableBedRdo.Location = new System.Drawing.Point(246, 34);
+            this.movableBedRdo.Name = "movableBedRdo";
+            this.movableBedRdo.Size = new System.Drawing.Size(128, 80);
+            this.movableBedRdo.TabIndex = 3;
+            this.movableBedRdo.TabStop = true;
+            this.movableBedRdo.Text = "動床";
+            this.movableBedRdo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.movableBedRdo.UseVisualStyleBackColor = true;
+            this.movableBedRdo.CheckedChanged += new System.EventHandler(this.modelingRdo_CheckedChanged);
+            // 
+            // waterModelingRdo
+            // 
+            this.waterModelingRdo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.waterModelingRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.waterModelingRdo.Location = new System.Drawing.Point(33, 34);
+            this.waterModelingRdo.Name = "waterModelingRdo";
+            this.waterModelingRdo.Size = new System.Drawing.Size(128, 80);
+            this.waterModelingRdo.TabIndex = 3;
+            this.waterModelingRdo.TabStop = true;
+            this.waterModelingRdo.Text = "水理";
+            this.waterModelingRdo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.waterModelingRdo.UseVisualStyleBackColor = true;
+            this.waterModelingRdo.CheckedChanged += new System.EventHandler(this.modelingRdo_CheckedChanged);
+            // 
             // flowTypeGroup
             // 
             this.flowTypeGroup.Controls.Add(this.dimension3dRdo);
@@ -101,6 +129,34 @@
             this.flowTypeGroup.TabIndex = 1;
             this.flowTypeGroup.TabStop = false;
             this.flowTypeGroup.Text = "維度選擇";
+            // 
+            // dimension3dRdo
+            // 
+            this.dimension3dRdo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.dimension3dRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.dimension3dRdo.Location = new System.Drawing.Point(246, 34);
+            this.dimension3dRdo.Name = "dimension3dRdo";
+            this.dimension3dRdo.Size = new System.Drawing.Size(128, 80);
+            this.dimension3dRdo.TabIndex = 3;
+            this.dimension3dRdo.TabStop = true;
+            this.dimension3dRdo.Text = "3D";
+            this.dimension3dRdo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dimension3dRdo.UseVisualStyleBackColor = true;
+            this.dimension3dRdo.CheckedChanged += new System.EventHandler(this.dimensionRdo_CheckedChanged);
+            // 
+            // dimension2dRdo
+            // 
+            this.dimension2dRdo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.dimension2dRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.dimension2dRdo.Location = new System.Drawing.Point(33, 34);
+            this.dimension2dRdo.Name = "dimension2dRdo";
+            this.dimension2dRdo.Size = new System.Drawing.Size(128, 80);
+            this.dimension2dRdo.TabIndex = 3;
+            this.dimension2dRdo.TabStop = true;
+            this.dimension2dRdo.Text = "2D";
+            this.dimension2dRdo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dimension2dRdo.UseVisualStyleBackColor = true;
+            this.dimension2dRdo.CheckedChanged += new System.EventHandler(this.dimensionRdo_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -253,62 +309,6 @@
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "水理";
-            // 
-            // dimension2dRdo
-            // 
-            this.dimension2dRdo.Appearance = System.Windows.Forms.Appearance.Button;
-            this.dimension2dRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.dimension2dRdo.Location = new System.Drawing.Point(33, 34);
-            this.dimension2dRdo.Name = "dimension2dRdo";
-            this.dimension2dRdo.Size = new System.Drawing.Size(128, 80);
-            this.dimension2dRdo.TabIndex = 3;
-            this.dimension2dRdo.TabStop = true;
-            this.dimension2dRdo.Text = "2D";
-            this.dimension2dRdo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.dimension2dRdo.UseVisualStyleBackColor = true;
-            this.dimension2dRdo.CheckedChanged += new System.EventHandler(this.dimensionRdo_CheckedChanged);
-            // 
-            // dimension3dRdo
-            // 
-            this.dimension3dRdo.Appearance = System.Windows.Forms.Appearance.Button;
-            this.dimension3dRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.dimension3dRdo.Location = new System.Drawing.Point(246, 34);
-            this.dimension3dRdo.Name = "dimension3dRdo";
-            this.dimension3dRdo.Size = new System.Drawing.Size(128, 80);
-            this.dimension3dRdo.TabIndex = 3;
-            this.dimension3dRdo.TabStop = true;
-            this.dimension3dRdo.Text = "3D";
-            this.dimension3dRdo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.dimension3dRdo.UseVisualStyleBackColor = true;
-            this.dimension3dRdo.CheckedChanged += new System.EventHandler(this.dimensionRdo_CheckedChanged);
-            // 
-            // waterModelingRdo
-            // 
-            this.waterModelingRdo.Appearance = System.Windows.Forms.Appearance.Button;
-            this.waterModelingRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.waterModelingRdo.Location = new System.Drawing.Point(33, 34);
-            this.waterModelingRdo.Name = "waterModelingRdo";
-            this.waterModelingRdo.Size = new System.Drawing.Size(128, 80);
-            this.waterModelingRdo.TabIndex = 3;
-            this.waterModelingRdo.TabStop = true;
-            this.waterModelingRdo.Text = "水理";
-            this.waterModelingRdo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.waterModelingRdo.UseVisualStyleBackColor = true;
-            this.waterModelingRdo.CheckedChanged += new System.EventHandler(this.modelingRdo_CheckedChanged);
-            // 
-            // movableBedRdo
-            // 
-            this.movableBedRdo.Appearance = System.Windows.Forms.Appearance.Button;
-            this.movableBedRdo.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.movableBedRdo.Location = new System.Drawing.Point(246, 34);
-            this.movableBedRdo.Name = "movableBedRdo";
-            this.movableBedRdo.Size = new System.Drawing.Size(128, 80);
-            this.movableBedRdo.TabIndex = 3;
-            this.movableBedRdo.TabStop = true;
-            this.movableBedRdo.Text = "動床";
-            this.movableBedRdo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.movableBedRdo.UseVisualStyleBackColor = true;
-            this.movableBedRdo.CheckedChanged += new System.EventHandler(this.modelingRdo_CheckedChanged);
             // 
             // SimulationModuleForm
             // 

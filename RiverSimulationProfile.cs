@@ -1407,7 +1407,6 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
             sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
             sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
-            sb.AppendFormat("{0,8}", (0.02).ToString());     //模式預設值
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
             sb.AppendFormat("{0,8}", gravityConstant.ToString());     //1.2.3.1 重力常數 單一數值 m/s2 9.81 實數 Free

@@ -1344,18 +1344,17 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", (outputControlLevel ? 1 : 0).ToString());    //1.1.3 輸出控制 水位
             sb.AppendFormat("{0,8}", (outputControlDepth ? 1 : 0).ToString());    //1.1.3 輸出控制 水深
             sb.AppendFormat("{0,8}", (outputControlFlow ? 1 : 0).ToString());    //1.1.3 輸出控制 流量
-            sb.AppendFormat("{0,8}", (outputControlVelocityInformation3D ? 1 : 0).ToString());    //1.1.3 輸出控制 三維流速資訊
+            sb.AppendFormat("{0,8}", (outputControlBottomElevation ? 1 : 0).ToString());    //2.1.3 輸出控制 初始底床高程
+            sb.AppendFormat("{0,8}", (outputControlAverageDepthDensity ? 1 : 0).ToString());    //2.1.3 輸出控制 水深平均流速
+            sb.AppendFormat("{0,8}", (outputControlErosionDepth ? 1 : 0).ToString());    //2.1.3 沖淤深度
             sb.Append("\n");
 
             //註3-2(動床2D 輸出控制開關，1：開、0：關。)：
-            sb.AppendFormat("{0,8}", (outputControlBottomElevation ? 1 : 0).ToString());    //2.1.3 輸出控制 初始底床高程
-            sb.AppendFormat("{0,8}", (outputControlAverageDepthDensity ? 1 : 0).ToString());    //2.1.3 輸出控制 水深平均流速
-            sb.AppendFormat("{0,8}", (outputControlErosionDepth ? 1 : 0).ToString());    //2.1.3 輸出控制 沖淤深度
+            sb.AppendFormat("{0,8}", ((int)turbulenceViscosityType - 1).ToString());    //紊流黏滯係數。1.2.2。(0：使用者輸入。1：零方程)
+            sb.AppendFormat("{0,8}", (tvInMainstreamDirection).ToString());    //使用者輸入。1.2.2.1水平方向(原主流方向)。
             sb.AppendFormat("{0,8}", (stopFlah ? 1 : 0).ToString());    //達停止條件未收斂是否繼續模擬
             sb.AppendFormat("{0,8}", (groundsillWorkSet ? 1 : 0).ToString());    //結構物固床工是否勾選
             sb.AppendFormat("{0,8}", (sedimentationWeirSet ? 1 : 0).ToString());    //結構物攔河堰是否勾選
-
-
             sb.Append("\n");
 
             //註4：
@@ -1370,6 +1369,7 @@ namespace RiverSimulationApplication
             //20150224要求改為0
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。
             sb.AppendFormat("{0,8}", maxIterationsNum.ToString());     //水理最大疊代次數。1.1.2.3
+            sb.AppendFormat("{0,8}", ((int)curvatureRadiusType - 1).ToString());     //1.3.1 曲率半徑 是否自動計算
             sb.Append("\n");
 
             //註5：
@@ -1402,13 +1402,16 @@ namespace RiverSimulationApplication
             sb.Append("\n");
 
             //註6：
-            sb.AppendFormat("{0,8}", (1).ToString());     //水理計算之權重(建議採預設值)
+            sb.AppendFormat("{0,8}", (1).ToString());           //水理計算之權重(建議採預設值)
+            sb.AppendFormat("{0,8}", (0.0001).ToString());       //模式預設值
             sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
             sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
             sb.AppendFormat("{0,8}", minWaterDeoth.ToString());     //1.1.4 最小水深
             sb.AppendFormat("{0,8}", (0.02).ToString());     //模式預設值
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
             sb.AppendFormat("{0,8}", (0).ToString());     //模式內部設定值
+            sb.AppendFormat("{0,8}", gravityConstant.ToString());     //1.2.3.1 重力常數 單一數值 m/s2 9.81 實數 Free
+            sb.AppendFormat("{0,8}", waterDensity.ToString());     //1.2.3.2 水密度 單一數值 kg/m3 1000 實數(>0) Free
             sb.Append("\n");
 
             //註7：

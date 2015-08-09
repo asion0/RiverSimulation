@@ -202,11 +202,11 @@ namespace RiverSimulationApplication
                     nearBedBoundaryAutoRdo.Checked = true;
                     break;
                 case RiverSimulationProfile.NearBedBoundaryType.Input:
-                    nearBedBoundaryInputRdo.Checked = true;
+                    nearBedBoundaryFluxRdo.Checked = true;
                     break;
                 case RiverSimulationProfile.NearBedBoundaryType.None:
                    nearBedBoundaryAutoRdo.Checked = false;
-                   nearBedBoundaryInputRdo.Checked = false;
+                   nearBedBoundaryFluxRdo.Checked = false;
                    break;
             }
             nearBedBoundaryAutoCombo.SelectedIndex = (int)p.concentrationCalculation - 1;
@@ -265,6 +265,7 @@ namespace RiverSimulationApplication
                 //upBoundaryElevationInputBtn.Enabled = false;
                 movableBedDownInputRdo.Enabled = false;
                 movableBedDownInputBtn.Enabled = false;
+                nearBedBoundaryInputRdo.Enabled = false;    //20150731介面測試問題 9.
             }
         }
 
@@ -1055,12 +1056,17 @@ namespace RiverSimulationApplication
             p.concentrationCalculation = sel;
         }
 
+        private void nearBedBoundaryFluxRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as RadioButton).Checked;
+            p.nearBedBoundaryType = RiverSimulationProfile.NearBedBoundaryType.Flux;
+        }
+
         private void nearBedBoundaryInputRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;
             p.nearBedBoundaryType = RiverSimulationProfile.NearBedBoundaryType.Input;
             nearBedBoundaryInputBtn.Enabled = chk;
-
         }
 
         private void nearBedBoundaryInputBtn_Click(object sender, EventArgs e)

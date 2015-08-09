@@ -32,6 +32,7 @@
             this.ok = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.bitmapGrp = new System.Windows.Forms.GroupBox();
+            this.coorSelCombo = new System.Windows.Forms.ComboBox();
             this.selectBgFilePath = new System.Windows.Forms.Label();
             this.imgInfoBtn = new System.Windows.Forms.Button();
             this.selectBgBtn = new System.Windows.Forms.Button();
@@ -63,7 +64,6 @@
             this.previewSpratePicBox = new System.Windows.Forms.PictureBox();
             this.previewCombo = new System.Windows.Forms.ComboBox();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
-            this.coorSelCombo = new System.Windows.Forms.ComboBox();
             this.mainPanel.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -124,6 +124,19 @@
             this.bitmapGrp.TabIndex = 0;
             this.bitmapGrp.TabStop = false;
             this.bitmapGrp.Text = "底圖設定";
+            // 
+            // coorSelCombo
+            // 
+            this.coorSelCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.coorSelCombo.FormattingEnabled = true;
+            this.coorSelCombo.Items.AddRange(new object[] {
+            "TWD97",
+            "TWD67"});
+            this.coorSelCombo.Location = new System.Drawing.Point(106, 56);
+            this.coorSelCombo.Name = "coorSelCombo";
+            this.coorSelCombo.Size = new System.Drawing.Size(121, 20);
+            this.coorSelCombo.TabIndex = 4;
+            this.coorSelCombo.SelectedIndexChanged += new System.EventHandler(this.coorSelCombo_SelectedIndexChanged);
             // 
             // selectBgFilePath
             // 
@@ -255,7 +268,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 26);
             this.button1.TabIndex = 1;
-            this.button1.Text = "SMS";
+            this.button1.Text = "Delft 3D";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // runCcheMeshBtn
@@ -465,19 +478,6 @@
             this.mapPicBox.SelectRow = false;
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 11;
-            // 
-            // coorSelCombo
-            // 
-            this.coorSelCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.coorSelCombo.FormattingEnabled = true;
-            this.coorSelCombo.Items.AddRange(new object[] {
-            "TWD97",
-            "TWD67"});
-            this.coorSelCombo.Location = new System.Drawing.Point(106, 56);
-            this.coorSelCombo.Name = "coorSelCombo";
-            this.coorSelCombo.Size = new System.Drawing.Size(121, 20);
-            this.coorSelCombo.TabIndex = 4;
-            this.coorSelCombo.SelectedIndexChanged += new System.EventHandler(this.coorSelCombo_SelectedIndexChanged);
             // 
             // ImportForm
             // 

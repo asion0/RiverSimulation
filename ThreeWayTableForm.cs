@@ -616,7 +616,7 @@ namespace RiverSimulationApplication
                     dataGridView[0, 1].Style.BackColor = rowHeaderColor;
                     for (int jw = jStart; jw < jStart + p.inputGrid.GetI; ++jw)
                     {
-                        dataGridView[0, jw].Value = (jw - jStart).ToString();
+                        dataGridView[0, jw].Value = (jw - jStart + 1).ToString();
                         dataGridView[0, jw].Style.BackColor = rowHeaderColor;
                     }
                     //buttonText = "均一值";

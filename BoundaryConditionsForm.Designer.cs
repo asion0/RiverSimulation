@@ -96,7 +96,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.nearBedBoundaryPanel = new System.Windows.Forms.Panel();
-            this.nearBedBoundaryInputRdo = new System.Windows.Forms.RadioButton();
+            this.nearBedBoundaryFluxRdo = new System.Windows.Forms.RadioButton();
             this.nearBedBoundaryAutoRdo = new System.Windows.Forms.RadioButton();
             this.nearBedBoundaryInputBtn = new System.Windows.Forms.Button();
             this.nearBedBoundaryAutoCombo = new System.Windows.Forms.ComboBox();
@@ -141,6 +141,7 @@
             this.upBoundaryElevationInputRdo = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
+            this.nearBedBoundaryInputRdo = new System.Windows.Forms.RadioButton();
             this.mainPanel.SuspendLayout();
             this.movableTypeGroup.SuspendLayout();
             this.waterTypeGroup.SuspendLayout();
@@ -888,25 +889,26 @@
             // 
             this.nearBedBoundaryPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.nearBedBoundaryPanel.Controls.Add(this.nearBedBoundaryInputRdo);
+            this.nearBedBoundaryPanel.Controls.Add(this.nearBedBoundaryFluxRdo);
             this.nearBedBoundaryPanel.Controls.Add(this.nearBedBoundaryAutoRdo);
             this.nearBedBoundaryPanel.Controls.Add(this.nearBedBoundaryInputBtn);
             this.nearBedBoundaryPanel.Controls.Add(this.nearBedBoundaryAutoCombo);
             this.nearBedBoundaryPanel.Location = new System.Drawing.Point(18, 509);
             this.nearBedBoundaryPanel.Name = "nearBedBoundaryPanel";
-            this.nearBedBoundaryPanel.Size = new System.Drawing.Size(440, 70);
+            this.nearBedBoundaryPanel.Size = new System.Drawing.Size(440, 92);
             this.nearBedBoundaryPanel.TabIndex = 5;
             // 
-            // nearBedBoundaryInputRdo
+            // nearBedBoundaryFluxRdo
             // 
-            this.nearBedBoundaryInputRdo.AutoSize = true;
-            this.nearBedBoundaryInputRdo.Location = new System.Drawing.Point(18, 39);
-            this.nearBedBoundaryInputRdo.Name = "nearBedBoundaryInputRdo";
-            this.nearBedBoundaryInputRdo.Size = new System.Drawing.Size(104, 16);
-            this.nearBedBoundaryInputRdo.TabIndex = 6;
-            this.nearBedBoundaryInputRdo.TabStop = true;
-            this.nearBedBoundaryInputRdo.Text = "通量 / 給定濃度";
-            this.nearBedBoundaryInputRdo.UseVisualStyleBackColor = true;
-            this.nearBedBoundaryInputRdo.CheckedChanged += new System.EventHandler(this.nearBedBoundaryInputRdo_CheckedChanged);
+            this.nearBedBoundaryFluxRdo.AutoSize = true;
+            this.nearBedBoundaryFluxRdo.Location = new System.Drawing.Point(18, 39);
+            this.nearBedBoundaryFluxRdo.Name = "nearBedBoundaryFluxRdo";
+            this.nearBedBoundaryFluxRdo.Size = new System.Drawing.Size(47, 16);
+            this.nearBedBoundaryFluxRdo.TabIndex = 6;
+            this.nearBedBoundaryFluxRdo.TabStop = true;
+            this.nearBedBoundaryFluxRdo.Text = "通量";
+            this.nearBedBoundaryFluxRdo.UseVisualStyleBackColor = true;
+            this.nearBedBoundaryFluxRdo.CheckedChanged += new System.EventHandler(this.nearBedBoundaryFluxRdo_CheckedChanged);
             // 
             // nearBedBoundaryAutoRdo
             // 
@@ -923,7 +925,7 @@
             // nearBedBoundaryInputBtn
             // 
             this.nearBedBoundaryInputBtn.Enabled = false;
-            this.nearBedBoundaryInputBtn.Location = new System.Drawing.Point(121, 34);
+            this.nearBedBoundaryInputBtn.Location = new System.Drawing.Point(121, 61);
             this.nearBedBoundaryInputBtn.Name = "nearBedBoundaryInputBtn";
             this.nearBedBoundaryInputBtn.Size = new System.Drawing.Size(104, 26);
             this.nearBedBoundaryInputBtn.TabIndex = 5;
@@ -1394,6 +1396,18 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 16;
             // 
+            // nearBedBoundaryInputRdo
+            // 
+            this.nearBedBoundaryInputRdo.AutoSize = true;
+            this.nearBedBoundaryInputRdo.Location = new System.Drawing.Point(18, 67);
+            this.nearBedBoundaryInputRdo.Name = "nearBedBoundaryInputRdo";
+            this.nearBedBoundaryInputRdo.Size = new System.Drawing.Size(71, 16);
+            this.nearBedBoundaryInputRdo.TabIndex = 6;
+            this.nearBedBoundaryInputRdo.TabStop = true;
+            this.nearBedBoundaryInputRdo.Text = "給定濃度";
+            this.nearBedBoundaryInputRdo.UseVisualStyleBackColor = true;
+            this.nearBedBoundaryInputRdo.CheckedChanged += new System.EventHandler(this.nearBedBoundaryInputRdo_CheckedChanged);
+            // 
             // BoundaryConditionsForm
             // 
             this.AcceptButton = this.ok;
@@ -1537,7 +1551,7 @@
         private System.Windows.Forms.TextBox sideWindShearTxt;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Button boundaryUpVerticalDistributionBtn;
-        private System.Windows.Forms.RadioButton nearBedBoundaryInputRdo;
+        private System.Windows.Forms.RadioButton nearBedBoundaryFluxRdo;
         private System.Windows.Forms.RadioButton nearBedBoundaryAutoRdo;
         private System.Windows.Forms.Button boundaryDownVerticalDistributionBtn;
         private System.Windows.Forms.Label label20;
@@ -1567,5 +1581,6 @@
         private System.Windows.Forms.RadioButton up3dValue;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.RadioButton nearBedBoundaryInputRdo;
     }
 }

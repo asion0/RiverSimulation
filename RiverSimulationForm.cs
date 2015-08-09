@@ -189,6 +189,26 @@ namespace RiverSimulationApplication
             UpdateStatus();
         }
 
+        private void runSimulationResultBtn_Click(object sender, EventArgs e)
+        {
+            if (!RiverSimulationProfile.profile.IsSimulationResultReady())
+            {
+                String errStr = "尚未模擬完成！";
+
+                MessageBox.Show(errStr, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            SimulationResultForm form = new SimulationResultForm();
+            if (DialogResult.OK == form.ShowDialog())
+            {
+
+            }
+
+            RiverSimulationProfile.profile.runSimulationFinished = true;
+            UpdateStatus();
+        }
+
         SolidBrush lineBrush = new SolidBrush(Color.Blue);
         Pen p = new Pen(Color.Black, 1);
         Pen pp = new Pen(Color.Red, 3);
@@ -294,15 +314,6 @@ namespace RiverSimulationApplication
             g.DrawLine(p, up.Left + up.Width / 2, up.Bottom,
                           up.Left + up.Width / 2, dn.Top);
 
-        }
-
-        private void runSimulationResultBtn_Click(object sender, EventArgs e)
-        {
-            if (!RiverSimulationProfile.profile.IsRunSimulationReady())
-            {
-                MessageBox.Show("請先完成前置設定", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
         }
 
         private void aboutMnuItem_Click(object sender, EventArgs e)

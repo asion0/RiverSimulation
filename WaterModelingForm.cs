@@ -138,6 +138,7 @@ namespace RiverSimulationApplication
             }
 
             //結構物設置
+            noNotice = true;
             tBarSetChk.Checked = p.tBarSet;
             tBarNumberTxt.Text = p.tBarNumber.ToString();
 
@@ -149,7 +150,7 @@ namespace RiverSimulationApplication
 
             sedimentationWeirSetChk.Checked = p.sedimentationWeirSet;
             sedimentationWeirNumberTxt.Text = p.sedimentationWeirNumber.ToString();
-
+            noNotice = false;
             //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
             highSandEffectAlpha1Txt.Text = p.highSandEffectAlpha1.ToString();
             highSandEffectBeta1Txt.Text = p.highSandEffectBeta1.ToString();
@@ -190,7 +191,7 @@ namespace RiverSimulationApplication
             roughnessHeightKsHelpBtn.Enabled = p.Is3DMode();
 
             tvInMainstreamDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
-            tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine);
+            tvInSideDirectionTxt.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.UserDefine) && (p.Is3DMode());  //20150731介面測試問題 4.
             zeroEquationTypeCombo.Enabled = (p.turbulenceViscosityType == RiverSimulationProfile.TurbulenceViscosityType.ZeroEquation);
             twinEquationRdo.Enabled = p.Is3DMode();
             zeroEquationTypeCombo.Enabled = p.Is3DMode();
@@ -704,11 +705,21 @@ namespace RiverSimulationApplication
                 p.curvatureRadius = (double[,])form.GenericDoubleData().Clone();
             }
         }
+        
+        private bool noNotice = false;
+        private void NoticeStructureChange()
+        {
+            if (!noNotice)
+            {
+                MessageBox.Show("結構物變更請至計算格網修改Z值！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
 
         private void tBarChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
             p.tBarSet = chk;
+            NoticeStructureChange();
             UpdateStatus(); //操作此UI會有互動變化則需呼叫
         }
 
@@ -716,6 +727,7 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as CheckBox).Checked;
             p.bridgePierSet = chk;
+            NoticeStructureChange();
             UpdateStatus(); //操作此UI會有互動變化則需呼叫
         }
 
@@ -723,6 +735,7 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as CheckBox).Checked;
             p.groundsillWorkSet = chk;
+            NoticeStructureChange();
             UpdateStatus(); //操作此UI會有互動變化則需呼叫
         }
 
@@ -730,6 +743,7 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as CheckBox).Checked;
             p.sedimentationWeirSet = chk;
+            NoticeStructureChange();
             UpdateStatus(); //操作此UI會有互動變化則需呼叫
         }
 
@@ -783,11 +797,9 @@ namespace RiverSimulationApplication
                 (p.sedimentationWeirSet) ? p.sedimentationWeirNumber : 0, sedimentationWeirSetChk.Text);
 
             DialogResult r = form.ShowDialog();
+            NoticeStructureChange();
             if (DialogResult.OK == r)
             {
-                //p.separateArray = (double[])form.SeparateData().Clone();
-                //ShowGridMap(PicBoxType.Sprate);
-                //DrawPreview();
             }
         }
 

@@ -188,6 +188,14 @@ namespace RiverSimulationApplication
             {
                 fullPanel.Visible = false;
             }
+
+            //20150731介面測試問題 6. 再度改為disable
+            if (Program.programVersion.DemoVersion)
+            {
+                diffusionFormulaUseChk.Enabled = false;
+                diffusionFormulaCombo.Enabled = false;
+            }
+
         }
 
         private enum PreviewType
@@ -254,7 +262,7 @@ namespace RiverSimulationApplication
                 return false;
             }
 
-            if(p.diffusionFormulaUse)
+            if (diffusionFormulaUseChk.Enabled && p.diffusionFormulaUse)
              {
                 if(p.diffusionFormula == RiverSimulationProfile.DiffusionFormulaType.None)
                 {

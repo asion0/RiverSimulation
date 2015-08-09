@@ -79,7 +79,7 @@ namespace RiverSimulationApplication
                         foreach (Point pt in pl)
                         {
                             dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
-                            dataGridViewZ[pt.Y, pt.X].Value = "99999999";
+                            dataGridViewZ[pt.Y, pt.X].Value = "99999";
                             dataGridViewZ[pt.Y, pt.X].Style.BackColor = Color.LightGray;
                         }
                     }
@@ -96,7 +96,7 @@ namespace RiverSimulationApplication
                         foreach (Point pt in pl)
                         {
                             dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
-                            dataGridViewZ[pt.Y, pt.X].Value = "99999999";
+                            dataGridViewZ[pt.Y, pt.X].Value = "9999";
                             dataGridViewZ[pt.Y, pt.X].Style.BackColor = Color.LightGray;
                         }
                     }

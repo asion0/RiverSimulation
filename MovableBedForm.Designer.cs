@@ -477,7 +477,7 @@
             // 
             this.valueParamPanel.Controls.Add(this.groupBox10);
             this.valueParamPanel.Controls.Add(this.valueParamBackBtn);
-            this.valueParamPanel.Location = new System.Drawing.Point(8, 663);
+            this.valueParamPanel.Location = new System.Drawing.Point(8, 292);
             this.valueParamPanel.Name = "valueParamPanel";
             this.valueParamPanel.Size = new System.Drawing.Size(500, 670);
             this.valueParamPanel.TabIndex = 12;
@@ -1762,12 +1762,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.previewSedimentCompositionPanel);
             this.Controls.Add(this.previewCombo);
             this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.rockStablePanel);
-            this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.ok);

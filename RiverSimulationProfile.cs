@@ -744,6 +744,7 @@ namespace RiverSimulationApplication
         {
             None,
             ConcentrationCalculation,
+            Flux,
             Input,
         }
         public NearBedBoundaryType nearBedBoundaryType;         //4.2.3 近底床濃度邊界二選一 實數 a. 三維only
@@ -1748,7 +1749,9 @@ namespace RiverSimulationApplication
                         double v;
                         if (suspendedLoadDepthAvgConcentration.type == TwoInOne.Type.UseArray)
                         {   //20150306 - 改用科學符號1.36-E04，統一小數點後2位，這裡只有3位精度沒關係。
-                            v = suspendedLoadDepthAvgConcentration.Array3D()[k, j, t];
+                            double v1= suspendedLoadDepthAvgConcentration.Array3D()[k, j, t];
+                            double v2 = suspendedLoadDepthAvgConcentration.Value3D()[k, 0, t];
+                            v = v1 * v2 / 100.0;
                             //sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Array3D()[k, j, t]);
                         }
                         else

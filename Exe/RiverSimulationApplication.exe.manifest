@@ -44,28 +44,64 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="45056">
-      <assemblyIdentity name="GridPictureBox" version="1.0.5700.1566" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="GridPictureBox" version="1.0.5700.19829" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>fJYYp//QnH4DxgBzBP7orzL5Grxpe6nKJcZ6qHqGQJI=</dsig:DigestValue>
+        <dsig:DigestValue>lUM3HhxWrNY/iFfZWXXxwYx7fIueDpcJaiaBPj1zrhc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="2027520">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="2096128">
       <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.43" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>B6904DZTCKSl+/tmUhnkBESHRyXNx7zKebr1nF3IqYU=</dsig:DigestValue>
+        <dsig:DigestValue>kreAPPyBkBoiojYceXxpgd24P7pKYUYQAtjBzUp4TW0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="desc_d.png" size="10315">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>7Cxg+MqU4UUscu08TjUapibimP3sg8earSoTKL0t3AI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="desc_h.png" size="15984">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>TTkuWfrf/0xOxmMqbo3tRqziuMlnqtDiTUvo1zjAe4c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="desc_n.png" size="21315">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>++D+vuHWFjaMEy4hraGP5Xl9XrlCiG5nrJ27EHNHCc4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="desc_p.png" size="18899">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>UiHp+m9eyjnSRQqDEFBEFg2K1/1yXZ6JAgrS0W6mpqk=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="RiverSimulation.ico" size="91133">
     <hash>
       <dsig:Transforms>

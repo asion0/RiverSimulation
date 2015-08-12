@@ -113,9 +113,9 @@
             this.projectDescriptBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.projectDescriptBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.projectDescriptBtn.Enabled = false;
-            this.projectDescriptBtn.Location = new System.Drawing.Point(540, 319);
+            this.projectDescriptBtn.Location = new System.Drawing.Point(389, 287);
             this.projectDescriptBtn.Name = "projectDescriptBtn";
-            this.projectDescriptBtn.Size = new System.Drawing.Size(70, 48);
+            this.projectDescriptBtn.Size = new System.Drawing.Size(222, 125);
             this.projectDescriptBtn.TabIndex = 2;
             this.projectDescriptBtn.UseVisualStyleBackColor = true;
             this.projectDescriptBtn.Click += new System.EventHandler(this.projectDescriptBtn_Click);
@@ -125,7 +125,7 @@
             this.projectTitle.Font = new System.Drawing.Font("新細明體", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.projectTitle.Location = new System.Drawing.Point(36, 319);
             this.projectTitle.Name = "projectTitle";
-            this.projectTitle.Size = new System.Drawing.Size(498, 48);
+            this.projectTitle.Size = new System.Drawing.Size(347, 48);
             this.projectTitle.TabIndex = 3;
             this.projectTitle.Text = "專案：";
             this.projectTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

@@ -331,6 +331,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Bitmaps\desc_d.png" />
+    <None Include="Bitmaps\desc_h.png" />
+    <None Include="Bitmaps\desc_n.png" />
+    <None Include="Bitmaps\desc_p.png" />
+    <Content Include="desc_d.png" />
+    <Content Include="desc_h.png" />
+    <Content Include="desc_n.png" />
+    <Content Include="desc_p.png" />
     <Content Include="RiverSimulation.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

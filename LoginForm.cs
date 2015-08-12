@@ -19,9 +19,21 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+        private Image descBmpNormal = new Bitmap(RiverSimulationApplication.Properties.Resources.desc_n);
+        private Image descBmpPush = new Bitmap(RiverSimulationApplication.Properties.Resources.desc_p);
+        private Image descBmpHighlight = new Bitmap(RiverSimulationApplication.Properties.Resources.desc_h);
+        private Image descBmpDisable = new Bitmap(RiverSimulationApplication.Properties.Resources.desc_d);
         private void LoginForm_Load(object sender, EventArgs e)
         {
-
+            projectDescriptBtn.Image = descBmpNormal;
+            projectDescriptBtn.AutoSize = true;
+            //projectDescriptBtn.BackColor = Color.Transparent;
+            //projectDescriptBtn.FlatStyle = FlatStyle.Flat;
+            //projectDescriptBtn.FlatAppearance.BorderSize = 0;
+            //projectDescriptBtn.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            //projectDescriptBtn.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            //projectDescriptBtn.ForeColor = System.Drawing.Color.White;
+            //projectDescriptBtn.Text = "Hello";
         }
 
         /*

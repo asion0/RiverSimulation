@@ -1370,7 +1370,14 @@ namespace RiverSimulationApplication
             //20150224要求改為0
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。
             sb.AppendFormat("{0,8}", maxIterationsNum.ToString());     //水理最大疊代次數。1.1.2.3
-            sb.AppendFormat("{0,8}", ((int)curvatureRadiusType - 1).ToString());     //1.3.1 曲率半徑 是否自動計算
+            if (curvatureRadiusType == CurvatureRadiusType.None)
+            {
+                sb.AppendFormat("{0,8}", (1).ToString());     //1.3.1 曲率半徑 是否自動計算
+            }
+            else
+            {
+                sb.AppendFormat("{0,8}", ((int)curvatureRadiusType - 1).ToString());     //1.3.1 曲率半徑 是否自動計算
+            }
             sb.Append("\n");
 
             //註5：
@@ -2046,7 +2053,14 @@ namespace RiverSimulationApplication
             sb.AppendFormat("\n");
 
             //註34：模式預設值
-            sb.AppendFormat("     0.5     0.1     0.1       1       1       1       1       1       0       0\n"); 
+            if (nearBedBoundaryType == NearBedBoundaryType.Input)
+            {
+                sb.AppendFormat("     0.5     0.1     0.1       1       1       1       1       1       4       2\n");
+            }
+            else
+            {
+                sb.AppendFormat("     0.5     0.1     0.1       1       1       1       1       1       4       1\n");
+            }
             sb.AppendFormat("       0\n");
             sb.AppendFormat("       1       1       1       1       0       0\n");
 

@@ -370,14 +370,14 @@ namespace RiverSimulationApplication
                 XmlDocument desc = new XmlDocument();
                 desc.Load(Program.GetDescriptionFileFullPath());
                 XmlNode files = desc.SelectSingleNode(@"Files");    //選擇節點
-                XmlElement f = files.SelectSingleNode(Program.projectFileName) as XmlElement;
+                XmlElement f = files.SelectSingleNode("F_" + Program.projectFileName) as XmlElement;
                 if (f != null)
                 {   //更新欄位
                     f.SetAttribute("Text", dlg.inputTxt.Text);
                 }
                 else
                 {   //新增欄位
-                    XmlElement f2 = desc.CreateElement(Program.projectFileName);
+                    XmlElement f2 = desc.CreateElement("F_" + Program.projectFileName);
                     f2.SetAttribute("Text", dlg.inputTxt.Text);
                     files.AppendChild(f2);
                 }
@@ -388,7 +388,7 @@ namespace RiverSimulationApplication
                 XmlDocument doc = new XmlDocument();
                 XmlNode files = doc.CreateElement(@"Files");//選擇節點
                 doc.AppendChild(files);
-                XmlElement description = doc.CreateElement(Program.projectFileName);
+                XmlElement description = doc.CreateElement("F_" + Program.projectFileName);
                 description.SetAttribute("Text", dlg.inputTxt.Text);    //設定屬性
                 files.AppendChild(description);
                 doc.Save(Program.GetDescriptionFileFullPath());

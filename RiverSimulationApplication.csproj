@@ -120,6 +120,18 @@
     <Compile Include="FeedbackForm.Designer.cs">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResultTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultTableForm.Designer.cs">
+      <DependentUpon>ResultTableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResultTimeSelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultTimeSelForm.Designer.cs">
+      <DependentUpon>ResultTimeSelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SimulationResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +233,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FeedbackForm.resx">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultTableForm.resx">
+      <DependentUpon>ResultTableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultTimeSelForm.resx">
+      <DependentUpon>ResultTimeSelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SimulationResultForm.resx">
       <DependentUpon>SimulationResultForm.cs</DependentUpon>

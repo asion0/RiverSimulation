@@ -25,8 +25,8 @@ namespace RiverSimulationApplication
         private Image descBmpDisable = new Bitmap(RiverSimulationApplication.Properties.Resources.desc_d);
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            projectDescriptBtn.Image = descBmpNormal;
-            projectDescriptBtn.AutoSize = true;
+            //projectDescriptBtn.Image = descBmpNormal;
+            //projectDescriptBtn.AutoSize = true;
             //projectDescriptBtn.BackColor = Color.Transparent;
             //projectDescriptBtn.FlatStyle = FlatStyle.Flat;
             //projectDescriptBtn.FlatAppearance.BorderSize = 0;
@@ -139,7 +139,7 @@ namespace RiverSimulationApplication
                 String fileName = (n as XmlElement).Name;
                 String fileDesc = (n as XmlElement).GetAttribute("Text");
 
-                fs.WriteLine(fileName + "\t\t" + fileDesc);
+                fs.WriteLine(fileName.Substring(2) + "\t\t" + fileDesc);
             }
             fs.Close();
             System.Diagnostics.Process.Start(tempTxtFile);

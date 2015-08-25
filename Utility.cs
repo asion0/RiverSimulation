@@ -129,7 +129,7 @@ namespace RiverSimulationApplication
             cs.Write(inputByteArray, 0, inputByteArray.Length);
             cs.FlushFinalBlock();
 
-            StringBuilder ret = new StringBuilder();
+            //StringBuilder ret = new StringBuilder();
             return System.Text.Encoding.Default.GetString(ms.ToArray());
         }
         
@@ -1077,6 +1077,68 @@ namespace RiverSimulationApplication
                     }
                 }
                 v.Rows[i].HeaderCell.Value = name;
+            }
+            v.PerformLayout();
+        }
+
+        public static void InitializeDataGridView2(DataGridView v,
+            int colStart, int colEnd,
+            int rowStart, int rowEnd,
+            int columnWidth = 48, int rowHeadersWidth = 64,
+            string tableName = "", string colName = "", string rowName = "",
+            bool nocolNum = false, bool noRowNum = false,
+            bool invertCol = false, bool invertRow = false)
+        {
+            v.Rows.Clear();
+            // Create an unbound DataGridView by declaring a column count.
+            v.ColumnCount = colEnd - colStart;
+            v.ColumnHeadersVisible = true;
+
+            // Set the column header style.
+            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+
+            columnHeaderStyle.BackColor = Color.Beige;
+            //columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+            v.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+
+            string[] row = new string[colEnd - colStart];
+            // Set the column header names.
+            //int c = 1;
+            for (int i = colStart; i < colEnd; ++i)
+            {
+                string name = colName;
+                if (!nocolNum)
+                {
+                    if (invertCol)
+                    {
+                        name += " " + (colEnd - i).ToString();
+                    }
+                    else
+                    {
+                        name += " " + (i + 1).ToString();
+                    }
+                }
+                v.Columns[i - colStart].Name = name;
+                v.Columns[i - colStart].Width = columnWidth;
+            }
+            v.RowHeadersWidth = rowHeadersWidth;
+            v.TopLeftHeaderCell.Value = tableName;
+            for (int i = rowStart; i < rowEnd; i++)
+            {
+                v.Rows.Add(row);
+                string name = rowName;
+                if (!noRowNum)
+                {
+                    if (invertRow)
+                    {
+                        name += " " + (rowEnd - i).ToString();
+                    }
+                    else
+                    {
+                        name += " " + (i + 1).ToString();
+                    }
+                }
+                v.Rows[i - rowStart].HeaderCell.Value = name;
             }
             v.PerformLayout();
         }

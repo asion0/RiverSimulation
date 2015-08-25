@@ -113,9 +113,9 @@
             this.projectDescriptBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.projectDescriptBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.projectDescriptBtn.Enabled = false;
-            this.projectDescriptBtn.Location = new System.Drawing.Point(389, 287);
+            this.projectDescriptBtn.Location = new System.Drawing.Point(389, 316);
             this.projectDescriptBtn.Name = "projectDescriptBtn";
-            this.projectDescriptBtn.Size = new System.Drawing.Size(222, 125);
+            this.projectDescriptBtn.Size = new System.Drawing.Size(86, 52);
             this.projectDescriptBtn.TabIndex = 2;
             this.projectDescriptBtn.UseVisualStyleBackColor = true;
             this.projectDescriptBtn.Click += new System.EventHandler(this.projectDescriptBtn_Click);

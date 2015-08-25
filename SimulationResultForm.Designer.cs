@@ -68,7 +68,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.generateResultBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.formGrp.SuspendLayout();
@@ -84,6 +84,7 @@
             resources.ApplyResources(this.ok, "ok");
             this.ok.Name = "ok";
             this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // groupBox1
             // 
@@ -301,6 +302,7 @@
             resources.ApplyResources(this.timeBtn, "timeBtn");
             this.timeBtn.Name = "timeBtn";
             this.timeBtn.UseVisualStyleBackColor = true;
+            this.timeBtn.Click += new System.EventHandler(this.timeBtn_Click);
             // 
             // axisGrp
             // 
@@ -345,11 +347,12 @@
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // generateResultBtn
             // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.generateResultBtn, "generateResultBtn");
+            this.generateResultBtn.Name = "generateResultBtn";
+            this.generateResultBtn.UseVisualStyleBackColor = true;
+            this.generateResultBtn.Click += new System.EventHandler(this.generateResultBtn_Click);
             // 
             // SimulationResultForm
             // 
@@ -362,7 +365,7 @@
             this.Controls.Add(this.timeGrp);
             this.Controls.Add(this.formGrp);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.generateResultBtn);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ok);
             this.Name = "SimulationResultForm";
@@ -426,6 +429,6 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button generateResultBtn;
     }
 }

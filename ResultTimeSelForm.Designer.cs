@@ -30,8 +30,8 @@
         {
             this.timeCmb = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.descLbl = new System.Windows.Forms.Label();
             this.ok = new System.Windows.Forms.Button();
+            this.timeLsb = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // timeCmb
@@ -52,14 +52,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "選取時間：";
             // 
-            // descLbl
-            // 
-            this.descLbl.Location = new System.Drawing.Point(12, 9);
-            this.descLbl.Name = "descLbl";
-            this.descLbl.Size = new System.Drawing.Size(519, 63);
-            this.descLbl.TabIndex = 2;
-            this.descLbl.Text = "label1";
-            // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -72,13 +64,23 @@
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
+            // timeLsb
+            // 
+            this.timeLsb.FormattingEnabled = true;
+            this.timeLsb.ItemHeight = 12;
+            this.timeLsb.Location = new System.Drawing.Point(199, 12);
+            this.timeLsb.Name = "timeLsb";
+            this.timeLsb.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.timeLsb.Size = new System.Drawing.Size(120, 280);
+            this.timeLsb.TabIndex = 7;
+            // 
             // ResultTimeSelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 310);
+            this.Controls.Add(this.timeLsb);
             this.Controls.Add(this.ok);
-            this.Controls.Add(this.descLbl);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.timeCmb);
             this.Name = "ResultTimeSelForm";
@@ -94,7 +96,7 @@
 
         private System.Windows.Forms.ComboBox timeCmb;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label descLbl;
         private System.Windows.Forms.Button ok;
+        private System.Windows.Forms.ListBox timeLsb;
     }
 }

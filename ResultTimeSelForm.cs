@@ -42,7 +42,7 @@ namespace RiverSimulationApplication
 
         private void ResultTimeSelForm_Load(object sender, EventArgs e)
         {
-            descLbl.Text = desc;
+            //descLbl.Text = desc;
             if(type == ResultTimeType.SingleSelect)
             {
                 timeSel = new List<double>();
@@ -50,22 +50,45 @@ namespace RiverSimulationApplication
                 {
                     timeCmb.DataSource = timeList;
                 }
+                if (timeLsb != null)
+                {
+                    timeLsb.DataSource = timeList;
+                }
             }
         }
 
         private void ok_Click(object sender, EventArgs e)
         {
-            if (timeCmb.SelectedIndex >= 0)
+            object o = timeLsb.SelectedItems;
+            for (int i = 0; i < timeLsb.Items.Count; ++i)
             {
-                timeSel.Add((timeList as List<double>)[timeCmb.SelectedIndex]);
+                if(timeLsb.GetSelected(i))
+                {
+                    timeSel.Add((timeList as List<double>)[i]);
+                }
             }
-            else
+            if (timeSel.Count == 0)
             {
                 //e.Cancel = true;
                 MessageBox.Show("尚未選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+
             DialogResult = DialogResult.OK;
+            MessageBox.Show(timeSel.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            return;
+            
+            //if (timeCmb.SelectedIndex >= 0)
+            //    {
+            //        timeSel.Add((timeList as List<double>)[timeCmb.SelectedIndex]);
+            //    }
+            //    else
+            //    {
+            //        //e.Cancel = true;
+            //        MessageBox.Show("尚未選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //        return;
+            //    }
+            //DialogResult = DialogResult.OK;
         }
     }
 }

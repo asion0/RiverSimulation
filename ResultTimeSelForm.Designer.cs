@@ -28,25 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.timeCmb = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ok = new System.Windows.Forms.Button();
             this.timeLsb = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.clearBtn = new System.Windows.Forms.Button();
+            this.selectAllChk = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            // 
-            // timeCmb
-            // 
-            this.timeCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.timeCmb.FormattingEnabled = true;
-            this.timeCmb.Location = new System.Drawing.Point(14, 108);
-            this.timeCmb.Name = "timeCmb";
-            this.timeCmb.Size = new System.Drawing.Size(161, 20);
-            this.timeCmb.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 93);
+            this.label1.Location = new System.Drawing.Point(12, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 2;
@@ -56,7 +49,7 @@
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ok.Location = new System.Drawing.Point(435, 266);
+            this.ok.Location = new System.Drawing.Point(139, 325);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 6;
@@ -66,23 +59,59 @@
             // 
             // timeLsb
             // 
+            this.timeLsb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.timeLsb.FormattingEnabled = true;
             this.timeLsb.ItemHeight = 12;
-            this.timeLsb.Location = new System.Drawing.Point(199, 12);
+            this.timeLsb.Location = new System.Drawing.Point(14, 70);
             this.timeLsb.Name = "timeLsb";
             this.timeLsb.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.timeLsb.Size = new System.Drawing.Size(120, 280);
+            this.timeLsb.Size = new System.Drawing.Size(197, 244);
             this.timeLsb.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(218, 302);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 12);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "秒";
+            // 
+            // clearBtn
+            // 
+            this.clearBtn.Location = new System.Drawing.Point(111, 12);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(100, 31);
+            this.clearBtn.TabIndex = 9;
+            this.clearBtn.Text = "清除";
+            this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            // 
+            // selectAllChk
+            // 
+            this.selectAllChk.AutoSize = true;
+            this.selectAllChk.Location = new System.Drawing.Point(14, 20);
+            this.selectAllChk.Name = "selectAllChk";
+            this.selectAllChk.Size = new System.Drawing.Size(48, 16);
+            this.selectAllChk.TabIndex = 10;
+            this.selectAllChk.Text = "全選";
+            this.selectAllChk.UseVisualStyleBackColor = true;
+            this.selectAllChk.CheckedChanged += new System.EventHandler(this.selectAllChk_CheckedChanged);
             // 
             // ResultTimeSelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 310);
+            this.ClientSize = new System.Drawing.Size(247, 361);
+            this.Controls.Add(this.selectAllChk);
+            this.Controls.Add(this.clearBtn);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.timeLsb);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.timeCmb);
             this.Name = "ResultTimeSelForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "選取時間";
@@ -94,9 +123,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox timeCmb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.ListBox timeLsb;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button clearBtn;
+        private System.Windows.Forms.CheckBox selectAllChk;
     }
 }

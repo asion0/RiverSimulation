@@ -20,7 +20,8 @@ namespace RiverSimulationApplication
         private object timeList = null;
         private string desc = "";
         private ResultTimeType type = ResultTimeType.SingleSelect;
-        private List<double> timeSel = null;
+        //private List<double> timeSel = null;
+        private List<int> timeSelIdx = null;
 
         public enum ResultTimeType
         {
@@ -35,25 +36,27 @@ namespace RiverSimulationApplication
             this.type = type;
         }
 
-        public List<double> GetTimeSelect()
+        //public List<double> GetTimeSelect()
+        public List<int> GetTimeSelect()
         {
-            return timeSel;
+            //return timeSel;
+            return timeSelIdx;
         }
 
         private void ResultTimeSelForm_Load(object sender, EventArgs e)
         {
-            //descLbl.Text = desc;
-            if(type == ResultTimeType.SingleSelect)
+            timeLsb.SelectionMode = (type == ResultTimeType.SingleSelect) ? SelectionMode.One : SelectionMode.MultiExtended;
+            if (type == ResultTimeType.SingleSelect)
             {
-                timeSel = new List<double>();
-                if (timeList != null)
-                {
-                    timeCmb.DataSource = timeList;
-                }
-                if (timeLsb != null)
-                {
-                    timeLsb.DataSource = timeList;
-                }
+                selectAllChk.Enabled = false;
+                clearBtn.Enabled = false;
+            }
+
+            //timeSel = new List<double>();
+            timeSelIdx = new List<int>();
+            if (timeLsb != null)
+            {
+                timeLsb.DataSource = timeList;
             }
         }
 
@@ -64,10 +67,13 @@ namespace RiverSimulationApplication
             {
                 if(timeLsb.GetSelected(i))
                 {
-                    timeSel.Add((timeList as List<double>)[i]);
+                    //timeSel.Add((timeList as List<double>)[i]);
+                    timeSelIdx.Add(i);
                 }
             }
-            if (timeSel.Count == 0)
+
+            //if (timeSel.Count == 0)
+            if (timeSelIdx.Count == 0)
             {
                 //e.Cancel = true;
                 MessageBox.Show("尚未選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -75,20 +81,26 @@ namespace RiverSimulationApplication
             }
 
             DialogResult = DialogResult.OK;
-            MessageBox.Show(timeSel.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //MessageBox.Show(timeSel.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             return;
-            
-            //if (timeCmb.SelectedIndex >= 0)
-            //    {
-            //        timeSel.Add((timeList as List<double>)[timeCmb.SelectedIndex]);
-            //    }
-            //    else
-            //    {
-            //        //e.Cancel = true;
-            //        MessageBox.Show("尚未選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //        return;
-            //    }
-            //DialogResult = DialogResult.OK;
+        }
+
+        private void selectAllChk_CheckedChanged(object sender, EventArgs e)
+        {
+            if((sender as CheckBox).Checked)
+            {
+                timeLsb.BeginUpdate();
+                for (int i = 0; i < timeLsb.Items.Count; i++)
+                {
+                    timeLsb.SelectedIndex = i;
+                }
+                timeLsb.EndUpdate();
+            }
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            timeLsb.ClearSelected();
         }
     }
 }

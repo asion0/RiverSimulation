@@ -264,11 +264,13 @@
             // 
             resources.ApplyResources(this.posJTxt, "posJTxt");
             this.posJTxt.Name = "posJTxt";
+            this.posJTxt.TextChanged += new System.EventHandler(this.posJTxt_TextChanged);
             // 
             // posITxt
             // 
             resources.ApplyResources(this.posITxt, "posITxt");
             this.posITxt.Name = "posITxt";
+            this.posITxt.TextChanged += new System.EventHandler(this.posITxt_TextChanged);
             // 
             // posIchk
             // 

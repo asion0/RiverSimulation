@@ -1251,6 +1251,9 @@
   <data name="&gt;&gt;timeBtn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="timeGrp.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="timeGrp.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 414</value>
   </data>

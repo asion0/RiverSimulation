@@ -20,6 +20,9 @@ namespace RiverSimulationApplication
         }
 
         RiverSimulationProfile p = null;
+        private List<double> resedTimeList = null;
+        private List<double> sedTimeList = null;
+
         private void SimulationResultForm_Load(object sender, EventArgs e)
         {
             p = RiverSimulationProfile.profile;
@@ -30,7 +33,16 @@ namespace RiverSimulationApplication
                 posKLbl.Text = String.Format("MAX:{0}", p.verticalLevelNumber);
             }
 
-            ParsingTime();
+            if (!ParsingTime("resed.O", ref resedTimeList))
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
+            if (!ParsingTime("SEDoutput.dat", ref sedTimeList))
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
 
         private void graphRdo_CheckedChanged(object sender, EventArgs e)
@@ -197,30 +209,42 @@ namespace RiverSimulationApplication
                     GenerateInitialBottomElevationTable();
                     break;
                 case 1: //水深平均流速-U(m/s)
-                    GenerateDepthAverageFlowSpeedUTable();
+                    //GenerateDepthAverageFlowSpeedUTable();
+                    GenerateTimeIJResultTable(" U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
                     break;
                 case 2: //水深平均流速-V(m/s)
-                     GenerateDepthAverageFlowSpeedVTable();
-                   break;
+                    //GenerateDepthAverageFlowSpeedVTable();
+                    GenerateTimeIJResultTable(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                  break;
                 case 3: //水深平均流速-UV 合向量的絕對值(m/s)
+                   //GenerateDepthAverageFlowSpeedVTableAbs();
                     break;
-                case 4: //底床剪應力(N/m2)
+                case 4: //底床剪應力(N/m2)   //⁰¹²³⁴⁵⁶⁷⁸⁹
+                    GenerateTimeIJResultTable(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
                     break;
                 case 5: //水位(m)
+                    GenerateTimeIJResultTable(" ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
                     break;
                 case 6: //水深(m)
+                    GenerateTimeIJResultTable(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
                     break;
                 case 7: //流量-U(cms)
+                    GenerateTimeIJResultTable(" ZS (M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
                     break;
                 case 8: //流量-V(cms)
-                    break;
+                    GenerateTimeIJResultTable(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
+                   break;
                 case 9: //底床高程(m)
+                   GenerateTimeIJResultTable(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
                     break;
                 case 10: //沖淤深度(m)
+                    GenerateTimeIJResultTable(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
                     break;
                 case 11: //水深平均濃度(ppm)
+                    GenerateTimeIJResultTable(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
                     break;
                 case 12: //粒徑分佈(%)
+                    GenerateTimeIJResultTable(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
                     break;
                 default:
                     break;
@@ -273,6 +297,7 @@ namespace RiverSimulationApplication
 
         }
 
+        /*
         private void GenerateDepthAverageFlowSpeedUTable()
         {
             //int iStart = 0, iEnd = p.inputGrid.GetI, jStart = 0, jEnd = p.inputGrid.GetJ;
@@ -302,7 +327,7 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            if(!ParsingIDepthAverageFlowSpeedUResult(t, pi))
+            if(!ParsingTimeIJResult(t, pi, " U-VELOCITY (M/S)", ref depthAverageFlowSpeedU))
             {
                 MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -365,11 +390,11 @@ namespace RiverSimulationApplication
                 //timeIndex = FoundTimeSelInList(timeSel[0]);
                 data = new double[pi.GetJCount(), timeSel.Length];
                 for (int ti = 0; ti < timeSel.Length; ++ti)
-                    for (int j = pi.jS; j <= pi.jE; ++j)
+                    for (int j = pi.jS; j < pi.jE; ++j)
                         data[j, ti] = depthAverageFlowSpeedU[timeSel[ti], j, pi.iS];
 
                 form.SetFormMode(
-                    "水深平均流速-U(m/s) I=" + (pi.jS + 1).ToString(),   //視窗標題
+                    "水深平均流速-U(m/s) I=" + (pi.iS + 1).ToString(),   //視窗標題
                     pi.jS, pi.jE - 1,       //行數(左右有幾行)
                     timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
                     "",                 //表格名稱
@@ -385,63 +410,274 @@ namespace RiverSimulationApplication
                     );
             }
 
-
-
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
-
-
         }
 
         private void GenerateDepthAverageFlowSpeedVTable()
         {
-            int iStart = 0, iEnd = p.inputGrid.GetI, jStart = 0, jEnd = p.inputGrid.GetJ;
+            //int iStart = 0, iEnd = p.inputGrid.GetI, jStart = 0, jEnd = p.inputGrid.GetJ;
             if (timeSel == null || timeSel.Length != 1)
             {
                 MessageBox.Show("請選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            if (!ParsingIDepthAverageFlowSpeedVResult())
+            PosInfo pi = new PosInfo();
+            TableType t = GetTableSize(ref pi);
+            if (TableType.Unknown == t)
+            {
+                MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (timeSel.Length == 1 && (t == TableType.TimeI || t == TableType.TimeJ))
+            {
+                MessageBox.Show("選取一維的位置請選取時間區段！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (timeSel.Length > 1 && (t == TableType.IJ))
+            {
+                MessageBox.Show("選取二維的位置請選取單一時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (!ParsingTimeIJResult(t, pi, " V-VELOCITY (M/S)", ref depthAverageFlowSpeedV))
             {
                 MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            int timeIndex = FoundTimeSelInList(timeSel[0]);
+            int timeIndex = 0;
+            double[,] data = null;
             ResultTableForm form = new ResultTableForm();
-            double[,] data = new double[p.inputGrid.GetJ, p.inputGrid.GetI];
-            for (int j = 0; j < p.inputGrid.GetJ; ++j)
-                for (int i = 0; i < p.inputGrid.GetI; ++i)
-                    data[j, i] = depthAverageFlowSpeedV[timeIndex, j, i];
-            form.SetFormMode(
-                "水深平均流速-V(m/s) T=" + timeSel[0].ToString(),   //視窗標題
-                jStart, jEnd,       //行數(左右有幾行)
-                iStart, iEnd,       //列數(上下有幾列)
-                "",                 //表格名稱
-                "",                 //行標題(顯示於上方)
-                "",                 //列標題(顯示於左方)
-                ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
-                48,                 //儲存格寬度
-                64,                 //列標題寬度
-                true,               //保留
-                false,              //不須行數字
-                false,              //不須列數字
-                data//資料
-                );
+
+            if (t == TableType.IJ)
+            {
+                timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[p.inputGrid.GetJ, p.inputGrid.GetI];
+                for (int j = 0; j < p.inputGrid.GetJ; ++j)
+                    for (int i = 0; i < p.inputGrid.GetI; ++i)
+                        data[j, i] = depthAverageFlowSpeedV[timeIndex, j, i];
+
+                form.SetFormMode(
+                    "水深平均流速-V(m/s) T=" + timeSel[0].ToString(),   //視窗標題
+                    pi.jS, pi.jE,       //行數(左右有幾行)
+                    pi.iS, pi.iE,       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+            else if (t == TableType.TimeI)
+            {
+                //timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[pi.GetICount(), timeSel.Length];
+                for (int ti = 0; ti < timeSel.Length; ++ti)
+                    for (int i = pi.iS; i < pi.iE; ++i)
+                        data[i, ti] = depthAverageFlowSpeedV[timeSel[ti], pi.jS, i];
+
+                form.SetFormMode(
+                    "水深平均流速-V(m/s) J=" + (pi.jS + 1).ToString(),   //視窗標題
+                    pi.iS, pi.iE - 1,       //行數(左右有幾行)
+                    timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+            else if (t == TableType.TimeJ)
+            {
+                //timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[pi.GetJCount(), timeSel.Length];
+                for (int ti = 0; ti < timeSel.Length; ++ti)
+                    for (int j = pi.jS; j <= pi.jE; ++j)
+                        data[j, ti] = depthAverageFlowSpeedV[timeSel[ti], j, pi.iS];
+
+                form.SetFormMode(
+                    "水深平均流速-V(m/s) I" + (pi.iS + 1).ToString(),   //視窗標題
+                    pi.jS, pi.jE - 1,       //行數(左右有幾行)
+                    timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
 
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
-
-
         }
-       
+        */
+        private void SaveToCsv(String file, double[,] data)
+        {
+            string outputFile = Program.GetProjectFileWorkingPath() + "\\" + file;
+            FileMode fm = (File.Exists(outputFile)) ? FileMode.Open : FileMode.Create;
+            using (FileStream fs = new FileStream(outputFile, fm, FileAccess.Write))
+            {
+                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Default);
+                for (int i = 0; i < data.GetLength(1); ++i)
+                {
+                    for(int j =0; j < data.GetLength(0); ++j)
+                    {
+                        sw.Write(data[j, i]);
+                        sw.Write(',');
+                    }
+                    sw.Write("\n");
+                }
+                sw.Close();
+                fs.Close();
+            }
+        }
+
+        private void GenerateTimeIJResultTable(String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
+        {
+            //int iStart = 0, iEnd = p.inputGrid.GetI, jStart = 0, jEnd = p.inputGrid.GetJ;
+            if (timeSel == null)
+            {
+                MessageBox.Show("請選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            PosInfo pi = new PosInfo();
+            TableType t = GetTableSize(ref pi);
+            if (TableType.Unknown == t)
+            {
+                MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (timeSel.Length == 1 && (t == TableType.TimeI || t == TableType.TimeJ))
+            {
+                MessageBox.Show("選取一維的位置請選取時間區段！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (timeSel.Length > 1 && (t == TableType.IJ))
+            {
+                MessageBox.Show("選取二維的位置請選取單一時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (!ParsingTimeIJResult(t, pi, timeList, key, outputfile, ref array))
+            {
+                MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            int timeIndex = 0;
+            double[,] data = null;
+            ResultTableForm form = new ResultTableForm();
+
+            if (t == TableType.IJ)
+            {
+                //timeIndex = FoundTimeSelInList(timeList, timeSel[0]);
+                timeIndex = timeSel[0];
+                data = new double[p.inputGrid.GetJ, p.inputGrid.GetI];
+                for (int j = 0; j < p.inputGrid.GetJ; ++j)
+                    for (int i = 0; i < p.inputGrid.GetI; ++i)
+                        data[j, i] = array[timeIndex, j, i];
+
+                SaveToCsv("Output.csv", data);
+                form.SetFormMode(
+                    title + " T=" + timeSel[0].ToString(),   //視窗標題
+                    pi.jS, pi.jE,       //行數(左右有幾行)
+                    pi.iS, pi.iE,       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+            else if (t == TableType.TimeI)
+            {
+                //timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[pi.GetICount(), timeSel.Length];
+                for (int ti = 0; ti < timeSel.Length; ++ti)
+                    for (int i = pi.iS; i < pi.iE; ++i)
+                        data[i, ti] = array[timeSel[ti], pi.jS, i];
+
+                form.SetFormMode(
+                    title + " J=" + (pi.jS + 1).ToString(),   //視窗標題
+                    pi.iS, pi.iE - 1,       //行數(左右有幾行)
+                    timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+            else if (t == TableType.TimeJ)
+            {
+                //timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[pi.GetJCount(), timeSel.Length];
+                for (int ti = 0; ti < timeSel.Length; ++ti)
+                    for (int j = pi.jS; j < pi.jE; ++j)
+                        data[j, ti] = array[timeSel[ti], j, pi.iS];
+
+                form.SetFormMode(
+                    title + " I=" + (pi.iS + 1).ToString(),   //視窗標題
+                    pi.jS, pi.jE - 1,       //行數(左右有幾行)
+                    timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
+            }
+        }
+
         private double[] GetLineDouble(string l, int size)
         {
             int count = l.Length / size;
@@ -502,7 +738,7 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        private double[, ,] depthAverageFlowSpeedU = null;
+        /*
         private bool ParsingIDepthAverageFlowSpeedUResult(TableType t, PosInfo pi)
         {
             string outputFile = Program.GetProjectFileFullPath() + ".working\\resed.O";
@@ -567,9 +803,9 @@ namespace RiverSimulationApplication
             }   //while ((line = f.ReadLine()) != null)
             return true;
         }
-
-        private double[, ,] depthAverageFlowSpeedV = null;
-        private bool ParsingIDepthAverageFlowSpeedVResult()
+        */
+        /*
+        private bool ParsingIDepthAverageFlowSpeedVResult(TableType t, PosInfo pi)
         {
             string outputFile = Program.GetProjectFileFullPath() + ".working\\resed.O";
             if (!File.Exists(outputFile))
@@ -588,11 +824,12 @@ namespace RiverSimulationApplication
                 depthAverageFlowSpeedV = new double[timeList.Count, p.inputGrid.GetJ, p.inputGrid.GetI];
             }
 
+            int ti = 0;
             while ((line = f.ReadLine()) != null)
             {
                 if (!foundTime && line.StartsWith("  TIME="))
                 {
-                    if (timeSel[0] == Convert.ToDouble(line.Substring(9, 16).Trim()))
+                    if (timeList[timeSel[ti]] == Convert.ToDouble(line.Substring(9, 16).Trim()))
                     {
                         foundTime = true;
                         continue;
@@ -606,7 +843,8 @@ namespace RiverSimulationApplication
                     continue;
                 }
 
-                int timeIndex = FoundTimeSelInList(timeSel[0]);
+                //int timeIndex = FoundTimeSelInList(timeSel[0]);
+                int timeIndex = timeSel[ti];
                 if (foundTime && found)
                 {
 
@@ -618,14 +856,20 @@ namespace RiverSimulationApplication
 
                     if (++count >= p.inputGrid.GetI)
                     {
-                        break;
+                        if (++ti == timeSel.Length)
+                        {
+                            break;
+                        }
+                        foundTime = false;
+                        found = false;
                     }
                 }
-            }
+            }   //while ((line = f.ReadLine()) != null)
             return true;
         }
+        */
 
-        private int FoundTimeSelInList(double d)
+        private int FoundTimeSelInList(List<double> timeList, double d)
         {
             for(int i = 0; i < timeList.Count; ++i)
             {
@@ -635,10 +879,20 @@ namespace RiverSimulationApplication
             return -1;
         }
 
-        private List<double> timeList = null;
-        private bool ParsingTime()
+        private double[, ,] depthAverageFlowSpeedU = null;
+        private double[, ,] depthAverageFlowSpeedV = null;
+        private double[, ,] tomd1 = null;
+        private double[, ,] zs = null;
+        private double[, ,] depth = null;
+        private double[, ,] usDischarge = null;
+        private double[, ,] vsDischarge = null;
+        private double[, ,] zbed = null;
+        private double[, ,] mudconc = null;
+        private double[, ,] beta = null;
+
+        private bool ParsingTimeIJResult(TableType t, PosInfo pi, List<double> timeList, String keyword, String outputfile, ref double[, ,] result)
         {
-            string outputFile = Program.GetProjectFileFullPath() + ".working\\resed.O";
+            string outputFile = Program.GetProjectFileFullPath() + ".working\\" + outputfile;
             if (!File.Exists(outputFile))
             {
                 return false;
@@ -647,10 +901,86 @@ namespace RiverSimulationApplication
             StreamReader f = new System.IO.StreamReader(outputFile);
             string line;
             int count = 0;
+            bool foundTime = false;
+            bool found = false;
+
+            if (result == null)
+            {
+                result = new double[timeList.Count, p.inputGrid.GetJ, p.inputGrid.GetI];
+            }
+
+            int ti = 0;
+            while ((line = f.ReadLine()) != null)
+            {
+                if (!foundTime && line.StartsWith("  TIME="))
+                {
+                    if (timeList[timeSel[ti]] == Convert.ToDouble(line.Substring(9, 16).Trim()))
+                    {
+                        foundTime = true;
+                        continue;
+                    }
+                }
+
+                if (foundTime && !found && line.StartsWith(keyword))
+                {
+                    found = true;
+                    count = 0;
+                    continue;
+                }
+
+                //int timeIndex = FoundTimeSelInList(timeSel[0]);
+                int timeIndex = timeSel[ti];
+                if (foundTime && found)
+                {
+
+                    double[] ar = GetLineDouble(line, 10);
+                    for (int i = 0; i < ar.Length; ++i)
+                    {
+                        result[timeIndex, i, count] = ar[i];
+                    }
+
+                    if (++count >= p.inputGrid.GetI)
+                    {
+                        if (++ti == timeSel.Length)
+                        {
+                            break;
+                        }
+                        foundTime = false;
+                        found = false;
+                    }
+                }
+            }   //while ((line = f.ReadLine()) != null)
+            return true;
+        }
+
+        private bool ParsingTime(String outputfile, ref List<double> timeList)
+        {
+            string outputFile = Program.GetProjectFileFullPath() + ".working\\" + outputfile;
+            if (!File.Exists(outputFile))
+            {
+                return false;
+            }
+            // Read the file and display it line by line.
+            StreamReader f = null;
+            try
+            {
+                f = new System.IO.StreamReader(outputFile);
+            }
+            catch
+            {
+                MessageBox.Show("無法開啟輸出檔" + outputfile, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            string line;
+            int count = 0;
 
             if (timeList == null)
             {
                 timeList = new List<double>();
+            }
+            else
+            {
+                timeList.Clear();
             }
 
             while ((line = f.ReadLine()) != null)
@@ -743,7 +1073,30 @@ namespace RiverSimulationApplication
         {
             ResultTimeSelForm form = new ResultTimeSelForm();
 
-            form.SetFormMode("", GetTimeSelectionType(), timeList);
+            //form.SetFormMode("", GetTimeSelectionType(), timeList);
+            switch (param1Cmb.SelectedIndex)
+            {
+                case 1: //水深平均流速-U(m/s)
+                case 2: //水深平均流速-V(m/s)
+                case 3: //水深平均流速-UV 合向量的絕對值(m/s)
+                case 4: //底床剪應力(N/m2)   //⁰¹²³⁴⁵⁶⁷⁸⁹
+                case 5: //水位(m)
+                case 6: //水深(m)
+                case 7: //流量-U(cms)
+                case 8: //流量-V(cms)
+                    form.SetFormMode("", GetTimeSelectionType(), resedTimeList);
+                    break;
+                case 9: //底床高程(m)
+                case 10: //沖淤深度(m)
+                case 11: //水深平均濃度(ppm)
+                case 12: //粒徑分佈(%)
+                    form.SetFormMode("", GetTimeSelectionType(), sedTimeList);
+                    break;
+                default:
+                    break;
+            }
+
+
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {

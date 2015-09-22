@@ -47,9 +47,16 @@ namespace RiverSimulationApplication
 
         private void graphRdo_CheckedChanged(object sender, EventArgs e)
         {
-
+            bool chk = (sender as RadioButton).Checked;
+            //20150811後處理流程示範說明,
+            //2. 若選擇“圖形”：
+            //  則“參數”先只能選擇一種，待“形式”若選擇“等值線疊向量圖”，
+            //  再把第2 個“參數”的下拉選單打開供使用者選擇。
+            param2Cmb.Enabled = !chk;
+            formGrp.Enabled = chk;
+            axisGrp.Enabled = chk;
+            InitialParam1(Param1Type.ParamTable);
         }
-
         private void tableRdo_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as RadioButton).Checked;

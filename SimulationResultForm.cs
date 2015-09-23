@@ -22,6 +22,15 @@ namespace RiverSimulationApplication
         RiverSimulationProfile p = null;
         private List<double> resedTimeList = null;
         private List<double> sedTimeList = null;
+        private enum GraphType
+        {
+            noSelect,
+            type1,
+            type2,
+            type3,
+            type4
+        };
+        GraphType graphType = GraphType.noSelect;
 
         private void SimulationResultForm_Load(object sender, EventArgs e)
         {
@@ -1047,7 +1056,8 @@ namespace RiverSimulationApplication
 
         private void GenerateGraph()
         {
-
+            switch (param1Cmb.SelectedIndex)
+            {
         }
 
         ResultTimeSelForm.ResultTimeType GetTimeSelectionType()
@@ -1216,6 +1226,33 @@ namespace RiverSimulationApplication
             TimeJ,
             IJ
         };
+
+        private void graphType1Rdo_CheckedChanged(object sender, EventArgs e)
+        {
+            if((sender as CheckBox).Checked)
+            {
+                            }
+        }
+
+        private void graphType2Rdo_CheckedChanged(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void graphType3Rdo_CheckedChanged(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void graphType4Rdo_CheckedChanged(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void animChk_CheckedChanged(object sender, EventArgs e)
+        {
+        
+        }
         //TableType tableType = TableType.Unknown;
     }
 }

@@ -37,11 +37,11 @@
             this.param2Cmb = new System.Windows.Forms.ComboBox();
             this.param1Cmb = new System.Windows.Forms.ComboBox();
             this.formGrp = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.animChk = new System.Windows.Forms.CheckBox();
+            this.graphType4Rdo = new System.Windows.Forms.RadioButton();
+            this.graphType3Rdo = new System.Windows.Forms.RadioButton();
+            this.graphType2Rdo = new System.Windows.Forms.RadioButton();
+            this.graphType1Rdo = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.poKPanel = new System.Windows.Forms.Panel();
             this.posKLbl = new System.Windows.Forms.Label();
@@ -135,48 +135,53 @@
             // 
             // formGrp
             // 
-            this.formGrp.Controls.Add(this.checkBox1);
-            this.formGrp.Controls.Add(this.radioButton6);
-            this.formGrp.Controls.Add(this.radioButton5);
-            this.formGrp.Controls.Add(this.radioButton4);
-            this.formGrp.Controls.Add(this.radioButton3);
+            this.formGrp.Controls.Add(this.animChk);
+            this.formGrp.Controls.Add(this.graphType4Rdo);
+            this.formGrp.Controls.Add(this.graphType3Rdo);
+            this.formGrp.Controls.Add(this.graphType2Rdo);
+            this.formGrp.Controls.Add(this.graphType1Rdo);
             resources.ApplyResources(this.formGrp, "formGrp");
             this.formGrp.Name = "formGrp";
             this.formGrp.TabStop = false;
             // 
-            // checkBox1
+            // animChk
             // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.animChk, "animChk");
+            this.animChk.Name = "animChk";
+            this.animChk.UseVisualStyleBackColor = true;
+            this.animChk.CheckedChanged += new System.EventHandler(this.animChk_CheckedChanged);
             // 
-            // radioButton6
+            // graphType4Rdo
             // 
-            resources.ApplyResources(this.radioButton6, "radioButton6");
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.TabStop = true;
-            this.radioButton6.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.graphType4Rdo, "graphType4Rdo");
+            this.graphType4Rdo.Name = "graphType4Rdo";
+            this.graphType4Rdo.TabStop = true;
+            this.graphType4Rdo.UseVisualStyleBackColor = true;
+            this.graphType4Rdo.CheckedChanged += new System.EventHandler(this.graphType4Rdo_CheckedChanged);
             // 
-            // radioButton5
+            // graphType3Rdo
             // 
-            resources.ApplyResources(this.radioButton5, "radioButton5");
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.TabStop = true;
-            this.radioButton5.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.graphType3Rdo, "graphType3Rdo");
+            this.graphType3Rdo.Name = "graphType3Rdo";
+            this.graphType3Rdo.TabStop = true;
+            this.graphType3Rdo.UseVisualStyleBackColor = true;
+            this.graphType3Rdo.CheckedChanged += new System.EventHandler(this.graphType3Rdo_CheckedChanged);
             // 
-            // radioButton4
+            // graphType2Rdo
             // 
-            resources.ApplyResources(this.radioButton4, "radioButton4");
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.TabStop = true;
-            this.radioButton4.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.graphType2Rdo, "graphType2Rdo");
+            this.graphType2Rdo.Name = "graphType2Rdo";
+            this.graphType2Rdo.TabStop = true;
+            this.graphType2Rdo.UseVisualStyleBackColor = true;
+            this.graphType2Rdo.CheckedChanged += new System.EventHandler(this.graphType2Rdo_CheckedChanged);
             // 
-            // radioButton3
+            // graphType1Rdo
             // 
-            resources.ApplyResources(this.radioButton3, "radioButton3");
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.TabStop = true;
-            this.radioButton3.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.graphType1Rdo, "graphType1Rdo");
+            this.graphType1Rdo.Name = "graphType1Rdo";
+            this.graphType1Rdo.TabStop = true;
+            this.graphType1Rdo.UseVisualStyleBackColor = true;
+            this.graphType1Rdo.CheckedChanged += new System.EventHandler(this.graphType1Rdo_CheckedChanged);
             // 
             // groupBox4
             // 
@@ -400,11 +405,11 @@
         private System.Windows.Forms.ComboBox param2Cmb;
         private System.Windows.Forms.ComboBox param1Cmb;
         private System.Windows.Forms.GroupBox formGrp;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.CheckBox animChk;
+        private System.Windows.Forms.RadioButton graphType4Rdo;
+        private System.Windows.Forms.RadioButton graphType3Rdo;
+        private System.Windows.Forms.RadioButton graphType2Rdo;
+        private System.Windows.Forms.RadioButton graphType1Rdo;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Panel poKPanel;
         private System.Windows.Forms.Label posKLbl;

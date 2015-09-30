@@ -120,6 +120,15 @@
     <Compile Include="FeedbackForm.Designer.cs">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResultGraphForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultGraphForm.Designer.cs">
+      <DependentUpon>ResultGraphForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResultUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ResultTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FeedbackForm.resx">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultGraphForm.resx">
+      <DependentUpon>ResultGraphForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultTableForm.resx">
       <DependentUpon>ResultTableForm.cs</DependentUpon>

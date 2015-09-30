@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace RiverSimulationApplication
 {
-    public partial class ResultTableForm : Form
+    public partial class ResultTableForm : ResultUI
     {
         public ResultTableForm()
         {
@@ -38,16 +38,8 @@ namespace RiverSimulationApplication
             VerticalDistribution,           //垂直濃度分布
             BottomBedParticleSizeRatio,     //底床粒徑比
         }
+        protected ResultTableType formType = ResultTableType.InitialBottomElevation;
 
-        private string title = "";
-        private ResultTableType formType = ResultTableType.InitialBottomElevation;
-        private int colStart;
-        private int colEnd;
-        private int rowStart;
-        private int rowEnd;
-        private int colWidth = 0;
-        private int rowHeadersWidth = 0;
-        private object initData = null;
         public void SetFormMode(string title,
             int colStart,
             int colEnd,
@@ -73,42 +65,12 @@ namespace RiverSimulationApplication
             this.colWidth = colWidth;
             this.rowHeadersWidth = rowHeadersWidth;
             this.initData = initData;
-            /*
-            hideSingle = onlyTable;
-            this.colCount = colCount;
-            this.rowCount = rowCount;
-            this.title = title;
-            this.tableName = tableName;
-            this.nocolNum = nocolNum;
-            this.noRowNum = noRowNum;
-            this.colWidth = colWidth;
-            this.rowHeadersWidth = rowHeadersWidth;
-            this.inputFormType = inputFormType;
-            CreateData(initData);
-             * */
         }
 
         private void ResultTableForm_Load(object sender, EventArgs e)
         {
-
             this.Text = title;
             InitializeDataGridView();
-            /*
-            foreach (DataGridViewColumn column in dataGridView.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-
-            if (inputFormType == InputFormType.SeparateForm || inputFormType == InputFormType.VerticalVelocityDistributionForm || inputFormType == TableInputForm.InputFormType.BoundaryTime)
-            {
-                averageBtn.Visible = true;
-            }
-
-            if (unitLbl.Text.Length == 0)
-            {
-                unitLbl.Visible = false;
-            }
-            */
         }
 
         private void InitializeDataGridView()

@@ -64,7 +64,7 @@ namespace RiverSimulationApplication
             param2Cmb.Enabled = !chk;
             formGrp.Enabled = chk;
             axisGrp.Enabled = chk;
-            InitialParam1(Param1Type.ParamTable);
+            InitialParam1(Param1Type.ParamGraph1);
         }
         private void tableRdo_CheckedChanged(object sender, EventArgs e)
         {
@@ -81,6 +81,7 @@ namespace RiverSimulationApplication
 
         private enum Param1Type {
             ParamTable,
+            ParamGraph1,
         }
 
         private string[] tableItemsParam1 = {
@@ -102,12 +103,38 @@ namespace RiverSimulationApplication
                 "流速-W(m/s)",
                 "濃度(ppm)" };
 
+        private string[] tableItemsParam2 = {
+                "初始底床高程(m)",
+                "水深平均流速-U(m/s)",
+                "水深平均流速-V(m/s)",
+                "水深平均流速-UV 合向量的絕對值(m/s)",
+                "水深平均流速-UV 合向量(m/s)",
+                "底床剪應力(N/m2)",
+                "水位(m)",
+                "水深(m)",
+                "流量-U(cms)",
+                "流量-V(cms)",
+                "底床高程(m)",
+                "沖淤深度(m)",
+                "水深平均濃度(ppm)",
+                "粒徑分佈(%)",
+                "流速-U(m/s)",
+                "流速-V(m/s)",
+                "流速-W(m/s)",
+                "流速-UW合向量(m/s)",
+                "流速-VW合向量(m/s)",
+                "濃度(ppm)" };
+
         private void InitialParam1(Param1Type p)
         {
             if (p == Param1Type.ParamTable)
             {
                 param1Cmb.DataSource = tableItemsParam1;
             }
+            else if (p == Param1Type.ParamGraph1)
+            {
+                param1Cmb.DataSource = tableItemsParam2;
+            } 
             param1Cmb.SelectedIndex = 0;
         }
 
@@ -185,6 +212,114 @@ namespace RiverSimulationApplication
                         break;
                     default:
                         break;
+                }
+            }
+            else if(cmb.DataSource == tableItemsParam2)
+            {
+                switch (cmb.SelectedIndex)
+                {
+                     case 0: //初始底床高程(m)
+                        timeGrp.Enabled = false;
+                        poKPanel.Enabled = false;
+                       break;
+                    case 1: //水深平均流速-U(m/s)
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        poKPanel.Enabled = false;
+                        break;
+                    case 2: //水深平均流速-V(m/s)
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = false;
+                        poKPanel.Enabled = false;
+                        break;
+                    case 3: //水深平均流速-UV 合向量的絕對值(m/s)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 4: //水深平均流速-UV 合向量(m/s)
+                
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 5: //底床剪應力(N/m2)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 6: //水位(m)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 7: //水深(m)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 8: //流量-U(cms)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 9: //流量-V(cms)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 10: //底床高程(m)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 11: //沖淤深度(m)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 12: //水深平均濃度(ppm)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 13: //粒徑分佈(%)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 14: //流速-U(m/s)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 15: //流速-V(m/s)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 16: //流速-W(m/s)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 17: //流速-UW合向量(m/s
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 18: //流速-VW合向量(m/s)
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    case 19: //濃度(ppm) 
+                        poKPanel.Enabled = false;
+                        //timeGrp.Enabled = true;
+                        timeChk.Enabled = true;
+                        break;
+                    default:
+                       break;
                 }
             }
         }
@@ -309,8 +444,52 @@ namespace RiverSimulationApplication
             {
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
+        }
 
+        private void GenerateInitialBottomElevationGraph()
+        {
+            PosInfo pi = new PosInfo();
+            TableType t = GetTableSize(ref pi);
+            if (TableType.Unknown == t || TableType.IJ == t)
+            {
+                MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
+            //if (t == TableType.TimeI || t == TableType.TimeJ)
+            //{
+            //    MessageBox.Show("選取一維的位置請選取時間區段！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    return;
+            //}
+
+            if(!ParsingInitialBottomElevationResult())
+            {
+                MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            ResultGraphForm form = new ResultGraphForm();
+            form.SetFormMode(
+                "初始底床高程(m)",   //視窗標題
+                pi.jS, pi.jE,       //行數(左右有幾行)
+                pi.iS, pi.iE,       //列數(上下有幾列)
+                "",                 //表格名稱
+                "",                 //行標題(顯示於上方)
+                "",                 //列標題(顯示於左方)
+                ResultGraphForm.ResultGraphType.InitialBottomElevation, //表格形式
+                48,                 //儲存格寬度
+                64,                 //列標題寬度
+                true,               //保留
+                false,              //不須行數字
+                false,              //不須列數字
+                initialBottomElevation  //資料
+                );
+
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
+            }
         }
 
         /*
@@ -1058,6 +1237,42 @@ namespace RiverSimulationApplication
         {
             switch (param1Cmb.SelectedIndex)
             {
+
+                case 0: //初始底床高程(m)
+                    GenerateInitialBottomElevationGraph();
+                    break;
+                case 1: //水深平均流速-U(m/s)
+                    GenerateTimeIJResultTable(" U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
+                    break;
+                case 2: //水深平均流速-V(m/s)
+                    GenerateTimeIJResultTable(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                    break;
+                case 3: //水深平均流速-UV 合向量的絕對值(m/s)
+                    GenerateTimeIJResultTable(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                    break;
+                case 4: //底床剪應力(N/m2)
+                    GenerateTimeIJResultTable(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                    break;
+                case 5: //水位(m)
+
+                    break;
+                case 6: //水深(m)
+                    break;
+                case 7: //流量-U(cms)
+                    break;
+                case 8: //流量-V(cms)
+                    break;
+                case 9: //底床高程(m)
+                    break;
+                case 10: //沖淤深度(m)
+                    break;
+                case 11: //水深平均濃度(ppm)
+                    break;
+                case 12: //粒徑分佈(%)
+                    break;
+                default:
+                    break;
+            }
         }
 
         ResultTimeSelForm.ResultTimeType GetTimeSelectionType()
@@ -1184,10 +1399,7 @@ namespace RiverSimulationApplication
             {   //取不到J範圍，表格型態未知
                 return TableType.Unknown;
             }
-            if (param1Cmb.SelectedIndex == 0)
-            {   
-                return TableType.IJ;
-            }
+
 
             if (pi.GetICount() == 1 && pi.GetJCount() > 1)
             {
@@ -1204,21 +1416,6 @@ namespace RiverSimulationApplication
             return TableType.Unknown;
         }
 
-        //bool CheckTimeSelectionEnable()
-        //{
-        //    int s = -1, e = -1;
-        //    if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref s, ref e))
-        //    {
-        //        return false;
-        //    }
-
-        //    if (!GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref s, ref e))
-        //    {
-        //        return false;
-        //    }
-        //    return true;
-        //}
-
         enum TableType
         {
             Unknown,
@@ -1229,9 +1426,7 @@ namespace RiverSimulationApplication
 
         private void graphType1Rdo_CheckedChanged(object sender, EventArgs e)
         {
-            if((sender as CheckBox).Checked)
-            {
-                            }
+
         }
 
         private void graphType2Rdo_CheckedChanged(object sender, EventArgs e)

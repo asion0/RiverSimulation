@@ -47,7 +47,8 @@ namespace RiverSimulationApplication
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
-            if (!ParsingTime("SEDoutput.dat", ref sedTimeList))
+
+            if (p.IsMovableBedMode() && !ParsingTime("SEDoutput.dat", ref sedTimeList))
             {
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
@@ -1153,6 +1154,7 @@ namespace RiverSimulationApplication
             string outputFile = Program.GetProjectFileFullPath() + ".working\\" + outputfile;
             if (!File.Exists(outputFile))
             {
+                MessageBox.Show("無法找到輸出檔" + outputfile, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             // Read the file and display it line by line.

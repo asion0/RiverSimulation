@@ -63,20 +63,36 @@ namespace RiverSimulationApplication
         private void ok_Click(object sender, EventArgs e)
         {
             object o = timeLsb.SelectedItems;
+            int start = -1, end = -1;
+            timeSelIdx.Clear();
             for (int i = 0; i < timeLsb.Items.Count; ++i)
             {
                 if(timeLsb.GetSelected(i))
                 {
-                    //timeSel.Add((timeList as List<double>)[i]);
                     timeSelIdx.Add(i);
+                    if(start == -1)
+                        start = i;
+                }
+                else 
+                {
+                    if (end == -1 && start != -1)
+                        end = i;
                 }
             }
+            if (end == -1 && start != -1)
+                end = timeLsb.Items.Count;
 
             //if (timeSel.Count == 0)
             if (timeSelIdx.Count == 0)
             {
                 //e.Cancel = true;
                 MessageBox.Show("尚未選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (end - start != timeSelIdx.Count)
+            {
+                //e.Cancel = true;
+                MessageBox.Show("請選取連續的時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

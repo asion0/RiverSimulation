@@ -9,9 +9,6 @@ namespace RiverSimulationApplication
 {
     public partial class ResultUI : Form
     {
-
-
-
         protected string title = "";
         protected int colStart;
         protected int colEnd;
@@ -20,9 +17,7 @@ namespace RiverSimulationApplication
         protected int colWidth = 0;
         protected int rowHeadersWidth = 0;
         protected object initData = null;
-
-
-
-
+        protected List<double> timeList = null;
+        protected int[] timeSel = null;
     }
 }

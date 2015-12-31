@@ -303,6 +303,7 @@
             resources.ApplyResources(this.timeChk, "timeChk");
             this.timeChk.Name = "timeChk";
             this.timeChk.UseVisualStyleBackColor = true;
+            this.timeChk.CheckedChanged += new System.EventHandler(this.timeChk_CheckedChanged);
             // 
             // timeBtn
             // 

@@ -49,7 +49,7 @@
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ok.Location = new System.Drawing.Point(139, 325);
+            this.ok.Location = new System.Drawing.Point(115, 320);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(96, 32);
             this.ok.TabIndex = 6;

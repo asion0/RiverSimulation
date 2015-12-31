@@ -71,7 +71,7 @@ namespace RiverSimulationApplication
                 chart1.Series.Clear();
                 chart1.ChartAreas.Clear();
             }
-                InitialChart();
+            InitialChart();
             chart1.Series.ResumeUpdates();
         }
 

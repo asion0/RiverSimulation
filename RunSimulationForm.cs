@@ -508,7 +508,6 @@ namespace RiverSimulationApplication
                     p.GenerateStructureFile(p.sedimentationWeirSets, Program.GetProjectFileWorkingPath() + @"/4.txt");
                 }
 
-
                 ResetChart();
                 RunSimulationMain();
                 EnterSimUI(Status.Running);

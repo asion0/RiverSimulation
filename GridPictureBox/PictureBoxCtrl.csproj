@@ -90,6 +90,7 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GnuPlot.cs" />
     <Compile Include="GridPictureBox.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Utilities.GnuplotCSharp;
 
 
 namespace RiverSimulationApplication
@@ -1202,6 +1203,114 @@ namespace RiverSimulationApplication
         {
             CheckBox c = (sender as CheckBox);
             timeBtn.Enabled = !c.Checked;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
+            StringBuilder sb3 = new StringBuilder();
+
+            //sb.AppendFormat("{0,8} {1, 8} {2, 8} {3, 8} {4, 8} {5, 8}\n", _i.ToString(), _j.ToString(), 
+            //    maxX.ToString(), minX.ToString(), maxY.ToString(), minY.ToString());
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            for (int i = 0; i < p.inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < p.inputGrid.GetJ; ++j)
+                {
+                    if (i + 1 < p.inputGrid.GetI)
+                    {
+                        sb.AppendFormat("{0} {1} {2}\n", p.inputGrid.inputCoor[i, j].x.ToString(), p.inputGrid.inputCoor[i, j].y.ToString(), p.inputGrid.inputCoor[i, j].z.ToString());
+                        sb.AppendFormat("{0} {1} {2}\n\n", p.inputGrid.inputCoor[i + 1, j].x.ToString(), p.inputGrid.inputCoor[i + 1, j].y.ToString(), p.inputGrid.inputCoor[i + 1, j].z.ToString());
+                    }
+
+                    if (j + 1 < p.inputGrid.GetJ)
+                    {
+                        sb.AppendFormat("{0} {1} {2}\n", p.inputGrid.inputCoor[i, j].x.ToString(), p.inputGrid.inputCoor[i, j].y.ToString(), p.inputGrid.inputCoor[i, j].z.ToString());
+                        sb.AppendFormat("{0} {1} {2}\n\n", p.inputGrid.inputCoor[i, j + 1].x.ToString(), p.inputGrid.inputCoor[i, j + 1].y.ToString(), p.inputGrid.inputCoor[i, j + 1].z.ToString());
+                    }
+                    sb2.AppendFormat("{0} {1} {2}\n", p.inputGrid.inputCoor[i, j].x.ToString(), p.inputGrid.inputCoor[i, j].y.ToString(), p.inputGrid.inputCoor[i, j].z.ToString());
+                    sb3.AppendFormat("{0} {1}\n", p.inputGrid.inputCoor[i, j].x.ToString(), p.inputGrid.inputCoor[i, j].y.ToString());
+                }
+                sb2.AppendFormat("\n");
+                sb3.AppendFormat("\n");
+            }
+
+            using (StreamWriter outfile = new StreamWriter(@"G:\_test.txt"))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+            using (StreamWriter outfile = new StreamWriter(@"G:\_test2.txt"))
+            {
+                outfile.Write(sb2.ToString());
+                outfile.Close();
+            }
+            using (StreamWriter outfile = new StreamWriter(@"G:\_test3.txt"))
+            {
+                outfile.Write(sb3.ToString());
+                outfile.Close();
+            }
+
+
+            double x1, x2, y1, y2;
+            if ((p.inputGrid.GetMaxX - p.inputGrid.GetMinX) > (p.inputGrid.GetMaxY - p.inputGrid.GetMinY))
+            {
+                x1 = p.inputGrid.GetMinX;
+                x2 = p.inputGrid.GetMaxX;
+                y1 = p.inputGrid.GetMinY - ((p.inputGrid.GetMaxX - p.inputGrid.GetMinX) - (p.inputGrid.GetMaxY - p.inputGrid.GetMinY)) / 2;
+                y2 = p.inputGrid.GetMaxY + ((p.inputGrid.GetMaxX - p.inputGrid.GetMinX) - (p.inputGrid.GetMaxY - p.inputGrid.GetMinY)) / 2;
+            }
+            else
+            {
+                y1 = p.inputGrid.GetMinY;
+                y2 = p.inputGrid.GetMaxY;
+                x1 = p.inputGrid.GetMinX - ((p.inputGrid.GetMaxY - p.inputGrid.GetMinY) - (p.inputGrid.GetMaxX - p.inputGrid.GetMinX)) / 2;
+                x2 = p.inputGrid.GetMaxX + ((p.inputGrid.GetMaxY - p.inputGrid.GetMinY) - (p.inputGrid.GetMaxX - p.inputGrid.GetMinX)) / 2;
+            }
+
+            string param = "";
+            GnuPlot.Set("title \"world.dat plotted with filledcurves\"");
+            GnuPlot.Set("size ratio 1");
+            GnuPlot.Set("format x \"\"");
+            GnuPlot.Set("format y \"\"");
+            GnuPlot.Set("grid layerdefault linewidth 0.5");
+            GnuPlot.Set("object  1 rect from graph 0, 0 to graph 1, 1 behind fc  rgb \"#afffff\" fillstyle solid 1.00 border -1");
+            param = "xrange[" + x1.ToString() + " : " + x2.ToString() + "]";
+            GnuPlot.Set(param);
+            param = "yrange[" + y1.ToString() + " : " + y2.ToString() + "]";
+            GnuPlot.Set(param);
+            GnuPlot.Set("lmargin  0");
+            //GnuPlot.Set("contour");
+            //GnuPlot.Plot(@"G:\_test.txt", "with filledcurve notitle fs solid 1.0 lc rgb 'dark-goldenrod'");
+            GnuPlot.SPlot(@"G:\_test2.txt", "with filledcurve notitle fs solid 1.0 lc rgb 'dark-goldenrod'");
+
+
+            /* 可行的contour
+            set view map
+            set xrange[270301.395 : 270903.805]
+            set yrange[2732858.0 : 2733461.91]
+            set size ratio 1
+            set object 1 rect from graph 0, graph 0 to graph 1, graph 1 back
+            set object 1 rect fc rgb "black" fillstyle solid 1.0
+            splot 'G:\_test2.txt' using 1:2:3 with points pointtype 5 pointsize 1 palette linewidth 30
+            */
+
+            /* 可行的contour2
+            set surface
+            set contour surface
+            set view 60, 30, 1, 1
+            set clabel '%8.2f'
+            set key right
+            set title 'Graph Title'
+            set xlabel 'vss'
+            set ylabel 'sbb'
+            set zlabel 'closs'
+            #set term png
+            #set output 'jf.png'
+            splot 'G:\_test2.txt' using 2:1:3 notitle with pm3d
+            */
+
         }
         //TableType tableType = TableType.Unknown;
     }

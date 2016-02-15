@@ -120,6 +120,7 @@
     <Compile Include="FeedbackForm.Designer.cs">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GnuPlot.cs" />
     <Compile Include="ResultGraphForm.cs">
       <SubType>Form</SubType>
     </Compile>

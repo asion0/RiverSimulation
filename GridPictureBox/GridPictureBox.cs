@@ -32,6 +32,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Drawing.Drawing2D;
+using System.Text;
+using Utilities.GnuplotCSharp;
 #endregion
 
 namespace PictureBoxCtrl
@@ -1053,6 +1055,26 @@ namespace PictureBoxCtrl
             get { return _j; }
         }
 
+        public double GetMaxX
+        {
+            get { return maxX; }
+        }
+
+        public double GetMinX
+        {
+            get { return minX; }
+        }
+
+        public double GetMaxY
+        {
+            get { return maxY; }
+        }
+
+        public double GetMinY
+        {
+            get { return minY; }
+        }
+
         public CoorPoint GetTopLeft
         {
             get { return this.topLeft;  }
@@ -1080,7 +1102,6 @@ namespace PictureBoxCtrl
                 string[] words = line.Split(charSeparators, MaxLineWord);
                 _j = Convert.ToInt32(words[0]);
                 _i = Convert.ToInt32(words[1]);
-
                 inputCoor = new CoorPoint[_i, _j];
                 int i = 0, j = _j - 1;
                 while ((line = file.ReadLine()) != null)
@@ -1111,7 +1132,6 @@ namespace PictureBoxCtrl
                         break;
                     }
                 }
-
                 ConvertGrid(inputCoor);
             }
             catch (Exception e)

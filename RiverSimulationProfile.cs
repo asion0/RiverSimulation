@@ -1243,17 +1243,18 @@ namespace RiverSimulationApplication
         public string br = Environment.CurrentDirectory + "\\br.jpg";
         public void ResetGoogleStaticMap()
         {
-            if(bkImgType == BackgroundMapType.GoogleStaticMap && 
+            tl = Environment.CurrentDirectory + "\\tl.jpg";
+            tr = Environment.CurrentDirectory + "\\tr.jpg";
+            bl = Environment.CurrentDirectory + "\\bl.jpg";
+            br = Environment.CurrentDirectory + "\\br.jpg"; 
+            if (bkImgType == BackgroundMapType.GoogleStaticMap && 
                 (!File.Exists(tl) || !File.Exists(tr) || !File.Exists(bl) || !File.Exists(br)))
             {
-                tl = Environment.CurrentDirectory + "\\tl.jpg";
-                tr = Environment.CurrentDirectory + "\\tr.jpg";
-                bl = Environment.CurrentDirectory + "\\bl.jpg";
-                br = Environment.CurrentDirectory + "\\br.jpg";
+
                 DownloadGoogleStaticMap();
             }
         }
-
+ 
         public bool DownloadGoogleStaticMap()
         {
             if (File.Exists(tl))
@@ -1280,6 +1281,40 @@ namespace RiverSimulationApplication
             }
             bkImgType = BackgroundMapType.GoogleStaticMap;
             return true;
+        }
+
+        public void ConvertToTwd97()
+        {
+            if (coorType == TWD97)
+                return; 
+            
+            for (int i = 0; i < inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    inputGrid.inputCoor[i, j].x += 828;
+                    inputGrid.inputCoor[i, j].y -= 207;
+                }
+            }
+            inputGrid.ResetGrid();
+            coorType = TWD97;
+        }
+
+        public void ConvertToTwd67()
+        {
+            if (coorType == TWD67)
+                return;
+
+            for (int i = 0; i < inputGrid.GetI; ++i)
+            {
+                for (int j = 0; j < inputGrid.GetJ; ++j)
+                {
+                    inputGrid.inputCoor[i, j].x -= 828;
+                    inputGrid.inputCoor[i, j].y += 207;
+                }
+            }
+            inputGrid.ResetGrid();
+            coorType = TWD67;
         }
 
         public void SetImportImageMode()

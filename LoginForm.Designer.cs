@@ -59,7 +59,7 @@
             this.openFileBtn.Name = "openFileBtn";
             this.openFileBtn.Size = new System.Drawing.Size(124, 40);
             this.openFileBtn.TabIndex = 0;
-            this.openFileBtn.Text = "開啟檔案";
+            this.openFileBtn.Text = "開啟案例";
             this.openFileBtn.UseVisualStyleBackColor = true;
             this.openFileBtn.Click += new System.EventHandler(this.openFileBtn_Click);
             // 
@@ -103,7 +103,7 @@
             this.newFileBtn.Name = "newFileBtn";
             this.newFileBtn.Size = new System.Drawing.Size(124, 40);
             this.newFileBtn.TabIndex = 0;
-            this.newFileBtn.Text = "新增檔案";
+            this.newFileBtn.Text = "新增案例";
             this.newFileBtn.UseVisualStyleBackColor = true;
             this.newFileBtn.Click += new System.EventHandler(this.newFileBtn_Click);
             // 
@@ -147,7 +147,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "水理動床模式使用介面";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

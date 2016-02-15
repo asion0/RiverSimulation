@@ -97,8 +97,16 @@ namespace RiverSimulationApplication
             }
             //RiverSimulationProfile.profile = new RiverSimulationProfile();
             //Program.projectFolder = Program.documentPath + "\\" + dlg.inputTxt.Text;
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            //this.DialogResult = DialogResult.OK;
+            //this.Close();
+
+            RiverSimulationForm form = new RiverSimulationForm();
+            if (DialogResult.OK != form.ShowDialog())
+            {
+                //this.Close();
+            }
+
+
         }
 
         private void openFileBtn_Click(object sender, EventArgs e)
@@ -107,8 +115,13 @@ namespace RiverSimulationApplication
             {
                 return;
             }
-            this.DialogResult = DialogResult.OK;
-            this.Close();       
+            //this.DialogResult = DialogResult.OK;
+            //this.Close();       
+            RiverSimulationForm form = new RiverSimulationForm();
+            if (DialogResult.OK != form.ShowDialog())
+            {
+                //this.Close();
+            }
         }
 
         private void exitBtn_Click(object sender, EventArgs e)

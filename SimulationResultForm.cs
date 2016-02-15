@@ -31,7 +31,7 @@ namespace RiverSimulationApplication
             type3,
             type4
         };
-        GraphType graphType = GraphType.noSelect;
+        //GraphType graphType = GraphType.noSelect;
 
         private void SimulationResultForm_Load(object sender, EventArgs e)
         {
@@ -385,13 +385,13 @@ namespace RiverSimulationApplication
                     GenerateTimeIJResultTable(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
                     break;
                 case 7: //流量-U(cms)
-                    GenerateTimeIJResultTable(" ZS (M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
+                    GenerateTimeIJResultTable(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
                     break;
                 case 8: //流量-V(cms)
                     GenerateTimeIJResultTable(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
                    break;
                 case 9: //底床高程(m)
-                   GenerateTimeIJResultTable(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
+                   GenerateTimeIJResultTable(" ZS (M)", "底床高程(m)", "resed.O", sedTimeList, ref usDischarge);
                     break;
                 case 10: //沖淤深度(m)
                     GenerateTimeIJResultTable(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
@@ -1236,17 +1236,17 @@ namespace RiverSimulationApplication
                 sb3.AppendFormat("\n");
             }
 
-            using (StreamWriter outfile = new StreamWriter(@"G:\_test.txt"))
+            using (StreamWriter outfile = new StreamWriter(@"_test.txt"))
             {
                 outfile.Write(sb.ToString());
                 outfile.Close();
             }
-            using (StreamWriter outfile = new StreamWriter(@"G:\_test2.txt"))
+            using (StreamWriter outfile = new StreamWriter(@"_test2.txt"))
             {
                 outfile.Write(sb2.ToString());
                 outfile.Close();
             }
-            using (StreamWriter outfile = new StreamWriter(@"G:\_test3.txt"))
+            using (StreamWriter outfile = new StreamWriter(@"_test3.txt"))
             {
                 outfile.Write(sb3.ToString());
                 outfile.Close();
@@ -1269,21 +1269,21 @@ namespace RiverSimulationApplication
                 x2 = p.inputGrid.GetMaxX + ((p.inputGrid.GetMaxY - p.inputGrid.GetMinY) - (p.inputGrid.GetMaxX - p.inputGrid.GetMinX)) / 2;
             }
 
-            string param = "";
-            GnuPlot.Set("title \"world.dat plotted with filledcurves\"");
-            GnuPlot.Set("size ratio 1");
-            GnuPlot.Set("format x \"\"");
-            GnuPlot.Set("format y \"\"");
-            GnuPlot.Set("grid layerdefault linewidth 0.5");
-            GnuPlot.Set("object  1 rect from graph 0, 0 to graph 1, 1 behind fc  rgb \"#afffff\" fillstyle solid 1.00 border -1");
-            param = "xrange[" + x1.ToString() + " : " + x2.ToString() + "]";
-            GnuPlot.Set(param);
-            param = "yrange[" + y1.ToString() + " : " + y2.ToString() + "]";
-            GnuPlot.Set(param);
-            GnuPlot.Set("lmargin  0");
-            //GnuPlot.Set("contour");
-            //GnuPlot.Plot(@"G:\_test.txt", "with filledcurve notitle fs solid 1.0 lc rgb 'dark-goldenrod'");
-            GnuPlot.SPlot(@"G:\_test2.txt", "with filledcurve notitle fs solid 1.0 lc rgb 'dark-goldenrod'");
+            //string param = "";
+            //GnuPlot.Set("title \"world.dat plotted with filledcurves\"");
+            //GnuPlot.Set("size ratio 1");
+            //GnuPlot.Set("format x \"\"");
+            //GnuPlot.Set("format y \"\"");
+            //GnuPlot.Set("grid layerdefault linewidth 0.5");
+            //GnuPlot.Set("object  1 rect from graph 0, 0 to graph 1, 1 behind fc  rgb \"#afffff\" fillstyle solid 1.00 border -1");
+            //param = "xrange[" + x1.ToString() + " : " + x2.ToString() + "]";
+            //GnuPlot.Set(param);
+            //param = "yrange[" + y1.ToString() + " : " + y2.ToString() + "]";
+            //GnuPlot.Set(param);
+            //GnuPlot.Set("lmargin  0");
+            ////GnuPlot.Set("contour");
+            ////GnuPlot.Plot(@"G:\_test.txt", "with filledcurve notitle fs solid 1.0 lc rgb 'dark-goldenrod'");
+            //GnuPlot.SPlot(@"_test2.txt", "with filledcurve notitle fs solid 1.0 lc rgb 'dark-goldenrod'");
 
 
             /* 可行的contour
@@ -1308,9 +1308,34 @@ namespace RiverSimulationApplication
             set zlabel 'closs'
             #set term png
             #set output 'jf.png'
-            splot 'G:\_test2.txt' using 2:1:3 notitle with pm3d
+            splot '_test2.txt' using 2:1:3 notitle with pm3d
             */
+            //string[] setting = { 
+            //                   "surface",
+            //                   "contour surface",
+            //                   "ticslevel 0",   //the zero of Z-Axis moves to on the XY plane.
+            //                   //"ratio 1",
+            //                   "view 0, 0, 1, 1",       //default view is 60 rot_x, 30 rot_z, 1 scale, 1 scale_z
+            //                   "cntrparam levels 10",
+            //                   "clabel \'%8.2f\'",
+            //                   "key right",
+            //                   "title \'Graph Title\'",
+            //                   "xlabel \'vss\'",
+            //                   "ylabel \'sbb\'",
+            //                   "zlabel \'closs\'",
+            //                   }; 
+            string[] setting = { 
+                               "pm3d map",
+                               };
+            GnuPlot.Set(setting);
+            //param = "xrange[" + x1.ToString() + " : " + x2.ToString() + "]";
+            //GnuPlot.Set(param);
+            //param = "yrange[" + y1.ToString() + " : " + y2.ToString() + "]";
+            //GnuPlot.Set(param);
+            //param = "zrange [0. : 500 ]";
+            //GnuPlot.Set(param);
 
+            GnuPlot.SPlot(@"_test2.txt", "with pm3d");
         }
         //TableType tableType = TableType.Unknown;
     }

@@ -146,11 +146,11 @@ namespace PictureBoxCtrl
 		/// </summary>
 		/// <value>Complete filename of the picture, including path information</value>
 		/// <remarks>Supported fileformat: *.gif, *.tif, *.jpg, *.bmp</remarks>
-		[ Browsable ( false ) ]
+		//[ Browsable ( false ) ]
         public enum CoorType
         {
             TWD97,
-            TWD64
+            TWD67
         }
 
 		public RiverGrid Grid
@@ -1197,6 +1197,11 @@ namespace PictureBoxCtrl
             return (minX > 42048.392 && minY > 2324145.604 && maxX < 450240.618 && maxY < 2878079.346);
         }
 
+        public bool ResetGrid()
+        {
+            return ConvertGrid(inputCoor);
+        }
+
         private bool ConvertGrid(CoorPoint[,] grid)
         {
             _j = grid.GetLength(1);
@@ -1255,7 +1260,7 @@ namespace PictureBoxCtrl
             try
             {
                 CoorPoint tlp = topLeft, cp = centerPoint, brp = bottomRight;
-                if ((GridPictureBox.CoorType)coorType == GridPictureBox.CoorType.TWD64)
+                if ((GridPictureBox.CoorType)coorType == GridPictureBox.CoorType.TWD67)
                 {
                     CoordinateTransform ct = new CoordinateTransform();
                     tlp = ct.Twd97ToTwd67(topLeft);
@@ -1268,8 +1273,9 @@ namespace PictureBoxCtrl
                 DownloadStaticMap((topLeft.x + centerPoint.x) / 2, (bottomRight.y + centerPoint.y) / 2, zoomScale, tr);
                 DownloadStaticMap((bottomRight.x + centerPoint.x) / 2, (bottomRight.y + centerPoint.y) / 2, zoomScale, tl);
             }
-            catch
+            catch (Exception e)
             {
+                string err = e.ToString();
                 return false;
             }
             return true;

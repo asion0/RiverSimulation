@@ -21,12 +21,12 @@ namespace RiverSimulationApplication
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoginForm form = new LoginForm();
-            if (DialogResult.OK != form.ShowDialog())
-            {
-                this.Close();
-            }
-
+            //LoginForm form = new LoginForm();
+            //if (DialogResult.OK != form.ShowDialog())
+            //{
+            //    this.Close();
+            //}
+            
             UpdateStatus();
         }
 
@@ -329,6 +329,7 @@ namespace RiverSimulationApplication
         {
             FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
             this.Close();
+
         }
 
         private void feedMnuItem_Click(object sender, EventArgs e)
@@ -344,8 +345,8 @@ namespace RiverSimulationApplication
         {
             
             InputForm dlg = new InputForm();
-            dlg.Text = "檔案敘述";
-            dlg.desc.Text = "請輸入檔案敘述";
+            dlg.Text = "案例敘述";
+            dlg.desc.Text = "請輸入案例敘述";
             if (File.Exists(Program.GetDescriptionFileFullPath()))
             {
                 XmlDocument desc = new XmlDocument();
@@ -429,7 +430,7 @@ namespace RiverSimulationApplication
         private void saveMnuItem_Click(object sender, EventArgs e)
         {
             FunctionlUtility.SaveProject(RiverSimulationProfile.profile);
-            MessageBox.Show("檔案儲存完成。", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("案例儲存完成。", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 

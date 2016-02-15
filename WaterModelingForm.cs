@@ -24,11 +24,12 @@ namespace RiverSimulationApplication
         {
             p = profile;
         }
-
+        private bool structFirstSetting = false;
         private void WaterModelingForm_Load(object sender, EventArgs e)
         {
             valueParamPanel.Visible = false;        //隱藏數值參數面板
             physicalParamPanel.Visible = false;     //隱藏物理參數面板
+            structFirstSetting = false;
 
             ControllerUtility.SetHtmlUrl(comment, "Logo.html");
             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, p);
@@ -75,7 +76,15 @@ namespace RiverSimulationApplication
             minWaterDeothTxt.Text = p.minWaterDeoth.ToString();
             viscosityFactorAdditionInMainstreamTxt.Text = p.viscosityFactorAdditionInMainstream.ToString();
             viscosityFactorAdditionInSideDirectionTxt.Text = p.viscosityFactorAdditionInSideDirection.ToString();
-           
+            outputControlInitialBottomElevationChk.Checked = p.outputControlInitialBottomElevation;
+            outputControlLevelChk.Checked = p.outputControlLevel;
+            outputControlDepthChk.Checked = p.outputControlDepth;
+            outputControlAverageDepthFlowRateChk.Checked = p.outputControlAverageDepthFlowRate;
+            outputControlFlowChk.Checked = p.outputControlFlow;
+            outputControlBottomShearingStressChk.Checked = p.outputControlBottomShearingStress;
+            outputControlVelocityInformation3DChk.Checked = p.outputControlVelocityInformation3D;
+          
+
             //1.2 物理參數 =========================================
             switch (p.roughnessType)
             {
@@ -551,10 +560,6 @@ namespace RiverSimulationApplication
             {
                 p.outputControlLevel = chk;
             }
-            else if (sender as CheckBox == outputControlLevelChk)
-            {
-                p.outputControlLevel = chk;
-            }
             else if (sender as CheckBox == outputControlDepthChk)
             {
                 p.outputControlDepth = chk;
@@ -709,9 +714,9 @@ namespace RiverSimulationApplication
         private bool noNotice = false;
         private void NoticeStructureChange()
         {
-            if (!noNotice)
+            if (!noNotice && structFirstSetting)
             {
-                MessageBox.Show("結構物變更請至計算格網修改Z值！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("結構物變更請至計算格網確認Z值！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -798,9 +803,8 @@ namespace RiverSimulationApplication
 
             DialogResult r = form.ShowDialog();
             NoticeStructureChange();
-            if (DialogResult.OK == r)
-            {
-            }
+            structFirstSetting = true;
+
         }
 
         private void valueTimePanel_MouseHover(object sender, EventArgs e)
@@ -811,6 +815,11 @@ namespace RiverSimulationApplication
         private void timeTxt_Enter(object sender, EventArgs e)
         {
             ControllerUtility.SetHtmlUrl(comment, "D1-1.html");
+        }
+
+        private void tBarNumberTxt_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

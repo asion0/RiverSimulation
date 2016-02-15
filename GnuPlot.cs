@@ -25,6 +25,7 @@ namespace Utilities.GnuplotCSharp
             ExtPro.StartInfo.FileName = gnuplotFileName + "gnuplot.exe";
             ExtPro.StartInfo.UseShellExecute = false;
             ExtPro.StartInfo.RedirectStandardInput = true;
+            ExtPro.StartInfo.CreateNoWindow = true;
             ExtPro.Start();
             GnupStWr = ExtPro.StandardInput;
             PlotBuffer = new List<StoredPlot>();

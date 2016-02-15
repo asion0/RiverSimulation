@@ -59,7 +59,6 @@
             this.posIchk = new System.Windows.Forms.CheckBox();
             this.posSelBtn = new System.Windows.Forms.Button();
             this.timeGrp = new System.Windows.Forms.GroupBox();
-            this.timeChk = new System.Windows.Forms.CheckBox();
             this.timeBtn = new System.Windows.Forms.Button();
             this.axisGrp = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -69,6 +68,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.generateResultBtn = new System.Windows.Forms.Button();
+            this.timeChk = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.formGrp.SuspendLayout();
@@ -298,13 +298,6 @@
             this.timeGrp.Name = "timeGrp";
             this.timeGrp.TabStop = false;
             // 
-            // timeChk
-            // 
-            resources.ApplyResources(this.timeChk, "timeChk");
-            this.timeChk.Name = "timeChk";
-            this.timeChk.UseVisualStyleBackColor = true;
-            this.timeChk.CheckedChanged += new System.EventHandler(this.timeChk_CheckedChanged);
-            // 
             // timeBtn
             // 
             resources.ApplyResources(this.timeBtn, "timeBtn");
@@ -362,6 +355,13 @@
             this.generateResultBtn.Name = "generateResultBtn";
             this.generateResultBtn.UseVisualStyleBackColor = true;
             this.generateResultBtn.Click += new System.EventHandler(this.generateResultBtn_Click);
+            // 
+            // timeChk
+            // 
+            resources.ApplyResources(this.timeChk, "timeChk");
+            this.timeChk.Name = "timeChk";
+            this.timeChk.UseVisualStyleBackColor = true;
+            this.timeChk.CheckedChanged += new System.EventHandler(this.timeChk_CheckedChanged);
             // 
             // SimulationResultForm
             // 
@@ -429,7 +429,6 @@
         private System.Windows.Forms.CheckBox posIchk;
         private System.Windows.Forms.Button posSelBtn;
         private System.Windows.Forms.GroupBox timeGrp;
-        private System.Windows.Forms.CheckBox timeChk;
         private System.Windows.Forms.Button timeBtn;
         private System.Windows.Forms.GroupBox axisGrp;
         private System.Windows.Forms.Label label5;
@@ -439,5 +438,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button generateResultBtn;
+        private System.Windows.Forms.CheckBox timeChk;
     }
 }

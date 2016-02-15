@@ -189,28 +189,28 @@
             // 
             this.newMnuItem.Name = "newMnuItem";
             this.newMnuItem.Size = new System.Drawing.Size(152, 22);
-            this.newMnuItem.Text = "開新檔案(N)";
+            this.newMnuItem.Text = "新增案例(N)";
             this.newMnuItem.Click += new System.EventHandler(this.newMnuItem_Click);
             // 
             // openMnuItem
             // 
             this.openMnuItem.Name = "openMnuItem";
             this.openMnuItem.Size = new System.Drawing.Size(152, 22);
-            this.openMnuItem.Text = "開啟舊檔(O)";
+            this.openMnuItem.Text = "開啟案例(O)";
             this.openMnuItem.Click += new System.EventHandler(this.openMnuItem_Click);
             // 
             // saveMnuItem
             // 
             this.saveMnuItem.Name = "saveMnuItem";
             this.saveMnuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveMnuItem.Text = "儲存檔案(S)";
+            this.saveMnuItem.Text = "儲存案例(S)";
             this.saveMnuItem.Click += new System.EventHandler(this.saveMnuItem_Click);
             // 
             // descriptionMnuItem
             // 
             this.descriptionMnuItem.Name = "descriptionMnuItem";
             this.descriptionMnuItem.Size = new System.Drawing.Size(152, 22);
-            this.descriptionMnuItem.Text = "檔案敘述(D)";
+            this.descriptionMnuItem.Text = "案例敘述(D)";
             this.descriptionMnuItem.Click += new System.EventHandler(this.descriptionMnuItem_Click);
             // 
             // toolStripSeparator1
@@ -222,7 +222,7 @@
             // 
             this.exitMnuItem.Name = "exitMnuItem";
             this.exitMnuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitMnuItem.Text = "結束(X)";
+            this.exitMnuItem.Text = "關閉(X)";
             this.exitMnuItem.Click += new System.EventHandler(this.exitMnuItem_Click);
             // 
             // languageMnu

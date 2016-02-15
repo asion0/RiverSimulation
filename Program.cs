@@ -28,8 +28,8 @@ namespace RiverSimulationApplication
 #endif
             //string f2 = Environment.CurrentDirectory + "\\t.i";
             //RiverSimulationProfile.profile.GenerateInputFile(f2);
-
-            Application.Run(new RiverSimulationForm());
+            
+            Application.Run(new LoginForm());
         }
 
         public static string currentPath;   //執行檔所在目錄, 會判斷是否RAR包裝檔案

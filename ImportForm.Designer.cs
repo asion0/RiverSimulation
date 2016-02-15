@@ -64,12 +64,16 @@
             this.previewSpratePicBox = new System.Windows.Forms.PictureBox();
             this.previewCombo = new System.Windows.Forms.ComboBox();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
+            this.coorTypeGroup = new System.Windows.Forms.GroupBox();
+            this.twd97Rdo = new System.Windows.Forms.RadioButton();
+            this.twd67Rdo = new System.Windows.Forms.RadioButton();
             this.mainPanel.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
             this.previewSpratePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewSpratePicBox)).BeginInit();
+            this.coorTypeGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // comment
@@ -98,7 +102,9 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.coorTypeGroup);
             this.mainPanel.Controls.Add(this.bitmapGrp);
+            this.mainPanel.Controls.Add(this.selectBgFilePath);
             this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Controls.Add(this.flowTypeGroup);
             this.mainPanel.Controls.Add(this.runExcelBtn);
@@ -111,7 +117,6 @@
             // bitmapGrp
             // 
             this.bitmapGrp.Controls.Add(this.coorSelCombo);
-            this.bitmapGrp.Controls.Add(this.selectBgFilePath);
             this.bitmapGrp.Controls.Add(this.imgInfoBtn);
             this.bitmapGrp.Controls.Add(this.selectBgBtn);
             this.bitmapGrp.Controls.Add(this.noBgRdo);
@@ -120,7 +125,7 @@
             this.bitmapGrp.Enabled = false;
             this.bitmapGrp.Location = new System.Drawing.Point(12, 305);
             this.bitmapGrp.Name = "bitmapGrp";
-            this.bitmapGrp.Size = new System.Drawing.Size(472, 177);
+            this.bitmapGrp.Size = new System.Drawing.Size(472, 127);
             this.bitmapGrp.TabIndex = 0;
             this.bitmapGrp.TabStop = false;
             this.bitmapGrp.Text = "底圖設定";
@@ -136,11 +141,12 @@
             this.coorSelCombo.Name = "coorSelCombo";
             this.coorSelCombo.Size = new System.Drawing.Size(121, 20);
             this.coorSelCombo.TabIndex = 4;
+            this.coorSelCombo.Visible = false;
             this.coorSelCombo.SelectedIndexChanged += new System.EventHandler(this.coorSelCombo_SelectedIndexChanged);
             // 
             // selectBgFilePath
             // 
-            this.selectBgFilePath.Location = new System.Drawing.Point(31, 114);
+            this.selectBgFilePath.Location = new System.Drawing.Point(10, 610);
             this.selectBgFilePath.Name = "selectBgFilePath";
             this.selectBgFilePath.Size = new System.Drawing.Size(303, 51);
             this.selectBgFilePath.TabIndex = 3;
@@ -231,6 +237,7 @@
             this.button5.TabIndex = 2;
             this.button5.Text = "操作方法";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             // 
             // button4
             // 
@@ -260,6 +267,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "MeshLab";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             // 
             // button1
             // 
@@ -399,7 +407,7 @@
             // runExcelBtn
             // 
             this.runExcelBtn.Enabled = false;
-            this.runExcelBtn.Location = new System.Drawing.Point(17, 520);
+            this.runExcelBtn.Location = new System.Drawing.Point(18, 581);
             this.runExcelBtn.Name = "runExcelBtn";
             this.runExcelBtn.Size = new System.Drawing.Size(130, 26);
             this.runExcelBtn.TabIndex = 1;
@@ -410,7 +418,7 @@
             // 
             // runCcheMeshBtn2
             // 
-            this.runCcheMeshBtn2.Location = new System.Drawing.Point(153, 520);
+            this.runCcheMeshBtn2.Location = new System.Drawing.Point(154, 581);
             this.runCcheMeshBtn2.Name = "runCcheMeshBtn2";
             this.runCcheMeshBtn2.Size = new System.Drawing.Size(130, 26);
             this.runCcheMeshBtn2.TabIndex = 1;
@@ -421,9 +429,9 @@
             // 
             // inputFileDlg
             // 
-            this.inputFileDlg.Filter = "CCHE_MESH檔案(*.geo)|*.geo|文字檔案(*.txt)|*.txt|Excel檔案(*.xls)|*.xls|SMS檔案(*.sms)|*.sm" +
-    "s";
+            this.inputFileDlg.Filter = "CCHE_MESH檔案(*.geo)|*.geo|Delft3D檔案(*.grd)|*.grd";
             this.inputFileDlg.Title = "選取匯入格網檔案";
+            this.inputFileDlg.FileOk += new System.ComponentModel.CancelEventHandler(this.inputFileDlg_FileOk);
             // 
             // selectBgDlg
             // 
@@ -479,6 +487,43 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 11;
             // 
+            // coorTypeGroup
+            // 
+            this.coorTypeGroup.Controls.Add(this.twd97Rdo);
+            this.coorTypeGroup.Controls.Add(this.twd67Rdo);
+            this.coorTypeGroup.Location = new System.Drawing.Point(12, 438);
+            this.coorTypeGroup.Name = "coorTypeGroup";
+            this.coorTypeGroup.Size = new System.Drawing.Size(472, 100);
+            this.coorTypeGroup.TabIndex = 0;
+            this.coorTypeGroup.TabStop = false;
+            this.coorTypeGroup.Text = "座標系統";
+            // 
+            // twd97Rdo
+            // 
+            this.twd97Rdo.AutoSize = true;
+            this.twd97Rdo.Checked = true;
+            this.twd97Rdo.Location = new System.Drawing.Point(17, 30);
+            this.twd97Rdo.Name = "twd97Rdo";
+            this.twd97Rdo.Size = new System.Drawing.Size(61, 16);
+            this.twd97Rdo.TabIndex = 0;
+            this.twd97Rdo.TabStop = true;
+            this.twd97Rdo.Text = "TWD97";
+            this.twd97Rdo.UseVisualStyleBackColor = true;
+            this.twd97Rdo.CheckedChanged += new System.EventHandler(this.twd97Rdo_CheckedChanged);
+            this.twd97Rdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
+            // 
+            // twd67Rdo
+            // 
+            this.twd67Rdo.AutoSize = true;
+            this.twd67Rdo.Location = new System.Drawing.Point(17, 60);
+            this.twd67Rdo.Name = "twd67Rdo";
+            this.twd67Rdo.Size = new System.Drawing.Size(61, 16);
+            this.twd67Rdo.TabIndex = 0;
+            this.twd67Rdo.Text = "TWD67";
+            this.twd67Rdo.UseVisualStyleBackColor = true;
+            this.twd67Rdo.CheckedChanged += new System.EventHandler(this.twd67Rdo_CheckedChanged);
+            this.twd67Rdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
+            // 
             // ImportForm
             // 
             this.AcceptButton = this.ok;
@@ -504,6 +549,8 @@
             this.flowTypeGroup.PerformLayout();
             this.previewSpratePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewSpratePicBox)).EndInit();
+            this.coorTypeGroup.ResumeLayout(false);
+            this.coorTypeGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -546,6 +593,9 @@
         private System.Windows.Forms.Button reverseGridBtn;
         private System.Windows.Forms.Button gridDataBtn;
         private System.Windows.Forms.ComboBox coorSelCombo;
+        private System.Windows.Forms.GroupBox coorTypeGroup;
+        private System.Windows.Forms.RadioButton twd97Rdo;
+        private System.Windows.Forms.RadioButton twd67Rdo;
 
     }
 }

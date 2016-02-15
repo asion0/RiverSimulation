@@ -115,7 +115,9 @@ namespace RiverSimulationApplication
         private void UpdateStatus()
         {
             initialWater3DPanel.Enabled = p.Is3DMode();
-            initialMovableBed3DPanel.Enabled = p.Is3DMode();
+            //20160127 - 動床模組-3D-垂向濃度剖面(甲方)無功能，請乙方灰階。
+            //initialMovableBed3DPanel.Enabled = p.Is3DMode();
+            initialMovableBed3DPanel.Enabled = false;
             movableTypeGroup.Enabled = p.IsMovableBedMode();
         }
 

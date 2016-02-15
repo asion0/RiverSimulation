@@ -461,6 +461,7 @@
             // 
             resources.ApplyResources(this.tBarNumberTxt, "tBarNumberTxt");
             this.tBarNumberTxt.Name = "tBarNumberTxt";
+            this.tBarNumberTxt.TextChanged += new System.EventHandler(this.tBarNumberTxt_TextChanged);
             // 
             // ok
             // 

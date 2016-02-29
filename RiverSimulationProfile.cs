@@ -79,6 +79,7 @@ namespace RiverSimulationApplication
 
         public ImportSource importSource;
         public int coorType;
+        public int uiCoorType;
         public const int TWD97 = 0;
         public const int TWD67 = 1;
         public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
@@ -943,6 +944,7 @@ namespace RiverSimulationApplication
             inputGrid = null;
             importSource = ImportSource.None;
             coorType = TWD97;
+            uiCoorType = TWD97;
             verticalLevelNumber = 19;      //0.1.1 垂向格網分層數目
             levelProportion = null;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
@@ -1274,7 +1276,7 @@ namespace RiverSimulationApplication
                 File.Delete(br);
             }
             if (!inputGrid.DownloadGridMap(coorType, tl, tr, bl, br))
-            {//coorType
+            {
                 MessageBox.Show("無法取得線上地圖！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 //bkImgType = BackgroundMapType.None;
                 return false;
@@ -1292,8 +1294,8 @@ namespace RiverSimulationApplication
             {
                 for (int j = 0; j < inputGrid.GetJ; ++j)
                 {
-                    inputGrid.inputCoor[i, j].x += 828;
-                    inputGrid.inputCoor[i, j].y -= 207;
+                    inputGrid.inputCoor[i, j].x -= 828;
+                    inputGrid.inputCoor[i, j].y += 207;
                 }
             }
             inputGrid.ResetGrid();
@@ -1309,8 +1311,8 @@ namespace RiverSimulationApplication
             {
                 for (int j = 0; j < inputGrid.GetJ; ++j)
                 {
-                    inputGrid.inputCoor[i, j].x -= 828;
-                    inputGrid.inputCoor[i, j].y += 207;
+                    inputGrid.inputCoor[i, j].x += 828;
+                    inputGrid.inputCoor[i, j].y -= 207;
                 }
             }
             inputGrid.ResetGrid();

@@ -1489,6 +1489,8 @@ namespace PictureBoxCtrl
         {
             double x67 = coor97.x - 807.8 - A * coor97.x - B * coor97.y;
             double y67 = coor97.y + 248.6 - A * coor97.y - B * coor97.x;
+            //double x67 = coor97.x + 828;
+            //double y67 = coor97.y - 207;
 
             return new CoorPoint(x67, y67);
         }
@@ -1497,6 +1499,8 @@ namespace PictureBoxCtrl
         {
             double x97 = coor67.x + 807.8 + A * coor67.x + B * coor67.y;
             double y97 = coor67.y - 248.6 + A * coor67.y + B * coor67.y;
+            //double x97 = coor67.x - 828;
+            //double y97 = coor67.y + 207;
 
             return new CoorPoint(x97, x97);
         }

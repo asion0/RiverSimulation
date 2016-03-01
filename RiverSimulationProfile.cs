@@ -78,10 +78,8 @@ namespace RiverSimulationApplication
         }
 
         public ImportSource importSource;
-        public int coorType;
-        public int uiCoorType;
-        public const int TWD97 = 0;
-        public const int TWD67 = 1;
+        public PictureBoxCtrl.GridPictureBox.CoorType coorType;
+
         public Int32 verticalLevelNumber;      //0.1.1 垂向格網分層數目
         public double[] levelProportion;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
@@ -943,8 +941,7 @@ namespace RiverSimulationApplication
             //全域參數
             inputGrid = null;
             importSource = ImportSource.None;
-            coorType = TWD97;
-            uiCoorType = TWD97;
+            coorType = PictureBoxCtrl.GridPictureBox.CoorType.None;
             verticalLevelNumber = 19;      //0.1.1 垂向格網分層數目
             levelProportion = null;       //0.1.1.1 分層比例 陣列大小_verticalLevelNumber
 
@@ -1214,11 +1211,7 @@ namespace RiverSimulationApplication
 
         public bool IsMapPosition()
         {
-            if (null == inputGrid || inputGrid.GetTopLeft.x < 120.0 || inputGrid.GetTopLeft.y < 23.0)
-            {
-                return false;
-            }
-            return true;
+            return (inputGrid == null) ? false : inputGrid.IsInMap();
         }
 
         public enum BackgroundMapType
@@ -1275,6 +1268,7 @@ namespace RiverSimulationApplication
             {
                 File.Delete(br);
             }
+            inputGrid.coorType = coorType;
             if (!inputGrid.DownloadGridMap(coorType, tl, tr, bl, br))
             {
                 MessageBox.Show("無法取得線上地圖！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1285,39 +1279,39 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        public void ConvertToTwd97()
-        {
-            if (coorType == TWD97)
-                return; 
+        //public void ConvertToTwd97()
+        //{
+        //    if (coorType == TWD97)
+        //        return; 
             
-            for (int i = 0; i < inputGrid.GetI; ++i)
-            {
-                for (int j = 0; j < inputGrid.GetJ; ++j)
-                {
-                    inputGrid.inputCoor[i, j].x -= 828;
-                    inputGrid.inputCoor[i, j].y += 207;
-                }
-            }
-            inputGrid.ResetGrid();
-            coorType = TWD97;
-        }
+        //    for (int i = 0; i < inputGrid.GetI; ++i)
+        //    {
+        //        for (int j = 0; j < inputGrid.GetJ; ++j)
+        //        {
+        //            inputGrid.inputCoor[i, j].x -= 828;
+        //            inputGrid.inputCoor[i, j].y += 207;
+        //        }
+        //    }
+        //    inputGrid.ResetGrid();
+        //    coorType = TWD97;
+        //}
 
-        public void ConvertToTwd67()
-        {
-            if (coorType == TWD67)
-                return;
+        //public void ConvertToTwd67()
+        //{
+        //    if (coorType == TWD67)
+        //        return;
 
-            for (int i = 0; i < inputGrid.GetI; ++i)
-            {
-                for (int j = 0; j < inputGrid.GetJ; ++j)
-                {
-                    inputGrid.inputCoor[i, j].x += 828;
-                    inputGrid.inputCoor[i, j].y -= 207;
-                }
-            }
-            inputGrid.ResetGrid();
-            coorType = TWD67;
-        }
+        //    for (int i = 0; i < inputGrid.GetI; ++i)
+        //    {
+        //        for (int j = 0; j < inputGrid.GetJ; ++j)
+        //        {
+        //            inputGrid.inputCoor[i, j].x += 828;
+        //            inputGrid.inputCoor[i, j].y -= 207;
+        //        }
+        //    }
+        //    inputGrid.ResetGrid();
+        //    coorType = TWD67;
+        //}
 
         public void SetImportImageMode()
         {

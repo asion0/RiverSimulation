@@ -139,16 +139,9 @@ namespace PictureBoxCtrl
 
 		#region Properties
 
-		/// <summary>
-		/// Property to select the picture which is displayed in the picturebox. If the 
-		/// file doesn´t exist or we receive an exception, the picturebox displays 
-		/// a red cross.
-		/// </summary>
-		/// <value>Complete filename of the picture, including path information</value>
-		/// <remarks>Supported fileformat: *.gif, *.tif, *.jpg, *.bmp</remarks>
-		//[ Browsable ( false ) ]
         public enum CoorType
         {
+            None,
             TWD97,
             TWD67
         }
@@ -183,59 +176,54 @@ namespace PictureBoxCtrl
         private BackgroundMapType bkImgType = BackgroundMapType.None;
         private BackgroundMapType GetBackgroundMapType()
         {
-            //if (bkImgType == BackgroundMapType.ImportImage)
-            //{
-            //    return BackgroundMapType.None;
-            //}
             return bkImgType;
         }
 
         private CoorPoint GetTopLeft()
         {
+            //return rg.GetTopLeftPoint();
+            
             if(!rg.IsInMap())
             {
-                return new CoorPoint(rg.GetTopLeft.x, rg.GetTopLeft.y);
+                return rg.GetTopLeftPoint();
             }
 
             CoordinateTransform ct = new CoordinateTransform();
-            CoorPoint pt = new CoorPoint();
+            CoorPoint tl = rg.GetTopLeftPoint();
             switch (bkImgType)
             {
                 case BackgroundMapType.None:
-                    pt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
-                    break;
+                    return ct.CalLonLatDegToTwd97(tl.x, tl.y);
                 case BackgroundMapType.GoogleStaticMap:
-                    pt = ct.CalLonLatDegToTwd97(rg.GetTopLeft.x, rg.GetTopLeft.y);
-                    break;
+                    return ct.CalLonLatDegToTwd97(tl.x, tl.y);
                 case BackgroundMapType.ImportImage:
-                    pt = topLeft;
-                    break;
+                    return tl;
             }
-            return pt;
+            return null;       
         }
 
         private CoorPoint GetBottomRight()
         {
+            //return rg.GetBottomRightPoint();
+            
             if (!rg.IsInMap())
             {
-                return new CoorPoint(rg.GetBottomRight.x, rg.GetBottomRight.y);
+                return rg.GetBottomRightPoint();
             }
 
             CoordinateTransform ct = new CoordinateTransform();
-            CoorPoint pt = new CoorPoint();
+            CoorPoint br = rg.GetBottomRightPoint();
             switch (bkImgType)
             {
                 case BackgroundMapType.None:
-                    pt = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
-                    break;
+                    return ct.CalLonLatDegToTwd97(br.x, br.y);
+
                 case BackgroundMapType.GoogleStaticMap:
-                    pt = ct.CalLonLatDegToTwd97(rg.GetBottomRight.x, rg.GetBottomRight.y);
-                    break;
+                    return ct.CalLonLatDegToTwd97(br.x, br.y);
                 case BackgroundMapType.ImportImage:
-                    pt = bottomRight;
-                    break;
+                    return br;
             }
-            return pt;
+            return null;
         }
  
         private Bitmap LoadBitmapWithoutLockFile(string s)
@@ -1035,15 +1023,16 @@ namespace PictureBoxCtrl
         }
 
         public CoorPoint[,] inputCoor;
+        public GridPictureBox.CoorType coorType = GridPictureBox.CoorType.None;
         private int _i = 0, _j = 0;
 
         private double maxX = double.MinValue, minX = double.MaxValue;
         private double maxY = double.MinValue, minY = double.MaxValue;
         private int zoomScale = 0;
 
-        private CoorPoint topLeft;
-        private CoorPoint bottomRight;
-        private CoorPoint centerPoint;
+        //private CoorPoint topLeft;
+        //private CoorPoint bottomRight;
+        //private CoorPoint centerPoint;
 
         public int GetI
         {
@@ -1075,14 +1064,83 @@ namespace PictureBoxCtrl
             get { return minY; }
         }
 
-        public CoorPoint GetTopLeft
-        {
-            get { return this.topLeft;  }
+        public bool IsInMap()
+        {   //119,21 - 42048.392, 2324145.604
+            //123,26 - 450240.618, 2878079.346
+            return (minX > 42048.392 && minY > 2324145.604 && maxX < 450240.618 && maxY < 2878079.346);
         }
 
-        public CoorPoint GetBottomRight
+        public CoorPoint GetCenterXY()
         {
-            get { return this.bottomRight; }
+            if (!IsInMap())
+            {
+                return new CoorPoint((maxX + minX) / 2, (maxY + minY) / 2);
+            }
+
+            double _maxX = this.maxX;
+            double _minX = this.minX;
+            double _maxY = this.maxY;
+            double _minY = this.minY;
+            if (coorType == GridPictureBox.CoorType.TWD67)
+            {
+                _maxX += 828;
+                _minX += 828;
+                _maxY -= 207;
+                _minY -= 207;
+            }
+            CoordinateTransform ct = new CoordinateTransform();
+            return ct.CalTwd97ToLatLonCoorRad((_maxX + _minX) / 2, (_maxY + _minY) / 2);
+        }
+
+        public CoorPoint GetCenterPoint()
+        {
+            return GetCenterXY().RadToDegree();
+        }
+
+        public CoorPoint GetTopLeftPoint()
+        {
+            if (!IsInMap())
+        {
+                return new CoorPoint(minX, maxY);
+            }
+
+            double _maxX = this.maxX;
+            double _minX = this.minX;
+            double _maxY = this.maxY;
+            double _minY = this.minY;
+            if (coorType == GridPictureBox.CoorType.TWD67)
+            {
+                _maxX += 828;
+                _minX += 828;
+                _maxY -= 207;
+                _minY -= 207;
+            }
+            CoordinateTransform ct = new CoordinateTransform();
+            CoorPoint center = GetCenterXY();
+            return ct.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
+        }
+
+        public CoorPoint GetBottomRightPoint()
+        {
+            if (!IsInMap())
+        {
+                return new CoorPoint(maxX, minY);
+            }
+
+            double _maxX = this.maxX;
+            double _minX = this.minX;
+            double _maxY = this.maxY;
+            double _minY = this.minY;
+            if (coorType == GridPictureBox.CoorType.TWD67)
+            {
+                _maxX += 828;
+                _minX += 828;
+                _maxY -= 207;
+                _minY -= 207;
+            }
+            CoordinateTransform ct = new CoordinateTransform();
+            CoorPoint center = GetCenterXY();
+            return ct.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
         }
 
         public bool IsReadFinished()
@@ -1191,12 +1249,6 @@ namespace PictureBoxCtrl
             return true;
         }
         
-        public bool IsInMap()
-        {   //119,21 - 42048.392, 2324145.604
-            //123,26 - 450240.618, 2878079.346
-            return (minX > 42048.392 && minY > 2324145.604 && maxX < 450240.618 && maxY < 2878079.346);
-        }
-
         public bool ResetGrid()
         {
             return ConvertGrid(inputCoor);
@@ -1238,40 +1290,27 @@ namespace PictureBoxCtrl
             {
                 return false;
             }
-
-            if (IsInMap())
-            {
-                CoorPoint center = ct.CalTwd97ToLatLonCoorRad((maxX + minX) / 2, (maxY + minY) / 2);
-                bottomRight = ct.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, 640, 640, zoomScale).RadToDegree();
-                topLeft = ct.CalCenterLatLonToOffsetPixelLonLat(center.x, center.y, -640, -640, zoomScale).RadToDegree();
-                centerPoint = center.RadToDegree();
-            }
-            else
-            {
-                centerPoint = new CoorPoint((maxX + minX) / 2, (maxY + minY) / 2);
-                bottomRight = new CoorPoint(maxX, minY);
-                topLeft = new CoorPoint(minX, maxY);
-            }
             return true;
         }
 
-        public bool DownloadGridMap(int coorType, string tl, string tr, string bl, string br)
+        public bool DownloadGridMap(GridPictureBox.CoorType coorType, string tl, string tr, string bl, string br)
         {
             try
             {
-                CoorPoint tlp = topLeft, cp = centerPoint, brp = bottomRight;
-                if ((GridPictureBox.CoorType)coorType == GridPictureBox.CoorType.TWD67)
-                {
-                    CoordinateTransform ct = new CoordinateTransform();
-                    tlp = ct.Twd97ToTwd67(topLeft);
-                    cp = ct.Twd97ToTwd67(centerPoint);
-                    brp = ct.Twd97ToTwd67(bottomRight);
-                }
+                CoorPoint tlp = GetTopLeftPoint(), cp = GetCenterPoint(), brp = GetBottomRightPoint();
+                //CoorPoint tlp = topLeft, cp = centerPoint, brp = bottomRight;
+                //if (coorType == GridPictureBox.CoorType.TWD67)
+                //{
+                //    CoordinateTransform ct = new CoordinateTransform();
+                //    tlp = ct.Twd97ToTwd67(topLeft);
+                //    cp = ct.Twd97ToTwd67(centerPoint);
+                //    brp = ct.Twd97ToTwd67(bottomRight);
+                //}
 
-                DownloadStaticMap((topLeft.x + centerPoint.x) / 2, (topLeft.y + centerPoint.y) / 2, zoomScale, br);
-                DownloadStaticMap((bottomRight.x + centerPoint.x) / 2, (topLeft.y + centerPoint.y) / 2, zoomScale, bl);
-                DownloadStaticMap((topLeft.x + centerPoint.x) / 2, (bottomRight.y + centerPoint.y) / 2, zoomScale, tr);
-                DownloadStaticMap((bottomRight.x + centerPoint.x) / 2, (bottomRight.y + centerPoint.y) / 2, zoomScale, tl);
+                DownloadStaticMap((tlp.x + cp.x) / 2, (tlp.y + cp.y) / 2, zoomScale, br);
+                DownloadStaticMap((brp.x + cp.x) / 2, (tlp.y + cp.y) / 2, zoomScale, bl);
+                DownloadStaticMap((tlp.x + cp.x) / 2, (brp.y + cp.y) / 2, zoomScale, tr);
+                DownloadStaticMap((brp.x + cp.x) / 2, (brp.y + cp.y) / 2, zoomScale, tl);
             }
             catch (Exception e)
             {

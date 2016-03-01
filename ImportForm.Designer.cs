@@ -31,14 +31,17 @@
             this.comment = new System.Windows.Forms.WebBrowser();
             this.ok = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.coorTypeGroup = new System.Windows.Forms.GroupBox();
+            this.twd97Rdo = new System.Windows.Forms.RadioButton();
+            this.twd67Rdo = new System.Windows.Forms.RadioButton();
             this.bitmapGrp = new System.Windows.Forms.GroupBox();
             this.coorSelCombo = new System.Windows.Forms.ComboBox();
-            this.selectBgFilePath = new System.Windows.Forms.Label();
             this.imgInfoBtn = new System.Windows.Forms.Button();
             this.selectBgBtn = new System.Windows.Forms.Button();
             this.noBgRdo = new System.Windows.Forms.RadioButton();
             this.selectBgRdo = new System.Windows.Forms.RadioButton();
             this.useGoogleBgRdo = new System.Windows.Forms.RadioButton();
+            this.selectBgFilePath = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -64,16 +67,14 @@
             this.previewSpratePicBox = new System.Windows.Forms.PictureBox();
             this.previewCombo = new System.Windows.Forms.ComboBox();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
-            this.coorTypeGroup = new System.Windows.Forms.GroupBox();
-            this.twd97Rdo = new System.Windows.Forms.RadioButton();
-            this.twd67Rdo = new System.Windows.Forms.RadioButton();
+            this.noneRdo = new System.Windows.Forms.RadioButton();
             this.mainPanel.SuspendLayout();
+            this.coorTypeGroup.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowTypeGroup.SuspendLayout();
             this.previewSpratePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewSpratePicBox)).BeginInit();
-            this.coorTypeGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // comment
@@ -114,6 +115,44 @@
             this.mainPanel.Size = new System.Drawing.Size(500, 680);
             this.mainPanel.TabIndex = 10;
             // 
+            // coorTypeGroup
+            // 
+            this.coorTypeGroup.Controls.Add(this.noneRdo);
+            this.coorTypeGroup.Controls.Add(this.twd97Rdo);
+            this.coorTypeGroup.Controls.Add(this.twd67Rdo);
+            this.coorTypeGroup.Location = new System.Drawing.Point(12, 433);
+            this.coorTypeGroup.Name = "coorTypeGroup";
+            this.coorTypeGroup.Size = new System.Drawing.Size(472, 110);
+            this.coorTypeGroup.TabIndex = 0;
+            this.coorTypeGroup.TabStop = false;
+            this.coorTypeGroup.Text = "座標系統";
+            // 
+            // twd97Rdo
+            // 
+            this.twd97Rdo.AutoSize = true;
+            this.twd97Rdo.Checked = true;
+            this.twd97Rdo.Location = new System.Drawing.Point(17, 51);
+            this.twd97Rdo.Name = "twd97Rdo";
+            this.twd97Rdo.Size = new System.Drawing.Size(61, 16);
+            this.twd97Rdo.TabIndex = 0;
+            this.twd97Rdo.TabStop = true;
+            this.twd97Rdo.Text = "TWD97";
+            this.twd97Rdo.UseVisualStyleBackColor = true;
+            this.twd97Rdo.CheckedChanged += new System.EventHandler(this.twd97Rdo_CheckedChanged);
+            this.twd97Rdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
+            // 
+            // twd67Rdo
+            // 
+            this.twd67Rdo.AutoSize = true;
+            this.twd67Rdo.Location = new System.Drawing.Point(17, 82);
+            this.twd67Rdo.Name = "twd67Rdo";
+            this.twd67Rdo.Size = new System.Drawing.Size(61, 16);
+            this.twd67Rdo.TabIndex = 0;
+            this.twd67Rdo.Text = "TWD67";
+            this.twd67Rdo.UseVisualStyleBackColor = true;
+            this.twd67Rdo.CheckedChanged += new System.EventHandler(this.twd67Rdo_CheckedChanged);
+            this.twd67Rdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
+            // 
             // bitmapGrp
             // 
             this.bitmapGrp.Controls.Add(this.coorSelCombo);
@@ -125,7 +164,7 @@
             this.bitmapGrp.Enabled = false;
             this.bitmapGrp.Location = new System.Drawing.Point(12, 305);
             this.bitmapGrp.Name = "bitmapGrp";
-            this.bitmapGrp.Size = new System.Drawing.Size(472, 127);
+            this.bitmapGrp.Size = new System.Drawing.Size(472, 118);
             this.bitmapGrp.TabIndex = 0;
             this.bitmapGrp.TabStop = false;
             this.bitmapGrp.Text = "底圖設定";
@@ -137,24 +176,17 @@
             this.coorSelCombo.Items.AddRange(new object[] {
             "TWD97",
             "TWD67"});
-            this.coorSelCombo.Location = new System.Drawing.Point(106, 56);
+            this.coorSelCombo.Location = new System.Drawing.Point(106, 51);
             this.coorSelCombo.Name = "coorSelCombo";
             this.coorSelCombo.Size = new System.Drawing.Size(121, 20);
             this.coorSelCombo.TabIndex = 4;
             this.coorSelCombo.Visible = false;
             this.coorSelCombo.SelectedIndexChanged += new System.EventHandler(this.coorSelCombo_SelectedIndexChanged);
             // 
-            // selectBgFilePath
-            // 
-            this.selectBgFilePath.Location = new System.Drawing.Point(10, 610);
-            this.selectBgFilePath.Name = "selectBgFilePath";
-            this.selectBgFilePath.Size = new System.Drawing.Size(303, 51);
-            this.selectBgFilePath.TabIndex = 3;
-            // 
             // imgInfoBtn
             // 
             this.imgInfoBtn.Enabled = false;
-            this.imgInfoBtn.Location = new System.Drawing.Point(208, 85);
+            this.imgInfoBtn.Location = new System.Drawing.Point(208, 80);
             this.imgInfoBtn.Name = "imgInfoBtn";
             this.imgInfoBtn.Size = new System.Drawing.Size(96, 26);
             this.imgInfoBtn.TabIndex = 1;
@@ -166,7 +198,7 @@
             // selectBgBtn
             // 
             this.selectBgBtn.Enabled = false;
-            this.selectBgBtn.Location = new System.Drawing.Point(106, 85);
+            this.selectBgBtn.Location = new System.Drawing.Point(106, 80);
             this.selectBgBtn.Name = "selectBgBtn";
             this.selectBgBtn.Size = new System.Drawing.Size(96, 26);
             this.selectBgBtn.TabIndex = 1;
@@ -179,7 +211,7 @@
             // 
             this.noBgRdo.AutoSize = true;
             this.noBgRdo.Checked = true;
-            this.noBgRdo.Location = new System.Drawing.Point(17, 30);
+            this.noBgRdo.Location = new System.Drawing.Point(17, 25);
             this.noBgRdo.Name = "noBgRdo";
             this.noBgRdo.Size = new System.Drawing.Size(59, 16);
             this.noBgRdo.TabIndex = 0;
@@ -192,7 +224,7 @@
             // selectBgRdo
             // 
             this.selectBgRdo.AutoSize = true;
-            this.selectBgRdo.Location = new System.Drawing.Point(17, 90);
+            this.selectBgRdo.Location = new System.Drawing.Point(17, 85);
             this.selectBgRdo.Name = "selectBgRdo";
             this.selectBgRdo.Size = new System.Drawing.Size(71, 16);
             this.selectBgRdo.TabIndex = 0;
@@ -204,7 +236,7 @@
             // useGoogleBgRdo
             // 
             this.useGoogleBgRdo.AutoSize = true;
-            this.useGoogleBgRdo.Location = new System.Drawing.Point(17, 60);
+            this.useGoogleBgRdo.Location = new System.Drawing.Point(17, 55);
             this.useGoogleBgRdo.Name = "useGoogleBgRdo";
             this.useGoogleBgRdo.Size = new System.Drawing.Size(81, 16);
             this.useGoogleBgRdo.TabIndex = 0;
@@ -212,6 +244,13 @@
             this.useGoogleBgRdo.UseVisualStyleBackColor = true;
             this.useGoogleBgRdo.CheckedChanged += new System.EventHandler(this.useGoogleBgRdo_CheckedChanged);
             this.useGoogleBgRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
+            // 
+            // selectBgFilePath
+            // 
+            this.selectBgFilePath.Location = new System.Drawing.Point(10, 610);
+            this.selectBgFilePath.Name = "selectBgFilePath";
+            this.selectBgFilePath.Size = new System.Drawing.Size(303, 51);
+            this.selectBgFilePath.TabIndex = 3;
             // 
             // groupBox2
             // 
@@ -487,42 +526,19 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 11;
             // 
-            // coorTypeGroup
+            // noneRdo
             // 
-            this.coorTypeGroup.Controls.Add(this.twd97Rdo);
-            this.coorTypeGroup.Controls.Add(this.twd67Rdo);
-            this.coorTypeGroup.Location = new System.Drawing.Point(12, 438);
-            this.coorTypeGroup.Name = "coorTypeGroup";
-            this.coorTypeGroup.Size = new System.Drawing.Size(472, 100);
-            this.coorTypeGroup.TabIndex = 0;
-            this.coorTypeGroup.TabStop = false;
-            this.coorTypeGroup.Text = "座標系統";
-            // 
-            // twd97Rdo
-            // 
-            this.twd97Rdo.AutoSize = true;
-            this.twd97Rdo.Checked = true;
-            this.twd97Rdo.Location = new System.Drawing.Point(17, 30);
-            this.twd97Rdo.Name = "twd97Rdo";
-            this.twd97Rdo.Size = new System.Drawing.Size(61, 16);
-            this.twd97Rdo.TabIndex = 0;
-            this.twd97Rdo.TabStop = true;
-            this.twd97Rdo.Text = "TWD97";
-            this.twd97Rdo.UseVisualStyleBackColor = true;
-            this.twd97Rdo.CheckedChanged += new System.EventHandler(this.twd97Rdo_CheckedChanged);
-            this.twd97Rdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
-            // 
-            // twd67Rdo
-            // 
-            this.twd67Rdo.AutoSize = true;
-            this.twd67Rdo.Location = new System.Drawing.Point(17, 60);
-            this.twd67Rdo.Name = "twd67Rdo";
-            this.twd67Rdo.Size = new System.Drawing.Size(61, 16);
-            this.twd67Rdo.TabIndex = 0;
-            this.twd67Rdo.Text = "TWD67";
-            this.twd67Rdo.UseVisualStyleBackColor = true;
-            this.twd67Rdo.CheckedChanged += new System.EventHandler(this.twd67Rdo_CheckedChanged);
-            this.twd67Rdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
+            this.noneRdo.AutoSize = true;
+            this.noneRdo.Checked = true;
+            this.noneRdo.Location = new System.Drawing.Point(17, 21);
+            this.noneRdo.Name = "noneRdo";
+            this.noneRdo.Size = new System.Drawing.Size(35, 16);
+            this.noneRdo.TabIndex = 0;
+            this.noneRdo.TabStop = true;
+            this.noneRdo.Text = "無";
+            this.noneRdo.UseVisualStyleBackColor = true;
+            this.noneRdo.CheckedChanged += new System.EventHandler(this.noneRdo_CheckedChanged);
+            this.noneRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // ImportForm
             // 
@@ -542,6 +558,8 @@
             this.Text = "計算格網";
             this.Load += new System.EventHandler(this.ImportForm_Load);
             this.mainPanel.ResumeLayout(false);
+            this.coorTypeGroup.ResumeLayout(false);
+            this.coorTypeGroup.PerformLayout();
             this.bitmapGrp.ResumeLayout(false);
             this.bitmapGrp.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -549,8 +567,6 @@
             this.flowTypeGroup.PerformLayout();
             this.previewSpratePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewSpratePicBox)).EndInit();
-            this.coorTypeGroup.ResumeLayout(false);
-            this.coorTypeGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -596,6 +612,6 @@
         private System.Windows.Forms.GroupBox coorTypeGroup;
         private System.Windows.Forms.RadioButton twd97Rdo;
         private System.Windows.Forms.RadioButton twd67Rdo;
-
+        private System.Windows.Forms.RadioButton noneRdo;
     }
 }

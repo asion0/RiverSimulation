@@ -188,40 +188,40 @@
             // newMnuItem
             // 
             this.newMnuItem.Name = "newMnuItem";
-            this.newMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.newMnuItem.Size = new System.Drawing.Size(140, 22);
             this.newMnuItem.Text = "新增案例(N)";
             this.newMnuItem.Click += new System.EventHandler(this.newMnuItem_Click);
             // 
             // openMnuItem
             // 
             this.openMnuItem.Name = "openMnuItem";
-            this.openMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMnuItem.Size = new System.Drawing.Size(140, 22);
             this.openMnuItem.Text = "開啟案例(O)";
             this.openMnuItem.Click += new System.EventHandler(this.openMnuItem_Click);
             // 
             // saveMnuItem
             // 
             this.saveMnuItem.Name = "saveMnuItem";
-            this.saveMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMnuItem.Size = new System.Drawing.Size(140, 22);
             this.saveMnuItem.Text = "儲存案例(S)";
             this.saveMnuItem.Click += new System.EventHandler(this.saveMnuItem_Click);
             // 
             // descriptionMnuItem
             // 
             this.descriptionMnuItem.Name = "descriptionMnuItem";
-            this.descriptionMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.descriptionMnuItem.Size = new System.Drawing.Size(140, 22);
             this.descriptionMnuItem.Text = "案例敘述(D)";
             this.descriptionMnuItem.Click += new System.EventHandler(this.descriptionMnuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
             // 
             // exitMnuItem
             // 
             this.exitMnuItem.Name = "exitMnuItem";
-            this.exitMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitMnuItem.Size = new System.Drawing.Size(140, 22);
             this.exitMnuItem.Text = "關閉(X)";
             this.exitMnuItem.Click += new System.EventHandler(this.exitMnuItem_Click);
             // 
@@ -236,15 +236,15 @@
             // langEngMnuItem
             // 
             this.langEngMnuItem.Name = "langEngMnuItem";
-            this.langEngMnuItem.Size = new System.Drawing.Size(152, 22);
+            this.langEngMnuItem.Size = new System.Drawing.Size(113, 22);
             this.langEngMnuItem.Text = "英文(E)";
             // 
             // helpMnu
             // 
             this.helpMnu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.feedMnuItem,
-            this.aboutMnuItem,
-            this.userManualMenuItem});
+            this.userManualMenuItem,
+            this.aboutMnuItem});
             this.helpMnu.Name = "helpMnu";
             this.helpMnu.Size = new System.Drawing.Size(60, 20);
             this.helpMnu.Text = "說明(H)";
@@ -252,21 +252,21 @@
             // feedMnuItem
             // 
             this.feedMnuItem.Name = "feedMnuItem";
-            this.feedMnuItem.Size = new System.Drawing.Size(142, 22);
+            this.feedMnuItem.Size = new System.Drawing.Size(152, 22);
             this.feedMnuItem.Text = "問題回饋(F)";
             this.feedMnuItem.Click += new System.EventHandler(this.feedMnuItem_Click);
             // 
             // aboutMnuItem
             // 
             this.aboutMnuItem.Name = "aboutMnuItem";
-            this.aboutMnuItem.Size = new System.Drawing.Size(142, 22);
+            this.aboutMnuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutMnuItem.Text = "版本說明(A)";
             this.aboutMnuItem.Click += new System.EventHandler(this.aboutMnuItem_Click);
             // 
             // userManualMenuItem
             // 
             this.userManualMenuItem.Name = "userManualMenuItem";
-            this.userManualMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.userManualMenuItem.Size = new System.Drawing.Size(152, 22);
             this.userManualMenuItem.Text = "使用手冊(M)";
             this.userManualMenuItem.Click += new System.EventHandler(this.userManualMenuItem_Click);
             // 

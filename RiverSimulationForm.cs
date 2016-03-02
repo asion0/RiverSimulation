@@ -343,63 +343,49 @@ namespace RiverSimulationApplication
 
         private void descriptionMnuItem_Click(object sender, EventArgs e)
         {
-            
             InputForm dlg = new InputForm();
             dlg.Text = "案例敘述";
             dlg.desc.Text = "請輸入案例敘述";
+
             if (File.Exists(Program.GetDescriptionFileFullPath()))
             {
-                XmlDocument desc = new XmlDocument();
-                desc.Load(Program.GetDescriptionFileFullPath());
-                XmlNode files = desc.SelectSingleNode(@"Files/" + Program.projectFileName);
-                if (files != null)
-                {
-                    XmlElement element = (XmlElement)files;
-                    dlg.inputTxt.Text = element.GetAttribute("Text");
+                if (Program.GetDescriptionFileVersion() != Utility.GetDescriptXMLVersion(Program.GetDescriptionFileFullPath()))
+                {   //XML版本不符合則刪除重建
+                    Utility.DeleteFileOrFolder(Program.GetDescriptionFileFullPath());
+                    dlg.inputTxt.Text = "";
+                }
+                else
+                {   //尋找已存在之敘述，找不到傳回空字串
+                    dlg.inputTxt.Text = Utility.GetDescriptionText(Program.GetDescriptionFileFullPath(), Program.projectFileName);
                 }
             }
             else
             {
                 dlg.inputTxt.Text = "";
             }
+
             if (DialogResult.OK != dlg.ShowDialog())
             {
                 return;
             }
+
             if (File.Exists(Program.GetDescriptionFileFullPath()))
             {   //更新說明檔
-                XmlDocument desc = new XmlDocument();
-                desc.Load(Program.GetDescriptionFileFullPath());
-                XmlNode files = desc.SelectSingleNode(@"Files");    //選擇節點
-                XmlElement f = files.SelectSingleNode("F_" + Program.projectFileName) as XmlElement;
-                if (f != null)
-                {   //更新欄位
-                    f.SetAttribute("Text", dlg.inputTxt.Text);
-                }
-                else
-                {   //新增欄位
-                    XmlElement f2 = desc.CreateElement("F_" + Program.projectFileName);
-                    f2.SetAttribute("Text", dlg.inputTxt.Text);
-                    files.AppendChild(f2);
-                }
-                desc.Save(Program.GetDescriptionFileFullPath());
-            }
+                bool b = Utility.UpdateDescriptionText(Program.GetDescriptionFileFullPath(), Program.projectFileName, dlg.inputTxt.Text);
+             }
             else
             {   //建立說明檔
-                XmlDocument doc = new XmlDocument();
-                XmlNode files = doc.CreateElement(@"Files");//選擇節點
-                doc.AppendChild(files);
-                XmlElement description = doc.CreateElement("F_" + Program.projectFileName);
-                description.SetAttribute("Text", dlg.inputTxt.Text);    //設定屬性
-                files.AppendChild(description);
-                doc.Save(Program.GetDescriptionFileFullPath());
+                bool b = Utility.CreateDescriptionText(Program.GetDescriptionFileFullPath(), Program.projectFileName, dlg.inputTxt.Text);
             }
-            
         }
 
         private void userManualMenuItem_Click(object sender, EventArgs e)
         {
-            Utility.ShellExecute(Environment.CurrentDirectory + "\\Manual.pdf");
+            if(!Utility.ShellExecute(Environment.CurrentDirectory + "\\Manual.pdf"))
+            {
+                MessageBox.Show("請安裝PDF閱讀程式！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
         }
 
         private void RiverSimulationForm_FormClosed(object sender, FormClosedEventArgs e)

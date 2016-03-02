@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Security.Cryptography;
 using System.Net.Mail;
 using System.Drawing.Drawing2D;
+using System.Xml;
 
 namespace RiverSimulationApplication
 {
@@ -199,11 +200,117 @@ namespace RiverSimulationApplication
             return OSType;
         }
 
-        public static void ShellExecute(string file)
+        public static bool ShellExecute(string file)
         {
             ProcessStartInfo psi = new ProcessStartInfo(file);
             psi.UseShellExecute = true;
-            Process.Start(psi);
+            Process p = Process.Start(psi);
+            p.WaitForExit();
+            string s = p.ExitCode.ToString();
+            return s == "1";
+        }
+
+        public static string GetDescriptionText(string path, string name)
+        {
+            XmlDocument desc = new XmlDocument();
+            desc.Load(path);
+            XmlNodeList nodeLists = desc.SelectNodes("Files/Item/Name");
+            foreach (XmlNode node in nodeLists)
+            {
+                if(node.InnerText == name)
+                {
+                    return node.ParentNode.SelectSingleNode("Text").InnerText;
+                }
+            }
+            return "";
+        }
+
+        public static bool UpdateDescriptionText(string path, string name, string text)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+            XmlNodeList nodeLists = doc.SelectNodes("Files/Item/Name");
+            bool found = false;
+            foreach (XmlNode node in nodeLists)
+            {
+                if(node.InnerText == name)
+                {
+                    node.ParentNode.SelectSingleNode("Text").InnerText = text;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                XmlNode files = doc.SelectSingleNode("Files");//選擇節點
+                if (files == null)
+                {
+                    return false;
+                }
+
+                XmlElement fileItem = doc.CreateElement("Item");
+                files.AppendChild(fileItem);
+
+                XmlElement n = doc.CreateElement("Name");
+                n.InnerText = name;
+                fileItem.AppendChild(n);
+                XmlElement t = doc.CreateElement("Text");
+                t.InnerText = text;
+                fileItem.AppendChild(t);
+            }
+            doc.Save(path);
+            return true;
+        }
+
+        public static bool ConvertDescriptionText(string srcPath, string dstPath)
+        {
+            StreamWriter fs = new StreamWriter(dstPath);
+            fs.WriteLine("專案名稱：" + Program.projectName);
+            fs.WriteLine("\r\n\r\n");
+
+            XmlDocument XmlDoc = new XmlDocument();
+            XmlDoc.Load(srcPath);
+            XmlNodeList nodeLists = XmlDoc.SelectNodes("Files/Item/Name");
+            foreach (XmlNode node in nodeLists)
+            {
+                String name = node.InnerText;
+                String text = node.ParentNode.SelectSingleNode("Text").InnerText;
+                fs.WriteLine(name + "\t\t" + text);
+            }
+            fs.Close();
+            return true;
+        }
+
+        public static bool CreateDescriptionText(string path, string name, string text)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlElement files = doc.CreateElement(@"Files");//選擇節點
+            files.SetAttribute("Version", Program.GetDescriptionFileVersion());    //設定屬性
+            doc.AppendChild(files);
+
+            XmlElement fileItem = doc.CreateElement("Item");
+            files.AppendChild(fileItem);
+            XmlElement n = doc.CreateElement("Name");
+            n.InnerText = Program.projectFileName;
+            fileItem.AppendChild(n);
+            XmlElement t = doc.CreateElement("Text");
+            t.InnerText = text;
+            fileItem.AppendChild(t);
+            doc.Save(Program.GetDescriptionFileFullPath());
+            return true;
+        }
+
+        public static string GetDescriptXMLVersion(string path)
+        {
+            XmlDocument desc = new XmlDocument();
+            desc.Load(path);
+            XmlNode info = desc.SelectSingleNode(@"Files");
+            if (info != null)
+            {
+                XmlElement element = (XmlElement)info;
+                return element.GetAttribute("Version");
+            }
+            return "0";
         }
     }
 

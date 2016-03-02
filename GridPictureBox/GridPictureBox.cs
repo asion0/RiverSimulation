@@ -412,7 +412,14 @@ namespace PictureBoxCtrl
 
             
             m.Scale(xScale, yScale);
-            m.Translate((float)-lt.x, (float)-lt.y);
+            if (rg.coorType == CoorType.TWD67)
+            {
+                m.Translate((float)-lt.x + 828, (float)-lt.y - 207);
+            }
+            else
+            {
+                m.Translate((float)-lt.x, (float)-lt.y);
+            }
             return m;
         }
 

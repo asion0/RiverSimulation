@@ -213,6 +213,11 @@ namespace RiverSimulationApplication
         {
             return GetProjectFullPath() + "\\" + descriptionName;
         }
+        
+        public static string GetDescriptionFileVersion()
+        {
+            return "1";
+        }
 
         public static string GetProjectFileWorkingPath()
         {

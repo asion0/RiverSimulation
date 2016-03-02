@@ -132,29 +132,15 @@ namespace RiverSimulationApplication
 
         private void projectDescriptBtn_Click(object sender, EventArgs e)
         {
-            if(!File.Exists(Program.GetDescriptionFileFullPath()))
+            if(!File.Exists(Program.GetDescriptionFileFullPath()) ||
+                Program.GetDescriptionFileVersion() != Utility.GetDescriptXMLVersion(Program.GetDescriptionFileFullPath()))
             {
                 MessageBox.Show("尚未建立說明檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            XmlDocument XmlDoc = new XmlDocument();
-            XmlDoc.Load(Program.GetDescriptionFileFullPath());
-            XmlNode files = XmlDoc.SelectSingleNode("Files");
-
             string tempTxtFile = Program.GetProjectFullPath() + @"\Description.txt";
-            StreamWriter fs = new StreamWriter(tempTxtFile);
-            fs.WriteLine("專案名稱：" + Program.projectName);
-            fs.WriteLine("\r\n\r\n");
-
-            foreach (XmlNode n in files.ChildNodes)
-            {
-                String fileName = (n as XmlElement).Name;
-                String fileDesc = (n as XmlElement).GetAttribute("Text");
-
-                fs.WriteLine(fileName.Substring(2) + "\t\t" + fileDesc);
-            }
-            fs.Close();
+            Utility.ConvertDescriptionText(Program.GetDescriptionFileFullPath(), tempTxtFile);
             System.Diagnostics.Process.Start(tempTxtFile);
         }
     }

@@ -1544,6 +1544,7 @@ namespace RiverSimulationApplication
             //註12：初始底床高程。對照介面“計算格網”-“計算網格來源”-“由檔案匯入水平格網”及“線上輸入水平格
             sb.AppendFormat("{0,8}\n", (-1).ToString());
             count = 0;
+            Point pt = new Point();
             for (int i = 0; i < inputGrid.GetI; ++i)
             {
                 for (int j = 0; j < inputGrid.GetJ; ++j)
@@ -1553,7 +1554,18 @@ namespace RiverSimulationApplication
                         sb.Append("\n");
                         count = 0;
                     }
-                    sb.AppendFormat("{0,8}", inputGrid.inputCoor[i, j].z.ToString("F3"));
+
+                    pt.X = i;
+                    pt.Y = j;
+                    Point grpId = StructureSetUtility.WhichGroup(this, pt);
+                    if (grpId.X == (int)StructureType.TBar || grpId.X == (int)StructureType.BridgePier)
+                    {
+                        sb.AppendFormat("{0,8}", "9999");
+                    }
+                    else
+                    {
+                        sb.AppendFormat("{0,8}", inputGrid.inputCoor[i, j].z.ToString("F3"));
+                    }
                     ++count;
                 }
                 sb.Append("\n");
@@ -2092,7 +2104,8 @@ namespace RiverSimulationApplication
             sb.AppendFormat("\n");
 
             //註34：模式預設值
-            if (nearBedBoundaryType == NearBedBoundaryType.Input)
+            //邊界條件-動床模組-近底床濃度邊界”中，1：濃度計算公式，2：通量
+            if (nearBedBoundaryType == NearBedBoundaryType.Flux)
             {
                 sb.AppendFormat("     0.5     0.1     0.1       1       1       1       1       1       4       2\n");
             }

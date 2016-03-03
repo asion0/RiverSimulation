@@ -96,6 +96,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.nearBedBoundaryPanel = new System.Windows.Forms.Panel();
+            this.nearBedBoundaryInputRdo = new System.Windows.Forms.RadioButton();
             this.nearBedBoundaryFluxRdo = new System.Windows.Forms.RadioButton();
             this.nearBedBoundaryAutoRdo = new System.Windows.Forms.RadioButton();
             this.nearBedBoundaryInputBtn = new System.Windows.Forms.Button();
@@ -141,7 +142,6 @@
             this.upBoundaryElevationInputRdo = new System.Windows.Forms.RadioButton();
             this.moveableBedBackBtn = new System.Windows.Forms.Button();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
-            this.nearBedBoundaryInputRdo = new System.Windows.Forms.RadioButton();
             this.mainPanel.SuspendLayout();
             this.movableTypeGroup.SuspendLayout();
             this.waterTypeGroup.SuspendLayout();
@@ -898,6 +898,18 @@
             this.nearBedBoundaryPanel.Size = new System.Drawing.Size(440, 92);
             this.nearBedBoundaryPanel.TabIndex = 5;
             // 
+            // nearBedBoundaryInputRdo
+            // 
+            this.nearBedBoundaryInputRdo.AutoSize = true;
+            this.nearBedBoundaryInputRdo.Location = new System.Drawing.Point(18, 67);
+            this.nearBedBoundaryInputRdo.Name = "nearBedBoundaryInputRdo";
+            this.nearBedBoundaryInputRdo.Size = new System.Drawing.Size(71, 16);
+            this.nearBedBoundaryInputRdo.TabIndex = 6;
+            this.nearBedBoundaryInputRdo.TabStop = true;
+            this.nearBedBoundaryInputRdo.Text = "給定濃度";
+            this.nearBedBoundaryInputRdo.UseVisualStyleBackColor = true;
+            this.nearBedBoundaryInputRdo.CheckedChanged += new System.EventHandler(this.nearBedBoundaryInputRdo_CheckedChanged);
+            // 
             // nearBedBoundaryFluxRdo
             // 
             this.nearBedBoundaryFluxRdo.AutoSize = true;
@@ -946,6 +958,7 @@
             this.nearBedBoundaryAutoCombo.Name = "nearBedBoundaryAutoCombo";
             this.nearBedBoundaryAutoCombo.Size = new System.Drawing.Size(121, 20);
             this.nearBedBoundaryAutoCombo.TabIndex = 1;
+            this.nearBedBoundaryAutoCombo.Visible = false;
             this.nearBedBoundaryAutoCombo.SelectedIndexChanged += new System.EventHandler(this.nearBedBoundaryAutoCombo_SelectedIndexChanged);
             // 
             // label6
@@ -1395,18 +1408,6 @@
             this.mapPicBox.SelectRow = false;
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 16;
-            // 
-            // nearBedBoundaryInputRdo
-            // 
-            this.nearBedBoundaryInputRdo.AutoSize = true;
-            this.nearBedBoundaryInputRdo.Location = new System.Drawing.Point(18, 67);
-            this.nearBedBoundaryInputRdo.Name = "nearBedBoundaryInputRdo";
-            this.nearBedBoundaryInputRdo.Size = new System.Drawing.Size(71, 16);
-            this.nearBedBoundaryInputRdo.TabIndex = 6;
-            this.nearBedBoundaryInputRdo.TabStop = true;
-            this.nearBedBoundaryInputRdo.Text = "給定濃度";
-            this.nearBedBoundaryInputRdo.UseVisualStyleBackColor = true;
-            this.nearBedBoundaryInputRdo.CheckedChanged += new System.EventHandler(this.nearBedBoundaryInputRdo_CheckedChanged);
             // 
             // BoundaryConditionsForm
             // 

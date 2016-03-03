@@ -202,12 +202,16 @@ namespace RiverSimulationApplication
                     nearBedBoundaryAutoRdo.Checked = true;
                     break;
                 case RiverSimulationProfile.NearBedBoundaryType.Input:
+                    nearBedBoundaryInputRdo.Checked = true;
+                    break;
+                case RiverSimulationProfile.NearBedBoundaryType.Flux:
                     nearBedBoundaryFluxRdo.Checked = true;
                     break;
                 case RiverSimulationProfile.NearBedBoundaryType.None:
                    nearBedBoundaryAutoRdo.Checked = false;
-                   nearBedBoundaryFluxRdo.Checked = false;
-                   break;
+                    nearBedBoundaryInputRdo.Checked = false;
+                    nearBedBoundaryFluxRdo.Checked = false;
+                    break;
             }
             nearBedBoundaryAutoCombo.SelectedIndex = (int)p.concentrationCalculation - 1;
         }
@@ -1046,8 +1050,8 @@ namespace RiverSimulationApplication
         {
             bool chk = (sender as RadioButton).Checked;
             p.nearBedBoundaryType = RiverSimulationProfile.NearBedBoundaryType.ConcentrationCalculation;
+            //160303 - 20160127介面討論綜整 近底床濃度邊界-“濃度計算公式”的下拉選單灰階隱藏。
             nearBedBoundaryAutoCombo.Enabled = chk;
-
         }
 
         private void nearBedBoundaryAutoCombo_SelectedIndexChanged(object sender, EventArgs e)

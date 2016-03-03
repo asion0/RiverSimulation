@@ -129,7 +129,6 @@ namespace RiverSimulationApplication
                     pt.Y = j;
                     Point grpId = StructureSetUtility.WhichGroup(p, pt, newPl, (newPl == null) ? -1 : type, (newPl == null) ? -1 : count);
 
-
                     Color cr;
                     if (grpId.X == -1 && grpId.Y == -1)
                     {   //空白處

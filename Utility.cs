@@ -823,7 +823,6 @@ namespace RiverSimulationApplication
         //查詢一格網點位於哪個結構物群組？
         public static Point WhichGroup(RiverSimulationProfile profile, Point pt, List<Point> addional = null, int passType = -1, int passIndex = -1)
         {
-
             for (int n = 0; n < (int)RiverSimulationProfile.StructureType.StructureTypeSize; ++n)
             {
                 List<Point>[] pts = GetStructureSets(profile, n); 

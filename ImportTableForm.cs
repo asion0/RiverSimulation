@@ -79,7 +79,10 @@ namespace RiverSimulationApplication
                         foreach (Point pt in pl)
                         {
                             dataGridViewZ[pt.Y, pt.X].ReadOnly = true;
-                            dataGridViewZ[pt.Y, pt.X].Value = "9999";
+                            //160303 20160127介面討論綜整 
+                            //原本“丁壩”圈選處後來取消時，回到“計算格網”中z 值有變回可編輯的白色，
+                            //但沒有恢復原本輸入的值。值保留、格子變灰底，但在產生.i 檔時為9999.000
+                            //dataGridViewZ[pt.Y, pt.X].Value = "9999";
                             dataGridViewZ[pt.Y, pt.X].Style.BackColor = Color.LightGray;
                         }
                     }

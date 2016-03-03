@@ -121,7 +121,7 @@
             this.coorTypeGroup.Controls.Add(this.noneRdo);
             this.coorTypeGroup.Controls.Add(this.twd97Rdo);
             this.coorTypeGroup.Controls.Add(this.twd67Rdo);
-            this.coorTypeGroup.Location = new System.Drawing.Point(12, 433);
+            this.coorTypeGroup.Location = new System.Drawing.Point(12, 305);
             this.coorTypeGroup.Name = "coorTypeGroup";
             this.coorTypeGroup.Size = new System.Drawing.Size(472, 110);
             this.coorTypeGroup.TabIndex = 0;
@@ -177,7 +177,7 @@
             this.bitmapGrp.Controls.Add(this.selectBgRdo);
             this.bitmapGrp.Controls.Add(this.useGoogleBgRdo);
             this.bitmapGrp.Enabled = false;
-            this.bitmapGrp.Location = new System.Drawing.Point(12, 305);
+            this.bitmapGrp.Location = new System.Drawing.Point(12, 421);
             this.bitmapGrp.Name = "bitmapGrp";
             this.bitmapGrp.Size = new System.Drawing.Size(472, 118);
             this.bitmapGrp.TabIndex = 0;

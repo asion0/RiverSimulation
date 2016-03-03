@@ -41,6 +41,9 @@
             this.ok = new System.Windows.Forms.Button();
             this.unitLbl = new System.Windows.Forms.Label();
             this.selInputBtn = new System.Windows.Forms.Button();
+            this.settingBtn = new System.Windows.Forms.Button();
+            this.timeGapTxt = new System.Windows.Forms.TextBox();
+            this.timeStepLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.copyPasteMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -169,12 +172,44 @@
             this.selInputBtn.Visible = false;
             this.selInputBtn.Click += new System.EventHandler(this.selInputBtn_Click);
             // 
+            // settingBtn
+            // 
+            this.settingBtn.Location = new System.Drawing.Point(369, 656);
+            this.settingBtn.Name = "settingBtn";
+            this.settingBtn.Size = new System.Drawing.Size(120, 26);
+            this.settingBtn.TabIndex = 7;
+            this.settingBtn.Text = "設定";
+            this.settingBtn.UseVisualStyleBackColor = true;
+            this.settingBtn.Visible = false;
+            this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
+            // 
+            // timeGapTxt
+            // 
+            this.timeGapTxt.Location = new System.Drawing.Point(252, 658);
+            this.timeGapTxt.Name = "timeGapTxt";
+            this.timeGapTxt.Size = new System.Drawing.Size(100, 22);
+            this.timeGapTxt.TabIndex = 8;
+            this.timeGapTxt.Visible = false;
+            // 
+            // timeStepLbl
+            // 
+            this.timeStepLbl.AutoSize = true;
+            this.timeStepLbl.Location = new System.Drawing.Point(193, 661);
+            this.timeStepLbl.Name = "timeStepLbl";
+            this.timeStepLbl.Size = new System.Drawing.Size(53, 12);
+            this.timeStepLbl.TabIndex = 9;
+            this.timeStepLbl.Text = "固定時距";
+            this.timeStepLbl.Visible = false;
+            // 
             // TableInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
             this.ContextMenuStrip = this.copyPasteMenuStrip;
+            this.Controls.Add(this.timeStepLbl);
+            this.Controls.Add(this.timeGapTxt);
+            this.Controls.Add(this.settingBtn);
             this.Controls.Add(this.selInputBtn);
             this.Controls.Add(this.unitLbl);
             this.Controls.Add(this.ok);
@@ -209,5 +244,8 @@
         private System.Windows.Forms.ToolStripMenuItem ValueToolStripMenuItem;
         public System.Windows.Forms.Label unitLbl;
         private System.Windows.Forms.Button selInputBtn;
+        private System.Windows.Forms.Button settingBtn;
+        private System.Windows.Forms.TextBox timeGapTxt;
+        private System.Windows.Forms.Label timeStepLbl;
     }
 }

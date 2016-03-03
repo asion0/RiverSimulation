@@ -375,6 +375,7 @@
     <None Include="Bitmaps\desc_h.png" />
     <None Include="Bitmaps\desc_n.png" />
     <None Include="Bitmaps\desc_p.png" />
+    <None Include="Bitmaps\s_desc_n.png" />
     <Content Include="desc_d.png" />
     <Content Include="desc_h.png" />
     <Content Include="desc_n.png" />

@@ -84,12 +84,16 @@ namespace RiverSimulationApplication
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum, false, true);
                 dataGridView.Columns[0].Name = "垂向分層位置";
-                dataGridView.Columns[1].Name = "比例係數";  
+                dataGridView.Columns[1].Name = "比例係數(百分比)";  
             }
             else if (inputFormType == InputFormType.BoundaryTime)
             {
                 DataGridViewUtility.InitializeDataGridView(dataGridView, colCount, rowCount, colWidth, rowHeadersWidth,
                     tableName, colName, rowName, nocolNum, noRowNum, false, false);
+
+                timeStepLbl.Visible = true;
+                timeGapTxt.Visible = true;
+                settingBtn.Visible = true;
             }            
             else if (inputFormType == InputFormType.TwoInOneDouble ||
                     inputFormType == InputFormType.TwoInOneDoubleGreaterThanZero ||
@@ -932,6 +936,37 @@ namespace RiverSimulationApplication
             return allPass;
         }
 
+        private bool AutoFinishConvertVerticalVelocityDistributionCell2()
+        {
+            double total = 0;
+            try
+            {
+                double v, vp, vm, po;
+                for (int i = 1; i < rowCount - 1; ++i)
+                {
+                    v = Convert.ToDouble(dataGridView[0, i].Value);  //0.75
+                    vp = Convert.ToDouble(dataGridView[0, i + 1].Value); //0.5
+                    vm = Convert.ToDouble(dataGridView[0, i - 1].Value); //100
+                    po = Convert.ToDouble(dataGridView[1, i].Value);  //150
+                    total += ((v - vp) / 2 + (vm - v) / 2) * po;
+                }
+                v = Convert.ToDouble(dataGridView[0, 0].Value);  //1.00
+                vp = Convert.ToDouble(dataGridView[0, 1].Value); //0.75
+                po = Convert.ToDouble(dataGridView[1, 0].Value);  //200
+                total += ((v - vp) / 2 ) * po;
+
+                v = Convert.ToDouble(dataGridView[0, rowCount - 1].Value);  //0.00
+                vm = Convert.ToDouble(dataGridView[0, rowCount - 2].Value); //0.25
+                po = Convert.ToDouble(dataGridView[1, rowCount - 1].Value);  //0
+                total += ((vm - v) / 2) * po;            
+            }
+            catch
+            {
+                return false;
+            }
+            return (total == 100);
+        }
+
         private bool AutoFinishConvertBottomBedParticleSizeRatioCell()
         {
             double sum = 0.0;
@@ -1065,13 +1100,13 @@ namespace RiverSimulationApplication
                     isSuccess = ConvertSedimentCompositionRatioData();
                     break;
                 case InputFormType.SeparateForm:
-                    if (AutoFinishConvertSeparateCell())
+                    if (AutoFinishConvertSeparateCell()) 
                     {
                         isSuccess = ConvertSeparateData();
                     }
                     break;
                 case InputFormType.VerticalVelocityDistributionForm:
-                    if (AutoFinishConvertVerticalVelocityDistributionCell())
+                    if (AutoFinishConvertVerticalVelocityDistributionCell() && AutoFinishConvertVerticalVelocityDistributionCell2())
                     {
                         isSuccess = ConvertVerticalVelocityDistributionData();
                     }
@@ -1188,6 +1223,44 @@ namespace RiverSimulationApplication
                 {
                     dataGridView[pt.Y, pt.X].Value = form.selectedValue;
                 }
+            }
+
+        }
+
+        private void settingBtn_Click(object sender, EventArgs e)
+        {
+            if (inputFormType != TableInputForm.InputFormType.BoundaryTime)
+            {
+                return;
+            }
+
+            try
+            {
+                double step = Convert.ToDouble(timeGapTxt.Text);
+                if(step <= 0)
+                {
+                    MessageBox.Show("無法設定時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                double v = step;
+                for (int i = 1; i < rowCount - 1; ++i)
+                {
+                    if (v > RiverSimulationProfile.profile.totalSimulationTime)
+                    {
+                        dataGridView[0, i].Value = RiverSimulationProfile.profile.totalSimulationTime.ToString();
+                    }
+                    else
+                    {
+                        dataGridView[0, i].Value = v.ToString(SeparateFormCellFormat);
+                    }
+                    v += step;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("無法設定時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
 
         }

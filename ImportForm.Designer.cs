@@ -32,6 +32,7 @@
             this.ok = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.coorTypeGroup = new System.Windows.Forms.GroupBox();
+            this.noneRdo = new System.Windows.Forms.RadioButton();
             this.twd97Rdo = new System.Windows.Forms.RadioButton();
             this.twd67Rdo = new System.Windows.Forms.RadioButton();
             this.bitmapGrp = new System.Windows.Forms.GroupBox();
@@ -47,7 +48,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.runDelft3dBtn = new System.Windows.Forms.Button();
             this.runCcheMeshBtn = new System.Windows.Forms.Button();
             this.flowTypeGroup = new System.Windows.Forms.GroupBox();
             this.levelProportionBtn = new System.Windows.Forms.Button();
@@ -67,7 +68,7 @@
             this.previewSpratePicBox = new System.Windows.Forms.PictureBox();
             this.previewCombo = new System.Windows.Forms.ComboBox();
             this.mapPicBox = new PictureBoxCtrl.GridPictureBox();
-            this.noneRdo = new System.Windows.Forms.RadioButton();
+            this.selectDepFile = new System.Windows.Forms.OpenFileDialog();
             this.mainPanel.SuspendLayout();
             this.coorTypeGroup.SuspendLayout();
             this.bitmapGrp.SuspendLayout();
@@ -126,6 +127,20 @@
             this.coorTypeGroup.TabIndex = 0;
             this.coorTypeGroup.TabStop = false;
             this.coorTypeGroup.Text = "座標系統";
+            // 
+            // noneRdo
+            // 
+            this.noneRdo.AutoSize = true;
+            this.noneRdo.Checked = true;
+            this.noneRdo.Location = new System.Drawing.Point(17, 21);
+            this.noneRdo.Name = "noneRdo";
+            this.noneRdo.Size = new System.Drawing.Size(35, 16);
+            this.noneRdo.TabIndex = 0;
+            this.noneRdo.TabStop = true;
+            this.noneRdo.Text = "無";
+            this.noneRdo.UseVisualStyleBackColor = true;
+            this.noneRdo.CheckedChanged += new System.EventHandler(this.noneRdo_CheckedChanged);
+            this.noneRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
             // 
             // twd97Rdo
             // 
@@ -258,7 +273,7 @@
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.runDelft3dBtn);
             this.groupBox2.Controls.Add(this.runCcheMeshBtn);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
@@ -280,7 +295,6 @@
             // 
             // button4
             // 
-            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(119, 61);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(96, 26);
@@ -308,15 +322,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Visible = false;
             // 
-            // button1
+            // runDelft3dBtn
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(17, 61);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 26);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Delft 3D";
-            this.button1.UseVisualStyleBackColor = true;
+            this.runDelft3dBtn.Location = new System.Drawing.Point(17, 61);
+            this.runDelft3dBtn.Name = "runDelft3dBtn";
+            this.runDelft3dBtn.Size = new System.Drawing.Size(96, 26);
+            this.runDelft3dBtn.TabIndex = 1;
+            this.runDelft3dBtn.Text = "Delft 3D";
+            this.runDelft3dBtn.UseVisualStyleBackColor = true;
+            this.runDelft3dBtn.Click += new System.EventHandler(this.runDelft3dBtn_Click);
             // 
             // runCcheMeshBtn
             // 
@@ -470,7 +484,6 @@
             // 
             this.inputFileDlg.Filter = "CCHE_MESH檔案(*.geo)|*.geo|Delft3D檔案(*.grd)|*.grd";
             this.inputFileDlg.Title = "選取匯入格網檔案";
-            this.inputFileDlg.FileOk += new System.ComponentModel.CancelEventHandler(this.inputFileDlg_FileOk);
             // 
             // selectBgDlg
             // 
@@ -526,19 +539,10 @@
             this.mapPicBox.Size = new System.Drawing.Size(438, 392);
             this.mapPicBox.TabIndex = 11;
             // 
-            // noneRdo
+            // selectDepFile
             // 
-            this.noneRdo.AutoSize = true;
-            this.noneRdo.Checked = true;
-            this.noneRdo.Location = new System.Drawing.Point(17, 21);
-            this.noneRdo.Name = "noneRdo";
-            this.noneRdo.Size = new System.Drawing.Size(35, 16);
-            this.noneRdo.TabIndex = 0;
-            this.noneRdo.TabStop = true;
-            this.noneRdo.Text = "無";
-            this.noneRdo.UseVisualStyleBackColor = true;
-            this.noneRdo.CheckedChanged += new System.EventHandler(this.noneRdo_CheckedChanged);
-            this.noneRdo.MouseHover += new System.EventHandler(this.showGridMapCtrls_MouseHover);
+            this.selectDepFile.Filter = "Delft3D檔案(*.dep)|*.dep";
+            this.selectDepFile.Title = "選取匯入格網檔案";
             // 
             // ImportForm
             // 
@@ -593,7 +597,7 @@
         private System.Windows.Forms.OpenFileDialog selectBgDlg;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button runDelft3dBtn;
         private System.Windows.Forms.Button runCcheMeshBtn;
         private System.Windows.Forms.Button levelProportionBtn;
         private System.Windows.Forms.TextBox verticalLevelNumberTxt;
@@ -613,5 +617,6 @@
         private System.Windows.Forms.RadioButton twd97Rdo;
         private System.Windows.Forms.RadioButton twd67Rdo;
         private System.Windows.Forms.RadioButton noneRdo;
+        private System.Windows.Forms.OpenFileDialog selectDepFile;
     }
 }

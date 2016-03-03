@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32; //Registry
 using System.Diagnostics;
@@ -215,18 +210,36 @@ namespace RiverSimulationApplication
         private void inputFileBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = inputFileDlg.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
+            if (result != DialogResult.OK) // Test result.
             {
-                //inputFilePath.Text = inputFileDlg.FileName;
-                if(!RiverSimulationProfile.profile.ReadInputGridGeo(inputFileDlg.FileName))
-                {
-                    MessageBox.Show("無法讀取所選檔案", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
-                SwitchPreivewCombo(PreviewType.GridMap);
-                UpdateStatus();
+                return;
             }
+
+            string ext = Path.GetExtension(inputFileDlg.FileName);
+            bool loadOK = false;
+            if(ext.ToLower() == ".geo")
+            {
+                loadOK = RiverSimulationProfile.profile.ReadInputGridGeo(inputFileDlg.FileName);
+            }
+            else if (ext.ToLower() == ".grd")
+            {
+                DialogResult depSel = selectDepFile.ShowDialog(); // Show the dialog.
+                string depPath = "";
+                if (depSel == DialogResult.OK) // Test result.
+                {
+                    depPath = selectDepFile.FileName;
+                }
+                loadOK = RiverSimulationProfile.profile.ReadInputGridGrd(inputFileDlg.FileName, depPath);
+            }
+            //inputFilePath.Text = inputFileDlg.FileName;
+            if (!loadOK)
+            {
+                MessageBox.Show("無法讀取所選檔案", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
+            SwitchPreivewCombo(PreviewType.GridMap);
+            UpdateStatus();
         }
 
         private void inputGridRdo_CheckedChanged(object sender, EventArgs e)
@@ -649,11 +662,6 @@ namespace RiverSimulationApplication
             //}
         }
 
-        private void inputFileDlg_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
         private void twd97Rdo_CheckedChanged(object sender, EventArgs e)
         {
             if (p.coorType == PictureBoxCtrl.GridPictureBox.CoorType.TWD97)
@@ -706,6 +714,21 @@ namespace RiverSimulationApplication
                 noBgRdo.Checked = true;
             }
             UpdateStatus();
+        }
+
+        private void runDelft3dBtn_Click(object sender, EventArgs e)
+        {
+            Delft3dMeshForm form = new Delft3dMeshForm();
+            if (DialogResult.OK == form.ShowDialog())
+            {
+                //mapPicBox.Grid = form.gridData;
+                //RiverSimulationProfile.profile.inputGrid = form.gridData;
+                //SwitchPreivewCombo(PreviewType.GridMap);
+                //UpdateStatus();
+            }
+            //{
+            //    MessageBox.Show("CCHE-Mesh未安裝!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
         }
     }
 }

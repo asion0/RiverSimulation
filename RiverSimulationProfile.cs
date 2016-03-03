@@ -1159,9 +1159,10 @@ namespace RiverSimulationApplication
             //4.1.2 下游 二選一
             downFlowCondition = FlowConditionType.None;         //4.1.2 下游 二選一
             downSubWaterLevel = new TwoInOne(TwoInOne.ValueType.TwoDim, TwoInOne.ArrayType.TwoDim);                   //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
-        
+
             //4.1.3 側壁
-            sidewallBoundarySlip = false;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
+            //20160127介面討論綜整 側壁-側壁邊界滑移，預設改“滑移”。
+            sidewallBoundarySlip = true;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
 
             //4.1.4 水面 三維 only。(”即時互動處”不放圖示)
             mainstreamWindShear = 0;              //4.1.4.1 主流方向風剪 單一數值 N/m2 0 實數 實數 8 格
@@ -1170,7 +1171,8 @@ namespace RiverSimulationApplication
 
             //4.1.5 底床 實數 三維 only。(”即時互動處”不放圖示)
             boundaryLayerThickness = 3;              //4.1.5.1 邊界層厚度 三選一 3 整數(>0) 整數 8 格 1、2、3，三維 only，下拉選單。
-            seabedBoundarySlip = SeabedBoundarySlipType.NonSlip;   //4.1.5.2 底床邊界滑移 三選一 -- 0 整數(>0) 整數 8 格 a. 三維 only，下拉選單 b. 0：非滑移、1：滑移、2：壁函數
+            //20160127介面討論綜整 底床-底床邊界滑移，預設改“滑移”。
+            seabedBoundarySlip = SeabedBoundarySlipType.Slip;   //4.1.5.2 底床邊界滑移 三選一 -- 0 整數(>0) 整數 8 格 a. 三維 only，下拉選單 b. 0：非滑移、1：滑移、2：壁函數
 
             //4.2 動床模組
             //4.2.1 上游
@@ -1201,7 +1203,13 @@ namespace RiverSimulationApplication
         public bool ReadInputGridGeo(string s)
         {
             inputGrid = new RiverGrid();
-            return inputGrid.ReadInputFile(s);
+            return inputGrid.ReadInputFileGeo(s);
+        }
+
+        public bool ReadInputGridGrd(string grd, string dep)
+        {
+            inputGrid = new RiverGrid();
+            return inputGrid.ReadInputFileGrd(grd, dep);
         }
 
         public void ClearInputGrid()
@@ -1401,13 +1409,13 @@ namespace RiverSimulationApplication
             //20150224要求改為0
             sb.AppendFormat("{0,8}", (1).ToString());     //是否計算岸壁崩塌。1:是；0:否。參考介面“模擬功能”-“特殊功能”的“岸壁穩定分析”。
             sb.AppendFormat("{0,8}", maxIterationsNum.ToString());     //水理最大疊代次數。1.1.2.3
-            if (curvatureRadiusType == CurvatureRadiusType.None)
-            {
+            if (curvatureRadiusType == CurvatureRadiusType.AutoCurvatureRadius)
+            {   //1:自動計算；0:輸入曲率半徑。
                 sb.AppendFormat("{0,8}", (1).ToString());     //1.3.1 曲率半徑 是否自動計算
             }
             else
             {
-                sb.AppendFormat("{0,8}", ((int)curvatureRadiusType - 1).ToString());     //1.3.1 曲率半徑 是否自動計算
+                sb.AppendFormat("{0,8}", (0).ToString());     //1.3.1 曲率半徑 是否自動計算
             }
             sb.Append("\n");
 

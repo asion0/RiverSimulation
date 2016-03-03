@@ -1155,7 +1155,7 @@ namespace PictureBoxCtrl
             return zoomScale != 0;
         }
 
-        public bool ReadInputFile(string path)
+        public bool ReadInputFileGeo(string path)
         {
             const int MaxLineWord = 5;
             try
@@ -1197,6 +1197,117 @@ namespace PictureBoxCtrl
                         break;
                     }
                 }
+                ConvertGrid(inputCoor);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+            return true;
+        }
+        public bool ReadInputFileGrd(string grdPath, string depPath)
+        {
+            const int MaxCountsPerLineGrd = 5;
+            const int MaxCountsPerLineDep = 12;
+            //const int MaxLineWord = 7;
+            try
+            {
+                //Read XY from .grd file
+                StreamReader grdFile = new StreamReader(grdPath);
+
+                //前六行跳過
+                string line = grdFile.ReadLine();
+                line = grdFile.ReadLine();
+                line = grdFile.ReadLine();
+                line = grdFile.ReadLine();
+                line = grdFile.ReadLine();
+                line = grdFile.ReadLine();
+
+                //讀取I, J
+                line = grdFile.ReadLine();
+                string[] words = System.Text.RegularExpressions.Regex.Split(line, @" +");
+                _i = Convert.ToInt32(words[1]);
+                _j = Convert.ToInt32(words[2]);
+                inputCoor = new CoorPoint[_i, _j];
+
+                //第七行跳過
+                line = grdFile.ReadLine();
+
+                int j = 0;
+                int count = 0;
+                string[] newWords = new string[MaxCountsPerLineDep];
+                bool idReadX = true;
+                while ((line = grdFile.ReadLine()) != null)
+                {
+                    words = System.Text.RegularExpressions.Regex.Split(line, @" +");
+                    if(words.Length > 3 && words[1] == "ETA=")
+                    {
+                        j = Convert.ToInt32(words[2]) - 1;                       
+                        Array.Copy(words, 3, newWords, 0, words.Length - 3);        //不需要前兩個參數了，只要後面的數值
+                        count = 0;      
+                        for(int iCount = 0; iCount < _i; ++iCount)
+                        {
+                            if (inputCoor[iCount, j] == null)
+                                inputCoor[iCount, j] = new CoorPoint();
+                            if (idReadX)
+                            {
+                                inputCoor[iCount, j].x = Convert.ToDouble(newWords[count++]);
+                            }
+                            else
+                            {
+                                inputCoor[iCount, j].y = Convert.ToDouble(newWords[count++]);
+                            }
+                            if (count == MaxCountsPerLineGrd)     //每行最多5個數值
+                            {   //滿5個讀取下一行
+                                line = grdFile.ReadLine();
+                                words = System.Text.RegularExpressions.Regex.Split(line, @" +");
+                                Array.Copy(words, 1, newWords, 0, words.Length - 1);
+                                count = 0;
+                            }
+                        }
+                    }
+                    if(j == _j - 1) //最後
+                    {
+                        if(idReadX)
+                        {   //讀完X之後讀取Y
+                            idReadX = false;    //start to read Y
+                            j = 0;
+                        }
+                        else
+                        {   //  讀完Y後跳出
+                            break;
+                        }
+                    }
+                }
+
+                //Read Z from .dep file
+                StreamReader depFile = new StreamReader(depPath);
+                count = 0;
+                words = new string[MaxCountsPerLineDep + 3];
+                for (int jCount = 0; jCount < _j; ++jCount)
+                {
+                    line = depFile.ReadLine();
+                    words = System.Text.RegularExpressions.Regex.Split(line, @" +");
+                    Array.Copy(words, 1, newWords, 0, words.Length - 1);
+                    count = 0;
+                    for (int iCount = 0; iCount <= _i; ++iCount)
+                    {
+                        if (iCount != _i)
+                        {
+                            inputCoor[iCount, jCount].z = Convert.ToDouble(newWords[count++]);
+                        }
+
+                        if (count == MaxCountsPerLineDep)     //每行最多12個數值
+                        {
+                            line = depFile.ReadLine();
+                            words = System.Text.RegularExpressions.Regex.Split(line, @" +");
+                            Array.Copy(words, 1, newWords, 0, words.Length - 1);
+                            count = 0;
+                        }
+                    }
+                }
+
                 ConvertGrid(inputCoor);
             }
             catch (Exception e)

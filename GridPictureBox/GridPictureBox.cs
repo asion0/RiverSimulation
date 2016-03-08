@@ -34,6 +34,7 @@ using System.Net;
 using System.Drawing.Drawing2D;
 using System.Text;
 using Utilities.GnuplotCSharp;
+using System.Diagnostics;
 #endregion
 
 namespace PictureBoxCtrl
@@ -1260,7 +1261,14 @@ namespace PictureBoxCtrl
                             }
                             if (count == MaxCountsPerLineGrd)     //每行最多5個數值
                             {   //滿5個讀取下一行
-                                line = grdFile.ReadLine();
+                                if (iCount < _i - 1)
+                                {
+                                    line = grdFile.ReadLine();
+                                }
+                                else
+                                {
+                                    Debug.WriteLine("Pass");
+                                }
                                 words = System.Text.RegularExpressions.Regex.Split(line, @" +");
                                 Array.Copy(words, 1, newWords, 0, words.Length - 1);
                                 count = 0;

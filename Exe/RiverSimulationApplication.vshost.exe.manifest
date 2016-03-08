@@ -44,13 +44,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="61440">
-      <assemblyIdentity name="GridPictureBox" version="1.0.5906.42995" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="GridPictureBox" version="1.0.5911.41643" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0rZpPTv+7Sp7PkwF7M+bhSZNM6jPneZcoqTXVGh3eK0=</dsig:DigestValue>
+        <dsig:DigestValue>L3v+e2VkxUIbW/+kVto0puNt5FaFVbWtNUNqCsFUIpo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>AjsWYHOgdT2htbSD2Ev4urMi/+JHD46H/aKhIGSE/yQ=</dsig:DigestValue>
+        <dsig:DigestValue>7oTGbHIfz1BTbhPgS85E9mMZS+uzBlhNtayQLO+PNm4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

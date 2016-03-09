@@ -32,10 +32,11 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.48")]
-[assembly: AssemblyFileVersion("1.0.48")]
+[assembly: AssemblyVersion("1.0.0.49")]
+[assembly: AssemblyFileVersion("1.0.49")]
 
-//1.0.0.47 - 20151231 Release version, for draw graph.
+//1.0.0.49 - 20160309 Release version, for .grd file supoort.
+//1.0.0.48 - 20160302 Release version, for all preprocess functions.
 //1.0.0.46 - 20151118 Release version, for final user manual.
 //1.0.0.45 - 20150908 Release version, Parsing Result.
 //1.0.0.44 - 20150826 Release version, Parsing Result.

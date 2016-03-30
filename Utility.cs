@@ -1185,13 +1185,15 @@ namespace RiverSimulationApplication
             v.PerformLayout();
         }
 
-        public static void InitializeDataGridView2(DataGridView v,
+        public static void InitializeDataGridView2(
+            DataGridView v,     //
             int colStart, int colEnd,
             int rowStart, int rowEnd,
             int columnWidth = 48, int rowHeadersWidth = 64,
             string tableName = "", string colName = "", string rowName = "",
             bool nocolNum = false, bool noRowNum = false,
-            bool invertCol = false, bool invertRow = false)
+            bool invertCol = false, bool invertRow = false,
+            double[] rowNameArray = null)
         {
             v.Rows.Clear();
             // Create an unbound DataGridView by declaring a column count.
@@ -1235,11 +1237,17 @@ namespace RiverSimulationApplication
                 {
                     if (invertRow)
                     {
-                        name += " " + (rowEnd - i).ToString();
+                        if (rowNameArray == null)
+                            name += " " + (rowEnd - i).ToString();
+                        else
+                            name += " " + rowNameArray[rowEnd - i - 1].ToString();
                     }
                     else
                     {
-                        name += " " + (i + 1).ToString();
+                        if (rowNameArray == null)
+                            name += " " + (i + 1).ToString();
+                        else
+                            name += " " + rowNameArray[i].ToString();
                     }
                 }
                 v.Rows[i - rowStart].HeaderCell.Value = name;

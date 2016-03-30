@@ -247,7 +247,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;param2Cmb.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>paramGrp</value>
   </data>
   <data name="&gt;&gt;param2Cmb.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -268,33 +268,33 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;param1Cmb.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>paramGrp</value>
   </data>
   <data name="&gt;&gt;param1Cmb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="paramGrp.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 94</value>
   </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="paramGrp.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 76</value>
   </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="paramGrp.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
+  <data name="paramGrp.Text" xml:space="preserve">
     <value>參數</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="&gt;&gt;paramGrp.Name" xml:space="preserve">
+    <value>paramGrp</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;paramGrp.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;paramGrp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;paramGrp.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="animChk.AutoSize" type="System.Boolean, mscorlib">
@@ -601,7 +601,7 @@
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;poKPanel.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+    <value>posGrp</value>
   </data>
   <data name="&gt;&gt;poKPanel.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -880,33 +880,33 @@
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pos_InJPanel.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+    <value>posGrp</value>
   </data>
   <data name="&gt;&gt;pos_InJPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="posGrp.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 258</value>
   </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="posGrp.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 150</value>
   </data>
-  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+  <data name="posGrp.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="groupBox4.Text" xml:space="preserve">
+  <data name="posGrp.Text" xml:space="preserve">
     <value>位置</value>
   </data>
-  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
-    <value>groupBox4</value>
+  <data name="&gt;&gt;posGrp.Name" xml:space="preserve">
+    <value>posGrp</value>
   </data>
-  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
+  <data name="&gt;&gt;posGrp.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;posGrp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;posGrp.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="timeChk.AutoSize" type="System.Boolean, mscorlib">

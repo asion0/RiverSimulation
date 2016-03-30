@@ -33,7 +33,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.graphRdo = new System.Windows.Forms.RadioButton();
             this.tableRdo = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.paramGrp = new System.Windows.Forms.GroupBox();
             this.param2Cmb = new System.Windows.Forms.ComboBox();
             this.param1Cmb = new System.Windows.Forms.ComboBox();
             this.formGrp = new System.Windows.Forms.GroupBox();
@@ -42,7 +42,7 @@
             this.graphType3Rdo = new System.Windows.Forms.RadioButton();
             this.graphType2Rdo = new System.Windows.Forms.RadioButton();
             this.graphType1Rdo = new System.Windows.Forms.RadioButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.posGrp = new System.Windows.Forms.GroupBox();
             this.poKPanel = new System.Windows.Forms.Panel();
             this.posKLbl = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -59,6 +59,7 @@
             this.posIchk = new System.Windows.Forms.CheckBox();
             this.posSelBtn = new System.Windows.Forms.Button();
             this.timeGrp = new System.Windows.Forms.GroupBox();
+            this.timeChk = new System.Windows.Forms.CheckBox();
             this.timeBtn = new System.Windows.Forms.Button();
             this.axisGrp = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,11 +69,10 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.generateResultBtn = new System.Windows.Forms.Button();
-            this.timeChk = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.paramGrp.SuspendLayout();
             this.formGrp.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.posGrp.SuspendLayout();
             this.poKPanel.SuspendLayout();
             this.pos_InJPanel.SuspendLayout();
             this.timeGrp.SuspendLayout();
@@ -110,13 +110,13 @@
             this.tableRdo.UseVisualStyleBackColor = true;
             this.tableRdo.CheckedChanged += new System.EventHandler(this.tableRdo_CheckedChanged);
             // 
-            // groupBox2
+            // paramGrp
             // 
-            this.groupBox2.Controls.Add(this.param2Cmb);
-            this.groupBox2.Controls.Add(this.param1Cmb);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
+            this.paramGrp.Controls.Add(this.param2Cmb);
+            this.paramGrp.Controls.Add(this.param1Cmb);
+            resources.ApplyResources(this.paramGrp, "paramGrp");
+            this.paramGrp.Name = "paramGrp";
+            this.paramGrp.TabStop = false;
             // 
             // param2Cmb
             // 
@@ -183,13 +183,13 @@
             this.graphType1Rdo.UseVisualStyleBackColor = true;
             this.graphType1Rdo.CheckedChanged += new System.EventHandler(this.graphType1Rdo_CheckedChanged);
             // 
-            // groupBox4
+            // posGrp
             // 
-            this.groupBox4.Controls.Add(this.poKPanel);
-            this.groupBox4.Controls.Add(this.pos_InJPanel);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
+            this.posGrp.Controls.Add(this.poKPanel);
+            this.posGrp.Controls.Add(this.pos_InJPanel);
+            resources.ApplyResources(this.posGrp, "posGrp");
+            this.posGrp.Name = "posGrp";
+            this.posGrp.TabStop = false;
             // 
             // poKPanel
             // 
@@ -298,6 +298,13 @@
             this.timeGrp.Name = "timeGrp";
             this.timeGrp.TabStop = false;
             // 
+            // timeChk
+            // 
+            resources.ApplyResources(this.timeChk, "timeChk");
+            this.timeChk.Name = "timeChk";
+            this.timeChk.UseVisualStyleBackColor = true;
+            this.timeChk.CheckedChanged += new System.EventHandler(this.timeChk_CheckedChanged);
+            // 
             // timeBtn
             // 
             resources.ApplyResources(this.timeBtn, "timeBtn");
@@ -356,20 +363,13 @@
             this.generateResultBtn.UseVisualStyleBackColor = true;
             this.generateResultBtn.Click += new System.EventHandler(this.generateResultBtn_Click);
             // 
-            // timeChk
-            // 
-            resources.ApplyResources(this.timeChk, "timeChk");
-            this.timeChk.Name = "timeChk";
-            this.timeChk.UseVisualStyleBackColor = true;
-            this.timeChk.CheckedChanged += new System.EventHandler(this.timeChk_CheckedChanged);
-            // 
             // SimulationResultForm
             // 
             this.AcceptButton = this.ok;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.paramGrp);
+            this.Controls.Add(this.posGrp);
             this.Controls.Add(this.axisGrp);
             this.Controls.Add(this.timeGrp);
             this.Controls.Add(this.formGrp);
@@ -381,10 +381,10 @@
             this.Load += new System.EventHandler(this.SimulationResultForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.paramGrp.ResumeLayout(false);
             this.formGrp.ResumeLayout(false);
             this.formGrp.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
+            this.posGrp.ResumeLayout(false);
             this.poKPanel.ResumeLayout(false);
             this.poKPanel.PerformLayout();
             this.pos_InJPanel.ResumeLayout(false);
@@ -403,7 +403,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton graphRdo;
         private System.Windows.Forms.RadioButton tableRdo;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox paramGrp;
         private System.Windows.Forms.ComboBox param2Cmb;
         private System.Windows.Forms.ComboBox param1Cmb;
         private System.Windows.Forms.GroupBox formGrp;
@@ -412,7 +412,7 @@
         private System.Windows.Forms.RadioButton graphType3Rdo;
         private System.Windows.Forms.RadioButton graphType2Rdo;
         private System.Windows.Forms.RadioButton graphType1Rdo;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox posGrp;
         private System.Windows.Forms.Panel poKPanel;
         private System.Windows.Forms.Label posKLbl;
         private System.Windows.Forms.Label label8;

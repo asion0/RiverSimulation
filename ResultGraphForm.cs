@@ -132,7 +132,6 @@ namespace RiverSimulationApplication
             this.colWidth = colWidth;
             this.rowHeadersWidth = rowHeadersWidth;
             this.initData = initData;
-            this.timeList = (List<double>)timeList;
             this.timeSel = timeSel;
 
             dt = CheckDT(colStart, colEnd, rowStart, rowEnd);

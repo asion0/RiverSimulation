@@ -39,12 +39,11 @@ namespace RiverSimulationApplication
             BottomBedParticleSizeRatio,     //底床粒徑比
         }
         protected ResultTableType formType = ResultTableType.InitialBottomElevation;
-
-        public void SetFormMode(string title,
-            int colStart,
-            int colEnd,
-            int rowStart,
-            int rowEnd,
+        
+        public void SetFormMode(
+            string title,
+            int colStart, int colEnd,
+            int rowStart, int rowEnd,
             string tableName = "", 
             string colName = "", 
             string rowName = "",
@@ -54,7 +53,16 @@ namespace RiverSimulationApplication
             bool onlyTable = true, 
             bool nocolNum = false, 
             bool noRowNum = false, 
-            object initData = null)
+            object initData = null,
+            int xDim = 0,
+            int yDim = 1,
+            int sel1Dim = -1,
+            int sel2Dim = -1,
+            int sel1Index = -1,
+            int sel2Index = -1,
+            string sel1Title = "",
+            string sel2Title = "",
+            double[] timeList = null)
         {
             this.title = title;
             this.formType = formType;
@@ -62,9 +70,21 @@ namespace RiverSimulationApplication
             this.colEnd = colEnd;
             this.rowStart = rowStart;
             this.rowEnd = rowEnd;
+            this.tableName = tableName;
+            this.colName = colName;
+            this.rowName = rowName;
             this.colWidth = colWidth;
             this.rowHeadersWidth = rowHeadersWidth;
             this.initData = initData;
+            this.xDim = xDim;
+            this.yDim = yDim;
+            this.sel1Dim = sel1Dim;
+            this.sel2Dim = sel2Dim;
+            this.sel1Title = sel1Title;
+            this.sel2Title = sel2Title;
+            this.sel1Index = sel1Index;
+            this.sel2Index = sel2Index;
+            this.timeList = timeList;
         }
 
         private void ResultTableForm_Load(object sender, EventArgs e)
@@ -77,27 +97,44 @@ namespace RiverSimulationApplication
         {
             if (formType == ResultTableType.InitialBottomElevation)
             {
-                DataGridViewUtility.InitializeDataGridView2(dataGridView, colStart, colEnd, rowStart, rowEnd, colWidth, rowHeadersWidth,
-                    "", "", "", false, false, false, false);
+                DataGridViewUtility.InitializeDataGridView2(
+                    dataGridView, 
+                    colStart, colEnd,   //行起始~結束
+                    rowStart, rowEnd,   //列起始~結束
+                    colWidth,           //行寬
+                    rowHeadersWidth,    //列標題寬
+                    title, //表格名稱
+                    colName, //列名稱
+                    rowName, //行名稱
+                    false, //不顯示行號
+                    false, //不顯示列號
+                    false, //反轉行
+                    false,  //反轉列
+                    timeList);
                 FillDataGridView();
             }
         }
 
         private void FillDataGridView()
         {
-            switch (formType)
+            for (int x = colStart; x < colEnd; ++x)
             {
-                case ResultTableType.InitialBottomElevation:
-                    //編輯陣列I * J
-                    for (int i = colStart; i < colEnd; ++i)
-                    {
-                        for (int j = rowStart; j < rowEnd; ++j)
-                        {
-                            dataGridView[i - colStart, j - rowStart].Value = (initData as double[,])[i, j].ToString();
-                        }
-                    }
-                    break;
+                for (int y = rowStart; y < rowEnd; ++y)
+                {
+                    if (sel1Index != -1 && sel2Index == -1 && xDim == 1 && yDim == 0)       //3D data X顯示J Y顯示I
+                        dataGridView[x - colStart, y - rowStart].Value = (initData as double[, ,])[y, x, sel1Index].ToString();
+                    else if (sel1Index != -1 && sel2Index == -1 && xDim == 1 && yDim == 3)       //3D data X顯示J Y顯示T
+                        dataGridView[x - colStart, y - rowStart].Value = (initData as double[, ,])[sel1Index, x, y].ToString();
+                    else if (sel1Index != -1 && sel2Index == -1 && xDim == 0 && yDim == 3)       //3D data X顯示I Y顯示T
+                        dataGridView[x - colStart, y - rowStart].Value = (initData as double[, ,])[x, sel1Index, y].ToString();
+                }
             }
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

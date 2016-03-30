@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Utilities.GnuplotCSharp;
@@ -67,7 +62,32 @@ namespace RiverSimulationApplication
             TypeUnknown,
         };
         TableType tableType = TableType.TypeUnknown;
-
+        //U-同參數單位 D-累距
+        /* I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|M|-|-|D|U| I  | -  | 0  |2D IJ  |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|1|-|-|D|U| J  | -  | 1  |2D IJ  |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|1|1|-|D|U| J  | -  | 3  |3D IJT |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|1|M|-|T|U| J  | -  | 4  |3D IJT |<<<<<NOW
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|M|1|1|I|J| K  | T  | 5  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|M|1|M|K|J| I  | T  | 6  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|1|1|M|K|J| J  | T  | 7  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|M|M|1|T|J| I  | K  | 8  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|1|M|1|T|I| J  | K  | 9  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|1|M|M|T|K| T  | K  | A  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+        */
         private enum GraphType
         {
             //XY Form
@@ -87,16 +107,61 @@ namespace RiverSimulationApplication
         };
         GraphType graphType = GraphType.TypeUnknown;
 
+        enum GraphFormMode
+        {
+            None,
+            XY,
+            Contour,
+            Vector,
+            ContouWithVector
+        }
+        private GraphFormMode graphFormMode = GraphFormMode.None;
+
         private void UpdateStatus()
         {
             if (drawType == Param1Type.ParamGraph1)
             {
-                paramGrp.Enabled = true;
                 formGrp.Enabled = true;
-                posGrp.Enabled = true;
-                timeGrp.Enabled = true;
-                axisGrp.Enabled = false;
-                return;
+                
+                if(graphFormMode == GraphFormMode.None)
+                {
+                    paramGrp.Enabled = false;
+                    posGrp.Enabled = false;
+                    timeGrp.Enabled = false;
+                    axisGrp.Enabled = false;
+                }
+                else if(graphFormMode == GraphFormMode.XY)
+                {
+                    paramGrp.Enabled = true;
+                    posGrp.Enabled = true;
+                    timeGrp.Enabled = (param1Cmb.SelectedIndex != 0);
+                    axisGrp.Enabled = false;
+                    param2Cmb.Enabled = false;
+                }
+                else if (graphFormMode == GraphFormMode.Contour)
+                {
+                    paramGrp.Enabled = true;
+                    posGrp.Enabled = true;
+                    timeGrp.Enabled = false;
+                    axisGrp.Enabled = false;
+                    param2Cmb.Enabled = false;
+                }
+                else if (graphFormMode == GraphFormMode.Vector)
+                {
+                    paramGrp.Enabled = true;
+                    posGrp.Enabled = true;
+                    timeGrp.Enabled = true;
+                    axisGrp.Enabled = false;
+                    param2Cmb.Enabled = false;
+                }
+                else if (graphFormMode == GraphFormMode.ContouWithVector)
+                {
+                    paramGrp.Enabled = true;
+                    posGrp.Enabled = true;
+                    timeGrp.Enabled = true;
+                    axisGrp.Enabled = false;
+                    param2Cmb.Enabled = true;
+                }
             }
             else if(drawType == Param1Type.ParamTable)
             { 
@@ -105,6 +170,7 @@ namespace RiverSimulationApplication
                 posGrp.Enabled = true;
                 timeGrp.Enabled = true;
                 axisGrp.Enabled = false;
+                param2Cmb.Enabled = false;
 
                 switch (tableType)
                 {
@@ -138,35 +204,14 @@ namespace RiverSimulationApplication
                         break;
                 }
             }
-            else if(drawType == Param1Type.ParamGraph1)
+            else
             {
-                paramGrp.Enabled = true;
-                formGrp.Enabled = true;
-                posGrp.Enabled = true;
-                axisGrp.Enabled = false;
-
-                switch (graphType)
-                {
-                    case GraphType.Type01:
-                        timeGrp.Enabled = false;
-                        break;
-                    case GraphType.Type234:
-                         timeGrp.Enabled = true;
-                        poKPanel.Enabled = false;
-                        break;
-                    case GraphType.Type5678:
-                        timeGrp.Enabled = true;
-                        poKPanel.Enabled = true;
-                        break;
-                    default:
-                        posGrp.Enabled = false;
-                        axisGrp.Enabled = false;
-                        timeGrp.Enabled = false;
-                        break;
-                }
-  
+                paramGrp.Enabled = false;
+                formGrp.Enabled = false;
+                posGrp.Enabled = false;
+                timeGrp.Enabled = false;
+                axisGrp.Enabled = false;  
             }
-
         }
 
         private void SimulationResultForm_Load(object sender, EventArgs e)
@@ -201,7 +246,7 @@ namespace RiverSimulationApplication
             //  則“參數”先只能選擇一種，待“形式”若選擇“等值線疊向量圖”，
             //  再把第2 個“參數”的下拉選單打開供使用者選擇。
             drawType = Param1Type.ParamGraph1;
-            InitialParam1(Param1Type.ParamGraph1);
+            InitialParam1(drawType);
             UpdateStatus();
         }
         private void tableRdo_CheckedChanged(object sender, EventArgs e)
@@ -224,71 +269,65 @@ namespace RiverSimulationApplication
         Param1Type drawType = Param1Type.None;
 
         private string[] tableItemsParam1 = {
-                "初始底床高程(m)",
-                "水深平均流速-U(m/s)",
-                "水深平均流速-V(m/s)",
-                "水深平均流速-UV 合向量的絕對值(m/s)",
-                "底床剪應力(N/m2)",
-                "水位(m)",
-                "水深(m)",
-                "流量-U(cms)",
-                "流量-V(cms)",
-                "底床高程(m)",
-                "沖淤深度(m)",
-                "水深平均濃度(ppm)",
-                "粒徑分佈(%)",
-                "流速-U(m/s)",
-                "流速-V(m/s)",
-                "流速-W(m/s)",
-                "濃度(ppm)" };
+                "初始底床高程(m)",                    //0
+                "水深平均流速-U(m/s)",                //1
+                "水深平均流速-V(m/s)",                //2
+                "水深平均流速-UV 合向量的絕對值(m/s)",  //3
+                "底床剪應力(N/m2)",                   //4
+                "水位(m)",                           //5
+                "水深(m)",                           //6
+                "流量-U(cms)",                       //7
+                "流量-V(cms)",                       //8
+                "底床高程(m)",                        //9
+                "沖淤深度(m)",                        //10
+                "水深平均濃度(ppm)",                  //11
+                "粒徑分佈(%)",                        //12
+                "流速-U(m/s)",                       //13
+                "流速-V(m/s)",                       //14
+                "流速-W(m/s)",                       //15
+                "濃度(ppm)" };                       //16
 
         private string[] tableItemsParam2 = {
-                "初始底床高程(m)",
-                "水深平均流速-U(m/s)",
-                "水深平均流速-V(m/s)",
-                "水深平均流速-UV 合向量的絕對值(m/s)",
-                //"水深平均流速-UV 合向量(m/s)",
-                "底床剪應力(N/m2)",
-                "水位(m)",
-                "水深(m)",
-                "流量-U(cms)",
-                "流量-V(cms)",
-                "底床高程(m)",
-                "沖淤深度(m)",
-                "水深平均濃度(ppm)",
-                "粒徑分佈(%)",
-                "流速-U(m/s)",
-                "流速-V(m/s)",
-                "流速-W(m/s)",
-                //"流速-UW合向量(m/s)",
-                //"流速-VW合向量(m/s)",
-                "濃度(ppm)" };
+                "初始底床高程(m)",                      //0
+                "水深平均流速-U(m/s)",                  //1
+                "水深平均流速-V(m/s)",                  //2
+                "水深平均流速-UV 合向量的絕對值(m/s)",    //3
+                "底床剪應力(N/m2)",                     //4
+                "水位(m)",                             //5
+                "水深(m)",                             //6
+                "流量-U(cms)",                         //7
+                "流量-V(cms)",                         //8
+                "底床高程(m)",                          //9
+                "沖淤深度(m)",                          //10
+                "水深平均濃度(ppm)",                    //11
+                "粒徑分佈(%)",                          //12
+                "流速-U(m/s)",                         //13
+                "流速-V(m/s)",                         //14
+                "流速-W(m/s)",                         //15
+                "濃度(ppm)" };                         //16
         private string[] tableItemsParam3 = {
-                "初始底床高程(m)",
-                "水深平均流速-U(m/s)",
-                "水深平均流速-V(m/s)",
-                "水深平均流速-UV 合向量的絕對值(m/s)",
-                //"水深平均流速-UV 合向量(m/s)",
-                "底床剪應力(N/m2)",
-                "水位(m)",
-                "水深(m)",
-                "流量-U(cms)",
-                "流量-V(cms)",
-                "底床高程(m)",
-                "沖淤深度(m)",
-                "水深平均濃度(ppm)",
-                "粒徑分佈(%)",
-                "流速-U(m/s)",
-                "流速-V(m/s)",
-                "流速-W(m/s)",
-                //"流速-UW合向量(m/s)",
-                //"流速-VW合向量(m/s)",
-                "濃度(ppm)" };
-        private string[] tableItemsParam4 = {
-                "水深平均流速-UV 合向量的絕對值(m/s)",
-                "流速-UW合向量(m/s)",
-                "流速-VW合向量(m/s)" };
-
+                "初始底床高程(m)",                    //0
+                "水深平均流速-U(m/s)",                //1
+                "水深平均流速-V(m/s)",                //2
+                "水深平均流速-UV 合向量的絕對值(m/s)",  //3
+                "底床剪應力(N/m2)",                   //4
+                "水位(m)",                           //5
+                "水深(m)",                           //6
+                "流量-U(cms)",                       //7
+                "流量-V(cms)",                       //8
+                "底床高程(m)",                        //9
+                "沖淤深度(m)",                        //10
+                "水深平均濃度(ppm)",                  //11
+                "粒徑分佈(%)",                        //12
+                "流速-U(m/s)",                       //13
+                "流速-V(m/s)",                       //14
+                "流速-W(m/s)",                       //15
+                "濃度(ppm)" };                       //16
+        private string[] tableItemsParam4 = {       
+                "水深平均流速-UV 合向量的絕對值(m/s)",   //0
+                "流速-UW合向量(m/s)",                  //1
+                "流速-VW合向量(m/s)" };                //2
+                                                     
         private void InitialParam1(Param1Type p)
         {
             if (p == Param1Type.ParamTable)
@@ -297,9 +336,27 @@ namespace RiverSimulationApplication
             }
             else if (p == Param1Type.ParamGraph1)
             {
-                param1Cmb.DataSource = tableItemsParam2;
-            } 
-            param1Cmb.SelectedIndex = 0;
+                switch(graphFormMode)
+                {
+                    case GraphFormMode.XY:
+                        param1Cmb.DataSource = tableItemsParam2;
+                        break;
+                    case GraphFormMode.Contour:
+                        param1Cmb.DataSource = tableItemsParam3;
+                        break;
+                    case GraphFormMode.Vector:
+                        param1Cmb.DataSource = tableItemsParam4;
+                        break;
+                    case GraphFormMode.ContouWithVector:
+                        param1Cmb.DataSource = tableItemsParam3;
+                        param2Cmb.DataSource = tableItemsParam4;
+                        break;
+                }
+                if (param1Cmb.DataSource != null)
+                    param1Cmb.SelectedIndex = 0;
+                if (param2Cmb.DataSource != null)
+                    param2Cmb.SelectedIndex = 0;
+            }
         }
 
         private void param1Cmb_SelectedIndexChanged(object sender, EventArgs e)
@@ -346,7 +403,8 @@ namespace RiverSimulationApplication
                 switch (cmb.SelectedIndex)
                 {
                     case 0: //初始底床高程(m)
-                         break;
+                        graphType = GraphType.Type01;
+                        break;
                     case 1: //水深平均流速-U(m/s)
                     case 2: //水深平均流速-V(m/s)
                     case 3: //水深平均流速-UV 合向量的絕對值(m/s)
@@ -421,11 +479,11 @@ namespace RiverSimulationApplication
 
         private void generateResultBtn_Click(object sender, EventArgs e)
         {
-            if(tableRdo.Checked)
+            if(drawType == Param1Type.ParamTable)
             {
                 GenerateTable();
             }
-            else if(graphRdo.Checked)
+            else if(drawType == Param1Type.ParamGraph1)
             {
                 GenerateGraph();
             }
@@ -479,7 +537,10 @@ namespace RiverSimulationApplication
                 case 12: //粒徑分佈(%)
                     GenerateTimeIJResultTable(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
                     break;
-                default:
+                case 13: //流速-U(m/s)
+                case 14: //流速-V(m/s)
+                case 15: //流速-W(m/s)
+                case 16: //濃度(ppm)
                     break;
             }
         }
@@ -538,11 +599,10 @@ namespace RiverSimulationApplication
 
         private void GenerateInitialBottomElevationGraph()
         {
-            /*
             PosInfo pi = new PosInfo();
-            //TableType t = GetTableSize(ref pi);
-            graphType = GetTableType(ref pi);
-            if (graphType < GraphType.Type1234)
+            TableType t = GetTableType(ref pi);
+            graphType = GetGraphType(ref pi);
+            if (graphType >= GraphType.Type01)
             {
                 MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -560,23 +620,30 @@ namespace RiverSimulationApplication
                 pi.jS, pi.jE,       //行數(左右有幾行)
                 pi.iS, pi.iE,       //列數(上下有幾列)
                 "",                 //表格名稱
-                "J=",                 //行標題(顯示於上方)
-                "I=",                 //列標題(顯示於左方)
+                "",                 //行標題(顯示於上方)
+                "",                 //列標題(顯示於左方)
                 ResultGraphForm.ResultGraphType.InitialBottomElevation, //表格形式
                 48,                 //儲存格寬度
-                64,                 //列標題寬度
+                96,                 //列標題寬度
                 true,               //保留
                 false,              //不須行數字
                 false,              //不須列數字
-                initialBottomElevation  //資料
-                );
+                initialBottomElevation,  //資料
+                1,                  //X維度
+                0,                  //Y維度
+                -1,                 //Sel1維度
+                -1,                 //Sel2維度
+                0,                  //Sel1索引
+                -1,                 //Sel2索引
+                "",                 //Sel1標籤
+                "",                 //Sel2標籤
+                null);              //Time陣列                
 
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
-             * */
         }
         //private void GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
         private void GenerateTimeIJResultGraph(String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
@@ -1095,53 +1162,54 @@ namespace RiverSimulationApplication
 
         private void GenerateGraph()
         {
-            switch (param1Cmb.SelectedIndex)
+            if (graphFormMode == GraphFormMode.XY)
             {
-                case 0: //初始底床高程(m)
-                    GenerateInitialBottomElevationGraph();
-                    break;
-                case 1: //水深平均流速-U(m/s)
-                    //GenerateDepthAverageFlowSpeedUGraph();
-                    GenerateTimeIJResultGraph(" U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
-                    break;
-                case 2: //水深平均流速-V(m/s)
-                    GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
-                    break;
-                case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                    //GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
-                    break;
-                case 4: //水深平均流速-UV 合向量(m/s)
-                    //GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
-                    break;
-                case 5: //底床剪應力(N/m2)
-                    GenerateTimeIJResultGraph(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
-                    break;
-                case 6: //水位(m)
-                    GenerateTimeIJResultGraph(" ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
-                     break;
-                case 7: //水深(m)
-                     GenerateTimeIJResultGraph(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
-                    break;
-                case 8://流量-U(cms)
-                    GenerateTimeIJResultGraph(" ZS (M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
-                   break;
-                case 9: //流量-V(cms)
-                   GenerateTimeIJResultGraph(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
-                    break;
-                case 10: //底床高程(m)
-                    GenerateTimeIJResultGraph(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
-                    break;
-                case 11: //沖淤深度(m)
-                    GenerateTimeIJResultGraph(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
-                    break;
-                case 12: //水深平均濃度(ppm)
-                    GenerateTimeIJResultGraph(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
-                   break;
-                case 13: //粒徑分佈(%)
-                    GenerateTimeIJResultGraph(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
-                    break;
-                default:
-                    break;
+                switch (param1Cmb.SelectedIndex)
+                {
+                    case 0: //初始底床高程(m)
+                        GenerateInitialBottomElevationGraph();
+                        break;
+                    case 1: //水深平均流速-U(m/s)
+                            //GenerateDepthAverageFlowSpeedUGraph();
+                        GenerateTimeIJResultGraph(" U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
+                        break;
+                    case 2: //水深平均流速-V(m/s)
+                        GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        break;
+                    case 3: //水深平均流速-UV 合向量的絕對值(m/s)
+                            //GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        break;
+                    case 4: //水深平均流速-UV 合向量(m/s)
+                            //GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        break;
+                    case 5: //底床剪應力(N/m2)
+                        GenerateTimeIJResultGraph(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
+                        break;
+                    case 6: //水位(m)
+                        GenerateTimeIJResultGraph(" ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
+                        break;
+                    case 7: //水深(m)
+                        GenerateTimeIJResultGraph(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
+                        break;
+                    case 8://流量-U(cms)
+                        GenerateTimeIJResultGraph(" ZS (M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
+                        break;
+                    case 9: //流量-V(cms)
+                        GenerateTimeIJResultGraph(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
+                        break;
+                    case 10: //底床高程(m)
+                        GenerateTimeIJResultGraph(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
+                        break;
+                    case 11: //沖淤深度(m)
+                        GenerateTimeIJResultGraph(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
+                        break;
+                    case 12: //水深平均濃度(ppm)
+                        GenerateTimeIJResultGraph(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
+                        break;
+                    case 13: //粒徑分佈(%)
+                        GenerateTimeIJResultGraph(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
+                        break;
+                }
             }
         }
 
@@ -1347,6 +1415,51 @@ namespace RiverSimulationApplication
             }
             return TableType.TypeUnknown;
         }
+        private GraphType GetGraphType(ref PosInfo pi)
+        {
+            switch (graphType)
+            {
+                case GraphType.Type01:
+                    if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
+                        !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE))
+                    {   //I或J未輸入
+                        return GraphType.Type01;
+                    }
+
+                    if (pi.GetICount() == 1 && pi.GetJCount() > 1)
+                    {   //I固定
+                        return GraphType.Type0;
+                    }
+                    else if (pi.GetICount() > 1 && pi.GetJCount() == 1)
+                    {   //J固定
+                        return GraphType.Type1;
+                    }
+                    return GraphType.Type01;
+                case GraphType.Type234:
+                    if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
+                        !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE) ||
+                        timeSel == null)
+                    {   //I或J或T未輸入
+                        return GraphType.Type234;
+                    }
+                    pi.tS = timeSel[0];
+                    pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    if (pi.GetICount() == 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1)
+                    {   //IT固定
+                        return GraphType.Type2;
+                    }
+                    else if (pi.GetICount() > 1 && pi.GetJCount() == 1 && pi.GetTCount() == 1)
+                    {   //JT固定
+                        return GraphType.Type3;
+                    }
+                    else if (pi.GetICount() == 1 && pi.GetJCount() == 1 && pi.GetTCount() > 1)
+                    {   //IJ固定
+                        return GraphType.Type4;
+                    }
+                    return GraphType.Type234;
+            }
+            return GraphType.TypeUnknown;
+        }
         /*
         enum TableType
         {
@@ -1369,46 +1482,44 @@ namespace RiverSimulationApplication
         };
         */
 
-        enum GraphFormMode
-        {
-            None,
-            XY,
-            Contour,
-            Vector,
-            ContouWithVector
-        }
-        private GraphFormMode graphFormMode = GraphFormMode.None;
-
         private void graphType1Rdo_CheckedChanged(object sender, EventArgs e)
         {
-            if ((sender as RadioButton).Checked)
+            if ((sender as RadioButton).Checked && graphFormMode != GraphFormMode.XY)
             {
                 graphFormMode = GraphFormMode.XY;
+                InitialParam1(drawType);
+                UpdateStatus();
             }
         }
 
         private void graphType2Rdo_CheckedChanged(object sender, EventArgs e)
         {
-            if ((sender as RadioButton).Checked)
+            if ((sender as RadioButton).Checked && graphFormMode != GraphFormMode.Contour)
             {
                 graphFormMode = GraphFormMode.Contour;
-            }        
+                InitialParam1(drawType);
+                UpdateStatus();
+            }
         }
 
         private void graphType3Rdo_CheckedChanged(object sender, EventArgs e)
         {
-            if ((sender as RadioButton).Checked)
+            if ((sender as RadioButton).Checked && graphFormMode != GraphFormMode.Vector)
             {
                 graphFormMode = GraphFormMode.Vector;
-            }          
+                InitialParam1(drawType);
+                UpdateStatus();
+            }
         }
 
         private void graphType4Rdo_CheckedChanged(object sender, EventArgs e)
         {
-            if ((sender as RadioButton).Checked)
+            if ((sender as RadioButton).Checked && graphFormMode != GraphFormMode.ContouWithVector)
             {
                 graphFormMode = GraphFormMode.ContouWithVector;
-            }          
+                InitialParam1(drawType);
+                UpdateStatus();
+            }
         }
 
         private void animChk_CheckedChanged(object sender, EventArgs e)

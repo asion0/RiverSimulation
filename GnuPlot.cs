@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Linq;
 
 namespace Utilities.GnuplotCSharp
 {

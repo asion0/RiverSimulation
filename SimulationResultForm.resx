@@ -274,7 +274,7 @@
     <value>1</value>
   </data>
   <data name="paramGrp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 94</value>
+    <value>12, 176</value>
   </data>
   <data name="paramGrp.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 76</value>
@@ -445,7 +445,7 @@
     <value>4</value>
   </data>
   <data name="formGrp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 176</value>
+    <value>12, 94</value>
   </data>
   <data name="formGrp.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 76</value>

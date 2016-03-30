@@ -8,7 +8,8 @@ using System.Text;
 //using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Collections.Generic;
+using System.IO;
+using Utilities.GnuplotCSharp;
 
 namespace RiverSimulationApplication
 {
@@ -46,70 +47,13 @@ namespace RiverSimulationApplication
         }
         protected ResultGraphType formType = ResultGraphType.InitialBottomElevation;
 
-        protected enum DrawType
-        {
-            None,
-            DrawI,
-            DrawJ,
-            DrawIJ
-        };
-        DrawType dt = DrawType.None;
-        DrawType CheckDT(int colStart, int colEnd, int rowStart, int rowEnd)
-        {
-            DrawType tempDt = DrawType.None;
-            if (formType == ResultGraphType.InitialBottomElevation)
-            {
-                if (colEnd - colStart == 1)
-                {
-                    tempDt = DrawType.DrawI;
-                    comboSelectData = colStart;
-                    comboText.Text = "請選取I：";
-                }
-                if (rowEnd - rowStart == 1)
-                {
-                    tempDt = DrawType.DrawJ;
-                    comboSelectData = rowStart;
-                    comboText.Text = "請選取J：";
-                }
-            }
-            else if(formType == ResultGraphType.MultipleISingleJSingleTime)
-            {
-                //if (colEnd - colStart == 1)
-                {
-                    tempDt = DrawType.DrawI;
-                    comboSelectData = colStart;
-                    comboText.Text = "請選取I：";
-                }
-            }
-            else if (formType == ResultGraphType.SingleIMultipleJSingleTime)
-            {
-                //if (rowEnd - rowStart == 1)
-                {
-                    tempDt = DrawType.DrawJ;
-                    comboSelectData = rowStart;
-                    comboText.Text = "請選取J：";
-                }
-            }
-            else if (formType == ResultGraphType.SingleISingleJMultipleTime)
-            {
-                //if (timeSel != null && timeSel.Length == 1)
-                {
-                    tempDt = DrawType.DrawIJ;
-                    comboSelectData = -1;
-                    comboText.Text = "";
-                    combo1.Enabled = false;
-                }
-            }
-            return tempDt;
-        }
-
         RiverSimulationProfile p = RiverSimulationProfile.profile;
         private double max, min;
-        public void SetFormMode(string title,
-            int colStart,
-            int colEnd,
-            int rowStart,
-            int rowEnd,
+
+        public void SetFormMode(
+            string title,
+            int colStart, int colEnd,
+            int rowStart, int rowEnd,
             string tableName = "",
             string colName = "",
             string rowName = "",
@@ -120,8 +64,15 @@ namespace RiverSimulationApplication
             bool nocolNum = false,
             bool noRowNum = false,
             object initData = null,
-            object timeList = null,
-            int[] timeSel = null)
+            int xDim = 0,
+            int yDim = 1,
+            int sel1Dim = -1,
+            int sel2Dim = -1,
+            int sel1Index = -1,
+            int sel2Index = -1,
+            string sel1Title = "",
+            string sel2Title = "",
+            double[] timeList = null)
         {
             this.title = title;
             this.formType = formType;
@@ -129,103 +80,21 @@ namespace RiverSimulationApplication
             this.colEnd = colEnd;
             this.rowStart = rowStart;
             this.rowEnd = rowEnd;
+            this.tableName = tableName;
+            this.colName = colName;
+            this.rowName = rowName;
             this.colWidth = colWidth;
             this.rowHeadersWidth = rowHeadersWidth;
             this.initData = initData;
-            this.timeSel = timeSel;
-
-            dt = CheckDT(colStart, colEnd, rowStart, rowEnd);
-
-            CalcMinMax();
-        }
-
-        private void GetIMaxMin(int j)
-        {
-            
-            max = double.MinValue;
-            min = double.MaxValue;
-            if (formType == ResultGraphType.InitialBottomElevation)
-            {
-                for (int i = rowStart; i < rowEnd; ++i)
-                {
-                    if (min > (initData as double[,])[j, i])
-                    {
-                        min = (initData as double[,])[j, i];
-                    }
-                    if (max < (initData as double[,])[j, i])
-                    {
-                        max = (initData as double[,])[j, i];
-                    }
-                }
-            }
-            else
-            {
-                int t = timeSel[0];
-                for (int i = rowStart; i < rowEnd; ++i)
-                {
-                    if (min > (initData as double[, ,])[t, j, i])
-                    {
-                        min = (initData as double[, ,])[t, j, i];
-                    }
-                    if (max < (initData as double[, ,])[t, j, i])
-                    {
-                        max = (initData as double[, ,])[t, j, i];
-                    }
-                }
-            }
-        }
-
-        private void GetJMaxMin(int i)
-        {
-            max = double.MinValue;
-            min = double.MaxValue;
-            if (formType == ResultGraphType.InitialBottomElevation)
-            {
-                for (int j = colStart; j < colEnd; ++j)
-                {
-                    if (min > (initData as double[,])[j, i])
-                    {
-                        min = (initData as double[,])[j, i];
-                    }
-                    if (max < (initData as double[,])[j, i])
-                    {
-                        max = (initData as double[,])[j, i];
-                    }
-                }
-            }
-            else
-            {
-                int t = timeSel[0];
-                for (int j = colStart; j < colEnd; ++j)
-                {
-                    if (min > (initData as double[, ,])[t, j, i])
-                    {
-                        min = (initData as double[, ,])[t, j, i];
-                    }
-                    if (max < (initData as double[, ,])[t, j, i])
-                    {
-                        max = (initData as double[, ,])[t, j, i];
-                    }
-                }
-            }
-        }
-
-        private void GetTMaxMin(int j, int i)
-        {
-            max = double.MinValue;
-            min = double.MaxValue;
-            for (int t = 0; t < timeSel.Length; ++t)
-            {
-                if (min > (initData as double[, ,])[timeSel[t], j, i])
-                {
-                    min = (initData as double[, ,])[timeSel[t], j, i];
-                }
-                if (max < (initData as double[, ,])[timeSel[t], j, i])
-                {
-                    max = (initData as double[, ,])[timeSel[t], j, i];
-                }
-            }
-     
+            this.xDim = xDim;
+            this.yDim = yDim;
+            this.sel1Dim = sel1Dim;
+            this.sel2Dim = sel2Dim;
+            this.sel1Title = sel1Title;
+            this.sel2Title = sel2Title;
+            this.sel1Index = sel1Index;
+            this.sel2Index = sel2Index;
+            this.timeList = timeList;
         }
 
         private void ResultGraphForm_Load(object sender, EventArgs e)
@@ -233,53 +102,91 @@ namespace RiverSimulationApplication
             this.Text = title;
             InitializeChartView();
         }
+        private double CumulativeJDistance(int i, int j, PictureBoxCtrl.CoorPoint[,] inputCoor)
+        {
+            /*
+            double d0, d1, d = 0.0;
+            d0 = (j == 0) ? 0 : Math.Sqrt(
+                Math.Pow(inputCoor[i, j].x - inputCoor[i, j - 1].x, 2) +
+                Math.Pow(inputCoor[i, j].y - inputCoor[i, j - 1].y, 2));
+            d1 = (j == inputCoor.GetLength(1) - 1) ? 0 : Math.Sqrt(
+                Math.Pow(inputCoor[i, j].x - inputCoor[i, j + 1].x, 2) +
+                Math.Pow(inputCoor[i, j].y - inputCoor[i, j + 1].y, 2));
+            d += d0 / 2 + d1 / 2;
+            */
+            return Math.Abs(inputCoor[j, i].y - inputCoor[j, i + 1].y);
+        }
 
         private void InitializeChartView()
         {
-            if (formType == ResultGraphType.InitialBottomElevation)
-            {
-               if (dt == DrawType.DrawI)
-                {   //繪製河道縱面 J可選
-                    for (int j = 0; j < (initData as double[,]).GetLength(0); ++j)
-                    {
-                        combo1.Items.Add((j + 1).ToString());
-                    }
-                    combo1.SelectedIndex = colStart;
-                }
-                if (dt == DrawType.DrawJ)
-                {   //繪製河道剖面 I可選
-                    for (int i = 0; i < (initData as double[,]).GetLength(1); ++i)
-                    {
-                        combo1.Items.Add((i + 1).ToString());
-                    }
-                    combo1.SelectedIndex = rowStart;
-                }
+            StringBuilder sb = new StringBuilder();
 
+            //標題列，代表Sel1索引
+            //sb.AppendFormat("{0,8} ", 0);
+            //for (int x = colStart; x < colEnd; ++x)
+            //{
+            //    sb.AppendFormat("{0,8} ", x + 1);
+            //}
+            //sb.AppendFormat("{0,8} {1,8}\n", 1, 2);
+
+            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+            // 1|M|-|-|D|U| I  | -  | 0  |2D IJ  |
+            double distance = 0.0;
+            if(colStart != 0)
+            {   //累距不從0開始
+                for (int x = 0; x < colStart; ++x)
+                {
+                    distance += CumulativeJDistance(rowStart, x, p.inputGrid.inputCoor);
+                }
             }
-            else
+
+            for (int x = colStart; x < colEnd; ++x)
             {
-                if (dt == DrawType.DrawI)
-                {   //繪製河道縱面 J可選
-                    for (int j = 0; j < (initData as double[,,]).GetLength(1); ++j)
-                    {
-                        combo1.Items.Add((j + 1).ToString());
-                    }
-                    combo1.SelectedIndex = colStart;
+                distance += CumulativeJDistance(rowStart, x, p.inputGrid.inputCoor);
+                sb.AppendFormat("{0,8} ", distance);
+                for (int y = rowStart; y < rowEnd; ++y)
+                {
+                    sb.AppendFormat("{0,8} ", (initData as double[,,])[y, x, sel1Index]);
                 }
-                else if (dt == DrawType.DrawJ)
-                {   //繪製河道剖面 I可選
-                    for (int i = 0; i < (initData as double[,,]).GetLength(2); ++i)
-                    {
-                        combo1.Items.Add((i + 1).ToString());
-                    }
-                    combo1.SelectedIndex = rowStart;
-                }
-                else
-                {   //繪製一點I,J時間變化 無選取
-                    InitialChart();
-                    DrawChart();
-                }
+                sb.AppendFormat("\n");
             }
+            using (StreamWriter outfile = new StreamWriter(@"g:/_test.txt"))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+            //*
+            string[] setting = {
+                               "grid",
+                               //"terminal png 0",
+                               "term pngcairo font \"AR PL UKai TW\"",
+                               "term png font \"g:/mingliu.ttc,12\" size 800,600",
+                               "output \"G:/test.png\"",
+                               "title '底床高程'",
+                               "ylabel  '(微秒)'",
+                               "xlabel  \"日期\"",
+                               "format  y \"%.0f\"",
+                               "style data lines",
+                };
+            GnuPlot.Set(setting);
+            GnuPlot.Plot(@"G:/_test.txt", @"with lines");
+            GnuPlot.Set("output");
+            //*/
+            /*
+            string[] setting = {
+                               "key tmargin",
+                               "tics nomirror",
+                               "set border 3",
+                               "set style data lines",
+                               "set terminal pngcairo notransparent font \"Helvetica, 12\"",
+                               "terminal png size 800,600",
+                               "output \"G:/test.png\"",
+                               "style data lines",
+                };
+            GnuPlot.Set(setting);
+            GnuPlot.Plot(@"G:/_test.txt", @"using 1 title '1'");
+            */
+
         }
 
         private void InitialChart()
@@ -366,6 +273,7 @@ namespace RiverSimulationApplication
 
         private void DrawChart()
         {
+            /*
             double m = 0.0;
             chart1.Series.SuspendUpdates();
             switch (formType)
@@ -427,10 +335,12 @@ namespace RiverSimulationApplication
                     break;
             }
             chart1.Series.ResumeUpdates();
+            */
         }
 
         private void CalcMinMax()
         {
+            /*
             if (ResultGraphType.InitialBottomElevation == formType)
             {   
                 if (colEnd - colStart == 1)
@@ -454,6 +364,7 @@ namespace RiverSimulationApplication
             {
                 GetIMaxMin(comboSelectData);
             }
+            */
         }
 
         private int comboSelectData = -1;

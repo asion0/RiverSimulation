@@ -43,7 +43,9 @@ namespace RiverSimulationApplication
         public static string projectFileExt = @".t2d";
         public static string projectFileFilter = @"*.t2d";
 
-
+        //public static bool autoTest = true;
+        //public static string testProject = @"C:\Users\Asion\Documents\FlowSimulation\新後處理專案";
+        //public static string testFile = @"C:\Users\Asion\Documents\FlowSimulation\新後處理專案\2Dbed.t2d";
 
         public static ProgramSetting programSetting = null;
         public class ProgramSetting

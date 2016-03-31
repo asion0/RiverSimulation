@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.IO;
+using System.Threading;
 using Utilities.GnuplotCSharp;
 
 namespace RiverSimulationApplication
@@ -19,6 +20,49 @@ namespace RiverSimulationApplication
         {
             InitializeComponent();
         }
+        //U-同參數單位 D-累距
+        /* I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|M|-|-|D|U| I  | -  | 0  |2D IJ  |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|1|-|-|D|U| J  | -  | 1  |2D IJ  |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|1|1|-|D|U| J  | -  | 3  |3D IJT |
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|1|M|-|T|U| J  | -  | 4  |3D IJT |<<<<<NOW
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|M|1|1|I|J| K  | T  | 5  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|M|1|M|K|J| I  | T  | 6  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|1|1|M|K|J| J  | T  | 7  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|M|M|1|T|J| I  | K  | 8  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * M|1|M|1|T|I| J  | K  | 9  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+         * 1|1|M|M|T|K| T  | K  | A  |4D IJTK|
+         * -+-+-+-+-+-+----+----+----+-------+
+        */
+        public enum GraphType
+        {
+            //XY Form
+            Type0,
+            Type1,
+            Type2,
+            Type3,
+            Type4,
+            Type5,
+            Type6,
+            Type7,
+            Type8,
+            Type01,
+            Type234,
+            Type5678,
+            TypeUnknown,
+        };
 
         public enum ResultGraphType
         {
@@ -102,90 +146,140 @@ namespace RiverSimulationApplication
             this.Text = title;
             InitializeChartView();
         }
-        private double CumulativeJDistance(int i, int j, PictureBoxCtrl.CoorPoint[,] inputCoor)
+
+        private double CumulativeIDistance(int i, int j, PictureBoxCtrl.CoorPoint[,] inputCoor)
         {
-            /*
-            double d0, d1, d = 0.0;
-            d0 = (j == 0) ? 0 : Math.Sqrt(
-                Math.Pow(inputCoor[i, j].x - inputCoor[i, j - 1].x, 2) +
-                Math.Pow(inputCoor[i, j].y - inputCoor[i, j - 1].y, 2));
-            d1 = (j == inputCoor.GetLength(1) - 1) ? 0 : Math.Sqrt(
-                Math.Pow(inputCoor[i, j].x - inputCoor[i, j + 1].x, 2) +
-                Math.Pow(inputCoor[i, j].y - inputCoor[i, j + 1].y, 2));
-            d += d0 / 2 + d1 / 2;
-            */
-            return Math.Abs(inputCoor[j, i].y - inputCoor[j, i + 1].y);
+            return (i > 0) ? Math.Abs(inputCoor[i, j].y - inputCoor[i - 1, j].y) : 0;
         }
 
-        private void InitializeChartView()
+        private double CumulativeJDistance(int i, int j, PictureBoxCtrl.CoorPoint[,] inputCoor)
+        {   //inputCoor[95, 19] I, J
+            return (j > 0) ? Math.Abs(inputCoor[i, j].x - inputCoor[i, j - 1].x) : 0;
+        }
+
+        private string DrawMode0XY(int i, int jS, int jE)
         {
-            StringBuilder sb = new StringBuilder();
-
-            //標題列，代表Sel1索引
-            //sb.AppendFormat("{0,8} ", 0);
-            //for (int x = colStart; x < colEnd; ++x)
-            //{
-            //    sb.AppendFormat("{0,8} ", x + 1);
-            //}
-            //sb.AppendFormat("{0,8} {1,8}\n", 1, 2);
-
-            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
-            // 1|M|-|-|D|U| I  | -  | 0  |2D IJ  |
+            // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
+            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+            // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |
             double distance = 0.0;
-            if(colStart != 0)
+            if (jS != 0)
             {   //累距不從0開始
-                for (int x = 0; x < colStart; ++x)
+                for (int x = 0; x < jS; ++x)
                 {
-                    distance += CumulativeJDistance(rowStart, x, p.inputGrid.inputCoor);
+                    distance += CumulativeJDistance(i, x, p.inputGrid.inputCoor);
                 }
             }
-
-            for (int x = colStart; x < colEnd; ++x)
+            //產生gunplot輸入檔內容
+            StringBuilder sb = new StringBuilder();
+            for (int x = jS; x < jE; ++x)
             {
-                distance += CumulativeJDistance(rowStart, x, p.inputGrid.inputCoor);
-                sb.AppendFormat("{0,8} ", distance);
-                for (int y = rowStart; y < rowEnd; ++y)
-                {
-                    sb.AppendFormat("{0,8} ", (initData as double[,,])[y, x, sel1Index]);
-                }
+                distance += CumulativeJDistance(i, x, p.inputGrid.inputCoor);
+                sb.AppendFormat("{0,15} ", distance.ToString("F7"));
+                sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, x, 0]).ToString("F7"));
                 sb.AppendFormat("\n");
             }
-            using (StreamWriter outfile = new StreamWriter(@"g:/_test.txt"))
+
+            string plotfile = string.Format("{0}{1}{2}.txt", Program.GetProjectFileWorkingPath(), "\\g", i).Replace('\\', '/');
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics";
+            Directory.CreateDirectory(graphicsPath);
+            using (StreamWriter outfile = new StreamWriter(plotfile))
             {
                 outfile.Write(sb.ToString());
                 outfile.Close();
             }
+
+            string pngFile = string.Format("{0}\\{1}", graphicsPath, "g.png").Replace('\\', '/');
+            //Utility.DeleteFileOrFolder(pngFile);
+            string setPngFile = string.Format("output \"{0}\"", pngFile);
             //*
             string[] setting = {
-                               "grid",
-                               //"terminal png 0",
-                               "term pngcairo font \"AR PL UKai TW\"",
-                               "term png font \"g:/mingliu.ttc,12\" size 800,600",
-                               "output \"G:/test.png\"",
-                               "title '底床高程'",
-                               "ylabel  '(微秒)'",
-                               "xlabel  \"日期\"",
-                               "format  y \"%.0f\"",
-                               "style data lines",
-                };
+                                   "grid",
+                                   "term png size 960,630",
+                                   setPngFile,
+                                   "title ''",
+                                   "ylabel '(m)'",
+                                   "xlabel '(m)'",
+                                   "format x \"%.3f\"",
+                                   "format y \"%.3f\"",
+                                   "style data lines",
+                                   "nokey" };
             GnuPlot.Set(setting);
-            GnuPlot.Plot(@"G:/_test.txt", @"with lines");
-            GnuPlot.Set("output");
-            //*/
-            /*
-            string[] setting = {
-                               "key tmargin",
-                               "tics nomirror",
-                               "set border 3",
-                               "set style data lines",
-                               "set terminal pngcairo notransparent font \"Helvetica, 12\"",
-                               "terminal png size 800,600",
-                               "output \"G:/test.png\"",
-                               "style data lines",
-                };
-            GnuPlot.Set(setting);
-            GnuPlot.Plot(@"G:/_test.txt", @"using 1 title '1'");
-            */
+            //plotfile = String.Format("\"{0}\"", plotfile);
+            GnuPlot.Plot(plotfile, @"with lines");
+            //GnuPlot.Set("term x11");
+            //GnuPlot.WriteLine();
+            //GnuPlot.Set("output");
+            return pngFile;
+        }
+
+        public static int CumulativeDistance = -3;
+        public static int DataContent = -2;
+        private GraphType graphType = GraphType.TypeUnknown;
+        private void InitializeChartView()
+        {
+            // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
+            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+            // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |
+
+            //Mode0 I固定 J範圍 選項一是I X顯示累距 Y顯示資料
+            if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent)
+            {
+                graphType = GraphType.Type0;
+                sel1Lbl.Visible = true;
+                sel1Lbl.Text = sel1Title;
+                combo1.Visible = true;
+                for (int i = 0; i < (initData as double[,,]).GetLength(0); ++i)
+                {
+                    combo1.Items.Add((i + 1).ToString());
+                }
+
+                string gfile = DrawMode0XY(rowStart, colStart, colEnd).Replace('/', '\\');
+                while(true)
+                {
+                    if (File.Exists(gfile))
+                        break;
+                    Thread.Sleep(10);
+                }
+                int c = 0;
+                byte[] pngRaw = null;
+                while (true)
+                {
+                    try
+                    {
+                        pngRaw = File.ReadAllBytes(gfile);
+                        
+                        break;
+                    }
+                    catch (Exception e)
+                    {
+                        string err = e.ToString();
+                        Thread.Sleep(10);
+                        if (++c > 10)
+                            break;
+                    }
+                }
+                try
+                {
+                    Image img = Image.FromFile(gfile);
+                    pic1.Image = img;
+                    pic1.Refresh();
+
+                }
+                catch (Exception e)
+                {
+                    string err = e.ToString();
+                    Thread.Sleep(10);
+
+                }
+             }
+            //else if (sel1Index != -1 && sel2Index == -1 && xDim == 1 && yDim == 3)       //3D data X顯示J Y顯示T
+            //    dataGridView[x - colStart, y - rowStart].Value = (initData as double[, ,])[sel1Index, x, y].ToString();
+            //else if (sel1Index != -1 && sel2Index == -1 && xDim == 0 && yDim == 3)       //3D data X顯示I Y顯示T
+            //    dataGridView[x - colStart, y - rowStart].Value = (initData as double[, ,])[x, sel1Index, y].ToString();
+
+
+ 
 
         }
 
@@ -367,11 +461,14 @@ namespace RiverSimulationApplication
             */
         }
 
-        private int comboSelectData = -1;
+        //private int comboSelectData = -1;
         private void combo1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox c = (sender as ComboBox);
-            comboSelectData = Convert.ToInt32(c.Items[c.SelectedIndex]) - 1;
+            int sel = Convert.ToInt32(c.Items[c.SelectedIndex]) - 1;
+            pic1.Image = Image.FromFile(DrawMode0XY(sel, colStart, colEnd));
+
+            /*
             CalcMinMax();
             chart1.Series.SuspendUpdates();
             if (chart1.ChartAreas.Count != 0)
@@ -384,6 +481,7 @@ namespace RiverSimulationApplication
             } 
             InitialChart();
             DrawChart();
+            */
         }
     }
 }

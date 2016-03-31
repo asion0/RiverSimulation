@@ -62,50 +62,7 @@ namespace RiverSimulationApplication
             TypeUnknown,
         };
         TableType tableType = TableType.TypeUnknown;
-        //U-同參數單位 D-累距
-        /* I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|M|-|-|D|U| I  | -  | 0  |2D IJ  |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|1|-|-|D|U| J  | -  | 1  |2D IJ  |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|1|1|-|D|U| J  | -  | 3  |3D IJT |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|1|M|-|T|U| J  | -  | 4  |3D IJT |<<<<<NOW
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|M|1|1|I|J| K  | T  | 5  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|M|1|M|K|J| I  | T  | 6  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|1|1|M|K|J| J  | T  | 7  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|M|M|1|T|J| I  | K  | 8  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|1|M|1|T|I| J  | K  | 9  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|1|M|M|T|K| T  | K  | A  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-        */
-        private enum GraphType
-        {
-            //XY Form
-            Type0,
-            Type1,
-            Type2,
-            Type3,
-            Type4,
-            Type5,
-            Type6,
-            Type7,
-            Type8,
-            Type01,
-            Type234,
-            Type5678,
-            TypeUnknown,
-        };
-        GraphType graphType = GraphType.TypeUnknown;
+        ResultGraphForm.GraphType graphType = ResultGraphForm.GraphType.TypeUnknown;
 
         enum GraphFormMode
         {
@@ -403,7 +360,7 @@ namespace RiverSimulationApplication
                 switch (cmb.SelectedIndex)
                 {
                     case 0: //初始底床高程(m)
-                        graphType = GraphType.Type01;
+                        graphType = ResultGraphForm.GraphType.Type01;
                         break;
                     case 1: //水深平均流速-U(m/s)
                     case 2: //水深平均流速-V(m/s)
@@ -601,8 +558,8 @@ namespace RiverSimulationApplication
         {
             PosInfo pi = new PosInfo();
             TableType t = GetTableType(ref pi);
-            graphType = GetGraphType(ref pi);
-            if (graphType >= GraphType.Type01)
+            ResultGraphForm.GraphType gt = GetGraphType(ref pi);
+            if (gt >= ResultGraphForm.GraphType.Type01)
             {
                 MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -615,35 +572,40 @@ namespace RiverSimulationApplication
             }
 
             ResultGraphForm form = new ResultGraphForm();
-            form.SetFormMode(
-                "初始底床高程(m)",   //視窗標題
-                pi.jS, pi.jE,       //行數(左右有幾行)
-                pi.iS, pi.iE,       //列數(上下有幾列)
-                "",                 //表格名稱
-                "",                 //行標題(顯示於上方)
-                "",                 //列標題(顯示於左方)
-                ResultGraphForm.ResultGraphType.InitialBottomElevation, //表格形式
-                48,                 //儲存格寬度
-                96,                 //列標題寬度
-                true,               //保留
-                false,              //不須行數字
-                false,              //不須列數字
-                initialBottomElevation,  //資料
-                1,                  //X維度
-                0,                  //Y維度
-                -1,                 //Sel1維度
-                -1,                 //Sel2維度
-                0,                  //Sel1索引
-                -1,                 //Sel2索引
-                "",                 //Sel1標籤
-                "",                 //Sel2標籤
-                null);              //Time陣列                
-
+            if (gt == ResultGraphForm.GraphType.Type0)
+            {
+                form.SetFormMode(
+                    "初始底床高程(m)",   //視窗標題
+                    pi.jS, pi.jE,       //行數(左右有幾行)
+                    pi.iS, pi.iE,       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultGraphForm.ResultGraphType.InitialBottomElevation, //表格形式
+                    48,                 //儲存格寬度
+                    96,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    initialBottomElevation,  //資料
+                    ResultGraphForm.CumulativeDistance,                  //X維度
+                    ResultGraphForm.DataContent,                  //Y維度
+                    0,                 //Sel1維度
+                    -1,                 //Sel2維度
+                    pi.iS,               //Sel1索引
+                    -1,                 //Sel2索引
+                    "I = ",              //Sel1標籤
+                    "",                 //Sel2標籤
+                    null);              //Time陣列                
+            }
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
+            //GnuPlot.Close();
+            
+
         }
         //private void GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
         private void GenerateTimeIJResultGraph(String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
@@ -1415,50 +1377,50 @@ namespace RiverSimulationApplication
             }
             return TableType.TypeUnknown;
         }
-        private GraphType GetGraphType(ref PosInfo pi)
+        private ResultGraphForm.GraphType GetGraphType(ref PosInfo pi)
         {
             switch (graphType)
             {
-                case GraphType.Type01:
+                case ResultGraphForm.GraphType.Type01:
                     if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
                         !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE))
                     {   //I或J未輸入
-                        return GraphType.Type01;
+                        return ResultGraphForm.GraphType.Type01;
                     }
 
                     if (pi.GetICount() == 1 && pi.GetJCount() > 1)
                     {   //I固定
-                        return GraphType.Type0;
+                        return ResultGraphForm.GraphType.Type0;
                     }
                     else if (pi.GetICount() > 1 && pi.GetJCount() == 1)
                     {   //J固定
-                        return GraphType.Type1;
+                        return ResultGraphForm.GraphType.Type1;
                     }
-                    return GraphType.Type01;
-                case GraphType.Type234:
+                    return ResultGraphForm.GraphType.Type01;
+                case ResultGraphForm.GraphType.Type234:
                     if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
                         !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE) ||
                         timeSel == null)
                     {   //I或J或T未輸入
-                        return GraphType.Type234;
+                        return ResultGraphForm.GraphType.Type234;
                     }
                     pi.tS = timeSel[0];
                     pi.tE = timeSel[timeSel.Length - 1] + 1;
                     if (pi.GetICount() == 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1)
                     {   //IT固定
-                        return GraphType.Type2;
+                        return ResultGraphForm.GraphType.Type2;
                     }
                     else if (pi.GetICount() > 1 && pi.GetJCount() == 1 && pi.GetTCount() == 1)
                     {   //JT固定
-                        return GraphType.Type3;
+                        return ResultGraphForm.GraphType.Type3;
                     }
                     else if (pi.GetICount() == 1 && pi.GetJCount() == 1 && pi.GetTCount() > 1)
                     {   //IJ固定
-                        return GraphType.Type4;
+                        return ResultGraphForm.GraphType.Type4;
                     }
-                    return GraphType.Type234;
+                    return ResultGraphForm.GraphType.Type234;
             }
-            return GraphType.TypeUnknown;
+            return ResultGraphForm.GraphType.TypeUnknown;
         }
         /*
         enum TableType

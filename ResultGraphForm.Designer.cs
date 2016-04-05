@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.sel1Lbl = new System.Windows.Forms.Label();
             this.combo1 = new System.Windows.Forms.ComboBox();
@@ -42,8 +42,8 @@
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(407, -1);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(109, 50);
@@ -90,6 +90,8 @@
             this.Controls.Add(this.combo1);
             this.Controls.Add(this.sel1Lbl);
             this.Controls.Add(this.chart1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ResultGraphForm";
             this.Text = "模擬結果-圖形";
             this.Load += new System.EventHandler(this.ResultGraphForm_Load);

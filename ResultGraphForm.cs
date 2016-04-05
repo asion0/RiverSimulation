@@ -21,31 +21,31 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
         //U-同參數單位 D-累距
-        /* I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|M|-|-|D|U| I  | -  | 0  |2D IJ  |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|1|-|-|D|U| J  | -  | 1  |2D IJ  |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|1|1|-|D|U| J  | -  | 3  |3D IJT |
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|1|M|-|T|U| J  | -  | 4  |3D IJT |<<<<<NOW
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|M|1|1|I|J| K  | T  | 5  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|M|1|M|K|J| I  | T  | 6  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|1|1|M|K|J| J  | T  | 7  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|M|M|1|T|J| I  | K  | 8  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * M|1|M|1|T|I| J  | K  | 9  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-         * 1|1|M|M|T|K| T  | K  | A  |4D IJTK|
-         * -+-+-+-+-+-+----+----+----+-------+
-        */
+       /* I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+        * -+-+-+-+-+-+----+----+----+-------+
+        * 1|M|-|-|D|U| I  | -  | 0  |2D IJ  |
+        * -+-+-+-+-+-+----+----+----+-------+
+        * M|1|-|-|D|U| J  | -  | 1  |2D IJ  |
+        * -+-+-+-+-+-+----+----+----+-------+
+        * 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
+        * -+-+-+-+-+-+----+----+----+-------+
+        * M|1|1|-|D|U| J  | -  | 3  |3D IJT |
+        * -+-+-+-+-+-+----+----+----+-------+
+        * 1|1|M|-|T|U| J  | -  | 4  |3D IJT |<<<<<NOW
+        * -+-+-+-+-+-+----+----+----+-------+
+        * M|M|1|1|I|J| K  | T  | 5  |4D IJTK|
+        * -+-+-+-+-+-+----+----+----+-------+
+        * 1|M|1|M|K|J| I  | T  | 6  |4D IJTK|
+        * -+-+-+-+-+-+----+----+----+-------+
+        * M|1|1|M|K|J| J  | T  | 7  |4D IJTK|
+        * -+-+-+-+-+-+----+----+----+-------+
+        * 1|M|M|1|T|J| I  | K  | 8  |4D IJTK|
+        * -+-+-+-+-+-+----+----+----+-------+
+        * M|1|M|1|T|I| J  | K  | 9  |4D IJTK|
+        * -+-+-+-+-+-+----+----+----+-------+
+        * 1|1|M|M|T|K| T  | K  | A  |4D IJTK|
+        * -+-+-+-+-+-+----+----+----+-------+
+       */
         public enum GraphType
         {
             //XY Form
@@ -162,6 +162,11 @@ namespace RiverSimulationApplication
             // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
             // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
             // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode0";
+            string pngFile = string.Format("{0}\\{1}_{2}_{3}.png", graphicsPath, i, jS, jE).Replace('\\', '/');
+            if (File.Exists(pngFile))
+                return pngFile;
+
             double distance = 0.0;
             if (jS != 0)
             {   //累距不從0開始
@@ -181,7 +186,6 @@ namespace RiverSimulationApplication
             }
 
             string plotfile = string.Format("{0}{1}{2}.txt", Program.GetProjectFileWorkingPath(), "\\g", i).Replace('\\', '/');
-            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics";
             Directory.CreateDirectory(graphicsPath);
             using (StreamWriter outfile = new StreamWriter(plotfile))
             {
@@ -189,7 +193,6 @@ namespace RiverSimulationApplication
                 outfile.Close();
             }
 
-            string pngFile = string.Format("{0}\\{1}", graphicsPath, "g.png").Replace('\\', '/');
             //Utility.DeleteFileOrFolder(pngFile);
             string setPngFile = string.Format("output \"{0}\"", pngFile);
             //*
@@ -209,7 +212,65 @@ namespace RiverSimulationApplication
             GnuPlot.Plot(plotfile, @"with lines");
             //GnuPlot.Set("term x11");
             //GnuPlot.WriteLine();
-            //GnuPlot.Set("output");
+            GnuPlot.Set("output");
+            return pngFile;
+        }
+        private string DrawMode1XY(int j, int iS, int iE)
+        {
+            // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
+            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+            // M|1|-|-|D|U| J  | -  | 1  |3D IJ1  |
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode1";
+            string pngFile = string.Format("{0}\\{1}_{2}_{3}.png", graphicsPath, j, iS, iE).Replace('\\', '/');
+            if (File.Exists(pngFile))
+                return pngFile;
+
+            double distance = 0.0;
+            if (iS != 0)
+            {   //累距不從0開始
+                for (int y = 0; y < iS; ++y)
+                {
+                    distance += CumulativeIDistance(y, j, p.inputGrid.inputCoor);
+                }
+            }
+            //產生gunplot輸入檔內容
+            StringBuilder sb = new StringBuilder();
+            for (int y = iS; y < iE; ++y)
+            {
+                distance += CumulativeIDistance(y, j, p.inputGrid.inputCoor);
+                sb.AppendFormat("{0,15} ", distance.ToString("F7"));
+                sb.AppendFormat("{0,15} ", ((initData as double[, ,])[y, j, 0]).ToString("F7"));
+                sb.AppendFormat("\n");
+            }
+
+            string plotfile = string.Format("{0}\\{1}_{2}_{3}.txt", graphicsPath, j, iS, iE).Replace('\\', '/');
+            Directory.CreateDirectory(graphicsPath);
+            using (StreamWriter outfile = new StreamWriter(plotfile))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+
+            //Utility.DeleteFileOrFolder(pngFile);
+            string setPngFile = string.Format("output \"{0}\"", pngFile);
+            //*
+            string[] setting = {
+                                   "grid",
+                                   "term png size 960,630",
+                                   setPngFile,
+                                   "title ''",
+                                   "ylabel '(m)'",
+                                   "xlabel '(m)'",
+                                   "format x \"%.3f\"",
+                                   "format y \"%.3f\"",
+                                   "style data lines",
+                                   "nokey" };
+            GnuPlot.Set(setting);
+            //plotfile = String.Format("\"{0}\"", plotfile);
+            GnuPlot.Plot(plotfile, @"with lines");
+            //GnuPlot.Set("term x11");
+            //GnuPlot.WriteLine();
+            GnuPlot.Set("output");
             return pngFile;
         }
 
@@ -218,61 +279,42 @@ namespace RiverSimulationApplication
         private GraphType graphType = GraphType.TypeUnknown;
         private void InitializeChartView()
         {
-            // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
-            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
-            // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |
-
-            //Mode0 I固定 J範圍 選項一是I X顯示累距 Y顯示資料
-            if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent)
+            
+            if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent && (rowEnd - rowStart == 1))
             {
-                graphType = GraphType.Type0;
+                // Mode0 I固定 J範圍 選項一是I X顯示累距 Y顯示資料
+                // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
+                // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+                // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |                    graphType = GraphType.Type0;
                 sel1Lbl.Visible = true;
                 sel1Lbl.Text = sel1Title;
                 combo1.Visible = true;
                 for (int i = 0; i < (initData as double[,,]).GetLength(0); ++i)
                 {
                     combo1.Items.Add((i + 1).ToString());
+                    DrawMode0XY(i, colStart, colEnd);
                 }
-
-                string gfile = DrawMode0XY(rowStart, colStart, colEnd).Replace('/', '\\');
-                while(true)
+                combo1.SelectedIndex = rowStart;
+                string gfile = DrawMode0XY(rowStart, colStart, colEnd);
+            }
+            else if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent && (colEnd - colStart == 1))
+            {
+                // Mode1 I範圍 J固定 選項一是J X顯示累距 Y顯示資料
+                // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
+                // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+                // M|1|-|-|D|U| J  | -  | 1  |2D IJ  |
+                graphType = GraphType.Type1;
+                sel1Lbl.Visible = true;
+                sel1Lbl.Text = sel1Title;
+                combo1.Visible = true;
+                for (int j = 0; j < (initData as double[, ,]).GetLength(1); ++j)
                 {
-                    if (File.Exists(gfile))
-                        break;
-                    Thread.Sleep(10);
+                    combo1.Items.Add((j + 1).ToString());
+                    DrawMode1XY(j, rowStart, rowEnd);
                 }
-                int c = 0;
-                byte[] pngRaw = null;
-                while (true)
-                {
-                    try
-                    {
-                        pngRaw = File.ReadAllBytes(gfile);
-                        
-                        break;
-                    }
-                    catch (Exception e)
-                    {
-                        string err = e.ToString();
-                        Thread.Sleep(10);
-                        if (++c > 10)
-                            break;
-                    }
-                }
-                try
-                {
-                    Image img = Image.FromFile(gfile);
-                    pic1.Image = img;
-                    pic1.Refresh();
-
-                }
-                catch (Exception e)
-                {
-                    string err = e.ToString();
-                    Thread.Sleep(10);
-
-                }
-             }
+                combo1.SelectedIndex = rowStart;
+                string gfile = DrawMode0XY(rowStart, colStart, colEnd);
+            }
             //else if (sel1Index != -1 && sel2Index == -1 && xDim == 1 && yDim == 3)       //3D data X顯示J Y顯示T
             //    dataGridView[x - colStart, y - rowStart].Value = (initData as double[, ,])[sel1Index, x, y].ToString();
             //else if (sel1Index != -1 && sel2Index == -1 && xDim == 0 && yDim == 3)       //3D data X顯示I Y顯示T
@@ -281,155 +323,155 @@ namespace RiverSimulationApplication
 
  
 
-        }
-
-        private void InitialChart()
-        {
-            chart1.ChartAreas.Add("Base");
-            chart1.Series.Add("Param1");
-
-            ChartArea myArea = chart1.ChartAreas["Base"];
-            Series mySeriesD = chart1.Series["Param1"];
-            mySeriesD.LegendText = title;
-
-            myArea.AxisX.MajorGrid.LineColor = Color.Transparent; // X軸的刻度 縱線
-            myArea.AxisY.MajorGrid.LineColor = Color.LightGray;  // Y軸的刻度 橫線
-            myArea.AxisY.IntervalAutoMode = IntervalAutoMode.FixedCount;
-            myArea.AxisY.IntervalOffsetType = DateTimeIntervalType.Auto;
-            myArea.AxisY.IsLabelAutoFit = true;
-            myArea.AxisY.IsLogarithmic = false;
-
-            double gap = (max - min) / 8;
-            if (gap == 0)
-                gap = 1.0;
-            myArea.AxisY.Minimum = min - gap;
-            myArea.AxisY.Maximum = max + gap;
-
-            myArea.AxisY.Title = title;
-
-            if (formType == ResultGraphType.InitialBottomElevation || formType == ResultGraphType.SingleIMultipleJSingleTime
-                || formType == ResultGraphType.MultipleISingleJSingleTime)
-            {
-                myArea.AxisX.Title = "累距(m)";
-                myArea.AxisX.Minimum = 0.0;
-            }
-            else
-            {
-                myArea.AxisX.Title = "時間(s)";
-                myArea.AxisX.Minimum = 0.0;
             }
 
-            myArea.AxisX.IntervalAutoMode = IntervalAutoMode.FixedCount;
-            myArea.AxisX.IntervalOffsetType = DateTimeIntervalType.Auto;
-            //myArea.AxisX.Minimum = 0.0;
-            //myArea.AxisX.Maximum = 500.0;
+             private void InitialChart()
+             {
+                 chart1.ChartAreas.Add("Base");
+                 chart1.Series.Add("Param1");
 
-            // 設定平均值的 Line
-            //if (RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d != 0.0)
-            //{
-            //    StripLine lineMean = new StripLine();
+                 ChartArea myArea = chart1.ChartAreas["Base"];
+                 Series mySeriesD = chart1.Series["Param1"];
+                 mySeriesD.LegendText = title;
 
-            //    lineMean.Text = "收斂值 : " + RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d.ToString();
-            //    lineMean.BorderColor = Color.Red; // 線條的顏色
-            //    lineMean.BorderDashStyle = ChartDashStyle.Dash;
-            //    lineMean.BorderWidth = 1;
-            //    lineMean.IntervalOffsetType = DateTimeIntervalType.Auto;
-            //    //lineMean.Interval = RiverSimulationProfile.profile.convergenceCriteria2d;
-            //    lineMean.IntervalOffset = Math.Log10(RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d);
-            //    myArea.AxisY.StripLines.Add(lineMean);
-            //}
+                 myArea.AxisX.MajorGrid.LineColor = Color.Transparent; // X軸的刻度 縱線
+                 myArea.AxisY.MajorGrid.LineColor = Color.LightGray;  // Y軸的刻度 橫線
+                 myArea.AxisY.IntervalAutoMode = IntervalAutoMode.FixedCount;
+                 myArea.AxisY.IntervalOffsetType = DateTimeIntervalType.Auto;
+                 myArea.AxisY.IsLabelAutoFit = true;
+                 myArea.AxisY.IsLogarithmic = false;
 
-            // mySeriesD.ChartType = SeriesChartType.Spline;        // 曲線圖
-            mySeriesD.ChartType = SeriesChartType.Line;        // 曲線圖
-            mySeriesD.Color = Color.Blue;               // 在圖型上的顏色
-            mySeriesD.BorderWidth = 1;                   // 線型的寬度
-            mySeriesD.ShadowColor = Color.Transparent;      // 陰影的顏色
-            mySeriesD.ShadowOffset = 2;                  // 陰影位置的角度
-            mySeriesD.MarkerStyle = MarkerStyle.None;  // 標記的樣式 (Circle, Diamond ...)
-            mySeriesD.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
+                 double gap = (max - min) / 8;
+                 if (gap == 0)
+                     gap = 1.0;
+                 myArea.AxisY.Minimum = min - gap;
+                 myArea.AxisY.Maximum = max + gap;
 
-            //mySeriesU.ChartType = SeriesChartType.Spline;        // 曲線圖
-            //mySeriesU.Color = Color.Orange;               // 在圖型上的顏色
-            //mySeriesU.BorderWidth = 1;                   // 線型的寬度
-            //mySeriesU.ShadowColor = Color.Transparent;      // 陰影的顏色
-            //mySeriesU.ShadowOffset = 2;                  // 陰影位置的角度
-            //mySeriesU.MarkerStyle = MarkerStyle.None;  // 標記的樣式 (Circle, Diamond ...)
-            //mySeriesU.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
+                 myArea.AxisY.Title = title;
 
-            //mySeriesV.ChartType = SeriesChartType.Spline;        // 曲線圖
-            //mySeriesV.Color = Color.Green;               // 在圖型上的顏色
-            //mySeriesV.BorderWidth = 1;                   // 線型的寬度
-            //mySeriesV.ShadowColor = Color.Transparent;      // 陰影的顏色
-            //mySeriesV.ShadowOffset = 2;                  // 陰影位置的角度
-            //mySeriesV.MarkerStyle = MarkerStyle.None;  // 標記的樣式 (Circle, Diamond ...)
-            //mySeriesV.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
-        }
+                 if (formType == ResultGraphType.InitialBottomElevation || formType == ResultGraphType.SingleIMultipleJSingleTime
+                     || formType == ResultGraphType.MultipleISingleJSingleTime)
+                 {
+                     myArea.AxisX.Title = "累距(m)";
+                     myArea.AxisX.Minimum = 0.0;
+                 }
+                 else
+                 {
+                     myArea.AxisX.Title = "時間(s)";
+                     myArea.AxisX.Minimum = 0.0;
+                 }
 
-        private void DrawChart()
-        {
-            /*
-            double m = 0.0;
-            chart1.Series.SuspendUpdates();
-            switch (formType)
-            {
-                case ResultGraphType.InitialBottomElevation:
-                    //編輯陣列I * J
-                    if (dt == DrawType.DrawI)
-                    {
-                        for (int j = rowStart; j < rowEnd; ++j)
-                        {
-                            chart1.Series["Param1"].Points.AddXY(m.ToString("F3"), (initData as double[,])[comboSelectData, j]);
-                            if (j < p.inputGrid.GetI - 1)
-                            {
-                                m += Math.Abs(p.inputGrid.inputCoor[j, comboSelectData].x - p.inputGrid.inputCoor[j + 1, comboSelectData].x);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for (int i = colStart; i < colEnd; ++i)
-                        {
-                            chart1.Series["Param1"].Points.AddXY(m.ToString("F3"), (initData as double[,])[i, comboSelectData]);
-                            if (i < p.inputGrid.GetJ - 1)
-                            {
-                                m += Math.Abs(p.inputGrid.inputCoor[comboSelectData, i].y - p.inputGrid.inputCoor[comboSelectData, i + 1].y);
-                            }
-                        }
-                    }
-                    break;
-                case ResultGraphType.SingleISingleJMultipleTime:
-                    for (int t = 0; t < timeSel.Length; ++t)
-                    {
-                        int i = colStart;
-                        int j = rowStart;
-                        chart1.Series["Param1"].Points.AddXY(timeList[timeSel[t]], (initData as double[, ,])[timeSel[t], i, j]);
-                    }
-                    break;
-                case ResultGraphType.SingleIMultipleJSingleTime:
-                    for (int i = colStart; i < colEnd; ++i)
-                    {
-                        int t = timeSel[0];
-                        chart1.Series["Param1"].Points.AddXY(m.ToString("F3"), (initData as double[, ,])[t, i, comboSelectData]);
-                        if (i < p.inputGrid.GetJ - 1)
-                        {
-                            m += Math.Abs(p.inputGrid.inputCoor[comboSelectData, i].y - p.inputGrid.inputCoor[comboSelectData, i + 1].y);
-                        }
-                    }
-                    break;
-                case ResultGraphType.MultipleISingleJSingleTime:
-                    for (int j = rowStart; j < rowEnd; ++j)
-                    {
-                        int t = timeSel[0];
-                        chart1.Series["Param1"].Points.AddXY(m.ToString("F3"), (initData as double[, ,])[t, comboSelectData, j]);
-                        if (j < p.inputGrid.GetI - 1)
-                        {
-                            m += Math.Abs(p.inputGrid.inputCoor[j, comboSelectData].x - p.inputGrid.inputCoor[j + 1, comboSelectData].x);
-                        }
-                    }
-                    break;
-            }
-            chart1.Series.ResumeUpdates();
-            */
+                 myArea.AxisX.IntervalAutoMode = IntervalAutoMode.FixedCount;
+                 myArea.AxisX.IntervalOffsetType = DateTimeIntervalType.Auto;
+                 //myArea.AxisX.Minimum = 0.0;
+                 //myArea.AxisX.Maximum = 500.0;
+
+                 // 設定平均值的 Line
+                 //if (RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d != 0.0)
+                 //{
+                 //    StripLine lineMean = new StripLine();
+
+                 //    lineMean.Text = "收斂值 : " + RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d.ToString();
+                 //    lineMean.BorderColor = Color.Red; // 線條的顏色
+                 //    lineMean.BorderDashStyle = ChartDashStyle.Dash;
+                 //    lineMean.BorderWidth = 1;
+                 //    lineMean.IntervalOffsetType = DateTimeIntervalType.Auto;
+                 //    //lineMean.Interval = RiverSimulationProfile.profile.convergenceCriteria2d;
+                 //    lineMean.IntervalOffset = Math.Log10(RiverSimulationProfile.profile.waterModelingConvergenceCriteria2d);
+                 //    myArea.AxisY.StripLines.Add(lineMean);
+                 //}
+
+                 // mySeriesD.ChartType = SeriesChartType.Spline;        // 曲線圖
+                 mySeriesD.ChartType = SeriesChartType.Line;        // 曲線圖
+                 mySeriesD.Color = Color.Blue;               // 在圖型上的顏色
+                 mySeriesD.BorderWidth = 1;                   // 線型的寬度
+                 mySeriesD.ShadowColor = Color.Transparent;      // 陰影的顏色
+                 mySeriesD.ShadowOffset = 2;                  // 陰影位置的角度
+                 mySeriesD.MarkerStyle = MarkerStyle.None;  // 標記的樣式 (Circle, Diamond ...)
+                 mySeriesD.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
+
+                 //mySeriesU.ChartType = SeriesChartType.Spline;        // 曲線圖
+                 //mySeriesU.Color = Color.Orange;               // 在圖型上的顏色
+                 //mySeriesU.BorderWidth = 1;                   // 線型的寬度
+                 //mySeriesU.ShadowColor = Color.Transparent;      // 陰影的顏色
+                 //mySeriesU.ShadowOffset = 2;                  // 陰影位置的角度
+                 //mySeriesU.MarkerStyle = MarkerStyle.None;  // 標記的樣式 (Circle, Diamond ...)
+                 //mySeriesU.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
+
+                 //mySeriesV.ChartType = SeriesChartType.Spline;        // 曲線圖
+                 //mySeriesV.Color = Color.Green;               // 在圖型上的顏色
+                 //mySeriesV.BorderWidth = 1;                   // 線型的寬度
+                 //mySeriesV.ShadowColor = Color.Transparent;      // 陰影的顏色
+                 //mySeriesV.ShadowOffset = 2;                  // 陰影位置的角度
+                 //mySeriesV.MarkerStyle = MarkerStyle.None;  // 標記的樣式 (Circle, Diamond ...)
+                 //mySeriesV.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
+             }
+
+             private void DrawChart()
+             {
+                 /*
+                 double m = 0.0;
+                 chart1.Series.SuspendUpdates();
+                 switch (formType)
+                 {
+                     case ResultGraphType.InitialBottomElevation:
+                         //編輯陣列I * J
+                         if (dt == DrawType.DrawI)
+                         {
+                             for (int j = rowStart; j < rowEnd; ++j)
+                             {
+                                 chart1.Series["Param1"].Points.AddXY(m.ToString("F3"), (initData as double[,])[comboSelectData, j]);
+                                 if (j < p.inputGrid.GetI - 1)
+                                 {
+                                     m += Math.Abs(p.inputGrid.inputCoor[j, comboSelectData].x - p.inputGrid.inputCoor[j + 1, comboSelectData].x);
+                                 }
+                             }
+                         }
+                         else
+                         {
+                             for (int i = colStart; i < colEnd; ++i)
+                             {
+                                 chart1.Series["Param1"].Points.AddXY(m.ToString("F3"), (initData as double[,])[i, comboSelectData]);
+                                 if (i < p.inputGrid.GetJ - 1)
+                                 {
+                                     m += Math.Abs(p.inputGrid.inputCoor[comboSelectData, i].y - p.inputGrid.inputCoor[comboSelectData, i + 1].y);
+                                 }
+                             }
+                         }
+                         break;
+                     case ResultGraphType.SingleISingleJMultipleTime:
+                         for (int t = 0; t < timeSel.Length; ++t)
+                         {
+                             int i = colStart;
+                             int j = rowStart;
+                             chart1.Series["Param1"].Points.AddXY(timeList[timeSel[t]], (initData as double[, ,])[timeSel[t], i, j]);
+                         }
+                         break;
+                     case ResultGraphType.SingleIMultipleJSingleTime:
+                         for (int i = colStart; i < colEnd; ++i)
+                         {
+                             int t = timeSel[0];
+                             chart1.Series["Param1"].Points.AddXY(m.ToString("F3"), (initData as double[, ,])[t, i, comboSelectData]);
+                             if (i < p.inputGrid.GetJ - 1)
+                             {
+                                 m += Math.Abs(p.inputGrid.inputCoor[comboSelectData, i].y - p.inputGrid.inputCoor[comboSelectData, i + 1].y);
+                             }
+                         }
+                         break;
+                     case ResultGraphType.MultipleISingleJSingleTime:
+                         for (int j = rowStart; j < rowEnd; ++j)
+                         {
+                             int t = timeSel[0];
+                             chart1.Series["Param1"].Points.AddXY(m.ToString("F3"), (initData as double[, ,])[t, comboSelectData, j]);
+                             if (j < p.inputGrid.GetI - 1)
+                             {
+                                 m += Math.Abs(p.inputGrid.inputCoor[j, comboSelectData].x - p.inputGrid.inputCoor[j + 1, comboSelectData].x);
+                             }
+                         }
+                         break;
+                 }
+                 chart1.Series.ResumeUpdates();
+                 */
         }
 
         private void CalcMinMax()
@@ -466,7 +508,16 @@ namespace RiverSimulationApplication
         {
             ComboBox c = (sender as ComboBox);
             int sel = Convert.ToInt32(c.Items[c.SelectedIndex]) - 1;
-            pic1.Image = Image.FromFile(DrawMode0XY(sel, colStart, colEnd));
+            String s = "";
+            if (graphType == GraphType.Type0)
+            {
+                s = DrawMode0XY(sel, colStart, colEnd);
+            }
+            else if (graphType == GraphType.Type1)
+            {
+                s = DrawMode1XY(sel, rowStart, rowEnd);
+            }
+            pic1.Image = Image.FromFile(s);
 
             /*
             CalcMinMax();

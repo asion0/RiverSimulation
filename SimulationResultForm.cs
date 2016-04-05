@@ -598,6 +598,33 @@ namespace RiverSimulationApplication
                     "",                 //Sel2標籤
                     null);              //Time陣列                
             }
+            else if (gt == ResultGraphForm.GraphType.Type1)
+            {
+                form.SetFormMode(
+                    "初始底床高程(m)",   //視窗標題
+                    pi.jS, pi.jE,       //行數(左右有幾行)
+                    pi.iS, pi.iE,       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultGraphForm.ResultGraphType.InitialBottomElevation, //表格形式
+                    48,                 //儲存格寬度
+                    96,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    initialBottomElevation,  //資料
+                    ResultGraphForm.CumulativeDistance,                  //X維度
+                    ResultGraphForm.DataContent,                  //Y維度
+                    0,                 //Sel1維度
+                    -1,                 //Sel2維度
+                    pi.jS,               //Sel1索引
+                    -1,                 //Sel2索引
+                    "J = ",              //Sel1標籤
+                    "",                 //Sel2標籤
+                    null);              //Time陣列                
+            }
+
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {

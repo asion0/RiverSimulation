@@ -46,6 +46,7 @@ namespace RiverSimulationApplication
          * 1|1|M|M|T|K| T  | K  | A  |4D IJTK|
          * -+-+-+-+-+-+----+----+----+-------+
         */
+        //U-同參數單位 D-累距
         public enum GraphType
         {
             //XY Form
@@ -66,6 +67,7 @@ namespace RiverSimulationApplication
 
         public enum ResultGraphType
         {
+            /*
             InitialBottomElevation, //初始底床高程(m)
             SingleIMultipleJSingleTime,
             MultipleISingleJSingleTime,
@@ -88,23 +90,25 @@ namespace RiverSimulationApplication
             BoundaryTime,                   //邊界時間輸入
             VerticalDistribution,           //垂直濃度分布
             BottomBedParticleSizeRatio,     //底床粒徑比
+            */
+            Unknown,
+            XyGraph,
+            ContourGraph,
         }
-        protected ResultGraphType formType = ResultGraphType.InitialBottomElevation;
+        protected ResultGraphType formType = ResultGraphType.Unknown;
 
         RiverSimulationProfile p = RiverSimulationProfile.profile;
-        private double max, min;
 
         public void SetFormMode(
             string title,
-            int colStart, int colEnd,
-            int rowStart, int rowEnd,
+            int iStart, int iEnd,
+            int jStart, int jEnd,
+            int kStart, int kEnd,
+            int tStart, int tEnd,
             string tableName = "",
             string colName = "",
             string rowName = "",
-            ResultGraphType formType = ResultGraphType.InitialBottomElevation,
-            int colWidth = 48,
-            int rowHeadersWidth = 64,
-            bool onlyTable = true,
+            ResultGraphType formType = ResultGraphType.XyGraph,
             bool nocolNum = false,
             bool noRowNum = false,
             object initData = null,
@@ -116,19 +120,22 @@ namespace RiverSimulationApplication
             int sel2Index = -1,
             string sel1Title = "",
             string sel2Title = "",
+            int []timeSel = null,
             double[] timeList = null)
         {
             this.title = title;
             this.formType = formType;
-            this.colStart = colStart;
-            this.colEnd = colEnd;
-            this.rowStart = rowStart;
-            this.rowEnd = rowEnd;
+            this.iStart = iStart;
+            this.iEnd = iEnd;
+            this.jStart = jStart;
+            this.jEnd = jEnd;
+            this.kStart = kStart;
+            this.kEnd = kEnd;
+            this.tStart = tStart;
+            this.tEnd = tEnd;
             this.tableName = tableName;
             this.colName = colName;
             this.rowName = rowName;
-            this.colWidth = colWidth;
-            this.rowHeadersWidth = rowHeadersWidth;
             this.initData = initData;
             this.xDim = xDim;
             this.yDim = yDim;
@@ -138,6 +145,7 @@ namespace RiverSimulationApplication
             this.sel2Title = sel2Title;
             this.sel1Index = sel1Index;
             this.sel2Index = sel2Index;
+            this.timeSel = timeSel;
             this.timeList = timeList;
         }
 
@@ -170,22 +178,22 @@ namespace RiverSimulationApplication
             double distance = 0.0;
             if (jS != 0)
             {   //累距不從0開始
-                for (int x = 0; x < jS; ++x)
+                for (int j = 0; j < jS; ++j)
                 {
-                    distance += CumulativeJDistance(i, x, p.inputGrid.inputCoor);
+                    distance += CumulativeJDistance(i, j, p.inputGrid.inputCoor);
                 }
             }
             //產生gunplot輸入檔內容
             StringBuilder sb = new StringBuilder();
-            for (int x = jS; x < jE; ++x)
+            for (int j = jS; j < jE; ++j)
             {
-                distance += CumulativeJDistance(i, x, p.inputGrid.inputCoor);
+                distance += CumulativeJDistance(i, j, p.inputGrid.inputCoor);
                 sb.AppendFormat("{0,15} ", distance.ToString("F7"));
-                sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, x, 0]).ToString("F7"));
+                sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, 0]).ToString("F7"));
                 sb.AppendFormat("\n");
             }
 
-            string plotfile = string.Format("{0}{1}{2}.txt", Program.GetProjectFileWorkingPath(), "\\g", i).Replace('\\', '/');
+            string plotfile = string.Format("{0}\\{1}_{2}_{3}.txt", graphicsPath, i, jS, jE).Replace('\\', '/');
             Directory.CreateDirectory(graphicsPath);
             using (StreamWriter outfile = new StreamWriter(plotfile))
             {
@@ -208,13 +216,11 @@ namespace RiverSimulationApplication
                                    "style data lines",
                                    "nokey" };
             GnuPlot.Set(setting);
-            //plotfile = String.Format("\"{0}\"", plotfile);
             GnuPlot.Plot(plotfile, @"with lines");
-            //GnuPlot.Set("term x11");
-            //GnuPlot.WriteLine();
             GnuPlot.Set("output");
             return pngFile;
         }
+
         private string DrawMode1XY(int j, int iS, int iE)
         {
             // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
@@ -228,18 +234,18 @@ namespace RiverSimulationApplication
             double distance = 0.0;
             if (iS != 0)
             {   //累距不從0開始
-                for (int y = 0; y < iS; ++y)
+                for (int i = 0; i < iS; ++i)
                 {
-                    distance += CumulativeIDistance(y, j, p.inputGrid.inputCoor);
+                    distance += CumulativeIDistance(i, j, p.inputGrid.inputCoor);
                 }
             }
             //產生gunplot輸入檔內容
             StringBuilder sb = new StringBuilder();
-            for (int y = iS; y < iE; ++y)
+            for (int i = iS; i < iE; ++i)
             {
-                distance += CumulativeIDistance(y, j, p.inputGrid.inputCoor);
+                distance += CumulativeIDistance(i, j, p.inputGrid.inputCoor);
                 sb.AppendFormat("{0,15} ", distance.ToString("F7"));
-                sb.AppendFormat("{0,15} ", ((initData as double[, ,])[y, j, 0]).ToString("F7"));
+                sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, 0]).ToString("F7"));
                 sb.AppendFormat("\n");
             }
 
@@ -274,58 +280,377 @@ namespace RiverSimulationApplication
             return pngFile;
         }
 
+        private string DrawMode2XY(int t, int i, int jS, int jE)
+        {
+            // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
+            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+            // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |
+            // 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode2";
+            string pngFile = string.Format("{0}\\{1}_{2}_{3}_{4}.png", graphicsPath, t, i, jS, jE).Replace('\\', '/');
+            if (File.Exists(pngFile))
+                return pngFile;
+
+            double distance = 0.0;
+            if (jS != 0)
+            {   //累距不從0開始
+                for (int j = 0; j < jS; ++j)
+                {
+                    distance += CumulativeJDistance(i, j, p.inputGrid.inputCoor);
+                }
+            }
+            //產生gunplot輸入檔內容
+            StringBuilder sb = new StringBuilder();
+            for (int j= jS; j < jE; ++j)
+            {
+                distance += CumulativeJDistance(i, j, p.inputGrid.inputCoor);
+                sb.AppendFormat("{0,15} ", distance.ToString("F7"));
+                sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, t]).ToString("F7"));
+                sb.AppendFormat("\n");
+            }
+
+            string plotfile = string.Format("{0}\\{1}_{2}_{3}_{4}.txt", graphicsPath, t, i, jS, jE).Replace('\\', '/');
+            Directory.CreateDirectory(graphicsPath);
+            using (StreamWriter outfile = new StreamWriter(plotfile))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+
+            //Utility.DeleteFileOrFolder(pngFile);
+            string setPngFile = string.Format("output \"{0}\"", pngFile);
+            //*
+            string[] setting = {
+                                   "grid",
+                                   "term png size 960,630",
+                                   setPngFile,
+                                   "title ''",
+                                   "ylabel '(m)'",
+                                   "xlabel '(m)'",
+                                   "format x \"%.3f\"",
+                                   "format y \"%.3f\"",
+                                   "style data lines",
+                                   "nokey" };
+            GnuPlot.Set(setting);
+            GnuPlot.Plot(plotfile, @"with lines");
+            GnuPlot.Set("output");
+            return pngFile;
+        }
+
+        private string DrawMode3XY(int t, int j, int iS, int iE)
+        {
+            // Mode 3 status : 1-Single M-Multiple D-壘距 U-資料單位
+            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+            // M|1|1|-|D|U| J  | -  | 3  |3D IJT |
+            // 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode3";
+            string pngFile = string.Format("{0}\\{1}_{2}_{3}_{4}.png", graphicsPath, t, j, iS, iE).Replace('\\', '/');
+            if (File.Exists(pngFile))
+                return pngFile;
+
+            double distance = 0.0;
+            if (iS != 0)
+            {   //累距不從0開始
+                for (int i = 0; i < iS; ++i)
+                {
+                    distance += CumulativeIDistance(i, j, p.inputGrid.inputCoor);
+                }
+            }
+            //產生gunplot輸入檔內容
+            StringBuilder sb = new StringBuilder();
+            for (int i= iS; i < iE; ++i)
+            {
+                distance += CumulativeIDistance(i, j, p.inputGrid.inputCoor);
+                sb.AppendFormat("{0,15} ", distance.ToString("F7"));
+                sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, t]).ToString("F7"));
+                sb.AppendFormat("\n");
+            }
+
+            string plotfile = string.Format("{0}\\{1}_{2}_{3}_{4}.txt", graphicsPath, t, j, iS, iE).Replace('\\', '/');
+            Directory.CreateDirectory(graphicsPath);
+            using (StreamWriter outfile = new StreamWriter(plotfile))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+
+            //Utility.DeleteFileOrFolder(pngFile);
+            string setPngFile = string.Format("output \"{0}\"", pngFile);
+            //*
+            string[] setting = {
+                                   "grid",
+                                   "term png size 960,630",
+                                   setPngFile,
+                                   "title ''",
+                                   "ylabel '(m)'",
+                                   "xlabel '(m)'",
+                                   "format x \"%.3f\"",
+                                   "format y \"%.3f\"",
+                                   "style data lines",
+                                   "nokey" };
+            GnuPlot.Set(setting);
+            GnuPlot.Plot(plotfile, @"with lines");
+            GnuPlot.Set("output");
+            return pngFile;
+        }
+
+        private string DrawMode0Contour()
+        {
+            // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
+            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+            // M|1|-|-|D|U| J  | -  | 1  |3D IJ1  |
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\ContourMode0";
+            string pngFile = string.Format("{0}\\C{1}_{2}.png", graphicsPath, iEnd, jEnd).Replace('\\', '/');
+            if (File.Exists(pngFile))
+                return pngFile;
+
+            //產生gunplot輸入檔內容
+            StringBuilder sb = new StringBuilder();
+            for (int i = iStart; i < iEnd; ++i)
+            {
+                for (int j = jStart; j < jEnd; ++j)
+                {
+                    sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].x.ToString("F7"));
+                    sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].y.ToString("F7"));
+                    sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, 0]).ToString("F7"));
+                    sb.AppendFormat("\n");
+                }
+                sb.AppendFormat("\n");
+            }
+
+            string plotfile = string.Format("{0}\\C{1}_{2}.txt", graphicsPath, iEnd, jEnd).Replace('\\', '/');
+            Directory.CreateDirectory(graphicsPath);
+            using (StreamWriter outfile = new StreamWriter(plotfile))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+
+            //Utility.DeleteFileOrFolder(pngFile);
+            string setPngFile = string.Format("output \"{0}\"", pngFile);
+            //*
+            string[] setting = {
+                                   "hidden3d",
+                                   "contour base",
+                                   "view map",
+                                   "pm3d at b",
+                                    "term png size 960,630",
+                                   setPngFile,
+                               };
+            GnuPlot.Set(setting);
+            //plotfile = String.Format("\"{0}\"", plotfile);
+            GnuPlot.SPlot(plotfile, "with lines title \"\"");
+            //GnuPlot.Set("term x11");
+            //GnuPlot.WriteLine();
+            GnuPlot.Set("output");
+            return pngFile;
+        }
+
+        private string DrawMode1Contour()
+        {
+            // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
+            // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+            // M|1|-|-|D|U| J  | -  | 1  |3D IJ1  |
+            string graphicsPath = string.Format("{0}\\Graphics\\ContourMode0_{1}", Program.GetProjectFileWorkingPath(), tableName.Replace('\\', '_').Replace('/', '_'));
+            string pngFile = string.Format("{0}\\C{1}_{2}_{3}.png", graphicsPath, tStart, iEnd, jEnd).Replace('\\', '/');
+            if (File.Exists(pngFile))
+                return pngFile;
+
+            //產生gunplot輸入檔內容
+            StringBuilder sb = new StringBuilder();
+            for (int i = iStart; i < iEnd; ++i)
+            {
+                for (int j = jStart; j < jEnd; ++j)
+                {
+                    sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].x.ToString("F7"));
+                    sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].y.ToString("F7"));
+                    sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, tStart]).ToString("F7"));
+                    sb.AppendFormat("\n");
+                }
+                sb.AppendFormat("\n");
+            }
+
+            string plotfile = string.Format("{0}\\C{1}_{2}_{3}.txt", graphicsPath, tStart, iEnd, jEnd).Replace('\\', '/');
+            Directory.CreateDirectory(graphicsPath);
+            using (StreamWriter outfile = new StreamWriter(plotfile))
+            {
+                outfile.Write(sb.ToString());
+                outfile.Close();
+            }
+
+            //Utility.DeleteFileOrFolder(pngFile);
+            string setPngFile = string.Format("output \"{0}\"", pngFile);
+            //*
+            string[] setting = {
+                                   "hidden3d",
+                                   "contour base",
+                                   "view map",
+                                   "pm3d at b",
+                                    "term png size 960,630",
+                                   setPngFile,
+                               };
+            GnuPlot.Set(setting);
+            //plotfile = String.Format("\"{0}\"", plotfile);
+            GnuPlot.SPlot(plotfile, "with lines title \"\"");
+            //GnuPlot.Set("term x11");
+            //GnuPlot.WriteLine();
+            GnuPlot.Set("output");
+            return pngFile;
+        }
+
+
+
+        public static int Time = -4;
         public static int CumulativeDistance = -3;
         public static int DataContent = -2;
         private GraphType graphType = GraphType.TypeUnknown;
         private void InitializeChartView()
         {
-
-            if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent && (rowEnd - rowStart == 1))
+            if (formType == ResultGraphType.XyGraph)
             {
-                // Mode0 I固定 J範圍 選項一是I X顯示累距 Y顯示資料
-                // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
-                // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
-                // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |                    graphType = GraphType.Type0;
-                graphType = GraphType.Type0;
-                sel1Lbl.Visible = true;
-                sel1Lbl.Text = sel1Title;
-                combo1.Visible = true;
-                for (int i = 0; i < (initData as double[, ,]).GetLength(0); ++i)
+                if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent && (iEnd - iStart == 1) && (tStart == -1))
                 {
-                    combo1.Items.Add((i + 1).ToString());
-                    DrawMode0XY(i, colStart, colEnd);
+                    // Mode0 I固定 J範圍 選項一是I X顯示累距 Y顯示資料
+                    // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
+                    // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+                    // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |                    graphType = GraphType.Type0;
+                    graphType = GraphType.Type0;
+                    sel1Lbl.Visible = true;
+                    sel1Lbl.Text = sel1Title;
+                    combo1.Visible = true;
+                    for (int i = 0; i < (initData as double[, ,]).GetLength(0); ++i)
+                    {
+                        combo1.Items.Add((i + 1).ToString());
+                        DrawMode0XY(i, jStart, jEnd);
+                    }
+                    combo1.SelectedIndex = jStart;
+                    //string gfile = DrawMode0XY(rowStart, colStart, colEnd);
                 }
-                combo1.SelectedIndex = rowStart;
-                //string gfile = DrawMode0XY(rowStart, colStart, colEnd);
+                else if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent && (jEnd - jStart == 1) && (tStart == -1))
+                {
+                    // Mode1 I範圍 J固定 選項一是J X顯示累距 Y顯示資料
+                    // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
+                    // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+                    // M|1|-|-|D|U| J  | -  | 1  |2D IJ  |
+                    graphType = GraphType.Type1;
+                    sel1Lbl.Visible = true;
+                    sel1Lbl.Text = sel1Title;
+                    combo1.Visible = true;
+                    for (int j = 0; j < (initData as double[, ,]).GetLength(1); ++j)
+                    {
+                        combo1.Items.Add((j + 1).ToString());
+                        DrawMode1XY(j, iStart, iEnd);
+                    }
+                    combo1.SelectedIndex = jStart;
+                    //string gfile = DrawMode0XY(rowStart, colStart, colEnd);
+                }
+                else if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent && (iEnd - iStart == 1) && (timeList != null) && (tEnd - tStart == 1))
+                {
+                    // Mode1 I範圍 J固定 選項一是J X顯示累距 Y顯示資料
+                    // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
+                    // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+                    // 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
+                    graphType = GraphType.Type2;
+                    sel1Lbl.Visible = true;
+                    sel1Lbl.Text = sel1Title;
+                    combo1.Visible = true;
+                    for (int i = 0; i < (initData as double[, ,]).GetLength(sel1Dim); ++i)
+                    {
+                        combo1.Items.Add((i + 1).ToString());
+                        DrawMode2XY(tStart, i, jStart, jEnd);
+                    }
+                    combo1.SelectedIndex = iStart;
+                    //string gfile = DrawMode0XY(rowStart, colStart, colEnd);
+                }
+                else if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent && (jEnd - jStart == 1) && (timeList != null) && (tEnd - tStart == 1))
+                {
+                    // Mode1 I範圍 J固定 選項一是J X顯示累距 Y顯示資料
+                    // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
+                    // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
+                    // 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
+                    // M|1|1|-|D|U| J  | -  | 3  |3D IJT |
+                    graphType = GraphType.Type3;
+                    sel1Lbl.Visible = true;
+                    sel1Lbl.Text = sel1Title;
+                    combo1.Visible = true;
+                    for (int j = 0; j < (initData as double[, ,]).GetLength(sel1Dim); ++j)
+                    {
+                        combo1.Items.Add((j + 1).ToString());
+                        DrawMode3XY(tStart, j, iStart, iEnd);
+                    }
+                    combo1.SelectedIndex = jStart;
+                    //string gfile = DrawMode0XY(rowStart, colStart, colEnd);
+                }
             }
-            else if (sel1Index != -1 && sel2Index == -1 && xDim == CumulativeDistance && yDim == DataContent && (colEnd - colStart == 1))
+            else if(formType == ResultGraphType.ContourGraph)
             {
-                // Mode1 I範圍 J固定 選項一是J X顯示累距 Y顯示資料
-                // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
-                // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
-                // M|1|-|-|D|U| J  | -  | 1  |2D IJ  |
-                graphType = GraphType.Type1;
-                sel1Lbl.Visible = true;
-                sel1Lbl.Text = sel1Title;
-                combo1.Visible = true;
-                for (int j = 0; j < (initData as double[, ,]).GetLength(1); ++j)
+                if (tStart == -1)
                 {
-                    combo1.Items.Add((j + 1).ToString());
-                    DrawMode1XY(j, rowStart, rowEnd);
+                    // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
+                    // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+                    // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |                    graphType = GraphType.Type0;
+                    graphType = GraphType.Type0;
+                    sel1Lbl.Visible = false;
+                    sel1Lbl.Text = "";
+                    combo1.Visible = false;
+                    String s = DrawMode0Contour();
+                    ShowImage(s);
                 }
-                combo1.SelectedIndex = rowStart;
-                //string gfile = DrawMode0XY(rowStart, colStart, colEnd);
+                else
+                {
+                    // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
+                    // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
+                    // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |                    graphType = GraphType.Type0;
+                    graphType = GraphType.Type0;
+                    sel1Lbl.Visible = false;
+                    sel1Lbl.Text = "";
+                    combo1.Visible = false;
+                    String s = DrawMode1Contour();
+                    ShowImage(s);
+                }
+
             }
-            //else if (sel1Index != -1 && sel2Index == -1 && xDim == 1 && yDim == 3)       //3D data X顯示J Y顯示T
-            //    dataGridView[x - colStart, y - rowStart].Value = (initData as double[, ,])[sel1Index, x, y].ToString();
-            //else if (sel1Index != -1 && sel2Index == -1 && xDim == 0 && yDim == 3)       //3D data X顯示I Y顯示T
-            //    dataGridView[x - colStart, y - rowStart].Value = (initData as double[, ,])[x, sel1Index, y].ToString();
-
-
-
-
         }
 
+        void ShowImage(string s)
+        {
+            String s2 = s + ".png";
+            int errCount = 100;
+            while (true)
+            {
+                try
+                {
+                    if (File.Exists(s2))
+                    {
+                        File.Delete(s2);
+                    }
+                    File.Copy(s, s2);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    Thread.Sleep(10);
+                    if (--errCount == 0)
+                        break;
+                    else
+                        continue;
+                }
+                FileInfo fi = new FileInfo(s2);
+                if (fi.Length == 0)
+                {
+                    Thread.Sleep(10);
+                    if (--errCount == 0)
+                        break;
+                    else
+                        continue;
+                }
+                break;
+            }
+            if(pic1.Image!= null)
+                pic1.Image.Dispose();
+            pic1.Image = Image.FromFile(s2);
+        }
+        /*
         private void InitialChart()
         {
             chart1.ChartAreas.Add("Base");
@@ -350,8 +675,7 @@ namespace RiverSimulationApplication
 
             myArea.AxisY.Title = title;
 
-            if (formType == ResultGraphType.InitialBottomElevation || formType == ResultGraphType.SingleIMultipleJSingleTime
-                || formType == ResultGraphType.MultipleISingleJSingleTime)
+            if (formType == ResultGraphType.InitialBottomElevationXyGraph )
             {
                 myArea.AxisX.Title = "累距(m)";
                 myArea.AxisX.Minimum = 0.0;
@@ -407,7 +731,8 @@ namespace RiverSimulationApplication
             //mySeriesV.MarkerStyle = MarkerStyle.None;  // 標記的樣式 (Circle, Diamond ...)
             //mySeriesV.IsValueShownAsLabel = false;         // 將 Y 值顯示在標記符號旁邊
         }
-
+        */
+        /*
         private void DrawChart()
         {
             /*
@@ -472,9 +797,9 @@ namespace RiverSimulationApplication
                     break;
             }
             chart1.Series.ResumeUpdates();
-            */
+            
         }
-
+        */
         private void CalcMinMax()
         {
             /*
@@ -504,21 +829,34 @@ namespace RiverSimulationApplication
             */
         }
 
-        //private int comboSelectData = -1;
+        private int lastCombo1Select = -1;
         private void combo1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox c = (sender as ComboBox);
             int sel = Convert.ToInt32(c.Items[c.SelectedIndex]) - 1;
+            if (lastCombo1Select == sel)
+                return;
+
+            lastCombo1Select = sel;
             String s = "";
             if (graphType == GraphType.Type0)
             {
-                s = DrawMode0XY(sel, colStart, colEnd);
+                s = DrawMode0XY(sel, jStart, jEnd);
             }
             else if (graphType == GraphType.Type1)
             {
-                s = DrawMode1XY(sel, rowStart, rowEnd);
+                s = DrawMode1XY(sel, iStart, iEnd);
             }
-            pic1.Image = Image.FromFile(s);
+            else if (graphType == GraphType.Type2)
+            {
+                s = DrawMode2XY(tStart, sel, jStart, jEnd);
+            }
+            else if (graphType == GraphType.Type3)
+            {
+                s = DrawMode3XY(tStart, sel, iStart, iEnd);
+            } 
+            ShowImage(s);
+
 
             /*
             CalcMinMax();
@@ -534,6 +872,12 @@ namespace RiverSimulationApplication
             InitialChart();
             DrawChart();
             */
+        }
+
+        private void ResultGraphForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (pic1.Image != null)
+                pic1.Image.Dispose();
         }
     }
 }

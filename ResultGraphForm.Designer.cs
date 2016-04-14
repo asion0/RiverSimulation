@@ -94,6 +94,7 @@
             this.MaximizeBox = false;
             this.Name = "ResultGraphForm";
             this.Text = "模擬結果-圖形";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ResultGraphForm_FormClosed);
             this.Load += new System.EventHandler(this.ResultGraphForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic1)).EndInit();

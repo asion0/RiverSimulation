@@ -14,6 +14,14 @@ namespace RiverSimulationApplication
         protected int colEnd;
         protected int rowStart;
         protected int rowEnd;
+        protected int iStart;
+        protected int iEnd;
+        protected int jStart;
+        protected int jEnd;
+        protected int kStart = -1;
+        protected int kEnd = -1;
+        protected int tStart = -1;
+        protected int tEnd = -1;
         protected string tableName = "";
         protected string colName = "";
         protected string rowName = "";

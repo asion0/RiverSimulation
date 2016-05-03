@@ -154,6 +154,12 @@
     <Compile Include="SimulationResultForm.Designer.cs">
       <DependentUpon>SimulationResultForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SideInOutFlowSetForm .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SideInOutFlowSetForm .Designer.cs">
+      <DependentUpon>SideInOutFlowSetForm .cs</DependentUpon>
+    </Compile>
     <Compile Include="StructureSetTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SimulationResultForm.resx">
       <DependentUpon>SimulationResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SideInOutFlowSetForm .resx">
+      <DependentUpon>SideInOutFlowSetForm .cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StructureSetTableForm.resx">
       <DependentUpon>StructureSetTableForm.cs</DependentUpon>

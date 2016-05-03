@@ -1028,6 +1028,446 @@ namespace RiverSimulationApplication
         }
     }
 
+    public static class SideFlowtUtility
+    {        
+        //檢查一群組所有的格網點是否連續(上下左右視為連續，對角與間隔視為不連續))
+        public static bool TrimToEdge(ref List<Point> pl, int maxI, int maxJ)
+        {
+            List<Point> newPl = new List<Point>();
+            foreach (Point p in pl)
+            {
+                if( p.Y == 0 || p.Y == maxJ - 1)
+                {
+                    newPl.Add(p);
+                }
+            }
+            if(newPl.Count == 0)
+            {
+                pl = null;
+                return false;
+            }
+            pl = newPl;
+            return true;
+        }
+
+        //檢查一群組所有的格網點是否連續(上下左右視為連續，對角與間隔視為不連續))
+        public static bool IsContinuous(List<Point> pl)
+        {
+            if (pl.Count == 0)
+            {
+                return false;
+            }
+
+            Point[] workQueue = new Point[pl.Count];
+            workQueue[0] = pl[0];
+            for (int i = 1; i < workQueue.Length; ++i)
+            {
+                workQueue[i].X = -1;
+                workQueue[i].Y = -1;
+            }
+            int ptr = 1;
+            for (int i = 0; i < workQueue.Length; ++i)
+            {
+                Point p0 = workQueue[i];
+                if (-1 == p0.X)
+                {
+                    break;
+                }
+
+                Point p1 = new Point(p0.X, p0.Y - 1);
+                Point p2 = new Point(p0.X, p0.Y + 1);
+                Point p3 = new Point(p0.X - 1, p0.Y);
+                Point p4 = new Point(p0.X + 1, p0.Y);
+
+                foreach (Point p in pl)
+                {
+                    if (p1 == p)
+                    {
+                        if (!workQueue.Contains(p1))
+                        {
+                            workQueue[ptr++] = p1;
+                        }
+                    }
+                    if (p2 == p)
+                    {
+                        if (!workQueue.Contains(p2))
+                        {
+                            workQueue[ptr++] = p2;
+                        }
+                    }
+                    if (p3 == p)
+                    {
+                        if (!workQueue.Contains(p3))
+                        {
+                            workQueue[ptr++] = p3;
+                        }
+                    }
+                    if (p4 == p)
+                    {
+                        if (!workQueue.Contains(p4))
+                        {
+                            workQueue[ptr++] = p4;
+                        }
+                    }
+                }
+            }
+            return (ptr == pl.Count);
+        }
+
+        //檢查一群組是否與現有群組重複
+        public static bool IsOverlapping(List<Point>[] pts, List<Point> pl, int passIndex)
+        {
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                if (i == passIndex || pts[i] == null)
+                    continue;
+                foreach (Point pt in pts[i])
+                {
+                    foreach (Point pp in pl)
+                    {
+                        if (pt == pp)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        //刪除一群組中與其他群組重複的格網點
+        public static bool RemoveOverlapping(ref List<Point> pl, List<Point>[] pts, int passIndex)
+        {
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
+            bool isRemove = false;
+            //List<Point> ptsResult = new List<Point>(pts);
+            for (int i = 0; i < pts.Length; ++i)
+            {   //尋訪全部的乾床群組
+                if (i == passIndex || pts[i] == null)
+                    continue;
+                foreach (Point pt in pts[i])
+                {   //被尋訪的乾床群組內的每個點
+                    foreach (Point pp in pl)
+                    {   //尋訪此次選取的群組
+                        if (pt == pp)
+                        {
+                            pl.Remove(pp);
+                            isRemove = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            return isRemove;
+        }
+
+        //檢查一群組是否與都位於空白處(不屬於任何群組)
+        public static bool IsAllInEmpty(RiverSimulationProfile profile, List<Point> pl, int passType, int passIndex)
+        {
+            foreach (Point p in pl)
+            {
+                for (int n = 0; n < (int)RiverSimulationProfile.StructureType.StructureTypeSize; ++n)
+                {
+                    List<Point>[] pts = null;
+                    switch (n)
+                    {
+                        case 0:
+                            pts = profile.tBarSets;
+                            break;
+                        case 1:
+                            pts = profile.bridgePierSets;
+                            break;
+                        case 2:
+                            pts = profile.groundsillWorkSets;
+                            break;
+                        case 3:
+                            pts = profile.sedimentationWeirSets;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (null == pts)
+                    {
+                        continue;
+                    }
+
+                    for (int i = 0; i < pts.Length; ++i)
+                    {
+                        List<Point> ppl = pts[i];
+
+                        if (i == passIndex || ppl == null)
+                            continue;
+
+                        if (ppl.Contains(p))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        //查詢一格網點位於哪個結構物群組？
+        //public static int WhichGroup(List<Point>[] pts, Point pt, List<Point> addional = null, int passIndex = -1)
+        //{
+        //    for (int i = 0; i < pts.Length; ++i)
+        //    {
+        //        List<Point> pl = pts[i];
+        //        if (pl == null || (passIndex != -1 && i == passIndex))
+        //            continue;
+        //        if(pl.Contains(pt))
+        //        {
+        //            return i;
+        //        }
+        //    }
+
+        //    if (addional != null)
+        //    {
+        //        if (addional.Contains(pt))
+        //        {
+        //            return passIndex;
+        //        }
+        //    }
+        //    return -1;
+        //}
+        public static List<Point>[] GetSideFlowSets(RiverSimulationProfile profile, int type)
+        {
+            List<Point>[] pts = null;
+            switch (type)
+            {
+                case 0:
+                    pts = profile.sideOutFlowSets;
+                    break;
+                case 1:
+                    pts = profile.sideInFlowSets;
+                    break;
+                default:
+                    break;
+            }
+            return pts;
+        }
+
+        public static List<Point> GetSideFlowSet(RiverSimulationProfile profile, int type, int index)
+        {
+            List<Point>[] pts = GetSideFlowSets(profile, type);
+            if (pts == null)
+            {
+                return null;
+            }
+            else
+            {
+                return pts[index];
+            }
+        }
+
+        //查詢一格網點位於哪個結構物群組？
+        public static Point WhichGroup(RiverSimulationProfile profile, Point pt, List<Point> addional = null, int passType = -1, int passIndex = -1)
+        {
+            for (int n = 0; n < (int)RiverSimulationProfile.StructureType.StructureTypeSize; ++n)
+            {
+                List<Point>[] pts = GetSideFlowSets(profile, n);
+                if (null == pts)
+                {
+                    continue;
+                }
+
+                for (int i = 0; i < pts.Length; ++i)
+                {
+                    List<Point> pl = pts[i];
+                    if (pl == null || (passIndex != -1 && i == passIndex))
+                        continue;
+                    if (pl.Contains(pt))
+                    {
+                        return new Point(n, i);
+                    }
+                }
+            }
+
+            if (addional != null)
+            {
+                if (addional.Contains(pt))
+                {
+                    return new Point(passType, passIndex);
+                }
+            }
+            return new Point(-1, -1);
+        }
+
+        //檢查pl2群組所有格網點是否完全包含在pl1群組中
+        public static bool IsAllInclude(List<Point> pl1, List<Point> pl2)
+        {   //pl2 - 被選取的, pl1 - 原群組
+            foreach (Point p in pl2)
+            {
+                if (pl1.Contains(p))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //移除在pl1群組中所有pl2群組包含的格網點
+        public static void RemovePoints(ref List<Point> pl1, List<Point> pl2)
+        {
+            foreach (Point p in pl2)
+            {
+                pl1.Remove(p);
+            }
+        }
+
+        //將pl2群組中所有的格網點加至pl2群組
+        public static void MergePoints(ref List<Point> pl1, List<Point> pl2)
+        {
+            foreach (Point p in pl2)
+            {
+                if (!pl1.Contains(p))
+                {
+                    pl1.Add(p);
+                }
+            }
+        }
+
+        //傳回兩個群組是否相鄰
+        private static bool IsNeighboring(System.Collections.Generic.List<Point>[] pts, int i, int j)
+        {
+            System.Collections.Generic.List<Point> ps = pts[i];
+            System.Collections.Generic.List<Point> pt = pts[j];
+            foreach (Point p in ps)
+            {
+                Point p1 = new Point(p.X, p.Y - 1);
+                Point p2 = new Point(p.X, p.Y + 1);
+                Point p3 = new Point(p.X - 1, p.Y);
+                Point p4 = new Point(p.X + 1, p.Y);
+
+                foreach (Point pp in pt)
+                {
+                    if (pp == p1 || pp == p2 | pp == p3 || pp == p4)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        //計算不同群組配色 使相鄰群組必不同色
+        public static int[] ColoringGrid(System.Collections.Generic.List<Point>[] pts, int selIndex)
+        {
+            int[] groupColors = new int[pts.Length];
+            bool[,] adj = new bool[pts.Length, pts.Length];
+            if (groupColors == null || groupColors.Length != pts.Length)
+            {
+                groupColors = new int[pts.Length];
+            }
+
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                groupColors[i] = -1;
+                //adj[i, i] = false;
+                for (int j = i + 1; j < pts.Length; j++)
+                {
+                    if (pts[i] == null || pts[j] == null || i == selIndex || j == selIndex)
+                    {   //尚未設定的Group必不相鄰
+                        adj[i, j] = false;
+                    }
+                    else
+                    {   //已設定的Group需檢查相鄰
+                        adj[i, j] = IsNeighboring(pts, i, j);
+                        adj[j, i] = adj[i, j];
+                    }
+                }
+            }
+
+            int[] degree = new int[pts.Length];
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                for (int j = 0; j < pts.Length; ++j)
+                {
+                    if (i != j && adj[i, j])
+                    {
+                        degree[i]++;
+                    }
+                }
+            }
+
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                if (degree[i] > 0)
+                    break;
+                if (i == pts.Length - 1)
+                    return groupColors;
+            }
+            bool[] used = new bool[pts.Length];
+            // 依照順序替各個點塗色。O(V^2)。
+            for (int i = 0; i < pts.Length; ++i)
+            {
+                // 先把鄰點所用的顏色都記錄起來
+                Array.Clear(used, 0, used.Length);
+                for (int j = 0; j < pts.Length; ++j)
+                {
+                    if (i != j && adj[i, j] && groupColors[j] != -1)
+                    {
+                        used[groupColors[j]] = true;
+                    }
+                }
+
+                // 最差的情況就是此顏色與所有鄰點都不同色
+                for (int j = 0; j < degree[i] + 1; ++j)
+                {
+                    if (!used[j])
+                    {
+                        groupColors[i] = j;
+                        break;
+                    }
+                }
+            }
+            return groupColors;
+        }
+
+        //檢查側出入流清單，得知是哪種側流的第幾個？
+        public static void CalcTypeCount(int index, ref int type, ref int count, RiverSimulationProfile.SideFlowType[] typeIndex)
+        {
+            if (index >= typeIndex.Length)
+                return;
+
+            RiverSimulationProfile.SideFlowType lastType = RiverSimulationProfile.SideFlowType.SideFlowSize;
+            int c = 0;
+
+            for (int i = 0; i <= index; ++i)
+            {
+                if (typeIndex[i] != lastType)
+                {
+                    c = 0;
+                    lastType = typeIndex[i];
+                }
+                else
+                {
+                    ++c;
+                }
+
+            }
+            type = (lastType == RiverSimulationProfile.SideFlowType.SideFlowSize) ? -1 : (int)lastType;
+            count = c;
+        }
+
+        public static void EditBottomElevation(RiverSimulationProfile profile, string title, int type, int index)
+        {
+
+            TableInputForm form = new TableInputForm();
+            form.SetFormMode(title, profile.inputGrid.GetJ, profile.inputGrid.GetI, "", "", "",
+                TableInputForm.InputFormType.BottomElevationForm, 90, 120, true, false, false, profile.inputGrid.inputCoor);
+            form.SetFormModeExtraData(GetSideFlowSet(profile, type, index));
+
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.levelProportion = (double[])form.SeparateData().Clone();
+                //ShowGridMap(PicBoxType.Sprate);
+                //DrawPreview();
+            }
+        }
+    }
+
     public static class DataGridViewUtility
     {
         public static void PasteFromeExcel(DataGridView v)

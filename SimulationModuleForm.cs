@@ -89,7 +89,7 @@ namespace RiverSimulationApplication
             if (Program.programVersion.DemoVersion)
             {
                 movableBedPanel.Enabled = false;
-                sideInOutFlowFunctionChk.Enabled = false;
+                //sideInOutFlowFunctionChk.Enabled = false;
                 waterHighSandContentEffectFunctionChk.Enabled = false;
             }
         }

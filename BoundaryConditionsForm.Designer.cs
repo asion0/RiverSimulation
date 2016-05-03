@@ -60,14 +60,14 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.boundaryTimeBtn = new System.Windows.Forms.Button();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.sideInFlowChk = new System.Windows.Forms.CheckBox();
-            this.sideInFlowBtn = new System.Windows.Forms.Button();
-            this.sideOutFlowChk = new System.Windows.Forms.CheckBox();
-            this.sideOutFlowBtn = new System.Windows.Forms.Button();
+            this.sideInOutPanel = new System.Windows.Forms.Panel();
+            this.label33 = new System.Windows.Forms.Label();
+            this.sideInFlowCountTxt = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.sidewallBoundarySlipRdo = new System.Windows.Forms.RadioButton();
-            this.nonSidewallBoundarySlipRdo = new System.Windows.Forms.RadioButton();
+            this.sideOutFlowCountTxt = new System.Windows.Forms.TextBox();
+            this.sideInFlowChk = new System.Windows.Forms.CheckBox();
+            this.sideOutFlowChk = new System.Windows.Forms.CheckBox();
+            this.sideInOutFlowSettingBtn = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.downSuperCriticalFlowRdo = new System.Windows.Forms.RadioButton();
@@ -150,7 +150,7 @@
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel8.SuspendLayout();
+            this.sideInOutPanel.SuspendLayout();
             this.panel7.SuspendLayout();
             this.waterSurfacePanel.SuspendLayout();
             this.bottomBedPanel.SuspendLayout();
@@ -257,7 +257,7 @@
             this.groupBox10.Controls.Add(this.label1);
             this.groupBox10.Controls.Add(this.panel6);
             this.groupBox10.Controls.Add(this.boundaryTimeBtn);
-            this.groupBox10.Controls.Add(this.panel8);
+            this.groupBox10.Controls.Add(this.sideInOutPanel);
             this.groupBox10.Controls.Add(this.panel7);
             this.groupBox10.Controls.Add(this.label5);
             this.groupBox10.Controls.Add(this.waterSurfacePanel);
@@ -516,97 +516,94 @@
             this.boundaryTimeBtn.UseVisualStyleBackColor = true;
             this.boundaryTimeBtn.Click += new System.EventHandler(this.boundaryTimeBtn_Click);
             // 
-            // panel8
+            // sideInOutPanel
             // 
-            this.panel8.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel8.Controls.Add(this.sideInFlowChk);
-            this.panel8.Controls.Add(this.sideInFlowBtn);
-            this.panel8.Controls.Add(this.sideOutFlowChk);
-            this.panel8.Controls.Add(this.sideOutFlowBtn);
-            this.panel8.Controls.Add(this.label25);
-            this.panel8.Controls.Add(this.sidewallBoundarySlipRdo);
-            this.panel8.Controls.Add(this.nonSidewallBoundarySlipRdo);
-            this.panel8.Controls.Add(this.label18);
-            this.panel8.Location = new System.Drawing.Point(18, 319);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(437, 98);
-            this.panel8.TabIndex = 5;
+            this.sideInOutPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.sideInOutPanel.Controls.Add(this.label33);
+            this.sideInOutPanel.Controls.Add(this.sideInFlowCountTxt);
+            this.sideInOutPanel.Controls.Add(this.label25);
+            this.sideInOutPanel.Controls.Add(this.sideOutFlowCountTxt);
+            this.sideInOutPanel.Controls.Add(this.sideInFlowChk);
+            this.sideInOutPanel.Controls.Add(this.sideOutFlowChk);
+            this.sideInOutPanel.Controls.Add(this.sideInOutFlowSettingBtn);
+            this.sideInOutPanel.Controls.Add(this.label18);
+            this.sideInOutPanel.Location = new System.Drawing.Point(18, 319);
+            this.sideInOutPanel.Name = "sideInOutPanel";
+            this.sideInOutPanel.Size = new System.Drawing.Size(437, 98);
+            this.sideInOutPanel.TabIndex = 5;
+            // 
+            // label33
+            // 
+            this.label33.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label33.Location = new System.Drawing.Point(117, 61);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(49, 19);
+            this.label33.TabIndex = 21;
+            this.label33.Text = "數量";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // sideInFlowCountTxt
+            // 
+            this.sideInFlowCountTxt.Enabled = false;
+            this.sideInFlowCountTxt.Location = new System.Drawing.Point(170, 59);
+            this.sideInFlowCountTxt.Name = "sideInFlowCountTxt";
+            this.sideInFlowCountTxt.Size = new System.Drawing.Size(96, 22);
+            this.sideInFlowCountTxt.TabIndex = 22;
+            // 
+            // label25
+            // 
+            this.label25.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label25.Location = new System.Drawing.Point(117, 31);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(49, 19);
+            this.label25.TabIndex = 21;
+            this.label25.Text = "數量";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // sideOutFlowCountTxt
+            // 
+            this.sideOutFlowCountTxt.Enabled = false;
+            this.sideOutFlowCountTxt.Location = new System.Drawing.Point(170, 29);
+            this.sideOutFlowCountTxt.Name = "sideOutFlowCountTxt";
+            this.sideOutFlowCountTxt.Size = new System.Drawing.Size(96, 22);
+            this.sideOutFlowCountTxt.TabIndex = 22;
             // 
             // sideInFlowChk
             // 
             this.sideInFlowChk.AutoSize = true;
-            this.sideInFlowChk.Location = new System.Drawing.Point(17, 69);
+            this.sideInFlowChk.Location = new System.Drawing.Point(17, 63);
             this.sideInFlowChk.Name = "sideInFlowChk";
             this.sideInFlowChk.Size = new System.Drawing.Size(60, 16);
             this.sideInFlowChk.TabIndex = 17;
             this.sideInFlowChk.Text = "側入流";
             this.sideInFlowChk.UseVisualStyleBackColor = true;
-            // 
-            // sideInFlowBtn
-            // 
-            this.sideInFlowBtn.Location = new System.Drawing.Point(77, 64);
-            this.sideInFlowBtn.Name = "sideInFlowBtn";
-            this.sideInFlowBtn.Size = new System.Drawing.Size(96, 26);
-            this.sideInFlowBtn.TabIndex = 19;
-            this.sideInFlowBtn.Text = "設定";
-            this.sideInFlowBtn.UseVisualStyleBackColor = true;
+            this.sideInFlowChk.CheckedChanged += new System.EventHandler(this.sideInFlowChk_CheckedChanged);
             // 
             // sideOutFlowChk
             // 
             this.sideOutFlowChk.AutoSize = true;
-            this.sideOutFlowChk.Location = new System.Drawing.Point(212, 69);
+            this.sideOutFlowChk.Location = new System.Drawing.Point(17, 33);
             this.sideOutFlowChk.Name = "sideOutFlowChk";
             this.sideOutFlowChk.Size = new System.Drawing.Size(60, 16);
             this.sideOutFlowChk.TabIndex = 18;
             this.sideOutFlowChk.Text = "側出流";
             this.sideOutFlowChk.UseVisualStyleBackColor = true;
+            this.sideOutFlowChk.CheckedChanged += new System.EventHandler(this.sideOutFlowChk_CheckedChanged);
             // 
-            // sideOutFlowBtn
+            // sideInOutFlowSettingBtn
             // 
-            this.sideOutFlowBtn.Location = new System.Drawing.Point(273, 64);
-            this.sideOutFlowBtn.Name = "sideOutFlowBtn";
-            this.sideOutFlowBtn.Size = new System.Drawing.Size(96, 26);
-            this.sideOutFlowBtn.TabIndex = 20;
-            this.sideOutFlowBtn.Text = "設定";
-            this.sideOutFlowBtn.UseVisualStyleBackColor = true;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(10, 7);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(77, 12);
-            this.label25.TabIndex = 16;
-            this.label25.Text = "側壁邊界滑移";
-            // 
-            // sidewallBoundarySlipRdo
-            // 
-            this.sidewallBoundarySlipRdo.AutoSize = true;
-            this.sidewallBoundarySlipRdo.Location = new System.Drawing.Point(153, 24);
-            this.sidewallBoundarySlipRdo.Name = "sidewallBoundarySlipRdo";
-            this.sidewallBoundarySlipRdo.Size = new System.Drawing.Size(47, 16);
-            this.sidewallBoundarySlipRdo.TabIndex = 3;
-            this.sidewallBoundarySlipRdo.TabStop = true;
-            this.sidewallBoundarySlipRdo.Text = "滑移";
-            this.sidewallBoundarySlipRdo.UseVisualStyleBackColor = true;
-            this.sidewallBoundarySlipRdo.CheckedChanged += new System.EventHandler(this.sidewallBoundarySlipRdo_CheckedChanged);
-            // 
-            // nonSidewallBoundarySlipRdo
-            // 
-            this.nonSidewallBoundarySlipRdo.AutoSize = true;
-            this.nonSidewallBoundarySlipRdo.Location = new System.Drawing.Point(20, 24);
-            this.nonSidewallBoundarySlipRdo.Name = "nonSidewallBoundarySlipRdo";
-            this.nonSidewallBoundarySlipRdo.Size = new System.Drawing.Size(59, 16);
-            this.nonSidewallBoundarySlipRdo.TabIndex = 3;
-            this.nonSidewallBoundarySlipRdo.TabStop = true;
-            this.nonSidewallBoundarySlipRdo.Text = "非滑移";
-            this.nonSidewallBoundarySlipRdo.UseVisualStyleBackColor = true;
-            this.nonSidewallBoundarySlipRdo.CheckedChanged += new System.EventHandler(this.nonSidewallBoundarySlipRdo_CheckedChanged);
+            this.sideInOutFlowSettingBtn.Location = new System.Drawing.Point(327, 57);
+            this.sideInOutFlowSettingBtn.Name = "sideInOutFlowSettingBtn";
+            this.sideInOutFlowSettingBtn.Size = new System.Drawing.Size(96, 26);
+            this.sideInOutFlowSettingBtn.TabIndex = 20;
+            this.sideInOutFlowSettingBtn.Text = "設定";
+            this.sideInOutFlowSettingBtn.UseVisualStyleBackColor = true;
+            this.sideInOutFlowSettingBtn.Click += new System.EventHandler(this.sideInOutFlowSettingBtn_Click);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(10, 51);
+            this.label18.Location = new System.Drawing.Point(9, 11);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(56, 12);
             this.label18.TabIndex = 7;
@@ -1415,8 +1412,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
-            this.Controls.Add(this.moveableBedPanel);
             this.Controls.Add(this.waterModelingPanel);
+            this.Controls.Add(this.moveableBedPanel);
             this.Controls.Add(this.mapPicBox);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.comment);
@@ -1438,8 +1435,8 @@
             this.panel9.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
+            this.sideInOutPanel.ResumeLayout(false);
+            this.sideInOutPanel.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.waterSurfacePanel.ResumeLayout(false);
@@ -1506,7 +1503,7 @@
         private System.Windows.Forms.ComboBox boundaryLayerThicknessCombo;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel sideInOutPanel;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.RadioButton downSuperCriticalFlowRdo;
         private System.Windows.Forms.RadioButton downSubCriticalFlowRdo;
@@ -1520,8 +1517,6 @@
         private System.Windows.Forms.RadioButton upSuperCriticalFlowRdo;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.RadioButton sidewallBoundarySlipRdo;
-        private System.Windows.Forms.RadioButton nonSidewallBoundarySlipRdo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label13;
@@ -1535,7 +1530,6 @@
         private System.Windows.Forms.RadioButton upBoundaryElevationInputRdo;
         private System.Windows.Forms.RadioButton upBoundaryElevationAutoRdo;
         private System.Windows.Forms.Button upBoundaryElevationInputBtn;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Panel panel4;
@@ -1560,9 +1554,8 @@
         private System.Windows.Forms.Button superSideFlowQuantityBtn;
         private System.Windows.Forms.Button boundaryTimeBtn;
         private System.Windows.Forms.CheckBox sideInFlowChk;
-        private System.Windows.Forms.Button sideInFlowBtn;
         private System.Windows.Forms.CheckBox sideOutFlowChk;
-        private System.Windows.Forms.Button sideOutFlowBtn;
+        private System.Windows.Forms.Button sideInOutFlowSettingBtn;
         private System.Windows.Forms.TextBox verticalVelocityDistributionTxt;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox boundaryDownVerticalDistributionNumTxt;
@@ -1583,5 +1576,9 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RadioButton nearBedBoundaryInputRdo;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.TextBox sideInFlowCountTxt;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox sideOutFlowCountTxt;
     }
 }

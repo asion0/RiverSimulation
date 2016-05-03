@@ -260,7 +260,6 @@
             // sideInOutFlowFunctionChk
             // 
             this.sideInOutFlowFunctionChk.AutoSize = true;
-            this.sideInOutFlowFunctionChk.Enabled = false;
             this.sideInOutFlowFunctionChk.Location = new System.Drawing.Point(3, 73);
             this.sideInOutFlowFunctionChk.Name = "sideInOutFlowFunctionChk";
             this.sideInOutFlowFunctionChk.Size = new System.Drawing.Size(75, 16);

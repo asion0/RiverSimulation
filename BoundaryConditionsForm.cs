@@ -111,14 +111,11 @@ namespace RiverSimulationApplication
             }
 
             //4.1.3 側壁
-            if (p.sidewallBoundarySlip)
-            {
-                sidewallBoundarySlipRdo.Checked = true;
-            }
-            else
-            {
-                nonSidewallBoundarySlipRdo.Checked = true;
-            }
+            sideOutFlowChk.Checked = p.sideOutFlowSet;
+            sideOutFlowCountTxt.Text = p.sideOutFlowNumber.ToString();
+
+            sideInFlowChk.Checked = p.sideInFlowSet;
+            sideInFlowCountTxt.Text = p.sideInFlowNumber.ToString();
 
             //4.1.4 水面 三維 only。(”即時互動處”不放圖示)
             mainstreamWindShearTxt.Text = p.mainstreamWindShear.ToString();              //4.1.4.1 主流方向風剪 單一數值 N/m2 0 實數 實數 8 格
@@ -218,6 +215,9 @@ namespace RiverSimulationApplication
 
         private void UpdateStatus()
         {
+            sideOutFlowCountTxt.Enabled = p.sideOutFlowSet;
+            sideInFlowCountTxt.Enabled = p.sideInFlowSet;
+            
             UpdateActiveFunctions();
         }
 
@@ -255,10 +255,11 @@ namespace RiverSimulationApplication
 
             if (!p.sideInOutFlowFunction)   //模擬功能之特殊功能中如有勾選側出/入流，則4.1.3.2 才會出現於介面中。
             {
-                sideInFlowChk.Enabled = p.sideInOutFlowFunction;
-                sideInFlowBtn.Enabled = p.sideInOutFlowFunction;
-                sideOutFlowChk.Enabled = p.sideInOutFlowFunction;
-                sideOutFlowBtn.Enabled = p.sideInOutFlowFunction;
+                sideInOutPanel.Enabled = p.sideInOutFlowFunction;
+                //sideInFlowChk.Enabled = p.sideInOutFlowFunction;
+                //sideInFlowBtn.Enabled = p.sideInOutFlowFunction;
+                //sideOutFlowChk.Enabled = p.sideInOutFlowFunction;
+                //sideInOutFlowSettingBtn.Enabled = p.sideInOutFlowFunction;
             }
 
             if(Program.programVersion.DemoVersion)
@@ -1170,6 +1171,91 @@ namespace RiverSimulationApplication
             {
                 p.boundaryDownVerticalDistribution.type = RiverSimulationProfile.TwoInOne.Type.UseArray;
             }
+        }
+
+        private void sideInFlowChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.sideInFlowSet = chk;
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+        }
+
+        private void sideOutFlowChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            p.sideOutFlowSet = chk;
+            UpdateStatus(); //操作此UI會有互動變化則需呼叫
+        }
+
+        private bool ConvertStructureSetNumber()
+        {
+            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            int n = 0;
+            if (p.sideOutFlowSet)
+            {
+                if (!ControllerUtility.CheckConvertInt32(ref n, sideOutFlowCountTxt, "請輸入正確的側出流數量！", ControllerUtility.CheckType.GreaterThanZero))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                n = 0;
+            }
+            p.sideOutFlowNumber = n;
+
+            if (p.sideInFlowSet)
+            {
+                if (!ControllerUtility.CheckConvertInt32(ref n, sideInFlowCountTxt, "請輸入正確的側入流數量！", ControllerUtility.CheckType.GreaterThanZero))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                n = 0;
+            }
+            p.sideInFlowNumber = n;
+            return true;
+        }
+
+        private void sideInOutFlowSettingBtn_Click(object sender, EventArgs e)
+        {
+            if (!ConvertStructureSetNumber())
+            {
+                return;
+            }
+
+            if (p.sideOutFlowNumber + p.sideInFlowNumber == 0)
+            {
+                MessageBox.Show("請設置側出/入流數量！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            bool alreadyShow = false;
+            RiverSimulationProfile.StructureChangeType tp = p.CheckStructurerChanged(p.sideOutFlowSet, ref p.sideOutFlowSets, p.sideOutFlowNumber, true);
+            if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
+            {
+                MessageBox.Show("側出流數量或設置已變更，請重新設定側出流！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                alreadyShow = true;
+            }
+
+            tp = p.CheckStructurerChanged(p.sideInFlowSet, ref p.sideInFlowSets, p.sideInFlowNumber, true);
+            if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
+            {
+                MessageBox.Show("側入流數量或設置已變更，請重新設定側入流！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                alreadyShow = true;
+            }
+
+            p.ResizeSideInOutFlowSets(p.sideOutFlowNumber, p.sideInFlowNumber);
+            SideInOutFlowSetForm form = new SideInOutFlowSetForm();
+            form.SetFormMode("側出/入流",
+                (p.sideOutFlowSet) ? p.sideOutFlowNumber : 0, sideOutFlowChk.Text,
+                (p.sideInFlowSet) ? p.sideInFlowNumber : 0, sideInFlowChk.Text);
+            DialogResult r = form.ShowDialog();
+            //NoticeStructureChange();
+            //structFirstSetting = true;
+
         }
     }
 

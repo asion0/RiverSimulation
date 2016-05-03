@@ -421,6 +421,13 @@ namespace RiverSimulationApplication
             StructureTypeSize,
         };
 
+        public enum SideFlowType
+        {
+            SideOutFlow,
+            SideInFlow,
+            SideFlowSize,
+        };
+
         //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
         public double highSandEffectAlpha1 { get; set; }
         public double highSandEffectBeta1 { get; set; }
@@ -451,6 +458,12 @@ namespace RiverSimulationApplication
             ResizeListPointArraySets(ref bridgePierSets, n2);
             ResizeListPointArraySets(ref groundsillWorkSets, n3);
             ResizeListPointArraySets(ref sedimentationWeirSets, n4);
+        }
+
+        public void ResizeSideInOutFlowSets(int n1, int n2)
+        {
+            ResizeListPointArraySets(ref sideOutFlowSets, n1);
+            ResizeListPointArraySets(ref sideInFlowSets, n2);
         }
 
         public List<Point>[] BridgePierSets
@@ -484,6 +497,21 @@ namespace RiverSimulationApplication
                     break;
                 case 3:
                     sedimentationWeirSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void UpdateSideFlowSet(List<Point> pts, int type, int index)
+        {
+            switch (type)
+            {
+                case 0:
+                    sideOutFlowSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    break;
+                case 1:
+                    sideInFlowSets[index] = (pts == null) ? null : new List<Point>(pts);
                     break;
                 default:
                     break;
@@ -696,6 +724,13 @@ namespace RiverSimulationApplication
         
         //4.1.3 側壁
         public bool sidewallBoundarySlip;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
+        public bool sideOutFlowSet { get; set; }                  //4.1.3.2.1 側出流勾選
+        public Int32 sideOutFlowNumber { get; set; }                  //4.1.3.2.1.1 側出流數目
+        public List<Point>[] sideOutFlowSets;           //4.1.3.2.1.2 側出流位置集合
+
+        public bool sideInFlowSet { get; set; }                     //4.1.3.2.1 側入流勾選
+        public Int32 sideInFlowNumber { get; set; }                   //4.1.3.2.1.1 側入流數目
+        public List<Point>[] sideInFlowSets;           //4.1.3.2.1.2 側入流位置集合
 
         //4.1.4 水面 三維 only。(”即時互動處”不放圖示)
         public double mainstreamWindShear;              //4.1.4.1 主流方向風剪 單一數值 N/m2 0 實數 實數 8 格
@@ -1163,6 +1198,14 @@ namespace RiverSimulationApplication
             //4.1.3 側壁
             //20160127介面討論綜整 側壁-側壁邊界滑移，預設改“滑移”。
             sidewallBoundarySlip = true;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
+            sideOutFlowSet = false;                //4.1.3.2.1 側出流勾選
+            sideOutFlowNumber = 0;                //4.1.3.2.1.1 側出流數目
+            sideOutFlowSets = null;           //4.1.3.2.1.2 側出流位置集合
+
+            sideInFlowSet = false;                     //4.1.3.2.1 側入流勾選
+            sideInFlowNumber = 0;                    //4.1.3.2.1.1 側入流數目
+            sideInFlowSets = null;           //4.1.3.2.1.2 側入流位置集合
+
 
             //4.1.4 水面 三維 only。(”即時互動處”不放圖示)
             mainstreamWindShear = 0;              //4.1.4.1 主流方向風剪 單一數值 N/m2 0 實數 實數 8 格

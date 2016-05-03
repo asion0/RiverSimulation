@@ -460,49 +460,49 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void GenerateTable()
+        private void GenerateTable(bool exportOnly = false)
         {
             switch (param1Cmb.SelectedIndex)
             {
                 case 0: //初始底床高程(m)
-                    GenerateInitialBottomElevationTable();
+                    GenerateInitialBottomElevationTable(exportOnly);
                     break;
                 case 1: //水深平均流速-U(m/s)
-                    GenerateTimeIJResultTable(" U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
+                    GenerateTimeIJResultTable(" U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU, exportOnly);
                     break;
                 case 2: //水深平均流速-V(m/s)
                     //GenerateDepthAverageFlowSpeedVTable();
-                    GenerateTimeIJResultTable(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                    GenerateTimeIJResultTable(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV, exportOnly);
                   break;
                 case 3: //水深平均流速-UV 合向量的絕對值(m/s)
                    //GenerateDepthAverageFlowSpeedVTableAbs();
                     break;
                 case 4: //底床剪應力(N/m2)   //⁰¹²³⁴⁵⁶⁷⁸⁹
-                    GenerateTimeIJResultTable(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
+                    GenerateTimeIJResultTable(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1, exportOnly);
                     break;
                 case 5: //水位(m)
-                    GenerateTimeIJResultTable(" ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
+                    GenerateTimeIJResultTable(" ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs, exportOnly);
                     break;
                 case 6: //水深(m)
-                    GenerateTimeIJResultTable(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
+                    GenerateTimeIJResultTable(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth, exportOnly);
                     break;
                 case 7: //流量-U(cms)
-                    GenerateTimeIJResultTable(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
+                    GenerateTimeIJResultTable(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge, exportOnly);
                     break;
                 case 8: //流量-V(cms)
-                    GenerateTimeIJResultTable(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
+                    GenerateTimeIJResultTable(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge, exportOnly);
                    break;
                 case 9: //底床高程(m)
-                   GenerateTimeIJResultTable(" ZS (M)", "底床高程(m)", "resed.O", sedTimeList, ref usDischarge);
+                   GenerateTimeIJResultTable(" ZS (M)", "底床高程(m)", "resed.O", sedTimeList, ref usDischarge, exportOnly);
                     break;
                 case 10: //沖淤深度(m)
-                    GenerateTimeIJResultTable(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
+                    GenerateTimeIJResultTable(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed, exportOnly);
                     break;
                 case 11: //水深平均濃度(ppm)
-                    GenerateTimeIJResultTable(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
+                    GenerateTimeIJResultTable(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc, exportOnly);
                     break;
                 case 12: //粒徑分佈(%)
-                    GenerateTimeIJResultTable(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
+                    GenerateTimeIJResultTable(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta, exportOnly);
                     break;
                 case 13: //流速-U(m/s)
                 case 14: //流速-V(m/s)
@@ -512,7 +512,7 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void GenerateInitialBottomElevationTable()
+        private void GenerateInitialBottomElevationTable(bool exportOnly = false)
         {
             int iStart = 0, iEnd = 0, jStart = 0, jEnd = 0;
             if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref iStart, ref iEnd))
@@ -529,6 +529,18 @@ namespace RiverSimulationApplication
             if(!ParsingInitialBottomElevationResult())
             {
                 MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            
+            if(exportOnly)
+            {
+                exportFileDialog.ShowDialog();
+                if (exportFileDialog.FileName == "")
+                 {
+                     MessageBox.Show("請選取匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                     return;
+                 }
+                ExportFile(exportFileDialog.FileName, 3, initialBottomElevation);
                 return;
             }
 
@@ -854,7 +866,7 @@ namespace RiverSimulationApplication
             }
         }
 
-        private void GenerateTimeIJResultTable(String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
+        private void GenerateTimeIJResultTable(String key, String title, String outputfile, List<double> timeList, ref double[, ,] array, bool exportOnly = false)
         {
             int iStart = 0, iEnd = 0, jStart = 0, jEnd = 0;
             if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref iStart, ref iEnd))
@@ -888,14 +900,32 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            int index = 0;
+            int index = (timeSel == null) ? 0 : timeSel[0];
+            if (exportOnly)
+            {
+                if (t == TableType.Type1)
+                {
+                    exportFileDialog.ShowDialog();
+                    if (exportFileDialog.FileName == "")
+                    {
+                        MessageBox.Show("請選取匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    ExportFile(exportFileDialog.FileName, 3, array, null, null, index);
+                }
+                else
+                {
+                    MessageBox.Show("只支援單一時間匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                return;
+            }
+
+            
             //double[,,] data = null;
             ResultTableForm form = new ResultTableForm();
-
             switch (t)
             {
                 case TableType.Type1:
-                    index = (timeSel == null) ? 0 : timeSel[0];
                     form.SetFormMode(
                         title + ((timeSel == null) ? " 定量流" : " T=" + timeList[index].ToString()),    //視窗標題
                         pi.jS, pi.jE,       //行數(左右有幾行)
@@ -1290,7 +1320,7 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        private void GenerateGraph()
+        private void GenerateGraph(bool exportOnly = false)
         {
             if (graphFormMode == GraphFormMode.XY)
             {
@@ -1609,6 +1639,7 @@ namespace RiverSimulationApplication
             }
             return TableType.TypeUnknown;
         }
+
         private ResultGraphForm.GraphType GetGraphType(ref PosInfo pi)
         {
             switch (graphType)
@@ -1654,27 +1685,6 @@ namespace RiverSimulationApplication
             }
             return ResultGraphForm.GraphType.TypeUnknown;
         }
-        /*
-        enum TableType
-        {
-            Unknown,
-            sImJnT,       //single I, multiple J, no Time
-            sImJsT,       //single I, multiple J, single Time
-            sImJmT,       //single I, multiple J, multiple Time
-
-            mIsJnT,       //multiple I, single J, no Time
-            mIsJsT,       //multiple I, single J, single Time
-            mIsJmT,       //multiple I, single J, multiple Time
-            
-            sIsJmT,
-
-            mImJnT,
-            mImJsT,
-            mImJmT,
-
-            //IJ
-        };
-        */
 
         private void graphType1Rdo_CheckedChanged(object sender, EventArgs e)
         {
@@ -1727,137 +1737,55 @@ namespace RiverSimulationApplication
             timeBtn.Enabled = !c.Checked;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void exportFileBtn_Click(object sender, EventArgs e)
+        {
+            if (drawType == Param1Type.ParamTable)
+            {
+                GenerateTable(true);
+            }
+            else
+            {
+                MessageBox.Show("請選取表格！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        bool ExportFile(String file, int varCount, object array1, object array2 = null, object array3 = null, int index = 0)
         {
             StringBuilder sb = new StringBuilder();
-            StringBuilder sb2 = new StringBuilder();
-            StringBuilder sb3 = new StringBuilder();
-
-            //sb.AppendFormat("{0,8} {1, 8} {2, 8} {3, 8} {4, 8} {5, 8}\n", _i.ToString(), _j.ToString(), 
-            //    maxX.ToString(), minX.ToString(), maxY.ToString(), minY.ToString());
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
-            for (int i = 0; i < p.inputGrid.GetI; ++i)
+            sb.Append("title = Algebric Grid-Generation\n");
+            if (varCount == 3)
             {
-                for (int j = 0; j < p.inputGrid.GetJ; ++j)
-                {
-                    if (i + 1 < p.inputGrid.GetI)
-                    {
-                        sb.AppendFormat("{0} {1} {2}\n", p.inputGrid.inputCoor[i, j].x.ToString(), p.inputGrid.inputCoor[i, j].y.ToString(), p.inputGrid.inputCoor[i, j].z.ToString());
-                        sb.AppendFormat("{0} {1} {2}\n\n", p.inputGrid.inputCoor[i + 1, j].x.ToString(), p.inputGrid.inputCoor[i + 1, j].y.ToString(), p.inputGrid.inputCoor[i + 1, j].z.ToString());
-                    }
-
-                    if (j + 1 < p.inputGrid.GetJ)
-                    {
-                        sb.AppendFormat("{0} {1} {2}\n", p.inputGrid.inputCoor[i, j].x.ToString(), p.inputGrid.inputCoor[i, j].y.ToString(), p.inputGrid.inputCoor[i, j].z.ToString());
-                        sb.AppendFormat("{0} {1} {2}\n\n", p.inputGrid.inputCoor[i, j + 1].x.ToString(), p.inputGrid.inputCoor[i, j + 1].y.ToString(), p.inputGrid.inputCoor[i, j + 1].z.ToString());
-                    }
-                    sb2.AppendFormat("{0} {1} {2}\n", p.inputGrid.inputCoor[i, j].x.ToString(), p.inputGrid.inputCoor[i, j].y.ToString(), p.inputGrid.inputCoor[i, j].z.ToString());
-                    sb3.AppendFormat("{0} {1}\n", p.inputGrid.inputCoor[i, j].x.ToString(), p.inputGrid.inputCoor[i, j].y.ToString());
-                }
-                sb2.AppendFormat("\n");
-                sb3.AppendFormat("\n");
+                sb.Append("variables = x , y , z\n");
             }
+            else if (varCount == 4)
+            {
+                sb.Append("variables = x , y , U , V\n");
+            }
+            else if (varCount == 5)
+            {
+                sb.Append("variables = x , y , U , V , z\n");
+            }
+            sb.AppendFormat("zone i = {0} , j = {1} , f=point\n", p.inputGrid.GetI, p.inputGrid.GetJ);
 
-            using (StreamWriter outfile = new StreamWriter(@"_test.txt"))
+            for(int j = p.inputGrid.GetJ - 1; j >= 0; --j)
+            {
+                for (int i = p.inputGrid.GetI - 1; i >= 0; --i)
+                {
+                    if (varCount == 3)
+                    {
+                        sb.AppendFormat("{0,8} {1,8} {2,8}\n",
+                            p.inputGrid.inputCoor[i, j].x,
+                            p.inputGrid.inputCoor[i, j].y,
+                            (array1 as double[, ,])[i, j, index]);
+                    }
+                }
+            }
+            using (StreamWriter outfile = new StreamWriter(file))
             {
                 outfile.Write(sb.ToString());
                 outfile.Close();
             }
-            using (StreamWriter outfile = new StreamWriter(@"_test2.txt"))
-            {
-                outfile.Write(sb2.ToString());
-                outfile.Close();
-            }
-            using (StreamWriter outfile = new StreamWriter(@"_test3.txt"))
-            {
-                outfile.Write(sb3.ToString());
-                outfile.Close();
-            }
-
-
-            double x1, x2, y1, y2;
-            if ((p.inputGrid.GetMaxX - p.inputGrid.GetMinX) > (p.inputGrid.GetMaxY - p.inputGrid.GetMinY))
-            {
-                x1 = p.inputGrid.GetMinX;
-                x2 = p.inputGrid.GetMaxX;
-                y1 = p.inputGrid.GetMinY - ((p.inputGrid.GetMaxX - p.inputGrid.GetMinX) - (p.inputGrid.GetMaxY - p.inputGrid.GetMinY)) / 2;
-                y2 = p.inputGrid.GetMaxY + ((p.inputGrid.GetMaxX - p.inputGrid.GetMinX) - (p.inputGrid.GetMaxY - p.inputGrid.GetMinY)) / 2;
-            }
-            else
-            {
-                y1 = p.inputGrid.GetMinY;
-                y2 = p.inputGrid.GetMaxY;
-                x1 = p.inputGrid.GetMinX - ((p.inputGrid.GetMaxY - p.inputGrid.GetMinY) - (p.inputGrid.GetMaxX - p.inputGrid.GetMinX)) / 2;
-                x2 = p.inputGrid.GetMaxX + ((p.inputGrid.GetMaxY - p.inputGrid.GetMinY) - (p.inputGrid.GetMaxX - p.inputGrid.GetMinX)) / 2;
-            }
-
-            //string param = "";
-            //GnuPlot.Set("title \"world.dat plotted with filledcurves\"");
-            //GnuPlot.Set("size ratio 1");
-            //GnuPlot.Set("format x \"\"");
-            //GnuPlot.Set("format y \"\"");
-            //GnuPlot.Set("grid layerdefault linewidth 0.5");
-            //GnuPlot.Set("object  1 rect from graph 0, 0 to graph 1, 1 behind fc  rgb \"#afffff\" fillstyle solid 1.00 border -1");
-            //param = "xrange[" + x1.ToString() + " : " + x2.ToString() + "]";
-            //GnuPlot.Set(param);
-            //param = "yrange[" + y1.ToString() + " : " + y2.ToString() + "]";
-            //GnuPlot.Set(param);
-            //GnuPlot.Set("lmargin  0");
-            ////GnuPlot.Set("contour");
-            ////GnuPlot.Plot(@"G:\_test.txt", "with filledcurve notitle fs solid 1.0 lc rgb 'dark-goldenrod'");
-            //GnuPlot.SPlot(@"_test2.txt", "with filledcurve notitle fs solid 1.0 lc rgb 'dark-goldenrod'");
-
-
-            /* 可行的contour
-            set view map
-            set xrange[270301.395 : 270903.805]
-            set yrange[2732858.0 : 2733461.91]
-            set size ratio 1
-            set object 1 rect from graph 0, graph 0 to graph 1, graph 1 back
-            set object 1 rect fc rgb "black" fillstyle solid 1.0
-            splot 'G:\_test2.txt' using 1:2:3 with points pointtype 5 pointsize 1 palette linewidth 30
-            */
-
-            /* 可行的contour2
-            set surface
-            set contour surface
-            set view 60, 30, 1, 1
-            set clabel '%8.2f'
-            set key right
-            set title 'Graph Title'
-            set xlabel 'vss'
-            set ylabel 'sbb'
-            set zlabel 'closs'
-            #set term png
-            #set output 'jf.png'
-            splot '_test2.txt' using 2:1:3 notitle with pm3d
-            */
-            //string[] setting = { 
-            //                   "surface",
-            //                   "contour surface",
-            //                   "ticslevel 0",   //the zero of Z-Axis moves to on the XY plane.
-            //                   //"ratio 1",
-            //                   "view 0, 0, 1, 1",       //default view is 60 rot_x, 30 rot_z, 1 scale, 1 scale_z
-            //                   "cntrparam levels 10",
-            //                   "clabel \'%8.2f\'",
-            //                   "key right",
-            //                   "title \'Graph Title\'",
-            //                   "xlabel \'vss\'",
-            //                   "ylabel \'sbb\'",
-            //                   "zlabel \'closs\'",
-            //                   }; 
-            string[] setting = { 
-                               "pm3d map",
-                               };
-            GnuPlot.Set(setting);
-            //param = "xrange[" + x1.ToString() + " : " + x2.ToString() + "]";
-            //GnuPlot.Set(param);
-            //param = "yrange[" + y1.ToString() + " : " + y2.ToString() + "]";
-            //GnuPlot.Set(param);
-            //param = "zrange [0. : 500 ]";
-            //GnuPlot.Set(param);
-
-            GnuPlot.SPlot(@"_test2.txt", "with pm3d");
+            return true;
         }
         //TableType tableType = TableType.Unknown;
     }

@@ -67,8 +67,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.exportFileBtn = new System.Windows.Forms.Button();
             this.generateResultBtn = new System.Windows.Forms.Button();
+            this.exportFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.paramGrp.SuspendLayout();
             this.formGrp.SuspendLayout();
@@ -349,12 +350,12 @@
             resources.ApplyResources(this.textBox4, "textBox4");
             this.textBox4.Name = "textBox4";
             // 
-            // button1
+            // exportFileBtn
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.exportFileBtn, "exportFileBtn");
+            this.exportFileBtn.Name = "exportFileBtn";
+            this.exportFileBtn.UseVisualStyleBackColor = true;
+            this.exportFileBtn.Click += new System.EventHandler(this.exportFileBtn_Click);
             // 
             // generateResultBtn
             // 
@@ -362,6 +363,10 @@
             this.generateResultBtn.Name = "generateResultBtn";
             this.generateResultBtn.UseVisualStyleBackColor = true;
             this.generateResultBtn.Click += new System.EventHandler(this.generateResultBtn_Click);
+            // 
+            // exportFileDialog
+            // 
+            resources.ApplyResources(this.exportFileDialog, "exportFileDialog");
             // 
             // SimulationResultForm
             // 
@@ -375,7 +380,7 @@
             this.Controls.Add(this.formGrp);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.generateResultBtn);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.exportFileBtn);
             this.Controls.Add(this.ok);
             this.Name = "SimulationResultForm";
             this.Load += new System.EventHandler(this.SimulationResultForm_Load);
@@ -436,8 +441,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button exportFileBtn;
         private System.Windows.Forms.Button generateResultBtn;
         private System.Windows.Forms.CheckBox timeChk;
+        private System.Windows.Forms.SaveFileDialog exportFileDialog;
     }
 }

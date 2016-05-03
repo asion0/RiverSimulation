@@ -1179,6 +1179,13 @@ namespace PictureBoxCtrl
                         inputCoor[i, j].z = Convert.ToDouble(words[3]);
                     }
 
+                    if(inputCoor[i, j].x == -999.999 || inputCoor[i, j].y == -999.999)
+                    {
+                        inputCoor = null;
+                        MessageBox.Show("不支援此格網佈置形式!");
+                        return false;
+                    }
+
                     if (inputCoor[i, j].x > maxX)
                         maxX = inputCoor[i, j].x;
                     if (inputCoor[i, j].x < minX)

@@ -169,6 +169,12 @@ namespace RiverSimulationApplication
                 timeGrp.Enabled = false;
                 axisGrp.Enabled = false;  
             }
+            if(p.IsConstantFlowType())
+            {   //“定量流”，則“模擬結果”中“時間”永遠灰階。
+                timeGrp.Enabled = false;
+                timeBtn.Enabled = false;
+            }
+
         }
 
         private void SimulationResultForm_Load(object sender, EventArgs e)
@@ -685,7 +691,8 @@ namespace RiverSimulationApplication
                         MessageBox.Show("請輸入正確位置/時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
-                    if (!ParsingTimeIJResult(resedTimeList, key, outputfile, ref array))
+                    
+                    if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : resedTimeList, key, outputfile, ref array))
                     {
                         MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
@@ -785,8 +792,8 @@ namespace RiverSimulationApplication
                     }     
                     pi.tS = timeSel[0];
                     pi.tE = timeSel[timeSel.Length - 1] + 1;
-
-                    if (!ParsingTimeIJResult(resedTimeList, key, outputfile, ref array))
+                    
+                    if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : resedTimeList, key, outputfile, ref array))
                     {
                         MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
@@ -861,7 +868,7 @@ namespace RiverSimulationApplication
                 return;
             } 
             
-            if (timeSel == null)
+            if (p.IsVariableFlowType() && timeSel == null)
             {
                 MessageBox.Show("請選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -874,8 +881,8 @@ namespace RiverSimulationApplication
                 MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-
-            if (!ParsingTimeIJResult(timeList, key, outputfile, ref array))
+            
+            if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : timeList, key, outputfile, ref array))
             {
                 MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -888,9 +895,9 @@ namespace RiverSimulationApplication
             switch (t)
             {
                 case TableType.Type1:
-                    index = timeSel[0];
+                    index = (timeSel == null) ? 0 : timeSel[0];
                     form.SetFormMode(
-                        title + " T=" + resedTimeList[index].ToString(),    //視窗標題
+                        title + ((timeSel == null) ? " 定量流" : " T=" + timeList[index].ToString()),    //視窗標題
                         pi.jS, pi.jE,       //行數(左右有幾行)
                         pi.iS, pi.iE,       //列數(上下有幾列)
                         "",                 //表格名稱
@@ -1149,7 +1156,8 @@ namespace RiverSimulationApplication
 
             if (result == null)
             {
-                result = new double[p.inputGrid.GetI, p.inputGrid.GetJ, timeList.Count];
+                int tCount = (timeList == null) ? 1 : timeList.Count;
+                result = new double[p.inputGrid.GetI, p.inputGrid.GetJ, tCount];
             }
 
             int ti = 0;
@@ -1157,7 +1165,8 @@ namespace RiverSimulationApplication
             {
                 if (!foundTime && line.StartsWith("  TIME="))
                 {
-                    if (timeList[timeSel[ti]] == Convert.ToDouble(line.Substring(9, 16).Trim()))
+                    double checkTime = (timeList == null) ? 0 : timeList[timeSel[ti]];
+                    if (checkTime == Convert.ToDouble(line.Substring(9, 16).Trim()))
                     {
                         foundTime = true;
                         continue;
@@ -1171,11 +1180,10 @@ namespace RiverSimulationApplication
                     continue;
                 }
 
-                //int timeIndex = FoundTimeSelInList(timeSel[0]);
-                int timeIndex = timeSel[ti];
+                //timeSel == null 定量流
+                int timeIndex = (timeSel == null) ? 0 : timeSel[ti];
                 if (foundTime && found)
                 {
-
                     double[] ar = GetLineDouble(line, 10);
                     for (int i = 0; i < ar.Length; ++i)
                     {
@@ -1184,7 +1192,7 @@ namespace RiverSimulationApplication
 
                     if (++count >= p.inputGrid.GetI)
                     {
-                        if (++ti == timeSel.Length)
+                        if ((timeSel == null) || (++ti == timeSel.Length))
                         {
                             break;
                         }
@@ -1439,7 +1447,7 @@ namespace RiverSimulationApplication
                 case 13:
                 case 14:
                 case 15:
-                case 116:
+                case 16:
                     form.SetFormMode("", GetTimeSelectionType(), resedTimeList);
                     break;
                 default:
@@ -1521,12 +1529,22 @@ namespace RiverSimulationApplication
                 case TableType.Type1234:
                     if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
                         !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE) ||
-                        timeSel == null)
+                        (p.IsVariableFlowType() && timeSel == null))
                     {   //I或J或T未輸入
                         return TableType.Type1234;
                     }
-                    pi.tS = timeSel[0];
-                    pi.tE = timeSel[timeSel.Length - 1] + 1;
+
+                    if (p.IsVariableFlowType())
+                    {
+                        pi.tS = timeSel[0];
+                        pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    }
+                    else
+                    {
+                        pi.tS = 0;
+                        pi.tE = 1;
+                    }
+
                     if (pi.GetICount() > 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1)
                     {   //T固定
                         return TableType.Type1;
@@ -1548,12 +1566,21 @@ namespace RiverSimulationApplication
                     if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
                         !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE) ||
                         !GetPosRange(posKchk, p.inputGrid.GetI, posKTxt, ref pi.kS, ref pi.kE) ||
-                        timeSel == null)
+                        (p.IsVariableFlowType() && timeSel == null))
                     {   //I或J或T或K未輸入
                         return TableType.Type56789A;
                     }
-                    pi.tS = timeSel[0];
-                    pi.tE = timeSel[timeSel.Length - 1] + 1;
+
+                    if (p.IsVariableFlowType())
+                    {
+                        pi.tS = timeSel[0];
+                        pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    }
+                    else
+                    {
+                        pi.tS = 0;
+                        pi.tE = 1;
+                    }
                     if (pi.GetICount() > 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1 && pi.GetKCount() == 1)
                     {   //KT固定
                         return TableType.Type5;

@@ -4,7 +4,7 @@
   <description asmv2:iconFile="RiverSimulation.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.52" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.53" language="neutral" processorArchitecture="msil" />
     <commandLine file="RiverSimulationApplication.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -44,25 +44,25 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="57344">
-      <assemblyIdentity name="GridPictureBox" version="1.0.5968.9759" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="GridPictureBox" version="1.0.5968.39082" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZNxHaazOgRea57S9dZcbnhqrOvJAR20gNF0ijMIlfH0=</dsig:DigestValue>
+        <dsig:DigestValue>OM8DojJAhy3PJ5ldLA/baQy8KZW/6mt2SOzG3FeRfzs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="2159104">
-      <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.52" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.53" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+I9DqEQYxSmfoMS3CN8NqgzdX9c6tFskdkOM1YsPHzg=</dsig:DigestValue>
+        <dsig:DigestValue>bXPaEptKpkPBm+n8wPsZ1TKnDjpVTxDyaTBOziPdRMU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

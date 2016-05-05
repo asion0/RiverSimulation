@@ -584,7 +584,7 @@ namespace RiverSimulationApplication
                 return;
             }
             ResultGraphForm form = new ResultGraphForm();
-           
+            form.key = "INI-ZB";
             switch (graphFormMode)
             {
                 case GraphFormMode.XY:
@@ -692,6 +692,7 @@ namespace RiverSimulationApplication
         {
 
             ResultGraphForm form = new ResultGraphForm();
+            form.key = key;
             PosInfo pi = new PosInfo();              
 
             switch (graphFormMode)
@@ -738,8 +739,8 @@ namespace RiverSimulationApplication
                             -1,                 //Sel2索引
                             "I = ",              //Sel1標籤
                             "",                 //Sel2標籤
-                             timeSel,             //Time選取索引陣列                
-                            timeList.ToArray());                //Time陣列                
+                            timeSel,             //Time選取索引陣列                
+                            (timeList==null) ? null : timeList.ToArray());                //Time陣列                
                     }
                     else if (gt == ResultGraphForm.GraphType.Type3)
                     {
@@ -765,7 +766,7 @@ namespace RiverSimulationApplication
                             "J = ",              //Sel1標籤
                             "",                 //Sel2標籤
                             timeSel,             //Time選取索引陣列                
-                            timeList.ToArray());              //Time陣列                
+                            (timeList == null) ? null : timeList.ToArray());              //Time陣列                
                     }
                     else if (gt == ResultGraphForm.GraphType.Type4)
                     {
@@ -1339,34 +1340,31 @@ namespace RiverSimulationApplication
                     case 3: //水深平均流速-UV 合向量的絕對值(m/s)
                             //GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
                         break;
-                    case 4: //水深平均流速-UV 合向量(m/s)
-                            //GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
-                        break;
-                    case 5: //底床剪應力(N/m2)
+                    case 4: //底床剪應力(N/m2)
                         GenerateTimeIJResultGraph(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
                         break;
-                    case 6: //水位(m)
+                    case 5: //水位(m)
                         GenerateTimeIJResultGraph(" ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
                         break;
-                    case 7: //水深(m)
+                    case 6: //水深(m)
                         GenerateTimeIJResultGraph(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
                         break;
-                    case 8://流量-U(cms)
+                    case 7://流量-U(cms)
                         GenerateTimeIJResultGraph(" ZS (M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
                         break;
-                    case 9: //流量-V(cms)
+                    case 8: //流量-V(cms)
                         GenerateTimeIJResultGraph(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
                         break;
-                    case 10: //底床高程(m)
+                    case 9: //底床高程(m)
                         GenerateTimeIJResultGraph(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
                         break;
-                    case 11: //沖淤深度(m)
+                    case 10: //沖淤深度(m)
                         GenerateTimeIJResultGraph(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
                         break;
-                    case 12: //水深平均濃度(ppm)
+                    case 11: //水深平均濃度(ppm)
                         GenerateTimeIJResultGraph(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
                         break;
-                    case 13: //粒徑分佈(%)
+                    case 12: //粒徑分佈(%)
                         GenerateTimeIJResultGraph(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
                         break;
                 }
@@ -1663,23 +1661,38 @@ namespace RiverSimulationApplication
                 case ResultGraphForm.GraphType.Type234:
                     if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
                         !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE) ||
-                        timeSel == null)
+                        (p.IsVariableFlowType() && timeSel == null))
                     {   //I或J或T未輸入
                         return ResultGraphForm.GraphType.Type234;
                     }
-                    pi.tS = timeSel[0];
-                    pi.tE = timeSel[timeSel.Length - 1] + 1;
-                    if (pi.GetICount() == 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1)
-                    {   //IT固定
-                        return ResultGraphForm.GraphType.Type2;
+                    if (p.IsVariableFlowType())
+                    {
+                        pi.tS = timeSel[0];
+                        pi.tE = timeSel[timeSel.Length - 1] + 1;
+
+                        if (pi.GetICount() == 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1)
+                        {   //IT固定
+                            return ResultGraphForm.GraphType.Type2;
+                        }
+                        else if (pi.GetICount() > 1 && pi.GetJCount() == 1 && pi.GetTCount() == 1)
+                        {   //JT固定
+                            return ResultGraphForm.GraphType.Type3;
+                        }
+                        else if (pi.GetICount() == 1 && pi.GetJCount() == 1 && pi.GetTCount() > 1)
+                        {   //IJ固定
+                            return ResultGraphForm.GraphType.Type4;
+                        }
                     }
-                    else if (pi.GetICount() > 1 && pi.GetJCount() == 1 && pi.GetTCount() == 1)
-                    {   //JT固定
-                        return ResultGraphForm.GraphType.Type3;
-                    }
-                    else if (pi.GetICount() == 1 && pi.GetJCount() == 1 && pi.GetTCount() > 1)
-                    {   //IJ固定
-                        return ResultGraphForm.GraphType.Type4;
+                    else
+                    {
+                        if (pi.GetICount() == 1 && pi.GetJCount() > 1)
+                        {   //IT固定
+                            return ResultGraphForm.GraphType.Type2;
+                        }
+                        else if (pi.GetICount() > 1 && pi.GetJCount() == 1)
+                        {   //JT固定
+                            return ResultGraphForm.GraphType.Type3;
+                        }
                     }
                     return ResultGraphForm.GraphType.Type234;
             }

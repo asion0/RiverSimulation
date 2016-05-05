@@ -98,7 +98,7 @@ namespace RiverSimulationApplication
         protected ResultGraphType formType = ResultGraphType.Unknown;
 
         RiverSimulationProfile p = RiverSimulationProfile.profile;
-
+        public string key = "";
         public void SetFormMode(
             string title,
             int iStart, int iEnd,
@@ -170,7 +170,7 @@ namespace RiverSimulationApplication
             // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
             // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
             // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |
-            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode0";
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode0\\" + key;
             string pngFile = string.Format("{0}\\{1}_{2}_{3}.png", graphicsPath, i, jS, jE).Replace('\\', '/');
             if (File.Exists(pngFile))
                 return pngFile;
@@ -226,7 +226,7 @@ namespace RiverSimulationApplication
             // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
             // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
             // M|1|-|-|D|U| J  | -  | 1  |3D IJ1  |
-            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode1";
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode1\\" + key;
             string pngFile = string.Format("{0}\\{1}_{2}_{3}.png", graphicsPath, j, iS, iE).Replace('\\', '/');
             if (File.Exists(pngFile))
                 return pngFile;
@@ -286,7 +286,7 @@ namespace RiverSimulationApplication
             // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
             // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |
             // 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
-            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode2";
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode2\\" + key;
             string pngFile = string.Format("{0}\\{1}_{2}_{3}_{4}.png", graphicsPath, t, i, jS, jE).Replace('\\', '/');
             if (File.Exists(pngFile))
                 return pngFile;
@@ -343,7 +343,7 @@ namespace RiverSimulationApplication
             // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
             // M|1|1|-|D|U| J  | -  | 3  |3D IJT |
             // 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
-            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode3";
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode3\\" + key;
             string pngFile = string.Format("{0}\\{1}_{2}_{3}_{4}.png", graphicsPath, t, j, iS, iE).Replace('\\', '/');
             if (File.Exists(pngFile))
                 return pngFile;
@@ -399,7 +399,7 @@ namespace RiverSimulationApplication
             // Mode 1 status : 1-Single M-Multiple D-壘距 U-資料單位
             // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
             // M|1|-|-|D|U| J  | -  | 1  |3D IJ1  |
-            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\ContourMode0";
+            string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\ContourMode0\\" + key;
             string pngFile = string.Format("{0}\\C{1}_{2}.png", graphicsPath, iEnd, jEnd).Replace('\\', '/');
             if (File.Exists(pngFile))
                 return pngFile;

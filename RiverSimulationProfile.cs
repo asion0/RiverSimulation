@@ -37,11 +37,20 @@ namespace RiverSimulationApplication
         public static RiverSimulationProfile DeSerialize(string file)
         {
             RiverSimulationProfile o = null;
-            FileStream oFileStream = new FileStream(file, FileMode.Open);
-            BinaryFormatter myBinaryFormatter = new BinaryFormatter();
-            o = (RiverSimulationProfile)myBinaryFormatter.Deserialize(oFileStream);
-            oFileStream.Close();
-            oFileStream.Dispose();
+            FileStream oFileStream = null;
+            try
+            {
+                oFileStream = new FileStream(file, FileMode.Open);
+                BinaryFormatter myBinaryFormatter = new BinaryFormatter();
+                o = (RiverSimulationProfile)myBinaryFormatter.Deserialize(oFileStream);
+                oFileStream.Close();
+                oFileStream.Dispose();
+            }
+            catch
+            {
+                oFileStream.Close();
+                oFileStream.Dispose();
+            }
             return o;
         }
 
@@ -412,6 +421,47 @@ namespace RiverSimulationApplication
             return changed;
         }
 
+        public StructureChangeType CheckSideFlowChanged(bool set, ref SideFlowObject[] sets, int num, bool clear)
+        {   //return true if changed
+            StructureChangeType changed = StructureChangeType.NoChange;
+            if (!set && sets != null)
+            {   //沒勾選此類結構物但有結構物資料
+                changed = StructureChangeType.NoSelectButHasData;
+            }
+            else if (set && sets == null)
+            {  //有勾選此類結構物但無結構物資料 
+                changed = StructureChangeType.HasSelectButNoData;
+            }
+            else if (set && sets.Length != num)
+            {   //有勾選此類結構物但結構物資料數量不符
+                changed = StructureChangeType.SelectionAndDataNoMatch;
+            }
+
+            if (clear && changed != StructureChangeType.NoChange)
+            {
+                sets = null;
+            }
+
+            if (changed != StructureChangeType.NoChange)
+            {
+                return changed;
+            }
+
+            //確認所有結構物資料串有被設定
+            if (set)
+            {
+                foreach (SideFlowObject o in sets)
+                {
+                    if (o.sideFlowPoints == null)
+                    {
+                        changed = StructureChangeType.NotAllDataSet;
+                        break;
+                    }
+                }
+            }
+            return changed;
+        }
+
         public enum StructureType
         {
             TBar,
@@ -423,11 +473,17 @@ namespace RiverSimulationApplication
 
         public enum SideFlowType
         {
-            SideOutFlow,
-            SideInFlow,
+            SideOutFlow,    //側出流
+            SideInFlow,     //側入流
             SideFlowSize,
         };
 
+        public enum CriticalFlowType
+        {
+            SuperCriticalFlow,  //超臨界流
+            SubCriticalFlow     //亞臨界流
+        }
+ 
         //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
         public double highSandEffectAlpha1 { get; set; }
         public double highSandEffectBeta1 { get; set; }
@@ -452,6 +508,21 @@ namespace RiverSimulationApplication
             }
         }
 
+        private void ResizeListSideFlowObjectSets(ref SideFlowObject[] sets, int n)
+        {
+            if (n <= 0)
+                return;
+
+            if (sets == null)
+            {
+                sets = new SideFlowObject[n];
+            }
+            else if (n > sets.Length)
+            {
+                Array.Resize(ref sets, n);
+            }
+        }
+
         public void ResizeStructureSets(int n1, int n2, int n3, int n4)
         {
             ResizeListPointArraySets(ref tBarSets, n1);
@@ -462,8 +533,8 @@ namespace RiverSimulationApplication
 
         public void ResizeSideInOutFlowSets(int n1, int n2)
         {
-            ResizeListPointArraySets(ref sideOutFlowSets, n1);
-            ResizeListPointArraySets(ref sideInFlowSets, n2);
+            ResizeListSideFlowObjectSets(ref sideOutFlowObjs, n1);
+            ResizeListSideFlowObjectSets(ref sideInFlowObjs, n2);
         }
 
         public List<Point>[] BridgePierSets
@@ -508,10 +579,10 @@ namespace RiverSimulationApplication
             switch (type)
             {
                 case 0:
-                    sideOutFlowSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    sideOutFlowObjs[index].sideFlowPoints = (pts == null) ? null : new List<Point>(pts);
                     break;
                 case 1:
-                    sideInFlowSets[index] = (pts == null) ? null : new List<Point>(pts);
+                    sideInFlowObjs[index].sideFlowPoints = (pts == null) ? null : new List<Point>(pts);
                     break;
                 default:
                     break;
@@ -645,7 +716,7 @@ namespace RiverSimulationApplication
         public double[,,] frictionAngleArray;           //2.6.4.3 內摩擦角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double flowRateRatio;                    //2.6.4.3 比流率 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] flowRateRatioArray;          //2.6.4.3 比流率 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[,,] flowRateRatioArray;          //2.6.4.3 比流率 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double porosityRatio;                    //2.6.4.5 孔隙率二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
         public double[,,] porosityRatioArray;           //若為逐點給，則參數形式為矩陣(2,IB,LBK)
@@ -654,7 +725,7 @@ namespace RiverSimulationApplication
         public double[,,] soilProportionArray;         //若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double ShearStrengthAngle;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[,,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         //3. 初始條件
         //3.1 水理模組 =========================================
@@ -725,12 +796,31 @@ namespace RiverSimulationApplication
         //4.1.3 側壁
         public bool sidewallBoundarySlip;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
         public bool sideOutFlowSet { get; set; }                  //4.1.3.2.1 側出流勾選
+
+        [Serializable]
+        public class SideFlowObject
+        {
+            public SideFlowObject(SideFlowType t)
+            {
+                sideFlowType = t;
+            }
+            public SideFlowType sideFlowType = SideFlowType.SideOutFlow;
+
+            public CriticalFlowType criticalFlowType = CriticalFlowType.SuperCriticalFlow;
+
+            public int number = 1;
+            public List<Point> sideFlowPoints;
+            public TwoInOne flowData = null;
+        }
+
         public Int32 sideOutFlowNumber { get; set; }                  //4.1.3.2.1.1 側出流數目
-        public List<Point>[] sideOutFlowSets;           //4.1.3.2.1.2 側出流位置集合
+        //public List<Point>[] sideOutFlowSets;           //4.1.3.2.1.2 側出流位置集合
+        public SideFlowObject[] sideOutFlowObjs;           //4.1.3.2.1.2 側出流位置集合
 
         public bool sideInFlowSet { get; set; }                     //4.1.3.2.1 側入流勾選
         public Int32 sideInFlowNumber { get; set; }                   //4.1.3.2.1.1 側入流數目
-        public List<Point>[] sideInFlowSets;           //4.1.3.2.1.2 側入流位置集合
+        //public List<Point>[] sideInFlowSets;           //4.1.3.2.1.2 側入流位置集合
+        public SideFlowObject[] sideInFlowObjs;           //4.1.3.2.1.2 側入流位置集合
 
         //4.1.4 水面 三維 only。(”即時互動處”不放圖示)
         public double mainstreamWindShear;              //4.1.4.1 主流方向風剪 單一數值 N/m2 0 實數 實數 8 格
@@ -1200,11 +1290,11 @@ namespace RiverSimulationApplication
             sidewallBoundarySlip = true;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
             sideOutFlowSet = false;                //4.1.3.2.1 側出流勾選
             sideOutFlowNumber = 0;                //4.1.3.2.1.1 側出流數目
-            sideOutFlowSets = null;           //4.1.3.2.1.2 側出流位置集合
+            sideOutFlowObjs = null;           //4.1.3.2.1.2 側出流位置集合
 
             sideInFlowSet = false;                     //4.1.3.2.1 側入流勾選
             sideInFlowNumber = 0;                    //4.1.3.2.1.1 側入流數目
-            sideInFlowSets = null;           //4.1.3.2.1.2 側入流位置集合
+            sideInFlowObjs = null;           //4.1.3.2.1.2 側入流位置集合
 
 
             //4.1.4 水面 三維 only。(”即時互動處”不放圖示)

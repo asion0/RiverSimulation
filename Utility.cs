@@ -1230,68 +1230,62 @@ namespace RiverSimulationApplication
         //    }
         //    return -1;
         //}
-        public static List<Point>[] GetSideFlowSets(RiverSimulationProfile profile, int type)
+        public static List<Point>[] GetSideFlowSets(RiverSimulationProfile.SideFlowObject[] objects)
         {
-            List<Point>[] pts = null;
-            switch (type)
+            List<Point>[] pts = new List<Point>[objects.Length];
+            int i = 0;
+            foreach (RiverSimulationProfile.SideFlowObject o in objects)
             {
-                case 0:
-                    pts = profile.sideOutFlowSets;
-                    break;
-                case 1:
-                    pts = profile.sideInFlowSets;
-                    break;
-                default:
-                    break;
+                pts[i++] = o.sideFlowPoints;
             }
             return pts;
         }
-
-        public static List<Point> GetSideFlowSet(RiverSimulationProfile profile, int type, int index)
-        {
-            List<Point>[] pts = GetSideFlowSets(profile, type);
-            if (pts == null)
-            {
-                return null;
-            }
-            else
-            {
-                return pts[index];
-            }
-        }
+        
+        //public static List<Point> GetSideFlowSet(RiverSimulationProfile profile, int type, int index)
+        //{
+        //    List<Point>[] pts = GetSideFlowSets(profile, type);
+        //    if (pts == null)
+        //    {
+        //        return null;
+        //    }
+        //    else
+        //    {
+        //        return pts[index];
+        //    }
+        //}
 
         //查詢一格網點位於哪個結構物群組？
-        public static Point WhichGroup(RiverSimulationProfile profile, Point pt, List<Point> addional = null, int passType = -1, int passIndex = -1)
-        {
-            for (int n = 0; n < (int)RiverSimulationProfile.StructureType.StructureTypeSize; ++n)
-            {
-                List<Point>[] pts = GetSideFlowSets(profile, n);
-                if (null == pts)
-                {
-                    continue;
-                }
+        //public static Point WhichGroup(RiverSimulationProfile profile, Point pt, List<Point> addional = null, int passType = -1, int passIndex = -1)
+        //{
+        //    for (int n = 0; n < (int)RiverSimulationProfile.StructureType.StructureTypeSize; ++n)
+        //    {
+        //        List<Point>[] pts = GetSideFlowSets(profile, n);
+        //        if (null == pts)
+        //        {
+        //            continue;
+        //        }
 
-                for (int i = 0; i < pts.Length; ++i)
-                {
-                    List<Point> pl = pts[i];
-                    if (pl == null || (passIndex != -1 && i == passIndex))
-                        continue;
-                    if (pl.Contains(pt))
-                    {
-                        return new Point(n, i);
-                    }
-                }
-            }
+        //        for (int i = 0; i < pts.Length; ++i)
+        //        {
+        //            List<Point> pl = pts[i];
+        //            if (pl == null || (passIndex != -1 && i == passIndex))
+        //                continue;
+        //            if (pl.Contains(pt))
+        //            {
+        //                return new Point(n, i);
+        //            }
+        //        }
+        //    }
 
-            if (addional != null)
-            {
-                if (addional.Contains(pt))
-                {
-                    return new Point(passType, passIndex);
-                }
-            }
-            return new Point(-1, -1);
-        }
+        //    if (addional != null)
+        //    {
+        //        if (addional.Contains(pt))
+        //        {
+        //            return new Point(passType, passIndex);
+        //        }
+        //    }
+        //    return new Point(-1, -1);
+        //}
 
         //檢查pl2群組所有格網點是否完全包含在pl1群組中
         public static bool IsAllInclude(List<Point> pl1, List<Point> pl2)
@@ -1425,47 +1419,47 @@ namespace RiverSimulationApplication
         }
 
         //檢查側出入流清單，得知是哪種側流的第幾個？
-        public static void CalcTypeCount(int index, ref int type, ref int count, RiverSimulationProfile.SideFlowType[] typeIndex)
-        {
-            if (index >= typeIndex.Length)
-                return;
+        //public static void CalcTypeCount(int index, ref int type, ref int count, RiverSimulationProfile.SideFlowType[] typeIndex)
+        //{
+        //    if (index >= typeIndex.Length)
+        //        return;
 
-            RiverSimulationProfile.SideFlowType lastType = RiverSimulationProfile.SideFlowType.SideFlowSize;
-            int c = 0;
+        //    RiverSimulationProfile.SideFlowType lastType = RiverSimulationProfile.SideFlowType.SideFlowSize;
+        //    int c = 0;
 
-            for (int i = 0; i <= index; ++i)
-            {
-                if (typeIndex[i] != lastType)
-                {
-                    c = 0;
-                    lastType = typeIndex[i];
-                }
-                else
-                {
-                    ++c;
-                }
+        //    for (int i = 0; i <= index; ++i)
+        //    {
+        //        if (typeIndex[i] != lastType)
+        //        {
+        //            c = 0;
+        //            lastType = typeIndex[i];
+        //        }
+        //        else
+        //        {
+        //            ++c;
+        //        }
 
-            }
-            type = (lastType == RiverSimulationProfile.SideFlowType.SideFlowSize) ? -1 : (int)lastType;
-            count = c;
-        }
+        //    }
+        //    type = (lastType == RiverSimulationProfile.SideFlowType.SideFlowSize) ? -1 : (int)lastType;
+        //    count = c;
+        //}
 
-        public static void EditBottomElevation(RiverSimulationProfile profile, string title, int type, int index)
-        {
+        //public static void EditBottomElevation(RiverSimulationProfile profile, string title, int type, int index)
+        //{
 
-            TableInputForm form = new TableInputForm();
-            form.SetFormMode(title, profile.inputGrid.GetJ, profile.inputGrid.GetI, "", "", "",
-                TableInputForm.InputFormType.BottomElevationForm, 90, 120, true, false, false, profile.inputGrid.inputCoor);
-            form.SetFormModeExtraData(GetSideFlowSet(profile, type, index));
+        //    TableInputForm form = new TableInputForm();
+        //    form.SetFormMode(title, profile.inputGrid.GetJ, profile.inputGrid.GetI, "", "", "",
+        //        TableInputForm.InputFormType.BottomElevationForm, 90, 120, true, false, false, profile.inputGrid.inputCoor);
+        //    form.SetFormModeExtraData(GetSideFlowSet(profile, type, index));
 
-            DialogResult r = form.ShowDialog();
-            if (DialogResult.OK == r)
-            {
-                //p.levelProportion = (double[])form.SeparateData().Clone();
-                //ShowGridMap(PicBoxType.Sprate);
-                //DrawPreview();
-            }
-        }
+        //    DialogResult r = form.ShowDialog();
+        //    if (DialogResult.OK == r)
+        //    {
+        //        //p.levelProportion = (double[])form.SeparateData().Clone();
+        //        //ShowGridMap(PicBoxType.Sprate);
+        //        //DrawPreview();
+        //    }
+        //}
     }
 
     public static class DataGridViewUtility

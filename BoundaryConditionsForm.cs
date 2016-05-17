@@ -1233,14 +1233,14 @@ namespace RiverSimulationApplication
             }
 
             bool alreadyShow = false;
-            RiverSimulationProfile.StructureChangeType tp = p.CheckStructurerChanged(p.sideOutFlowSet, ref p.sideOutFlowSets, p.sideOutFlowNumber, true);
+            RiverSimulationProfile.StructureChangeType tp = p.CheckSideFlowChanged(p.sideOutFlowSet, ref p.sideInFlowObjs, p.sideOutFlowNumber, true);
             if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
             {
                 MessageBox.Show("側出流數量或設置已變更，請重新設定側出流！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 alreadyShow = true;
             }
 
-            tp = p.CheckStructurerChanged(p.sideInFlowSet, ref p.sideInFlowSets, p.sideInFlowNumber, true);
+            tp = p.CheckSideFlowChanged(p.sideInFlowSet, ref p.sideInFlowObjs, p.sideInFlowNumber, true);
             if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
             {
                 MessageBox.Show("側入流數量或設置已變更，請重新設定側入流！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

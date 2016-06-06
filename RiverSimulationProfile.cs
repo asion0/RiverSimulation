@@ -1454,6 +1454,15 @@ namespace RiverSimulationApplication
 
                 DownloadGoogleStaticMap();
             }
+            else if (!File.Exists(this.imagePath))
+            {
+                if (bkImgType == BackgroundMapType.ImportImage)
+                {
+                    bkImgType = BackgroundMapType.None;
+                }
+                imagePath = "";
+
+            }
         }
  
         public bool DownloadGoogleStaticMap()

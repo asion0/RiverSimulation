@@ -666,7 +666,9 @@ namespace RiverSimulationApplication
         {
             if (p.coorType == PictureBoxCtrl.GridPictureBox.CoorType.TWD97)
                 return;
-           
+
+            if (!(sender as RadioButton).Checked)
+                return;
             //p.ConvertToTwd97();
             //mapPicBox.Grid = RiverSimulationProfile.profile.inputGrid;
             p.coorType = PictureBoxCtrl.GridPictureBox.CoorType.TWD97;
@@ -683,6 +685,8 @@ namespace RiverSimulationApplication
         private void twd67Rdo_CheckedChanged(object sender, EventArgs e)
         {
             if (p.coorType == PictureBoxCtrl.GridPictureBox.CoorType.TWD67)
+                return;
+            if (!(sender as RadioButton).Checked)
                 return;
 
             //p.ConvertToTwd67();
@@ -701,6 +705,8 @@ namespace RiverSimulationApplication
         private void noneRdo_CheckedChanged(object sender, EventArgs e)
         {
             if (p.coorType == PictureBoxCtrl.GridPictureBox.CoorType.None)
+                return;
+            if (!(sender as RadioButton).Checked)
                 return;
 
             //p.ConvertToTwd97();

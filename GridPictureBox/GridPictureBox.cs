@@ -198,7 +198,7 @@ namespace PictureBoxCtrl
                 case BackgroundMapType.GoogleStaticMap:
                     return ct.CalLonLatDegToTwd97(tl.x, tl.y);
                 case BackgroundMapType.ImportImage:
-                    return tl;
+                    return ct.CalLonLatDegToTwd97(tl.x, tl.y);
             }
             return null;       
         }
@@ -222,7 +222,7 @@ namespace PictureBoxCtrl
                 case BackgroundMapType.GoogleStaticMap:
                     return ct.CalLonLatDegToTwd97(br.x, br.y);
                 case BackgroundMapType.ImportImage:
-                    return br;
+                    return ct.CalLonLatDegToTwd97(br.x, br.y);
             }
             return null;
         }

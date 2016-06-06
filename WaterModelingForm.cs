@@ -47,7 +47,7 @@ namespace RiverSimulationApplication
                 //p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
             }
 
-            switch (p.flowType)
+            switch (p.GetFlowType())
             {
                 case RiverSimulationProfile.FlowType.ConstantFlow:
                     constantFlowRdo.Checked = true;
@@ -235,7 +235,7 @@ namespace RiverSimulationApplication
 
         private bool DoConvert()
         {
-            if (p.flowType == RiverSimulationProfile.FlowType.None)
+            if (p.GetFlowType() == RiverSimulationProfile.FlowType.None)
             {
                 MessageBox.Show("請選取定/變量流設定！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
@@ -536,15 +536,15 @@ namespace RiverSimulationApplication
         {
             if (constantFlowRdo.Checked)
             {
-                p.flowType = RiverSimulationProfile.FlowType.ConstantFlow;
+                p.SetFlowType(RiverSimulationProfile.FlowType.ConstantFlow);
             }
             else if (variableFlowRdo.Checked)
             {
-                p.flowType = RiverSimulationProfile.FlowType.VariableFlow;
+                p.SetFlowType(RiverSimulationProfile.FlowType.VariableFlow);
             }
             else
             {
-                p.flowType = RiverSimulationProfile.FlowType.None;
+                p.SetFlowType(RiverSimulationProfile.FlowType.None);
             }
             UpdateStatus();
         }

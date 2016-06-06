@@ -21,24 +21,61 @@ namespace RiverSimulationApplication
         private string title;
         //private string[] sideFlowName = new string[SideFlowNumber];
         //private int[] sideFlowNum = new int[SideFlowNumber];
-        RiverSimulationProfile.SideFlowObject[] sideOutObjects = null;
-        RiverSimulationProfile.SideFlowObject[] sideInObjects = null;
+        public RiverSimulationProfile.SideFlowObject[] sideOutObjects = null;
+        public RiverSimulationProfile.SideFlowObject[] sideInObjects = null;
 
         //private bool onlySelectMode = false;
         //private RiverSimulationProfile.SideFlowType[] typeIndex = null;
-        public void SetFormMode(string title, int num1, string name1, int num2, string name2)
+        public void SetFormMode(string title, RiverSimulationProfile.SideFlowObject[] outObjs, string inName, RiverSimulationProfile.SideFlowObject[] inObjs, string outName)
         {
             this.title = title;
-            sideOutObjects = new RiverSimulationProfile.SideFlowObject[num1];
-            sideInObjects = new RiverSimulationProfile.SideFlowObject[num2];
-            for(int i = 0; i < num1; ++i)
+            //從RiverSimulationProfile複製一份資料來編輯
+            if (outObjs != null && outObjs.Length > 0)
             {
-                sideOutObjects[i] = new RiverSimulationProfile.SideFlowObject(RiverSimulationProfile.SideFlowType.SideOutFlow);
+                sideOutObjects = new RiverSimulationProfile.SideFlowObject[outObjs.Length];
+                for(int i = 0; i < outObjs.Length; ++i)
+                {
+                    if (outObjs[i] != null)
+                    {
+                        sideOutObjects[i] = outObjs[i].Clone();
+                    }
+                    else
+                    {
+                        sideOutObjects[i] = new RiverSimulationProfile.SideFlowObject(RiverSimulationProfile.SideFlowType.SideOutFlow);
+                    }
+                }
             }
-            for (int i = 0; i < num2; ++i)
+
+            if (inObjs != null && inObjs.Length > 0)
             {
-                sideInObjects[i] = new RiverSimulationProfile.SideFlowObject(RiverSimulationProfile.SideFlowType.SideInFlow);
+                sideInObjects = new RiverSimulationProfile.SideFlowObject[inObjs.Length];
+                for (int i = 0; i < inObjs.Length; ++i)
+                {
+                    if (outObjs[i] != null)
+                    {
+                        sideInObjects[i] = inObjs[i].Clone();
+                    }
+                    else
+                    {
+                        sideInObjects[i] = new RiverSimulationProfile.SideFlowObject(RiverSimulationProfile.SideFlowType.SideInFlow);
+                    }
+                }
             }
+
+            //for (int i = 0; i < sideOutObjects.Length; ++i)
+            //{
+            //    if (sideOutObjects[i] == null)
+            //    {
+            //        sideOutObjects[i] = new RiverSimulationProfile.SideFlowObject(RiverSimulationProfile.SideFlowType.SideOutFlow);
+            //    }
+            //}
+            //for (int i = 0; i < sideInObjects.Length; ++i)
+            //{
+            //    if (sideInObjects[i] == null)
+            //    {
+            //        sideInObjects[i] = new RiverSimulationProfile.SideFlowObject(RiverSimulationProfile.SideFlowType.SideInFlow);
+            //    }
+            //}
         }
 
         private void StructureSetForm_Load(object sender, EventArgs e)
@@ -60,10 +97,26 @@ namespace RiverSimulationApplication
 
         private void SetPicBoxGrid(int index, bool alert)
         {
-            RiverSimulationProfile p = RiverSimulationProfile.profile;
+            //RiverSimulationProfile p = RiverSimulationProfile.profile;
             mapPicBox.SelectGroup = true;
             int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
             mapPicBox.SetSelectedGrid(SideFlowtUtility.GetSideFlowSets(sideOutObjects), SideFlowtUtility.GetSideFlowSets(sideInObjects), null, null, type, count, alert);
+
+            if (index < sideOutObjects.Length)
+            {
+                if (sideOutObjects[index].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
+                    subTypeRdo.Checked = true;
+                else
+                    superTypeRdo.Checked = true;
+            }
+            else
+            {
+                if (sideInObjects[index - sideOutObjects.Length].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
+                    subTypeRdo.Checked = true;
+                else
+                    superTypeRdo.Checked = true;
+            }
+
         }
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -77,9 +130,22 @@ namespace RiverSimulationApplication
             int index = listBox.SelectedIndex;
             int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
             if (index < sideOutObjects.Length)
+            {
                 sideOutObjects[index].sideFlowPoints = pts;
+                //if (sideOutObjects[index].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
+                //    subTypeRdo.Checked = true;
+                //else
+                //    superTypeRdo.Checked = true;
+            }
             else
+            {
                 sideInObjects[index - sideOutObjects.Length].sideFlowPoints = pts;
+                //if (sideInObjects[index - sideOutObjects.Length].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
+                //    subTypeRdo.Checked = true;
+                //else
+                //    superTypeRdo.Checked = true;
+            }
+
             mapPicBox.SetSelectedGrid(SideFlowtUtility.GetSideFlowSets(sideOutObjects), SideFlowtUtility.GetSideFlowSets(sideInObjects), null, null, type, count, alert);
         }
 
@@ -194,23 +260,94 @@ namespace RiverSimulationApplication
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            var p = RiverSimulationProfile.profile;
+            //var p = RiverSimulationProfile.profile;
             int index = listBox.SelectedIndex;
 
-//            StructureSetTableForm form = new StructureSetTableForm();
-//            form.SetGroupColors(mapPicBox.GetGroupColors());
-//            form.SetColorTable(mapPicBox.GetColorTable());
-//            form.SetSelectionItems(listBox, structureName, structureNum, typeIndex);
+            String[] sideObjNames = new String[listBox.Items.Count];
+            for(int i = 0; i < listBox.Items.Count; ++i)
+            {
+                sideObjNames[i] = listBox.Items[i].ToString();
+            }
 
-//            form.SetFormMode("編輯結構物", "");
-////            form.SetGridData(p.tBarSets, index);
+            SideFlowSetTableForm form = new SideFlowSetTableForm();
+            form.SetGroupColors(mapPicBox.GetGroupColors());
+            form.SetColorTable(mapPicBox.GetColorTable());
+            form.SetSelectionItems(listBox, sideObjNames);
 
-
-//            if (DialogResult.OK == form.ShowDialog())
-//            {
-
-//            }
+            form.SetFormMode("編輯側出/入流", "", sideOutObjects, sideInObjects);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+                //if (index < sideOutObjects.Length)
+                //{
+                //     //p.boundaryUpVerticalDistribution.SetArrayObject(form.VerticalVelocityDistributionData().Clone());
+                //    sideOutObjects[index].flowData = form.
+                //}
+                //else
+                //{
+                //    sideInObjects[index - sideOutObjects.Length].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
+                //}
+            }
 //            SetPicBoxGrid(listBox.SelectedIndex, false);
+        }
+
+        private void superTypeRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as RadioButton).Checked)
+            {
+                int index = listBox.SelectedIndex;
+                if (index < sideOutObjects.Length)
+                {
+                    sideOutObjects[index].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
+                }
+                else
+                {
+                    sideInObjects[index - sideOutObjects.Length].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
+                }
+            }
+        }
+
+        private void subTypeRdo_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as RadioButton).Checked)
+            {
+                int index = listBox.SelectedIndex;
+                if (index < sideOutObjects.Length)
+                {
+                    sideOutObjects[index].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
+                }
+                else
+                {
+                    sideInObjects[index - sideOutObjects.Length].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
+                }
+            }
+        }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+            bool allInputFinished = true;
+            foreach (RiverSimulationProfile.SideFlowObject obj in sideOutObjects)
+            {
+                if (obj == null || obj.sideFlowPoints == null || obj.sideFlowPoints.Count == 0)
+                {
+                    allInputFinished = false;
+                }
+            }
+            foreach (RiverSimulationProfile.SideFlowObject obj in sideInObjects)
+            {
+                if (obj == null || obj.sideFlowPoints == null || obj.sideFlowPoints.Count == 0)
+                {
+                    allInputFinished = false;
+                }
+            }
+
+            if (!allInputFinished)
+            {
+                MessageBox.Show("輸入未完成！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

@@ -168,6 +168,24 @@ namespace RiverSimulationApplication
                 dataArray = new double[i, j];
             }
 
+            public void CreateValue2D(int i, int j)
+            {
+                Debug.Assert(valueType == ValueType.TwoDim);
+                dataValue = new double[i, j];
+            }
+
+            public void CreateValue3D(int i, int j, int k)
+            {
+                Debug.Assert(valueType == ValueType.ThreeDim);
+                dataValue = new double[i, j, k];
+            }
+
+            public void CreateArray3D(int i, int j, int k)
+            {
+                Debug.Assert(arrayType == ArrayType.ThreeDim);
+                dataArray = new double[i, j, k];
+            }
+
             public void Create3D(int i, int j, int k)
             {
                 Debug.Assert(valueType == ValueType.ThreeDim);
@@ -270,7 +288,24 @@ namespace RiverSimulationApplication
             ConstantFlow,
             VariableFlow,
         }
-        public FlowType flowType = FlowType.None;               //1.0 定/變量流
+        private FlowType flowType = FlowType.None;               //1.0 定/變量流
+        public FlowType GetFlowType() { return flowType; }
+        public void SetFlowType(FlowType t)
+        {
+            if(flowType != t)
+            {
+                flowType = t;
+                for(int i = 0; i < sideInFlowObjs.Length; ++i)
+                {
+                    sideInFlowObjs[i].flowData = null;
+                }
+                for (int i = 0; i < sideOutFlowObjs.Length; ++i)
+                {
+                    sideOutFlowObjs[i].flowData = null;
+                }
+            }
+
+        }
         //1.1 數值參數 =========================================
         //1.1.1 時間
         public double totalSimulationTime;         //1.1.1.1 總模擬時間
@@ -510,8 +545,11 @@ namespace RiverSimulationApplication
 
         private void ResizeListSideFlowObjectSets(ref SideFlowObject[] sets, int n)
         {
-            if (n <= 0)
+            if (n == 0)
+            {
+                sets = null;
                 return;
+            }
 
             if (sets == null)
             {
@@ -800,10 +838,31 @@ namespace RiverSimulationApplication
         [Serializable]
         public class SideFlowObject
         {
+            public SideFlowObject(SideFlowObject obj)
+            {
+                sideFlowType = obj.sideFlowType;
+                criticalFlowType = obj.criticalFlowType;
+                number = obj.number;
+                sideFlowPoints = new List<Point>();
+                criticalFlowType = obj.criticalFlowType;
+                foreach (var item in obj.sideFlowPoints)
+                {
+                    sideFlowPoints.Add(item);
+                }
+                flowData = obj.flowData;
+            }
+
             public SideFlowObject(SideFlowType t)
             {
                 sideFlowType = t;
             }
+
+            public SideFlowObject Clone()
+            {
+                SideFlowObject obj = new SideFlowObject(this);
+                return obj;
+            }
+
             public SideFlowType sideFlowType = SideFlowType.SideOutFlow;
 
             public CriticalFlowType criticalFlowType = CriticalFlowType.SuperCriticalFlow;

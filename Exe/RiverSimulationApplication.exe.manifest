@@ -4,7 +4,7 @@
   <description asmv2:iconFile="RiverSimulation.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.53" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.54" language="neutral" processorArchitecture="msil" />
     <commandLine file="RiverSimulationApplication.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -44,25 +44,25 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GridPictureBox.dll" size="57344">
-      <assemblyIdentity name="GridPictureBox" version="1.0.5968.39082" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="GridPictureBox" version="1.0.6001.15615" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>OM8DojJAhy3PJ5ldLA/baQy8KZW/6mt2SOzG3FeRfzs=</dsig:DigestValue>
+        <dsig:DigestValue>kEAn0Qgk00tYVA4VAQFZ2e8ZZ0QU11ogIxzICi6w/lQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="2186240">
-      <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.53" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RiverSimulationApplication.exe" size="2196992">
+      <assemblyIdentity name="RiverSimulationApplication" version="1.0.0.54" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tfrZs0w8+e6c5fzsaNHf2gbqrCDxvRaUx7BwCSJjYpo=</dsig:DigestValue>
+        <dsig:DigestValue>XyWHvR9HaznGA39qhZOHxClASSE/A8PPBGQPi5aU0Hg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

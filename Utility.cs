@@ -1255,37 +1255,25 @@ namespace RiverSimulationApplication
         //}
 
         //查詢一格網點位於哪個結構物群組？
-        //public static Point WhichGroup(RiverSimulationProfile profile, Point pt, List<Point> addional = null, int passType = -1, int passIndex = -1)
-        //{
-        //    for (int n = 0; n < (int)RiverSimulationProfile.StructureType.StructureTypeSize; ++n)
-        //    {
-        //        List<Point>[] pts = GetSideFlowSets(profile, n);
-        //        if (null == pts)
-        //        {
-        //            continue;
-        //        }
+        public static Point WhichGroup(RiverSimulationProfile.SideFlowObject[] sideOutObjects, RiverSimulationProfile.SideFlowObject[] sideInObjects, Point pt )
+        {
+            for (int i = 0; i < sideOutObjects.Length; ++i)
+            {
+                if (sideOutObjects[i].sideFlowPoints != null && sideOutObjects[i].sideFlowPoints.Contains(pt))
+                {
+                    return new Point(0, i);
+                }
+            }
 
-        //        for (int i = 0; i < pts.Length; ++i)
-        //        {
-        //            List<Point> pl = pts[i];
-        //            if (pl == null || (passIndex != -1 && i == passIndex))
-        //                continue;
-        //            if (pl.Contains(pt))
-        //            {
-        //                return new Point(n, i);
-        //            }
-        //        }
-        //    }
-
-        //    if (addional != null)
-        //    {
-        //        if (addional.Contains(pt))
-        //        {
-        //            return new Point(passType, passIndex);
-        //        }
-        //    }
-        //    return new Point(-1, -1);
-        //}
+            for (int i = 0; i < sideInObjects.Length; ++i)
+            {
+                if (sideInObjects[i].sideFlowPoints != null  && sideInObjects[i].sideFlowPoints.Contains(pt))
+                {
+                    return new Point(1, i);
+                }
+            }
+            return new Point(-1, -1);
+        }
 
         //檢查pl2群組所有格網點是否完全包含在pl1群組中
         public static bool IsAllInclude(List<Point> pl1, List<Point> pl2)

@@ -172,8 +172,8 @@ namespace RiverSimulationApplication
             // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |
             string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode0\\" + key;
             string pngFile = string.Format("{0}\\{1}_{2}_{3}.png", graphicsPath, i, jS, jE).Replace('\\', '/');
-            if (File.Exists(pngFile))
-                return pngFile;
+           // if (File.Exists(pngFile))
+             //   return pngFile;
 
             double distance = 0.0;
             if (jS != 0)
@@ -206,8 +206,9 @@ namespace RiverSimulationApplication
             //*
             string[] setting = {
                                    "grid",
-                                   "term png size 960,630",
-                                   setPngFile,
+                                   "terminal windows",
+                                   //"term png size 960,630",
+                                   //setPngFile,
                                    "title ''",
                                    "ylabel '(m)'",
                                    "xlabel '(m)'",
@@ -228,8 +229,9 @@ namespace RiverSimulationApplication
             // M|1|-|-|D|U| J  | -  | 1  |3D IJ1  |
             string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode1\\" + key;
             string pngFile = string.Format("{0}\\{1}_{2}_{3}.png", graphicsPath, j, iS, iE).Replace('\\', '/');
-            if (File.Exists(pngFile))
-                return pngFile;
+            //Use GnuPlot UI
+            //if (File.Exists(pngFile))
+            //    return pngFile;
 
             double distance = 0.0;
             if (iS != 0)
@@ -262,8 +264,9 @@ namespace RiverSimulationApplication
             //*
             string[] setting = {
                                    "grid",
-                                   "term png size 960,630",
-                                   setPngFile,
+                                   "terminal windows",
+                                   //"term png size 960,630",
+                                   //setPngFile,
                                    "title ''",
                                    "ylabel '(m)'",
                                    "xlabel '(m)'",
@@ -288,8 +291,8 @@ namespace RiverSimulationApplication
             // 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
             string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode2\\" + key;
             string pngFile = string.Format("{0}\\{1}_{2}_{3}_{4}.png", graphicsPath, t, i, jS, jE).Replace('\\', '/');
-            if (File.Exists(pngFile))
-                return pngFile;
+            //if (File.Exists(pngFile))
+            //    return pngFile;
 
             double distance = 0.0;
             if (jS != 0)
@@ -322,8 +325,9 @@ namespace RiverSimulationApplication
             //*
             string[] setting = {
                                    "grid",
-                                   "term png size 960,630",
-                                   setPngFile,
+                                   "terminal windows",
+                                   //"term png size 960,630",
+                                   //setPngFile,
                                    "title ''",
                                    "ylabel '(m)'",
                                    "xlabel '(m)'",
@@ -345,8 +349,8 @@ namespace RiverSimulationApplication
             // 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
             string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\XYMode3\\" + key;
             string pngFile = string.Format("{0}\\{1}_{2}_{3}_{4}.png", graphicsPath, t, j, iS, iE).Replace('\\', '/');
-            if (File.Exists(pngFile))
-                return pngFile;
+            //if (File.Exists(pngFile))
+            //    return pngFile;
 
             double distance = 0.0;
             if (iS != 0)
@@ -379,8 +383,9 @@ namespace RiverSimulationApplication
             //*
             string[] setting = {
                                    "grid",
-                                   "term png size 960,630",
-                                   setPngFile,
+                                   "terminal windows",
+                                   //"term png size 960,630",
+                                   //setPngFile,
                                    "title ''",
                                    "ylabel '(m)'",
                                    "xlabel '(m)'",
@@ -401,8 +406,8 @@ namespace RiverSimulationApplication
             // M|1|-|-|D|U| J  | -  | 1  |3D IJ1  |
             string graphicsPath = Program.GetProjectFileWorkingPath() + "\\Graphics\\ContourMode0\\" + key;
             string pngFile = string.Format("{0}\\C{1}_{2}.png", graphicsPath, iEnd, jEnd).Replace('\\', '/');
-            if (File.Exists(pngFile))
-                return pngFile;
+            //if (File.Exists(pngFile))
+            //    return pngFile;
 
             //產生gunplot輸入檔內容
             StringBuilder sb = new StringBuilder();
@@ -434,8 +439,9 @@ namespace RiverSimulationApplication
                                    "contour base",
                                    "view map",
                                    "pm3d at b",
-                                    "term png size 960,630",
-                                   setPngFile,
+                                   "terminal windows",
+                                   //"term png size 960,630",
+                                   //setPngFile,
                                };
             GnuPlot.Set(setting);
             //plotfile = String.Format("\"{0}\"", plotfile);
@@ -453,8 +459,8 @@ namespace RiverSimulationApplication
             // M|1|-|-|D|U| J  | -  | 1  |3D IJ1  |
             string graphicsPath = string.Format("{0}\\Graphics\\ContourMode0_{1}", Program.GetProjectFileWorkingPath(), tableName.Replace('\\', '_').Replace('/', '_'));
             string pngFile = string.Format("{0}\\C{1}_{2}_{3}.png", graphicsPath, tStart, iEnd, jEnd).Replace('\\', '/');
-            if (File.Exists(pngFile))
-                return pngFile;
+            //if (File.Exists(pngFile))
+            //    return pngFile;
 
             //產生gunplot輸入檔內容
             StringBuilder sb = new StringBuilder();
@@ -486,8 +492,9 @@ namespace RiverSimulationApplication
                                    "contour base",
                                    "view map",
                                    "pm3d at b",
-                                    "term png size 960,630",
-                                   setPngFile,
+                                   "terminal windows",
+                                   //"term png size 960,630",
+                                   //setPngFile,
                                };
             GnuPlot.Set(setting);
             //plotfile = String.Format("\"{0}\"", plotfile);
@@ -614,6 +621,11 @@ namespace RiverSimulationApplication
 
         void ShowImage(string s)
         {
+            //Use GnuPlot GUI
+            this.Close();
+            return;
+
+
             String s2 = s + ".png";
             int errCount = 100;
             while (true)

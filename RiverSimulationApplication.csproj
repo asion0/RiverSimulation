@@ -160,6 +160,12 @@
     <Compile Include="SideInOutFlowSetForm .Designer.cs">
       <DependentUpon>SideInOutFlowSetForm .cs</DependentUpon>
     </Compile>
+    <Compile Include="SideFlowSetTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SideFlowSetTableForm.Designer.cs">
+      <DependentUpon>SideFlowSetTableForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StructureSetTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -274,6 +280,9 @@
     <EmbeddedResource Include="SideInOutFlowSetForm .resx">
       <DependentUpon>SideInOutFlowSetForm .cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SideFlowSetTableForm.resx">
+      <DependentUpon>SideFlowSetTableForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StructureSetTableForm.resx">
       <DependentUpon>StructureSetTableForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,11 +310,23 @@
     <EmbeddedResource Include="ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="SideFlowDataInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SideFlowDataInputForm.Designer.cs">
+      <DependentUpon>SideFlowDataInputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TableInputForm.Designer.cs">
       <DependentUpon>TableInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SideFlowDataTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SideFlowDataTableForm.Designer.cs">
+      <DependentUpon>SideFlowDataTableForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ThreeWayTableForm.cs">
       <SubType>Form</SubType>
@@ -356,8 +377,14 @@
     <EmbeddedResource Include="SimulationModuleForm.resx">
       <DependentUpon>SimulationModuleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SideFlowDataInputForm.resx">
+      <DependentUpon>SideFlowDataInputForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TableInputForm.resx">
       <DependentUpon>TableInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SideFlowDataTableForm.resx">
+      <DependentUpon>SideFlowDataTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThreeWayTableForm.resx">
       <DependentUpon>ThreeWayTableForm.cs</DependentUpon>

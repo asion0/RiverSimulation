@@ -1233,7 +1233,7 @@ namespace RiverSimulationApplication
             }
 
             bool alreadyShow = false;
-            RiverSimulationProfile.StructureChangeType tp = p.CheckSideFlowChanged(p.sideOutFlowSet, ref p.sideInFlowObjs, p.sideOutFlowNumber, true);
+            RiverSimulationProfile.StructureChangeType tp = p.CheckSideFlowChanged(p.sideOutFlowSet, ref p.sideOutFlowObjs, p.sideOutFlowNumber, true);
             if (!alreadyShow && tp == RiverSimulationProfile.StructureChangeType.SelectionAndDataNoMatch)
             {
                 MessageBox.Show("側出流數量或設置已變更，請重新設定側出流！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1250,11 +1250,14 @@ namespace RiverSimulationApplication
             p.ResizeSideInOutFlowSets(p.sideOutFlowNumber, p.sideInFlowNumber);
             SideInOutFlowSetForm form = new SideInOutFlowSetForm();
             form.SetFormMode("側出/入流",
-                (p.sideOutFlowSet) ? p.sideOutFlowNumber : 0, sideOutFlowChk.Text,
-                (p.sideInFlowSet) ? p.sideInFlowNumber : 0, sideInFlowChk.Text);
+                p.sideOutFlowObjs, sideOutFlowChk.Text,
+                p.sideInFlowObjs, sideInFlowChk.Text);
             DialogResult r = form.ShowDialog();
-            //NoticeStructureChange();
-            //structFirstSetting = true;
+            if(r == System.Windows.Forms.DialogResult.OK)
+            {
+                p.sideOutFlowObjs = form.sideOutObjects;
+                p.sideInFlowObjs = form.sideInObjects;
+            }
 
         }
     }

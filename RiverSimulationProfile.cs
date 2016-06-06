@@ -295,17 +295,23 @@ namespace RiverSimulationApplication
             if(flowType != t)
             {
                 flowType = t;
-                for(int i = 0; i < sideInFlowObjs.Length; ++i)
+                if (sideInFlowObjs != null)
                 {
-                    sideInFlowObjs[i].flowData = null;
+                    for (int i = 0; i < sideInFlowObjs.Length; ++i)
+                    {
+                        sideInFlowObjs[i].flowData = null;
+                    }
                 }
-                for (int i = 0; i < sideOutFlowObjs.Length; ++i)
+                if (sideOutFlowObjs != null)
                 {
-                    sideOutFlowObjs[i].flowData = null;
+                    for (int i = 0; i < sideOutFlowObjs.Length; ++i)
+                    {
+                        sideOutFlowObjs[i].flowData = null;
+                    }
                 }
             }
-
         }
+
         //1.1 數值參數 =========================================
         //1.1.1 時間
         public double totalSimulationTime;         //1.1.1.1 總模擬時間

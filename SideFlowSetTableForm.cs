@@ -343,42 +343,21 @@ namespace RiverSimulationApplication
             int index = selCombo.SelectedIndex;
             int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
 
-            if (true)
+            String title = String.Format("輸入{0}流量/水位", selCombo.Items[index].ToString());
+            SideFlowDataInputForm form = new SideFlowDataInputForm();
+            form.SetFormMode(title, p.inputGrid.GetJ, p.inputGrid.GetI, "", "", "",
+                120, 120, false, false, false, (type == 0) ? sideOutObjects[count] : sideInObjects[count]);
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
             {
-                SideFlowDataInputForm form = new SideFlowDataInputForm();
-                form.SetFormMode("", p.inputGrid.GetJ, p.inputGrid.GetI, "", "", "",
-                    120, 120, false, false, false, (type == 0) ? sideOutObjects[count] : sideInObjects[count]);
-                DialogResult r = form.ShowDialog();
-                if (DialogResult.OK == r)
+                if (index < sideOutObjects.Length)
                 {
-                    if (index < sideOutObjects.Length)
-                    {
-                        sideOutObjects[count].flowData = (RiverSimulationProfile.TwoInOne)form.data;
-                    }
-                    else
-                    {
-                        sideInObjects[count].flowData = (RiverSimulationProfile.TwoInOne)form.data;
-                    }
+                    sideOutObjects[count].flowData = (RiverSimulationProfile.TwoInOne)form.data;
                 }
-            }
-            else
-            {
-                SideFlowDataTableForm form = new SideFlowDataTableForm();
-                //form.SetFormMode("上游超臨界流主流方向流量", "流量Q", (type == 0) ? sideOutObjects[count] : sideInObjects[count]);
-                DialogResult r = form.ShowDialog();
-                if (DialogResult.OK == r)
+                else
                 {
-                    if (index < sideOutObjects.Length)
-                    {
-                        //sideOutObjects[count].flowData = (RiverSimulationProfile.TwoInOne)form.data;
-                    }
-                    else
-                    {
-                        //sideInObjects[count].flowData = (RiverSimulationProfile.TwoInOne)form.data;
-                    } 
-                    //p.superMainFlowQuantity = new RiverSimulationProfile.TwoInOne(form.GetData() as RiverSimulationProfile.TwoInOne);
+                    sideInObjects[count].flowData = (RiverSimulationProfile.TwoInOne)form.data;
                 }
-
             }
  
         }

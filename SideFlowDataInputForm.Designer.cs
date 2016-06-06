@@ -35,13 +35,9 @@
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.averageBtn = new System.Windows.Forms.Button();
             this.ok = new System.Windows.Forms.Button();
             this.unitLbl = new System.Windows.Forms.Label();
             this.selInputBtn = new System.Windows.Forms.Button();
-            this.settingBtn = new System.Windows.Forms.Button();
-            this.timeGapTxt = new System.Windows.Forms.TextBox();
-            this.timeStepLbl = new System.Windows.Forms.Label();
             this.singleValueTxt = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -63,9 +59,10 @@
             // tableValueRdo
             // 
             this.tableValueRdo.AutoSize = true;
-            this.tableValueRdo.Location = new System.Drawing.Point(121, 12);
+            this.tableValueRdo.Location = new System.Drawing.Point(161, 15);
+            this.tableValueRdo.Margin = new System.Windows.Forms.Padding(4);
             this.tableValueRdo.Name = "tableValueRdo";
-            this.tableValueRdo.Size = new System.Drawing.Size(71, 16);
+            this.tableValueRdo.Size = new System.Drawing.Size(88, 19);
             this.tableValueRdo.TabIndex = 1;
             this.tableValueRdo.Text = "逐點輸入";
             this.tableValueRdo.UseVisualStyleBackColor = true;
@@ -74,9 +71,10 @@
             // singleValueRdo
             // 
             this.singleValueRdo.AutoSize = true;
-            this.singleValueRdo.Location = new System.Drawing.Point(12, 12);
+            this.singleValueRdo.Location = new System.Drawing.Point(16, 15);
+            this.singleValueRdo.Margin = new System.Windows.Forms.Padding(4);
             this.singleValueRdo.Name = "singleValueRdo";
-            this.singleValueRdo.Size = new System.Drawing.Size(59, 16);
+            this.singleValueRdo.Size = new System.Drawing.Size(73, 19);
             this.singleValueRdo.TabIndex = 1;
             this.singleValueRdo.Text = "均一值";
             this.singleValueRdo.UseVisualStyleBackColor = true;
@@ -84,18 +82,19 @@
             // 
             // copyPasteMenuStrip
             // 
+            this.copyPasteMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.copyPasteMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem,
             this.pasteToolStripMenuItem,
             this.ValueToolStripMenuItem});
             this.copyPasteMenuStrip.Name = "contextMenuStrip1";
-            this.copyPasteMenuStrip.Size = new System.Drawing.Size(181, 70);
+            this.copyPasteMenuStrip.Size = new System.Drawing.Size(219, 82);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.copyToolStripMenuItem.Text = "複製(C)";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -103,7 +102,7 @@
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.pasteToolStripMenuItem.Text = "貼上(P)";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -111,28 +110,17 @@
             // 
             this.ValueToolStripMenuItem.Name = "ValueToolStripMenuItem";
             this.ValueToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.ValueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ValueToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.ValueToolStripMenuItem.Text = "填入數值(V)";
             this.ValueToolStripMenuItem.Click += new System.EventHandler(this.valueToolStripMenuItem_Click);
-            // 
-            // averageBtn
-            // 
-            this.averageBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.averageBtn.Location = new System.Drawing.Point(12, 654);
-            this.averageBtn.Name = "averageBtn";
-            this.averageBtn.Size = new System.Drawing.Size(120, 26);
-            this.averageBtn.TabIndex = 3;
-            this.averageBtn.Text = "平均分配";
-            this.averageBtn.UseVisualStyleBackColor = true;
-            this.averageBtn.Visible = false;
-            this.averageBtn.Click += new System.EventHandler(this.averageBtn_Click);
             // 
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ok.Location = new System.Drawing.Point(824, 654);
+            this.ok.Location = new System.Drawing.Point(1134, 785);
+            this.ok.Margin = new System.Windows.Forms.Padding(4);
             this.ok.Name = "ok";
-            this.ok.Size = new System.Drawing.Size(120, 26);
+            this.ok.Size = new System.Drawing.Size(128, 40);
             this.ok.TabIndex = 4;
             this.ok.Text = "完成";
             this.ok.UseVisualStyleBackColor = true;
@@ -140,61 +128,35 @@
             // 
             // unitLbl
             // 
-            this.unitLbl.Location = new System.Drawing.Point(177, 41);
+            this.unitLbl.Location = new System.Drawing.Point(236, 51);
+            this.unitLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.unitLbl.Name = "unitLbl";
-            this.unitLbl.Size = new System.Drawing.Size(33, 12);
+            this.unitLbl.Size = new System.Drawing.Size(44, 15);
             this.unitLbl.TabIndex = 5;
             this.unitLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // selInputBtn
             // 
             this.selInputBtn.Enabled = false;
-            this.selInputBtn.Location = new System.Drawing.Point(226, 9);
+            this.selInputBtn.Location = new System.Drawing.Point(301, 11);
+            this.selInputBtn.Margin = new System.Windows.Forms.Padding(4);
             this.selInputBtn.Name = "selInputBtn";
-            this.selInputBtn.Size = new System.Drawing.Size(84, 23);
+            this.selInputBtn.Size = new System.Drawing.Size(112, 29);
             this.selInputBtn.TabIndex = 6;
             this.selInputBtn.Text = "圈選填入";
             this.selInputBtn.UseVisualStyleBackColor = true;
             this.selInputBtn.Visible = false;
-            this.selInputBtn.Click += new System.EventHandler(this.selInputBtn_Click);
-            // 
-            // settingBtn
-            // 
-            this.settingBtn.Location = new System.Drawing.Point(369, 656);
-            this.settingBtn.Name = "settingBtn";
-            this.settingBtn.Size = new System.Drawing.Size(120, 26);
-            this.settingBtn.TabIndex = 7;
-            this.settingBtn.Text = "設定";
-            this.settingBtn.UseVisualStyleBackColor = true;
-            this.settingBtn.Visible = false;
-            this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
-            // 
-            // timeGapTxt
-            // 
-            this.timeGapTxt.Location = new System.Drawing.Point(252, 658);
-            this.timeGapTxt.Name = "timeGapTxt";
-            this.timeGapTxt.Size = new System.Drawing.Size(100, 22);
-            this.timeGapTxt.TabIndex = 8;
-            this.timeGapTxt.Visible = false;
-            // 
-            // timeStepLbl
-            // 
-            this.timeStepLbl.AutoSize = true;
-            this.timeStepLbl.Location = new System.Drawing.Point(193, 661);
-            this.timeStepLbl.Name = "timeStepLbl";
-            this.timeStepLbl.Size = new System.Drawing.Size(53, 12);
-            this.timeStepLbl.TabIndex = 9;
-            this.timeStepLbl.Text = "固定時距";
-            this.timeStepLbl.Visible = false;
             // 
             // singleValueTxt
             // 
             this.singleValueTxt.Enabled = false;
-            this.singleValueTxt.Location = new System.Drawing.Point(32, 36);
+            this.singleValueTxt.Location = new System.Drawing.Point(492, 15);
+            this.singleValueTxt.Margin = new System.Windows.Forms.Padding(4);
             this.singleValueTxt.MaxLength = 8;
             this.singleValueTxt.Name = "singleValueTxt";
-            this.singleValueTxt.Size = new System.Drawing.Size(141, 22);
+            this.singleValueTxt.Size = new System.Drawing.Size(187, 25);
             this.singleValueTxt.TabIndex = 2;
+            this.singleValueTxt.Visible = false;
             // 
             // tabControl
             // 
@@ -205,20 +167,21 @@
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Enabled = false;
-            this.tabControl.Location = new System.Drawing.Point(1, 81);
+            this.tabControl.Location = new System.Drawing.Point(1, 51);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(954, 560);
+            this.tabControl.Size = new System.Drawing.Size(1261, 720);
             this.tabControl.TabIndex = 10;
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(946, 534);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1253, 691);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "X";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -234,18 +197,20 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(946, 534);
+            this.dataGridView1.Size = new System.Drawing.Size(1250, 688);
             this.dataGridView1.TabIndex = 0;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(946, 534);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1253, 727);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Y";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -255,21 +220,26 @@
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeRows = false;
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridView2.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(946, 483);
+            this.dataGridView2.Size = new System.Drawing.Size(1250, 724);
             this.dataGridView2.TabIndex = 0;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.dataGridView3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(946, 534);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Size = new System.Drawing.Size(1253, 689);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Z";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -285,29 +255,27 @@
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.ContextMenuStrip = this.copyPasteMenuStrip;
             this.dataGridView3.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowTemplate.Height = 24;
-            this.dataGridView3.Size = new System.Drawing.Size(946, 534);
+            this.dataGridView3.Size = new System.Drawing.Size(1250, 686);
             this.dataGridView3.TabIndex = 0;
             // 
             // SideFlowDataInputForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 689);
+            this.ClientSize = new System.Drawing.Size(1275, 861);
             this.ContextMenuStrip = this.copyPasteMenuStrip;
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.timeStepLbl);
-            this.Controls.Add(this.timeGapTxt);
-            this.Controls.Add(this.settingBtn);
             this.Controls.Add(this.selInputBtn);
             this.Controls.Add(this.unitLbl);
             this.Controls.Add(this.ok);
-            this.Controls.Add(this.averageBtn);
             this.Controls.Add(this.singleValueTxt);
             this.Controls.Add(this.singleValueRdo);
             this.Controls.Add(this.tableValueRdo);
-            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(1061, 738);
             this.Name = "SideFlowDataInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SideFlowDataInputForm";
@@ -332,14 +300,10 @@
         private System.Windows.Forms.ContextMenuStrip copyPasteMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
-        private System.Windows.Forms.Button averageBtn;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.ToolStripMenuItem ValueToolStripMenuItem;
         public System.Windows.Forms.Label unitLbl;
         private System.Windows.Forms.Button selInputBtn;
-        private System.Windows.Forms.Button settingBtn;
-        private System.Windows.Forms.TextBox timeGapTxt;
-        private System.Windows.Forms.Label timeStepLbl;
         private System.Windows.Forms.TextBox singleValueTxt;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;

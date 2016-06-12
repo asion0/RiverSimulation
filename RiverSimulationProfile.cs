@@ -17,7 +17,7 @@ namespace RiverSimulationApplication
     {
         //public static RiverSimulationProfile profile = new RiverSimulationProfile();
         public static RiverSimulationProfile profile = null;
- 
+
         #region Constructor
         public RiverSimulationProfile()
         {
@@ -192,7 +192,7 @@ namespace RiverSimulationApplication
                 Debug.Assert(arrayType == ArrayType.ThreeDim);
                 dataValue = new double[i, j, k];
                 dataArray = new double[i, j, k];
-            }         
+            }
 
             public void Clear()
             {
@@ -208,7 +208,7 @@ namespace RiverSimulationApplication
                 return dataArray as double[,];
             }
 
-            public double[,,] Array3D()
+            public double[, ,] Array3D()
             {
                 Debug.Assert(arrayType == ArrayType.ThreeDim);
                 return dataArray as double[, ,];
@@ -231,7 +231,7 @@ namespace RiverSimulationApplication
                 return dataValue as double[,];
             }
 
-            public double[,,] Value3D()
+            public double[, ,] Value3D()
             {
                 Debug.Assert(valueType == ValueType.ThreeDim);
                 return dataValue as double[, ,];
@@ -281,7 +281,7 @@ namespace RiverSimulationApplication
         #endregion
 
         //水理參數
-        #region WaterModeling   
+        #region WaterModeling
         public enum FlowType
         {
             None,
@@ -292,7 +292,7 @@ namespace RiverSimulationApplication
         public FlowType GetFlowType() { return flowType; }
         public void SetFlowType(FlowType t)
         {
-            if(flowType != t)
+            if (flowType != t)
             {
                 flowType = t;
                 if (sideInFlowObjs != null)
@@ -355,7 +355,7 @@ namespace RiverSimulationApplication
         //public double roughnessHeightKs { get; set; }           //1.2.1.3 粗糙高度 ks mm -- 均一值
         //public double[,] roughnessHeightKsArray { get; set; }   //1.2.1.3 粗糙高度 ks mm -- 矩陣[I,J]
 
-        public enum TurbulenceViscosityType     
+        public enum TurbulenceViscosityType
         {   //紊流黏滯係數 種類
             None,
             UserDefine,
@@ -385,7 +385,7 @@ namespace RiverSimulationApplication
         //1.2.3 其他
         public double gravityConstant;             //1.2.3.1 重力常數 單一數值 m/s2 9.81 實數 Free
         public double waterDensity;                //1.2.3.2 水密度 單一數值 kg/m3 1000 實數(>0) Free
-        
+
         //1.3 二次流效應 二維 only
         public enum CurvatureRadiusType
         {
@@ -424,11 +424,11 @@ namespace RiverSimulationApplication
         public StructureChangeType CheckStructurerChanged(bool set, ref List<Point>[] sets, int num, bool clear)
         {   //return true if changed
             StructureChangeType changed = StructureChangeType.NoChange;
-            if (!set && sets != null) 
+            if (!set && sets != null)
             {   //沒勾選此類結構物但有結構物資料
                 changed = StructureChangeType.NoSelectButHasData;
             }
-            else if (set && sets == null) 
+            else if (set && sets == null)
             {  //有勾選此類結構物但無結構物資料 
                 changed = StructureChangeType.HasSelectButNoData;
             }
@@ -493,7 +493,7 @@ namespace RiverSimulationApplication
             {
                 foreach (SideFlowObject o in sets)
                 {
-                    if (o.sideFlowPoints == null)
+                    if (o == null || o.sideFlowPoints == null)
                     {
                         changed = StructureChangeType.NotAllDataSet;
                         break;
@@ -524,13 +524,13 @@ namespace RiverSimulationApplication
             SuperCriticalFlow,  //超臨界流
             SubCriticalFlow     //亞臨界流
         }
- 
+
         //1.6 高含砂效應 供使用者輸入 6 個常數：α1、β1、c 1、α2、β2、c 2
         public double highSandEffectAlpha1 { get; set; }
         public double highSandEffectBeta1 { get; set; }
         public double highSandEffectC1 { get; set; }
         public double highSandEffectAlpha2 { get; set; }
-        public double highSandEffectBeta2 { get; set; }          
+        public double highSandEffectBeta2 { get; set; }
         public double highSandEffectC2 { get; set; }
 
         //Support Functions
@@ -680,7 +680,7 @@ namespace RiverSimulationApplication
         public bool surfaceErosion;                         //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
         public double surfaceErosionCoefficient;            //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
         public double surfaceErosionCriticalShearStress;    //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
-        
+
         public bool massiveErosion;                         //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
         public double massiveErosionCriticalShearStress;    //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
 
@@ -700,13 +700,13 @@ namespace RiverSimulationApplication
         }
         //2.4.1 一般輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
         //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
-        public SandTransportEquationType sandTransportEquation; 
+        public SandTransportEquationType sandTransportEquation;
 
         //2.5 岩床
         public bool waterJetting;           //2.5.1 水力沖刷
         public double waterJettingAlpha;    //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
         public double waterJettingBeta;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
-       
+
         public bool sedimentErosion;                            //2.5.2 泥砂磨蝕
         public double sedimentErosionElasticModulusValue;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
         public double[,] sedimentErosionElasticModulusArray;    //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
@@ -751,25 +751,25 @@ namespace RiverSimulationApplication
         //2.6.4 岸壁土壤性質
         public bool quaySoilProperties { get; set; }    //2.6.4 岸壁土壤性質
         public double cohesion;                         //2.6.4.1 凝聚力 二選一 pa 實數(>0) a. 0：均一值，逐點給：-1
-        public double[,,] cohesionArray;                //2.6.4.1 凝聚力 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[, ,] cohesionArray;                //2.6.4.1 凝聚力 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double reposeAngle;                      //2.6.4.2 安息角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[,,] reposeAngleArray;             //2.6.4.2 安息角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[, ,] reposeAngleArray;             //2.6.4.2 安息角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double frictionAngle;                    //2.6.4.3 內摩擦角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[,,] frictionAngleArray;           //2.6.4.3 內摩擦角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[, ,] frictionAngleArray;           //2.6.4.3 內摩擦角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double flowRateRatio;                    //2.6.4.3 比流率 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[,,] flowRateRatioArray;          //2.6.4.3 比流率 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[, ,] flowRateRatioArray;          //2.6.4.3 比流率 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double porosityRatio;                    //2.6.4.5 孔隙率二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
-        public double[,,] porosityRatioArray;           //若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[, ,] porosityRatioArray;           //若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double soilProportion;                  //2.6.4.6 土壤比重二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
-        public double[,,] soilProportionArray;         //若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[, ,] soilProportionArray;         //若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         public double ShearStrengthAngle;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[,,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public double[, ,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         //3. 初始條件
         //3.1 水理模組 =========================================
@@ -817,7 +817,7 @@ namespace RiverSimulationApplication
         public TwoInOne superMainFlowQuantity;              //4.1.1.1.1.1 流量 m3/s 實數(>=0) a. 圖 5，“即時互動處”呈現流量歷線圖，根
         public TwoInOne superSideFlowQuantity;              //4.1.1.1.1.1 流量 m3/s 實數(>=0) a. 圖 5，“即時互動處”呈現流量歷線圖，根
         public TwoInOne superWaterLevel;                //4.1.1.1.1.2 水位 m 實數
-        
+
         //4.1.1.1.2 亞臨界流
         //public int subBoundaryConditionNumber;        //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
         public TwoInOne subMainFlowQuantity;              //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
@@ -832,11 +832,11 @@ namespace RiverSimulationApplication
         public VerticalVelocityType verticalVelocityType;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
         public int verticalVelocityDistributionNumber;  ////4.1.1.2 垂向流速分布(3D) 分層數目P 整數(>=3) 
         public double[,] verticalVelocityDistributionArray;     //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0) 
-        
+
         //4.1.2 下游 二選一
         public FlowConditionType downFlowCondition;         //4.1.2 下游 二選一
         public TwoInOne downSubWaterLevel;                //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
-        
+
         //4.1.3 側壁
         public bool sidewallBoundarySlip;               //4.1.3.1 側壁邊界滑移 -- 0 整數(>0) 整數 8 格 0：非滑移、1：滑移，check box
         public bool sideOutFlowSet { get; set; }                  //4.1.3.2.1 側出流勾選
@@ -949,7 +949,7 @@ namespace RiverSimulationApplication
         public TwoInOne inputConcentration;                             //4.2.3.2 通量/給定濃度二選一 a. 先令使用者選擇是通量或者是給定濃
 
         public bool stopFlah;
-         //功能檢查
+        //功能檢查
         #region Fuction Check
         public bool Is3DMode() { return dimensionType == DimensionType.Type3D; }
         public bool Is2DMode() { return dimensionType == DimensionType.Type2D; }
@@ -959,52 +959,52 @@ namespace RiverSimulationApplication
         public bool IsVariableFlowType() { return flowType == FlowType.VariableFlow; }
         #endregion
 
-        public bool IsImportFinished() 
+        public bool IsImportFinished()
         {
             return importFinished;
         }
 
-        public bool IsImportReady() 
+        public bool IsImportReady()
         {
             return dimensionType != DimensionType.None && modelingType != ModelingType.None;
         }
 
-        public bool IsSimulationModuleFinished() 
+        public bool IsSimulationModuleFinished()
         {
             return dimensionType != DimensionType.None && modelingType != ModelingType.None;
         }
 
-        public bool IsSimulationModuleReady() 
+        public bool IsSimulationModuleReady()
         {
             return true;
         }
 
-        public bool IsWaterModelingFinished() 
-        { 
-            return waterModelingFinished; 
-        }
-
-        public bool IsWaterModelingReady() 
+        public bool IsWaterModelingFinished()
         {
-            return IsImportFinished(); 
+            return waterModelingFinished;
         }
 
-        public bool IsMovableBedFinished() 
-        { 
-            return movableBedFinished; 
+        public bool IsWaterModelingReady()
+        {
+            return IsImportFinished();
         }
 
-        public bool IsMovableBedReady() 
+        public bool IsMovableBedFinished()
+        {
+            return movableBedFinished;
+        }
+
+        public bool IsMovableBedReady()
         {
             return IsImportFinished() && modelingType == ModelingType.MovableBed;
         }
 
-        public bool IsInitialConditionsFinished() 
-        { 
-            return initialConditionsFinished; 
+        public bool IsInitialConditionsFinished()
+        {
+            return initialConditionsFinished;
         }
 
-        public bool IsInitialConditionsReady() 
+        public bool IsInitialConditionsReady()
         {
             if (modelingType == ModelingType.MovableBed)
                 return IsWaterModelingFinished() && IsMovableBedFinished();
@@ -1012,39 +1012,39 @@ namespace RiverSimulationApplication
                 return IsWaterModelingFinished();
         }
 
-        public bool IsBoundaryConditionsFinished() 
-        { 
-            return boundaryConditionsFinished; 
+        public bool IsBoundaryConditionsFinished()
+        {
+            return boundaryConditionsFinished;
         }
 
-        public bool IsBoundaryConditionsReady() 
+        public bool IsBoundaryConditionsReady()
         {
             if (modelingType == ModelingType.MovableBed)
-                return IsWaterModelingFinished() && IsMovableBedFinished(); 
+                return IsWaterModelingFinished() && IsMovableBedFinished();
             else
                 return IsWaterModelingFinished();
         }
 
-        public bool IsRunSimulationFinished() 
-        { 
-            return runSimulationFinished; 
+        public bool IsRunSimulationFinished()
+        {
+            return runSimulationFinished;
         }
 
-        public bool IsRunSimulationReady() 
-        { 
-            return IsBoundaryConditionsFinished() && IsInitialConditionsFinished(); 
+        public bool IsRunSimulationReady()
+        {
+            return IsBoundaryConditionsFinished() && IsInitialConditionsFinished();
         }
 
         public bool IsSimulationResultFinished()
-        { 
-            return IsRunSimulationFinished(); 
+        {
+            return IsRunSimulationFinished();
         }
 
-        public bool IsSimulationResultReady() 
-        { 
-            return IsRunSimulationFinished(); 
+        public bool IsSimulationResultReady()
+        {
+            return IsRunSimulationFinished();
         }
-        
+
         //Temp variable for demo version
         public bool importFinished = false;
         public bool simulationModuleFinished = false;
@@ -1060,7 +1060,7 @@ namespace RiverSimulationApplication
         //public DimensionType GetModuleType1() { return dimensionType; }
         //public void SetModuleType2(ModelingType t) { modelingType = t; }
         //public ModelingType GetModuleType2() { return modelingType; }
-        
+
         ////Setting for special functions
         //public bool diffusionEffectFunction { get; set; }
         //public bool secFlowEffectFunction { get; set; }
@@ -1108,7 +1108,7 @@ namespace RiverSimulationApplication
         //private List<Point>[] _immersedBoundaryPts = null;
         //public bool sidewallBoundarySlip = false;      //4.1.3.1
 
-  
+
         private void Initialization()
         {
             //模組特殊功能高程
@@ -1206,7 +1206,7 @@ namespace RiverSimulationApplication
             highSandEffectBeta1 = 0;
             highSandEffectC1 = 0;
             highSandEffectAlpha2 = 0;
-            highSandEffectBeta2 = 0;          
+            highSandEffectBeta2 = 0;
             highSandEffectC2 = 0;
 
             //動床參數
@@ -1224,7 +1224,7 @@ namespace RiverSimulationApplication
             outputControlDensityInformation3D = false;   //2.1.3 輸出控制 三維流速資訊
 
             //2.1.4 選擇擴散公式
-            diffusionFormulaUse = false;;                //2.1.4 擴散公式
+            diffusionFormulaUse = false; ;                //2.1.4 擴散公式
             diffusionFormula = DiffusionFormulaType.None;   //2.1.4 擴散公式
 
             diffusionBonusProportionalInMainstream = 1.0;   //2.1.5 主流方向擴散係數加成比例單一數值 1 實數(>=0) 實數8 格三維 only (隱藏版功能)
@@ -1249,17 +1249,17 @@ namespace RiverSimulationApplication
             surfaceErosion = false;                 //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
             surfaceErosionCoefficient = 0;          //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
             surfaceErosionCriticalShearStress = 0;  //2.3.2.1 表層沖刷 -- 實數(>0) 供者用者輸入係數及臨界剪應力(N/m2)兩個值
-        
+
             massiveErosion = false;                 //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
             massiveErosionCriticalShearStress = 0;  //2.3.2.2 塊狀沖蝕 單一數值 N/m2。 -- 實數(>0) 供者用者輸入臨界剪應力(N/m2)
             noErosionElevationUse = false;             //2.3.3 不可沖刷高程 二選一 m 實數 a. option 用 check box
             noErosionElevation = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim);            //b. 0：均一值，逐點給：-1
 
             //2.4.2 高含砂輸砂公式 多選一 -- -- 整數 8 格 共 3 種選項
-            sandTransportEquation = SandTransportEquationType.None; 
+            sandTransportEquation = SandTransportEquationType.None;
             waterJettingAlpha = 0;    //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
             waterJettingBeta = 0;     //2.5.1 水力沖刷 實數 供使用者輸入α及β兩個常數。
-       
+
             sedimentErosion = false;                            //2.5.2 泥砂磨蝕
             sedimentErosionElasticModulusValue = 0;       //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 0：均一值，逐點給：-1
             sedimentErosionElasticModulusArray = null;    //2.5.2.1 彈性模數 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
@@ -1267,7 +1267,7 @@ namespace RiverSimulationApplication
             sedimentErosionTensileStrengthArray = null;   //2.5.2.2 張力強度 二選一 pa 實數(>=0) a. 若為逐點給，則參數形式為矩陣(I,J)
 
             bedrockElevation = false;           //2.5.3 岩床高程
-            bedrockElevationValue = 0;;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1。
+            bedrockElevationValue = 0; ;    //2.5.3 岩床高程 二選一 m 實數 a. 0：均一值，逐點給：-1。
             bedrockElevationArray = null; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
 
             //2.6 岸壁穩定分析 option
@@ -1331,13 +1331,13 @@ namespace RiverSimulationApplication
 
             //4.1.1 上游
             upFlowCondition = FlowConditionType.None;         //4.1.1.1 流況設定 二選一
-            
+
             //4.1.1.1.1 超臨界流
             //boundaryConditionNumber = 0;                   //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
             superMainFlowQuantity = new TwoInOne(TwoInOne.ValueType.TwoDim, TwoInOne.ArrayType.TwoDim);                 //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
             superSideFlowQuantity = new TwoInOne(TwoInOne.ValueType.TwoDim, TwoInOne.ArrayType.TwoDim);                 //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
             superWaterLevel = new TwoInOne(TwoInOne.ValueType.TwoDim, TwoInOne.ArrayType.TwoDim);                   //4.1.1.1.1.2 水位 m 實數
-        
+
             //4.1.1.1.2 亞臨界流
             //subBoundaryConditionNumber = 0;                 //4.1.1.1.2.0 邊界條件數目 T 整數(>1) 定量流不輸入
             subMainFlowQuantity = new TwoInOne(TwoInOne.ValueType.TwoDim, TwoInOne.ArrayType.TwoDim);               //4.1.1.1.2.1 流量 實數(>=0) 同 4.1.1.1.1.1 
@@ -1345,7 +1345,7 @@ namespace RiverSimulationApplication
 
             verticalVelocityType = VerticalVelocityType.Auto;       //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0)
             verticalVelocityDistributionArray = null;     //4.1.1.2 垂向流速分布(3D) 矩陣(2,P) 實數(>=0) 
-        
+
             //4.1.2 下游 二選一
             downFlowCondition = FlowConditionType.None;         //4.1.2 下游 二選一
             downSubWaterLevel = new TwoInOne(TwoInOne.ValueType.TwoDim, TwoInOne.ArrayType.TwoDim);                   //4.1.2.2.1 水位 實數 同 4.1.1.1.1.2，T 與前同(4.1.1.1.1.0 或4.1.1.1.2.0)
@@ -1428,9 +1428,9 @@ namespace RiverSimulationApplication
         };
 
         private BackgroundMapType bkImgType = BackgroundMapType.None;
-        public BackgroundMapType GetBackgroundMapType() 
+        public BackgroundMapType GetBackgroundMapType()
         {
-            return bkImgType; 
+            return bkImgType;
         }
 
         public void ClearBackgroundMapType()
@@ -1447,8 +1447,8 @@ namespace RiverSimulationApplication
             tl = Environment.CurrentDirectory + "\\tl.jpg";
             tr = Environment.CurrentDirectory + "\\tr.jpg";
             bl = Environment.CurrentDirectory + "\\bl.jpg";
-            br = Environment.CurrentDirectory + "\\br.jpg"; 
-            if (bkImgType == BackgroundMapType.GoogleStaticMap && 
+            br = Environment.CurrentDirectory + "\\br.jpg";
+            if (bkImgType == BackgroundMapType.GoogleStaticMap &&
                 (!File.Exists(tl) || !File.Exists(tr) || !File.Exists(bl) || !File.Exists(br)))
             {
 
@@ -1464,7 +1464,7 @@ namespace RiverSimulationApplication
 
             }
         }
- 
+
         public bool DownloadGoogleStaticMap()
         {
             if (File.Exists(tl))
@@ -1474,11 +1474,11 @@ namespace RiverSimulationApplication
             if (File.Exists(tr))
             {
                 File.Delete(tr);
-            } 
+            }
             if (File.Exists(bl))
             {
                 File.Delete(bl);
-            } 
+            }
             if (File.Exists(br))
             {
                 File.Delete(br);
@@ -1498,7 +1498,7 @@ namespace RiverSimulationApplication
         //{
         //    if (coorType == TWD97)
         //        return; 
-            
+
         //    for (int i = 0; i < inputGrid.GetI; ++i)
         //    {
         //        for (int j = 0; j < inputGrid.GetJ; ++j)
@@ -1585,7 +1585,7 @@ namespace RiverSimulationApplication
             sb.Append("      20       0                                                                \n");
 
             //註3-1(水理2D 輸出控制開關，1：開、0：關。)：
-            sb.AppendFormat("{0,8}", (outputControlInitialBottomElevation? 1 : 0).ToString());    //1.1.3 輸出控制 水深平均流速
+            sb.AppendFormat("{0,8}", (outputControlInitialBottomElevation ? 1 : 0).ToString());    //1.1.3 輸出控制 水深平均流速
             sb.AppendFormat("{0,8}", (outputControlAverageDepthFlowRate ? 1 : 0).ToString());    //1.1.3 輸出控制 初始底床高程
             sb.AppendFormat("{0,8}", (outputControlBottomShearingStress ? 1 : 0).ToString());    //1.1.3 輸出控制 底床剪應力
             sb.AppendFormat("{0,8}", (outputControlLevel ? 1 : 0).ToString());    //1.1.3 輸出控制 水位
@@ -1730,7 +1730,7 @@ namespace RiverSimulationApplication
                     {
                         sb.Append("\n");
                         count = 0;
-                    } 
+                    }
                     if (curvatureRadius == null)
                     {
                         sb.AppendFormat("{0,8}", (0).ToString());
@@ -1784,7 +1784,7 @@ namespace RiverSimulationApplication
             DumpTwoInOne(depthAverageFlowSpeedV, ref sb);       //3.1.2 水深平均流速-V
 
             //註14：
-            if (roughnessType== RoughnessType.ManningN)
+            if (roughnessType == RoughnessType.ManningN)
             {
                 DumpTwoInOne(manningN, ref sb, DumpTwoInOneType.OnlyType, true);       //1.2.1.1 Manning n 二選一
             }
@@ -1794,10 +1794,10 @@ namespace RiverSimulationApplication
             }
             else
             {
-                DumpTwoInOne(null, ref sb, DumpTwoInOneType.OnlyType, true);       
+                DumpTwoInOne(null, ref sb, DumpTwoInOneType.OnlyType, true);
             }
             sb.AppendFormat("{0,8}\n", ((int)roughnessType).ToString());      //糙度係數之類型。輸入1 為Manning 糙度係數(n)；輸入2 為Chezy 糙度係數(C)。1.2.1
-            if (roughnessType== RoughnessType.ManningN)
+            if (roughnessType == RoughnessType.ManningN)
             {
                 DumpTwoInOne(manningN, ref sb, DumpTwoInOneType.OnlyValueOrArray);       //1.2.1.1 Manning n 二選一
             }
@@ -1807,7 +1807,7 @@ namespace RiverSimulationApplication
             }
             else
             {
-                DumpTwoInOne(null, ref sb, DumpTwoInOneType.OnlyValueOrArray);       
+                DumpTwoInOne(null, ref sb, DumpTwoInOneType.OnlyValueOrArray);
             }
 
             //註15：上游邊界條件設定
@@ -2014,7 +2014,7 @@ namespace RiverSimulationApplication
                         double v;
                         if (suspendedLoadDepthAvgConcentration.type == TwoInOne.Type.UseArray)
                         {   //20150306 - 改用科學符號1.36-E04，統一小數點後2位，這裡只有3位精度沒關係。
-                            double v1= suspendedLoadDepthAvgConcentration.Array3D()[k, j, t];
+                            double v1 = suspendedLoadDepthAvgConcentration.Array3D()[k, j, t];
                             double v2 = suspendedLoadDepthAvgConcentration.Value3D()[k, 0, t];
                             v = v1 * v2 / 100.0;
                             //sb.AppendFormat("{0,8}", suspendedLoadDepthAvgConcentration.Array3D()[k, j, t]);
@@ -2036,7 +2036,7 @@ namespace RiverSimulationApplication
         {
             double q = 0;
             double d0, d1, d;
-            if(!o.check)
+            if (!o.check)
             {   //均一流量，採用Value欄位直接回傳
                 d = Math.Sqrt(
                     Math.Pow(inputGrid.inputCoor[0, 0].x - inputGrid.inputCoor[0, inputGrid.GetJ - 1].x, 2) +
@@ -2060,15 +2060,15 @@ namespace RiverSimulationApplication
         public double CalcWaterLevel(int t, int j, TwoInOne o)
         {
             double l = 0;
-            if(o.type == TwoInOne.Type.UseArray)
+            if (o.type == TwoInOne.Type.UseArray)
             {   //逐點輸入，採用Value欄位 
                 l = o.Array2D()[j, t];
             }
-            else        
+            else
             {   //均一水位，採用Value欄位直接回傳
                 l = o.Value2D()[0, t];
             }
-  
+
             return l;
         }
 
@@ -2080,10 +2080,10 @@ namespace RiverSimulationApplication
             for (int k = 0; k < sedimentParticlesNumber; ++k)
             {
                 if (count == 5)
-                {   
+                {
                     sb.AppendFormat("\n");
                     count = 0;
-                } 
+                }
                 sb.AppendFormat(" {0,15}", sedimentParticleSize[0, k]);
                 ++count;
             }
@@ -2108,7 +2108,7 @@ namespace RiverSimulationApplication
                 {
                     sb.AppendFormat("\n");
                     count = 0;
-                } 
+                }
                 sb.AppendFormat(" {0,7}", depthAverageConcentration.Value3D()[k, 0, 0]);
                 ++count;
             }
@@ -2138,7 +2138,7 @@ namespace RiverSimulationApplication
                     sb.AppendFormat("\n");
                     count = 0;
                 }
-                if(count == 1)
+                if (count == 1)
                 {
                     sb.AppendFormat("{0,8}", " ");
                     ++count;
@@ -2211,7 +2211,7 @@ namespace RiverSimulationApplication
                     }
                 }
             }
-           
+
             using (StreamWriter outfile = new StreamWriter(file))
             {
                 outfile.Write(sb.ToString());
@@ -2228,7 +2228,7 @@ namespace RiverSimulationApplication
             for (int p = 0; p < verticalLevelNumber; ++p)
             {
                 if (count == 10)
-                {   
+                {
                     sb.AppendFormat("\n");
                     count = 0;
                 }
@@ -2294,19 +2294,19 @@ namespace RiverSimulationApplication
                 sb.AppendFormat(" {0,7}", (int)zeroEquationType);       //紊流黏滯係數。1.2.2
                 sb.AppendFormat(" {0,7}", (int)zeroEquationType);       //紊流黏滯係數。1.2.2
             }
-            else if(turbulenceViscosityType == TurbulenceViscosityType.TwinEquation)
+            else if (turbulenceViscosityType == TurbulenceViscosityType.TwinEquation)
             {
                 sb.AppendFormat(" {0,7}", 6);       //紊流黏滯係數。1.2.2
                 sb.AppendFormat(" {0,7}", 6);       //紊流黏滯係數。1.2.2
             }
-            else 
+            else
             {
                 sb.AppendFormat(" {0,7}", (int)turbulenceViscosityType - 1);       //紊流黏滯係數。1.2.2
                 sb.AppendFormat(" {0,7}", (int)turbulenceViscosityType - 1);       //紊流黏滯係數。1.2.2
             }
 
             sb.AppendFormat(" {0,7}", 0);       //模式預設值
-            sb.AppendFormat(" {0,7}", (verticalVelocitySlice== VerticalVelocitySliceType.Open) ? 1 : 0);       //垂向流速剖面。3.1.4
+            sb.AppendFormat(" {0,7}", (verticalVelocitySlice == VerticalVelocitySliceType.Open) ? 1 : 0);       //垂向流速剖面。3.1.4
             sb.AppendFormat(" {0,7}", 0);       //模式預設值。
             sb.AppendFormat("\n");
 
@@ -2330,7 +2330,7 @@ namespace RiverSimulationApplication
             sb.AppendFormat(" {0,7} {1,7}\n", outputControlVelocityInformation3D ? 1 : 0, outputControlDensityInformation3D ? 1 : 0);
 
             //註36：垂向濃度分布(3D)
-            if(boundaryUpVerticalDistribution.type != TwoInOne.Type.UseArray)
+            if (boundaryUpVerticalDistribution.type != TwoInOne.Type.UseArray)
             {   //均一值
                 sb.AppendFormat(" {0,7}\n", 0);
                 sb.AppendFormat(" {0,7}\n", 0);
@@ -2359,7 +2359,7 @@ namespace RiverSimulationApplication
                         sb.AppendFormat("\n");
                         count = 0;
                     }
-                    sb.AppendFormat(" {0,7}", boundaryUpVerticalDistribution.Array2D()[0,  pp]);
+                    sb.AppendFormat(" {0,7}", boundaryUpVerticalDistribution.Array2D()[0, pp]);
                     ++count;
                 }
                 sb.AppendFormat("\n");
@@ -2412,7 +2412,7 @@ namespace RiverSimulationApplication
 
             //註38：模式預設值
             sb.AppendFormat("       0\n");
-            sb.AppendFormat("     500\n"); 
+            sb.AppendFormat("     500\n");
 
             using (StreamWriter outfile = new StreamWriter(file))
             {
@@ -2422,7 +2422,7 @@ namespace RiverSimulationApplication
             return true;
         }
 
-        public bool GenerateStructureFile(List<Point> [] sets, string file)
+        public bool GenerateStructureFile(List<Point>[] sets, string file)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -2439,7 +2439,7 @@ namespace RiverSimulationApplication
             {
                 for (int j = 0; j < inputGrid.GetJ; ++j)
                 {
-                    sb.Append(setsTmp[i,j] ? "1 " : "0 "); 
+                    sb.Append(setsTmp[i, j] ? "1 " : "0 ");
                 }
                 sb.Append("\r\n");
             }
@@ -2461,7 +2461,7 @@ namespace RiverSimulationApplication
 
         void DumpTwoInOne(TwoInOne o, ref StringBuilder sb, DumpTwoInOneType t = DumpTwoInOneType.Normal, bool noNewLine = false)
         {
-            if(o == null || o.type == TwoInOne.Type.None)
+            if (o == null || o.type == TwoInOne.Type.None)
             {
                 if (t != DumpTwoInOneType.OnlyValueOrArray)
                 {
@@ -2477,7 +2477,7 @@ namespace RiverSimulationApplication
                 }
                 return;
             }
-            if(o.type == TwoInOne.Type.UseValue)
+            if (o.type == TwoInOne.Type.UseValue)
             {
                 if (t != DumpTwoInOneType.OnlyValueOrArray)
                 {
@@ -2494,7 +2494,7 @@ namespace RiverSimulationApplication
                 }
                 return;
             }
-            
+
             if (t != DumpTwoInOneType.OnlyValueOrArray)
             {
                 sb.AppendFormat("{0,8}", (-1).ToString());

@@ -148,55 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ok.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;graphRdo.Name" xml:space="preserve">
-    <value>graphRdo</value>
-  </data>
-  <data name="&gt;&gt;graphRdo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;graphRdo.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;graphRdo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableRdo.Name" xml:space="preserve">
-    <value>tableRdo</value>
-  </data>
-  <data name="&gt;&gt;tableRdo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableRdo.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;tableRdo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 76</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>表格/圖形</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="graphRdo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -205,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="graphRdo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 35</value>
+    <value>238, 29</value>
   </data>
   <data name="graphRdo.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 16</value>
@@ -232,7 +184,7 @@
     <value>True</value>
   </data>
   <data name="tableRdo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 35</value>
+    <value>18, 29</value>
   </data>
   <data name="tableRdo.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 16</value>
@@ -255,53 +207,29 @@
   <data name="&gt;&gt;tableRdo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;param2Cmb.Name" xml:space="preserve">
-    <value>param2Cmb</value>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
-  <data name="&gt;&gt;param2Cmb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 65</value>
   </data>
-  <data name="&gt;&gt;param2Cmb.Parent" xml:space="preserve">
-    <value>paramGrp</value>
-  </data>
-  <data name="&gt;&gt;param2Cmb.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;param1Cmb.Name" xml:space="preserve">
-    <value>param1Cmb</value>
-  </data>
-  <data name="&gt;&gt;param1Cmb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;param1Cmb.Parent" xml:space="preserve">
-    <value>paramGrp</value>
-  </data>
-  <data name="&gt;&gt;param1Cmb.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="paramGrp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 176</value>
-  </data>
-  <data name="paramGrp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 76</value>
-  </data>
-  <data name="paramGrp.TabIndex" type="System.Int32, mscorlib">
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="paramGrp.Text" xml:space="preserve">
-    <value>參數</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>表格/圖形</value>
   </data>
-  <data name="&gt;&gt;paramGrp.Name" xml:space="preserve">
-    <value>paramGrp</value>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;paramGrp.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;paramGrp.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;paramGrp.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="param2Cmb.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 34</value>
@@ -345,89 +273,29 @@
   <data name="&gt;&gt;param1Cmb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;animChk.Name" xml:space="preserve">
-    <value>animChk</value>
+  <data name="paramGrp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 165</value>
   </data>
-  <data name="&gt;&gt;animChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;animChk.Parent" xml:space="preserve">
-    <value>formGrp</value>
-  </data>
-  <data name="&gt;&gt;animChk.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;graphType4Rdo.Name" xml:space="preserve">
-    <value>graphType4Rdo</value>
-  </data>
-  <data name="&gt;&gt;graphType4Rdo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;graphType4Rdo.Parent" xml:space="preserve">
-    <value>formGrp</value>
-  </data>
-  <data name="&gt;&gt;graphType4Rdo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;graphType3Rdo.Name" xml:space="preserve">
-    <value>graphType3Rdo</value>
-  </data>
-  <data name="&gt;&gt;graphType3Rdo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;graphType3Rdo.Parent" xml:space="preserve">
-    <value>formGrp</value>
-  </data>
-  <data name="&gt;&gt;graphType3Rdo.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;graphType2Rdo.Name" xml:space="preserve">
-    <value>graphType2Rdo</value>
-  </data>
-  <data name="&gt;&gt;graphType2Rdo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;graphType2Rdo.Parent" xml:space="preserve">
-    <value>formGrp</value>
-  </data>
-  <data name="&gt;&gt;graphType2Rdo.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;graphType1Rdo.Name" xml:space="preserve">
-    <value>graphType1Rdo</value>
-  </data>
-  <data name="&gt;&gt;graphType1Rdo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;graphType1Rdo.Parent" xml:space="preserve">
-    <value>formGrp</value>
-  </data>
-  <data name="&gt;&gt;graphType1Rdo.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="formGrp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 94</value>
-  </data>
-  <data name="formGrp.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="paramGrp.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 76</value>
   </data>
-  <data name="formGrp.TabIndex" type="System.Int32, mscorlib">
+  <data name="paramGrp.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="formGrp.Text" xml:space="preserve">
-    <value>形式</value>
+  <data name="paramGrp.Text" xml:space="preserve">
+    <value>參數</value>
   </data>
-  <data name="&gt;&gt;formGrp.Name" xml:space="preserve">
-    <value>formGrp</value>
+  <data name="&gt;&gt;paramGrp.Name" xml:space="preserve">
+    <value>paramGrp</value>
   </data>
-  <data name="&gt;&gt;formGrp.Type" xml:space="preserve">
+  <data name="&gt;&gt;paramGrp.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;formGrp.Parent" xml:space="preserve">
+  <data name="&gt;&gt;paramGrp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;formGrp.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;paramGrp.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="animChk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -576,122 +444,29 @@
   <data name="&gt;&gt;graphType1Rdo.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;poKPanel.Name" xml:space="preserve">
-    <value>poKPanel</value>
+  <data name="formGrp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 83</value>
   </data>
-  <data name="&gt;&gt;poKPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="formGrp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 76</value>
   </data>
-  <data name="&gt;&gt;poKPanel.Parent" xml:space="preserve">
-    <value>posGrp</value>
-  </data>
-  <data name="&gt;&gt;poKPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pos_InJPanel.Name" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;pos_InJPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pos_InJPanel.Parent" xml:space="preserve">
-    <value>posGrp</value>
-  </data>
-  <data name="&gt;&gt;pos_InJPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="posGrp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 258</value>
-  </data>
-  <data name="posGrp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 150</value>
-  </data>
-  <data name="posGrp.TabIndex" type="System.Int32, mscorlib">
+  <data name="formGrp.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="posGrp.Text" xml:space="preserve">
-    <value>位置</value>
+  <data name="formGrp.Text" xml:space="preserve">
+    <value>形式</value>
   </data>
-  <data name="&gt;&gt;posGrp.Name" xml:space="preserve">
-    <value>posGrp</value>
+  <data name="&gt;&gt;formGrp.Name" xml:space="preserve">
+    <value>formGrp</value>
   </data>
-  <data name="&gt;&gt;posGrp.Type" xml:space="preserve">
+  <data name="&gt;&gt;formGrp.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;posGrp.Parent" xml:space="preserve">
+  <data name="&gt;&gt;formGrp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;posGrp.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;posKLbl.Name" xml:space="preserve">
-    <value>posKLbl</value>
-  </data>
-  <data name="&gt;&gt;posKLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posKLbl.Parent" xml:space="preserve">
-    <value>poKPanel</value>
-  </data>
-  <data name="&gt;&gt;posKLbl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>poKPanel</value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;posKchk.Name" xml:space="preserve">
-    <value>posKchk</value>
-  </data>
-  <data name="&gt;&gt;posKchk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posKchk.Parent" xml:space="preserve">
-    <value>poKPanel</value>
-  </data>
-  <data name="&gt;&gt;posKchk.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;posKTxt.Name" xml:space="preserve">
-    <value>posKTxt</value>
-  </data>
-  <data name="&gt;&gt;posKTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posKTxt.Parent" xml:space="preserve">
-    <value>poKPanel</value>
-  </data>
-  <data name="&gt;&gt;posKTxt.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="poKPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 100</value>
-  </data>
-  <data name="poKPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 40</value>
-  </data>
-  <data name="poKPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;poKPanel.Name" xml:space="preserve">
-    <value>poKPanel</value>
-  </data>
-  <data name="&gt;&gt;poKPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;poKPanel.Parent" xml:space="preserve">
-    <value>posGrp</value>
-  </data>
-  <data name="&gt;&gt;poKPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;formGrp.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="posKLbl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -810,134 +585,26 @@
   <data name="&gt;&gt;posKTxt.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
+  <data name="poKPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 100</value>
   </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="poKPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>830, 40</value>
   </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+  <data name="poKPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;posJLbl.Name" xml:space="preserve">
-    <value>posJLbl</value>
+  <data name="&gt;&gt;poKPanel.Name" xml:space="preserve">
+    <value>poKPanel</value>
   </data>
-  <data name="&gt;&gt;posJLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posJLbl.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posJLbl.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;posILbl.Name" xml:space="preserve">
-    <value>posILbl</value>
-  </data>
-  <data name="&gt;&gt;posILbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posILbl.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posILbl.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;posJchk.Name" xml:space="preserve">
-    <value>posJchk</value>
-  </data>
-  <data name="&gt;&gt;posJchk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posJchk.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posJchk.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;posJTxt.Name" xml:space="preserve">
-    <value>posJTxt</value>
-  </data>
-  <data name="&gt;&gt;posJTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posJTxt.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posJTxt.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;posITxt.Name" xml:space="preserve">
-    <value>posITxt</value>
-  </data>
-  <data name="&gt;&gt;posITxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posITxt.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posITxt.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;posIchk.Name" xml:space="preserve">
-    <value>posIchk</value>
-  </data>
-  <data name="&gt;&gt;posIchk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posIchk.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posIchk.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;posSelBtn.Name" xml:space="preserve">
-    <value>posSelBtn</value>
-  </data>
-  <data name="&gt;&gt;posSelBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posSelBtn.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posSelBtn.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="pos_InJPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 23</value>
-  </data>
-  <data name="pos_InJPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 70</value>
-  </data>
-  <data name="pos_InJPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pos_InJPanel.Name" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;pos_InJPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;poKPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pos_InJPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;poKPanel.Parent" xml:space="preserve">
     <value>posGrp</value>
   </data>
-  <data name="&gt;&gt;pos_InJPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;poKPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1197,53 +864,50 @@
   <data name="&gt;&gt;posSelBtn.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;timeChk.Name" xml:space="preserve">
-    <value>timeChk</value>
+  <data name="pos_InJPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 23</value>
   </data>
-  <data name="&gt;&gt;timeChk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="pos_InJPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>830, 70</value>
   </data>
-  <data name="&gt;&gt;timeChk.Parent" xml:space="preserve">
-    <value>timeGrp</value>
-  </data>
-  <data name="&gt;&gt;timeChk.ZOrder" xml:space="preserve">
+  <data name="pos_InJPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;timeBtn.Name" xml:space="preserve">
-    <value>timeBtn</value>
+  <data name="&gt;&gt;pos_InJPanel.Name" xml:space="preserve">
+    <value>pos_InJPanel</value>
   </data>
-  <data name="&gt;&gt;timeBtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;pos_InJPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;timeBtn.Parent" xml:space="preserve">
-    <value>timeGrp</value>
+  <data name="&gt;&gt;pos_InJPanel.Parent" xml:space="preserve">
+    <value>posGrp</value>
   </data>
-  <data name="&gt;&gt;timeBtn.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pos_InJPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="timeGrp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 414</value>
+  <data name="posGrp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 247</value>
   </data>
-  <data name="timeGrp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 76</value>
+  <data name="posGrp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 150</value>
   </data>
-  <data name="timeGrp.TabIndex" type="System.Int32, mscorlib">
+  <data name="posGrp.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="timeGrp.Text" xml:space="preserve">
-    <value>時間</value>
+  <data name="posGrp.Text" xml:space="preserve">
+    <value>位置</value>
   </data>
-  <data name="&gt;&gt;timeGrp.Name" xml:space="preserve">
-    <value>timeGrp</value>
+  <data name="&gt;&gt;posGrp.Name" xml:space="preserve">
+    <value>posGrp</value>
   </data>
-  <data name="&gt;&gt;timeGrp.Type" xml:space="preserve">
+  <data name="&gt;&gt;posGrp.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;timeGrp.Parent" xml:space="preserve">
+  <data name="&gt;&gt;posGrp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;timeGrp.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;posGrp.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="timeChk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1255,7 +919,7 @@
     <value>NoControl</value>
   </data>
   <data name="timeChk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 31</value>
+    <value>268, 31</value>
   </data>
   <data name="timeChk.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -1285,10 +949,10 @@
     <value>NoControl</value>
   </data>
   <data name="timeBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 27</value>
+    <value>18, 23</value>
   </data>
   <data name="timeBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 22</value>
+    <value>96, 30</value>
   </data>
   <data name="timeBtn.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1308,89 +972,29 @@
   <data name="&gt;&gt;timeBtn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
+  <data name="timeGrp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 474</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="timeGrp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 65</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>axisGrp</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;button5.Name" xml:space="preserve">
-    <value>button5</value>
-  </data>
-  <data name="&gt;&gt;button5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button5.Parent" xml:space="preserve">
-    <value>axisGrp</value>
-  </data>
-  <data name="&gt;&gt;button5.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>axisGrp</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;textBox5.Name" xml:space="preserve">
-    <value>textBox5</value>
-  </data>
-  <data name="&gt;&gt;textBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBox5.Parent" xml:space="preserve">
-    <value>axisGrp</value>
-  </data>
-  <data name="&gt;&gt;textBox5.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;textBox4.Name" xml:space="preserve">
-    <value>textBox4</value>
-  </data>
-  <data name="&gt;&gt;textBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBox4.Parent" xml:space="preserve">
-    <value>axisGrp</value>
-  </data>
-  <data name="&gt;&gt;textBox4.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="axisGrp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 496</value>
-  </data>
-  <data name="axisGrp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 76</value>
-  </data>
-  <data name="axisGrp.TabIndex" type="System.Int32, mscorlib">
+  <data name="timeGrp.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="axisGrp.Text" xml:space="preserve">
-    <value>座標軸</value>
+  <data name="timeGrp.Text" xml:space="preserve">
+    <value>時間</value>
   </data>
-  <data name="&gt;&gt;axisGrp.Name" xml:space="preserve">
-    <value>axisGrp</value>
+  <data name="&gt;&gt;timeGrp.Name" xml:space="preserve">
+    <value>timeGrp</value>
   </data>
-  <data name="&gt;&gt;axisGrp.Type" xml:space="preserve">
+  <data name="&gt;&gt;timeGrp.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;axisGrp.Parent" xml:space="preserve">
+  <data name="&gt;&gt;timeGrp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;axisGrp.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;timeGrp.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1399,7 +1003,7 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 35</value>
+    <value>236, 29</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 12</value>
@@ -1426,10 +1030,10 @@
     <value>NoControl</value>
   </data>
   <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 31</value>
+    <value>427, 21</value>
   </data>
   <data name="button5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 22</value>
+    <value>96, 30</value>
   </data>
   <data name="button5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1456,7 +1060,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 35</value>
+    <value>27, 29</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 12</value>
@@ -1480,7 +1084,7 @@
     <value>2</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 31</value>
+    <value>271, 25</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 22</value>
@@ -1501,7 +1105,7 @@
     <value>3</value>
   </data>
   <data name="textBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 31</value>
+    <value>62, 25</value>
   </data>
   <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 22</value>
@@ -1520,6 +1124,30 @@
   </data>
   <data name="&gt;&gt;textBox4.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="axisGrp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 545</value>
+  </data>
+  <data name="axisGrp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 65</value>
+  </data>
+  <data name="axisGrp.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="axisGrp.Text" xml:space="preserve">
+    <value>座標軸</value>
+  </data>
+  <data name="&gt;&gt;axisGrp.Name" xml:space="preserve">
+    <value>axisGrp</value>
+  </data>
+  <data name="&gt;&gt;axisGrp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;axisGrp.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;axisGrp.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="exportFileBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1549,7 +1177,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;exportFileBtn.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="generateResultBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1579,7 +1207,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;generateResultBtn.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <metadata name="exportFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -1589,6 +1217,84 @@
   </data>
   <data name="exportFileDialog.Title" xml:space="preserve">
     <value>輸出檔案</value>
+  </data>
+  <data name="sedimentSizeCmb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 26</value>
+  </data>
+  <data name="sedimentSizeCmb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="sedimentSizeCmb.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;sedimentSizeCmb.Name" xml:space="preserve">
+    <value>sedimentSizeCmb</value>
+  </data>
+  <data name="&gt;&gt;sedimentSizeCmb.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sedimentSizeCmb.Parent" xml:space="preserve">
+    <value>sedimentSizeGrp</value>
+  </data>
+  <data name="&gt;&gt;sedimentSizeCmb.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 29</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 12</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>泥砂粒徑編號</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>sedimentSizeGrp</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="sedimentSizeGrp.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="sedimentSizeGrp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 403</value>
+  </data>
+  <data name="sedimentSizeGrp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 65</value>
+  </data>
+  <data name="sedimentSizeGrp.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="sedimentSizeGrp.Text" xml:space="preserve">
+    <value>泥砂粒徑</value>
+  </data>
+  <data name="&gt;&gt;sedimentSizeGrp.Name" xml:space="preserve">
+    <value>sedimentSizeGrp</value>
+  </data>
+  <data name="&gt;&gt;sedimentSizeGrp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sedimentSizeGrp.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;sedimentSizeGrp.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -330,7 +330,7 @@ namespace RiverSimulationApplication
                 selectBgFilePath.Text = selectBgDlg.FileName;
                 ImportImageForm form = new ImportImageForm();
                 form.SetImage(selectBgDlg.FileName);
-                if (DialogResult.OK == form.ShowDialog())
+                if (form.HasJgw() || DialogResult.OK == form.ShowDialog())
                 {
                     imgInfoBtn.Enabled = true;
                     RiverSimulationProfile.profile.SetImportImage(selectBgDlg.FileName, form.e, form.n, form.w, form.h);

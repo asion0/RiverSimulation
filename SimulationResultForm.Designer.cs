@@ -70,6 +70,9 @@
             this.exportFileBtn = new System.Windows.Forms.Button();
             this.generateResultBtn = new System.Windows.Forms.Button();
             this.exportFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.sedimentSizeGrp = new System.Windows.Forms.GroupBox();
+            this.sedimentSizeCmb = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.paramGrp.SuspendLayout();
             this.formGrp.SuspendLayout();
@@ -78,6 +81,7 @@
             this.pos_InJPanel.SuspendLayout();
             this.timeGrp.SuspendLayout();
             this.axisGrp.SuspendLayout();
+            this.sedimentSizeGrp.SuspendLayout();
             this.SuspendLayout();
             // 
             // ok
@@ -368,11 +372,33 @@
             // 
             resources.ApplyResources(this.exportFileDialog, "exportFileDialog");
             // 
+            // sedimentSizeGrp
+            // 
+            this.sedimentSizeGrp.Controls.Add(this.sedimentSizeCmb);
+            this.sedimentSizeGrp.Controls.Add(this.label1);
+            resources.ApplyResources(this.sedimentSizeGrp, "sedimentSizeGrp");
+            this.sedimentSizeGrp.Name = "sedimentSizeGrp";
+            this.sedimentSizeGrp.TabStop = false;
+            // 
+            // sedimentSizeCmb
+            // 
+            this.sedimentSizeCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sedimentSizeCmb.FormattingEnabled = true;
+            resources.ApplyResources(this.sedimentSizeCmb, "sedimentSizeCmb");
+            this.sedimentSizeCmb.Name = "sedimentSizeCmb";
+            this.sedimentSizeCmb.SelectedIndexChanged += new System.EventHandler(this.param1Cmb_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // SimulationResultForm
             // 
             this.AcceptButton = this.ok;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.sedimentSizeGrp);
             this.Controls.Add(this.paramGrp);
             this.Controls.Add(this.posGrp);
             this.Controls.Add(this.axisGrp);
@@ -398,6 +424,8 @@
             this.timeGrp.PerformLayout();
             this.axisGrp.ResumeLayout(false);
             this.axisGrp.PerformLayout();
+            this.sedimentSizeGrp.ResumeLayout(false);
+            this.sedimentSizeGrp.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -445,5 +473,8 @@
         private System.Windows.Forms.Button generateResultBtn;
         private System.Windows.Forms.CheckBox timeChk;
         private System.Windows.Forms.SaveFileDialog exportFileDialog;
+        private System.Windows.Forms.GroupBox sedimentSizeGrp;
+        private System.Windows.Forms.ComboBox sedimentSizeCmb;
+        private System.Windows.Forms.Label label1;
     }
 }

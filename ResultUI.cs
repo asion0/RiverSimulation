@@ -28,6 +28,7 @@ namespace RiverSimulationApplication
         protected int colWidth = 0;
         protected int rowHeadersWidth = 0;
         protected object initData = null;
+        protected object initData2 = null;
         protected int xDim = 0;     
         protected int yDim = 1;
         protected int sel1Dim = -1;
@@ -38,5 +39,6 @@ namespace RiverSimulationApplication
         protected string sel2Title = "";
         protected double[] timeList = null;
         protected int[] timeSel = null;
+        protected int m = -1;
     }
 }

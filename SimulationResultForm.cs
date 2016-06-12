@@ -77,7 +77,7 @@ namespace RiverSimulationApplication
         private void UpdateStatus()
         {
             if (drawType == Param1Type.ParamGraph1)
-            {
+            {   //圖形
                 formGrp.Enabled = true;
                 if(graphFormMode == GraphFormMode.None)
                 {
@@ -93,23 +93,53 @@ namespace RiverSimulationApplication
                     timeGrp.Enabled = (param1Cmb.SelectedIndex != 0);
                     axisGrp.Enabled = false;
                     param2Cmb.Enabled = false;
+                    if (param1Cmb.SelectedIndex == 11 || param1Cmb.SelectedIndex == 16)
+                    {   //5："水深平均濃度"及"濃度"多了1 個維度M
+                        sedimentSizeGrp.Enabled = true;
+                    }
+                    else
+                    {
+                        sedimentSizeGrp.Enabled = false;
+                    }
                 }
                 else if (graphFormMode == GraphFormMode.Contour)
                 {
-
                     paramGrp.Enabled = true;
                     posGrp.Enabled = false;
                     timeGrp.Enabled = (param1Cmb.SelectedIndex != 0);
                     axisGrp.Enabled = false;
                     param2Cmb.Enabled = false;
+                    sedimentSizeGrp.Enabled = false;
+                    if (param1Cmb.SelectedIndex > 12)
+                    {
+                        posGrp.Enabled = true;
+                        pos_InJPanel.Enabled = false;
+                        poKPanel.Enabled = true;
+                    }
+                    else
+                    {
+                        pos_InJPanel.Enabled = true;
+                        poKPanel.Enabled = false;
+
+                    }
+                    if (param1Cmb.SelectedIndex == 11 || param1Cmb.SelectedIndex == 16)
+                    {   //5："水深平均濃度"及"濃度"多了1 個維度M
+                        sedimentSizeGrp.Enabled = true;
+                    }
+                    else
+                    {
+                        sedimentSizeGrp.Enabled = false;
+                    }
                 }
                 else if (graphFormMode == GraphFormMode.Vector)
                 {
+                    int param1Index = param1Cmb.SelectedIndex;
                     paramGrp.Enabled = true;
-                    posGrp.Enabled = true;
+                    posGrp.Enabled = (param1Index==0) ? false : true;
                     timeGrp.Enabled = true;
                     axisGrp.Enabled = false;
                     param2Cmb.Enabled = false;
+                    sedimentSizeGrp.Enabled = false;
                 }
                 else if (graphFormMode == GraphFormMode.ContouWithVector)
                 {
@@ -118,17 +148,18 @@ namespace RiverSimulationApplication
                     timeGrp.Enabled = true;
                     axisGrp.Enabled = false;
                     param2Cmb.Enabled = true;
+                    sedimentSizeGrp.Enabled = false;
                 }
+
             }
             else if(drawType == Param1Type.ParamTable)
-            { 
+            { //表格
                 paramGrp.Enabled = true;
                 formGrp.Enabled = false;
                 posGrp.Enabled = true;
                 timeGrp.Enabled = true;
                 axisGrp.Enabled = false;
                 param2Cmb.Enabled = false;
-
                 switch (tableType)
                 {
                     case TableType.Type0:
@@ -159,6 +190,14 @@ namespace RiverSimulationApplication
                         timeBtn.Enabled = true;
                         poKPanel.Enabled = false;
                         break;
+                }
+                if(param1Cmb.SelectedIndex == 11 || param1Cmb.SelectedIndex == 16)
+                {   //5："水深平均濃度"及"濃度"多了1 個維度M
+                    sedimentSizeGrp.Enabled = true;
+                }
+                else
+                {
+                    sedimentSizeGrp.Enabled = false;
                 }
             }
             else
@@ -197,6 +236,16 @@ namespace RiverSimulationApplication
             {
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
+            }
+
+            if(p.IsMovableBedMode())
+            {
+                sedimentSizeCmb.Items.Add("總濃度");
+                for (int i = 0; i < p.sedimentParticlesNumber; ++i)
+                {
+                    sedimentSizeCmb.Items.Add(String.Format("粒徑{0}濃度", i + 1));
+                }
+                sedimentSizeCmb.SelectedIndex = 0;
             }
             UpdateStatus();
         }
@@ -330,30 +379,27 @@ namespace RiverSimulationApplication
             {
                 switch(cmb.SelectedIndex)
                 {
-                     case 0: //初始底床高程(m)
+                    case 0: //初始底床高程(m)
                         tableType = TableType.Type0;
                         break;
-                    case 1: //水深平均流速-U(m/s)
-                    case 2: //水深平均流速-V(m/s)
-                    case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                    case 4: //水深平均流速-UV 合向量(m/s)
-                    case 5: //底床剪應力(N/m2)
-                    case 6: //水位(m)
-                    case 7: //水深(m)
-                    case 8: //流量-U(cms)
-                    case 9: //流量-V(cms)
-                    case 10: //底床高程(m)
-                    case 11: //沖淤深度(m)
-                    case 12: //水深平均濃度(ppm)
-                    case 13: //粒徑分佈(%)
+                    case 1:     //水深平均流速-U(m/s)
+                    case 2:     //水深平均流速-V(m/s)
+                    case 3:     //水深平均流速-UV 合向量的絕對值(m/s)
+                    case 4:     //底床剪應力(N/m2)
+                    case 5:     //水位(m)
+                    case 6:     //水深(m)
+                    case 7:     //流量-U(cms)
+                    case 8:     //流量-V(cms)
+                    case 9:     //底床高程(m)
+                    case 10:    //沖淤深度(m)
+                    case 11:    //水深平均濃度(ppm)
+                    case 12:    //粒徑分佈(%)
                         tableType = TableType.Type1234;
                         break;
-                    case 14: //流速-U(m/s)
-                    case 15: //流速-V(m/s)
-                    case 16: //流速-W(m/s)
-                    case 17: //流速-UW合向量(m/s
-                    case 18: //流速-VW合向量(m/s)
-                    case 19: //濃度(ppm) 
+                    case 13: //流速-U(m/s)
+                    case 14: //流速-V(m/s)
+                    case 15: //流速-W(m/s)
+                    case 16: //濃度(ppm) 
                         tableType = TableType.Type56789A;
                         break;
                     default:
@@ -371,58 +417,25 @@ namespace RiverSimulationApplication
                     case 1: //水深平均流速-U(m/s)
                     case 2: //水深平均流速-V(m/s)
                     case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                    case 4: //水深平均流速-UV 合向量(m/s)
-                    case 5: //底床剪應力(N/m2)
-                    case 6: //水位(m)
-                    case 7: //水深(m)
-                    case 8: //流量-U(cms)
-                    case 9: //流量-V(cms)
-                    case 10: //底床高程(m)
-                    case 11: //沖淤深度(m)
-                    case 12: //水深平均濃度(ppm)
-                    case 13: //粒徑分佈(%)
+                    case 4: //底床剪應力(N/m2)
+                    case 5: //水位(m)
+                    case 6: //水深(m)
+                    case 7: //流量-U(cms)
+                    case 8: //流量-V(cms)
+                    case 9: //底床高程(m)
+                    case 10: //沖淤深度(m)
+                    case 11: //水深平均濃度(ppm)
+                    case 12: //粒徑分佈(%)
                         graphType = ResultGraphForm.GraphType.Type234;
                         break;
-                    case 14: //流速-U(m/s)
-                    case 15: //流速-V(m/s)
-                    case 16: //流速-W(m/s)
-                    case 17: //流速-UW合向量(m/s
-                    case 18: //流速-VW合向量(m/s)
-                    case 19: //濃度(ppm) 
-                        //graphType = GraphType.Type56789A;
+                    case 13: //流速-U(m/s)
+                    case 14: //流速-V(m/s)
+                    case 15: //流速-W(m/s)
+                    case 16: //濃度(ppm) 
+                        graphType = ResultGraphForm.GraphType.Type5678;
                         break;
                     default:
                         break;
-                    /*
-                case 0: //初始底床高程(m)
-                    //graphType = GraphType.Type0;
-                    break;
-                case 1: //水深平均流速-U(m/s)
-                case 2: //水深平均流速-V(m/s)
-                case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                case 4: //水深平均流速-UV 合向量(m/s)
-                case 5: //底床剪應力(N/m2)
-                case 6: //水位(m)
-                case 7: //水深(m)
-                case 8: //流量-U(cms)
-                case 9: //流量-V(cms)
-                case 10: //底床高程(m)
-                case 11: //沖淤深度(m)
-                case 12: //水深平均濃度(ppm)
-                case 13: //粒徑分佈(%)
-                    //graphType = GraphType.Type56789A;
-                    break;
-                case 14: //流速-U(m/s)
-                case 15: //流速-V(m/s)
-                case 16: //流速-W(m/s)
-                case 17: //流速-UW合向量(m/s
-                case 18: //流速-VW合向量(m/s)
-                case 19: //濃度(ppm) 
-                    //graphType = GraphType.Type56789A;
-                    break;
-                default:
-                   break;
-                     * */
                 }
                 UpdateStatus();
             }
@@ -475,7 +488,7 @@ namespace RiverSimulationApplication
                     GenerateTimeIJResultTable(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV, exportOnly);
                   break;
                 case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                   //GenerateDepthAverageFlowSpeedVTableAbs();
+                  GenerateTimeIJResultTable(" ABS-UV-VELOCITY(M/S)", "水深平均流速-UV 合向量的絕對值(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedAbsUV, exportOnly);
                     break;
                 case 4: //底床剪應力(N/m2)   //⁰¹²³⁴⁵⁶⁷⁸⁹
                     GenerateTimeIJResultTable(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1, exportOnly);
@@ -499,15 +512,29 @@ namespace RiverSimulationApplication
                     GenerateTimeIJResultTable(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed, exportOnly);
                     break;
                 case 11: //水深平均濃度(ppm)
-                    GenerateTimeIJResultTable(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc, exportOnly);
+                    if (sedimentSizeCmb.SelectedIndex == 0)
+                    {
+                        GenerateTimeIJResultTable(" MUDCONC", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc, exportOnly);
+                    }
+                    else
+                    {
+                        GenerateTimeIJMResultTable(" CONC", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref conc, exportOnly);
+                    }
                     break;
                 case 12: //粒徑分佈(%)
                     GenerateTimeIJResultTable(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta, exportOnly);
                     break;
                 case 13: //流速-U(m/s)
+                    GenerateTimeIJKResultTable("流速-U(m/s)", "3Dvelocity-U.dat", resedTimeList, ref flowSpeedU, exportOnly);
+                    break;
                 case 14: //流速-V(m/s)
+                    GenerateTimeIJKResultTable("流速-V(m/s)", "3Dvelocity-V.dat", resedTimeList, ref flowSpeedV, exportOnly);
+                    break;
                 case 15: //流速-W(m/s)
+                    GenerateTimeIJKResultTable("流速-W(m/s)", "3Dvelocity-W.dat", resedTimeList, ref flowSpeedW, exportOnly);
+                    break;
                 case 16: //濃度(ppm)
+                    GenerateTimeIJKMResultTable("濃度(ppm)", "3Dconcentration.dat", sedTimeList, ref concentration, exportOnly);
                     break;
             }
         }
@@ -552,7 +579,7 @@ namespace RiverSimulationApplication
                 "",                 //表格名稱
                 "J=",                 //行標題(顯示於上方)
                 "I=",                 //列標題(顯示於左方)
-                ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                ResultTableForm.ResultTableType.IJT_Table, //表格形式
                 48,                 //儲存格寬度
                 64,                 //列標題寬度
                 true,               //保留
@@ -604,7 +631,7 @@ namespace RiverSimulationApplication
                             pi.jS, pi.jE,       //j
                             pi.kS, pi.kE,       //k
                             pi.tS, pi.tE,       //t
-                            "",                 //表格名稱
+                            "(m)",                 //表格名稱
                             "",                 //行標題(顯示於上方)
                             "",                 //列標題(顯示於左方)
                             ResultGraphForm.ResultGraphType.XyGraph, //表格形式
@@ -629,7 +656,7 @@ namespace RiverSimulationApplication
                             pi.jS, pi.jE,       //j
                             pi.kS, pi.kE,       //k
                             pi.tS, pi.tE,       //t
-                            "",                 //表格名稱
+                            "(m)",                 //表格名稱
                             "",                 //行標題(顯示於上方)
                             "",                 //列標題(顯示於左方)
                             ResultGraphForm.ResultGraphType.XyGraph, //表格形式
@@ -654,7 +681,7 @@ namespace RiverSimulationApplication
                         0, initialBottomElevation.GetLength(1),       //列數(上下有幾列)
                         -1, -1,       //k
                         -1, -1,       //t
-                        "",                 //表格名稱
+                        "(m)",                 //表格名稱
                         "",                 //行標題(顯示於上方)
                         "",                 //列標題(顯示於左方)
                         ResultGraphForm.ResultGraphType.ContourGraph, //表格形式
@@ -679,16 +706,74 @@ namespace RiverSimulationApplication
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
             //GnuPlot.Close();
-            
+        }
+
+        private void GenerateCoorUV_VelocityVectorGraph()
+        {
+            PosInfo pi = new PosInfo();
+            ResultGraphForm.GraphType gt = GetGraphType(ref pi);
+            ResultGraphForm form = new ResultGraphForm();
+            form.key = "CoorU-VELOCITY (M/S) + CoorV-VELOCITY (M/S)";
+            if (timeSel == null || timeSel.Length != 1)
+            {
+                MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            pi.tS = timeSel[0];
+            pi.tE = timeSel[timeSel.Length - 1] + 1;
+            if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : resedTimeList, " CoorU-VELOCITY (M/S) ", "resed.O", ref depthAverageFlowSpeedCoorU))
+            {
+                MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : resedTimeList, " CoorV-VELOCITY (M/S) ", "resed.O", ref depthAverageFlowSpeedCoorV))
+            {
+                MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            form.SetFormUVVectorMode(
+                        "水深平均流速-UV 合向量(m/s)",   //視窗標題
+                        0, depthAverageFlowSpeedCoorV.GetLength(0),       //i
+                        0, depthAverageFlowSpeedCoorV.GetLength(1),       //j
+                        -1, -1,              //k
+                        pi.tS, pi.tE,       //t
+                        form.key,                 //表格名稱
+                        "",                 //行標題(顯示於上方)
+                        "",                 //列標題(顯示於左方)
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        depthAverageFlowSpeedCoorU, depthAverageFlowSpeedCoorV,  //資料
+                        ResultGraphForm.CumulativeDistance,                  //X維度
+                        ResultGraphForm.DataContent,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        -1,               //Sel1索引
+                        -1,                 //Sel2索引
+                        "",              //Sel1標籤
+                        "",                 //Sel2標籤
+                        null,             //Time選取索引陣列                
+                        null);              //Time陣列                 
+
+
+
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
+            }
+            //GnuPlot.Close();
+
 
         }
+
         private void GenerateTimeContourResultGraph(String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
         {
 
 
         }
 
-        private void GenerateTimeIJResultGraph(String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
+        private void GenerateTimeIJResultGraph(String ylabel, String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
         {
 
             ResultGraphForm form = new ResultGraphForm();
@@ -724,7 +809,7 @@ namespace RiverSimulationApplication
                             pi.jS, pi.jE,       //j
                             pi.kS, pi.kE,       //k
                             pi.tS, pi.tE,       //t
-                            key,                 //表格名稱
+                            ylabel,                 //表格名稱
                             "",                 //行標題(顯示於上方)
                             "",                 //列標題(顯示於左方)
                             ResultGraphForm.ResultGraphType.XyGraph, //表格形式
@@ -750,7 +835,7 @@ namespace RiverSimulationApplication
                             pi.jS, pi.jE,       //j
                             pi.kS, pi.kE,       //k
                             pi.tS, pi.tE,       //t
-                            key,                 //表格名稱
+                            ylabel,                 //表格名稱
                             "",                 //行標題(顯示於上方)
                             "",                 //列標題(顯示於左方)
                             ResultGraphForm.ResultGraphType.XyGraph, //表格形式
@@ -777,7 +862,7 @@ namespace RiverSimulationApplication
                             pi.jS, pi.jE,       //j
                             pi.kS, pi.kE,       //k
                             pi.tS, pi.tE,       //t
-                            "",                 //表格名稱
+                            ylabel,                 //表格名稱
                             "",                 //行標題(顯示於上方)
                             "",                 //列標題(顯示於左方)
                             ResultGraphForm.ResultGraphType.XyGraph, //表格形式
@@ -818,7 +903,7 @@ namespace RiverSimulationApplication
                             0, array.GetLength(1),       //j
                             -1, -1,              //k
                             pi.tS, pi.tE,       //t
-                            key,                 //表格名稱
+                            ylabel,                 //表格名稱
                             "",                 //行標題(顯示於上方)
                             "",                 //列標題(顯示於左方)
                             ResultGraphForm.ResultGraphType.ContourGraph, //表格形式
@@ -844,6 +929,354 @@ namespace RiverSimulationApplication
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
             
+        }
+
+        private void GenerateTimeIJKResultGraph(String ylabel, String title, String outputfile, List<double> timeList, ref double[, , ,] array)
+        {
+            ResultGraphForm form = new ResultGraphForm();
+            PosInfo pi = new PosInfo();
+
+            int index = 0;
+            int index2 = 0;
+            switch (graphFormMode)
+            {
+                case GraphFormMode.XY:
+                    ResultGraphForm.GraphType gt = GetGraphType(ref pi);
+                    if (gt >= ResultGraphForm.GraphType.Type01)
+                    {
+                        MessageBox.Show("請輸入正確位置/時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    if (!ParsingTimeIJKResult(p.IsConstantFlowType() ? null : resedTimeList, outputfile, ref array))
+                    {
+                        MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    if (gt == ResultGraphForm.GraphType.Type5)
+                    {
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                     //* 1|M|1|1|D|U| -  | -  | 5  |4D IJTK|
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                        index = pi.iS;
+                        index2 = (timeSel == null) ? 0 : timeSel[0]; 
+                        
+                        form.SetFormMode(
+                            title,              //視窗標題
+                            pi.iS, pi.iE,       //i
+                            pi.jS, pi.jE,       //j
+                            pi.kS, pi.kE,       //k
+                            pi.tS, pi.tE,       //t
+                            ylabel,                 //表格名稱
+                            "",                 //行標題(顯示於上方)
+                            "",                 //列標題(顯示於左方)
+                            ResultGraphForm.ResultGraphType.XyGraph, //表格形式
+                            false,              //不須行數字
+                            false,              //不須列數字
+                            array,              //資料
+                            ResultGraphForm.CumulativeDistance,     //X維度
+                            ResultGraphForm.DataContent,            //Y維度
+                            1,                 //Sel1維度
+                            -1,                 //Sel2維度
+                            -1,               //Sel1索引
+                            -1,                 //Sel2索引
+                            "",              //Sel1標籤
+                            "",                 //Sel2標籤
+                            timeSel,             //Time選取索引陣列                
+                            (timeList == null) ? null : timeList.ToArray());                //Time陣列                
+                    }
+                    else if (gt == ResultGraphForm.GraphType.Type6)
+                    {
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                     //* M|1|1|1|D|U| -  | -  | 6  |4D IJTK|
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                        form.SetFormMode(
+                            title,              //視窗標題
+                            pi.iS, pi.iE,       //i
+                            pi.jS, pi.jE,       //j
+                            pi.kS, pi.kE,       //k
+                            pi.tS, pi.tE,       //t
+                            ylabel,                 //表格名稱
+                            "",                 //行標題(顯示於上方)
+                            "",                 //列標題(顯示於左方)
+                            ResultGraphForm.ResultGraphType.XyGraph, //表格形式
+                            false,              //不須行數字
+                            false,              //不須列數字
+                            array,              //資料
+                            ResultGraphForm.CumulativeDistance,     //X維度
+                            ResultGraphForm.DataContent,            //Y維度
+                            0,                 //Sel1維度
+                            -1,                 //Sel2維度
+                            -1,               //Sel1索引
+                            -1,                 //Sel2索引
+                            "",              //Sel1標籤
+                            "",                 //Sel2標籤
+                            timeSel,             //Time選取索引陣列                
+                            (timeList == null) ? null : timeList.ToArray());                //Time陣列      
+                    }
+                    else if (gt == ResultGraphForm.GraphType.Type7)
+                    {
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                     //* 1|1|T|1|T|U| -  | -  | 7  |4D IJTK|
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                     //* 1|1|1|M|U|?| -  | -  | 8  |4D IJTK|<<<<<NOW
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                        /*
+                        form.SetFormMode(
+                            title,              //視窗標題
+                            pi.iS, pi.iE,       //i
+                            pi.jS, pi.jE,       //j
+                            pi.kS, pi.kE,       //k
+                            pi.tS, pi.tE,       //t
+                            ylabel,                 //表格名稱
+                            "",                 //行標題(顯示於上方)
+                            "",                 //列標題(顯示於左方)
+                            ResultGraphForm.ResultGraphType.XyGraph, //表格形式
+                            false,              //不須行數字
+                            false,              //不須列數字
+                            array,              //資料
+                            ResultGraphForm.Time,                         //X維度
+                            ResultGraphForm.DataContent,                  //Y維度
+                            1,                  //Sel1維度
+                            -1,                 //Sel2維度
+                            pi.jS,              //Sel1索引
+                            -1,                 //Sel2索引
+                            "J = ",             //Sel1標籤
+                            "",                 //Sel2標籤
+                            timeSel,             //Time選取索引陣列                
+                            timeList.ToArray());              //Time陣列       
+                         * */
+                    }
+                    break;
+                case GraphFormMode.Contour:
+                    if (timeSel == null || timeSel.Length != 1)
+                    {
+                        MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    pi.tS = timeSel[0];
+                    pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    if (!GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref pi.kS, ref pi.tE))
+                    {
+                        MessageBox.Show("請輸入正確的K位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    if (!ParsingTimeIJKResult(p.IsConstantFlowType() ? null : timeList, outputfile, ref array))
+                    {
+                        MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    form.SetFormMode(
+                             title,              //視窗標題
+                             0, array.GetLength(0),       //i
+                             0, array.GetLength(1),       //j
+                             pi.kS, pi.kE,                  //k
+                             pi.tS, pi.tE,       //t
+                             ylabel,                 //表格名稱
+                             "",                 //行標題(顯示於上方)
+                             "",                 //列標題(顯示於左方)
+                             ResultGraphForm.ResultGraphType.ContourGraph, //表格形式
+                             false,              //不須行數字
+                             false,              //不須列數字
+                             array,              //資料
+                             ResultGraphForm.CumulativeDistance,                         //X維度
+                             ResultGraphForm.DataContent,                  //Y維度
+                             -1,                  //Sel1維度
+                             -1,                 //Sel2維度
+                             -1,              //Sel1索引
+                             -1,                 //Sel2索引
+                             "",             //Sel1標籤
+                             "",                 //Sel2標籤
+                             timeSel,             //Time選取索引陣列                
+                             timeList.ToArray());              //Time陣列       
+                    break;
+            }
+
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
+            }
+
+        }
+
+        private void GenerateTimeIJKMResultGraph(String ylabel, String title, String outputfile, List<double> timeList, ref double[, , , ,] array)
+        {
+            ResultGraphForm form = new ResultGraphForm();
+            PosInfo pi = new PosInfo();
+
+            int index = 0;
+            int index2 = 0;
+            switch (graphFormMode)
+            {
+                case GraphFormMode.XY:
+                    ResultGraphForm.GraphType gt = GetGraphType(ref pi);
+                    pi.m = sedimentSizeCmb.SelectedIndex;
+                    if (gt >= ResultGraphForm.GraphType.Type01)
+                    {
+                        MessageBox.Show("請輸入正確位置/時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    if (!ParsingTimeIJKMResult(p.IsConstantFlowType() ? null : timeList, outputfile, ref array, pi.m))
+                    {
+                        MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    if (gt == ResultGraphForm.GraphType.Type5)
+                    {
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                     //* 1|M|1|1|D|U| -  | -  | 5  |4D IJTK|
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                        index = pi.iS;
+                        index2 = (timeSel == null) ? 0 : timeSel[0]; 
+                        
+                        form.SetFormMode(
+                            title,              //視窗標題
+                            pi.iS, pi.iE,       //i
+                            pi.jS, pi.jE,       //j
+                            pi.kS, pi.kE,       //k
+                            pi.tS, pi.tE,       //t
+                            ylabel,                 //表格名稱
+                            "",                 //行標題(顯示於上方)
+                            "",                 //列標題(顯示於左方)
+                            ResultGraphForm.ResultGraphType.XyGraph, //表格形式
+                            false,              //不須行數字
+                            false,              //不須列數字
+                            array,              //資料
+                            ResultGraphForm.CumulativeDistance,     //X維度
+                            ResultGraphForm.DataContent,            //Y維度
+                            1,                 //Sel1維度
+                            -1,                 //Sel2維度
+                            -1,               //Sel1索引
+                            -1,                 //Sel2索引
+                            "",              //Sel1標籤
+                            "",                 //Sel2標籤
+                            timeSel,             //Time選取索引陣列                
+                            (timeList == null) ? null : timeList.ToArray(), //Time陣列   
+                            pi.m);                             
+                    }
+                    else if (gt == ResultGraphForm.GraphType.Type6)
+                    {
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                     //* M|1|1|1|D|U| -  | -  | 6  |4D IJTK|
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                        form.SetFormMode(
+                            title,              //視窗標題
+                            pi.iS, pi.iE,       //i
+                            pi.jS, pi.jE,       //j
+                            pi.kS, pi.kE,       //k
+                            pi.tS, pi.tE,       //t
+                            ylabel,                 //表格名稱
+                            "",                 //行標題(顯示於上方)
+                            "",                 //列標題(顯示於左方)
+                            ResultGraphForm.ResultGraphType.XyGraph, //表格形式
+                            false,              //不須行數字
+                            false,              //不須列數字
+                            array,              //資料
+                            ResultGraphForm.CumulativeDistance,     //X維度
+                            ResultGraphForm.DataContent,            //Y維度
+                            0,                 //Sel1維度
+                            -1,                 //Sel2維度
+                            -1,               //Sel1索引
+                            -1,                 //Sel2索引
+                            "",              //Sel1標籤
+                            "",                 //Sel2標籤
+                            timeSel,             //Time選取索引陣列                
+                            (timeList == null) ? null : timeList.ToArray(), //Time陣列   
+                            pi.m);                             
+                    }
+                    else if (gt == ResultGraphForm.GraphType.Type7)
+                    {
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                     //* 1|1|T|1|T|U| -  | -  | 7  |4D IJTK|
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                     //* 1|1|1|M|U|?| -  | -  | 8  |4D IJTK|<<<<<NOW
+                     //* -+-+-+-+-+-+----+----+----+-------+
+                        /*
+                        form.SetFormMode(
+                            title,              //視窗標題
+                            pi.iS, pi.iE,       //i
+                            pi.jS, pi.jE,       //j
+                            pi.kS, pi.kE,       //k
+                            pi.tS, pi.tE,       //t
+                            ylabel,                 //表格名稱
+                            "",                 //行標題(顯示於上方)
+                            "",                 //列標題(顯示於左方)
+                            ResultGraphForm.ResultGraphType.XyGraph, //表格形式
+                            false,              //不須行數字
+                            false,              //不須列數字
+                            array,              //資料
+                            ResultGraphForm.Time,                         //X維度
+                            ResultGraphForm.DataContent,                  //Y維度
+                            1,                  //Sel1維度
+                            -1,                 //Sel2維度
+                            pi.jS,              //Sel1索引
+                            -1,                 //Sel2索引
+                            "J = ",             //Sel1標籤
+                            "",                 //Sel2標籤
+                            timeSel,             //Time選取索引陣列                
+                            timeList.ToArray(), //Time陣列   
+                            pi.m);                             
+                         * */
+                    }
+                    break;
+                case GraphFormMode.Contour:
+                    if (timeSel == null || timeSel.Length != 1)
+                    {
+                        MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    pi.tS = timeSel[0];
+                    pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    pi.m = sedimentSizeCmb.SelectedIndex;
+                    if (!GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref pi.kS, ref pi.tE))
+                    {
+                        MessageBox.Show("請輸入正確的K位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    if (!ParsingTimeIJKMResult(p.IsConstantFlowType() ? null : timeList, outputfile, ref array, pi.m))
+                    {
+                        MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    form.SetFormMode(
+                             title,              //視窗標題
+                             0, array.GetLength(0),       //i
+                             0, array.GetLength(1),       //j
+                             pi.kS, pi.kE,              //k
+                             pi.tS, pi.tE,       //t
+                             ylabel,                 //表格名稱
+                             "",                 //行標題(顯示於上方)
+                             "",                 //列標題(顯示於左方)
+                             ResultGraphForm.ResultGraphType.ContourGraph, //表格形式
+                             false,              //不須行數字
+                             false,              //不須列數字
+                             array,              //資料
+                             ResultGraphForm.CumulativeDistance,                         //X維度
+                             ResultGraphForm.DataContent,                  //Y維度
+                             -1,                  //Sel1維度
+                             -1,                 //Sel2維度
+                             -1,              //Sel1索引
+                             -1,                 //Sel2索引
+                             "",             //Sel1標籤
+                             "",                 //Sel2標籤
+                             timeSel,             //Time選取索引陣列                
+                             timeList.ToArray(),              //Time陣列       
+                             pi.m);
+                    break;
+            }
+
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
+            }
+
         }
 
         private void SaveToCsv(String file, double[,] data)
@@ -934,7 +1367,7 @@ namespace RiverSimulationApplication
                         "",                 //表格名稱
                         "J=",                 //行標題(顯示於上方)
                         "I=",                 //列標題(顯示於左方)
-                        ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                        ResultTableForm.ResultTableType.IJT_Table, //表格形式
                         48,                 //儲存格寬度
                         64,                 //列標題寬度
                         true,               //保留
@@ -960,7 +1393,7 @@ namespace RiverSimulationApplication
                         "",                 //表格名稱
                         "J=",                 //行標題(顯示於上方)
                         "T=",                 //列標題(顯示於左方)
-                        ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                        ResultTableForm.ResultTableType.IJT_Table, //表格形式
                         48,                 //儲存格寬度
                         96,                 //列標題寬度
                         true,               //保留
@@ -986,7 +1419,7 @@ namespace RiverSimulationApplication
                         "",                 //表格名稱
                         "I=",                 //行標題(顯示於上方)
                         "T=",                 //列標題(顯示於左方)
-                        ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                        ResultTableForm.ResultTableType.IJT_Table, //表格形式
                         48,                 //儲存格寬度
                         96,                 //列標題寬度
                         true,               //保留
@@ -1012,7 +1445,7 @@ namespace RiverSimulationApplication
                         "",                 //表格名稱
                         "I=",                 //行標題(顯示於上方)
                         "T=",                 //列標題(顯示於左方)
-                        ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                        ResultTableForm.ResultTableType.IJT_Table, //表格形式
                         48,                 //儲存格寬度
                         96,                 //列標題寬度
                         true,               //保留
@@ -1048,7 +1481,7 @@ namespace RiverSimulationApplication
                     "",                 //表格名稱
                     "",                 //行標題(顯示於上方)
                     "",                 //列標題(顯示於左方)
-                    ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                    ResultTableForm.ResultTableType.IJT_Table, //表格形式
                     48,                 //儲存格寬度
                     64,                 //列標題寬度
                     true,               //保留
@@ -1072,7 +1505,7 @@ namespace RiverSimulationApplication
                     "",                 //表格名稱
                     "",                 //行標題(顯示於上方)
                     "",                 //列標題(顯示於左方)
-                    ResultTableForm.ResultTableType.InitialBottomElevation, //表格形式
+                    ResultTableForm.ResultTableType.IJK_Table, //表格形式
                     48,                 //儲存格寬度
                     64,                 //列標題寬度
                     true,               //保留
@@ -1088,6 +1521,769 @@ namespace RiverSimulationApplication
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
                    
+        }
+
+        private void GenerateTimeIJMResultTable(String key, String title, String outputfile, List<double> timeList, ref double[, , , ,] array, bool exportOnly = false)
+        {
+            int iStart = 0, iEnd = 0, jStart = 0, jEnd = 0;
+            if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref iStart, ref iEnd))
+            {
+                MessageBox.Show("請輸入正確的I位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (!GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref jStart, ref jEnd))
+            {
+                MessageBox.Show("請輸入正確的J位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (p.IsVariableFlowType() && timeSel == null)
+            {
+                MessageBox.Show("請選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            PosInfo pi = new PosInfo();
+            TableType t = GetTableType(ref pi);
+            pi.m = sedimentSizeCmb.SelectedIndex;
+            if (t >= TableType.Type1234)
+            {
+                MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (!ParsingTimeIJMResult(p.IsConstantFlowType() ? null : timeList, key, outputfile, ref array, pi.m))
+            {
+                MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            int index = (timeSel == null) ? 0 : timeSel[0];
+            if (exportOnly)
+            {
+                if (t == TableType.Type1)
+                {
+                    exportFileDialog.ShowDialog();
+                    if (exportFileDialog.FileName == "")
+                    {
+                        MessageBox.Show("請選取匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    ExportFile(exportFileDialog.FileName, 3, array, null, null, index);
+                }
+                else
+                {
+                    MessageBox.Show("只支援單一時間匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                return;
+            }
+
+
+            //double[,,] data = null;
+            ResultTableForm form = new ResultTableForm();
+            switch (t)
+            {
+                case TableType.Type1:
+                    form.SetFormMode(
+                        String.Format("{0} {1} T={2} M={3}", title, (timeSel == null) ? " 定量流" : " T=", timeList[index], pi.m),
+                        //title + ((timeSel == null) ? " 定量流" : " T=" + timeList[index].ToString()),    //視窗標題
+                        pi.jS, pi.jE,       //行數(左右有幾行)
+                        pi.iS, pi.iE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "J=",                 //行標題(顯示於上方)
+                        "I=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTM_Table, //表格形式
+                        48,                 //儲存格寬度
+                        64,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        1,                  //X維度
+                        0,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,          //Sel1索引
+                        -1,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        null,               //Time陣列
+                        pi.m);              
+                    break;
+                case TableType.Type2:
+                    index = pi.iS;
+                    form.SetFormMode(
+                        title + " I=" + (index + 1).ToString(),    //視窗標題
+                        pi.jS, pi.jE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "J=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTM_Table, //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        1,                  //X維度
+                        3,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,              //Sel1索引
+                        -1,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray(), //Time陣列
+                        pi.m);              
+                    break;
+                case TableType.Type3:
+                    index = pi.jS;
+                    form.SetFormMode(
+                        title + " J=" + (index + 1).ToString(),    //視窗標題
+                        pi.iS, pi.iE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "I=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTM_Table, //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        0,                  //X維度
+                        3,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,              //Sel1索引
+                        -1,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray(), //Time陣列
+                        pi.m);     
+                    break;
+                case TableType.Type4:
+                    index = pi.jS;
+                    form.SetFormMode(
+                        title + " J=" + (index + 1).ToString(),    //視窗標題
+                        pi.iS, pi.iE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "I=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTM_Table, //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        0,                  //X維度
+                        3,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,              //Sel1索引
+                        -1,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray(), //Time陣列
+                        pi.m);     
+                    break;
+                default:
+                    break;
+            }
+            /*
+            else if (t == TableType.mIsJmT)
+            {
+                //timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[pi.GetICount(), timeSel.Length];
+                for (int ti = 0; ti < timeSel.Length; ++ti)
+                    for (int i = pi.iS; i < pi.iE; ++i)
+                        data[i, ti] = array[timeSel[ti], pi.jS, i];
+
+                form.SetFormMode(
+                    title + " J=" + (pi.jS + 1).ToString(),   //視窗標題
+                    pi.iS, pi.iE - 1,       //行數(左右有幾行)
+                    timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.IJK_Table, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+            else if (t == TableType.mIsJmT)
+            {
+                //timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[pi.GetJCount(), timeSel.Length];
+                for (int ti = 0; ti < timeSel.Length; ++ti)
+                    for (int j = pi.jS; j < pi.jE; ++j)
+                        data[j, ti] = array[timeSel[ti], j, pi.iS];
+
+                form.SetFormMode(
+                    title + " I=" + (pi.iS + 1).ToString(),   //視窗標題
+                    pi.jS, pi.jE - 1,       //行數(左右有幾行)
+                    timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.IJK_Table, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+ */
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
+            }
+
+        }
+
+        private void GenerateTimeIJKResultTable(String title, String outputfile, List<double> timeList, ref double[, , ,] array, bool exportOnly = false)
+        {
+            int iStart = 0, iEnd = 0, jStart = 0, jEnd = 0, kStart = 0, kEnd = 0;
+            if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref iStart, ref iEnd))
+            {
+                MessageBox.Show("請輸入正確的I位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (!GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref jStart, ref jEnd))
+            {
+                MessageBox.Show("請輸入正確的J位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (!GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref kStart, ref kEnd))
+            {
+                MessageBox.Show("請輸入正確的K位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (p.IsVariableFlowType() && timeSel == null)
+            {
+                MessageBox.Show("請選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            PosInfo pi = new PosInfo();
+            TableType t = GetTableType(ref pi);
+            if (t >= TableType.Type1234)
+            {
+                MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (!ParsingTimeIJKResult(p.IsConstantFlowType() ? null : timeList, outputfile, ref array))
+            {
+                MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            int index = 0;
+            int index2 = 0;
+            if (exportOnly)
+            {
+                if (t == TableType.Type1)
+                {
+                    exportFileDialog.ShowDialog();
+                    if (exportFileDialog.FileName == "")
+                    {
+                        MessageBox.Show("請選取匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    ExportFile(exportFileDialog.FileName, 3, array, null, null, index);
+                }
+                else
+                {
+                    MessageBox.Show("只支援單一時間匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                return;
+            }
+
+
+            //double[,,] data = null;
+            ResultTableForm form = new ResultTableForm();
+            switch (t)
+            {
+                case TableType.Type5:
+                    index = (timeSel == null) ? 0 : timeSel[0];
+                    index2 = pi.kS;
+                    form.SetFormMode(
+                        String.Format("{0} T={1}, K={2}", title, timeList[index], index2 + 1),  //視窗標題
+                        //title + " T=" + timeList[index].ToString(),    
+                        pi.jS, pi.jE,       //行數(左右有幾行)
+                        pi.iS, pi.iE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "J=",                 //行標題(顯示於上方)
+                        "I=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTK_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        1,                  //X維度
+                        0,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        null);               //Time陣列，若XY沒有要顯示T便不用傳
+                    break;
+                case TableType.Type6:
+                    index = pi.iS;
+                    index2 = (timeSel == null) ? 0 : timeSel[0];
+                    form.SetFormMode(
+                        String.Format("{0} I={1}, T={2}", title, index + 1, timeList[index2]),  //視窗標題
+                        pi.jS, pi.jE,       //行數(左右有幾行)
+                        pi.kS, pi.kE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "J=",                 //行標題(顯示於上方)
+                        "K=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTK_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        1,                  //X維度
+                        3,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        null);              //Time陣列，若XY沒有要顯示T便不用傳
+                    break;
+                case TableType.Type7:
+                    index = pi.jS;
+                    index2 = (timeSel == null) ? 0 : timeSel[0];
+                    form.SetFormMode(
+                        String.Format("{0} J={1}, T={2}", title, index + 1, timeList[index2]),  //視窗標題
+                        pi.iS, pi.iE,       //行數(左右有幾行)
+                        pi.kS, pi.kE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "I=",                 //行標題(顯示於上方)
+                        "K=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTK_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        0,                  //X維度
+                        3,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        null);              //Time陣列，若XY沒有要顯示T便不用傳
+                    break;
+                case TableType.Type8:   //JK固定，顯示TI
+                    index = pi.jS;
+                    index2 = pi.kS;
+                    form.SetFormMode(
+                        String.Format("{0} J={1}, K={2}", title, index + 1, index2 + 1),  //視窗標題
+                        pi.iS, pi.iE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "I=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTK_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        0,                  //X維度
+                        2,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray());              //Time陣列，若XY沒有要顯示T便不用傳
+                    break;
+                case TableType.Type9:   //IK固定，顯示TJ
+                    index = pi.iS;
+                    index2 = pi.kS;
+                    form.SetFormMode(
+                        String.Format("{0} I={1}, K={2}", title, index + 1, index2 + 1),  //視窗標題
+                        pi.jS, pi.jE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "J=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTK_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        1,                  //X維度
+                        2,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray());              //Time陣列，若XY沒有要顯示T便不用傳
+                    break;
+                case TableType.TypeA:   //IJ固定，顯示TK
+                    index = pi.iS;
+                    index2 = pi.jS;
+                    form.SetFormMode(
+                        String.Format("{0} I={1}, J={2}", title, index + 1, index2 + 1),  //視窗標題
+                        pi.kS, pi.kE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "K=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTK_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        3,                  //X維度
+                        2,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray());    //Time陣列，若XY沒有要顯示T便不用傳
+                    break;
+                default:
+                    break;
+            }
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
+            }
+
+        }
+
+        private void GenerateTimeIJKMResultTable(String title, String outputfile, List<double> timeList, ref double[, , , , ] array, bool exportOnly = false)
+        {
+            int iStart = 0, iEnd = 0, jStart = 0, jEnd = 0, kStart = 0, kEnd = 0;
+            if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref iStart, ref iEnd))
+            {
+                MessageBox.Show("請輸入正確的I位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (!GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref jStart, ref jEnd))
+            {
+                MessageBox.Show("請輸入正確的J位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (!GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref kStart, ref kEnd))
+            {
+                MessageBox.Show("請輸入正確的K位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (p.IsVariableFlowType() && timeSel == null)
+            {
+                MessageBox.Show("請選取時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            PosInfo pi = new PosInfo();
+            TableType t = GetTableType(ref pi);
+            pi.m = sedimentSizeCmb.SelectedIndex;
+
+            if (t >= TableType.Type1234)
+            {
+                MessageBox.Show("請輸入正確位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (!ParsingTimeIJKMResult(p.IsConstantFlowType() ? null : timeList, outputfile, ref array, pi.m))
+            {
+                MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            int index = 0;
+            int index2 = 0;
+            if (exportOnly)
+            {
+                if (t == TableType.Type1)
+                {
+                    exportFileDialog.ShowDialog();
+                    if (exportFileDialog.FileName == "")
+                    {
+                        MessageBox.Show("請選取匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    ExportFile(exportFileDialog.FileName, 3, array, null, null, index);
+                }
+                else
+                {
+                    MessageBox.Show("只支援單一時間匯出檔案！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                return;
+            }
+
+
+            //double[,,] data = null;
+            ResultTableForm form = new ResultTableForm();
+            switch (t)
+            {
+                case TableType.Type5:
+                    index = (timeSel == null) ? 0 : timeSel[0];
+                    index2 = pi.kS;
+                    form.SetFormMode(
+                        String.Format("{0} T={1}, K={2}", title, timeList[index], index2 + 1),  //視窗標題
+                        //title + " T=" + timeList[index].ToString(),    
+                        pi.jS, pi.jE,       //行數(左右有幾行)
+                        pi.iS, pi.iE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "J=",                 //行標題(顯示於上方)
+                        "I=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTKM_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        1,                  //X維度
+                        0,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        null,               //Time陣列，若XY沒有要顯示T便不用傳
+                        pi.m);              
+                    break;
+                case TableType.Type6:
+                    index = pi.iS;
+                    index2 = (timeSel == null) ? 0 : timeSel[0];
+                    form.SetFormMode(
+                        String.Format("{0} I={1}, T={2}", title, index + 1, timeList[index2]),  //視窗標題
+                        pi.jS, pi.jE,       //行數(左右有幾行)
+                        pi.kS, pi.kE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "J=",                 //行標題(顯示於上方)
+                        "K=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTKM_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        1,                  //X維度
+                        3,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        null,               //Time陣列，若XY沒有要顯示T便不用傳
+                        pi.m);              
+                    break;
+                case TableType.Type7:
+                    index = pi.jS;
+                    index2 = (timeSel == null) ? 0 : timeSel[0];
+                    form.SetFormMode(
+                        String.Format("{0} J={1}, T={2}", title, index + 1, timeList[index2]),  //視窗標題
+                        pi.iS, pi.iE,       //行數(左右有幾行)
+                        pi.kS, pi.kE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "I=",                 //行標題(顯示於上方)
+                        "K=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTKM_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        0,                  //X維度
+                        3,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        null,               //Time陣列，若XY沒有要顯示T便不用傳
+                        pi.m);              
+                    break;
+                case TableType.Type8:   //JK固定，顯示TI
+                    index = pi.jS;
+                    index2 = pi.kS;
+                    form.SetFormMode(
+                        String.Format("{0} J={1}, K={2}", title, index + 1, index2 + 1),  //視窗標題
+                        pi.iS, pi.iE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "I=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTKM_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        0,                  //X維度
+                        2,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
+                        pi.m);              
+                    break;
+                case TableType.Type9:   //IK固定，顯示TJ
+                    index = pi.iS;
+                    index2 = pi.kS;
+                    form.SetFormMode(
+                        String.Format("{0} I={1}, K={2}", title, index + 1, index2 + 1),  //視窗標題
+                        pi.jS, pi.jE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "J=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTKM_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        1,                  //X維度
+                        2,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
+                        pi.m);              
+                    break;
+                case TableType.TypeA:   //IJ固定，顯示TK
+                    index = pi.iS;
+                    index2 = pi.jS;
+                    form.SetFormMode(
+                        String.Format("{0} I={1}, J={2}", title, index + 1, index2 + 1),  //視窗標題
+                        pi.kS, pi.kE,       //行數(左右有幾行)
+                        pi.tS, pi.tE,       //列數(上下有幾列)
+                        "",                 //表格名稱
+                        "K=",                 //行標題(顯示於上方)
+                        "T=",                 //列標題(顯示於左方)
+                        ResultTableForm.ResultTableType.IJTKM_Table,     //表格形式
+                        48,                 //儲存格寬度
+                        96,                 //列標題寬度
+                        true,               //保留
+                        false,              //不須行數字
+                        false,              //不須列數字
+                        array,              //資料
+                        3,                  //X維度
+                        2,                  //Y維度
+                        -1,                 //Sel1維度
+                        -1,                 //Sel2維度
+                        index,                 //Sel1索引
+                        index2,                 //Sel2索引
+                        "",                 //Sel1標籤
+                        "",                 //Sel2標籤
+                        timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
+                        pi.m);              
+                    break;
+                default:
+                    break;
+            }
+            /*
+            else if (t == TableType.mIsJmT)
+            {
+                //timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[pi.GetICount(), timeSel.Length];
+                for (int ti = 0; ti < timeSel.Length; ++ti)
+                    for (int i = pi.iS; i < pi.iE; ++i)
+                        data[i, ti] = array[timeSel[ti], pi.jS, i];
+
+                form.SetFormMode(
+                    title + " J=" + (pi.jS + 1).ToString(),   //視窗標題
+                    pi.iS, pi.iE - 1,       //行數(左右有幾行)
+                    timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.IJK_Table, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+            else if (t == TableType.mIsJmT)
+            {
+                //timeIndex = FoundTimeSelInList(timeSel[0]);
+                data = new double[pi.GetJCount(), timeSel.Length];
+                for (int ti = 0; ti < timeSel.Length; ++ti)
+                    for (int j = pi.jS; j < pi.jE; ++j)
+                        data[j, ti] = array[timeSel[ti], j, pi.iS];
+
+                form.SetFormMode(
+                    title + " I=" + (pi.iS + 1).ToString(),   //視窗標題
+                    pi.jS, pi.jE - 1,       //行數(左右有幾行)
+                    timeSel[0], timeSel[timeSel.Length - 1],       //列數(上下有幾列)
+                    "",                 //表格名稱
+                    "",                 //行標題(顯示於上方)
+                    "",                 //列標題(顯示於左方)
+                    ResultTableForm.ResultTableType.IJK_Table, //表格形式
+                    48,                 //儲存格寬度
+                    64,                 //列標題寬度
+                    true,               //保留
+                    false,              //不須行數字
+                    false,              //不須列數字
+                    data//資料
+                    );
+            }
+ */
+            DialogResult r = form.ShowDialog();
+            if (DialogResult.OK == r)
+            {
+                //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
+            }
+
         }
 
         private double[] GetLineDouble(string l, int size)
@@ -1160,8 +2356,11 @@ namespace RiverSimulationApplication
             return -1;
         }
 
+        private double[, ,] depthAverageFlowSpeedCoorU = null;
+        private double[, ,] depthAverageFlowSpeedCoorV = null;
         private double[, ,] depthAverageFlowSpeedU = null;
         private double[, ,] depthAverageFlowSpeedV = null;
+        private double[, ,] depthAverageFlowSpeedAbsUV = null;
         private double[, ,] tomd1 = null;
         private double[, ,] zs = null;
         private double[, ,] depth = null;
@@ -1170,6 +2369,11 @@ namespace RiverSimulationApplication
         private double[, ,] zbed = null;
         private double[, ,] mudconc = null;
         private double[, ,] beta = null;
+        private double[, , ,] flowSpeedU = null;    //I, J, T, K
+        private double[, , ,] flowSpeedV = null;    //I, J, T, K
+        private double[, , ,] flowSpeedW = null;    //I, J, T, K
+        private double[, , , ,] concentration = null;    //I, J, T, K, M
+        private double[, , , ,] conc = null;
 
         private bool ParsingTimeIJResult(/*TableType t, PosInfo pi, */List<double> timeList, String keyword, String outputfile, ref double[, ,] result)
         {
@@ -1184,7 +2388,7 @@ namespace RiverSimulationApplication
             int count = 0;
             bool foundTime = false;
             bool found = false;
-
+            bool foundKey = false;
             if (result == null)
             {
                 int tCount = (timeList == null) ? 1 : timeList.Count;
@@ -1220,7 +2424,7 @@ namespace RiverSimulationApplication
                     {
                         result[count, i, timeIndex] = ar[i];
                     }
-
+                    foundKey = true;
                     if (++count >= p.inputGrid.GetI)
                     {
                         if ((timeSel == null) || (++ti == timeSel.Length))
@@ -1232,7 +2436,270 @@ namespace RiverSimulationApplication
                     }
                 }
             }   //while ((line = f.ReadLine()) != null)
-            return true;
+            return foundKey;
+        }
+
+        private bool ParsingTimeIJKResult(List<double> timeList, String outputfile, ref double[, , ,] result)
+        {
+            string outputFile = Program.GetProjectFileFullPath() + ".working\\" + outputfile;
+            if (!File.Exists(outputFile))
+            {
+                return false;
+            }
+            // Read the file and display it line by line.
+            StreamReader f = new System.IO.StreamReader(outputFile);
+
+            if (result == null)
+            {
+                int tCount = (timeList == null) ? 1 : timeList.Count;
+                result = new double[p.inputGrid.GetI, p.inputGrid.GetJ, tCount, p.verticalLevelNumber];
+            }
+
+            string line;
+            int count = 0;
+            bool foundTime = false;
+            bool found = false;
+            bool foundKey = false; 
+            int ti = 0;
+            int ki = 0;
+            int cc = 0;
+
+            while ((line = f.ReadLine()) != null)
+            {
+                ++cc;
+                if (!foundTime && line.StartsWith("  TIME="))
+                {
+                    double checkTime = (timeList == null) ? 0 : timeList[timeSel[ti]];
+                    if (checkTime == Convert.ToDouble(line.Substring(9, 16).Trim()))
+                    {
+                        foundTime = true;
+                        continue;
+                    }
+                }
+
+                if (foundTime && !found && line.StartsWith(" K="))
+                {
+                    ki = Convert.ToInt32(line.Substring(3, line.Length - 3).Trim()) - 1;
+                    found = true;
+                    count = 0;
+                    continue;
+                }
+                int timeIndex = (timeSel == null) ? 0 : timeSel[ti];
+                if (foundTime && found)
+                {
+                    double[] ar = GetLineDouble(line, 10);
+                    for (int i = 0; i < ar.Length; ++i)
+                    {
+                        result[count, i, timeIndex, ki] = ar[i];
+                    }
+                    foundKey = true;
+                    if (++count >= p.inputGrid.GetI)
+                    {
+                        if ((timeSel == null) || (++ti == timeSel.Length))
+                        {
+                            --ti;
+                            found = false;
+                            if (ki == p.verticalLevelNumber - 1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            if (ki == p.verticalLevelNumber - 1)
+                            {
+                                foundTime = false;
+                            }
+                            else
+                            {
+                                --ti;
+                            }
+                            found = false;
+                        }
+                    }
+                }
+            }   //while ((line = f.ReadLine()) != null)
+            return foundKey;
+        }
+
+        private bool ParsingTimeIJKMResult(List<double> timeList, String outputfile, ref double[, , , ,] result, int m)
+        {
+            string outputFile = Program.GetProjectFileFullPath() + ".working\\" + outputfile;
+            if (!File.Exists(outputFile))
+            {
+                return false;
+            }
+            // Read the file and display it line by line.
+            StreamReader f = new System.IO.StreamReader(outputFile);
+
+            if (result == null)
+            {
+                int tCount = (timeList == null) ? 1 : timeList.Count;
+                result = new double[p.inputGrid.GetI, p.inputGrid.GetJ, tCount, p.verticalLevelNumber, p.sedimentParticlesNumber + 1];
+            }
+
+            string line;
+            int count = 0;
+            bool foundTime = false;
+            bool foundM = false;
+            bool foundK = false;
+            bool foundData = false;
+            int ti = 0;
+            int mi = 0;
+            int ki = 0;
+            int cc = 0;
+
+            while ((line = f.ReadLine()) != null)
+            {
+                ++cc;
+                if (!foundTime && line.StartsWith("  TIME="))
+                {   
+                    double checkTime = (timeList == null) ? 0 : timeList[timeSel[ti]];
+                    if (checkTime == Convert.ToDouble(line.Substring(9, 16).Trim()))
+                    {   //找到所需讀取的時間
+                        foundTime = true;
+                        continue;
+                    }
+                }
+                if (foundTime && !foundM && line.StartsWith(" M="))
+                {   //找到所需讀取的時間
+                    mi = Convert.ToInt32(line.Substring(3, line.Length - 3).Trim());
+                    if(mi == m)
+                    {   //找到所需讀取的M
+                        foundM = true;
+                        continue;
+                    }
+                }
+ 
+                if (foundTime && foundM && !foundK && line.StartsWith(" K="))
+                {
+                    ki = Convert.ToInt32(line.Substring(3, line.Length - 3).Trim()) - 1;
+                    foundK = true;
+                    count = 0;
+                    continue;
+                }
+                int timeIndex = (timeSel == null) ? 0 : timeSel[ti];
+                if (foundTime && foundK)
+                {
+                    double[] ar = GetLineDouble(line, 10);
+                    for (int i = 0; i < ar.Length; ++i)
+                    {
+                        result[count, i, timeIndex, ki, mi] = ar[i];
+                    }
+                    foundData = true;
+                    if (++count >= p.inputGrid.GetI)
+                    {   //讀完I X J個數值
+                        if ((timeSel == null) || (++ti == timeSel.Length))
+                        {   //讀到最後一個時間段
+                            --ti;
+                            foundK = false;
+                            if (ki == p.verticalLevelNumber - 1)
+                            {   //K讀完了還有下一個M
+                                break;
+                            }
+                            else
+                            {   //繼續讀取下一個K
+                                continue;
+                            }
+                        }
+                        else
+                        {   //讀取下一個一個時間段
+                            if (ki == p.verticalLevelNumber - 1)
+                            {
+                                foundTime = false;
+                                foundM = false;
+                            }
+                            else
+                            {
+                                --ti;
+                            }
+                            foundK = false;
+                        }
+                    }
+                }
+            }   //while ((line = f.ReadLine()) != null)
+            return foundData;
+        }
+        
+        private bool ParsingTimeIJMResult(List<double> timeList, String key,  String outputfile, ref double[, , , ,] result, int m)
+        {
+            string outputFile = Program.GetProjectFileFullPath() + ".working\\" + outputfile;
+            if (!File.Exists(outputFile))
+            {
+                return false;
+            }
+            // Read the file and display it line by line.
+            StreamReader f = new System.IO.StreamReader(outputFile);
+
+            if (result == null)
+            {
+                int tCount = (timeList == null) ? 1 : timeList.Count;
+                result = new double[p.inputGrid.GetI, p.inputGrid.GetJ, tCount, 1, p.sedimentParticlesNumber + 1];
+            }
+
+            string line;
+            int count = 0;
+            bool foundTime = false;
+            bool foundK = false;
+            bool foundData = false;
+            int ti = 0;
+            int mi = 0;
+            int cc = 0;
+
+            while ((line = f.ReadLine()) != null)
+            {
+                ++cc;
+                if (!foundTime && line.StartsWith("  TIME="))
+                {
+                    double checkTime = (timeList == null) ? 0 : timeList[timeSel[ti]];
+                    if (checkTime == Convert.ToDouble(line.Substring(9, 16).Trim()))
+                    {   //找到所需讀取的時間
+                        foundTime = true;
+                        continue;
+                    }
+                }
+
+                if (foundTime && !foundK && line.StartsWith(key))
+                {
+                    String ss = line.Substring(35, line.Length - 35).Trim();
+                    mi = Convert.ToInt32(line.Substring(35, line.Length - 35).Trim());
+                    if (mi != m)
+                    {
+                        continue;
+                    }
+                    foundK = true;
+                    count = 0;
+                    continue;
+                }
+
+                int timeIndex = (timeSel == null) ? 0 : timeSel[ti];
+                if (foundTime && foundK)
+                {
+                    double[] ar = GetLineDouble(line, 10);
+                    for (int i = 0; i < ar.Length; ++i)
+                    {
+                        result[count, i, timeIndex, 0, mi] = ar[i];
+                    }
+                    foundData = true;
+                    if (++count >= p.inputGrid.GetI)
+                    {   //讀完I X J個數值
+                        if ((timeSel == null) || (++ti == timeSel.Length))
+                        {   //讀到最後一個時間段
+                            break;
+                        }
+                        else
+                        {   //讀取下一個一個時間段
+                            foundTime = false;
+                            foundK = false;
+                        }
+                    }
+                }
+            }   //while ((line = f.ReadLine()) != null)
+            return foundData;
         }
 
         private bool ParsingTime(String outputfile, ref List<double> timeList)
@@ -1331,41 +2798,52 @@ namespace RiverSimulationApplication
                         GenerateInitialBottomElevationGraph();
                         break;
                     case 1: //水深平均流速-U(m/s)
-                            //GenerateDepthAverageFlowSpeedUGraph();
-                        GenerateTimeIJResultGraph(" U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
+                        GenerateTimeIJResultGraph("(m/s)", " U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
                         break;
                     case 2: //水深平均流速-V(m/s)
-                        GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        GenerateTimeIJResultGraph("(m/s)", " V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
                         break;
                     case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                            //GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        GenerateTimeIJResultGraph("(m/s)", " ABS-UV-VELOCITY(M/S)", "水深平均流速-UV 合向量的絕對值(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedAbsUV);
                         break;
                     case 4: //底床剪應力(N/m2)
-                        GenerateTimeIJResultGraph(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
+                        GenerateTimeIJResultGraph("(N/m2)", " TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
                         break;
                     case 5: //水位(m)
-                        GenerateTimeIJResultGraph(" ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
+                        GenerateTimeIJResultGraph("(m)", " ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
                         break;
                     case 6: //水深(m)
-                        GenerateTimeIJResultGraph(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
+                        GenerateTimeIJResultGraph("(m)", " DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
                         break;
                     case 7://流量-U(cms)
-                        GenerateTimeIJResultGraph(" ZS (M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
+                        GenerateTimeIJResultGraph("(cms)",  "US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
                         break;
                     case 8: //流量-V(cms)
-                        GenerateTimeIJResultGraph(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
+                        GenerateTimeIJResultGraph("(cms)", " VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
                         break;
                     case 9: //底床高程(m)
-                        GenerateTimeIJResultGraph(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
+                        GenerateTimeIJResultGraph("(m)", " US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
                         break;
                     case 10: //沖淤深度(m)
-                        GenerateTimeIJResultGraph(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
+                        GenerateTimeIJResultGraph("(m)", " DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
                         break;
                     case 11: //水深平均濃度(ppm)
-                        GenerateTimeIJResultGraph(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
+                        GenerateTimeIJResultGraph("(ppm)", " MUDCONC", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
                         break;
                     case 12: //粒徑分佈(%)
-                        GenerateTimeIJResultGraph(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
+                        GenerateTimeIJResultGraph("(%)", " BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
+                        break;
+                    case 13: //流速-U(m/s)
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-U(m/s)", "3Dvelocity-U.dat", resedTimeList, ref flowSpeedU);
+                        break;
+                    case 14: //流速-V(m/s)
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-V(m/s)", "3Dvelocity-V.dat", resedTimeList, ref flowSpeedV);
+                        break;
+                    case 15: //流速-W(m/s)
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-W(m/s)", "3Dvelocity-W.dat", resedTimeList, ref flowSpeedW);
+                        break;
+                    case 16: //濃度(ppm)
+                        GenerateTimeIJKMResultGraph("(ppm)", "濃度(ppm)", "3Dconcentration.dat", sedTimeList, ref concentration);
                         break;
                 }
             }
@@ -1377,40 +2855,67 @@ namespace RiverSimulationApplication
                         GenerateInitialBottomElevationGraph();
                         break;
                     case 1: //水深平均流速-U(m/s)                       
-                        GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        GenerateTimeIJResultGraph("(m/s)", " U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
                         break;
                     case 2: //水深平均流速-V(m/s)
-                        //GnerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        GenerateTimeIJResultGraph("(m/s)", " V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
                         break;
                     case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                        //GenerateTimeIJResultGraph(" V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        GenerateTimeIJResultGraph("(m/s)", " ABS-UV-VELOCITY(M/S)", "水深平均流速-UV 合向量的絕對值(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedAbsUV);
                         break;
                     case 4: //底床剪應力(N/m2)
-                        GenerateTimeIJResultGraph(" TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
+                        GenerateTimeIJResultGraph("(N/m2)", " TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
                         break;
                     case 5: //水位(m)
-                        GenerateTimeIJResultGraph(" ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
+                        GenerateTimeIJResultGraph("(m)", " ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
                         break;
                     case 6: //水深(m)
-                        GenerateTimeIJResultGraph(" DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
+                        GenerateTimeIJResultGraph("(m)", " DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
                         break;
                     case 7://流量-U(cms)
-                        GenerateTimeIJResultGraph(" ZS (M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
+                        GenerateTimeIJResultGraph("(cms)", " US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
                         break;
                     case 8: //流量-V(cms)
-                        GenerateTimeIJResultGraph(" VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
+                        GenerateTimeIJResultGraph("(cms)", " VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
                         break;
                     case 9: //底床高程(m)
-                        GenerateTimeIJResultGraph(" US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
+                        GenerateTimeIJResultGraph("(m)", " US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", sedTimeList, ref usDischarge);
                         break;
                     case 10: //沖淤深度(m)
-                        GenerateTimeIJResultGraph(" DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
+                        GenerateTimeIJResultGraph("(m)", " DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref zbed);
                         break;
                     case 11: //水深平均濃度(ppm)
-                        GenerateTimeIJResultGraph(" MUDCONC & CONC (-)", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
+                        GenerateTimeIJResultGraph("ppm", " MUDCONC", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
                         break;
                     case 12: //粒徑分佈(%)
-                        GenerateTimeIJResultGraph(" BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
+                        GenerateTimeIJResultGraph("(%)", " BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
+                        break;
+                    case 13: //流速-U(m/s)
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-U(m/s)", "3Dvelocity-U.dat", resedTimeList, ref flowSpeedU);
+                        break;
+                    case 14: //流速-V(m/s)
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-V(m/s)", "3Dvelocity-V.dat", resedTimeList, ref flowSpeedV);
+                        break;
+                    case 15: //流速-W(m/s)
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-W(m/s)", "3Dvelocity-W.dat", resedTimeList, ref flowSpeedW);
+                        break;
+                    case 16: //濃度(ppm)
+                        GenerateTimeIJKMResultGraph("(ppm)", "濃度(ppm)", "3Dconcentration.dat", sedTimeList, ref concentration);
+                        break;
+                }
+            }
+            else if (graphFormMode == GraphFormMode.Vector)
+            {
+                switch (param1Cmb.SelectedIndex)
+                {
+                    case 0: //水深平均流速-UV 合向量(m/s)
+                        GenerateCoorUV_VelocityVectorGraph();
+                        break;
+                    case 1: //流速-UW合向量(m/s)              
+                        //GenerateTimeIJResultGraph("(m/s)", " U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
+                        break;
+                    case 2: //流速-VW合向量(m/s)
+                        //GenerateTimeIJResultGraph("(m/s)", " V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
                         break;
                 }
             }
@@ -1453,33 +2958,112 @@ namespace RiverSimulationApplication
         private void timeBtn_Click(object sender, EventArgs e)
         {
             ResultTimeSelForm form = new ResultTimeSelForm();
-
-            switch (param1Cmb.SelectedIndex)
+            if (drawType == Param1Type.ParamTable)
             {
-                case 1: //水深平均流速-U(m/s)
-                case 2: //水深平均流速-V(m/s)
-                case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                case 4: //底床剪應力(N/m2)   //⁰¹²³⁴⁵⁶⁷⁸⁹
-                case 5: //水位(m)
-                case 6: //水深(m)
-                case 7: //流量-U(cms)
-                case 8: //流量-V(cms)
-                    form.SetFormMode("", GetTimeSelectionType(), resedTimeList);
-                    break;
-                case 9: //底床高程(m)
-                case 10: //沖淤深度(m)
-                case 11: //水深平均濃度(ppm)
-                case 12: //粒徑分佈(%)
-                    form.SetFormMode("", GetTimeSelectionType(), sedTimeList);
-                    break;
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                    form.SetFormMode("", GetTimeSelectionType(), resedTimeList);
-                    break;
-                default:
-                    break;
+                switch (param1Cmb.SelectedIndex)
+                {   //param1Cmb.DataSource = tableItemsParam1;
+                    case 1: //水深平均流速-U(m/s)
+                    case 2: //水深平均流速-V(m/s)
+                    case 3: //水深平均流速-UV 合向量的絕對值(m/s)
+                    case 4: //底床剪應力(N/m2)   //⁰¹²³⁴⁵⁶⁷⁸⁹
+                    case 5: //水位(m)
+                    case 6: //水深(m)
+                    case 7: //流量-U(cms)
+                    case 8: //流量-V(cms)
+                        form.SetFormMode("", GetTimeSelectionType(), resedTimeList);
+                        break;
+                    case 9: //底床高程(m)
+                    case 10: //沖淤深度(m)
+                    case 11: //水深平均濃度(ppm)
+                    case 12: //粒徑分佈(%)
+                    case 16:
+                        form.SetFormMode("", GetTimeSelectionType(), sedTimeList);
+                        break;
+                    case 13:
+                    case 14:
+                    case 15:
+                        form.SetFormMode("", GetTimeSelectionType(), resedTimeList);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(drawType == Param1Type.ParamGraph1)
+            {
+                if(graphFormMode == GraphFormMode.XY)   //折線圖
+                {
+                    switch (param1Cmb.SelectedIndex)
+                    {   //param1Cmb.DataSource = tableItemsParam2;
+                        case 1: //水深平均流速-U(m/s)
+                        case 2: //水深平均流速-V(m/s)
+                        case 3: //水深平均流速-UV 合向量的絕對值(m/s)
+                        case 4: //底床剪應力(N/m2)   //⁰¹²³⁴⁵⁶⁷⁸⁹
+                        case 5: //水位(m)
+                        case 6: //水深(m)
+                        case 7: //流量-U(cms)
+                        case 8: //流量-V(cms)
+                            form.SetFormMode("", GetTimeSelectionType(), resedTimeList);
+                            break;
+                        case 9: //底床高程(m)
+                        case 10: //沖淤深度(m)
+                        case 11: //水深平均濃度(ppm)
+                        case 12: //粒徑分佈(%)
+                        case 16:
+                            form.SetFormMode("", GetTimeSelectionType(), sedTimeList);
+                            break;
+                        case 13:
+                        case 14:
+                        case 15:
+                            form.SetFormMode("", GetTimeSelectionType(), resedTimeList);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+                else if(graphFormMode == GraphFormMode.Contour)   //等值線圖
+                {
+                    switch (param1Cmb.SelectedIndex)
+                    {   //param1Cmb.DataSource = tableItemsParam3;
+                        case 1: //水深平均流速-U(m/s)
+                        case 2: //水深平均流速-V(m/s)
+                        case 3: //水深平均流速-UV 合向量的絕對值(m/s)
+                        case 4: //底床剪應力(N/m2)   //⁰¹²³⁴⁵⁶⁷⁸⁹
+                        case 5: //水位(m)
+                        case 6: //水深(m)
+                        case 7: //流量-U(cms)
+                        case 8: //流量-V(cms)
+                            form.SetFormMode("", ResultTimeSelForm.ResultTimeType.SingleSelect, resedTimeList);
+                            break;
+                        case 9: //底床高程(m)
+                        case 10: //沖淤深度(m)
+                        case 11: //水深平均濃度(ppm)
+                        case 12: //粒徑分佈(%)
+                        case 16:
+                            form.SetFormMode("", ResultTimeSelForm.ResultTimeType.SingleSelect, sedTimeList);
+                            break;
+                        case 13:
+                        case 14:
+                        case 15:
+                            form.SetFormMode("", ResultTimeSelForm.ResultTimeType.SingleSelect, resedTimeList);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else if (graphFormMode == GraphFormMode.Vector)   //向量圖
+                {
+                    switch (param1Cmb.SelectedIndex)
+                    {   //param1Cmb.DataSource = tableItemsParam4;
+                        case 0: //水深平均流速-UV 合向量的絕對值(m/s)
+                        case 1: //流速-UW合向量(m/s)
+                        case 2: //流速-VW合向量(m/s)
+                            form.SetFormMode("", ResultTimeSelForm.ResultTimeType.SingleSelect, resedTimeList);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
 
 
@@ -1543,6 +3127,7 @@ namespace RiverSimulationApplication
             public int tE = -1;
             public int kS = -1;
             public int kE = -1;
+            public int m = -1;
 
             public int GetICount() { return iE - iS; }
             public int GetJCount() { return jE - jS; }
@@ -1593,7 +3178,7 @@ namespace RiverSimulationApplication
                 case TableType.Type56789A:
                     if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
                         !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE) ||
-                        !GetPosRange(posKchk, p.inputGrid.GetI, posKTxt, ref pi.kS, ref pi.kE) ||
+                        !GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref pi.kS, ref pi.kE) ||
                         (p.IsVariableFlowType() && timeSel == null))
                     {   //I或J或T或K未輸入
                         return TableType.Type56789A;
@@ -1610,27 +3195,27 @@ namespace RiverSimulationApplication
                         pi.tE = 1;
                     }
                     if (pi.GetICount() > 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1 && pi.GetKCount() == 1)
-                    {   //KT固定
+                    {   //KT固定，顯示IJ
                         return TableType.Type5;
                     }
                     else if (pi.GetICount() == 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1 && pi.GetKCount() > 1)
-                    {   //IT固定
+                    {   //IT固定，顯示KJ
                         return TableType.Type6;
                     }
                     else if (pi.GetICount() > 1 && pi.GetJCount() == 1 && pi.GetTCount() == 1 && pi.GetKCount() > 1)
-                    {   //JT固定
+                    {   //JT固定，顯示KI
                         return TableType.Type7;
                     }
-                    else if (pi.GetICount() == 1 && pi.GetJCount() > 1 && pi.GetTCount() > 1 && pi.GetKCount() == 1)
-                    {   //IK固定
+                    else if (pi.GetICount() > 1 && pi.GetJCount() == 1 && pi.GetTCount() > 1 && pi.GetKCount() == 1)
+                    {   //JK固定，顯示TI
                         return TableType.Type8;
                     }
-                    else if (pi.GetICount() > 1 && pi.GetJCount() == 1 && pi.GetTCount() > 1 && pi.GetKCount() == 1)
-                    {   //JK固定
+                    else if (pi.GetICount() == 1 && pi.GetJCount() > 1 && pi.GetTCount() > 1 && pi.GetKCount() == 1)
+                    {   //IK固定，顯示TJ
                         return TableType.Type9;
                     }
                     else if (pi.GetICount() == 1 && pi.GetJCount() == 1 && pi.GetTCount() > 1 && pi.GetKCount() > 1)
-                    {   //IJ固定
+                    {   //IJ固定，顯示TK
                         return TableType.TypeA;
                     }
                     return TableType.Type56789A;
@@ -1695,6 +3280,41 @@ namespace RiverSimulationApplication
                         }
                     }
                     return ResultGraphForm.GraphType.Type234;
+                case ResultGraphForm.GraphType.Type5678:
+                    if (!GetPosRange(posIchk, p.inputGrid.GetI, posITxt, ref pi.iS, ref pi.iE) ||
+                        !GetPosRange(posJchk, p.inputGrid.GetJ, posJTxt, ref pi.jS, ref pi.jE) ||
+                        !GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref pi.kS, ref pi.kE) ||
+                        (p.IsVariableFlowType() && timeSel == null))
+                    {   //I或J或T或K未輸入
+                        return ResultGraphForm.GraphType.Type5678;
+                    }
+                    if (p.IsVariableFlowType())
+                    {
+                        pi.tS = timeSel[0];
+                        pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    }
+                    else
+                    {
+                        pi.tS = 0;
+                        pi.tE = 1;
+                    }
+                    if (pi.GetICount() == 1 && pi.GetJCount() > 1 && pi.GetTCount() == 1 && pi.GetKCount() == 1)
+                    {   //ITK固定，顯示J, 累距(m)
+                        return ResultGraphForm.GraphType.Type5;
+                    }
+                    else if (pi.GetICount() > 1 && pi.GetJCount() == 1 && pi.GetTCount() == 1 && pi.GetKCount() == 1)
+                    {   //JTK固定，顯示I, 累距(m)
+                        return ResultGraphForm.GraphType.Type6;
+                    }
+                    else if (pi.GetICount() == 1 && pi.GetJCount() == 1 && pi.GetTCount() > 1 && pi.GetKCount() == 1)
+                    {   //IJK固定，顯示IJK, 時間(sec)
+                        return ResultGraphForm.GraphType.Type7;
+                    }
+                    else if (pi.GetICount() == 1 && pi.GetJCount() == 1 && pi.GetTCount() == 1 && pi.GetKCount() > 1)
+                    {   //IJT固定，顯示高程(m), K
+                        return ResultGraphForm.GraphType.Type8;
+                    }
+                    return ResultGraphForm.GraphType.Type5678;
             }
             return ResultGraphForm.GraphType.TypeUnknown;
         }

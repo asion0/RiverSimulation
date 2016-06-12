@@ -477,7 +477,7 @@
             // 
             this.valueParamPanel.Controls.Add(this.groupBox10);
             this.valueParamPanel.Controls.Add(this.valueParamBackBtn);
-            this.valueParamPanel.Location = new System.Drawing.Point(8, 292);
+            this.valueParamPanel.Location = new System.Drawing.Point(52, 587);
             this.valueParamPanel.Name = "valueParamPanel";
             this.valueParamPanel.Size = new System.Drawing.Size(500, 670);
             this.valueParamPanel.TabIndex = 12;
@@ -811,7 +811,7 @@
             // 
             this.seabedCompositionPanel.Controls.Add(this.groupBox7);
             this.seabedCompositionPanel.Controls.Add(this.seabedCompositionBackBtn);
-            this.seabedCompositionPanel.Location = new System.Drawing.Point(24, 249);
+            this.seabedCompositionPanel.Location = new System.Drawing.Point(8, 613);
             this.seabedCompositionPanel.Name = "seabedCompositionPanel";
             this.seabedCompositionPanel.Size = new System.Drawing.Size(500, 659);
             this.seabedCompositionPanel.TabIndex = 12;
@@ -1010,7 +1010,7 @@
             // 
             this.rockStablePanel.Controls.Add(this.groupBox8);
             this.rockStablePanel.Controls.Add(this.rockStableBackBtn);
-            this.rockStablePanel.Location = new System.Drawing.Point(86, 545);
+            this.rockStablePanel.Location = new System.Drawing.Point(166, 518);
             this.rockStablePanel.Name = "rockStablePanel";
             this.rockStablePanel.Size = new System.Drawing.Size(500, 670);
             this.rockStablePanel.TabIndex = 12;
@@ -1377,7 +1377,7 @@
             // 
             this.rockbedPanel.Controls.Add(this.groupBox9);
             this.rockbedPanel.Controls.Add(this.button9);
-            this.rockbedPanel.Location = new System.Drawing.Point(68, 575);
+            this.rockbedPanel.Location = new System.Drawing.Point(136, 542);
             this.rockbedPanel.Name = "rockbedPanel";
             this.rockbedPanel.Size = new System.Drawing.Size(500, 682);
             this.rockbedPanel.TabIndex = 12;
@@ -1521,7 +1521,7 @@
             // 
             this.transSandMethodPanel.Controls.Add(this.groupBox5);
             this.transSandMethodPanel.Controls.Add(this.button1);
-            this.transSandMethodPanel.Location = new System.Drawing.Point(55, 281);
+            this.transSandMethodPanel.Location = new System.Drawing.Point(104, 564);
             this.transSandMethodPanel.Name = "transSandMethodPanel";
             this.transSandMethodPanel.Size = new System.Drawing.Size(500, 670);
             this.transSandMethodPanel.TabIndex = 12;
@@ -1762,13 +1762,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 689);
+            this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.valueParamPanel);
             this.Controls.Add(this.previewSedimentCompositionPanel);
             this.Controls.Add(this.previewCombo);
             this.Controls.Add(this.transSandMethodPanel);
             this.Controls.Add(this.rockbedPanel);
             this.Controls.Add(this.rockStablePanel);
-            this.Controls.Add(this.seabedCompositionPanel);
             this.Controls.Add(this.physicalParamPanel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.mainPanel);

@@ -42,7 +42,7 @@ namespace RiverSimulationApplication
         public static string resedName = @"\resed.exe";
         public static string projectFileExt = @".t2d";
         public static string projectFileFilter = @"*.t2d";
-
+        public static bool outputPngFormat = false;
         //public static bool autoTest = true;
         //public static string testProject = @"C:\Users\Asion\Documents\FlowSimulation\新後處理專案";
         //public static string testFile = @"C:\Users\Asion\Documents\FlowSimulation\新後處理專案\2Dbed.t2d";
@@ -58,7 +58,6 @@ namespace RiverSimulationApplication
             public ProgramSetting()
             {
                 SetDefault();
-
             }
 
             public ProgramSetting(string name)

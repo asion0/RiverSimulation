@@ -20,6 +20,7 @@ namespace RiverSimulationApplication
 
         private string jgwPath = "";
         Bitmap bmp = null;
+        bool hasJgw = false;
         public void SetImage(string s)
         {
             bmp = new Bitmap(s);
@@ -54,10 +55,11 @@ namespace RiverSimulationApplication
                     n = Convert.ToDouble(line);
                 }
                 file.Close();
+                hasJgw = true;
             }
 
         }
-
+        public bool HasJgw() { return hasJgw; }
         private bool SaveJgwFile()
         {
             try

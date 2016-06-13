@@ -718,58 +718,30 @@ namespace RiverSimulationApplication
         public double[,] bedrockElevationArray; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
 
         //2.6 岸壁穩定分析 option
-        //2.6.1 分析位置
-        public bool positionAnalysis { get; set; }   //2.6.1 分析位置
-        public enum PositionAnalysisType
-        {
-            None,
-            GlobalSimulation,
-            LocalSimulation,
-        }
-        public PositionAnalysisType positionAnalysisType;   //2.6.1 分析位置二選一 -- a. 僅供介面用，不用輸入到input 檔。此選項為提供全部模擬與局部模擬兩個選項
-        public int localBlockNumber;                        //2.6.1.1 數值格網數目的表格供使用者填入欲分析位置數目IB，其中IB 的數目不可超過格網數目I。
-        public int[,] localBlockArray;                         //2.6.1.1 局部區塊數目矩陣(2, IB) -- a. 矩陣(2, IB)，1 代表左岸，2 代表右岸。僅為0、1 兩個數目字可供選擇，若1 為計算，若0 為不計算。
+        //BR_0 岸壁穩定
+        public double rockStableTimeSpacing;    //BR_0.1 時間間距 單一數值 sec 實數(>0)實數8格
 
-        //2.6.2 入滲效應
-        public bool infiltrationEffect { get; set; }         //2.6.2 入滲效應 option
-        public enum InfiltrationEffectTimeFormat
-        {
-            Minute,
-            Hour,
-        }
-        public InfiltrationEffectTimeFormat infiltrationEffectTimeFormat;   //2.6.2.1 時間格式二選一 小時/分鐘，二選一。
-        public double infiltrationEffectTimeSpacing;                        //2.6.2.2 間距單一數值 實數(>0) 使用者自行輸入數值ex：1.5 小時or 90 分鐘
-        public double[] rainfall;                                           //2.6.2.2.1 降雨量矩陣 mm 實數(>0) Free a. 矩陣大小需計算：首先將間距換為秒，然後“總模擬時間” (秒)除於間距(秒)，即為矩陣大小
+        //BR_1 岸壁幾何條件
+        public bool analysisLeftBankStable;     //分析左岸岸壁穩定
+        public double leftSlopeToePosiotion;    //BR_1.1 坡腳位置 單一數值 -- 實數(>0)
+        public double leftBankHeight;           //BR_1.2 岸壁高度 單一數值  m 實數
+        public double leftInitBankSlope;        //BR_1.3 初始岸壁坡度 單一數值 deg 實數(>0)
+        public double leftDikeToBankLength;	    //BR_1.4 堤防到岸壁的長度 單一數值 m 實數(>0)
 
-        //2.6.3 岸壁幾何條件
-        public bool quayGeometry { get; set; }      //2.6.3 岸壁幾何條件
-        public int soilStratificationNumber;        //2.6.3.1 岸壁土壤分層數目單一數值 整數(>0) option
-        public double[,] layerThicknessArray;       //2.6.3.1.1 分層厚度矩陣(LBK)m 實數(>0) 矩陣(LBK)為岸壁土壤分層數目
-        public double[,] quayHeightArray;           //2.6.3.2 岸壁高度矩陣(2, IB) m 實數
-        public double[,] dikeToWharfLengthArray;    //2.6.3.3 堤防到岸壁的長度矩陣(2, IB)m 實數(>0)
+        public bool analysisRightBankStable;	//分析右岸岸壁穩定
+        public double rightSlopeToePosiotion;   //BR_1.1' 坡腳位置 單一數值 -- 實數(>0)
+        public double rightBankHeight;          //BR_1.2' 岸壁高度 單一數值  m 實數
+        public double rightInitBankSlope;       //BR_1.3' 初始岸壁坡度 單一數值 deg 實數(>0)
+        public double rightDikeToBankLength;    //BR_1.4' 堤防到岸壁的長度 單一數值 m 實數(>0)
 
-        //2.6.4 岸壁土壤性質
-        public bool quaySoilProperties { get; set; }    //2.6.4 岸壁土壤性質
-        public double cohesion;                         //2.6.4.1 凝聚力 二選一 pa 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] cohesionArray;                //2.6.4.1 凝聚力 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+        public bool bankSoilProperties;             //岸壁土壤性質
+        public double bankSoilInternalFrictionAngle;        //BR_2.3 內摩擦角 單一數值 deg 實數(>0)	
+        public double bankSoilConductCoefficient;           //BR_2.4 傳導係數 單一數值 m/s 實數(>0) 
+        public double bankSoilBankScourCriticalStress;      //BR_2.6 岸壁沖刷臨界剪應力 單一數值 N/m2 實數(>0)
+        public double bankSoilCohesion;                 //BR_3.1 凝聚力 單一數值 pa 實數(>0) 
+        public double bankSoilAngleOfRepose;                //BR_3.2 安息角 單一數值 deg 實數(>0) 
+        public double bbankSoilSpecificYield;				//BR_2.5 比流率 單一數值 -- 實數(>0)	
 
-        public double reposeAngle;                      //2.6.4.2 安息角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] reposeAngleArray;             //2.6.4.2 安息角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-        public double frictionAngle;                    //2.6.4.3 內摩擦角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] frictionAngleArray;           //2.6.4.3 內摩擦角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-        public double flowRateRatio;                    //2.6.4.3 比流率 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] flowRateRatioArray;          //2.6.4.3 比流率 若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-        public double porosityRatio;                    //2.6.4.5 孔隙率二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] porosityRatioArray;           //若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-        public double soilProportion;                  //2.6.4.6 土壤比重二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] soilProportionArray;         //若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-        public double ShearStrengthAngle;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-        public double[, ,] ShearStrengthAngleArray;         //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
 
         //3. 初始條件
         //3.1 水理模組 =========================================
@@ -1271,51 +1243,33 @@ namespace RiverSimulationApplication
             bedrockElevationArray = null; //2.5.3 岩床高程 二選一 m 實數 a. 為逐點給，則參數形式為矩陣(I,J)
 
             //2.6 岸壁穩定分析 option
-            //2.6.1 分析位置
-            positionAnalysis = false;   //2.6.1 分析位置
-            positionAnalysisType = PositionAnalysisType.None;   //2.6.1 分析位置二選一 -- a. 僅供介面用，不用輸入到input 檔。此選項為提供全部模擬與局部模擬兩個選項
-            localBlockNumber = 0;                        //2.6.1.1 數值格網數目的表格供使用者填入欲分析位置數目IB，其中IB 的數目不可超過格網數目I。
-            localBlockArray = null;                         //2.6.1.1 局部區塊數目矩陣(2, IB) -- a. 矩陣(2, IB)，1 代表左岸，2 代表右岸。僅為0、1 兩個數目字可供選擇，若1 為計算，若0 為不計算。
+            //BR_0 岸壁穩定
+            rockStableTimeSpacing = 0;    //BR_0.1 時間間距 單一數值 sec 實數(>0)實數8格
 
-            //2.6.2 入滲效應
-            infiltrationEffect = false;        //2.6.2 入滲效應 option
-            infiltrationEffectTimeFormat = InfiltrationEffectTimeFormat.Minute;   //2.6.2.1 時間格式二選一 小時/分鐘，二選一。
-            infiltrationEffectTimeSpacing = 0;                        //2.6.2.2 間距單一數值 實數(>0) 使用者自行輸入數值ex：1.5 小時or 90 分鐘
-            rainfall = null;                                           //2.6.2.2.1 降雨量矩陣 mm 實數(>0) Free a. 矩陣大小需計算：首先將間距換為秒，然後“總模擬時間” (秒)除於間距(秒)，即為矩陣大小
+            //BR_1 岸壁幾何條件
+            analysisLeftBankStable = false;     //分析左岸岸壁穩定
+            leftSlopeToePosiotion = 0;    //BR_1.1 坡腳位置 單一數值 -- 實數(>0)
+            leftBankHeight = 0;           //BR_1.2 岸壁高度 單一數值  m 實數
+            leftInitBankSlope = 0;        //BR_1.3 初始岸壁坡度 單一數值 deg 實數(>0)
+            leftDikeToBankLength = 0;   //BR_1.4 堤防到岸壁的長度 單一數值 m 實數(>0)
 
-            //2.6.3 岸壁幾何條件
-            quayGeometry = false;      //2.6.3 岸壁幾何條件
-            soilStratificationNumber = 0;        //2.6.3.1 岸壁土壤分層數目單一數值 整數(>0) option
-            layerThicknessArray = null;       //2.6.3.1.1 分層厚度矩陣(LBK)m 實數(>0) 矩陣(LBK)為岸壁土壤分層數目
-            quayHeightArray = null;           //2.6.3.2 岸壁高度矩陣(2, IB) m 實數
-            dikeToWharfLengthArray = null;    //2.6.3.3 堤防到岸壁的長度矩陣(2, IB)m 實數(>0)
+            analysisRightBankStable = false;    //分析右岸岸壁穩定
+            rightSlopeToePosiotion = 0;   //BR_1.1' 坡腳位置 單一數值 -- 實數(>0)
+            rightBankHeight = 0;          //BR_1.2' 岸壁高度 單一數值  m 實數
+            rightInitBankSlope = 0;       //BR_1.3' 初始岸壁坡度 單一數值 deg 實數(>0)
+            rightDikeToBankLength = 0;    //BR_1.4' 堤防到岸壁的長度 單一數值 m 實數(>0)
 
-            //2.6.4 岸壁土壤性質
-            quaySoilProperties = false;   //2.6.4 岸壁土壤性質
-            cohesion = 0;                         //2.6.4.1 凝聚力 二選一 pa 實數(>0) a. 0：均一值，逐點給：-1
-            cohesionArray = null;                //2.6.4.1 凝聚力 若為逐點給，則參數形式為矩陣(2,IB,LBK)
+            bankSoilProperties = false;             //岸壁土壤性質
+            bankSoilInternalFrictionAngle = 0;        //BR_2.3 內摩擦角 單一數值 deg 實數(>0)	
+            bankSoilConductCoefficient = 0;           //BR_2.4 傳導係數 單一數值 m/s 實數(>0) 
+            bankSoilBankScourCriticalStress = 0;      //BR_2.6 岸壁沖刷臨界剪應力 單一數值 N/m2 實數(>0)
+            bankSoilCohesion = 0;                 //BR_3.1 凝聚力 單一數值 pa 實數(>0) 
+            bankSoilAngleOfRepose = 0;                //BR_3.2 安息角 單一數值 deg 實數(>0) 
+            bbankSoilSpecificYield = 0;               //BR_2.5 比流率 單一數值 -- 實數(>0)	
 
-            reposeAngle = 0;                      //2.6.4.2 安息角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-            reposeAngleArray = null;             //2.6.4.2 安息角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-            frictionAngle = 0;                    //2.6.4.3 內摩擦角 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-            frictionAngleArray = null;           //2.6.4.3 內摩擦角 若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-            flowRateRatio = 0;                    //2.6.4.3 比流率 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-            flowRateRatioArray = null;          //2.6.4.3 比流率 若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-            porosityRatio = 0;                    //2.6.4.5 孔隙率二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
-            porosityRatioArray = null;           //若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-            soilProportion = 0;                  //2.6.4.6 土壤比重二選一 -- 實數(>0) a. 0：均一值，逐點給：-1
-            soilProportionArray = null;         //若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-            ShearStrengthAngle = 0;              //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 二選一 deg 實數(>0) a. 0：均一值，逐點給：-1
-            ShearStrengthAngleArray = null;      //2.6.4.7 岸壁未飽和基值吸力造成剪力強度增加所對應角度 若為逐點給，則參數形式為矩陣(2,IB,LBK)
-
-            //3. 初始條件
-            //3.1 水理模組 =========================================
-            depthAverageFlowSpeedU = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim);
+        //3. 初始條件
+        //3.1 水理模組 =========================================
+        depthAverageFlowSpeedU = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim);
             depthAverageFlowSpeedV = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim);
             waterLevel = new TwoInOne(TwoInOne.ValueType.Double, TwoInOne.ArrayType.TwoDim); ;      //3.1.4 水位 二選一 m 實數 實數 8 格a. 若為逐 點給，則參數形式為矩陣(I,J)
             verticalVelocitySlice = VerticalVelocitySliceType.None;         //3.1.4 垂向流速剖面二選一 -- -- 整數8 格a. 三維only b. 0：關；1：開

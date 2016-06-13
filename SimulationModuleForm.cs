@@ -88,8 +88,10 @@ namespace RiverSimulationApplication
         {
             if (Program.programVersion.DemoVersion)
             {
-                movableBedPanel.Enabled = false;
-                //sideInOutFlowFunctionChk.Enabled = false;
+                //20160613, 打開岸壁穩定分析功能
+                //movableBedPanel.Enabled = false;
+                bedrockFunctionChk.Enabled = false;
+                movableBedHighSandContentEffectFunctionChk.Enabled = false;
                 waterHighSandContentEffectFunctionChk.Enabled = false;
             }
         }

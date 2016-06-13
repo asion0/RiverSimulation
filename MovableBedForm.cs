@@ -140,28 +140,28 @@ namespace RiverSimulationApplication
                    break;
             }
             //BR_0 岸壁穩定
-rockStableTimeSpacingTxt.Text = p.rockStableTimeSpacing.ToString();
+            rockStableTimeSpacingTxt.Text = p.rockStableTimeSpacing.ToString();
 
-//BR_1 岸壁幾何條件
-analysisLeftBankStableChk.Checked = p.analysisLeftBankStable;
-leftSlopeToePosiotionTxt.Text = p.leftSlopeToePosiotion.ToString();
-leftBankHeightTxt.Text = p.leftSlopeToePosiotion.ToString();
-leftInitBankSlopeTxt.Text = p.leftInitBankSlope.ToString();
-leftDikeToBankLengthTxt.Text = p.leftDikeToBankLength.ToString();
+            //BR_1 岸壁幾何條件
+            analysisLeftBankStableChk.Checked = p.analysisLeftBankStable;
+            leftSlopeToePosiotionTxt.Text = p.leftSlopeToePosiotion.ToString();
+            leftBankHeightTxt.Text = p.leftSlopeToePosiotion.ToString();
+            leftInitBankSlopeTxt.Text = p.leftInitBankSlope.ToString();
+            leftDikeToBankLengthTxt.Text = p.leftDikeToBankLength.ToString();
 
-analysisRightBankStableChk.Checked = p.analysisRightBankStable;
-rightSlopeToePosiotionTxt.Text = p.rightSlopeToePosiotion.ToString();
-rightBankHeightTxt.Text = p.rightBankHeight.ToString();
-rightInitBankSlopeTxt.Text = p.rightInitBankSlope.ToString();
-rightDikeToBankLengthTxt.Text = p.rightDikeToBankLength.ToString();
+            analysisRightBankStableChk.Checked = p.analysisRightBankStable;
+            rightSlopeToePosiotionTxt.Text = p.rightSlopeToePosiotion.ToString();
+            rightBankHeightTxt.Text = p.rightBankHeight.ToString();
+            rightInitBankSlopeTxt.Text = p.rightInitBankSlope.ToString();
+            rightDikeToBankLengthTxt.Text = p.rightDikeToBankLength.ToString();
 
-bankSoilPropertiesChk.Checked = p.bankSoilProperties;
-bankSoilInternalFrictionAngleTxt.Text = p.bankSoilInternalFrictionAngle.ToString();
-bankSoilConductCoefficientTxt.Text = p.bankSoilConductCoefficient.ToString();
-bankSoilBankScourCriticalStressTxt.Text = p.bankSoilBankScourCriticalStress.ToString();
-bankSoilCohesionTxt.Text = p.bankSoilCohesion.ToString();
-bankSoilAngleOfReposeTxt.Text = p.bankSoilAngleOfRepose.ToString();
-bbankSoilSpecificYieldTxt.Text = p.bbankSoilSpecificYield.ToString();
+            //bankSoilPropertiesChk.Checked = p.bankSoilProperties;
+            bankSoilInternalFrictionAngleTxt.Text = p.bankSoilInternalFrictionAngle.ToString();
+            bankSoilConductCoefficientTxt.Text = p.bankSoilConductCoefficient.ToString();
+            bankSoilBankScourCriticalStressTxt.Text = p.bankSoilBankScourCriticalStress.ToString();
+            bankSoilCohesionTxt.Text = p.bankSoilCohesion.ToString();
+            bankSoilAngleOfReposeTxt.Text = p.bankSoilAngleOfRepose.ToString();
+            bankSoilSpecificYieldTxt.Text = p.bankSoilSpecificYield.ToString();
 
         }
 
@@ -313,6 +313,79 @@ bbankSoilSpecificYieldTxt.Text = p.bbankSoilSpecificYield.ToString();
                 return false;
             }
 
+            if (!ControllerUtility.CheckConvertDouble(ref p.rockStableTimeSpacing, rockStableTimeSpacingTxt, "請輸入正確的岸壁穩定-時間間距", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.leftSlopeToePosiotion, leftSlopeToePosiotionTxt, "請輸入正確的岸壁穩定-分析左岸岸壁穩定-坡腳位置!", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.leftBankHeight, leftBankHeightTxt, "請輸入正確的岸壁穩定-分析左岸岸壁穩定-岸壁高度!", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.leftInitBankSlope, leftInitBankSlopeTxt, "請輸入正確的岸壁穩定-分析左岸岸壁穩定-初始岸壁坡度!", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.leftDikeToBankLength, leftDikeToBankLengthTxt, "請輸入正確的岸壁穩定-分析左岸岸壁穩定-堤防到岸壁的長度!", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.rightSlopeToePosiotion, rightSlopeToePosiotionTxt, "請輸入正確的岸壁穩定-分析右岸岸壁穩定-坡腳位置!", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.rightBankHeight, rightBankHeightTxt, "請輸入正確的岸壁穩定-分析右岸岸壁穩定-岸壁高度!", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.rightInitBankSlope, rightInitBankSlopeTxt, "請輸入正確的岸壁穩定-分析右岸岸壁穩定-初始岸壁坡度!", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+            if (!ControllerUtility.CheckConvertDouble(ref p.rightDikeToBankLength, rightDikeToBankLengthTxt, "請輸入正確的岸壁穩定-分析右岸岸壁穩定-堤防到岸壁的長度！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.bankSoilInternalFrictionAngle, bankSoilInternalFrictionAngleTxt, "請輸入正確的岸壁穩定-岸壁土壤性質-內摩擦角！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.bankSoilConductCoefficient, bankSoilConductCoefficientTxt, "請輸入正確的岸壁穩定-岸壁土壤性質-傳導係數！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.bankSoilBankScourCriticalStress, bankSoilBankScourCriticalStressTxt, "請輸入正確的岸壁穩定-岸壁土壤性質-岸壁沖刷臨界剪應力！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.bankSoilCohesion, bankSoilCohesionTxt, "請輸入正確的岸壁穩定-岸壁土壤性質-凝聚力！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.bankSoilAngleOfRepose, bankSoilAngleOfReposeTxt, "請輸入正確的岸壁穩定-岸壁土壤性質-安息角！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
+
+            if (!ControllerUtility.CheckConvertDouble(ref p.bankSoilSpecificYield, bankSoilSpecificYieldTxt, "請輸入正確的岸壁穩定-岸壁土壤性質-比流率！", ControllerUtility.CheckType.GreaterThanZero))
+            {
+                return false;
+            }
 
             return true;
         }
@@ -680,21 +753,14 @@ bbankSoilSpecificYieldTxt.Text = p.bbankSoilSpecificYield.ToString();
         private void infiltrationEffectChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            infiltrationEffectPanel.Enabled = chk;
-
-        }
-
-        private void quayGeometryChk_CheckedChanged(object sender, EventArgs e)
-        {
-            bool chk = (sender as CheckBox).Checked;
-            quayGeometryPanel.Enabled = chk;
+            analysisLeftBankStablePanel.Enabled = chk;
 
         }
 
         private void quaySoilPropertiesChk_CheckedChanged(object sender, EventArgs e)
         {
             bool chk = (sender as CheckBox).Checked;
-            quaySoilPropertiesPanel.Enabled = chk;
+            bankSoilPropertiesPanel.Enabled = chk;
 
         }
 
@@ -942,9 +1008,19 @@ bbankSoilSpecificYieldTxt.Text = p.bbankSoilSpecificYield.ToString();
             }
         }
 
-        private void label43_Click(object sender, EventArgs e)
+        private void analysisLeftBankStableChk_CheckedChanged(object sender, EventArgs e)
         {
-
+            bool chk = (sender as CheckBox).Checked;
+            analysisLeftBankStablePanel.Enabled = chk;
+            p.analysisLeftBankStable = chk;
         }
+
+        private void analysisRightBankStableChk_CheckedChanged(object sender, EventArgs e)
+        {
+            bool chk = (sender as CheckBox).Checked;
+            analysisRightBankStablePanel.Enabled = chk;
+            p.analysisRightBankStable = chk;
+        }
+
     }
 }

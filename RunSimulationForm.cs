@@ -508,6 +508,10 @@ namespace RiverSimulationApplication
                     p.GenerateStructureFile(p.sedimentationWeirSets, Program.GetProjectFileWorkingPath() + @"/4.txt");
                 }
 
+                if (p.IsMovableBedMode() && p.quayStableAnalysisFunction)
+                {
+                    p.GenerateQuayWallFile(Program.GetProjectFileWorkingPath() + @"/quayWall.dat");
+                }
                 ResetChart();
                 RunSimulationMain();
                 EnterSimUI(Status.Running);

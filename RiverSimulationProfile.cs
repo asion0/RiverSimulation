@@ -1622,23 +1622,23 @@ namespace RiverSimulationApplication
             sb.Append("\n");
 
             //註7：
-            sb.AppendFormat(" {0,15}", "0.0");                               //初始計算時間(sec)。格式為實數16 格。值為0.0。
-            sb.AppendFormat(" {0,15}", waterTimeSpan.ToString());            //2.1.1 時間間距
-            sb.AppendFormat(" {0,15}", rockStableTimeSpacing.ToString());            //岸壁退縮時間間距。BR_0.1。 [20160612][岸壁穩定分析文件]bankretreat_說明檔2
-            sb.AppendFormat(" {0,15}", timeSpan2d.ToString());               //1.1.1.2 二維時間間距
+            sb.AppendFormat("{0,8}", "0.0");                               //初始計算時間(sec)。格式為實數16 格。值為0.0。
+            sb.AppendFormat("{0,8}", waterTimeSpan.ToString());            //2.1.1 時間間距
+            sb.AppendFormat("{0,8}", rockStableTimeSpacing.ToString());            //岸壁退縮時間間距。BR_0.1。 [20160612][岸壁穩定分析文件]bankretreat_說明檔2
+            sb.AppendFormat("{0,8}", timeSpan2d.ToString());               //1.1.1.2 二維時間間距
             //定量流且模組為水理時，使用者不於UI 輸入，請取二維時間間距1.1.1.2 值為總模
             //擬時間；定量流且模組為動床時，讓使用者輸入總模擬時間。變量流則都要讓使用者輸入。
             if (IsConstantFlowType() && IsWaterModelingMode())
             {
-                sb.AppendFormat(" {0,15}", timeSpan2d.ToString());      //1.1.1.1 總模擬時間
+                sb.AppendFormat("{0,8}", timeSpan2d.ToString());      //1.1.1.1 總模擬時間
             }
             else
             {
-                sb.AppendFormat(" {0,15}", totalSimulationTime.ToString());      //1.1.1.1 總模擬時間
+                sb.AppendFormat("{0,8}", totalSimulationTime.ToString());      //1.1.1.1 總模擬時間
             }
-            sb.AppendFormat(" {0,15}", waterModelingConvergenceCriteria2d.ToString());     //1.1.2.1 二維水理收斂標準
-            sb.AppendFormat(" {0,15}", (0).ToString());     //模式預設值  [20160612][岸壁穩定分析文件]bankretreat_說明檔2
-            sb.AppendFormat(" {0,15}", (0).ToString());     //模式預設值  [20160612][岸壁穩定分析文件]bankretreat_說明檔2
+            sb.AppendFormat("{0,8}", waterModelingConvergenceCriteria2d.ToString());     //1.1.2.1 二維水理收斂標準
+            sb.AppendFormat("{0,8}", (0).ToString());     //模式預設值  [20160612][岸壁穩定分析文件]bankretreat_說明檔2
+            sb.AppendFormat("{0,8}", (0).ToString());     //模式預設值  [20160612][岸壁穩定分析文件]bankretreat_說明檔2
             sb.Append("\n");
 
             //註8：各點之X 座標值。由第一個斷面依序排列，側方向一行最多10 個值
@@ -2182,77 +2182,77 @@ namespace RiverSimulationApplication
             StringBuilder sb = new StringBuilder();
 
             //註39 岸壁穩定分析計算 0-均一值, -1 逐點給
-            sb.AppendFormat(" {0,8}\n", 0);
+            sb.AppendFormat("{0,8}\n", 0);
 
             //右岸岸壁穩定分析計算開關。輸入2時，開啟右岸岸壁退縮計算；若輸入1，則右岸岸壁退縮不計算。
-            sb.AppendFormat(" {0,8}\n", (this.analysisRightBankStable) ? 2 : 1);
+            sb.AppendFormat("{0,8}\n", (this.analysisRightBankStable) ? 2 : 1);
 
             //左岸岸壁穩定分析計算開關。輸入2時，開啟左岸岸壁退縮計算；若輸入1，則左岸岸壁退縮不計算。
-            sb.AppendFormat(" {0,8}\n", (this.analysisLeftBankStable) ? 2 : 1);
+            sb.AppendFormat("{0,8}\n", (this.analysisLeftBankStable) ? 2 : 1);
 
             //岸壁穩定分析計算。輸入0時，代表各斷面之岸壁幾何條件均為同一值；若輸入-1，
             //則各斷面之岸壁幾何條件需逐點輸入。BR_1。介面預設值為0。B
-            sb.AppendFormat(" {0,8}\n", 0);
+            sb.AppendFormat("{0,8}\n", 0);
 
             //右岸岸壁坡腳位置。輸入右岸岸壁坡腳的側方向斷面編號(J)。BR_1.1。
-            sb.AppendFormat(" {0,8}\n", this.rightSlopeToePosiotion);
+            sb.AppendFormat("{0,8}\n", (analysisRightBankStable) ? rightSlopeToePosiotion : leftSlopeToePosiotion);
 
             //左岸岸壁坡腳位置。輸入左岸岸壁坡腳的側方向斷面編號(J)。BR_1.1。
-            sb.AppendFormat(" {0,8}\n", this.leftSlopeToePosiotion);
+            sb.AppendFormat("{0,8}\n", (analysisLeftBankStable) ? leftSlopeToePosiotion : rightSlopeToePosiotion);
 
             //右岸岸壁的高度。BR_1.2。
-            sb.AppendFormat(" {0,8}\n", this.rightBankHeight);
+            sb.AppendFormat("{0,8}\n", (analysisRightBankStable)? rightBankHeight : leftBankHeight);
 
             //左岸岸壁的高度。BR_1.2。
-            sb.AppendFormat(" {0,8}\n", this.leftBankHeight);
+            sb.AppendFormat("{0,8}\n", (analysisLeftBankStable) ? leftBankHeight : rightBankHeight);
 
             //初始右岸岸壁的坡度。BR_1.3。
-            sb.AppendFormat(" {0,8}\n", this.rightInitBankSlope);
+            sb.AppendFormat("{0,8}\n", (analysisRightBankStable) ? rightInitBankSlope : leftInitBankSlope);
 
             //初始左岸岸壁的坡度。BR_1.3。
-            sb.AppendFormat(" {0,8}\n", this.leftInitBankSlope);
+            sb.AppendFormat("{0,8}\n", (analysisLeftBankStable) ? leftInitBankSlope : rightInitBankSlope);
 
             //右岸岸壁頂點至堤防的長度。BR_1.4。
-            sb.AppendFormat(" {0,8}\n", this.rightDikeToBankLength);
+            sb.AppendFormat("{0,8}\n", (analysisRightBankStable) ? rightDikeToBankLength : leftDikeToBankLength);
 
             //左岸岸壁頂點至堤防的長度。BR_1.4。
-            sb.AppendFormat(" {0,8}\n", this.leftDikeToBankLength);
+            sb.AppendFormat("{0,8}\n", (analysisLeftBankStable) ? leftDikeToBankLength : rightDikeToBankLength);
 
             //輸入0時，代表各斷面之岸壁土壤性值參數均為同一值；若輸入-1，則各斷面之岸壁土壤性值參數需逐點輸入。BR_2。
-            sb.AppendFormat(" {0,8}\n", 0);
+            sb.AppendFormat("{0,8}\n", 0);
 
             //水的密度。BR_2.1。介面中請時不要放入
-            sb.AppendFormat(" {0,8}\n", 1000);
+            sb.AppendFormat("{0,8}\n", 1000);
 
             //砂的密度。BR_2.2。介面中暫時不要放入
-            sb.AppendFormat(" {0,8}\n", 2650);
+            sb.AppendFormat("{0,8}\n", 2650);
 
             //內磨擦角。BR_2.3。
-            sb.AppendFormat(" {0,8}\n", this.bankSoilInternalFrictionAngle);
+            sb.AppendFormat("{0,8}\n", this.bankSoilInternalFrictionAngle);
 
             //傳導係數。BR_2.4。
-            sb.AppendFormat(" {0,8}\n", this.bankSoilConductCoefficient);
+            sb.AppendFormat("{0,8}\n", this.bankSoilConductCoefficient);
 
             //比流率。BR_2.5。
-            sb.AppendFormat(" {0,8}\n", this.bankSoilSpecificYield);
+            sb.AppendFormat("{0,8}\n", this.bankSoilSpecificYield);
 
             //岸壁沖刷臨界剪應力。BR_2.6。
-            sb.AppendFormat(" {0,8}\n", this.bankSoilBankScourCriticalStress);
+            sb.AppendFormat("{0,8}\n", this.bankSoilBankScourCriticalStress);
 
             //輸入0時，代表各斷面之參數均為同一值；若輸入-1，則各斷面之參數需逐點輸入。BR_3。
-            sb.AppendFormat(" {0,8}\n", 0);
+            sb.AppendFormat("{0,8}\n", 0);
 
             //模式預設值
-            sb.AppendFormat(" {0,8}\n", 1);
+            sb.AppendFormat("{0,8}\n", 1);
 
             //模式預設值
-            sb.AppendFormat(" {0,8}\n", 1);
+            sb.AppendFormat("{0,8}\n", 1);
 
             //土壤凝聚力。BR_3.1。
-            sb.AppendFormat(" {0,8}\n", this.bankSoilCohesion);
+            sb.AppendFormat("{0,8}\n", this.bankSoilCohesion);
 
             //安息角。BR_3.2。
-            sb.AppendFormat(" {0,8}\n", this.bankSoilAngleOfRepose);
+            sb.AppendFormat("{0,8}\n", this.bankSoilAngleOfRepose);
 
             using (StreamWriter outfile = new StreamWriter(file))
             {

@@ -510,7 +510,7 @@ namespace RiverSimulationApplication
 
                 if (p.IsMovableBedMode() && p.quayStableAnalysisFunction)
                 {
-                    p.GenerateQuayWallFile(Program.GetProjectFileWorkingPath() + @"/quayWall.dat");
+                    p.GenerateQuayWallFile(Program.GetProjectFileWorkingPath() + @"/BANKINFO.txt");
                 }
                 ResetChart();
                 RunSimulationMain();

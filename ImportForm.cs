@@ -736,5 +736,23 @@ namespace RiverSimulationApplication
             //    MessageBox.Show("CCHE-Mesh未安裝!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             //}
         }
+
+        private void docCcheMeshBtn_Click(object sender, EventArgs e)
+        {
+            if (!Utility.ShellExecute(Environment.CurrentDirectory + "\\CCHE-MESH 3.x User's Manual.pdf"))
+            {
+                MessageBox.Show("請安裝PDF閱讀程式！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+        }
+
+        private void docDelft3dBtn_Click(object sender, EventArgs e)
+        {
+            if (!Utility.ShellExecute(Environment.CurrentDirectory + "\\Delft3D RGFGRID&QUICKIN UserManual.pdf"))
+            {
+                MessageBox.Show("請安裝PDF閱讀程式！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+        }
     }
 }

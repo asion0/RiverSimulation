@@ -45,8 +45,8 @@
             this.selectBgFilePath = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.docDelft3dBtn = new System.Windows.Forms.Button();
+            this.docCcheMeshBtn = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.runDelft3dBtn = new System.Windows.Forms.Button();
             this.runCcheMeshBtn = new System.Windows.Forms.Button();
@@ -270,8 +270,8 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.docDelft3dBtn);
+            this.groupBox2.Controls.Add(this.docCcheMeshBtn);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.runDelft3dBtn);
             this.groupBox2.Controls.Add(this.runCcheMeshBtn);
@@ -293,23 +293,25 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Visible = false;
             // 
-            // button4
+            // docDelft3dBtn
             // 
-            this.button4.Location = new System.Drawing.Point(119, 61);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(96, 26);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "操作方法";
-            this.button4.UseVisualStyleBackColor = true;
+            this.docDelft3dBtn.Location = new System.Drawing.Point(119, 61);
+            this.docDelft3dBtn.Name = "docDelft3dBtn";
+            this.docDelft3dBtn.Size = new System.Drawing.Size(96, 26);
+            this.docDelft3dBtn.TabIndex = 2;
+            this.docDelft3dBtn.Text = "操作方法";
+            this.docDelft3dBtn.UseVisualStyleBackColor = true;
+            this.docDelft3dBtn.Click += new System.EventHandler(this.docDelft3dBtn_Click);
             // 
-            // button3
+            // docCcheMeshBtn
             // 
-            this.button3.Location = new System.Drawing.Point(119, 21);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 26);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "操作方法";
-            this.button3.UseVisualStyleBackColor = true;
+            this.docCcheMeshBtn.Location = new System.Drawing.Point(119, 21);
+            this.docCcheMeshBtn.Name = "docCcheMeshBtn";
+            this.docCcheMeshBtn.Size = new System.Drawing.Size(96, 26);
+            this.docCcheMeshBtn.TabIndex = 2;
+            this.docCcheMeshBtn.Text = "操作方法";
+            this.docCcheMeshBtn.UseVisualStyleBackColor = true;
+            this.docCcheMeshBtn.Click += new System.EventHandler(this.docCcheMeshBtn_Click);
             // 
             // button2
             // 
@@ -607,8 +609,8 @@
         private System.Windows.Forms.Panel previewSpratePanel;
         private System.Windows.Forms.PictureBox previewSpratePicBox;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button docDelft3dBtn;
+        private System.Windows.Forms.Button docCcheMeshBtn;
         private System.Windows.Forms.ComboBox previewCombo;
         private System.Windows.Forms.Button reverseGridBtn;
         private System.Windows.Forms.Button gridDataBtn;

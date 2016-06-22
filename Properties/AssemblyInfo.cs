@@ -32,9 +32,10 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.58")]
-[assembly: AssemblyFileVersion("1.0.58")]
+[assembly: AssemblyVersion("1.0.0.59")]
+[assembly: AssemblyFileVersion("1.0.59")]
 
+//1.0.0.59 - 20160623 Release version, Fix 累距 method and 定量流 graphic mode.
 //1.0.0.58 - 20160622 Release version, Fix no side flow out data crash issue.
 //1.0.0.57 - 20160614 Release version, Funish quay wall function.
 //1.0.0.56 - 20160612 Release version, Complete all result table and graphic.

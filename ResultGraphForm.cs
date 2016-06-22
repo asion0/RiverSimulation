@@ -192,12 +192,16 @@ namespace RiverSimulationApplication
 
         private double CumulativeIDistance(int i, int j, PictureBoxCtrl.CoorPoint[,] inputCoor)
         {
-            return (i > 0) ? Math.Abs(inputCoor[i, j].y - inputCoor[i - 1, j].y) : 0;
+            double d1 = (i > 0) ? Math.Abs(inputCoor[i, j].y - inputCoor[i - 1, j].y) : 0;
+            double d2 = (i > 0) ? Math.Pow(Math.Pow(inputCoor[i, j].x - inputCoor[i - 1, j].x, 2) + Math.Pow(inputCoor[i, j].y - inputCoor[i - 1, j].y, 2), 0.5) : 0;
+            return d2;
         }
 
         private double CumulativeJDistance(int i, int j, PictureBoxCtrl.CoorPoint[,] inputCoor)
-        {   //inputCoor[95, 19] I, J
-            return (j > 0) ? Math.Abs(inputCoor[i, j].x - inputCoor[i, j - 1].x) : 0;
+        {   
+            double d1 = (j > 0) ? Math.Abs(inputCoor[i, j].x - inputCoor[i, j - 1].x) : 0;
+            double d2 = (j > 0) ? Math.Pow(Math.Pow(inputCoor[i, j].x - inputCoor[i, j - 1].x, 2) + Math.Pow(inputCoor[i, j].y - inputCoor[i, j - 1].y, 2), 0.5) : 0;
+            return d2;
         }
 
         private string DrawMode0XY(int i, int jS, int jE)

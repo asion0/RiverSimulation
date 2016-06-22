@@ -714,7 +714,7 @@ namespace RiverSimulationApplication
             ResultGraphForm.GraphType gt = GetGraphType(ref pi);
             ResultGraphForm form = new ResultGraphForm();
             form.key = "CoorU-VELOCITY (M/S) + CoorV-VELOCITY (M/S)";
-            if (timeSel == null || timeSel.Length != 1)
+            if (p.IsVariableFlowType() && (timeSel == null || timeSel.Length != 1))
             {
                 MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -883,13 +883,21 @@ namespace RiverSimulationApplication
                     }
                    break;
                 case GraphFormMode.Contour:
-                   if (timeSel == null || timeSel.Length != 1)
+                   if (p.IsVariableFlowType() && (timeSel == null || timeSel.Length != 1))
                     {
                         MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
-                    }     
-                    pi.tS = timeSel[0];
-                    pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    }
+                   if (p.IsVariableFlowType())
+                   {
+                       pi.tS = timeSel[0];
+                       pi.tE = timeSel[timeSel.Length - 1] + 1;
+                   }
+                   else
+                   {
+                       pi.tS = 0;
+                       pi.tE = 1;
+                   }
                     
                     if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : resedTimeList, key, outputfile, ref array))
                     {
@@ -919,7 +927,7 @@ namespace RiverSimulationApplication
                             "",             //Sel1標籤
                             "",                 //Sel2標籤
                             timeSel,             //Time選取索引陣列                
-                            timeList.ToArray());              //Time陣列       
+                            (timeList == null) ? null : timeList.ToArray());              //Time陣列       
                    break;
             }
 
@@ -1050,13 +1058,22 @@ namespace RiverSimulationApplication
                     }
                     break;
                 case GraphFormMode.Contour:
-                    if (timeSel == null || timeSel.Length != 1)
+                    if (p.IsVariableFlowType() && (timeSel == null || timeSel.Length != 1))
                     {
                         MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
-                    pi.tS = timeSel[0];
-                    pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    if (p.IsVariableFlowType())
+                    {
+                        pi.tS = timeSel[0];
+                        pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    }
+                    else
+                    {
+                        pi.tS = 0;
+                        pi.tE = 1;
+                    }
+
                     if (!GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref pi.kS, ref pi.tE))
                     {
                         MessageBox.Show("請輸入正確的K位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1090,7 +1107,7 @@ namespace RiverSimulationApplication
                              "",             //Sel1標籤
                              "",                 //Sel2標籤
                              timeSel,             //Time選取索引陣列                
-                             timeList.ToArray());              //Time陣列       
+                             (timeList == null) ? null : timeList.ToArray());              //Time陣列       
                     break;
             }
 
@@ -1225,13 +1242,22 @@ namespace RiverSimulationApplication
                     }
                     break;
                 case GraphFormMode.Contour:
-                    if (timeSel == null || timeSel.Length != 1)
+                    if (p.IsVariableFlowType() && (timeSel == null || timeSel.Length != 1))
                     {
                         MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
-                    pi.tS = timeSel[0];
-                    pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    if (p.IsVariableFlowType())
+                    {
+                        pi.tS = timeSel[0];
+                        pi.tE = timeSel[timeSel.Length - 1] + 1;
+                    }
+                    else
+                    {
+                        pi.tS = 0;
+                        pi.tE = 1;
+                    }
+
                     pi.m = sedimentSizeCmb.SelectedIndex;
                     if (!GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref pi.kS, ref pi.tE))
                     {
@@ -1266,7 +1292,7 @@ namespace RiverSimulationApplication
                              "",             //Sel1標籤
                              "",                 //Sel2標籤
                              timeSel,             //Time選取索引陣列                
-                             timeList.ToArray(),              //Time陣列       
+                             (timeList == null) ? null : timeList.ToArray(),              //Time陣列       
                              pi.m);
                     break;
             }
@@ -1408,7 +1434,7 @@ namespace RiverSimulationApplication
                         -1,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray());              //Time陣列
+                        (timeList == null) ? null : timeList.ToArray());              //Time陣列
                     break;
                 case TableType.Type3:
                     index = pi.jS;
@@ -1434,7 +1460,7 @@ namespace RiverSimulationApplication
                         -1,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray());              //Time陣列
+                        (timeList == null) ? null : timeList.ToArray());              //Time陣列
                     break;
                 case TableType.Type4:
                     index = pi.jS;
@@ -1460,7 +1486,7 @@ namespace RiverSimulationApplication
                         -1,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray());              //Time陣列
+                        (timeList == null) ? null : timeList.ToArray());              //Time陣列
                     break;
                 default:
                     break;
@@ -1634,7 +1660,7 @@ namespace RiverSimulationApplication
                         -1,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray(), //Time陣列
+                        (timeList == null) ? null : timeList.ToArray(), //Time陣列
                         pi.m);              
                     break;
                 case TableType.Type3:
@@ -1661,7 +1687,7 @@ namespace RiverSimulationApplication
                         -1,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray(), //Time陣列
+                        (timeList == null) ? null : timeList.ToArray(), //Time陣列
                         pi.m);     
                     break;
                 case TableType.Type4:
@@ -1688,7 +1714,7 @@ namespace RiverSimulationApplication
                         -1,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray(), //Time陣列
+                        (timeList == null) ? null : timeList.ToArray(), //Time陣列
                         pi.m);     
                     break;
                 default:
@@ -1923,7 +1949,7 @@ namespace RiverSimulationApplication
                         index2,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray());              //Time陣列，若XY沒有要顯示T便不用傳
+                        (timeList == null) ? null : timeList.ToArray());              //Time陣列，若XY沒有要顯示T便不用傳
                     break;
                 case TableType.Type9:   //IK固定，顯示TJ
                     index = pi.iS;
@@ -1950,7 +1976,7 @@ namespace RiverSimulationApplication
                         index2,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray());              //Time陣列，若XY沒有要顯示T便不用傳
+                        (timeList == null) ? null : timeList.ToArray());              //Time陣列，若XY沒有要顯示T便不用傳
                     break;
                 case TableType.TypeA:   //IJ固定，顯示TK
                     index = pi.iS;
@@ -1977,7 +2003,7 @@ namespace RiverSimulationApplication
                         index2,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray());    //Time陣列，若XY沒有要顯示T便不用傳
+                        (timeList == null) ? null : timeList.ToArray());    //Time陣列，若XY沒有要顯示T便不用傳
                     break;
                 default:
                     break;
@@ -2166,7 +2192,7 @@ namespace RiverSimulationApplication
                         index2,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
+                        (timeList == null) ? null : timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
                         pi.m);              
                     break;
                 case TableType.Type9:   //IK固定，顯示TJ
@@ -2194,7 +2220,7 @@ namespace RiverSimulationApplication
                         index2,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
+                        (timeList == null) ? null : timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
                         pi.m);              
                     break;
                 case TableType.TypeA:   //IJ固定，顯示TK
@@ -2222,7 +2248,7 @@ namespace RiverSimulationApplication
                         index2,                 //Sel2索引
                         "",                 //Sel1標籤
                         "",                 //Sel2標籤
-                        timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
+                        (timeList == null) ? null : timeList.ToArray(), //Time陣列，若XY沒有要顯示T便不用傳
                         pi.m);              
                     break;
                 default:

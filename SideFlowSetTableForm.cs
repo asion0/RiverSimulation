@@ -17,6 +17,18 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+        private bool CheclEditBtnEnabled(int type, int count)
+        {
+            List<Point> pts = (type == 0) ? sideOutObjects[count].sideFlowPoints : sideInObjects[count].sideFlowPoints;
+            return (null != pts);
+        }
+
+        private void GetTypeAndCount(int index, ref int type, ref int count)
+        {
+            type = (sideOutObjects != null && index < sideOutObjects.Length) ? 0 : 1;
+            count = (type == 0) ? index : index - ((sideOutObjects == null) ? 0 : sideOutObjects.Length);
+        }
+
         private string objectName;
         private RiverSimulationProfile.SideFlowObject[] sideOutObjects = null;
         private RiverSimulationProfile.SideFlowObject[] sideInObjects = null;
@@ -125,7 +137,8 @@ namespace RiverSimulationApplication
             //int type = 0, count = 0;
 //            StructureSetUtility.CalcTypeCount(selIndex, ref type, ref count, typeIndex);
             int index = selCombo.SelectedIndex;
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
 
             Point pt = new Point();
             for (int i = 0; i < rg.GetI; ++i)
@@ -135,7 +148,7 @@ namespace RiverSimulationApplication
                     pt.X = i;
                     pt.Y = j;
                     Point grpId = SideFlowtUtility.WhichGroup(sideOutObjects, sideInObjects, pt);
-                    int nameId = grpId.X * sideOutObjects.Length + grpId.Y;
+                    int nameId = grpId.X * (sideOutObjects == null ? 0 : sideOutObjects.Length) + grpId.Y;
                     Color cr;
                     if (grpId.X == -1 && grpId.Y == -1)
                     {   //空白處
@@ -194,7 +207,8 @@ namespace RiverSimulationApplication
                 return;
 
             int index = selCombo.SelectedIndex;
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
 
             List<Point> pl = new List<Point>();
             for (int i = 0; i < selectedCellCount; ++i)
@@ -203,16 +217,10 @@ namespace RiverSimulationApplication
             }
             addBtn.Enabled = SideFlowtUtility.IsAllInEmpty(p, pl, type, count);
 
-            List<Point> pts = (index < sideOutObjects.Length) ? sideOutObjects[count].sideFlowPoints : sideInObjects[count].sideFlowPoints;
+            List<Point> pts = (type == 0) ? sideOutObjects[count].sideFlowPoints : sideInObjects[count].sideFlowPoints;
             removeBtn.Enabled = CheclRemoveBtnEnabled(pts, pl);
 
             editBtn.Enabled = CheclEditBtnEnabled(type, count);
-        }
-
-        private bool CheclEditBtnEnabled(int type, int count)
-        {
-            List<Point> pts = (type == 0) ? sideOutObjects[count].sideFlowPoints : sideInObjects[count].sideFlowPoints;
-            return (null != pts);
         }
 
         private bool CheclRemoveBtnEnabled(List<Point> pts, List<Point> pl)
@@ -228,7 +236,8 @@ namespace RiverSimulationApplication
                 return;
 
             int index = selCombo.SelectedIndex;
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
 
             List<Point> pl = new List<Point>();     //表格內被選取的格網點
             for (int i = 0; i < selectedCellCount; ++i)
@@ -236,7 +245,7 @@ namespace RiverSimulationApplication
                 pl.Add(new Point(dataGv.SelectedCells[i].RowIndex, dataGv.SelectedCells[i].ColumnIndex));
             }
 
-            List<Point> pts = (index < sideOutObjects.Length) ? sideOutObjects[count].sideFlowPoints : sideInObjects[count].sideFlowPoints;
+            List<Point> pts = (type == 0) ? sideOutObjects[count].sideFlowPoints : sideInObjects[count].sideFlowPoints;
             List<Point> plSelected = (pts == null) ? null : new List<Point>(pts);
             if(null != plSelected)
             {   //正在編輯的結構物不為空則合併被選取的格網點到正在編輯的結構物中
@@ -261,13 +270,13 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            if (index < sideOutObjects.Length)
+            if (type == 0)
             {
-                sideOutObjects[index].sideFlowPoints = plSelected;
+                sideOutObjects[count].sideFlowPoints = plSelected;
             }
             else
             {
-                sideInObjects[index - sideOutObjects.Length].sideFlowPoints = plSelected;
+                sideInObjects[count].sideFlowPoints = plSelected;
             }
 
             FillDataGrid();
@@ -281,7 +290,8 @@ namespace RiverSimulationApplication
                 return;
 
             int index = selCombo.SelectedIndex;
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
 
             List<Point> pl = new List<Point>();
             for (int i = 0; i < selectedCellCount; ++i)
@@ -289,7 +299,7 @@ namespace RiverSimulationApplication
                 pl.Add(new Point(dataGv.SelectedCells[i].RowIndex, dataGv.SelectedCells[i].ColumnIndex));
             }
 
-            List<Point> pts = (index < sideOutObjects.Length) ? sideOutObjects[count].sideFlowPoints : sideInObjects[count].sideFlowPoints;
+            List<Point> pts = (type == 0) ? sideOutObjects[count].sideFlowPoints : sideInObjects[count].sideFlowPoints;
             List<Point> plSelected = (pts == null) ? null : new List<Point>(pts);
             SideFlowtUtility.RemovePoints(ref plSelected, pl);
 
@@ -301,13 +311,13 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            if (index < sideOutObjects.Length)
+            if (type == 0)
             {
-                sideOutObjects[index].sideFlowPoints = plSelected;
+                sideOutObjects[count].sideFlowPoints = plSelected;
             }
             else
             {
-                sideInObjects[index - sideOutObjects.Length].sideFlowPoints = plSelected;
+                sideInObjects[count].sideFlowPoints = plSelected;
             }
 
             FillDataGrid();
@@ -317,19 +327,20 @@ namespace RiverSimulationApplication
         private void dryBedCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = selCombo.SelectedIndex;
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
             editBtn.Enabled = CheclEditBtnEnabled(type, count);
 
-            if (index < sideOutObjects.Length)
+            if (type == 0)
             {
-                if (sideOutObjects[index].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
+                if (sideOutObjects[count].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
                     subTypeRdo.Checked = true;
                 else
                     superTypeRdo.Checked = true;
             }
             else
             {
-                if (sideInObjects[index - sideOutObjects.Length].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
+                if (sideInObjects[count].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
                     subTypeRdo.Checked = true;
                 else
                     superTypeRdo.Checked = true;
@@ -341,7 +352,8 @@ namespace RiverSimulationApplication
         private void edit_Click(object sender, EventArgs e)
         {
             int index = selCombo.SelectedIndex;
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
 
             String title = String.Format("輸入{0}流量/水位", selCombo.Items[index].ToString());
             SideFlowDataInputForm form = new SideFlowDataInputForm();
@@ -350,7 +362,7 @@ namespace RiverSimulationApplication
             DialogResult r = form.ShowDialog();
             if (DialogResult.OK == r)
             {
-                if (index < sideOutObjects.Length)
+                if (type == 0)
                 {
                     sideOutObjects[count].flowData = (RiverSimulationProfile.TwoInOne)form.data;
                 }
@@ -367,13 +379,15 @@ namespace RiverSimulationApplication
             if ((sender as RadioButton).Checked)
             {
                 int index = selCombo.SelectedIndex;
-                if (index < sideOutObjects.Length)
+                int type = 0, count = 0;
+                GetTypeAndCount(index, ref type, ref count);
+                if (type == 0)
                 {
-                    sideOutObjects[index].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
+                    sideOutObjects[count].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
                 }
                 else
                 {
-                    sideInObjects[index - sideOutObjects.Length].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
+                    sideInObjects[count].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
                 }
             }
         }
@@ -383,13 +397,15 @@ namespace RiverSimulationApplication
             if ((sender as RadioButton).Checked)
             {
                 int index = selCombo.SelectedIndex;
-                if (index < sideOutObjects.Length)
+                int type = 0, count = 0;
+                GetTypeAndCount(index, ref type, ref count);
+                if (type == 0)
                 {
-                    sideOutObjects[index].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
+                    sideOutObjects[count].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
                 }
                 else
                 {
-                    sideInObjects[index - sideOutObjects.Length].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
+                    sideInObjects[count].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
                 }
             }
         }

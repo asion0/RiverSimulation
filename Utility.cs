@@ -1257,19 +1257,25 @@ namespace RiverSimulationApplication
         //查詢一格網點位於哪個結構物群組？
         public static Point WhichGroup(RiverSimulationProfile.SideFlowObject[] sideOutObjects, RiverSimulationProfile.SideFlowObject[] sideInObjects, Point pt )
         {
-            for (int i = 0; i < sideOutObjects.Length; ++i)
+            if (sideOutObjects != null)
             {
-                if (sideOutObjects[i].sideFlowPoints != null && sideOutObjects[i].sideFlowPoints.Contains(pt))
+                for (int i = 0; i < sideOutObjects.Length; ++i)
                 {
-                    return new Point(0, i);
+                    if (sideOutObjects[i].sideFlowPoints != null && sideOutObjects[i].sideFlowPoints.Contains(pt))
+                    {
+                        return new Point(0, i);
+                    }
                 }
             }
 
-            for (int i = 0; i < sideInObjects.Length; ++i)
+            if (sideInObjects != null)
             {
-                if (sideInObjects[i].sideFlowPoints != null  && sideInObjects[i].sideFlowPoints.Contains(pt))
+                for (int i = 0; i < sideInObjects.Length; ++i)
                 {
-                    return new Point(1, i);
+                    if (sideInObjects[i].sideFlowPoints != null && sideInObjects[i].sideFlowPoints.Contains(pt))
+                    {
+                        return new Point(1, i);
+                    }
                 }
             }
             return new Point(-1, -1);

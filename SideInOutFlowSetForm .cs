@@ -17,6 +17,12 @@ namespace RiverSimulationApplication
             InitializeComponent();
         }
 
+        private void GetTypeAndCount(int index, ref int type, ref int count)
+        {
+            type = (sideOutObjects != null && index < sideOutObjects.Length) ? 0 : 1;
+            count = (type == 0) ? index : index - ((sideOutObjects == null) ? 0 : sideOutObjects.Length);
+        }
+
         //const int SideFlowNumber = (int)RiverSimulationProfile.SideFlowType.SideFlowSize;
         private string title;
         //private string[] sideFlowName = new string[SideFlowNumber];
@@ -51,7 +57,7 @@ namespace RiverSimulationApplication
                 sideInObjects = new RiverSimulationProfile.SideFlowObject[inObjs.Length];
                 for (int i = 0; i < inObjs.Length; ++i)
                 {
-                    if (outObjs[i] != null)
+                    if (inObjs[i] != null)
                     {
                         sideInObjects[i] = inObjs[i].Clone();
                     }
@@ -61,57 +67,49 @@ namespace RiverSimulationApplication
                     }
                 }
             }
-
-            //for (int i = 0; i < sideOutObjects.Length; ++i)
-            //{
-            //    if (sideOutObjects[i] == null)
-            //    {
-            //        sideOutObjects[i] = new RiverSimulationProfile.SideFlowObject(RiverSimulationProfile.SideFlowType.SideOutFlow);
-            //    }
-            //}
-            //for (int i = 0; i < sideInObjects.Length; ++i)
-            //{
-            //    if (sideInObjects[i] == null)
-            //    {
-            //        sideInObjects[i] = new RiverSimulationProfile.SideFlowObject(RiverSimulationProfile.SideFlowType.SideInFlow);
-            //    }
-            //}
         }
 
         private void StructureSetForm_Load(object sender, EventArgs e)
         {
             this.Text = title;
-            //int typeCount = 0;
 
-            for (int i = 0; i < sideOutObjects.Length; ++i)
+            if (sideOutObjects != null)
             {
-                listBox.Items.Add("側出流" + (i + 1).ToString());
+                for (int i = 0; i < sideOutObjects.Length; ++i)
+                {
+                    listBox.Items.Add("側出流" + (i + 1).ToString());
+                }
             }
-            for (int i = 0; i < sideInObjects.Length; ++i)
+
+            if (sideInObjects != null)
             {
-                listBox.Items.Add("側入流" + (i + 1).ToString());
+                for (int i = 0; i < sideInObjects.Length; ++i)
+                {
+                    listBox.Items.Add("側入流" + (i + 1).ToString());
+                }
             }
+
             listBox.SelectedIndex = 0;
             ControllerUtility.InitialGridPictureBoxByProfile(ref mapPicBox, RiverSimulationProfile.profile);
         }
 
         private void SetPicBoxGrid(int index, bool alert)
         {
-            //RiverSimulationProfile p = RiverSimulationProfile.profile;
-            mapPicBox.SelectGroup = true;
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
-            mapPicBox.SetSelectedGrid(SideFlowtUtility.GetSideFlowSets(sideOutObjects), SideFlowtUtility.GetSideFlowSets(sideInObjects), null, null, type, count, alert);
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
 
-            if (index < sideOutObjects.Length)
+            mapPicBox.SelectGroup = true;
+            mapPicBox.SetSelectedGrid((sideOutObjects==null) ? null : SideFlowtUtility.GetSideFlowSets(sideOutObjects), (sideInObjects == null) ? null : SideFlowtUtility.GetSideFlowSets(sideInObjects), null, null, type, count, alert);
+            if (type == 0)
             {
-                if (sideOutObjects[index].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
+                if (sideOutObjects[count].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
                     subTypeRdo.Checked = true;
                 else
                     superTypeRdo.Checked = true;
             }
             else
             {
-                if (sideInObjects[index - sideOutObjects.Length].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
+                if (sideInObjects[count].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
                     subTypeRdo.Checked = true;
                 else
                     superTypeRdo.Checked = true;
@@ -128,38 +126,21 @@ namespace RiverSimulationApplication
         {
             RiverSimulationProfile p = RiverSimulationProfile.profile;
             int index = listBox.SelectedIndex;
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
-            if (index < sideOutObjects.Length)
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
+
+            if (type == 0)
             {
-                sideOutObjects[index].sideFlowPoints = pts;
-                //if (sideOutObjects[index].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
-                //    subTypeRdo.Checked = true;
-                //else
-                //    superTypeRdo.Checked = true;
+                sideOutObjects[count].sideFlowPoints = pts;
             }
             else
             {
-                sideInObjects[index - sideOutObjects.Length].sideFlowPoints = pts;
-                //if (sideInObjects[index - sideOutObjects.Length].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow)
-                //    subTypeRdo.Checked = true;
-                //else
-                //    superTypeRdo.Checked = true;
+                sideInObjects[count].sideFlowPoints = pts;
             }
 
-            mapPicBox.SetSelectedGrid(SideFlowtUtility.GetSideFlowSets(sideOutObjects), SideFlowtUtility.GetSideFlowSets(sideInObjects), null, null, type, count, alert);
+            mapPicBox.SetSelectedGrid((sideOutObjects == null) ? null : SideFlowtUtility.GetSideFlowSets(sideOutObjects), (sideInObjects==null) ? null : SideFlowtUtility.GetSideFlowSets(sideInObjects), null, null, type, count, alert);
         }
 
-        //private List<Point> GetSelectedGroup()
-        //{
-        //    RiverSimulationProfile p = RiverSimulationProfile.profile;
-        //    int index = listBox.SelectedIndex;
-
-        //    if (st == SelectType.StructureSet)
-        //    {
-        //        return p.DryBedPts[index];
-        //    }
-        //    return null;
-        //}
         private bool CheckOverlapping(List<Point> pl, List<Point>[] rg, int count)
         {
             if (rg == null)
@@ -204,7 +185,8 @@ namespace RiverSimulationApplication
                 return;
             }
 
-            int type = (index < sideOutObjects.Length) ? 0 : 1, count = (index < sideOutObjects.Length) ? index : index - sideOutObjects.Length;
+            int type = 0, count = 0;
+            GetTypeAndCount(index, ref type, ref count);
 
             //檢查連續
             if (!SideFlowtUtility.IsContinuous(pl))
@@ -216,7 +198,6 @@ namespace RiverSimulationApplication
             }
 
             //檢查重疊
-
             if(!CheckOverlapping(pl, SideFlowtUtility.GetSideFlowSets(sideOutObjects), count))
             {
                 return;
@@ -295,13 +276,16 @@ namespace RiverSimulationApplication
             if ((sender as RadioButton).Checked)
             {
                 int index = listBox.SelectedIndex;
-                if (index < sideOutObjects.Length)
+                int type = 0, count = 0;
+                GetTypeAndCount(index, ref type, ref count);
+
+                if (type == 0)
                 {
-                    sideOutObjects[index].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
+                    sideOutObjects[count].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
                 }
                 else
                 {
-                    sideInObjects[index - sideOutObjects.Length].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
+                    sideInObjects[count].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow;
                 }
             }
         }
@@ -311,13 +295,15 @@ namespace RiverSimulationApplication
             if ((sender as RadioButton).Checked)
             {
                 int index = listBox.SelectedIndex;
-                if (index < sideOutObjects.Length)
+                int type = 0, count = 0;
+                GetTypeAndCount(index, ref type, ref count);
+                if (type == 0)
                 {
-                    sideOutObjects[index].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
+                    sideOutObjects[count].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
                 }
                 else
                 {
-                    sideInObjects[index - sideOutObjects.Length].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
+                    sideInObjects[count].criticalFlowType = RiverSimulationProfile.CriticalFlowType.SubCriticalFlow;
                 }
             }
         }
@@ -325,18 +311,25 @@ namespace RiverSimulationApplication
         private void ok_Click(object sender, EventArgs e)
         {
             bool allInputFinished = true;
-            foreach (RiverSimulationProfile.SideFlowObject obj in sideOutObjects)
+            if (sideOutObjects != null)
             {
-                if (obj == null || obj.sideFlowPoints == null || obj.sideFlowPoints.Count == 0)
+                foreach (RiverSimulationProfile.SideFlowObject obj in sideOutObjects)
                 {
-                    allInputFinished = false;
+                    if (obj == null || obj.sideFlowPoints == null || obj.sideFlowPoints.Count == 0)
+                    {
+                        allInputFinished = false;
+                    }
                 }
             }
-            foreach (RiverSimulationProfile.SideFlowObject obj in sideInObjects)
+
+            if (sideInObjects != null)
             {
-                if (obj == null || obj.sideFlowPoints == null || obj.sideFlowPoints.Count == 0)
+                foreach (RiverSimulationProfile.SideFlowObject obj in sideInObjects)
                 {
-                    allInputFinished = false;
+                    if (obj == null || obj.sideFlowPoints == null || obj.sideFlowPoints.Count == 0)
+                    {
+                        allInputFinished = false;
+                    }
                 }
             }
 

@@ -336,7 +336,7 @@ namespace RiverSimulationApplication
                 "流速-W(m/s)",                       //15
                 "濃度(ppm)" };                       //16
         private string[] tableItemsParam4 = {       
-                "水深平均流速-UV 合向量的絕對值(m/s)",   //0
+                "水深平均流速-UV合向量(m/s)",   //0
                 "流速-UW合向量(m/s)",                  //1
                 "流速-VW合向量(m/s)" };                //2
                                                      
@@ -719,8 +719,16 @@ namespace RiverSimulationApplication
                 MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            pi.tS = timeSel[0];
-            pi.tE = timeSel[timeSel.Length - 1] + 1;
+            if (p.IsVariableFlowType())
+            {
+                pi.tS = timeSel[0];
+                pi.tE = timeSel[timeSel.Length - 1] + 1;
+            }
+            else
+            {
+                pi.tS = 0;
+                pi.tE = 1;
+            }
             if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : resedTimeList, " CoorU-VELOCITY (M/S) ", "resed.O", ref depthAverageFlowSpeedCoorU))
             {
                 MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -733,7 +741,7 @@ namespace RiverSimulationApplication
             }
 
             form.SetFormUVVectorMode(
-                        "水深平均流速-UV 合向量(m/s)",   //視窗標題
+                        "水深平均流速-UV合向量(m/s)",   //視窗標題
                         0, depthAverageFlowSpeedCoorV.GetLength(0),       //i
                         0, depthAverageFlowSpeedCoorV.GetLength(1),       //j
                         -1, -1,              //k

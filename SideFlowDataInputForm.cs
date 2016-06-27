@@ -258,8 +258,8 @@ namespace RiverSimulationApplication
                     tabPage1.Parent = tabControl;
                     tabPage2.Parent = tabControl;
                     tabPage3.Parent = tabControl;
-                    tabPage1.Text = "主流方向流量(cms)(cms)";
-                    tabPage2.Text = "側方向流量";
+                    tabPage1.Text = "主流方向流量(cms)";
+                    tabPage2.Text = "側方向流量(cms)";
                     tabPage3.Text = "水位(m)";
 
                     if (_d.ArrayNull())
@@ -345,7 +345,7 @@ namespace RiverSimulationApplication
                     tableName, "", "", true, true, false, false);
                 dataGridView1.Columns[0].Name = "主流方向流量(cms)";
                 dataGridView1.Columns[1].Name = "側方向流量(cms)";
-                dataGridView1.Columns[2].Name = "水位(cms)";
+                dataGridView1.Columns[2].Name = "水位(m)";
             }
             else if (inputFormType == InputFormType.Type7)
             {

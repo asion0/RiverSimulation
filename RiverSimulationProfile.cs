@@ -1778,6 +1778,109 @@ namespace RiverSimulationApplication
                 sb.AppendFormat("{0,8}", (j + 1).ToString());
                 sb.Append("\n");
             }
+            //側出流邊界條件設定
+            //sideOutFlowSet = false;                //4.1.3.2.1 側出流勾選
+            int flowIndex = (upFlowCondition == FlowConditionType.SuperCriticalFlow) ? inputGrid.GetJ + 1 : 1;
+            if (sideInOutFlowFunction && sideInFlowSet)
+            {
+                //sideOutFlowNumber = 0;                //4.1.3.2.1.1 側出流數目
+                for (int i = 0; i < sideInFlowNumber; ++i)
+                {
+                    //sideOutFlowObjs = null;               //4.1.3.2.1.2 側出流位置集合
+                    //第1, 3種：亞臨界流、均一值/逐點給、定量流
+                    if(sideInFlowObjs[i].sideFlowPoints != null && sideInFlowObjs[i].sideFlowPoints.Count > 1)
+                    {
+                        sideInFlowObjs[i].sideFlowPoints.Sort((d1, d2) => { return d1.X.CompareTo(d2.X); });
+                    }
+
+                    if (sideInFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        for(int j = 0; j < sideInFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            sb.AppendFormat("{0,8}", (sideInFlowObjs[i].sideFlowPoints[j].X + 1).ToString());
+                            sb.AppendFormat("{0,8}", (sideInFlowObjs[i].sideFlowPoints[j].Y + 1).ToString());
+                            sb.AppendFormat("{0,8}", (sideInFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow ? 1 : 5).ToString());
+                            sb.AppendFormat("{0,8}", (flowIndex).ToString());
+                            sb.AppendFormat("{0,8}", (flowIndex).ToString());
+                            sb.AppendFormat("{0,8}", (flowIndex).ToString());
+                            sb.Append("\n");
+                        }
+                        flowIndex++;
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideInFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            sb.AppendFormat("{0,8}", (sideInFlowObjs[i].sideFlowPoints[0].X + 1).ToString());
+                            sb.AppendFormat("{0,8}", (sideInFlowObjs[i].sideFlowPoints[0].Y + 1).ToString());
+                            sb.AppendFormat("{0,8}", (sideInFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow ? 1 : 5).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.Append("\n");
+                            flowIndex++;
+                        }
+                    }
+                }
+            }
+            if (sideInOutFlowFunction && sideOutFlowSet)
+            {
+                //sideOutFlowNumber = 0;                //4.1.3.2.1.1 側出流數目
+                for (int i = 0; i < sideOutFlowNumber; ++i)
+                {
+                    //sideOutFlowObjs = null;               //4.1.3.2.1.2 側出流位置集合
+                    //第1, 3種：亞臨界流、均一值/逐點給、定量流
+                    if (sideOutFlowObjs[i].sideFlowPoints != null && sideOutFlowObjs[i].sideFlowPoints.Count > 1)
+                    {
+                        sideOutFlowObjs[i].sideFlowPoints.Sort((d1, d2) => { return d1.X.CompareTo(d2.X); });
+                    }
+
+                    if (sideOutFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        for (int j = 0; j < sideOutFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            sb.AppendFormat("{0,8}", (sideOutFlowObjs[i].sideFlowPoints[j].X + 1).ToString());
+                            sb.AppendFormat("{0,8}", (sideOutFlowObjs[i].sideFlowPoints[j].Y + 1).ToString());
+                            sb.AppendFormat("{0,8}", (sideOutFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow ? 1 : 5).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.Append("\n");
+                        }
+                        flowIndex++;
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideOutFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            sb.AppendFormat("{0,8}", (sideOutFlowObjs[i].sideFlowPoints[0].X + 1).ToString());
+                            sb.AppendFormat("{0,8}", (sideOutFlowObjs[i].sideFlowPoints[0].Y + 1).ToString());
+                            sb.AppendFormat("{0,8}", (sideOutFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow ? 1 : 5).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.AppendFormat("{0,8}", (inputGrid.GetJ + flowIndex).ToString());
+                            sb.Append("\n");
+                            flowIndex++;
+                        }
+                    }
+                }
+            }
+
+            //側入流邊界條件設定
+            //sideInFlowSet = false;                     //4.1.3.2.1 側入流勾選
+            if (sideInOutFlowFunction && sideInFlowSet)
+            {
+                //sideInFlowNumber = 0;                    //4.1.3.2.1.1 側入流數目
+                for (int i = 0; i < sideOutFlowNumber; ++i)
+                {
+                    //sideInFlowObjs = null;           //4.1.3.2.1.2 側入流位置集合
+
+                }
+            }
+
+
+            String tmp = sb.ToString();
+            //Console.Write(tmp);
 
             //註16：下游邊界條件設定
             for (int j = 0; j < inputGrid.GetJ; ++j)
@@ -1868,8 +1971,9 @@ namespace RiverSimulationApplication
                 sb.AppendFormat("{0,8}", flowQ.ToString("F4"));
                 ++count;
             }
-            count = 8;
+            AppendSideInOutData(t, ref count, ref sb, FlowDataType.MainFlow);
 
+            count = 8;
             for (int jw = 0; jw < inputGrid.GetJ; ++jw)
             {   //側流方向流量
                 if (count == 8)
@@ -1881,6 +1985,7 @@ namespace RiverSimulationApplication
                 sb.AppendFormat("{0,8}", flowQ.ToString("F4"));
                 ++count;
             }
+            AppendSideInOutData(t, ref count, ref sb, FlowDataType.SideFlow);
             count = 8;
 
             if (upFlowCondition == FlowConditionType.SuperCriticalFlow)
@@ -1896,8 +2001,10 @@ namespace RiverSimulationApplication
                     sb.AppendFormat("{0,8}", level.ToString("F4"));
                     ++count;
                 }
-                count = 8;
             }
+            AppendSideInOutData(t, ref count, ref sb, FlowDataType.WaterLevel);
+            count = 8;
+
 
             if (downFlowCondition == FlowConditionType.SubCriticalFlow)
             {
@@ -1985,6 +2092,452 @@ namespace RiverSimulationApplication
                         sb.AppendFormat("{0,8}", s);
                     }
                     sb.AppendFormat("\n");
+                }
+            }
+        }
+
+        public enum FlowDataType
+        {
+            MainFlow,
+            SideFlow,
+            WaterLevel
+        }
+
+        public void AppendSideInOutData(int t, ref int lineCount, ref StringBuilder sb, FlowDataType flowDataType)
+        {
+            for (int i = 0; i < sideInFlowNumber; ++i)
+            {
+                if (sideInFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow
+                && IsConstantFlowType())
+                {
+                    if (sideInFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        if (lineCount == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            lineCount = 0;
+                        }
+                        ++lineCount;
+                        double value = 0;
+                        switch (flowDataType)
+                        {
+                            case FlowDataType.MainFlow:
+                                value = sideInFlowObjs[i].flowData.Value2D()[0, 0];
+                                break;
+                            case FlowDataType.SideFlow:
+                                value = sideInFlowObjs[i].flowData.Value2D()[1, 0];
+                                break;
+                            case FlowDataType.WaterLevel:
+                                return;
+                        }
+                        sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideInFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            if (lineCount == 8)
+                            {
+                                sb.AppendFormat("\n{0,16}", " ");
+                                lineCount = 0;
+                            }
+                            ++lineCount;
+                            double value = 0;
+                            switch (flowDataType)
+                            {
+                                case FlowDataType.MainFlow:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, 0, 0];
+                                    break;
+                                case FlowDataType.SideFlow:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, 0, 1];
+                                    break;
+                                case FlowDataType.WaterLevel:
+                                    return;
+                            }
+                            sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                        }
+                    }
+                }
+                //第2, 4種：亞臨界流、均一值/逐點給、變量流
+                else if (sideInFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow
+                    && IsVariableFlowType())
+                {
+                    if (sideInFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        if (lineCount == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            lineCount = 0;
+                        }
+                        ++lineCount;
+                        double value = 0;
+                        switch (flowDataType)
+                        {
+                            case FlowDataType.MainFlow:
+                                value = sideInFlowObjs[i].flowData.Value3D()[0, t, 0];
+                                break;
+                            case FlowDataType.SideFlow:
+                                value = sideInFlowObjs[i].flowData.Value3D()[0, t, 1];
+                                break;
+                            case FlowDataType.WaterLevel:
+                                return;
+                        }
+                        sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideInFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            if (lineCount == 8)
+                            {
+                                sb.AppendFormat("\n{0,16}", " ");
+                                lineCount = 0;
+                            }
+                            ++lineCount;
+                            double value = 0;
+                            switch (flowDataType)
+                            {
+                                case FlowDataType.MainFlow:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, t, 0];
+                                    break;
+                                case FlowDataType.SideFlow:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, t, 1];
+                                    break;
+                                case FlowDataType.WaterLevel:
+                                    return;
+                            }
+                            sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                        }
+                    }
+                }
+                //第5, 7種：超臨界流、均一值/逐點給、定量流
+                else if (sideInFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow
+                    && IsConstantFlowType())
+                {
+                    if (sideInFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        if (lineCount == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            lineCount = 0;
+                        }
+                        ++lineCount;
+                        double value = 0;
+                        switch (flowDataType)
+                        {
+                            case FlowDataType.MainFlow:
+                                value = sideInFlowObjs[i].flowData.Value2D()[0, 0];
+                                break;
+                            case FlowDataType.SideFlow:
+                                value = sideInFlowObjs[i].flowData.Value2D()[1, 0];
+                                break;
+                            case FlowDataType.WaterLevel:
+                                value = sideInFlowObjs[i].flowData.Value2D()[2, 0];
+                                break;
+                        }
+                        sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideInFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            if (lineCount == 8)
+                            {
+                                sb.AppendFormat("\n{0,16}", " ");
+                                lineCount = 0;
+                            }
+                            ++lineCount;
+                            double value = 0;
+                            switch (flowDataType)
+                            {
+                                case FlowDataType.MainFlow:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, 0, 0];
+                                    break;
+                                case FlowDataType.SideFlow:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, 0, 1];
+                                    break;
+                                case FlowDataType.WaterLevel:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, 0, 2];
+                                    break;
+                            }
+                            sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                        }
+                    }
+
+                }
+                //第6, 8種：超臨界流、均一值/逐點給、變量流
+                else if (sideInFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow
+                    && IsVariableFlowType())
+                {
+                    if (sideInFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        if (lineCount == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            lineCount = 0;
+                        }
+                        ++lineCount;
+                        double value = 0;
+                        switch (flowDataType)
+                        {
+                            case FlowDataType.MainFlow:
+                                value = sideInFlowObjs[i].flowData.Value3D()[0, t, 0];
+                                break;
+                            case FlowDataType.SideFlow:
+                                value = sideInFlowObjs[i].flowData.Value3D()[0, t, 1];
+                                break;
+                            case FlowDataType.WaterLevel:
+                                value = sideInFlowObjs[i].flowData.Value3D()[0, t, 2];
+                                break;
+                        }
+                        sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideInFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            if (lineCount == 8)
+                            {
+                                sb.AppendFormat("\n{0,16}", " ");
+                                lineCount = 0;
+                            }
+                            ++lineCount;
+                            double value = 0;
+                            switch (flowDataType)
+                            {
+                                case FlowDataType.MainFlow:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, t, 0];
+                                    break;
+                                case FlowDataType.SideFlow:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, t, 1];
+                                    break;
+                                case FlowDataType.WaterLevel:
+                                    value = sideInFlowObjs[i].flowData.Array3D()[j, t, 2];
+                                    break;
+                            }
+                            sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < sideOutFlowNumber; ++i)
+            {
+                if (sideOutFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow
+                && IsConstantFlowType())
+                {
+                    if (sideOutFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        if (lineCount == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            lineCount = 0;
+                        }
+                        ++lineCount;
+                        double value = 0;
+                        switch(flowDataType)
+                        {
+                            case FlowDataType.MainFlow:
+                                value = sideOutFlowObjs[i].flowData.Value2D()[0, 0];
+                                break;
+                            case FlowDataType.SideFlow:
+                                value = sideOutFlowObjs[i].flowData.Value2D()[1, 0];
+                                break;
+                            case FlowDataType.WaterLevel:
+                                return;
+                        }
+                        sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideOutFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            if (lineCount == 8)
+                            {
+                                sb.AppendFormat("\n{0,16}", " ");
+                                lineCount = 0;
+                            }
+                            ++lineCount;
+                            double value = 0;
+                            switch (flowDataType)
+                            {
+                                case FlowDataType.MainFlow:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, 0, 0];
+                                    break;
+                                case FlowDataType.SideFlow:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, 0, 1];
+                                    break;
+                                case FlowDataType.WaterLevel:
+                                    return;
+                            }
+                            sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                        }
+                    }
+                }
+                //第2, 4種：亞臨界流、均一值/逐點給、變量流
+                else if (sideOutFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow
+                    && IsVariableFlowType())
+                {
+                    if (sideOutFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        if (lineCount == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            lineCount = 0;
+                        }
+                        ++lineCount;
+                        double value = 0;
+                        switch (flowDataType)
+                        {
+                            case FlowDataType.MainFlow:
+                                value = sideOutFlowObjs[i].flowData.Value3D()[0, t, 0];
+                                break;
+                            case FlowDataType.SideFlow:
+                                value = sideOutFlowObjs[i].flowData.Value3D()[0, t, 1];
+                                break;
+                            case FlowDataType.WaterLevel:
+                                return;
+                        }
+                        sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideOutFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            if (lineCount == 8)
+                            {
+                                sb.AppendFormat("\n{0,16}", " ");
+                                lineCount = 0;
+                            }
+                            ++lineCount;
+                            double value = 0;
+                            switch (flowDataType)
+                            {
+                                case FlowDataType.MainFlow:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, t, 0];
+                                    break;
+                                case FlowDataType.SideFlow:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, t, 1];
+                                    break;
+                                case FlowDataType.WaterLevel:
+                                    return;
+                            }
+                            sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                        }
+                    }
+                }
+                //第5, 7種：超臨界流、均一值/逐點給、定量流
+                else if (sideOutFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow
+                    && IsConstantFlowType())
+                {
+                    if (sideOutFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        if (lineCount == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            lineCount = 0;
+                        }
+                        ++lineCount;
+                        double value = 0;
+                        switch (flowDataType)
+                        {
+                            case FlowDataType.MainFlow:
+                                value = sideOutFlowObjs[i].flowData.Value2D()[0, 0];
+                                break;
+                            case FlowDataType.SideFlow:
+                                value = sideOutFlowObjs[i].flowData.Value2D()[1, 0];
+                                break;
+                            case FlowDataType.WaterLevel:
+                                value = sideOutFlowObjs[i].flowData.Value2D()[2, 0];
+                                break;
+                        }
+                        sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideOutFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            if (lineCount == 8)
+                            {
+                                sb.AppendFormat("\n{0,16}", " ");
+                                lineCount = 0;
+                            }
+                            ++lineCount;
+                            double value = 0;
+                            switch (flowDataType)
+                            {
+                                case FlowDataType.MainFlow:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, 0, 0];
+                                    break;
+                                case FlowDataType.SideFlow:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, 0, 1];
+                                    break;
+                                case FlowDataType.WaterLevel:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, 0, 2];
+                                    break;
+                            }
+                            sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                        }
+                    }
+
+                }
+                //第6, 8種：超臨界流、均一值/逐點給、變量流
+                else if (sideOutFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SuperCriticalFlow
+                    && IsVariableFlowType())
+                {
+                    if (sideOutFlowObjs[i].flowData.type == RiverSimulationProfile.TwoInOne.Type.UseValue)
+                    {
+                        if (lineCount == 8)
+                        {
+                            sb.AppendFormat("\n{0,16}", " ");
+                            lineCount = 0;
+                        }
+                        ++lineCount;
+                        double value = 0;
+                        switch (flowDataType)
+                        {
+                            case FlowDataType.MainFlow:
+                                value = sideOutFlowObjs[i].flowData.Value3D()[0, t, 0];
+                                break;
+                            case FlowDataType.SideFlow:
+                                value = sideOutFlowObjs[i].flowData.Value3D()[0, t, 1];
+                                break;
+                            case FlowDataType.WaterLevel:
+                                value = sideOutFlowObjs[i].flowData.Value3D()[0, t, 2];
+                                break;
+                        }
+                        sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                    }
+                    else
+                    {
+                        for (int j = 0; j < sideOutFlowObjs[i].sideFlowPoints.Count; ++j)
+                        {
+                            if (lineCount == 8)
+                            {
+                                sb.AppendFormat("\n{0,16}", " ");
+                                lineCount = 0;
+                            }
+                            ++lineCount;
+                            double value = 0;
+                            switch (flowDataType)
+                            {
+                                case FlowDataType.MainFlow:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, t, 0];
+                                    break;
+                                case FlowDataType.SideFlow:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, t, 1];
+                                    break;
+                                case FlowDataType.WaterLevel:
+                                    value = sideOutFlowObjs[i].flowData.Array3D()[j, t, 2];
+                                    break;
+                            }
+                            sb.AppendFormat("{0,8}", value.ToString((value < 0) ? "F3" : "F4"));
+                        }
+                    }
                 }
             }
         }

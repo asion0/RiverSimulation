@@ -74,11 +74,23 @@ namespace RiverSimulationApplication
             UWVectorGraph,
             VWVectorGraph,
         }
-
+        public struct ExportObject
+        {
+            public String plotFile;
+            public String cmd;
+        }
+        public String[] exportObject = new String[2];
         protected ResultGraphType formType = ResultGraphType.Unknown;
-        string yLabel = "";
+        protected bool exportOnly = false;
+        protected string yLabel = "";
         RiverSimulationProfile p = RiverSimulationProfile.profile;
         public string key = "";
+
+        public void SetExportOnly(bool b)
+        {
+            exportOnly = b;
+        }
+
         public void SetFormMode(
             string title,
             int iStart, int iEnd,
@@ -756,9 +768,17 @@ namespace RiverSimulationApplication
                                    //"term png size 960,630",
                                    //setPngFile,
                                };
-            GnuPlot.Set(setting);
-            //plotfile = String.Format("\"{0}\"", plotfile);
-            GnuPlot.SPlot(plotfile, "with lines title \"\"");
+            if (exportOnly)
+            {
+                exportObject[0] = plotfile;
+                exportObject[1] = "with lines title \"\"";
+            }
+            else
+            {
+                GnuPlot.Set(setting);
+                //plotfile = String.Format("\"{0}\"", plotfile);
+                GnuPlot.SPlot(plotfile, "with lines title \"\"");
+            }
             //GnuPlot.Set("term x11");
             //GnuPlot.WriteLine();
             GnuPlot.Set("output");
@@ -824,9 +844,17 @@ namespace RiverSimulationApplication
                                    //"term png size 960,630",
                                    //setPngFile,
                                };
-            GnuPlot.Set(setting);
-            //plotfile = String.Format("\"{0}\"", plotfile);
-            GnuPlot.SPlot(plotfile, "with lines title \"\"");
+            if (exportOnly)
+            {
+                exportObject[0] = plotfile;
+                exportObject[1] = "with lines title \"\"";
+            }
+            else
+            {
+                GnuPlot.Set(setting);
+                //plotfile = String.Format("\"{0}\"", plotfile);
+                GnuPlot.SPlot(plotfile, "with lines title \"\"");
+            }
             //GnuPlot.Set("term x11");
             //GnuPlot.WriteLine();
             GnuPlot.Set("output");
@@ -882,9 +910,17 @@ namespace RiverSimulationApplication
                                    //"term png size 960,630",
                                    //setPngFile,
                                };
-            GnuPlot.Set(setting);
-            //plotfile = String.Format("\"{0}\"", plotfile);
-            GnuPlot.Plot(plotfile, "with vectors title \"\"");
+            if (exportOnly)
+            {
+                exportObject[0] = plotfile;
+                exportObject[1] = "with vectors title \"\"";
+            }
+            else
+            {
+                GnuPlot.Set(setting);
+                //plotfile = String.Format("\"{0}\"", plotfile);
+                GnuPlot.Plot(plotfile, "with vectors title \"\"");
+            }
             //GnuPlot.Set("term x11");
             //GnuPlot.WriteLine();
             GnuPlot.Set("output");
@@ -1197,30 +1233,13 @@ namespace RiverSimulationApplication
             }
             else if (formType == ResultGraphType.UVVectorGraph)
             {
-                if (tStart == -1)
-                {
-                    // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
-                    // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
-                    // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |                    graphType = GraphType.Type0;
                     graphType = GraphType.Type0;
                     sel1Lbl.Visible = false;
                     sel1Lbl.Text = "";
                     combo1.Visible = false;
                     String s = DrawUV_Vector();
                     ShowImage(s);
-                }
-                else
-                {
-                    // Mode 0 status : 1-Single M-Multiple D-壘距 U-資料單位
-                    // I|J|T|K|X|Y|Sel1|Sel2|Mode| Data   |
-                    // 1|M|-|-|D|U| I  | -  | 0  |3D IJ1  |                    graphType = GraphType.Type0;
-                    graphType = GraphType.Type0;
-                    sel1Lbl.Visible = false;
-                    sel1Lbl.Text = "";
-                    combo1.Visible = false;
-                    String s = DrawUV_Vector();
-                    ShowImage(s);
-                }
+
             }
             else if (formType == ResultGraphType.UWVectorGraph)
             {
@@ -1248,7 +1267,7 @@ namespace RiverSimulationApplication
             this.Close();
             return;
 
-
+            /*
             String s2 = s + ".png";
             int errCount = 100;
             while (true)
@@ -1284,6 +1303,7 @@ namespace RiverSimulationApplication
             if(pic1.Image!= null)
                 pic1.Image.Dispose();
             pic1.Image = Image.FromFile(s2);
+            */
         }
         /*
         private void InitialChart()

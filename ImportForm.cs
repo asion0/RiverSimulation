@@ -133,6 +133,7 @@ namespace RiverSimulationApplication
         private void SwitchPreivewCombo(PreviewType n)
         {
             previewCombo.SelectedIndex = (int)(n) - 1;
+            DrawPreview();
         }
  
         private void ok_Click(object sender, EventArgs e)

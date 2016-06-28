@@ -73,6 +73,8 @@
             this.sedimentSizeGrp = new System.Windows.Forms.GroupBox();
             this.sedimentSizeCmb = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.poIPanel = new System.Windows.Forms.Panel();
+            this.poJPanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.paramGrp.SuspendLayout();
             this.formGrp.SuspendLayout();
@@ -82,6 +84,8 @@
             this.timeGrp.SuspendLayout();
             this.axisGrp.SuspendLayout();
             this.sedimentSizeGrp.SuspendLayout();
+            this.poIPanel.SuspendLayout();
+            this.poJPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ok
@@ -231,14 +235,8 @@
             // pos_InJPanel
             // 
             this.pos_InJPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pos_InJPanel.Controls.Add(this.label7);
-            this.pos_InJPanel.Controls.Add(this.posJLbl);
-            this.pos_InJPanel.Controls.Add(this.posILbl);
-            this.pos_InJPanel.Controls.Add(this.label6);
-            this.pos_InJPanel.Controls.Add(this.posJchk);
-            this.pos_InJPanel.Controls.Add(this.posJTxt);
-            this.pos_InJPanel.Controls.Add(this.posITxt);
-            this.pos_InJPanel.Controls.Add(this.posIchk);
+            this.pos_InJPanel.Controls.Add(this.poJPanel);
+            this.pos_InJPanel.Controls.Add(this.poIPanel);
             this.pos_InJPanel.Controls.Add(this.posSelBtn);
             resources.ApplyResources(this.pos_InJPanel, "pos_InJPanel");
             this.pos_InJPanel.Name = "pos_InJPanel";
@@ -393,6 +391,24 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // poIPanel
+            // 
+            this.poIPanel.Controls.Add(this.posITxt);
+            this.poIPanel.Controls.Add(this.posIchk);
+            this.poIPanel.Controls.Add(this.label6);
+            this.poIPanel.Controls.Add(this.posILbl);
+            resources.ApplyResources(this.poIPanel, "poIPanel");
+            this.poIPanel.Name = "poIPanel";
+            // 
+            // poJPanel
+            // 
+            this.poJPanel.Controls.Add(this.posJchk);
+            this.poJPanel.Controls.Add(this.posJTxt);
+            this.poJPanel.Controls.Add(this.label7);
+            this.poJPanel.Controls.Add(this.posJLbl);
+            resources.ApplyResources(this.poJPanel, "poJPanel");
+            this.poJPanel.Name = "poJPanel";
+            // 
             // SimulationResultForm
             // 
             this.AcceptButton = this.ok;
@@ -419,13 +435,16 @@
             this.poKPanel.ResumeLayout(false);
             this.poKPanel.PerformLayout();
             this.pos_InJPanel.ResumeLayout(false);
-            this.pos_InJPanel.PerformLayout();
             this.timeGrp.ResumeLayout(false);
             this.timeGrp.PerformLayout();
             this.axisGrp.ResumeLayout(false);
             this.axisGrp.PerformLayout();
             this.sedimentSizeGrp.ResumeLayout(false);
             this.sedimentSizeGrp.PerformLayout();
+            this.poIPanel.ResumeLayout(false);
+            this.poIPanel.PerformLayout();
+            this.poJPanel.ResumeLayout(false);
+            this.poJPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -476,5 +495,7 @@
         private System.Windows.Forms.GroupBox sedimentSizeGrp;
         private System.Windows.Forms.ComboBox sedimentSizeCmb;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel poJPanel;
+        private System.Windows.Forms.Panel poIPanel;
     }
 }

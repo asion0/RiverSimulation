@@ -606,138 +606,6 @@
   <data name="&gt;&gt;poKPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Symbol, 11.25pt</value>
-  </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 40</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>14, 20</value>
-  </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>J</value>
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="posJLbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="posJLbl.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Symbol, 11.25pt</value>
-  </data>
-  <data name="posJLbl.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="posJLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 40</value>
-  </data>
-  <data name="posJLbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="posJLbl.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="posJLbl.Text" xml:space="preserve">
-    <value>MAX:95</value>
-  </data>
-  <data name="&gt;&gt;posJLbl.Name" xml:space="preserve">
-    <value>posJLbl</value>
-  </data>
-  <data name="&gt;&gt;posJLbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posJLbl.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posJLbl.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="posILbl.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="posILbl.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Symbol, 11.25pt</value>
-  </data>
-  <data name="posILbl.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="posILbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 9</value>
-  </data>
-  <data name="posILbl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="posILbl.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="posILbl.Text" xml:space="preserve">
-    <value>MAX:95</value>
-  </data>
-  <data name="&gt;&gt;posILbl.Name" xml:space="preserve">
-    <value>posILbl</value>
-  </data>
-  <data name="&gt;&gt;posILbl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;posILbl.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;posILbl.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Symbol, 11.25pt</value>
-  </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 9</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 20</value>
-  </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>I</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="posJchk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -745,7 +613,7 @@
     <value>NoControl</value>
   </data>
   <data name="posJchk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 43</value>
+    <value>23, 6</value>
   </data>
   <data name="posJchk.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -763,13 +631,13 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;posJchk.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
+    <value>poJPanel</value>
   </data>
   <data name="&gt;&gt;posJchk.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="posJTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 40</value>
+    <value>78, 3</value>
   </data>
   <data name="posJTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 22</value>
@@ -784,13 +652,100 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;posJTxt.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
+    <value>poJPanel</value>
   </data>
   <data name="&gt;&gt;posJTxt.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Symbol, 11.25pt</value>
+  </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 20</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>J</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>poJPanel</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="posJLbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="posJLbl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Symbol, 11.25pt</value>
+  </data>
+  <data name="posJLbl.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="posJLbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 3</value>
+  </data>
+  <data name="posJLbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="posJLbl.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="posJLbl.Text" xml:space="preserve">
+    <value>MAX:95</value>
+  </data>
+  <data name="&gt;&gt;posJLbl.Name" xml:space="preserve">
+    <value>posJLbl</value>
+  </data>
+  <data name="&gt;&gt;posJLbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;posJLbl.Parent" xml:space="preserve">
+    <value>poJPanel</value>
+  </data>
+  <data name="&gt;&gt;posJLbl.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="poJPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 40</value>
+  </data>
+  <data name="poJPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 27</value>
+  </data>
+  <data name="poJPanel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;poJPanel.Name" xml:space="preserve">
+    <value>poJPanel</value>
+  </data>
+  <data name="&gt;&gt;poJPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;poJPanel.Parent" xml:space="preserve">
+    <value>pos_InJPanel</value>
+  </data>
+  <data name="&gt;&gt;poJPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="posITxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 9</value>
+    <value>78, 3</value>
   </data>
   <data name="posITxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 22</value>
@@ -805,16 +760,16 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;posITxt.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
+    <value>poIPanel</value>
   </data>
   <data name="&gt;&gt;posITxt.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="posIchk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="posIchk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 12</value>
+    <value>24, 6</value>
   </data>
   <data name="posIchk.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -832,10 +787,97 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;posIchk.Parent" xml:space="preserve">
-    <value>pos_InJPanel</value>
+    <value>poIPanel</value>
   </data>
   <data name="&gt;&gt;posIchk.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>1</value>
+  </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Symbol, 11.25pt</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 20</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>poIPanel</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="posILbl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="posILbl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Symbol, 11.25pt</value>
+  </data>
+  <data name="posILbl.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="posILbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 3</value>
+  </data>
+  <data name="posILbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="posILbl.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="posILbl.Text" xml:space="preserve">
+    <value>MAX:95</value>
+  </data>
+  <data name="&gt;&gt;posILbl.Name" xml:space="preserve">
+    <value>posILbl</value>
+  </data>
+  <data name="&gt;&gt;posILbl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;posILbl.Parent" xml:space="preserve">
+    <value>poIPanel</value>
+  </data>
+  <data name="&gt;&gt;posILbl.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="poIPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 9</value>
+  </data>
+  <data name="poIPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 25</value>
+  </data>
+  <data name="poIPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;poIPanel.Name" xml:space="preserve">
+    <value>poIPanel</value>
+  </data>
+  <data name="&gt;&gt;poIPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;poIPanel.Parent" xml:space="preserve">
+    <value>pos_InJPanel</value>
+  </data>
+  <data name="&gt;&gt;poIPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="posSelBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -862,7 +904,7 @@
     <value>pos_InJPanel</value>
   </data>
   <data name="&gt;&gt;posSelBtn.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="pos_InJPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 23</value>

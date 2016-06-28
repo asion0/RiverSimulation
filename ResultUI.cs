@@ -29,6 +29,8 @@ namespace RiverSimulationApplication
         protected int rowHeadersWidth = 0;
         protected object initData = null;
         protected object initData2 = null;
+        protected object initData3 = null;
+        protected object initData4 = null;
         protected int xDim = 0;     
         protected int yDim = 1;
         protected int sel1Dim = -1;

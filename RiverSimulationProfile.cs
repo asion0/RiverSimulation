@@ -1542,8 +1542,9 @@ namespace RiverSimulationApplication
             sb.AppendFormat("{0,8}", (outputControlInitialBottomElevation ? 1 : 0).ToString());    //1.1.3 輸出控制 水深平均流速
             sb.AppendFormat("{0,8}", (outputControlAverageDepthFlowRate ? 1 : 0).ToString());    //1.1.3 輸出控制 初始底床高程
             sb.AppendFormat("{0,8}", (outputControlBottomShearingStress ? 1 : 0).ToString());    //1.1.3 輸出控制 底床剪應力
-            sb.AppendFormat("{0,8}", (outputControlLevel ? 1 : 0).ToString());    //1.1.3 輸出控制 水位
-            sb.AppendFormat("{0,8}", (outputControlDepth ? 1 : 0).ToString());    //1.1.3 輸出控制 水深
+            //20160627 會議新增規格，有勾選3D輸出自動產生水深與水位資訊，這樣才畫得出UW, VW向量圖。
+            sb.AppendFormat("{0,8}", (outputControlDensityInformation3D || outputControlInitialBottomElevation || outputControlLevel ? 1 : 0).ToString());    //1.1.3 輸出控制 水位
+            sb.AppendFormat("{0,8}", (outputControlDensityInformation3D || outputControlInitialBottomElevation || outputControlDepth ? 1 : 0).ToString());    //1.1.3 輸出控制 水深
             sb.AppendFormat("{0,8}", (outputControlFlow ? 1 : 0).ToString());    //1.1.3 輸出控制 流量
             sb.AppendFormat("{0,8}", (outputControlBottomElevation ? 1 : 0).ToString());    //2.1.3 輸出控制 初始底床高程
             sb.AppendFormat("{0,8}", (outputControlAverageDepthDensity ? 1 : 0).ToString());    //2.1.3 輸出控制 水深平均流速
@@ -2105,6 +2106,11 @@ namespace RiverSimulationApplication
 
         public void AppendSideInOutData(int t, ref int lineCount, ref StringBuilder sb, FlowDataType flowDataType)
         {
+            if (!sideInOutFlowFunction || !sideInFlowSet)
+            {
+                return;
+            }
+
             for (int i = 0; i < sideInFlowNumber; ++i)
             {
                 if (sideInFlowObjs[i].criticalFlowType == RiverSimulationProfile.CriticalFlowType.SubCriticalFlow

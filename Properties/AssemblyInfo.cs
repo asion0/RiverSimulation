@@ -32,9 +32,11 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.61")]
-[assembly: AssemblyFileVersion("1.0.61")]
+[assembly: AssemblyVersion("1.0.0.63")]
+[assembly: AssemblyFileVersion("1.0.63")]
 
+//1.0.0.63 - 20160628 Release version, Fix Add dual mode support.
+//1.0.0.62 - 20160628 Release version, Fix 流量U折線圖 bug.
 //1.0.0.61 - 20160628 Release version, Finished all vector graph.
 //1.0.0.60 - 20160627 Release version, Finished side flow input file.
 //1.0.0.59 - 20160623 Release version, Fix 累距 method and 定量流 graphic mode.

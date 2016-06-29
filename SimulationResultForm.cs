@@ -1094,16 +1094,10 @@ namespace RiverSimulationApplication
 
         }
 
-        private void GenerateTimeContourResultGraph(String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
+        private String[] GenerateTimeIJResultGraph(String ylabel, String key, String title, String outputfile, List<double> timeList, ref double[, ,] array, bool exportOnly)
         {
-
-
-        }
-
-        private void GenerateTimeIJResultGraph(String ylabel, String key, String title, String outputfile, List<double> timeList, ref double[, ,] array)
-        {
-
             ResultGraphForm form = new ResultGraphForm();
+            form.SetExportOnly(exportOnly);
             form.key = key;
             PosInfo pi = new PosInfo();              
 
@@ -1114,13 +1108,13 @@ namespace RiverSimulationApplication
                     if (gt >= ResultGraphForm.GraphType.Type01)
                     {
                         MessageBox.Show("請輸入正確位置/時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
                     
                     if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : resedTimeList, key, outputfile, ref array))
                     {
                         MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
                     /* I|J|T|K|X|Y|Sel1|Sel2|Mode| Data  |
                      * 1|M|1|-|D|U| I  | -  | 2  |3D IJT |
@@ -1210,10 +1204,11 @@ namespace RiverSimulationApplication
                     }
                    break;
                 case GraphFormMode.Contour:
-                   if (p.IsVariableFlowType() && (timeSel == null || timeSel.Length != 1))
+                case GraphFormMode.ContouWithVector:
+                    if (p.IsVariableFlowType() && (timeSel == null || timeSel.Length != 1))
                     {
                         MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
                    if (p.IsVariableFlowType())
                    {
@@ -1229,7 +1224,7 @@ namespace RiverSimulationApplication
                    if (!ParsingTimeIJResult(p.IsConstantFlowType() ? null : timeList, key, outputfile, ref array))
                     {
                         MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
 
                    form.SetFormMode(
@@ -1263,12 +1258,13 @@ namespace RiverSimulationApplication
             {
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
-            
+            return (exportOnly) ? form.exportObject : null;
         }
 
-        private void GenerateTimeIJKResultGraph(String ylabel, String title, String outputfile, List<double> timeList, ref double[, , ,] array)
+        private String[] GenerateTimeIJKResultGraph(String ylabel, String title, String outputfile, List<double> timeList, ref double[, , ,] array, bool exportOnly)
         {
             ResultGraphForm form = new ResultGraphForm();
+            form.SetExportOnly(exportOnly);
             PosInfo pi = new PosInfo();
 
             int index = 0;
@@ -1280,13 +1276,13 @@ namespace RiverSimulationApplication
                     if (gt >= ResultGraphForm.GraphType.Type01)
                     {
                         MessageBox.Show("請輸入正確位置/時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
 
                     if (!ParsingTimeIJKResult(p.IsConstantFlowType() ? null : resedTimeList, outputfile, ref array))
                     {
                         MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
 
                     if (gt == ResultGraphForm.GraphType.Type5)
@@ -1387,10 +1383,11 @@ namespace RiverSimulationApplication
                     }
                     break;
                 case GraphFormMode.Contour:
+                case GraphFormMode.ContouWithVector:
                     if (p.IsVariableFlowType() && (timeSel == null || timeSel.Length != 1))
                     {
                         MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
                     if (p.IsVariableFlowType())
                     {
@@ -1406,12 +1403,12 @@ namespace RiverSimulationApplication
                     if (!GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref pi.kS, ref pi.kE) || (pi.kE - pi.kS) != 1)
                     {
                         MessageBox.Show("請輸入正確的K位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
                     if (!ParsingTimeIJKResult(p.IsConstantFlowType() ? null : timeList, outputfile, ref array))
                     {
                         MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
                     form.key = title;
                     form.SetFormMode(
@@ -1445,12 +1442,13 @@ namespace RiverSimulationApplication
             {
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
-
+            return (exportOnly) ? form.exportObject : null;
         }
 
-        private void GenerateTimeIJKMResultGraph(String ylabel, String title, String outputfile, List<double> timeList, ref double[, , , ,] array)
+        private String[] GenerateTimeIJKMResultGraph(String ylabel, String title, String outputfile, List<double> timeList, ref double[, , , ,] array, bool exportOnly)
         {
             ResultGraphForm form = new ResultGraphForm();
+            form.SetExportOnly(exportOnly);
             PosInfo pi = new PosInfo();
 
             int index = 0;
@@ -1463,13 +1461,13 @@ namespace RiverSimulationApplication
                     if (gt >= ResultGraphForm.GraphType.Type01)
                     {
                         MessageBox.Show("請輸入正確位置/時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
 
                     if (!ParsingTimeIJKMResult(p.IsConstantFlowType() ? null : timeList, outputfile, ref array, pi.m))
                     {
                         MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
 
                     if (gt == ResultGraphForm.GraphType.Type5)
@@ -1571,10 +1569,11 @@ namespace RiverSimulationApplication
                     }
                     break;
                 case GraphFormMode.Contour:
+                case GraphFormMode.ContouWithVector:
                     if (p.IsVariableFlowType() && (timeSel == null || timeSel.Length != 1))
                     {
                         MessageBox.Show("請輸入正確時間！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
                     if (p.IsVariableFlowType())
                     {
@@ -1591,12 +1590,12 @@ namespace RiverSimulationApplication
                     if (!GetPosRange(posKchk, p.verticalLevelNumber, posKTxt, ref pi.kS, ref pi.kE))
                     {
                         MessageBox.Show("請輸入正確的K位置！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
                     if (!ParsingTimeIJKMResult(p.IsConstantFlowType() ? null : timeList, outputfile, ref array, pi.m))
                     {
                         MessageBox.Show("無法讀取輸出檔！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        return null;
                     }
 
                     form.SetFormMode(
@@ -1631,7 +1630,7 @@ namespace RiverSimulationApplication
             {
                 //p.verticalVelocityDistributionArray = (double[,])form.VerticalVelocityDistributionData().Clone();
             }
-
+            return (exportOnly) ? form.exportObject : null;
         }
 
         private void SaveToCsv(String file, double[,] data)
@@ -3067,52 +3066,52 @@ namespace RiverSimulationApplication
                     export = GenerateInitialBottomElevationGraph(exportOnly);
                     break;
                 case 1: //水深平均流速-U(m/s)                       
-                    GenerateTimeIJResultGraph("(m/s)", " U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
+                    export = GenerateTimeIJResultGraph("(m/s)", " U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU, exportOnly);
                     break;
                 case 2: //水深平均流速-V(m/s)
-                    GenerateTimeIJResultGraph("(m/s)", " V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                    export = GenerateTimeIJResultGraph("(m/s)", " V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV, exportOnly);
                     break;
                 case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                    GenerateTimeIJResultGraph("(m/s)", " ABS-UV-VELOCITY (M/S)", "水深平均流速-UV 合向量的絕對值(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedAbsUV);
+                    export = GenerateTimeIJResultGraph("(m/s)", " ABS-UV-VELOCITY (M/S)", "水深平均流速-UV 合向量的絕對值(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedAbsUV, exportOnly);
                     break;
                 case 4: //底床剪應力(N/m2)
-                    GenerateTimeIJResultGraph("(N/m2)", " TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
+                    export = GenerateTimeIJResultGraph("(N/m2)", " TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1, exportOnly);
                     break;
                 case 5: //水位(m)
-                    GenerateTimeIJResultGraph("(m)", " ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
+                    export = GenerateTimeIJResultGraph("(m)", " ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs, exportOnly);
                     break;
                 case 6: //水深(m)
-                    GenerateTimeIJResultGraph("(m)", " DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
+                    export = GenerateTimeIJResultGraph("(m)", " DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth, exportOnly);
                     break;
                 case 7://流量-U(cms)
-                    GenerateTimeIJResultGraph("(cms)", " US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
+                    export = GenerateTimeIJResultGraph("(cms)", " US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge, exportOnly);
                     break;
                 case 8: //流量-V(cms)
-                    GenerateTimeIJResultGraph("(cms)", " VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
+                    export = GenerateTimeIJResultGraph("(cms)", " VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge, exportOnly);
                     break;
                 case 9: //底床高程(m)
-                    GenerateTimeIJResultGraph("(m)", " ZBED (M)", "底床高程(m)", "SEDoutput.dat", sedTimeList, ref zbed);
+                    GenerateTimeIJResultGraph("(m)", " ZBED (M)", "底床高程(m)", "SEDoutput.dat", sedTimeList, ref zbed, exportOnly);
                     break;
                 case 10: //沖淤深度(m)
-                    GenerateTimeIJResultGraph("(m)", " DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref dzbed);
+                    export = GenerateTimeIJResultGraph("(m)", " DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref dzbed, exportOnly);
                     break;
                 case 11: //水深平均濃度(ppm)
-                    GenerateTimeIJResultGraph("ppm", " MUDCONC", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
+                    export = GenerateTimeIJResultGraph("ppm", " MUDCONC", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc, exportOnly);
                     break;
                 case 12: //粒徑分佈(%)
-                    GenerateTimeIJResultGraph("(%)", " BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
+                    export = GenerateTimeIJResultGraph("(%)", " BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta, exportOnly);
                     break;
                 case 13: //流速-U(m/s)
-                    GenerateTimeIJKResultGraph("(m/s)", "3D Velocity-U(m/s)", "3Dvelocity-U.dat", resedTimeList, ref flowSpeedU);
+                    export = GenerateTimeIJKResultGraph("(m/s)", "3D Velocity-U(m/s)", "3Dvelocity-U.dat", resedTimeList, ref flowSpeedU, exportOnly);
                     break;
                 case 14: //流速-V(m/s)
-                    GenerateTimeIJKResultGraph("(m/s)", "3D Velocity-V(m/s)", "3Dvelocity-V.dat", resedTimeList, ref flowSpeedV);
+                    export = GenerateTimeIJKResultGraph("(m/s)", "3D Velocity-V(m/s)", "3Dvelocity-V.dat", resedTimeList, ref flowSpeedV, exportOnly);
                     break;
                 case 15: //流速-W(m/s)
-                    GenerateTimeIJKResultGraph("(m/s)", "3D Velocity-W(m/s)", "3Dvelocity-W.dat", resedTimeList, ref flowSpeedW);
+                    export = GenerateTimeIJKResultGraph("(m/s)", "3D Velocity-W(m/s)", "3Dvelocity-W.dat", resedTimeList, ref flowSpeedW, exportOnly);
                     break;
                 case 16: //濃度(ppm)
-                    GenerateTimeIJKMResultGraph("(ppm)", "3D Cncentration(ppm)", "3Dconcentration.dat", sedTimeList, ref concentration);
+                    export = GenerateTimeIJKMResultGraph("(ppm)", "3D Cncentration(ppm)", "3Dconcentration.dat", sedTimeList, ref concentration, exportOnly);
                     break;
             }
             return export;
@@ -3214,52 +3213,52 @@ namespace RiverSimulationApplication
                         GenerateInitialBottomElevationGraph(false);
                         break;
                     case 1: //水深平均流速-U(m/s)
-                        GenerateTimeIJResultGraph("(m/s)", " U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU);
+                        GenerateTimeIJResultGraph("(m/s)", " U-VELOCITY (M/S)", "水深平均流速-U(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedU, false);
                         break;
                     case 2: //水深平均流速-V(m/s)
-                        GenerateTimeIJResultGraph("(m/s)", " V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV);
+                        GenerateTimeIJResultGraph("(m/s)", " V-VELOCITY (M/S)", "水深平均流速-V(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedV, false);
                         break;
                     case 3: //水深平均流速-UV 合向量的絕對值(m/s)
-                        GenerateTimeIJResultGraph("(m/s)", " ABS-UV-VELOCITY (M/S)", "水深平均流速-UV 合向量的絕對值(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedAbsUV);
+                        GenerateTimeIJResultGraph("(m/s)", " ABS-UV-VELOCITY (M/S)", "水深平均流速-UV 合向量的絕對值(m/s)", "resed.O", resedTimeList, ref depthAverageFlowSpeedAbsUV, false);
                         break;
                     case 4: //底床剪應力(N/m2)
-                        GenerateTimeIJResultGraph("(N/m2)", " TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1);
+                        GenerateTimeIJResultGraph("(N/m2)", " TOMD1-U", "底床剪應力(N/m²)", "resed.O", resedTimeList, ref tomd1, false);
                         break;
                     case 5: //水位(m)
-                        GenerateTimeIJResultGraph("(m)", " ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs);
+                        GenerateTimeIJResultGraph("(m)", " ZS (M)", "水位(m)", "resed.O", resedTimeList, ref zs, false);
                         break;
                     case 6: //水深(m)
-                        GenerateTimeIJResultGraph("(m)", " DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth);
+                        GenerateTimeIJResultGraph("(m)", " DEPTH (M)", "水深(m)", "resed.O", resedTimeList, ref depth, false);
                         break;
                     case 7://流量-U(cms)
-                        GenerateTimeIJResultGraph("(cms)",  "US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge);
+                        GenerateTimeIJResultGraph("(cms)",  " US-DISCHARGE (M3/S/M)", "流量-U(cms)", "resed.O", resedTimeList, ref usDischarge, false);
                         break;
                     case 8: //流量-V(cms)
-                        GenerateTimeIJResultGraph("(cms)", " VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge);
+                        GenerateTimeIJResultGraph("(cms)", " VS-DISCHARGE (M3/S/M)", "流量-V(cms)", "resed.O", resedTimeList, ref vsDischarge, false);
                         break;
                     case 9: //底床高程(m)
-                        GenerateTimeIJResultGraph("(m)", " ZBED (M)", "底床高程(m)", "SEDoutput.dat", sedTimeList, ref zbed);
+                        GenerateTimeIJResultGraph("(m)", " ZBED (M)", "底床高程(m)", "SEDoutput.dat", sedTimeList, ref zbed, false);
                         break;
                     case 10: //沖淤深度(m)
-                        GenerateTimeIJResultGraph("(m)", " DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref dzbed);
+                        GenerateTimeIJResultGraph("(m)", " DZBED (M)", "沖淤深度(m)", "SEDoutput.dat", sedTimeList, ref dzbed, false);
                         break;
                     case 11: //水深平均濃度(ppm)
-                        GenerateTimeIJResultGraph("(ppm)", " MUDCONC", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc);
+                        GenerateTimeIJResultGraph("(ppm)", " MUDCONC", "水深平均濃度(ppm)", "SEDoutput.dat", sedTimeList, ref mudconc, false);
                         break;
                     case 12: //粒徑分佈(%)
-                        GenerateTimeIJResultGraph("(%)", " BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta);
+                        GenerateTimeIJResultGraph("(%)", " BETA (-)", "粒徑分佈(%)", "SEDoutput.dat", sedTimeList, ref beta, false);
                         break;
                     case 13: //流速-U(m/s)
-                        GenerateTimeIJKResultGraph("(m/s)", "流速-U(m/s)", "3Dvelocity-U.dat", resedTimeList, ref flowSpeedU);
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-U(m/s)", "3Dvelocity-U.dat", resedTimeList, ref flowSpeedU, false);
                         break;
                     case 14: //流速-V(m/s)
-                        GenerateTimeIJKResultGraph("(m/s)", "流速-V(m/s)", "3Dvelocity-V.dat", resedTimeList, ref flowSpeedV);
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-V(m/s)", "3Dvelocity-V.dat", resedTimeList, ref flowSpeedV, false);
                         break;
                     case 15: //流速-W(m/s)
-                        GenerateTimeIJKResultGraph("(m/s)", "流速-W(m/s)", "3Dvelocity-W.dat", resedTimeList, ref flowSpeedW);
+                        GenerateTimeIJKResultGraph("(m/s)", "流速-W(m/s)", "3Dvelocity-W.dat", resedTimeList, ref flowSpeedW, false);
                         break;
                     case 16: //濃度(ppm)
-                        GenerateTimeIJKMResultGraph("(ppm)", "濃度(ppm)", "3Dconcentration.dat", sedTimeList, ref concentration);
+                        GenerateTimeIJKMResultGraph("(ppm)", "濃度(ppm)", "3Dconcentration.dat", sedTimeList, ref concentration, false);
                         break;
                 }
             }
@@ -3322,32 +3321,29 @@ namespace RiverSimulationApplication
         
         private void GenerateContourWithVectorMode1(String[] obj1, String[] obj2)
         {
-            string setTitle = string.Format("title \"{0}\"", "123");
-            string[] setting2 = { 
-                                    "reset",
-                                    "terminal windows",
-                                };
- 
-            string[] setting1 = {
-                                   "multiplot",
-                                   "terminal windows",
-                                   "hidden3d",
-                                   "contour base",
-                                   "view map",
-                                   "pm3d at b", 
-                                };
-                                   
-            string[] unset = {                           
-                                    "hidden3d",
-                                    "contour base",
-                                    "view map",
-                                    "pm3d at b" };
-
-            GnuPlot.Set(setting1);
-            GnuPlot.SPlot(obj1[0], obj1[1]);
-            GnuPlot.Unset(unset);
-            GnuPlot.Set(setting2);
-            GnuPlot.Plot(obj2[0], obj2[1]);
+            /*
+            reset
+            set terminal windows
+            #set hidden3d
+            set contour base
+            set view map
+            unset key
+            splot 'c.dat' with pm3d, 'v.dat' u 1:2:(270.0):3:4:(270.0) w vectors linecolor rgb "#000000"
+            */
+            String[] setting = {
+                "terminal windows",
+                "contour base",
+                "view map",
+            };
+            String[] unsetting = {
+                "key",
+            };
+            String c = String.Format("splot '{0}' with pm3d, '{1}' u 1:2:({2}):3:4:({3}) w vectors linecolor rgb \"#000000\"", obj1[0], obj2[0], obj1[1], obj1[1]);
+            GnuPlot.Set(setting);
+            GnuPlot.Unset(unsetting);
+            //GnuPlot.SPlot(c);
+            GnuPlot.Write(c);
+            GnuPlot.Write("reset");
 
         }
 

@@ -733,13 +733,15 @@ namespace RiverSimulationApplication
 
             //產生gunplot輸入檔內容
             StringBuilder sb = new StringBuilder();
+            double rvalue = 0;
             for (int i = iStart; i < iEnd; ++i)
             {
                 for (int j = jStart; j < jEnd; ++j)
                 {
                     sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].x.ToString("F7"));
                     sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].y.ToString("F7"));
-                    sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, 0]).ToString("F7"));
+                    rvalue = (initData as double[,,])[i, j, 0];
+                    sb.AppendFormat("{0,15} ", rvalue.ToString("F7"));
                     sb.AppendFormat("\n");
                 }
                 sb.AppendFormat("\n");
@@ -771,12 +773,11 @@ namespace RiverSimulationApplication
             if (exportOnly)
             {
                 exportObject[0] = plotfile;
-                exportObject[1] = "with lines title \"\"";
+                exportObject[1] = rvalue.ToString();
             }
             else
             {
                 GnuPlot.Set(setting);
-                //plotfile = String.Format("\"{0}\"", plotfile);
                 GnuPlot.SPlot(plotfile, "with lines title \"\"");
             }
             //GnuPlot.Set("term x11");
@@ -798,6 +799,7 @@ namespace RiverSimulationApplication
 
             //產生gunplot輸入檔內容
             StringBuilder sb = new StringBuilder();
+            double rvalue = 0;
             for (int i = iStart; i < iEnd; ++i)
             {
                 for (int j = jStart; j < jEnd; ++j)
@@ -806,15 +808,18 @@ namespace RiverSimulationApplication
                     sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].y.ToString("F7"));
                     if (kStart == -1)
                     {
-                        sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, tStart]).ToString("F7"));
+                        rvalue = (initData as double[,,])[i, j, tStart];
+                        sb.AppendFormat("{0,15} ", rvalue.ToString("F7"));
                     }
                     else if(m == -1)
                     {
-                        sb.AppendFormat("{0,15} ", ((initData as double[, , ,])[i, j, tStart, kStart]).ToString("F7"));
+                        rvalue = (initData as double[,,,])[i, j, tStart, kStart];
+                        sb.AppendFormat("{0,15} ", rvalue.ToString("F7"));
                     }
                     else
                     {
-                        sb.AppendFormat("{0,15} ", ((initData as double[, , , ,])[i, j, tStart, kStart, m]).ToString("F7"));
+                        rvalue = (initData as double[,,,,])[i, j, tStart, kStart, m];
+                        sb.AppendFormat("{0,15} ", rvalue.ToString("F7"));
                     }
                     sb.AppendFormat("\n");
                 }
@@ -847,7 +852,7 @@ namespace RiverSimulationApplication
             if (exportOnly)
             {
                 exportObject[0] = plotfile;
-                exportObject[1] = "with lines title \"\"";
+                exportObject[1] = rvalue.ToString();
             }
             else
             {
@@ -873,14 +878,17 @@ namespace RiverSimulationApplication
 
             //產生gunplot輸入檔內容
             StringBuilder sb = new StringBuilder();
+            double rvalue = 0;
             for (int i = iStart; i < iEnd; ++i)
             {
                 for (int j = jStart; j < jEnd; ++j)
                 {
                     sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].x.ToString("F7"));
                     sb.AppendFormat("{0,15} ", p.inputGrid.inputCoor[i, j].y.ToString("F7"));
-                    sb.AppendFormat("{0,15} ", ((initData as double[, ,])[i, j, tStart]).ToString("F7"));
-                    sb.AppendFormat("{0,15} ", ((initData2 as double[, ,])[i, j, tStart]).ToString("F7"));
+                    rvalue = (initData as double[,,])[i, j, tStart];
+                    sb.AppendFormat("{0,15} ", rvalue.ToString("F7"));
+                    rvalue = (initData2 as double[,,])[i, j, tStart];
+                    sb.AppendFormat("{0,15} ", rvalue.ToString("F7"));
                     sb.AppendFormat("\n");
                 }
                 sb.AppendFormat("\n");
@@ -900,12 +908,7 @@ namespace RiverSimulationApplication
 
             //*
             string[] setting = {
-                                   //"hidden3d",
-                                   //"contour base",
-                                   //"view map",
-                                   //"pm3d at b",
                                    "terminal windows",
-                                   //"term pdfcairo lw 2 font \"Times New Roman, 8 \"",
                                    setTitle,
                                    //"term png size 960,630",
                                    //setPngFile,
@@ -913,7 +916,7 @@ namespace RiverSimulationApplication
             if (exportOnly)
             {
                 exportObject[0] = plotfile;
-                exportObject[1] = "with vectors title \"\"";
+                exportObject[1] = rvalue.ToString();
             }
             else
             {
